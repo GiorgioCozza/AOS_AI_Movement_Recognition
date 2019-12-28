@@ -1,23 +1,10 @@
-# coding:utf-8
 import numpy as np
-import math
 import copy as cp
-
-RUN_TEST_SAMPLES = 100
-JUMP_TEST_SAMPLES = 100
-STAND_TEST_SAMPLES = 100
-WALK_TEST_SAMPLES = 100
-
-RUN_TRAIN_SAMPLES = 15000
-JUMP_TRAIN_SAMPLES = 15000
-STAND_TRAIN_SAMPLES = 15000
-WALK_TRAIN_SAMPLES = 15000
-
-SENSORS = ["ACC_LSM6DSL_DS", "GYR_LSM6DSL_DS", "ACC_LSM303AGR_DS", "MAG_LSM303AGR_DS"]
-AXIS = ["x", "y", "z"]
-
-SENS_VALUES = 12
-WINDOW_SIZE = 50
+from datetime import datetime as dt
+import os
+import keras
+import csv
+from scripts.nn_config import *
 
 ds_model = {"ACC_LSM6DSL_DS": {"x": [], "y": [], "z": []}, "GYR_LSM6DSL_DS": {"x": [], "y": [], "z": []},
                    "ACC_LSM303AGR_DS": {"x": [], "y": [], "z": []}, "MAG_LSM303AGR_DS": {"x": [], "y": [], "z": []}}
@@ -26,23 +13,34 @@ ds_model = {"ACC_LSM6DSL_DS": {"x": [], "y": [], "z": []}, "GYR_LSM6DSL_DS": {"x
 
 
 # Dataset partitioning (training, testing)
-def split_train_test(ds_batches, labels, ratio, fold):
+def split_train_valid_test(ds_batches, labels, ratio, fold):
 
     ds_batch_num = ds_batches.shape[0]
     test_batch_num = int(np.round(ratio*ds_batch_num))
-    max_fold = int(np.floor(ds_batch_num/test_batch_num))
+    val_batch_num = int(np.round(ratio*ds_batch_num))
+    max_fold = int(np.floor(ds_batch_num/(test_batch_num + val_batch_num)))
     if test_batch_num > 0 and fold in range(0, max_fold-1):
         test_bstart = fold * test_batch_num
         test_bend = test_bstart + test_batch_num
+        val_bstart = test_bend + fold*val_batch_num
+        val_bend = val_bstart + val_batch_num
         ds_test_batches = ds_batches[test_bstart:test_bend]
+        ds_val_batches = ds_batches[val_bstart:val_bend]
         ds_train_batches = np.delete(ds_batches, range(test_bstart, test_bend), axis=0)
+        ds_train_batches = np.delete(ds_train_batches, range(val_bstart, val_bend), axis=0)
         test_labels = labels[test_bstart:test_bend]
+        val_labels = labels[val_bstart:val_bend]
         train_labels = np.delete(labels, range(test_bstart, test_bend), axis=0)
+        train_labels = np.delete(train_labels, range(val_bstart, val_bend), axis=0)
     else:
         print("\r\nBAD INPUT: Fold out of range or negative test batches")
         return
 
-    return ds_train_batches, ds_test_batches, train_labels, test_labels
+    split_dict = {"training" : {"input" : ds_train_batches, "output" : train_labels},
+                  "validation" : {"input" : ds_val_batches, "output":val_labels},
+                  "testing" : {"input": ds_test_batches, "output": test_labels}}
+    #print(split_dict["testing"]["input"][0])
+    return split_dict
 
 
 
@@ -74,17 +72,8 @@ def normalize(dataset_dict):
         for ax in AXIS:
             max_ax = np.max(dataset_dict[s][ax])
             min_ax = np.min(dataset_dict[s][ax])
-            #mu = np.mean(dataset_dict[s][ax], axis=0)
-            #sigma = np.std(dataset_dict[s][ax], axis=0)
-            norm_dataset[s][ax] = (dataset_dict[s][ax] - min_ax) / (max_ax - min_ax)
 
-            # _itr = iter(dataset_dict[s][ax])
-            # _max = max(_itr)
-            # for k in range(0, len(dataset_dict[s][ax])):
-            #    val = dataset_dict[s][ax][k]
-            #    norm_val = val / _max
-            #    norm_val = round(norm_val, 4)
-            #    norm_dataset[s][ax].append(norm_val)
+            norm_dataset[s][ax] = (dataset_dict[s][ax] - min_ax) / (max_ax - min_ax)
 
     return norm_dataset
 
@@ -94,12 +83,12 @@ def normalize(dataset_dict):
 
 # Reshape and organize the input and output sets
 def prepare_data(ds, label):
-    segments = np.empty((0, SENS_VALUES, WINDOW_SIZE))
+    segments = np.empty((0, SENS_VALUES, WINDOW_SAMPLES))
     step = 50
     labels = []
     reshaped_segments = np.empty((12,50))
     ds_len = len(ds["ACC_LSM6DSL_DS"]["x"])
-    ds_r = ds_len % WINDOW_SIZE
+    ds_r = ds_len % WINDOW_SAMPLES
     ds_len = ds_len - ds_r
 
     for i in range(0, ds_len - step, step):
@@ -121,7 +110,6 @@ def prepare_data(ds, label):
                              xs_acc_lsm303agr, ys_acc_lsm303agr, zs_acc_lsm303agr,
                              xs_mag_lsm303agr, ys_mag_lsm303agr, zs_mag_lsm303agr]
         reshaped_segments = np.transpose(reshaped_segments)
-
         segments = np.vstack([segments, np.dstack(reshaped_segments)])
         labels.append(label)
 
@@ -131,57 +119,86 @@ def prepare_data(ds, label):
 
 
 
-def prepare_data_simp_mod(ds, label):
-    segments = np.empty((0, WINDOW_SIZE, SENS_VALUES))
-    step = 50
-    labels = []
-    reshaped_segments = []
-    ds_len = len(ds["ACC_LSM6DSL_DS"]["x"])
-    n_feature = 12
-    for i in range(0, ds_len - step, step):
-        xs_acc_lsm6dsl = ds[SENSORS[0]]["x"][i: i + step]
-        ys_acc_lsm6dsl = ds[SENSORS[0]]["y"][i: i + step]
-        zs_acc_lsm6dsl = ds[SENSORS[0]]["z"][i: i + step]
-        xs_gyr_lsm6dsl = ds[SENSORS[1]]["x"][i: i + step]
-        ys_gyr_lsm6dsl = ds[SENSORS[1]]["y"][i: i + step]
-        zs_gyr_lsm6dsl = ds[SENSORS[1]]["z"][i: i + step]
-        xs_acc_lsm303agr = ds[SENSORS[2]]["x"][i: i + step]
-        ys_acc_lsm303agr = ds[SENSORS[2]]["y"][i: i + step]
-        zs_acc_lsm303agr = ds[SENSORS[2]]["z"][i: i + step]
-        xs_mag_lsm303agr = ds[SENSORS[3]]["x"][i: i + step]
-        ys_mag_lsm303agr = ds[SENSORS[3]]["y"][i: i + step]
-        zs_mag_lsm303agr = ds[SENSORS[3]]["z"][i: i + step]
 
-        segments = np.vstack([segments, np.dstack([xs_acc_lsm6dsl, ys_acc_lsm6dsl, zs_acc_lsm6dsl,
-                                                   xs_gyr_lsm6dsl, ys_gyr_lsm6dsl, zs_gyr_lsm6dsl,
-                                                   xs_acc_lsm303agr, ys_acc_lsm303agr, zs_acc_lsm303agr,
-                                                   xs_mag_lsm303agr, ys_mag_lsm303agr, zs_mag_lsm303agr])])
+def test_on_csv(xtest, ytest, find_dir=None, fold_n=0):
 
-        #segments.append([xs_acc_lsm6dsl, ys_acc_lsm6dsl, zs_acc_lsm6dsl,
-         #                xs_gyr_lsm6dsl, ys_gyr_lsm6dsl, zs_gyr_lsm6dsl,
-          #               xs_acc_lsm303agr, ys_acc_lsm303agr, zs_acc_lsm303agr,
-          #               xs_mag_lsm303agr, ys_mag_lsm303agr, zs_mag_lsm303agr])
-        labels.append(label)
+    icsv_fname = 'test_input_' + 'fold-' + str(fold_n) + '_' + dt.now().strftime('%b%d_%H-%M-%S') + '.csv'
+    ocsv_fname = 'test_output_' + 'fold-' + str(fold_n) + '_' + dt.now().strftime('%b%d_%H-%M-%S') + '.csv'
 
-    reshaped_segments = np.asarray(segments, dtype=np.float32).reshape(-1, step, n_feature)
-    labels = np.asarray(labels)
-    return reshaped_segments, labels
+    csv_dir_name = 'test_' + dt.now().strftime('%b%d_%y')
+    dt_csv_dir = os.path.join(csv_path, csv_dir_name)
+
+    if not os.path.exists(dt_csv_dir):
+        os.makedirs(dt_csv_dir)
+
+    with open(os.path.join(dt_csv_dir, icsv_fname), 'w', newline='') as f:
+
+        wrt = csv.writer(f, delimiter=',')
+
+        for idx in range(0, len(xtest)):
+            ar = np.reshape(xtest[idx], [-1])
+            wrt.writerow(ar)
+
+        f.close()
 
 
-def sub_data(step, list):
-    bound = len(list)
-    row = math.floor((bound - 10) / step)
-    count = 0
-    iter = 0
-    data = np.zeros((row, 120))
-    while iter < row:
-        vector = []
-        for i in range(10):
-            vector.append(list[i + count])
-        vectornp = np.array(vector)
-        vectornp = vectornp.reshape(1, 120)
-        data[iter] = vectornp
-        iter = iter + 1
-        count = count + step
-    return data
+    with open(os.path.join(dt_csv_dir, ocsv_fname), 'w', newline='') as f:
 
+        wrt = csv.writer(f, delimiter=',')
+
+        for idx in range(0, len(ytest)):
+            ar = np.reshape(ytest[idx], [-1])
+            wrt.writerow(ar)
+
+        f.close()
+
+    return icsv_fname, ocsv_fname
+
+
+
+def test_from_csv(test_in_set, test_out_set):
+
+    test_set = np.array([])
+
+    if (len(test_in_set) == len(test_out_set)):
+
+        csv_dir_name = 'test_' + dt.now().strftime('%b%d_%y')
+        dt_csv_dir = os.path.join(csv_path, csv_dir_name)
+
+        if not os.path.exists(dt_csv_dir):
+            os.makedirs(dt_csv_dir)
+
+        print("\r\n[LOG]: Test sets dimension correct!")
+        n = len(test_in_set)
+
+        for i in range(0, n):
+
+            test_set = np.append(test_set, {"input":  np.empty((0, SENS_VALUES, WINDOW_SAMPLES)), "output": []})
+
+            with open(os.path.join(dt_csv_dir, test_in_set[i]), 'r') as f_in:
+
+                rd = csv.reader(f_in)
+                for row in rd:
+                    row = [float(num) for num in row]
+                    ar = np.reshape(row, (SENS_VALUES, WINDOW_SAMPLES))
+                    ar = np.transpose(ar)
+                    test_set[i]["input"] = np.vstack([test_set[i]["input"], np.dstack(ar)])
+
+                f_in.close()
+
+            with open(os.path.join(dt_csv_dir,  test_out_set[i]), 'r') as f_out:
+
+                rd = csv.reader(f_out)
+
+                for row in rd:
+                    ar = np.argmax(row)
+                    test_set[i]["output"] = np.append(test_set[i]["output"], ar)
+
+                f_out.close()
+
+            test_set[i]["input"] = test_set[i]["input"].reshape(test_set[i]["input"].shape[0],
+                                                                test_set[i]["input"].shape[1],
+                                                                test_set[i]["input"].shape[2], 1)
+            test_set[i]["output"] = keras.utils.to_categorical(test_set[i]["output"], num_classes=4)
+
+    return test_set
