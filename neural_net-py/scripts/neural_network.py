@@ -4,16 +4,12 @@ import keras
 from keras.models import Sequential
 from keras.layers import Dense, Conv2D, MaxPooling2D, Dropout, Flatten
 from keras.callbacks import CSVLogger
-from keras.optimizers import SGD, Adam
-from scripts.dataset_processing import get_dataset, normalize, prepare_data, split_train_valid_test, create_test_csv
 import seaborn as sns
 from datetime import datetime as dt
-import time
-import random as rnd
-import os
 from sklearn import metrics
 from matplotlib import pyplot as plt
-import tensorflow as tf
+import os
+
 from scripts.nn_config import *
 
 x_train = []
@@ -24,7 +20,7 @@ y_test = []
 
 # Definition of the neural network model
 def CNN_model():
-    numFilters = 24
+    numFilters = 16
 
     model = Sequential()
     num_classes = 4
@@ -33,9 +29,9 @@ def CNN_model():
     model.add(MaxPooling2D(pool_size=(2, 2), padding='valid'))
     model.add(Dropout(0.2))
     model.add(Flatten())
-    model.add(Dense(16, activation='relu'))
+    model.add(Dense(32, activation='relu'))
     model.add(Dropout(0.5))
-    model.add(Dense(16, activation='relu'))
+    model.add(Dense(32, activation='relu'))
     model.add(Dense(num_classes, activation='softmax'))
 
     model.summary()
@@ -63,10 +59,6 @@ def show_confusion_matrix(validations, predictions):
 def train_model(model, x_train, y_train, x_valid, y_valid):
     # set model
     model_name =  "activityRec_model" + "_" + dt.now().strftime("%d-%m-%Y_%H%M%S") + ".log"
-
-
-
-
     # Training logging
     now = dt.now()
     log_file = log_path + "activityRec_train_log" + "_" + now.strftime("%d-%m-%Y_%H%M%S") + ".log"
@@ -74,7 +66,7 @@ def train_model(model, x_train, y_train, x_valid, y_valid):
 
     # callback list
     callback_list = [
-        keras.callbacks.ModelCheckpoint(model_path,
+        keras.callbacks.ModelCheckpoint(best_mod_path,
                                         monitor='val_accuracy',
                                         mode='max',
                                         save_best_only=True),
@@ -109,35 +101,32 @@ def train_model(model, x_train, y_train, x_valid, y_valid):
                         verbose=1,
                         callbacks=callback_list)
 
-    model.save(model_path)
-    print('Saved trained model at %s ' % model_path)
 
 
-def test_model_set(model_set, x_test, y_test):
+
+def test_model_set(model_set, test_set):
 
     loss_res = []
     acc_res = []
     max_y_pred_test = []
     max_y_test = []
     y_pred_test = []
-    scores = []
-    # Score trained model.
-
     for i in range(0, len(model_set)):
-        scores = model_set[i].evaluate(x_test, y_test, verbose=1)
+        scores = model_set[i].evaluate(test_set[i]["input"], test_set[i]["output"], verbose=1)
         loss_res.append(scores[0])
         acc_res.append(scores[1])
-        y_pred_test.append(model_set[i].predict(x_test))
+        y_pred_test.append(model_set[i].predict(test_set[i]["input"]))
         max_y_pred_test.append(np.argmax(y_pred_test[i], axis=1))
-        max_y_test.append(np.argmax(y_test, axis=1))
-        av_loss = np.mean(loss_res)
-        av_acc = np.mean(acc_res)
+        max_y_test.append(np.argmax(test_set[i]["output"], axis=1))
 
         print("\r\n********  FOLD " + str(i + 1) + "  ************")
         print("\t\n - Fold Loss: ", loss_res[i])
         print("\t\n - Fold Accuracy: ", acc_res[i])
         show_confusion_matrix(max_y_test[i], max_y_pred_test[i])
         print("\r\n\n")
+
+    av_loss = np.mean(loss_res)
+    av_acc = np.mean(acc_res)
 
     print("\r\n\n TRAINING AND TESTING FINISHED:\n")
     print("\r\nShowing results...\r\n")
@@ -147,3 +136,41 @@ def test_model_set(model_set, x_test, y_test):
     print("\t\n - Average Accuracy: ", av_acc)
     print("\r\n\n")
 
+    best_acc_model = model_set[np.argmax(acc_res)]
+    best_loss_model = model_set[np.argmax(loss_res)]
+
+    return best_acc_model, best_loss_model
+
+
+def get_folds(btch_lens):
+
+    print("\r\nREADY to TRAIN the NN, Please insert the ratio of the data batches that will be used for testing:\r\n")
+    ratio = input("RATIO: ")
+    ratio = float(ratio)
+
+    test_batch_num = [int(np.round(ratio * btch_lens[0])),
+                      int(np.round(ratio * btch_lens[1])),
+                      int(np.round(ratio * btch_lens[2])),
+                      int(np.round(ratio * btch_lens[3]))]
+    valid_batch_num = [int(np.round(ratio * btch_lens[0])),
+                       int(np.round(ratio * btch_lens[1])),
+                       int(np.round(ratio * btch_lens[2])),
+                       int(np.round(ratio * btch_lens[3]))]
+    max_folds = [int(np.floor(btch_lens[0] / (test_batch_num[0] + valid_batch_num[0]))),
+                 int(np.floor(btch_lens[1] / (test_batch_num[1] + valid_batch_num[1]))),
+                 int(np.floor(btch_lens[2] / (test_batch_num[2] + valid_batch_num[2]))),
+                 int(np.floor(btch_lens[3] / (test_batch_num[3] + valid_batch_num[3])))]
+
+    folds = np.min(max_folds)
+
+    return ratio, folds
+
+
+
+def save_best_models(max_acc_mod, min_loss_mod):
+
+    loss_mod_path = os.path.join(best_mod_path, "best_loss_model_" + dt.now().strftime("%d-%m-%Y_%H%M%S") + '.h5')
+    acc_mod_path = os.path.join(best_mod_path, "best_acc_model_" + dt.now().strftime("%d-%m-%Y_%H%M%S") + '.h5')
+
+    min_loss_mod.save(loss_mod_path)
+    max_acc_mod.save(acc_mod_path)
