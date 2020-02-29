@@ -10,15 +10,15 @@ KPATH := miosix
 CONFPATH := $(KPATH)
 
 ## MODULE PATHS
-AIPATH := ai_module
+AIPATH := ./ai_module
 SENSDRIV := sensor_driver
 DATAUTL := data_util
 
 ARM_MIOSIX_EABI := C:/arm-miosix-eabi
 ARM_NONE_EABI := C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q3
-PROJ_DIR := C:/Users/grgcz/Desktop/dev_space_win/AOS_Project/data_collection_driver1/AOS_MovementRecognition/miosix-kernel
+PROJ_DIR := C:\Users\grgcz\Desktop\dev_space_win\AOS_Project\AOS_MovementRecognition\miosix-kernel
 include $(CONFPATH)/config/Makefile.inc
-PROGRAM_CMDLINE = monitor flash write_image erase main.bin 0x08000000
+PROGRAM_CMDLINE := Copy-Item .\main.bin F:\
 ##
 ## List here subdirectories which contains makefiles
 ##
@@ -30,11 +30,8 @@ SUBDIRS := $(KPATH)			\
 SRC :=                                				\
 ./main.cpp											\
 $(SENSDRIV)/com_i2c/i2c_helper.cpp					\
-$(DATAUTL)/circular_queue.cpp			            \
 $(DATAUTL)/dataset_preproc.cpp						\
-$(SENSDRIV)/HTS221/HTS221_driver.c					\
 $(SENSDRIV)/LSM6DSL/LSM6DSL_acc_gyro_driver.c	    \
-$(SENSDRIV)/HTS221/HTS221Sensor.cpp					\
 $(SENSDRIV)/LSM6DSL/LSM6DSLSensor.cpp				\
 $(SENSDRIV)/LSM303AGR/LSM303AGR_acc_driver.c        \
 $(SENSDRIV)/LSM303AGR/LSM303AGRAccSensor.cpp		\
@@ -61,7 +58,6 @@ $(AIPATH)/Drivers/CMSIS/Lib/GCC/libarm_cortexM4lf_math.a		\
 INCLUDE_DIRS :=			\
 -I$(SENSDRIV)/									\
 -I$(SENSDRIV)/board_common						\
--I$(SENSDRIV)/HTS221							\
 -I$(SENSDRIV)/LSM6DSL							\
 -I$(SENSDRIV)/LSM303AGR							\
 -I$(SENSDRIV)/com_i2c							\
@@ -149,7 +145,6 @@ main: main.elf
 
 main.elf: $(OBJ) all-recursive
 	$(ECHO) "[LD  ] main.elf"
-	echo $(ARM_NONE_EABI)/bin/arm-none-eabi-gcc $(LFLAGS) -o main.elf $(OBJ) $(KPATH)/$(BOOT_FILE) $(LINK_LIBS)
 	$(Q)$(ARM_NONE_EABI)/bin/arm-none-eabi-gcc $(LFLAGS) -o main.elf $(OBJ) $(KPATH)/$(BOOT_FILE) $(LINK_LIBS)
 
 

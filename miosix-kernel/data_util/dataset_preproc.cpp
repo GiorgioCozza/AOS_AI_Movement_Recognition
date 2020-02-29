@@ -40,7 +40,8 @@ void dataset_preproc::normalize(float* in_vect) {
 	uint16_t vec_cntr = 0;
 	while (vec_cntr < VECTOR_SIZE) {
 		for (int j = 0; j < WINDOW_SIZE; j++)
-			*(in_vect + VECTOR_SIZE * j + vec_cntr) = (*(in_vect + VECTOR_SIZE * j + vec_cntr) - *(dataset_preproc::min + vec_cntr)) / (*(dataset_preproc::max + vec_cntr) - *(dataset_preproc::min + vec_cntr));
+			*(in_vect + VECTOR_SIZE * j + vec_cntr) = (*(in_vect + VECTOR_SIZE * j + vec_cntr) - *(dataset_preproc::min + vec_cntr))\
+													/ ((*(dataset_preproc::max + vec_cntr) - *(dataset_preproc::min + vec_cntr))+0.000000001);
 
 		vec_cntr++;
 	}
@@ -92,7 +93,7 @@ void dataset_preproc::print_dataset(float* in_v) {
 	printf("\r\n|***** LSM6DSL_ACCELEROMETER *****||***** LSM6DSL_GYROSCOPE *****||***** LSM303A_ACCELEROMETER ****||****** LSM303A_MAGNETOMETER *****|\r\n");
 	printf("    |                                 ||                             ||                                ||                                 |    ");
 	for (int i = 0; i < WINDOW_SIZE; i++) {
-		printf("\r\n|   X: %.4f   Y:%.4f   Z:%.4f   ||   X: %.4f   Y:%.4f   Z:%.4f   ||   X: %.4f   Y:%.4f   Z:%.4f   ||   X: %.4f   Y:%.4f   Z:%.4f   ||\r\n",
+		printf("\r\n|   X: %f   Y:%f   Z:%f   ||   X: %f   Y:%f   Z:%f   ||   X: %f   Y:%f   Z:%f   ||   X: %f   Y:%f   Z:%f   ||\r\n",
 			*(float*)(in_v + VECTOR_SIZE * i), *(float*)(in_v + VECTOR_SIZE * i + 1), *(float*)(in_v + VECTOR_SIZE * i + 2), *(float*)(in_v + VECTOR_SIZE * i + 3), *(float*)(in_v + VECTOR_SIZE * i + 4),
 			*(float*)(in_v + VECTOR_SIZE * i + 5), *(float*)(in_v + VECTOR_SIZE * i + 6), *(float*)(in_v + VECTOR_SIZE * i + 7), *(float*)(in_v + VECTOR_SIZE * i + 8),
 			*(float*)(in_v + VECTOR_SIZE * i + 9), *(float*)(in_v + VECTOR_SIZE * i + 10), *(float*)(in_v + VECTOR_SIZE * i + 11));

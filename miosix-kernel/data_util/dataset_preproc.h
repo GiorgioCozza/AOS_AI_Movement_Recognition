@@ -32,9 +32,7 @@
 #include "ai_math_helpers.h"
 #include "XNUCLEO_IKS01A2.h"
 #include <stdint.h>
-
-#define VECTOR_SIZE		12
-#define WINDOW_SIZE		50
+#include "prog_config.h"
 
 
 class dataset_preproc {
