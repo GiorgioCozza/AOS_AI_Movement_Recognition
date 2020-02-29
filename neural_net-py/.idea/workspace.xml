@@ -2,10 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09f50ed0-32f5-4dad-a37d-a2b12a97fb75" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/scripts/data_visualization.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Drivers/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_f32.o" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Drivers/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_f32.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Inc/RTE_Components.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Inc/RTE_Components.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Inc/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Inc/main.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Inc/network.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Inc/network.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Inc/network_data.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Inc/network_data.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Inc/stm32f4xx_it.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Inc/stm32f4xx_it.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/ai_common_config.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/ai_common_config.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/ai_datatypes_defines.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/ai_datatypes_defines.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/ai_datatypes_format.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/ai_datatypes_format.h" afterDir="false" />
@@ -50,24 +54,42 @@
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Src/pb_encode.c" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Src/pb_encode.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Src/stm32msg.pb.c" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Src/stm32msg.pb.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/NN.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/NN.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/NN.d" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/NN.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/NN.o" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/NN.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Src/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Src/network.c" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Src/network.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Src/network.o" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Src/network.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Src/network_data.c" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Src/network_data.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Src/network_data.o" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Src/network_data.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Src/stm32f4xx_hal_msp.c" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Src/stm32f4xx_hal_msp.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Src/stm32f4xx_it.c" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Src/stm32f4xx_it.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/data_util/circular_queue.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/data_util/circular_queue.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/data_util/circular_queue.d" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/data_util/circular_queue.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/data_util/circular_queue.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/data_util/circular_queue.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/data_util/circular_queue.o" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/data_util/circular_queue.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/data_util/dataset_preproc.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/data_util/dataset_preproc.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/data_util/dataset_preproc.d" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/data_util/dataset_preproc.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/data_util/dataset_preproc.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/data_util/dataset_preproc.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/data_util/dataset_preproc.o" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/data_util/dataset_preproc.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/eabi_glibc/aeabi_memclr.o" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/eabi_glibc/aeabi_memclr.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/eabi_glibc/aeabi_memcpy.o" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/eabi_glibc/aeabi_memcpy.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/main.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/main.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/main.d" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/main.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/main.elf" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/main.elf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/main.hex" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/main.hex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/main.map" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/main.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/main.o" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/main.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/sensor_driver/HTS221/HTS221Sensor.o" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/sensor_driver/HTS221/HTS221Sensor.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/sensor_driver/HTS221/HTS221_driver.o" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/sensor_driver/HTS221/HTS221_driver.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/old_files/main2.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/old_files/main3.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/sensor_driver/HTS221/HTS221Sensor.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/sensor_driver/HTS221/HTS221Sensor.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/sensor_driver/HTS221/HTS221Sensor.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/sensor_driver/HTS221/HTS221Sensor.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/sensor_driver/HTS221/HTS221_driver.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/sensor_driver/HTS221/HTS221_driver.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/sensor_driver/HTS221/HTS221_driver.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/sensor_driver/HTS221/HTS221_driver.o" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/sensor_driver/LSM303AGR/LSM303AGRAccSensor.o" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/sensor_driver/LSM303AGR/LSM303AGRAccSensor.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/sensor_driver/LSM303AGR/LSM303AGRMagSensor.o" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/sensor_driver/LSM303AGR/LSM303AGRMagSensor.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/sensor_driver/LSM303AGR/LSM303AGR_acc_driver.o" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/sensor_driver/LSM303AGR/LSM303AGR_acc_driver.o" afterDir="false" />
@@ -76,111 +98,19 @@
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/sensor_driver/LSM6DSL/LSM6DSL_acc_gyro_driver.o" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/sensor_driver/LSM6DSL/LSM6DSL_acc_gyro_driver.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../miosix-kernel/sensor_driver/com_i2c/i2c_helper.o" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/sensor_driver/com_i2c/i2c_helper.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_02-10-2019_113653.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_02-10-2019_113914.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_02-10-2019_113950.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_13-10-2019_170327.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_13-11-2019_134041.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_13-11-2019_134355.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_13-11-2019_161611.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_13-11-2019_161731.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_13-11-2019_161746.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_13-11-2019_161821.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_13-11-2019_161912.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_13-11-2019_161936.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_13-11-2019_162031.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_13-11-2019_162048.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_13-11-2019_162101.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_13-11-2019_162231.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_13-11-2019_162459.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_13-11-2019_162602.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_13-11-2019_163100.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_13-11-2019_164541.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_13-11-2019_170743.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_13-11-2019_170851.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_13-11-2019_170940.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_13-11-2019_172049.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_13-11-2019_172135.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_13-11-2019_172211.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_13-11-2019_172243.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_13-11-2019_172326.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_13-11-2019_181747.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_14-11-2019_144553.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_14-11-2019_144627.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_14-11-2019_144704.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_14-11-2019_145205.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_15-06-2019_115321.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_15-06-2019_120102.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_15-06-2019_120344.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_15-06-2019_121000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_15-11-2019_111504.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_15-11-2019_111558.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_112125.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_112153.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_114321.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_114336.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_114346.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_114608.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_114616.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_114624.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_114634.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_114642.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_114650.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_114658.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_114709.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_115323.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_115332.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_115605.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_115609.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_115614.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_115618.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_115623.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_115637.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_115642.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_115647.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_115652.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_115658.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_115711.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_115716.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_16-11-2019_115724.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_18-11-2019_110120.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_18-11-2019_110123.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_18-11-2019_110125.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_18-11-2019_110128.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_18-11-2019_110131.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_18-11-2019_110134.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_18-11-2019_110138.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_18-11-2019_110141.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_18-11-2019_110249.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_18-11-2019_110313.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_18-11-2019_110315.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_18-11-2019_150548.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_18-11-2019_150551.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_18-11-2019_150553.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_18-11-2019_150648.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_18-11-2019_150650.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_18-11-2019_150653.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_18-11-2019_173519.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_18-11-2019_173521.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_18-11-2019_173524.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_18-11-2019_173635.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_18-11-2019_173637.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_18-11-2019_173640.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_19-11-2019_000815.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_19-11-2019_000820.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_19-11-2019_000826.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_19-11-2019_001148.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_19-11-2019_001151.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_19-11-2019_001154.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_26-10-2019_205413.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_26-10-2019_205435.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/saved_models/activityRec_trained_model.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/best_models/best_acc_model_28-12-2019_191851.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/best_models/best_loss_model_28-12-2019_191851.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datasets/jumping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/datasets/jumping.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datasets/running.txt" beforeDir="false" afterPath="$PROJECT_DIR$/datasets/running.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datasets/standing.txt" beforeDir="false" afterPath="$PROJECT_DIR$/datasets/standing.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datasets/walking.txt" beforeDir="false" afterPath="$PROJECT_DIR$/datasets/walking.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_28-12-2019_191810.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/activityRec_train_log_28-12-2019_191828.log" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/data_gathering.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/data_gathering.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/dataset_processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/dataset_processing.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/neural_network.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/neural_network.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/nn_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/nn_config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/saved_models/keras_cifar10_trained_model.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/saved_models/keras_test_trained_model.h5" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -191,34 +121,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/neural_network.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1039">
-              <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
-              <folding>
-                <element signature="e#9#27#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/nn_config.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="263">
-              <caret line="24" selection-start-line="24" selection-end-line="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/dataset_processing.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="30" selection-start-line="30" selection-end-line="30" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="115">
+              <caret line="21" column="39" selection-start-line="21" selection-start-column="39" selection-end-line="21" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -226,8 +132,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="644">
-              <caret line="111" selection-start-line="111" selection-end-line="111" />
+            <state relative-caret-position="283">
+              <caret line="74" column="56" selection-start-line="74" selection-start-column="56" selection-end-line="74" selection-end-column="56" />
               <folding>
                 <element signature="e#9#27#0" expanded="true" />
               </folding>
@@ -236,12 +142,36 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/data_gathering.py">
+        <entry file="file://$PROJECT_DIR$/scripts/data_visualization.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="51" selection-start-line="51" selection-end-line="51" />
+            <state relative-caret-position="287">
+              <caret line="76" column="14" selection-start-line="76" selection-start-column="14" selection-end-line="76" selection-end-column="14" />
               <folding>
-                <element signature="e#0#13#0" expanded="true" />
+                <element signature="e#1#22#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/neural_network.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="795">
+              <caret line="149" column="35" selection-start-line="149" selection-start-column="35" selection-end-line="149" selection-end-column="35" />
+              <folding>
+                <element signature="e#9#27#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/dataset_processing.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="146">
+              <caret line="22" column="47" selection-start-line="22" selection-start-column="47" selection-end-line="22" selection-end-column="47" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -268,6 +198,11 @@
       <find>CNN_model</find>
       <find>print</find>
       <find>ds_model</find>
+      <find>prepa</find>
+      <find>NUM_CL</find>
+      <find>keras</find>
+      <find>glorot</find>
+      <find>NUM_CLAS</find>
     </findStrings>
     <replaceStrings>
       <replace>running</replace>
@@ -305,12 +240,13 @@
         <option value="$PROJECT_DIR$/scripts/Kerastest.py" />
         <option value="$PROJECT_DIR$/scripts/dataProcess.py" />
         <option value="$PROJECT_DIR$/scripts/simple_model.py" />
-        <option value="$PROJECT_DIR$/scripts/data_gathering.py" />
         <option value="$PROJECT_DIR$/scripts/CNN_model.py" />
-        <option value="$PROJECT_DIR$/scripts/nn_config.py" />
-        <option value="$PROJECT_DIR$/scripts/main.py" />
-        <option value="$PROJECT_DIR$/scripts/dataset_processing.py" />
+        <option value="$PROJECT_DIR$/scripts/data_gathering.py" />
         <option value="$PROJECT_DIR$/scripts/neural_network.py" />
+        <option value="$PROJECT_DIR$/scripts/nn_config.py" />
+        <option value="$PROJECT_DIR$/scripts/dataset_processing.py" />
+        <option value="$PROJECT_DIR$/scripts/data_visualization.py" />
+        <option value="$PROJECT_DIR$/scripts/main.py" />
       </list>
     </option>
   </component>
@@ -326,6 +262,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -347,7 +284,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -519,12 +455,12 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22721268" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10766182" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32978722" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49583334" visible="true" weight="0.42998585" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49583334" weight="0.4059406" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39886847" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -532,32 +468,12 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="8" weight="0.32951945" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50416666" side_tool="true" weight="0.32446808" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32978722" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32956153" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Data View" order="3" />
     </layout>
-    <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11756935" />
-      <window_info id="Structure" order="1" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32978722" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49583334" weight="0.27722773" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39886847" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Python Console" order="8" weight="0.32951945" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50416666" side_tool="true" weight="0.32446808" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32978722" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Data View" order="3" />
-    </layout-to-restore>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -570,8 +486,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://E:/Files/LabProgram/ChromeSome/demo_v5_win/interface_win.py" />
-    <entry file="file://E:/Files/LabProgram/ChromeSome/demo_v5_win/net/chromofast-v_5_27/para.py" />
     <entry file="file://E:/Files/LabProgram/ChromeSome/demo_v5_win/net/chromofast-v_5_27/integrate.py" />
     <entry file="file://E:/Files/LabProgram/ChromeSome/demo_v5_win/net/main.py" />
     <entry file="file://$PROJECT_DIR$/serial.py" />
@@ -648,25 +562,52 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/data_gathering.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="51" selection-start-line="51" selection-end-line="51" />
+        <state relative-caret-position="313">
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/nn_config.py">
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/tensorflow_core/python/keras/engine/training.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        <state relative-caret-position="126">
+          <caret line="727" selection-start-line="727" selection-end-line="727" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="644">
-          <caret line="111" selection-start-line="111" selection-end-line="111" />
+        <state relative-caret-position="283">
+          <caret line="74" column="56" selection-start-line="74" selection-start-column="56" selection-end-line="74" selection-end-column="56" />
+          <folding>
+            <element signature="e#9#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/data_visualization.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="76" column="14" selection-start-line="76" selection-start-column="14" selection-end-line="76" selection-end-column="14" />
+          <folding>
+            <element signature="e#1#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/neural_network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="795">
+          <caret line="149" column="35" selection-start-line="149" selection-start-column="35" selection-end-line="149" selection-end-column="35" />
           <folding>
             <element signature="e#9#27#0" expanded="true" />
           </folding>
@@ -675,21 +616,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/dataset_processing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
+        <state relative-caret-position="146">
+          <caret line="22" column="47" selection-start-line="22" selection-start-column="47" selection-end-line="22" selection-end-column="47" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/neural_network.py">
+    <entry file="file://$PROJECT_DIR$/scripts/nn_config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1039">
-          <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
-          <folding>
-            <element signature="e#9#27#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="115">
+          <caret line="21" column="39" selection-start-line="21" selection-start-column="39" selection-end-line="21" selection-end-column="39" />
         </state>
       </provider>
     </entry>
