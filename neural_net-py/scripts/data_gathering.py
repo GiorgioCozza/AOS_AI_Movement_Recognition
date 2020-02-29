@@ -79,9 +79,6 @@ while 1:
             gather_samples(file_name)
 
     else:
-        for i in range(0, 7):
-            winsound.Beep(duration, freq)
-            time.sleep(1)
 
         print("\nData gathering interrupted!\n")
         ch = input("\nDo you want to close the session? (y/n):")
