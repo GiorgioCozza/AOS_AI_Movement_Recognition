@@ -1,16 +1,17 @@
 # IMPORT
 import numpy as np
-import keras
-from keras.models import Sequential
-from keras.layers import Dense, Conv2D, MaxPooling2D, Dropout, Flatten
-from keras.callbacks import CSVLogger
-import seaborn as sns
+from keras.layers import Dense, Conv2D, Flatten, Dropout, MaxPooling2D, BatchNormalization, LSTM
+from keras.losses import categorical_crossentropy
+from keras.optimizers import Adam, RMSprop, SGD
+from keras import Sequential
+from keras.callbacks import EarlyStopping
+from keras.callbacks import TensorBoard
+from tensorboard import program
 from datetime import datetime as dt
-from sklearn import metrics
-from matplotlib import pyplot as plt
 import os
-
+from scripts.data_visualization import show_confusion_matrix
 from scripts.nn_config import *
+
 
 x_train = []
 x_test = []
@@ -20,40 +21,40 @@ y_test = []
 
 # Definition of the neural network model
 def CNN_model():
-    numFilters = 16
+    numFilters = 24
 
     model = Sequential()
-    num_classes = 4
     model.add(Conv2D(numFilters, kernel_size=3, strides=(1, 1),
-                     activation='relu', input_shape=(SENS_VALUES, WINDOW_SAMPLES, 1)))
+                     activation='relu', input_shape=(WINDOW_SAMPLES, SENS_VALUES, 1)))
     model.add(MaxPooling2D(pool_size=(2, 2), padding='valid'))
-    model.add(Dropout(0.2))
     model.add(Flatten())
     model.add(Dense(32, activation='relu'))
-    model.add(Dropout(0.5))
+    model.add(Dropout(0.2))
     model.add(Dense(32, activation='relu'))
+    model.add(Dropout(0.2))
     model.add(Dense(num_classes, activation='softmax'))
 
     model.summary()
     return model
 
 
-def show_confusion_matrix(validations, predictions):
+def RNN_model():
 
-    matrix = metrics.confusion_matrix(validations, predictions)
-    plt.figure(figsize=(6, 4))
-    sns.heatmap(matrix,
-                cmap='coolwarm',
-                linecolor='white',
-                linewidths=1,
-                xticklabels=LABELS,
-                yticklabels=LABELS,
-                annot=True,
-                fmt='d')
-    plt.title('Confusion Matrix')
-    plt.ylabel('True Label')
-    plt.xlabel('Predicted Label')
-    plt.show()
+    hid_nodes_lstm = 32
+    rec_graph = Sequential()
+    rec_graph.add(BatchNormalization(input_shape=(WINDOW_SAMPLES, SENS_VALUES)))
+    rec_graph.add(LSTM(units=hid_nodes_lstm, return_sequences=True, name='RNN1'))
+    rec_graph.add(Dropout(0.2))
+    rec_graph.add(LSTM(units=hid_nodes_lstm, return_sequences=True, name='RNN2'))
+    rec_graph.add(Dropout(0.2))
+    rec_graph.add(LSTM(units=hid_nodes_lstm, return_sequences=True, name='RNN3'))
+    rec_graph.add(Dropout(0.2))
+    rec_graph.add(LSTM(units=hid_nodes_lstm, return_sequences=False, name='RNN4'))
+    rec_graph.add(Dropout(0.2))
+    rec_graph.add(Dense(num_classes, activation='softmax'))
+
+    rec_graph.summary()
+    return rec_graph
 
 
 def train_model(model, x_train, y_train, x_valid, y_valid):
@@ -62,40 +63,33 @@ def train_model(model, x_train, y_train, x_valid, y_valid):
     # Training logging
     now = dt.now()
     log_file = log_path + "activityRec_train_log" + "_" + now.strftime("%d-%m-%Y_%H%M%S") + ".log"
-    csv_log = CSVLogger(filename=log_file, separator='|')
-
+    logfile_path = os.path.join(log_dir, log_file)
+    tensorboard_cb = TensorBoard(log_dir=logfile_path,histogram_freq=1)
     # callback list
     callback_list = [
-        keras.callbacks.ModelCheckpoint(best_mod_path,
-                                        monitor='val_accuracy',
-                                        mode='max',
-                                        save_best_only=True),
-        keras.callbacks.EarlyStopping(monitor='val_accuracy', mode='max', verbose=1, patience=15),
-        csv_log
+        EarlyStopping(monitor='val_acc', mode='max', verbose=1, patience=40),
+        tensorboard_cb
     ]
 
     # Hyper-parameters
-    BATCH_SIZE = 64
-    EPOCHS = 100
+    BATCH_SIZE = 32
+    EPOCHS = 80
 
-    # Learning rate setting
-    # SGD optimizer
     learning_rate = 0.0001
-    decay_rate = learning_rate / EPOCHS
-    mnt = 0.5
-    sgd = keras.optimizers.RMSprop(lr=learning_rate)
-
-    # Adam optimizer
-    adam = keras.optimizers.Adam(lr=0.0001)
+    rms = RMSprop(lr=learning_rate)
+    adam = Adam(lr=learning_rate)
+    sgd = SGD(lr=0.001, momentum=0.5, nesterov=True)
 
     model.compile(loss='categorical_crossentropy',
-                  optimizer=sgd, metrics=['accuracy'])
+                  optimizer=rms, metrics=['accuracy'])
 
+    tspe = int(np.round((len(x_train)/BATCH_SIZE)*0.1))
+    vspe = int(np.round((len(x_valid)/BATCH_SIZE)*0.1))
     # Training
     history = model.fit(x_train,
                         y_train,
-                        batch_size=BATCH_SIZE,
                         epochs=EPOCHS,
+                        batch_size=BATCH_SIZE,
                         validation_data=(x_valid, y_valid),
                         shuffle=True,
                         verbose=1,
@@ -104,6 +98,7 @@ def train_model(model, x_train, y_train, x_valid, y_valid):
 
 
 
+# Test all the model of a given set
 def test_model_set(model_set, test_set):
 
     loss_res = []

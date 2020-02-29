@@ -1,10 +1,13 @@
 # IMPORT
 import numpy as np
 import keras
-from scripts.dataset_processing import get_dataset, normalize, prepare_data, split_train_valid_test, test_on_csv, test_from_csv
+from scripts.dataset_processing import get_dataset, normalize, prepare_data, \
+                                       split_train_valid_test, test_on_csv, test_from_csv, \
+                                       shuffle_dataset, merge_session_files
 import os
+from scripts.data_visualization import plot_temporal_activity, show_activities_histogram
 from scripts.nn_config import *
-from scripts.neural_network import CNN_model, train_model, test_model_set, get_folds, save_best_models
+from scripts.neural_network import CNN_model, train_model, test_model_set, get_folds, save_best_models, RNN_model
 from datetime import datetime as dt
 
 
@@ -35,32 +38,70 @@ def set_env():
         os.makedirs(td_csv_dir)
 
 
+def choose_activity_file():
+
+    m_c = 1
+    print("###########################   SESSION FILES   ###################################")
+    print("\n")
+    actfiles = os.listdir(session_dir)
+    for file in actfiles:
+        print("\t" + str(m_c) + ". " + str(file))
+        m_c+=1
+    print("\n")
+    print("#################################################################################")
+
+    c = int(input("\n[INPUT]: "))
+
+    while c not in range(1, m_c+1):
+        print("[ERROR]: Invalid choice!")
+        c = int(input("\n[INPUT]: "))
+
+    return actfiles[c-1]
 
 def main():
     set_env()
+
+    # merge all the activity files in a single dataset (for each label)
+    merge_session_files(datasets_dir, LABELS[0])
+    merge_session_files(datasets_dir, LABELS[1])
+    merge_session_files(datasets_dir, LABELS[2])
+    merge_session_files(datasets_dir, LABELS[3])
+    merge_session_files(datasets_dir, LABELS[4])
+    merge_session_files(datasets_dir, LABELS[5])
+    merge_session_files(datasets_dir, LABELS[6])
+
+    c = choose_activity_file()
+    actpath = os.path.join(session_dir, c)
+    plot_temporal_activity(actpath, limit=WINDOW_SAMPLES)
+
+    show_activities_histogram()
+
 
     # dataset collection
     stand_dataset = get_dataset(stand_ds_path)
     run_dataset = get_dataset(run_ds_path)
     walk_dataset = get_dataset(walk_ds_path)
     jump_dataset = get_dataset(jump_ds_path)
+    sit_dataset = get_dataset(sit_ds_path)
+    sup_dataset = get_dataset(sup_ds_path)
+    los_dataset = get_dataset(los_ds_path)
 
     stand_num = len(stand_dataset[SENSORS[0]]['x'])
     run_num = len(run_dataset[SENSORS[0]]['x'])
     walk_num = len(walk_dataset[SENSORS[0]]['x'])
     jump_num = len(jump_dataset[SENSORS[0]]['x'])
-
-    # data normalization
-    stand_norm_ds = normalize(stand_dataset)
-    run_norm_ds = normalize(run_dataset)
-    walk_norm_ds = normalize(walk_dataset)
-    jump_norm_ds = normalize(jump_dataset)
+    sit_num = len(sit_dataset[SENSORS[0]]['x'])
+    sup_num = len(sup_dataset[SENSORS[0]]['x'])
+    los_num = len(los_dataset[SENSORS[0]]['x'])
 
     # prepare NN input
-    proc_run, run_res = prepare_data(run_norm_ds, 0)
-    proc_stand, stand_res = prepare_data(stand_norm_ds, 1)
-    proc_walk, walk_res = prepare_data(walk_norm_ds, 2)
-    proc_jump, jump_res = prepare_data(jump_norm_ds, 3)
+    proc_run, run_res = prepare_data(run_dataset, 0)
+    proc_walk, walk_res = prepare_data(walk_dataset, 1)
+    proc_jump, jump_res = prepare_data(jump_dataset, 2)
+    proc_stand, stand_res = prepare_data(stand_dataset, 3)
+    proc_sit, sit_res = prepare_data(sit_dataset, 4)
+    proc_sup, sup_res = prepare_data(sup_dataset, 5)
+    proc_los, los_res = prepare_data(los_dataset, 6)
 
     batches_len = [proc_run.shape[0], proc_stand.shape[0], proc_walk.shape[0], proc_jump.shape[0]]
 
@@ -71,7 +112,7 @@ def main():
     test_oset = []
 
     for j in range(0, folds - 1):
-        nn_models.append(CNN_model())
+        nn_models.append(RNN_model())
 
     print("\r\nMINIMUM FOLD CYCLE: " + str(folds))
     for i in range(0, folds - 1):
@@ -81,33 +122,57 @@ def main():
         proc_stand_dict = split_train_valid_test(proc_stand, stand_res, ratio, i)
         proc_walk_dict = split_train_valid_test(proc_walk, walk_res, ratio, i)
         proc_jump_dict = split_train_valid_test(proc_jump, jump_res, ratio, i)
+        proc_sit_dict = split_train_valid_test(proc_sit, sit_res, ratio, i)
+        proc_sup_dict = split_train_valid_test(proc_sup, sup_res, ratio, i)
+        proc_los_dict = split_train_valid_test(proc_los, los_res, ratio, i)
 
         train_results = np.vstack((proc_run_dict["training"]["output"], proc_stand_dict["training"]["output"],
-                                   proc_walk_dict["training"]["output"], proc_jump_dict["training"]["output"]))
+                                   proc_walk_dict["training"]["output"], proc_jump_dict["training"]["output"],
+                                   proc_sit_dict['training']['output'], proc_sup_dict['training']['output'],
+                                   proc_los_dict['training']['output']))
 
         test_results = np.vstack((proc_run_dict["testing"]["output"], proc_stand_dict["testing"]["output"],
-                                  proc_walk_dict["testing"]["output"], proc_jump_dict["testing"]["output"]))
+                                  proc_walk_dict["testing"]["output"], proc_jump_dict["testing"]["output"],
+                                  proc_sit_dict['testing']['output'], proc_sup_dict['testing']['output'],
+                                  proc_los_dict['testing']['output']
+                                  ))
 
         valid_results = np.vstack((proc_run_dict["validation"]["output"], proc_stand_dict["validation"]["output"],
-                                   proc_walk_dict["validation"]["output"], proc_jump_dict["validation"]["output"]))
+                                   proc_walk_dict["validation"]["output"], proc_jump_dict["validation"]["output"],
+                                   proc_sit_dict['validation']['output'], proc_sup_dict['validation']['output'],
+                                   proc_los_dict['validation']['output']
+                                   ))
 
 
         x_train = np.vstack((proc_run_dict["training"]["input"], proc_stand_dict["training"]["input"],
-                             proc_walk_dict["training"]["input"], proc_jump_dict["training"]["input"]))
+                             proc_walk_dict["training"]["input"], proc_jump_dict["training"]["input"],
+                             proc_sit_dict['training']['input'], proc_sup_dict['training']['input'],
+                             proc_los_dict['training']['input']
+                             ))
 
         x_test = np.vstack((proc_run_dict["testing"]["input"], proc_stand_dict["testing"]["input"],
-                            proc_walk_dict["testing"]["input"], proc_jump_dict["testing"]["input"]))
+                            proc_walk_dict["testing"]["input"], proc_jump_dict["testing"]["input"],
+                            proc_sit_dict['testing']['input'], proc_sup_dict['testing']['input'],
+                            proc_los_dict['testing']['input']
+                            ))
 
         x_valid = np.vstack((proc_run_dict["validation"]["input"], proc_stand_dict["validation"]["input"],
-                             proc_walk_dict["validation"]["input"], proc_jump_dict["validation"]["input"]))
+                             proc_walk_dict["validation"]["input"], proc_jump_dict["validation"]["input"],
+                             proc_sit_dict['validation']['input'], proc_sup_dict['validation']['input'],
+                             proc_los_dict['validation']['input']
+                             ))
 
-        y_train = keras.utils.to_categorical(train_results, num_classes=4)
-        y_test = keras.utils.to_categorical(test_results, num_classes=4)
-        y_valid = keras.utils.to_categorical(valid_results, num_classes=4)
+        y_train = keras.utils.to_categorical(train_results, num_classes=7)
+        y_test = keras.utils.to_categorical(test_results, num_classes=7)
+        y_valid = keras.utils.to_categorical(valid_results, num_classes=7)
 
-        x_train = x_train.reshape(x_train.shape[0], x_train.shape[1], x_train.shape[2], 1)
-        x_valid = x_valid.reshape(x_valid.shape[0], x_valid.shape[1], x_valid.shape[2], 1)
-        x_test = x_test.reshape(x_test.shape[0], x_test.shape[1], x_test.shape[2], 1)
+       # x_train = x_train.reshape(x_train.shape[0], x_train.shape[1], x_train.shape[2], 1)
+        #x_valid = x_valid.reshape(x_valid.shape[0], x_valid.shape[1], x_valid.shape[2], 1)
+        #x_test = x_test.reshape(x_test.shape[0], x_test.shape[1], x_test.shape[2], 1)
+
+        x_train, y_train = shuffle_dataset(x_train, y_train)
+        x_valid, y_valid = shuffle_dataset(x_valid, y_valid)
+        x_test, y_test = shuffle_dataset(x_test, y_test)
 
         cur_icsv, cur_ocsv = test_on_csv(x_test, y_test, fold_n=i)
         test_iset = np.append(test_iset, cur_icsv)
