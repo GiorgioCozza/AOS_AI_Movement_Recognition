@@ -4,16 +4,15 @@
 #include <unistd.h>
 #include <stdint.h>
 #include "miosix.h"
+#include "prog_config.h"
+#include "nn_config.h"
 #include "i2c_helper.h"
 #include "circular_queue.h"
-#include "NN.h"
-#include "network_data.h"
 #include "LSM6DSLSensor.h"
 #include "LSM303AGRAccSensor.h"
 #include "LSM303AGRMagSensor.h"
 #include "XNUCLEO_IKS01A2.h"
-#include "nn_config.h"
-#include "prog_config.h"
+
 
 using namespace std;
 using namespace miosix;
@@ -23,40 +22,21 @@ axis ax;
 
 bool startflag = false;
 typedef Gpio<GPIOC_BASE, 13> usrbtn;
-
-/*
-void printing2(int32_t * int_vec) {
-	for (int i = 0; i < 12; i++) {
-		printf("%6ld", int_vec[i]);
-	}
-	printf("\n");
-}
-*/
+typedef Gpio<GPIOA_BASE, 5> usrled;
 
 
-void printing2(int32_t* int_vec, char* sensor, int i) {
 
-	printf("%s:     ", sensor);
-	printf("X: %f  ", (float)int_vec[0 + 3 * i]);
-	printf("Y: %f  ", (float)int_vec[1 + 3 * i]);
-	printf("Z: %f  ", (float)int_vec[2 + 3 * i]);
+void print_on_serial(float* int_vec, uint32_t smp_cnt) {
+
+	printf(" %d, %.6f, %.6f, %.6f, %.6f, %.6f, %.6f, %.6f, %.6f, %.6f, %.6f, %.6f, %.6f", smp_cnt, (float)int_vec[0], (float)int_vec[1], (float)int_vec[2], \
+																							(float)int_vec[3], (float)int_vec[4], (float)int_vec[5], \
+																							(float)int_vec[6], (float)int_vec[7], (float)int_vec[8], \
+																							(float)int_vec[9], (float)int_vec[10], (float)int_vec[11]);
+
 	printf("\n");
 }
 
 
-
-uint16_t argmax(float * vec, uint16_t vec_sz){
-	
-	uint16_t idx_max=0;
-	float _max = 0;
-	for(int i = 0; i < vec_sz; i++)
-		if (vec[i] > _max){
-			idx_max = i;
-			_max = vec[i];
-		}
-		
-	return idx_max;
-}
 
 
 int main() {
@@ -73,17 +53,9 @@ int main() {
 	int32_t buf_reader[3];
 	//char rep;
 
-	// network variable declaration
-	ai_handle network = AI_HANDLE_NULL;
-	ai_buffer ai_input = AI_NETWORK_IN;
-	ai_buffer ai_output = AI_NETWORK_OUT;
-	ai_u8* activations = new ai_u8[AI_NETWORK_DATA_ACTIVATIONS_SIZE];
-	NN* neural_net = new NN();
-
 	float* in_data = nullptr;
 	float* out_data = (float*)malloc(NUM_CLASSES * sizeof(float));
 	float* int_vec = new float[VECTOR_SIZE];
-	uint16_t vec_sz = WINDOW_SIZE * VECTOR_SIZE;
 
 	LSM6DSLSensor* acc_gyr = new LSM6DSLSensor(LSM6DSL_I2C_ADDR);
 	LSM303AGRAccSensor* acc = new LSM303AGRAccSensor(LSM303AGRAcc_I2C_ADDR);  //++
@@ -91,16 +63,14 @@ int main() {
 
 	// struct declaration to use for input segment preprocessing	
 
-	if (neural_net->nnCreate(&network)) {
-		if (neural_net->nnInit(network, (ai_network_params*)AI_NETWORK_DATA_CONFIG, activations)) {
-
-			circularQueue<float> queue(vec_sz);
-			dataset_preproc ds_pp;
+			circularQueue<float> queue(VECTOR_SIZE * WINDOW_SIZE);
 
 			uint32_t tmp_val = 0;
-
+			uint32_t sample_cnt = 0;
 			int count = 0;
-
+			
+			startflag = false;
+			usrbtn::mode(Mode::INPUT_PULL_UP);
 			//enable board sensors
 
 			int en1 = acc_gyr->enable_x();
@@ -132,90 +102,66 @@ int main() {
 				printf("\r\n[LOG]: START, Batch collection...\r\n");
 
 				while (1) {
-
-					//Clear terminal screen
-					char ESC = 27;
-					printf("%c[H", ESC);
-					printf("%c[2J", ESC);
-					//Thread::sleep(50);
+					
+					
+					while (startflag == false) {
+						if (usrbtn::value() == 0) {
+							startflag = true;
+							printf("S");
+							printf("\n");
+							Thread::sleep(500);
+						}
+						usrled::high();
+					}
+					usrled::low();
+					sample_cnt++;
 
 
 					if (!acc_gyr->get_x_axes(buf_reader)) {
 						int_vec[0] = (float)buf_reader[0];
 						int_vec[1] = (float)buf_reader[1];
 						int_vec[2] = (float)buf_reader[2];
-						//ds_pp.update_min_max(int_vec, 0);
 					}
-					//Thread::sleep(50);
 
 					if (!acc_gyr->get_g_axes(buf_reader)) {
-						int_vec[3] = (float)buf_reader[0];// >> 6;
-						int_vec[4] = (float)buf_reader[1];// >> 6;
-						int_vec[5] = (float)buf_reader[2];// >> 6;
-						//ds_pp.update_min_max(int_vec, 1);
+						int_vec[3] = (float)buf_reader[0];//
+						int_vec[4] = (float)buf_reader[1];// 
+						int_vec[5] = (float)buf_reader[2];//
 					}
-
-					//Thread::sleep(50);
 
 					if (!acc->get_x_axes(buf_reader)) {
 						int_vec[6] = (float)buf_reader[0];
 						int_vec[7] = (float)buf_reader[1];
 						int_vec[8] = (float)buf_reader[2];
-						//ds_pp.update_min_max(int_vec, 2);
 					}
-
-					//Thread::sleep(50);
 
 					if (!mag->get_m_axes(buf_reader)) {
 						int_vec[9] = (float)buf_reader[0];
 						int_vec[10] = (float)buf_reader[1];
 						int_vec[11] = (float)buf_reader[2];
-						//ds_pp.update_min_max(int_vec, 3);
 					}
 
 					
 					queue.insert(int_vec, VECTOR_SIZE);
 					
-					/*
-					printing2(int_vec, "\n\nLSM6DSL_ACCELEROMETER", 0);
-					printing2(int_vec, "LSM6DSL_GYROSCOPE____", 1);
-					printing2(int_vec, "LSM303A_ACCELEROMETER", 2);
-					printing2(int_vec, "LSM303A_MAGNETOMETER", 3);
-					*/
-					//Clear terminal screen
-					printf("%c[H", ESC);
-					printf("%c[2J", ESC);
-					//Thread::sleep(100);
+					print_on_serial(int_vec, sample_cnt);
+					
+					if (usrbtn::value() == 0) {
+							startflag = false;
+							Thread::sleep(500);
+						}
+
 
 					count++;
-
-					if (count == WINDOW_SIZE) {
-						count = 0;
-						
-						neural_net->prepareData(&ds_pp, in_data, out_data, &ai_input, &ai_output, 1);
-
-						//printf("\r\n[LOG]: Running the Neural Network...\r\n");
-						int n_b = neural_net->nnRun(network, &ai_input, &ai_output, 1);
-						printf("\r\n****************	AI NN NETWORK RESULT	*********************\r\n");
-						printf("\n[LOG]: You are %s\n\n", movements[argmax(out_data, NUM_CLASSES)]);
-
-						//for (int i = 0; i < NUM_CLASSES; i++)
-						//	printf("[OUTPUT]: Class %s (acc): %.2f %\r\n", movements[i], out_data[i]);
-						Thread::sleep(100);
-
-
-					}
+					
 
 				}
 
 
 			}
-		}
-	}
 
 
 }
-
 
 
 
