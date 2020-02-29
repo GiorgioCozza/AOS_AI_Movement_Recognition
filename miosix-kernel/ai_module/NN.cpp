@@ -98,8 +98,8 @@ ai_bool NN::prepareData(dataset_preproc* ds_pp, ai_float* in_data, ai_float* out
 	uint16_t req_out_sz = sizeof(ai_float) * batches;
 	printf("\r\n[LOG]: Preparing the neural network datasets...\r\n");
 	// input segment preprocessing
-	
-	ds_pp->normalize(in_data);
+
+	//ds_pp->normalize(in_data);
 
 	printf("\r\n[TEST] in_data: %f\r\n", *(in_data + 3));
 

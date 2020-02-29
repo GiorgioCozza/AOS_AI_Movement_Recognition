@@ -2,7 +2,7 @@
 /**
  *******************************************************************************
   *   @file NNManager.h
-  *   @author Cozza Giorgio, Liu Qiaqi
+  *   @author Cozza Giorgio, Liu Jiaqi
   *   @date 08/04/19
   *   @version 1.0
   *   @brief Class in charge of managing a neural network instance.
@@ -33,6 +33,7 @@
 #include "network_data.h"
 #include "miosix.h"
 #include "dataset_preproc.h"
+#include "nn_config.h"
  /*-----------------  DEFINE  --------------------------------*/
 
 
