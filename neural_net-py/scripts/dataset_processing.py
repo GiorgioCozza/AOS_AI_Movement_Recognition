@@ -4,10 +4,68 @@ from datetime import datetime as dt
 import os
 import keras
 import csv
+import random as rnd
 from scripts.nn_config import *
 
 ds_model = {"ACC_LSM6DSL_DS": {"x": [], "y": [], "z": []}, "GYR_LSM6DSL_DS": {"x": [], "y": [], "z": []},
                    "ACC_LSM303AGR_DS": {"x": [], "y": [], "z": []}, "MAG_LSM303AGR_DS": {"x": [], "y": [], "z": []}}
+
+
+
+
+def merge_session_files(dir_path, activity):
+
+    act_filename = activity + '.txt'
+    actfile_dir = os.path.join(dir_path, 'activity_files')
+    ds_file = os.path.join(dir_path, act_filename)
+    sess_ds = {}
+    with open(ds_file, mode='w', newline='') as fw:
+        csv_wrt = csv.writer(fw, delimiter=' ')
+        for file in os.listdir(actfile_dir):
+            if file.startswith(activity):
+                print('[LOG]: Extract samples from file: ' + file)
+                filepath = os.path.join(actfile_dir, file)
+                with open(filepath, mode='r') as fr:
+                    csv_rd = csv.reader(fr, delimiter=',')
+                    for line in csv_rd:
+                        if len(line) == 13:
+                            rd = [float(line[i].replace(' ', '')) for i in range(0, len(line))]
+                            rd = list(map(int, rd))
+                            rd = rd[1:]
+                            csv_wrt.writerow(rd)
+                fr.close()
+    fw.close()
+
+
+
+
+def get_activity_session(filename):
+
+    res = cp.deepcopy(ds_model)
+
+    print('[LOG]: Extract samples from session file: ' + filename)
+    filepath = os.path.join(session_dir, filename)
+    with open(filepath, mode='r') as fr:
+        csv_rd = csv.reader(fr, delimiter=',')
+        r_count = 1
+        for line in csv_rd:
+            if len(line) == 13:
+                rd = [float(line[i].replace(' ', '')) for i in range(0, len(line))]
+                rd = list(map(int, rd))
+                rd = rd[1:]
+
+                v_count = 0
+                for s in SENSORS:
+                    for a in AXIS:
+                        if v_count == 12:
+                            v_count = 0
+                            r_count += 1
+                        res[s][a].append(rd[v_count])
+                        v_count += 1
+    res['ts'] = [i for i in range(1,r_count+1)]
+    fr.close()
+
+    return res
 
 
 
@@ -65,28 +123,33 @@ def get_dataset(filename):
 
 
 # Dataset normalization
-def normalize(dataset_dict):
+def normalize(dataset_dict, activity):
     norm_dataset = cp.deepcopy(ds_model)
 
-    for s in SENSORS:
-        for ax in AXIS:
-            max_ax = np.max(dataset_dict[s][ax])
-            min_ax = np.min(dataset_dict[s][ax])
+    log_file = 'preprocessing_log_' + activity + '_' + dt.now().strftime("%d-%m-%Y_%H%M") + '.txt'
+    norm_log = os.path.join(log_dir, log_file)
+    with open(norm_log, 'w') as f:
 
-            norm_dataset[s][ax] = (dataset_dict[s][ax] - min_ax) / (max_ax - min_ax)
+        f.write(activity)
+        f.write("\n")
+        for s in SENSORS:
+            for ax in AXIS:
+                max_ax = np.max(dataset_dict[s][ax])
+                min_ax = np.min(dataset_dict[s][ax])
+                ar = s + ', ' + ax + ', MIN: ' + str(min_ax) + ', MAX: ' + str(max_ax) + "\n"
+                f.write(ar)
+                norm_dataset[s][ax] = (dataset_dict[s][ax] - min_ax) / (max_ax - min_ax)
 
+    f.close()
     return norm_dataset
-
-
 
 
 
 # Reshape and organize the input and output sets
 def prepare_data(ds, label):
-    segments = np.empty((0, SENS_VALUES, WINDOW_SAMPLES))
-    step = 50
+    segments = np.empty((0, WINDOW_SAMPLES, SENS_VALUES))
+    step = WINDOW_SAMPLES
     labels = []
-    reshaped_segments = np.empty((12,50))
     ds_len = len(ds["ACC_LSM6DSL_DS"]["x"])
     ds_r = ds_len % WINDOW_SAMPLES
     ds_len = ds_len - ds_r
@@ -109,11 +172,18 @@ def prepare_data(ds, label):
                              xs_gyr_lsm6dsl, ys_gyr_lsm6dsl, zs_gyr_lsm6dsl,
                              xs_acc_lsm303agr, ys_acc_lsm303agr, zs_acc_lsm303agr,
                              xs_mag_lsm303agr, ys_mag_lsm303agr, zs_mag_lsm303agr]
+
+        batch_min = np.min(reshaped_segments, axis=1)
+        batch_max = np.max(reshaped_segments, axis=1)
+
         reshaped_segments = np.transpose(reshaped_segments)
-        segments = np.vstack([segments, np.dstack(reshaped_segments)])
+
+        reshaped_segments = np.expand_dims(reshaped_segments, axis=0)
+        segments = np.append(segments, reshaped_segments, axis=0)
         labels.append(label)
 
     labels = np.vstack(labels)
+
     return segments, labels
 
 
@@ -141,7 +211,6 @@ def test_on_csv(xtest, ytest, find_dir=None, fold_n=0):
 
         f.close()
 
-
     with open(os.path.join(dt_csv_dir, ocsv_fname), 'w', newline='') as f:
 
         wrt = csv.writer(f, delimiter=',')
@@ -153,7 +222,6 @@ def test_on_csv(xtest, ytest, find_dir=None, fold_n=0):
         f.close()
 
     return icsv_fname, ocsv_fname
-
 
 
 def test_from_csv(test_in_set, test_out_set):
@@ -173,14 +241,14 @@ def test_from_csv(test_in_set, test_out_set):
 
         for i in range(0, n):
 
-            test_set = np.append(test_set, {"input":  np.empty((0, SENS_VALUES, WINDOW_SAMPLES)), "output": []})
+            test_set = np.append(test_set, {"input":  np.empty((0, WINDOW_SAMPLES, SENS_VALUES)), "output": []})
 
             with open(os.path.join(dt_csv_dir, test_in_set[i]), 'r') as f_in:
 
                 rd = csv.reader(f_in)
                 for row in rd:
                     row = [float(num) for num in row]
-                    ar = np.reshape(row, (SENS_VALUES, WINDOW_SAMPLES))
+                    ar = np.reshape(row, (WINDOW_SAMPLES, SENS_VALUES))
                     ar = np.transpose(ar)
                     test_set[i]["input"] = np.vstack([test_set[i]["input"], np.dstack(ar)])
 
@@ -196,9 +264,22 @@ def test_from_csv(test_in_set, test_out_set):
 
                 f_out.close()
 
-            test_set[i]["input"] = test_set[i]["input"].reshape(test_set[i]["input"].shape[0],
-                                                                test_set[i]["input"].shape[1],
-                                                                test_set[i]["input"].shape[2], 1)
-            test_set[i]["output"] = keras.utils.to_categorical(test_set[i]["output"], num_classes=4)
+            #test_set[i]["input"] = test_set[i]["input"].reshape(test_set[i]["input"].shape[0],
+            #                                                    test_set[i]["input"].shape[1],
+            #                                                    test_set[i]["input"].shape[2], 1)
+            test_set[i]["output"] = keras.utils.to_categorical(test_set[i]["output"], num_classes=num_classes)
 
     return test_set
+
+
+
+def shuffle_dataset(x_ds, y_ds):
+
+    print(x_ds.shape)
+    zip_ds = list(zip(x_ds, y_ds))
+
+    rnd.shuffle(zip_ds)
+
+    x_shf, y_shf = zip(*zip_ds)
+
+    return np.array(x_shf), np.array(y_shf)
