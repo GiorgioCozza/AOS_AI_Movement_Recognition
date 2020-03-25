@@ -28,16 +28,15 @@ sit_ds_path =os.path.join( datasets_dir, "sitting.txt")
 sup_ds_path = os.path.join(datasets_dir, "supine.txt")
 los_ds_path = os.path.join(datasets_dir, "lying_on_side.txt")
 
+plot_dir = "../plots"
+log_dir = "../log/"
+curlog_dir = ""
+plot_dir = "../plots"
+mod_dir = "../saved_models"
+csv_dir = "../test_csv"
+best_mod_dir = "../best_models"
 
-log_dir = os.path.join(workspace, "../log/")
-mod_dir = os.path.join(workspace, "../saved_models")
-csv_dir = os.path.join(workspace, "../test_csv")
-best_mod_dir = os.path.join(workspace, "../best_models")
-
-log_path = log_dir
-mod_path = mod_dir
-csv_path = csv_dir
-best_mod_path = best_mod_dir
+cmod = {'CNN': 1, 'RNN': 2}
 
 # DATA PROCESSING INFO
 WINDOW_SAMPLES = 30

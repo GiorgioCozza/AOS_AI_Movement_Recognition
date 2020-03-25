@@ -6,12 +6,11 @@ from keras.optimizers import Adam, RMSprop, SGD
 from keras import Sequential
 from keras.callbacks import EarlyStopping
 from keras.callbacks import TensorBoard
-from tensorboard import program
+import keras.backend as K
 from datetime import datetime as dt
 import os
 from scripts.data_visualization import show_confusion_matrix
-from scripts.nn_config import *
-
+from scripts.config import *
 
 x_train = []
 x_test = []
@@ -19,52 +18,58 @@ y_train = []
 y_test = []
 
 
+def model_summary(model, mod_type=''):
+    if mod_type == '':
+        model.summary()
+    else:
+        sum_name = mod_type + '_summary' + dt.now().strftime("%d-%m-%Y_%H%M%S") + ".txt"
+        sum_log = os.path.join(log_dir, sum_name)
+        with open(sum_log, mode='w') as f:
+            model.summary(print_fn=lambda x: print(x, file=f))
+        f.close()
+
+
 # Definition of the neural network model
 def CNN_model():
-    numFilters = 24
+    numFilters = 30
 
-    model = Sequential()
-    model.add(Conv2D(numFilters, kernel_size=3, strides=(1, 1),
-                     activation='relu', input_shape=(WINDOW_SAMPLES, SENS_VALUES, 1)))
-    model.add(MaxPooling2D(pool_size=(2, 2), padding='valid'))
-    model.add(Flatten())
-    model.add(Dense(32, activation='relu'))
-    model.add(Dropout(0.2))
-    model.add(Dense(32, activation='relu'))
-    model.add(Dropout(0.2))
-    model.add(Dense(num_classes, activation='softmax'))
+    cnn_model = Sequential()
+    cnn_model.add(BatchNormalization(input_shape=(WINDOW_SAMPLES, SENS_VALUES, 1)))
+    cnn_model.add(Conv2D(numFilters, kernel_size=3, strides=(1, 1), activation='relu', name='Conv2D_1'))
+    cnn_model.add(MaxPooling2D(pool_size=(2, 2), padding='valid', name='MaxPool_1'))
+    cnn_model.add(Flatten())
+    cnn_model.add(Dense(32, activation='relu', name='FCN2'))
+    cnn_model.add(Dropout(0.2))
+    cnn_model.add(Dense(num_classes, activation='softmax', name='FCN3'))
 
-    model.summary()
-    return model
+    model_summary(cnn_model, mod_type='CNN')
+    return cnn_model
 
 
 def RNN_model():
-
     hid_nodes_lstm = 32
-    rec_graph = Sequential()
-    rec_graph.add(BatchNormalization(input_shape=(WINDOW_SAMPLES, SENS_VALUES)))
-    rec_graph.add(LSTM(units=hid_nodes_lstm, return_sequences=True, name='RNN1'))
-    rec_graph.add(Dropout(0.2))
-    rec_graph.add(LSTM(units=hid_nodes_lstm, return_sequences=True, name='RNN2'))
-    rec_graph.add(Dropout(0.2))
-    rec_graph.add(LSTM(units=hid_nodes_lstm, return_sequences=True, name='RNN3'))
-    rec_graph.add(Dropout(0.2))
-    rec_graph.add(LSTM(units=hid_nodes_lstm, return_sequences=False, name='RNN4'))
-    rec_graph.add(Dropout(0.2))
-    rec_graph.add(Dense(num_classes, activation='softmax'))
+    rnn_model = Sequential()
+    rnn_model.add(BatchNormalization(input_shape=(WINDOW_SAMPLES, SENS_VALUES)))
+    rnn_model.add(LSTM(units=hid_nodes_lstm, return_sequences=True, name='LSTM1'))
+    rnn_model.add(Dropout(0.2))
+    rnn_model.add(LSTM(units=hid_nodes_lstm, return_sequences=True, name='LSTM2'))
+    rnn_model.add(Dropout(0.2))
+    rnn_model.add(LSTM(units=hid_nodes_lstm, return_sequences=True, name='LSTM3'))
+    rnn_model.add(Dropout(0.2))
+    rnn_model.add(LSTM(units=hid_nodes_lstm, return_sequences=False, name='LSTM4'))
+    rnn_model.add(Dropout(0.2))
+    rnn_model.add(Dense(num_classes, activation='softmax', name='FCN1'))
 
-    rec_graph.summary()
-    return rec_graph
+    model_summary(rnn_model, mod_type='RNN')
+    return rnn_model
 
 
 def train_model(model, x_train, y_train, x_valid, y_valid):
-    # set model
-    model_name =  "activityRec_model" + "_" + dt.now().strftime("%d-%m-%Y_%H%M%S") + ".log"
     # Training logging
     now = dt.now()
-    log_file = log_path + "activityRec_train_log" + "_" + now.strftime("%d-%m-%Y_%H%M%S") + ".log"
+    log_file = "train_log" + "_" + now.strftime("%d-%m-%Y_%H%M%S") + ".log"
     logfile_path = os.path.join(log_dir, log_file)
-    tensorboard_cb = TensorBoard(log_dir=logfile_path,histogram_freq=1)
+    tensorboard_cb = TensorBoard(log_dir=logfile_path, histogram_freq=0)
     # callback list
     callback_list = [
         EarlyStopping(monitor='val_acc', mode='max', verbose=1, patience=40),
@@ -73,34 +78,27 @@ def train_model(model, x_train, y_train, x_valid, y_valid):
 
     # Hyper-parameters
     BATCH_SIZE = 32
-    EPOCHS = 80
+    EPOCHS = 60
 
     learning_rate = 0.0001
     rms = RMSprop(lr=learning_rate)
-    adam = Adam(lr=learning_rate)
-    sgd = SGD(lr=0.001, momentum=0.5, nesterov=True)
 
     model.compile(loss='categorical_crossentropy',
                   optimizer=rms, metrics=['accuracy'])
 
-    tspe = int(np.round((len(x_train)/BATCH_SIZE)*0.1))
-    vspe = int(np.round((len(x_valid)/BATCH_SIZE)*0.1))
     # Training
-    history = model.fit(x_train,
-                        y_train,
-                        epochs=EPOCHS,
-                        batch_size=BATCH_SIZE,
-                        validation_data=(x_valid, y_valid),
-                        shuffle=True,
-                        verbose=1,
-                        callbacks=callback_list)
-
-
+    model.fit(x_train,
+              y_train,
+              epochs=EPOCHS,
+              batch_size=BATCH_SIZE,
+              validation_data=(x_valid, y_valid),
+              shuffle=True,
+              verbose=1,
+              callbacks=callback_list)
 
 
 # Test all the model of a given set
 def test_model_set(model_set, test_set):
-
     loss_res = []
     acc_res = []
     max_y_pred_test = []
@@ -131,41 +129,19 @@ def test_model_set(model_set, test_set):
     print("\t\n - Average Accuracy: ", av_acc)
     print("\r\n\n")
 
-    best_acc_model = model_set[np.argmax(acc_res)]
-    best_loss_model = model_set[np.argmax(loss_res)]
+    best_acc_fold = np.argmax(acc_res)
+    best_loss_fold = np.argmax(loss_res)
+    best_acc_model = model_set[best_acc_fold]
+    best_loss_model = model_set[best_loss_fold]
 
-    return best_acc_model, best_loss_model
-
-
-def get_folds(btch_lens):
-
-    print("\r\nREADY to TRAIN the NN, Please insert the ratio of the data batches that will be used for testing:\r\n")
-    ratio = input("RATIO: ")
-    ratio = float(ratio)
-
-    test_batch_num = [int(np.round(ratio * btch_lens[0])),
-                      int(np.round(ratio * btch_lens[1])),
-                      int(np.round(ratio * btch_lens[2])),
-                      int(np.round(ratio * btch_lens[3]))]
-    valid_batch_num = [int(np.round(ratio * btch_lens[0])),
-                       int(np.round(ratio * btch_lens[1])),
-                       int(np.round(ratio * btch_lens[2])),
-                       int(np.round(ratio * btch_lens[3]))]
-    max_folds = [int(np.floor(btch_lens[0] / (test_batch_num[0] + valid_batch_num[0]))),
-                 int(np.floor(btch_lens[1] / (test_batch_num[1] + valid_batch_num[1]))),
-                 int(np.floor(btch_lens[2] / (test_batch_num[2] + valid_batch_num[2]))),
-                 int(np.floor(btch_lens[3] / (test_batch_num[3] + valid_batch_num[3])))]
-
-    folds = np.min(max_folds)
-
-    return ratio, folds
+    return best_acc_model, best_loss_model, best_acc_fold, best_loss_fold
 
 
-
-def save_best_models(max_acc_mod, min_loss_mod):
-
-    loss_mod_path = os.path.join(best_mod_path, "best_loss_model_" + dt.now().strftime("%d-%m-%Y_%H%M%S") + '.h5')
-    acc_mod_path = os.path.join(best_mod_path, "best_acc_model_" + dt.now().strftime("%d-%m-%Y_%H%M%S") + '.h5')
+def save_best_models(max_acc_mod, min_loss_mod, model_name, acc_fold, loss_fold):
+    loss_mod_path = os.path.join(best_mod_dir,
+                                 "best_loss_" + model_name + '_fold' + str(loss_fold) + '_' + dt.now().strftime("%d-%m-%Y_%H%M%S") + '.h5')
+    acc_mod_path = os.path.join(best_mod_dir,
+                                "best_acc_model_" + model_name + '_fold' + str(acc_fold) + '_' + dt.now().strftime("%d-%m-%Y_%H%M%S") + '.h5')
 
     min_loss_mod.save(loss_mod_path)
     max_acc_mod.save(acc_mod_path)

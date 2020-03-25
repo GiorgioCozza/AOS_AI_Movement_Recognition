@@ -5,16 +5,13 @@ import os
 import keras
 import csv
 import random as rnd
-from scripts.nn_config import *
+from scripts.config import *
 
 ds_model = {"ACC_LSM6DSL_DS": {"x": [], "y": [], "z": []}, "GYR_LSM6DSL_DS": {"x": [], "y": [], "z": []},
-                   "ACC_LSM303AGR_DS": {"x": [], "y": [], "z": []}, "MAG_LSM303AGR_DS": {"x": [], "y": [], "z": []}}
-
-
+            "ACC_LSM303AGR_DS": {"x": [], "y": [], "z": []}, "MAG_LSM303AGR_DS": {"x": [], "y": [], "z": []}}
 
 
 def merge_session_files(dir_path, activity):
-
     act_filename = activity + '.txt'
     actfile_dir = os.path.join(dir_path, 'activity_files')
     ds_file = os.path.join(dir_path, act_filename)
@@ -23,7 +20,7 @@ def merge_session_files(dir_path, activity):
         csv_wrt = csv.writer(fw, delimiter=' ')
         for file in os.listdir(actfile_dir):
             if file.startswith(activity):
-                print('[LOG]: Extract samples from file: ' + file)
+                print('[LOG]: Extract samples from file: ' + file.split('datasets')[-1])
                 filepath = os.path.join(actfile_dir, file)
                 with open(filepath, mode='r') as fr:
                     csv_rd = csv.reader(fr, delimiter=',')
@@ -37,13 +34,10 @@ def merge_session_files(dir_path, activity):
     fw.close()
 
 
-
-
 def get_activity_session(filename):
-
     res = cp.deepcopy(ds_model)
 
-    print('[LOG]: Extract samples from session file: ' + filename)
+    print('[LOG]: Extract samples from session file: ' + filename.split('datasets')[-1])
     filepath = os.path.join(session_dir, filename)
     with open(filepath, mode='r') as fr:
         csv_rd = csv.reader(fr, delimiter=',')
@@ -62,30 +56,31 @@ def get_activity_session(filename):
                             r_count += 1
                         res[s][a].append(rd[v_count])
                         v_count += 1
-    res['ts'] = [i for i in range(1,r_count+1)]
+    res['ts'] = [i for i in range(1, r_count + 1)]
     fr.close()
 
     return res
 
 
-
-
 # Dataset partitioning (training, testing)
 def split_train_valid_test(ds_batches, labels, ratio, fold):
-
     ds_batch_num = ds_batches.shape[0]
-    test_batch_num = int(np.round(ratio*ds_batch_num))
-    val_batch_num = int(np.round(ratio*ds_batch_num))
-    max_fold = int(np.floor(ds_batch_num/(test_batch_num + val_batch_num)))
-    if test_batch_num > 0 and fold in range(0, max_fold-1):
+    test_batch_num = int(np.round(ratio * ds_batch_num))
+    val_batch_num = int(np.round(ratio * ds_batch_num))
+    max_fold = int(np.floor(ds_batch_num / (test_batch_num + val_batch_num)))
+
+    if test_batch_num > 0 and fold in range(0, max_fold):
         test_bstart = fold * test_batch_num
         test_bend = test_bstart + test_batch_num
-        val_bstart = test_bend + fold*val_batch_num
+
+        val_bstart = test_bend + fold * val_batch_num
         val_bend = val_bstart + val_batch_num
+
         ds_test_batches = ds_batches[test_bstart:test_bend]
         ds_val_batches = ds_batches[val_bstart:val_bend]
         ds_train_batches = np.delete(ds_batches, range(test_bstart, test_bend), axis=0)
         ds_train_batches = np.delete(ds_train_batches, range(val_bstart, val_bend), axis=0)
+
         test_labels = labels[test_bstart:test_bend]
         val_labels = labels[val_bstart:val_bend]
         train_labels = np.delete(labels, range(test_bstart, test_bend), axis=0)
@@ -94,12 +89,11 @@ def split_train_valid_test(ds_batches, labels, ratio, fold):
         print("\r\nBAD INPUT: Fold out of range or negative test batches")
         return
 
-    split_dict = {"training" : {"input" : ds_train_batches, "output" : train_labels},
-                  "validation" : {"input" : ds_val_batches, "output":val_labels},
-                  "testing" : {"input": ds_test_batches, "output": test_labels}}
-    #print(split_dict["testing"]["input"][0])
+    split_dict = {"training": {"input": ds_train_batches, "output": train_labels},
+                  "validation": {"input": ds_val_batches, "output": val_labels},
+                  "testing": {"input": ds_test_batches, "output": test_labels}}
+    # print(split_dict["testing"]["input"][0])
     return split_dict
-
 
 
 # Get samples from the dataset file and organize them into a dictionary
@@ -119,7 +113,6 @@ def get_dataset(filename):
                     v_count += 1
 
     return res
-
 
 
 # Dataset normalization
@@ -142,7 +135,6 @@ def normalize(dataset_dict, activity):
 
     f.close()
     return norm_dataset
-
 
 
 # Reshape and organize the input and output sets
@@ -173,9 +165,6 @@ def prepare_data(ds, label):
                              xs_acc_lsm303agr, ys_acc_lsm303agr, zs_acc_lsm303agr,
                              xs_mag_lsm303agr, ys_mag_lsm303agr, zs_mag_lsm303agr]
 
-        batch_min = np.min(reshaped_segments, axis=1)
-        batch_max = np.max(reshaped_segments, axis=1)
-
         reshaped_segments = np.transpose(reshaped_segments)
 
         reshaped_segments = np.expand_dims(reshaped_segments, axis=0)
@@ -187,16 +176,12 @@ def prepare_data(ds, label):
     return segments, labels
 
 
-
-
-
 def test_on_csv(xtest, ytest, find_dir=None, fold_n=0):
-
     icsv_fname = 'test_input_' + 'fold-' + str(fold_n) + '_' + dt.now().strftime('%b%d_%H-%M-%S') + '.csv'
     ocsv_fname = 'test_output_' + 'fold-' + str(fold_n) + '_' + dt.now().strftime('%b%d_%H-%M-%S') + '.csv'
 
     csv_dir_name = 'test_' + dt.now().strftime('%b%d_%y')
-    dt_csv_dir = os.path.join(csv_path, csv_dir_name)
+    dt_csv_dir = os.path.join(csv_dir, csv_dir_name)
 
     if not os.path.exists(dt_csv_dir):
         os.makedirs(dt_csv_dir)
@@ -224,14 +209,13 @@ def test_on_csv(xtest, ytest, find_dir=None, fold_n=0):
     return icsv_fname, ocsv_fname
 
 
-def test_from_csv(test_in_set, test_out_set):
-
+def test_from_csv(test_in_set, test_out_set, model):
     test_set = np.array([])
 
     if (len(test_in_set) == len(test_out_set)):
 
         csv_dir_name = 'test_' + dt.now().strftime('%b%d_%y')
-        dt_csv_dir = os.path.join(csv_path, csv_dir_name)
+        dt_csv_dir = os.path.join(csv_dir, csv_dir_name)
 
         if not os.path.exists(dt_csv_dir):
             os.makedirs(dt_csv_dir)
@@ -241,7 +225,7 @@ def test_from_csv(test_in_set, test_out_set):
 
         for i in range(0, n):
 
-            test_set = np.append(test_set, {"input":  np.empty((0, WINDOW_SAMPLES, SENS_VALUES)), "output": []})
+            test_set = np.append(test_set, {"input": np.empty((0, WINDOW_SAMPLES, SENS_VALUES)), "output": []})
 
             with open(os.path.join(dt_csv_dir, test_in_set[i]), 'r') as f_in:
 
@@ -254,7 +238,7 @@ def test_from_csv(test_in_set, test_out_set):
 
                 f_in.close()
 
-            with open(os.path.join(dt_csv_dir,  test_out_set[i]), 'r') as f_out:
+            with open(os.path.join(dt_csv_dir, test_out_set[i]), 'r') as f_out:
 
                 rd = csv.reader(f_out)
 
@@ -264,20 +248,17 @@ def test_from_csv(test_in_set, test_out_set):
 
                 f_out.close()
 
-            #test_set[i]["input"] = test_set[i]["input"].reshape(test_set[i]["input"].shape[0],
-            #                                                    test_set[i]["input"].shape[1],
-            #                                                    test_set[i]["input"].shape[2], 1)
+            if model == cmod['CNN']:
+                test_set[i]["input"] = test_set[i]["input"].reshape(test_set[i]["input"].shape[0],
+                                                                    test_set[i]["input"].shape[1],
+                                                                    test_set[i]["input"].shape[2], 1)
             test_set[i]["output"] = keras.utils.to_categorical(test_set[i]["output"], num_classes=num_classes)
 
     return test_set
 
 
-
 def shuffle_dataset(x_ds, y_ds):
-
-    print(x_ds.shape)
     zip_ds = list(zip(x_ds, y_ds))
-
     rnd.shuffle(zip_ds)
 
     x_shf, y_shf = zip(*zip_ds)

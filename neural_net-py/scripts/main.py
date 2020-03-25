@@ -5,58 +5,63 @@ from scripts.dataset_processing import get_dataset, normalize, prepare_data, \
                                        split_train_valid_test, test_on_csv, test_from_csv, \
                                        shuffle_dataset, merge_session_files
 import os
-from scripts.data_visualization import plot_temporal_activity, show_activities_histogram
-from scripts.nn_config import *
-from scripts.neural_network import CNN_model, train_model, test_model_set, get_folds, save_best_models, RNN_model
+from scripts.data_visualization import plot_temporal_activity, show_activities_histogram, show_activity_files, activity_scattering3D
+from scripts.config import *
+from scripts.neural_network import CNN_model, train_model, test_model_set, save_best_models, RNN_model
 from datetime import datetime as dt
 
 
 def set_env():
     workspace = os.getcwd()
     mod_path = os.path.join(workspace, mod_dir)
-    best_mod_path = os.path.join(mod_path, best_mod_dir)
 
     if not os.path.exists(mod_path):
         os.makedirs(mod_path)
-        os.makedirs(best_mod_path)
+        os.makedirs(best_mod_dir)
 
-    if not os.path.exists(best_mod_path):
-        os.makedirs(best_mod_path)
+    if not os.path.exists(best_mod_dir):
+        os.makedirs(best_mod_dir)
 
-    log_path = os.path.join(workspace, log_dir)
-    if not os.path.exists(log_path):
-        os.makedirs(log_path)
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir)
 
-    csv_path = os.path.join(workspace, csv_dir)
-    if not os.path.exists(csv_path):
-        os.makedirs(csv_path)
+    if not os.path.exists(plot_dir):
+        os.makedirs(plot_dir)
+
+    if not os.path.exists(csv_dir):
+        os.makedirs(csv_dir)
 
     csv_dir_name = 'test_' + dt.now().strftime('%b%d_%y')
-    td_csv_dir = os.path.join(csv_path, csv_dir_name)
+    td_csv_dir = os.path.join(csv_dir, csv_dir_name)
 
     if not os.path.exists(td_csv_dir):
         os.makedirs(td_csv_dir)
 
 
-def choose_activity_file():
 
-    m_c = 1
-    print("###########################   SESSION FILES   ###################################")
-    print("\n")
-    actfiles = os.listdir(session_dir)
-    for file in actfiles:
-        print("\t" + str(m_c) + ". " + str(file))
-        m_c+=1
-    print("\n")
-    print("#################################################################################")
+def model_menu():
+    c = 0
+    while c not in list(cmod.values()):
+        m_c = 1
+        print("###########################   MODEL MENU   ###################################")
+        print("\n")
+        for mod in cmod.keys():
+            print("\t" + str(m_c) + ". " + mod)
+            m_c += 1
+        print("\n")
+        print("#################################################################################")
 
-    c = int(input("\n[INPUT]: "))
+        c = input("\nCHOOSE MODEL TO TRAIN: ")
+        if c.isdigit():
+            c = int(c)
 
-    while c not in range(1, m_c+1):
-        print("[ERROR]: Invalid choice!")
-        c = int(input("\n[INPUT]: "))
+        if c not in list(cmod.values()):
+            print("[ERROR]: Bad input!")
 
-    return actfiles[c-1]
+    mod_key = list(cmod.keys())[list(cmod.values()).index(c)]
+    mod_val = c
+    return mod_key, mod_val
+
 
 def main():
     set_env()
@@ -70,11 +75,26 @@ def main():
     merge_session_files(datasets_dir, LABELS[5])
     merge_session_files(datasets_dir, LABELS[6])
 
-    c = choose_activity_file()
-    actpath = os.path.join(session_dir, c)
-    plot_temporal_activity(actpath, limit=WINDOW_SAMPLES)
+    c = show_activity_files()
+    # copy into the list all the activity files to be plotted
+    act_files_scat = ['walking_23-02-2020_165231.txt',
+                 'standing_29-12-2019_063829.txt',
+                 'jumping_25-02-2020_094215.txt',
+                 'running_24-02-2020_151633.txt',
+                 'supine_24-02-2020_125443.txt',
+                 'sitting_24-02-2020_081708.txt',
+                 'lying_on_side_24-02-2020_134922.txt']
 
-    show_activities_histogram()
+    act_files_plot = ['supine_24-02-2020_125443.txt',
+                 'sitting_24-02-2020_081708.txt',
+                 'lying_on_side_24-02-2020_134922.txt']
+
+    # UNCOMMENT TO SHOW PLOTS
+    act_files_scat = [os.path.join(session_dir, af) for af in act_files_scat]
+    act_files_plot = [os.path.join(session_dir, af) for af in act_files_plot]
+    #plot_temporal_activity(act_files_plot, limit=WINDOW_SAMPLES*3)
+    #activity_scattering3D(act_files_scat, limit=WINDOW_SAMPLES)
+    #show_activities_histogram()
 
 
     # dataset collection
@@ -86,13 +106,6 @@ def main():
     sup_dataset = get_dataset(sup_ds_path)
     los_dataset = get_dataset(los_ds_path)
 
-    stand_num = len(stand_dataset[SENSORS[0]]['x'])
-    run_num = len(run_dataset[SENSORS[0]]['x'])
-    walk_num = len(walk_dataset[SENSORS[0]]['x'])
-    jump_num = len(jump_dataset[SENSORS[0]]['x'])
-    sit_num = len(sit_dataset[SENSORS[0]]['x'])
-    sup_num = len(sup_dataset[SENSORS[0]]['x'])
-    los_num = len(los_dataset[SENSORS[0]]['x'])
 
     # prepare NN input
     proc_run, run_res = prepare_data(run_dataset, 0)
@@ -103,19 +116,31 @@ def main():
     proc_sup, sup_res = prepare_data(sup_dataset, 5)
     proc_los, los_res = prepare_data(los_dataset, 6)
 
-    batches_len = [proc_run.shape[0], proc_stand.shape[0], proc_walk.shape[0], proc_jump.shape[0]]
+    batch_len = proc_run.shape[0]
 
-    ratio, folds = get_folds(batches_len)
+    print("\r\nREADY to TRAIN the NN, Please insert the ratio of the data batches that will be used for testing:\r\n")
+    ratio = input("RATIO: ")
+    ratio = float(ratio)
+
+    valtest_batches = 2 * int(np.round(batch_len * ratio))
+    folds = int(np.floor(batch_len/valtest_batches))
 
     nn_models = []
     test_iset = []
     test_oset = []
 
-    for j in range(0, folds - 1):
-        nn_models.append(RNN_model())
+    k, v = model_menu()
+
+    if v == cmod['CNN']:
+        mod_fun = CNN_model
+    elif v == cmod['RNN']:
+        mod_fun = RNN_model
+
+    for j in range(0, folds):
+        nn_models.append(mod_fun())       #substitute with CNN_model()/RNN_model() to train the two solutions
 
     print("\r\nMINIMUM FOLD CYCLE: " + str(folds))
-    for i in range(0, folds - 1):
+    for i in range(0, folds):
         print("\r\nSTART TRAINING AND TESTING USING FOLD " + str(i) + "\r\n")
 
         proc_run_dict = split_train_valid_test(proc_run, run_res, ratio, i)
@@ -143,7 +168,6 @@ def main():
                                    proc_los_dict['validation']['output']
                                    ))
 
-
         x_train = np.vstack((proc_run_dict["training"]["input"], proc_stand_dict["training"]["input"],
                              proc_walk_dict["training"]["input"], proc_jump_dict["training"]["input"],
                              proc_sit_dict['training']['input'], proc_sup_dict['training']['input'],
@@ -166,9 +190,10 @@ def main():
         y_test = keras.utils.to_categorical(test_results, num_classes=7)
         y_valid = keras.utils.to_categorical(valid_results, num_classes=7)
 
-       # x_train = x_train.reshape(x_train.shape[0], x_train.shape[1], x_train.shape[2], 1)
-        #x_valid = x_valid.reshape(x_valid.shape[0], x_valid.shape[1], x_valid.shape[2], 1)
-        #x_test = x_test.reshape(x_test.shape[0], x_test.shape[1], x_test.shape[2], 1)
+        if v == cmod['CNN']:
+            x_train = x_train.reshape(x_train.shape[0], x_train.shape[1], x_train.shape[2], 1)
+            x_valid = x_valid.reshape(x_valid.shape[0], x_valid.shape[1], x_valid.shape[2], 1)
+            x_test = x_test.reshape(x_test.shape[0], x_test.shape[1], x_test.shape[2], 1)
 
         x_train, y_train = shuffle_dataset(x_train, y_train)
         x_valid, y_valid = shuffle_dataset(x_valid, y_valid)
@@ -180,9 +205,9 @@ def main():
 
         train_model(model=nn_models[i], x_train=x_train, y_train=y_train, x_valid=x_valid, y_valid=y_valid)
 
-    test_set = test_from_csv(test_iset, test_oset)
-    best_acc_mod, best_loss_mod = test_model_set(model_set=nn_models, test_set=test_set)
-    save_best_models(best_acc_mod, best_loss_mod)
+    test_set = test_from_csv(test_iset, test_oset, v)
+    best_acc_mod, best_loss_mod, best_acc_fold, best_loss_fold = test_model_set(model_set=nn_models, test_set=test_set)
+    save_best_models(best_acc_mod, best_loss_mod, model_name=k, acc_fold=best_acc_fold, loss_fold=best_loss_fold)
 
 
 if __name__ == '__main__':
