@@ -73,8 +73,8 @@ ai_i32 NN::nnRun(ai_handle net, ai_buffer* ai_input, ai_buffer* ai_output, const
 	ai_i32 nbatch;
 	float result;
 	if (ai_input->data != nullptr) {
-		//printf("\r\n[OUTPUT]: %.2f %.2f %.2f\r\n", (float)(*(ai_input->data + 0)), (float*)(*(ai_input->data + 1)), (float*)(*(ai_input->data + 1)));
-		// if the input dataset is not empty run the neural network
+
+
 		nbatch = ai_network_run(net, (const ai_buffer*)ai_input, ai_output);
 
 		if (nbatch != batch_size) {
@@ -96,12 +96,10 @@ ai_i32 NN::nnRun(ai_handle net, ai_buffer* ai_input, ai_buffer* ai_output, const
 ai_bool NN::prepareData(dataset_preproc* ds_pp, ai_float* in_data, ai_float* out_data, ai_buffer* ai_input, ai_buffer* ai_output, const ai_u16 batches) {
 
 	uint16_t req_out_sz = sizeof(ai_float) * batches;
-	printf("\r\n[LOG]: Preparing the neural network datasets...\r\n");
+	//printf("\r\n[LOG]: Preparing the neural network datasets...\r\n");
 	// input segment preprocessing
 
 	//ds_pp->normalize(in_data);
-
-	printf("\r\n[TEST] in_data: %f\r\n", *(in_data + 3));
 
 	if (in_data == NULL) {
 		printf("\r\n[ERROR]: An error occurred during dataset processing\r\n");

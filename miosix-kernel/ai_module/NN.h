@@ -95,11 +95,12 @@ public:
 	*/
 	ai_bool nnInit(ai_handle net, ai_network_params* net_par, ai_u8 * activations);
 
+
 protected:
 
 private:
 	ai_network_params* params=nullptr;
-	ai_error last_error_rep/*=AI_ERROR_INIT(0,0)*/;
+	ai_error last_error_rep;
 	ai_network_report* report=nullptr;
 
 

@@ -33,7 +33,6 @@
 
 
 static const char* movements[7] = { "RUNNING", "WALKING", "JUMPING", "STANDING", "SITTING", "SUPINE", "LYING ON SIDE"};
-static const char* activities[6] = { "SOCCER", "BASKETBALL", "VOLLEYBALL", "GOLF", "SLEEPING", "STUDYING"};
 
 
 #endif
