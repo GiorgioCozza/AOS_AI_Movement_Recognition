@@ -25,37 +25,7 @@ typedef Gpio<GPIOC_BASE, 13> usrbtn;
 typedef Gpio<GPIOA_BASE, 5> usrled;
 
 
-static Thread *wait;
-/*
-void printing2(int32_t * int_vec) {
-	for (int i = 0; i < 12; i++) {
-		printf("%6ld", int_vec[i]);
-	}
-	printf("\n");
-}
-*/
-/*
-void confBtnInt(){
-	
-	usrbtn::mode(Mode::INPUT_PULL_DOWN);
-	EXTI->IMR |= EXTI_IMR_MR0;
-	EXTI->RTSR |= EXTI_RTSR_TR0;
-	NVIC_EnableIRQ(EXTI0_IRQn);
-	NVIC_SetPriority(EXTI0_IRQn, 15);
-}
 
-void waitUsrStart(){
-	
-	FastInterruptDisableLock dLock;
-	wait = Thread::IRQgetCurrentThread();
-	while(wait){
-		Thread::IRQwait();
-		FastInterruptEnableLock eLock(dLock);
-		Thread::yield();
-		
-	}
-}
-*/
 void print_on_serial(float* int_vec, uint32_t smp_cnt) {
 
 	printf(" %d, %.6f, %.6f, %.6f, %.6f, %.6f, %.6f, %.6f, %.6f, %.6f, %.6f, %.6f, %.6f", smp_cnt, (float)int_vec[0], (float)int_vec[1], (float)int_vec[2], \
@@ -87,7 +57,7 @@ int main() {
 	float* out_data = (float*)malloc(NUM_CLASSES * sizeof(float));
 	float* int_vec = new float[VECTOR_SIZE];
 
-	LSM6DSLSensor* acc_gyr = new LSM6DSLSensor(LSM6DSL_I2C_ADDR);
+	LSM6DSLAccGyr* acc_gyr = new LSM6DSLAccGyr(LSM6DSL_I2C_ADDRESS_HIGH);
 	LSM303AGRAccSensor* acc = new LSM303AGRAccSensor(LSM303AGRAcc_I2C_ADDR);  //++
 	LSM303AGRMagSensor* mag = new LSM303AGRMagSensor(LSM303AGRMag_I2C_ADDR);  //++
 
@@ -102,13 +72,17 @@ int main() {
 			startflag = false;
 			usrbtn::mode(Mode::INPUT_PULL_UP);
 			//enable board sensors
+	
+			
+			int en1 = acc_gyr->init();
+			int en2 = acc->enable();
+			int en3 = mag->enable();
+		
 
-			int en1 = acc_gyr->enable_x();
-			int en2 = acc_gyr->enable_g();
-			int en3 = acc->enable();
-			int en4 = mag->enable();
-
-			printf("\r\n[LOG]: Sensors enabled!\r\n");
+			float *c;
+			acc_gyr->get_acc_odr(c);
+			float cv = *c;
+			printf("\r\n[LOG]: Sensors enabled! ODR: %f\r\n", cv);
 
 			/* Print sensor IDs*/
 
@@ -143,22 +117,18 @@ int main() {
 						}
 						usrled::high();
 					}
+					
 					usrled::low();
 					sample_cnt++;
-					//Clear erminal screen
-					
-					char ESC = 27;
-					//printf("%c[H", ESC);
-					//printf("%c[2J", ESC);
-					
 
-					if (!acc_gyr->get_x_axes(buf_reader)) {
+
+					if (!acc_gyr->get_acc_axes(buf_reader)) {
 						int_vec[0] = (float)buf_reader[0];
 						int_vec[1] = (float)buf_reader[1];
 						int_vec[2] = (float)buf_reader[2];
 					}
 
-					if (!acc_gyr->get_g_axes(buf_reader)) {
+					if (!acc_gyr->get_gyr_axes(buf_reader)) {
 						int_vec[3] = (float)buf_reader[0];//
 						int_vec[4] = (float)buf_reader[1];// 
 						int_vec[5] = (float)buf_reader[2];//
@@ -185,13 +155,7 @@ int main() {
 							startflag = false;
 							Thread::sleep(500);
 						}
-					
-					//Clear terminal screen
-					
-					//printf("%c[H", ESC);
-					//printf("%c[2J", ESC);
-					
-					//Thread::sleep(50);
+
 
 					count++;
 					

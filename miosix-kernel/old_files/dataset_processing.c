@@ -24,11 +24,7 @@
 
 #include "dataset_processing.h"
 #include <stddef.h>
-/*
-pthread_mutex_t mut = PTHREAD_MUTEX_INITIALIZER;
-pthread_t thr[MAX_AV_THREADS];
-ai_bool busy_thr[MAX_AV_THREADS] = { false, false };
-*/
+
 char lsm6dsl_acc[] = "LSM6DSL_ACCELEROMETER";
 char lsm6dsl_gyr[] = "LSM6DSL_GYROSCOPE";
 char lsm303a_acc[] = "LSM303A_ACCELEROMETER";

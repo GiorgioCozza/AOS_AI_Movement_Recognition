@@ -45,7 +45,7 @@ void printing2(int32_t* int_vec, char* sensor, int i) {
 
 
 
-uint16_t argmax(float * vec, uint16_t vec_sz){
+uint8_t argmax(float * vec, uint16_t vec_sz){
 	
 	uint16_t idx_max=0;
 	float _max = 0;
@@ -57,6 +57,7 @@ uint16_t argmax(float * vec, uint16_t vec_sz){
 		
 	return idx_max;
 }
+
 
 
 int main() {
@@ -196,12 +197,13 @@ int main() {
 
 						//printf("\r\n[LOG]: Running the Neural Network...\r\n");
 						int n_b = neural_net->nnRun(network, &ai_input, &ai_output, 1);
+						
 						printf("\r\n****************	AI NN NETWORK RESULT	*********************\r\n");
 						printf("\n[LOG]: You are %s\n\n", movements[argmax(out_data, NUM_CLASSES)]);
+						Thread::sleep(100);						
 
 						//for (int i = 0; i < NUM_CLASSES; i++)
 						//	printf("[OUTPUT]: Class %s (acc): %.2f %\r\n", movements[i], out_data[i]);
-						Thread::sleep(100);
 
 
 					}

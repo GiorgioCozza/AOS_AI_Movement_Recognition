@@ -49,10 +49,10 @@ typedef void* (*prc_rtn)(void*);
 #define PROC_VEC_INIT(vec_, r_, c_)								\
 		{	.mean = (float *)malloc(c_*sizeof(float)),				\
 			.sigma = (float *)malloc(c_*sizeof(float)),				\			
-			.counter = 0, \
-			.matrix = nullptr, \
-			.inp_vec = (vec_), \
-			.n_rows = (r_), \
+			.counter = 0,											 \
+			.matrix = nullptr,										 \
+			.inp_vec = (vec_),										 \
+			.n_rows = (r_),												\
 			.n_cols = (c_), \
 			.idx = 0 }
 
