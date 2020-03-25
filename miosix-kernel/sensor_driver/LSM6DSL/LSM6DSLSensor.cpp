@@ -120,6 +120,7 @@ int LSM6DSLSensor::enable_x(void)
   }
   
   /* Output data rate selection. */
+  
   if ( set_x_odr_when_enabled( _x_last_odr ) == 1 )
   {
     return 1;
