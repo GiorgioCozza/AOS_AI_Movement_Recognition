@@ -1,0 +1,157 @@
+
+ RUN Stats    : batches=752 dur=226.297s tfx=192.465s 5.601KiB/s (wb=1057.500KiB,rb=20.562KiB) 
+ 
+Results for 752 inference(s) @84/84MHz (macc:129121) 
+ duration    : 21.552 ms (average) 
+ CPU cycles  : 1810392 (average) 
+ cycles/MACC : 14.02 (average for all layers) 
+ 
+Inspector report (layer by layer) 
+ n_nodes        : 7 
+ num_inferences : 752 
+ 
+Clayer  id  desc                          oshape          fmt       ms         
+-------------------------------------------------------------------------------- 
+0       1   10011/(Merged Conv2d / Pool)  (14, 5, 24)     FLOAT32   16.965     
+1       4   10005/(Dense)                 (1, 1, 32)      FLOAT32   4.418      
+2       4   10009/(Nonlinearity)          (1, 1, 32)      FLOAT32   0.009      
+3       6   10005/(Dense)                 (1, 1, 32)      FLOAT32   0.102      
+4       6   10009/(Nonlinearity)          (1, 1, 32)      FLOAT32   0.009      
+5       8   10005/(Dense)                 (1, 1, 7)       FLOAT32   0.026      
+6       8   10009/(Nonlinearity)          (1, 1, 7)       FLOAT32   0.022      
+                                                                    21.552 (total) 
+ 
+-- Running STM32 C-model - done (elapsed time 226.564s) 
+-- Running original model 
+-- Running original model - done (elapsed time 0.507s) 
+ 
+Exec/report summary (validate 0.000s err=0) 
+------------------------------------------------------------------------------------------------------------------------ 
+model file      : C:\Users\grgcz\Desktop\dev_space_win\AOS_Project\AOS_MovementRecognition\neural_net-py\best_models\best_acc_model_CNN_fold2_21-03-2020_160538.h5 
+type            : keras (keras_dump) 
+c_name          : network 
+compression     : None 
+quantize        : None 
+L2r error       : 1.56669131e-07 (expected to be < 0.01) 
+workspace dir   : C:\Users\grgcz\AppData\Local\Temp\mxAI_workspace4874643108472003252065361600587343 
+output dir      : C:\Users\grgcz\.stm32cubemx\stm32ai_output 
+vinput files    : C:\Users\grgcz\Desktop\dev_space_win\AOS_Project\AOS_MovementRecognition\neural_net-py\test_csv\test_Mar21_20\test_input_fold-2_Mar21_16-04-19.csv 
+voutput files   : C:\Users\grgcz\Desktop\dev_space_win\AOS_Project\AOS_MovementRecognition\neural_net-py\test_csv\test_Mar21_20\test_output_fold-2_Mar21_16-04-19.csv 
+ 
+model_name      : best_acc_model_CNN_fold2_21032020_160538 
+model_hash      : b78cad02c661d8e0eb4b98232e152758 
+input           : input_0 (item#=360, size=1.41 KiB, fmt=FLOAT32) 
+input (total)   : 1.41 KiB 
+output          : FCN3_nl (item#=7, size=28 B, fmt=FLOAT32) 
+output (total)  : 28 B 
+params #        : 55,321 (216.10 KiB) 
+macc            : 129,121 
+rom (ro)        : 221,276 (216.09 KiB) -0.00% 
+ram (rw)        : 8,640 + 1,468 (8.44 KiB + 1.43 KiB) 
+ 
+------------------------------------------------------------------------------------------------------------------------ 
+id  layer (type)                      output shape      param #     connected to             macc           rom                 
+------------------------------------------------------------------------------------------------------------------------ 
+0   input_0 (Input)                   (30, 12, 1)                                                                               
+    batch_normalization_3 (ScaleBias) (30, 12, 1)       2           input_0                                                     
+------------------------------------------------------------------------------------------------------------------------ 
+1   Conv2D_1 (Conv2D)                 (28, 10, 24)      240         batch_normalization_3    73,944         960                 
+    Conv2D_1_nl (Nonlinearity)        (28, 10, 24)                  Conv2D_1                                                    
+------------------------------------------------------------------------------------------------------------------------ 
+2   MaxPool_1 (Pool)                  (14, 5, 24)                   Conv2D_1_nl                                                 
+------------------------------------------------------------------------------------------------------------------------ 
+3   flatten_3 (Reshape)               (1680,)                       MaxPool_1                                                   
+------------------------------------------------------------------------------------------------------------------------ 
+4   FCN1 (Dense)                      (32,)             53,792      flatten_3                53,760         215,168             
+    FCN1_nl (Nonlinearity)            (32,)                         FCN1                     32                                 
+------------------------------------------------------------------------------------------------------------------------ 
+6   FCN2 (Dense)                      (32,)             1,056       FCN1_nl                  1,024          4,224               
+    FCN2_nl (Nonlinearity)            (32,)                         FCN2                     32                                 
+------------------------------------------------------------------------------------------------------------------------ 
+8   FCN3 (Dense)                      (7,)              231         FCN2_nl                  224            924                 
+    FCN3_nl (Nonlinearity)            (7,)                          FCN3                     105                                
+------------------------------------------------------------------------------------------------------------------------ 
+best_acc_model_CNN_fold2_21032020_160538 p=55321(216.10 KBytes) macc=129121 rom=216.09 KBytes ram=8.44 KBytes -0.00% 
+ 
+ 
+Accuracy report for the generated stm32 C-model 
+---------------------------------------------------------------------------------------------------- 
+NOTE: Computed against the provided ground truth values 
+ 
+acc=99.47%, rmse=0.0409, mae=0.0032 
+ 
+7 classes (752 samples) 
+------------------------------------------- 
+C0        68    .    .    .    .    .    .   
+C1         .   79    .    .    .    .    .   
+C2         1    .   15    1    .    .    .   
+C3         .    .    1   97    .    .    .   
+C4         .    .    .    .   207   .    .   
+C5         .    .    .    .    .   153   .   
+C6         .    .    .    1    .    .   129  
+ 
+Accuracy report for the reference model 
+---------------------------------------------------------------------------------------------------- 
+NOTE: Computed against the provided ground truth values 
+ 
+acc=99.47%, rmse=0.0409, mae=0.0032 
+ 
+7 classes (752 samples) 
+------------------------------------------- 
+C0        68    .    .    .    .    .    .   
+C1         .   79    .    .    .    .    .   
+C2         1    .   15    1    .    .    .   
+C3         .    .    1   97    .    .    .   
+C4         .    .    .    .   207   .    .   
+C5         .    .    .    .    .   153   .   
+C6         .    .    .    1    .    .   129  
+ 
+Cross accuracy report (reference vs C-model) 
+---------------------------------------------------------------------------------------------------- 
+NOTE: the output of the reference model is used as ground truth value 
+ 
+acc=100.00%, rmse=0.0000, mae=0.0000 
+ 
+7 classes (752 samples) 
+------------------------------------------- 
+C0        69    .    .    .    .    .    .   
+C1         .   79    .    .    .    .    .   
+C2         .    .   16    .    .    .    .   
+C3         .    .    .   99    .    .    .   
+C4         .    .    .    .   207   .    .   
+C5         .    .    .    .    .   153   .   
+C6         .    .    .    .    .    .   129  
+ 
+Creating C:\Users\grgcz\.stm32cubemx\stm32ai_output\network_val_m_inputs.csv 
+Creating C:\Users\grgcz\.stm32cubemx\stm32ai_output\network_val_c_inputs.csv 
+Creating C:\Users\grgcz\.stm32cubemx\stm32ai_output\network_val_m_outputs.csv 
+Creating C:\Users\grgcz\.stm32cubemx\stm32ai_output\network_val_c_outputs.csv 
+Creating C:\Users\grgcz\.stm32cubemx\stm32ai_output\network_val_io.npz 
+ 
+Evaluation report (summary) 
+-------------------------------------------------- 
+Mode                acc       rmse      mae       
+-------------------------------------------------- 
+stm32 C-model       99.5%     0.040947  0.003237  
+original model      99.5%     0.040947  0.003237  
+X-cross             100.0%    0.000000  0.000000  
+ 
+L2r error : 1.56669131e-07 (expected to be < 0.01) 
+ 
+Creating report file C:\Users\grgcz\.stm32cubemx\stm32ai_output\network_validate_report.txt 
+  
+Complexity/l2r error by layer - macc=129,121 rom=221,276 
+------------------------------------------------------------------------------------------------------------------------ 
+id  layer (type)                      macc                          rom                           l2r error                     
+------------------------------------------------------------------------------------------------------------------------ 
+1   Conv2D_1 (Conv2D)                 |||||||||||||||||||||  57.3%  |                       0.4%                                
+4   FCN1 (Dense)                      |||||||||||||||        41.6%  |||||||||||||||||||||  97.2%                                
+4   FCN1_nl (Nonlinearity)            |                       0.0%  |                       0.0%                                
+6   FCN2 (Dense)                      |                       0.8%  |                       1.9%                                
+6   FCN2_nl (Nonlinearity)            |                       0.0%  |                       0.0%                                
+8   FCN3 (Dense)                      |                       0.2%  |                       0.4%                                
+8   FCN3_nl (Nonlinearity)            |                       0.1%  |                       0.0%  1.56669131e-07 *              
+------------------------------------------------------------------------------------------------------------------------ 
+ 
+Using TensorFlow backend. 
+Validation ended

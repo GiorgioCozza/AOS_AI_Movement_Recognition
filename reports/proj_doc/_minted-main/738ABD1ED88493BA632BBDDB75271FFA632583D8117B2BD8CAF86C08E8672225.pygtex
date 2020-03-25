@@ -1,0 +1,184 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} IMPORT}
+\PYG{k+kn}{import} \PYG{n+nn}{numpy} \PYG{k}{as} \PYG{n+nn}{np}
+\PYG{k+kn}{from} \PYG{n+nn}{keras.layers} \PYG{k+kn}{import} \PYG{n}{Dense}\PYG{p}{,} \PYG{n}{Conv2D}\PYG{p}{,} \PYG{n}{Flatten}\PYG{p}{,} \PYG{n}{Dropout}\PYG{p}{,} \PYG{n}{MaxPooling2D}\PYG{p}{,} \PYG{n}{BatchNormalization}\PYG{p}{,} \PYG{n}{LSTM}
+\PYG{k+kn}{from} \PYG{n+nn}{keras.losses} \PYG{k+kn}{import} \PYG{n}{categorical\PYGZus{}crossentropy}
+\PYG{k+kn}{from} \PYG{n+nn}{keras.optimizers} \PYG{k+kn}{import} \PYG{n}{Adam}\PYG{p}{,} \PYG{n}{RMSprop}\PYG{p}{,} \PYG{n}{SGD}
+\PYG{k+kn}{from} \PYG{n+nn}{keras} \PYG{k+kn}{import} \PYG{n}{Sequential}
+\PYG{k+kn}{from} \PYG{n+nn}{keras.callbacks} \PYG{k+kn}{import} \PYG{n}{EarlyStopping}
+\PYG{k+kn}{from} \PYG{n+nn}{keras.callbacks} \PYG{k+kn}{import} \PYG{n}{TensorBoard}
+\PYG{k+kn}{from} \PYG{n+nn}{tensorboard} \PYG{k+kn}{import} \PYG{n}{program}
+\PYG{k+kn}{from} \PYG{n+nn}{datetime} \PYG{k+kn}{import} \PYG{n}{datetime} \PYG{k}{as} \PYG{n}{dt}
+\PYG{k+kn}{import} \PYG{n+nn}{os}
+\PYG{k+kn}{from} \PYG{n+nn}{scripts.data\PYGZus{}visualization} \PYG{k+kn}{import} \PYG{n}{show\PYGZus{}confusion\PYGZus{}matrix}
+\PYG{k+kn}{from} \PYG{n+nn}{scripts.config} \PYG{k+kn}{import} \PYG{o}{*}
+
+
+\PYG{n}{x\PYGZus{}train} \PYG{o}{=} \PYG{p}{[]}
+\PYG{n}{x\PYGZus{}test} \PYG{o}{=} \PYG{p}{[]}
+\PYG{n}{y\PYGZus{}train} \PYG{o}{=} \PYG{p}{[]}
+\PYG{n}{y\PYGZus{}test} \PYG{o}{=} \PYG{p}{[]}
+
+
+\PYG{k}{def} \PYG{n+nf}{model\PYGZus{}summary}\PYG{p}{(}\PYG{n}{model}\PYG{p}{,} \PYG{n}{mod\PYGZus{}type}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}\PYGZsq{}}\PYG{p}{):}
+    \PYG{k}{if} \PYG{n}{mod\PYGZus{}type} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}\PYGZsq{}}\PYG{p}{:}
+        \PYG{n}{model}\PYG{o}{.}\PYG{n}{summary}\PYG{p}{()}
+    \PYG{k}{else}\PYG{p}{:}
+        \PYG{n}{sum\PYGZus{}name} \PYG{o}{=} \PYG{n}{mod\PYGZus{}type} \PYG{o}{+} \PYG{l+s+s1}{\PYGZsq{}\PYGZus{}summary\PYGZsq{}} \PYG{o}{+} \PYG{n}{dt}\PYG{o}{.}\PYG{n}{now}\PYG{p}{()}\PYG{o}{.}\PYG{n}{strftime}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+si}{\PYGZpc{}d}\PYG{l+s+s2}{\PYGZhy{}\PYGZpc{}m\PYGZhy{}\PYGZpc{}Y\PYGZus{}\PYGZpc{}H\PYGZpc{}M\PYGZpc{}S\PYGZdq{}}\PYG{p}{)} \PYG{o}{+} \PYG{l+s+s2}{\PYGZdq{}.txt\PYGZdq{}}
+        \PYG{n}{sum\PYGZus{}log} \PYG{o}{=} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{join}\PYG{p}{(}\PYG{n}{log\PYGZus{}dir}\PYG{p}{,} \PYG{n}{sum\PYGZus{}name}\PYG{p}{)}
+        \PYG{k}{with} \PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{sum\PYGZus{}log}\PYG{p}{,} \PYG{n}{mode}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}w\PYGZsq{}}\PYG{p}{)} \PYG{k}{as} \PYG{n}{f}\PYG{p}{:}
+            \PYG{n}{model}\PYG{o}{.}\PYG{n}{summary}\PYG{p}{(}\PYG{n}{print\PYGZus{}fn}\PYG{o}{=}\PYG{k}{lambda} \PYG{n}{x}\PYG{p}{:} \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{file}\PYG{o}{=}\PYG{n}{f}\PYG{p}{))}
+        \PYG{n}{f}\PYG{o}{.}\PYG{n}{close}\PYG{p}{()}
+
+
+\PYG{c+c1}{\PYGZsh{} Definition of the neural network model}
+\PYG{k}{def} \PYG{n+nf}{CNN\PYGZus{}model}\PYG{p}{():}
+    \PYG{n}{numFilters} \PYG{o}{=} \PYG{l+m+mi}{24}
+
+    \PYG{n}{cnn\PYGZus{}model} \PYG{o}{=} \PYG{n}{Sequential}\PYG{p}{()}
+    \PYG{n}{cnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{BatchNormalization}\PYG{p}{(}\PYG{n}{input\PYGZus{}shape}\PYG{o}{=}\PYG{p}{(}\PYG{n}{WINDOW\PYGZus{}SAMPLES}\PYG{p}{,} \PYG{n}{SENS\PYGZus{}VALUES}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)))}
+    \PYG{n}{cnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Conv2D}\PYG{p}{(}\PYG{n}{numFilters}\PYG{p}{,} \PYG{n}{kernel\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{n}{strides}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{),} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}relu\PYGZsq{}}\PYG{p}{))}
+    \PYG{n}{cnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{MaxPooling2D}\PYG{p}{(}\PYG{n}{pool\PYGZus{}size}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{),} \PYG{n}{padding}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}valid\PYGZsq{}}\PYG{p}{))}
+    \PYG{n}{cnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Flatten}\PYG{p}{())}
+    \PYG{n}{cnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dense}\PYG{p}{(}\PYG{l+m+mi}{32}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}relu\PYGZsq{}}\PYG{p}{))}
+    \PYG{n}{cnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dropout}\PYG{p}{(}\PYG{l+m+mf}{0.2}\PYG{p}{))}
+    \PYG{n}{cnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dense}\PYG{p}{(}\PYG{l+m+mi}{32}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}relu\PYGZsq{}}\PYG{p}{))}
+    \PYG{n}{cnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dropout}\PYG{p}{(}\PYG{l+m+mf}{0.2}\PYG{p}{))}
+    \PYG{n}{cnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dense}\PYG{p}{(}\PYG{n}{num\PYGZus{}classes}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}softmax\PYGZsq{}}\PYG{p}{))}
+
+    \PYG{n}{model\PYGZus{}summary}\PYG{p}{(}\PYG{n}{cnn\PYGZus{}model}\PYG{p}{,} \PYG{n}{mod\PYGZus{}type}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}CNN\PYGZsq{}}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{cnn\PYGZus{}model}
+
+
+\PYG{k}{def} \PYG{n+nf}{RNN\PYGZus{}model}\PYG{p}{():}
+
+    \PYG{n}{hid\PYGZus{}nodes\PYGZus{}lstm} \PYG{o}{=} \PYG{l+m+mi}{32}
+    \PYG{n}{rnn\PYGZus{}model} \PYG{o}{=} \PYG{n}{Sequential}\PYG{p}{()}
+    \PYG{n}{rnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{BatchNormalization}\PYG{p}{(}\PYG{n}{input\PYGZus{}shape}\PYG{o}{=}\PYG{p}{(}\PYG{n}{WINDOW\PYGZus{}SAMPLES}\PYG{p}{,} \PYG{n}{SENS\PYGZus{}VALUES}\PYG{p}{)))}
+    \PYG{n}{rnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{LSTM}\PYG{p}{(}\PYG{n}{units}\PYG{o}{=}\PYG{n}{hid\PYGZus{}nodes\PYGZus{}lstm}\PYG{p}{,} \PYG{n}{return\PYGZus{}sequences}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{name}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}RNN1\PYGZsq{}}\PYG{p}{))}
+    \PYG{n}{rnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dropout}\PYG{p}{(}\PYG{l+m+mf}{0.2}\PYG{p}{))}
+    \PYG{n}{rnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{LSTM}\PYG{p}{(}\PYG{n}{units}\PYG{o}{=}\PYG{n}{hid\PYGZus{}nodes\PYGZus{}lstm}\PYG{p}{,} \PYG{n}{return\PYGZus{}sequences}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{name}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}RNN2\PYGZsq{}}\PYG{p}{))}
+    \PYG{n}{rnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dropout}\PYG{p}{(}\PYG{l+m+mf}{0.2}\PYG{p}{))}
+    \PYG{n}{rnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{LSTM}\PYG{p}{(}\PYG{n}{units}\PYG{o}{=}\PYG{n}{hid\PYGZus{}nodes\PYGZus{}lstm}\PYG{p}{,} \PYG{n}{return\PYGZus{}sequences}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{name}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}RNN3\PYGZsq{}}\PYG{p}{))}
+    \PYG{n}{rnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dropout}\PYG{p}{(}\PYG{l+m+mf}{0.2}\PYG{p}{))}
+    \PYG{n}{rnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{LSTM}\PYG{p}{(}\PYG{n}{units}\PYG{o}{=}\PYG{n}{hid\PYGZus{}nodes\PYGZus{}lstm}\PYG{p}{,} \PYG{n}{return\PYGZus{}sequences}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,} \PYG{n}{name}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}RNN4\PYGZsq{}}\PYG{p}{))}
+    \PYG{n}{rnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dropout}\PYG{p}{(}\PYG{l+m+mf}{0.2}\PYG{p}{))}
+    \PYG{n}{rnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dense}\PYG{p}{(}\PYG{n}{num\PYGZus{}classes}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}softmax\PYGZsq{}}\PYG{p}{))}
+
+    \PYG{n}{model\PYGZus{}summary}\PYG{p}{(}\PYG{n}{rnn\PYGZus{}model}\PYG{p}{,} \PYG{n}{mod\PYGZus{}type}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}RNN\PYGZsq{}}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{rnn\PYGZus{}model}
+
+
+\PYG{k}{def} \PYG{n+nf}{train\PYGZus{}model}\PYG{p}{(}\PYG{n}{model}\PYG{p}{,} \PYG{n}{x\PYGZus{}train}\PYG{p}{,} \PYG{n}{y\PYGZus{}train}\PYG{p}{,} \PYG{n}{x\PYGZus{}valid}\PYG{p}{,} \PYG{n}{y\PYGZus{}valid}\PYG{p}{):}
+    \PYG{c+c1}{\PYGZsh{} set model}
+    \PYG{n}{model\PYGZus{}name} \PYG{o}{=}  \PYG{l+s+s2}{\PYGZdq{}activityRec\PYGZus{}model\PYGZdq{}} \PYG{o}{+} \PYG{l+s+s2}{\PYGZdq{}\PYGZus{}\PYGZdq{}} \PYG{o}{+} \PYG{n}{dt}\PYG{o}{.}\PYG{n}{now}\PYG{p}{()}\PYG{o}{.}\PYG{n}{strftime}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+si}{\PYGZpc{}d}\PYG{l+s+s2}{\PYGZhy{}\PYGZpc{}m\PYGZhy{}\PYGZpc{}Y\PYGZus{}\PYGZpc{}H\PYGZpc{}M\PYGZpc{}S\PYGZdq{}}\PYG{p}{)} \PYG{o}{+} \PYG{l+s+s2}{\PYGZdq{}.log\PYGZdq{}}
+    \PYG{c+c1}{\PYGZsh{} Training logging}
+    \PYG{n}{now} \PYG{o}{=} \PYG{n}{dt}\PYG{o}{.}\PYG{n}{now}\PYG{p}{()}
+    \PYG{n}{log\PYGZus{}file} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}activityRec\PYGZus{}train\PYGZus{}log\PYGZdq{}} \PYG{o}{+} \PYG{l+s+s2}{\PYGZdq{}\PYGZus{}\PYGZdq{}} \PYG{o}{+} \PYG{n}{now}\PYG{o}{.}\PYG{n}{strftime}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+si}{\PYGZpc{}d}\PYG{l+s+s2}{\PYGZhy{}\PYGZpc{}m\PYGZhy{}\PYGZpc{}Y\PYGZus{}\PYGZpc{}H\PYGZpc{}M\PYGZpc{}S\PYGZdq{}}\PYG{p}{)} \PYG{o}{+} \PYG{l+s+s2}{\PYGZdq{}.log\PYGZdq{}}
+    \PYG{n}{logfile\PYGZus{}path} \PYG{o}{=} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{join}\PYG{p}{(}\PYG{n}{curlog\PYGZus{}dir}\PYG{p}{,} \PYG{n}{log\PYGZus{}file}\PYG{p}{)}
+    \PYG{n}{tensorboard\PYGZus{}cb} \PYG{o}{=} \PYG{n}{TensorBoard}\PYG{p}{(}\PYG{n}{log\PYGZus{}dir}\PYG{o}{=}\PYG{n}{logfile\PYGZus{}path}\PYG{p}{,} \PYG{n}{histogram\PYGZus{}freq}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
+    \PYG{c+c1}{\PYGZsh{} callback list}
+    \PYG{n}{callback\PYGZus{}list} \PYG{o}{=} \PYG{p}{[}
+        \PYG{n}{EarlyStopping}\PYG{p}{(}\PYG{n}{monitor}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}val\PYGZus{}acc\PYGZsq{}}\PYG{p}{,} \PYG{n}{mode}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}max\PYGZsq{}}\PYG{p}{,} \PYG{n}{verbose}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{patience}\PYG{o}{=}\PYG{l+m+mi}{40}\PYG{p}{),}
+        \PYG{n}{tensorboard\PYGZus{}cb}
+    \PYG{p}{]}
+
+    \PYG{c+c1}{\PYGZsh{} Hyper\PYGZhy{}parameters}
+    \PYG{n}{BATCH\PYGZus{}SIZE} \PYG{o}{=} \PYG{l+m+mi}{32}
+    \PYG{n}{EPOCHS} \PYG{o}{=} \PYG{l+m+mi}{80}
+
+    \PYG{n}{learning\PYGZus{}rate} \PYG{o}{=} \PYG{l+m+mf}{0.0001}
+    \PYG{n}{rms} \PYG{o}{=} \PYG{n}{RMSprop}\PYG{p}{(}\PYG{n}{lr}\PYG{o}{=}\PYG{n}{learning\PYGZus{}rate}\PYG{p}{)}
+    \PYG{n}{adam} \PYG{o}{=} \PYG{n}{Adam}\PYG{p}{(}\PYG{n}{lr}\PYG{o}{=}\PYG{n}{learning\PYGZus{}rate}\PYG{p}{)}
+    \PYG{n}{sgd} \PYG{o}{=} \PYG{n}{SGD}\PYG{p}{(}\PYG{n}{lr}\PYG{o}{=}\PYG{l+m+mf}{0.001}\PYG{p}{,} \PYG{n}{momentum}\PYG{o}{=}\PYG{l+m+mf}{0.5}\PYG{p}{,} \PYG{n}{nesterov}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+
+    \PYG{n}{model}\PYG{o}{.}\PYG{n}{compile}\PYG{p}{(}\PYG{n}{loss}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}categorical\PYGZus{}crossentropy\PYGZsq{}}\PYG{p}{,}
+                  \PYG{n}{optimizer}\PYG{o}{=}\PYG{n}{rms}\PYG{p}{,} \PYG{n}{metrics}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}accuracy\PYGZsq{}}\PYG{p}{])}
+
+    \PYG{n}{tspe} \PYG{o}{=} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{round}\PYG{p}{((}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{x\PYGZus{}train}\PYG{p}{)}\PYG{o}{/}\PYG{n}{BATCH\PYGZus{}SIZE}\PYG{p}{)}\PYG{o}{*}\PYG{l+m+mf}{0.1}\PYG{p}{))}
+    \PYG{n}{vspe} \PYG{o}{=} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{round}\PYG{p}{((}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{x\PYGZus{}valid}\PYG{p}{)}\PYG{o}{/}\PYG{n}{BATCH\PYGZus{}SIZE}\PYG{p}{)}\PYG{o}{*}\PYG{l+m+mf}{0.1}\PYG{p}{))}
+    \PYG{c+c1}{\PYGZsh{} Training}
+    \PYG{n}{history} \PYG{o}{=} \PYG{n}{model}\PYG{o}{.}\PYG{n}{fit}\PYG{p}{(}\PYG{n}{x\PYGZus{}train}\PYG{p}{,}
+                        \PYG{n}{y\PYGZus{}train}\PYG{p}{,}
+                        \PYG{n}{epochs}\PYG{o}{=}\PYG{n}{EPOCHS}\PYG{p}{,}
+                        \PYG{n}{batch\PYGZus{}size}\PYG{o}{=}\PYG{n}{BATCH\PYGZus{}SIZE}\PYG{p}{,}
+                        \PYG{n}{validation\PYGZus{}data}\PYG{o}{=}\PYG{p}{(}\PYG{n}{x\PYGZus{}valid}\PYG{p}{,} \PYG{n}{y\PYGZus{}valid}\PYG{p}{),}
+                        \PYG{n}{shuffle}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}
+                        \PYG{n}{verbose}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{,}
+                        \PYG{n}{callbacks}\PYG{o}{=}\PYG{n}{callback\PYGZus{}list}\PYG{p}{)}
+
+
+
+
+\PYG{c+c1}{\PYGZsh{} Test all the model of a given set}
+\PYG{k}{def} \PYG{n+nf}{test\PYGZus{}model\PYGZus{}set}\PYG{p}{(}\PYG{n}{model\PYGZus{}set}\PYG{p}{,} \PYG{n}{test\PYGZus{}set}\PYG{p}{):}
+
+    \PYG{n}{loss\PYGZus{}res} \PYG{o}{=} \PYG{p}{[]}
+    \PYG{n}{acc\PYGZus{}res} \PYG{o}{=} \PYG{p}{[]}
+    \PYG{n}{max\PYGZus{}y\PYGZus{}pred\PYGZus{}test} \PYG{o}{=} \PYG{p}{[]}
+    \PYG{n}{max\PYGZus{}y\PYGZus{}test} \PYG{o}{=} \PYG{p}{[]}
+    \PYG{n}{y\PYGZus{}pred\PYGZus{}test} \PYG{o}{=} \PYG{p}{[]}
+    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{model\PYGZus{}set}\PYG{p}{)):}
+        \PYG{n}{scores} \PYG{o}{=} \PYG{n}{model\PYGZus{}set}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{.}\PYG{n}{evaluate}\PYG{p}{(}\PYG{n}{test\PYGZus{}set}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+s+s2}{\PYGZdq{}input\PYGZdq{}}\PYG{p}{],} \PYG{n}{test\PYGZus{}set}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+s+s2}{\PYGZdq{}output\PYGZdq{}}\PYG{p}{],} \PYG{n}{verbose}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
+        \PYG{n}{loss\PYGZus{}res}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{scores}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{])}
+        \PYG{n}{acc\PYGZus{}res}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{scores}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{])}
+        \PYG{n}{y\PYGZus{}pred\PYGZus{}test}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{model\PYGZus{}set}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{.}\PYG{n}{predict}\PYG{p}{(}\PYG{n}{test\PYGZus{}set}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+s+s2}{\PYGZdq{}input\PYGZdq{}}\PYG{p}{]))}
+        \PYG{n}{max\PYGZus{}y\PYGZus{}pred\PYGZus{}test}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{argmax}\PYG{p}{(}\PYG{n}{y\PYGZus{}pred\PYGZus{}test}\PYG{p}{[}\PYG{n}{i}\PYG{p}{],} \PYG{n}{axis}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{))}
+        \PYG{n}{max\PYGZus{}y\PYGZus{}test}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{argmax}\PYG{p}{(}\PYG{n}{test\PYGZus{}set}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+s+s2}{\PYGZdq{}output\PYGZdq{}}\PYG{p}{],} \PYG{n}{axis}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{))}
+
+        \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}r\PYGZbs{}n}\PYG{l+s+s2}{********  FOLD \PYGZdq{}} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{i} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{)} \PYG{o}{+} \PYG{l+s+s2}{\PYGZdq{}  ************\PYGZdq{}}\PYG{p}{)}
+        \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}t\PYGZbs{}n}\PYG{l+s+s2}{ \PYGZhy{} Fold Loss: \PYGZdq{}}\PYG{p}{,} \PYG{n}{loss\PYGZus{}res}\PYG{p}{[}\PYG{n}{i}\PYG{p}{])}
+        \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}t\PYGZbs{}n}\PYG{l+s+s2}{ \PYGZhy{} Fold Accuracy: \PYGZdq{}}\PYG{p}{,} \PYG{n}{acc\PYGZus{}res}\PYG{p}{[}\PYG{n}{i}\PYG{p}{])}
+        \PYG{n}{show\PYGZus{}confusion\PYGZus{}matrix}\PYG{p}{(}\PYG{n}{max\PYGZus{}y\PYGZus{}test}\PYG{p}{[}\PYG{n}{i}\PYG{p}{],} \PYG{n}{max\PYGZus{}y\PYGZus{}pred\PYGZus{}test}\PYG{p}{[}\PYG{n}{i}\PYG{p}{])}
+        \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}r\PYGZbs{}n\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+    \PYG{n}{av\PYGZus{}loss} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{n}{loss\PYGZus{}res}\PYG{p}{)}
+    \PYG{n}{av\PYGZus{}acc} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{n}{acc\PYGZus{}res}\PYG{p}{)}
+
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}r\PYGZbs{}n\PYGZbs{}n}\PYG{l+s+s2}{ TRAINING AND TESTING FINISHED:}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}r\PYGZbs{}n}\PYG{l+s+s2}{Showing results...}\PYG{l+s+se}{\PYGZbs{}r\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}r\PYGZbs{}n}\PYG{l+s+s2}{********  TOTAL SCORE  ************ \PYGZdq{}}\PYG{p}{)}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}t\PYGZbs{}n}\PYG{l+s+s2}{ \PYGZhy{} Average Loss: \PYGZdq{}}\PYG{p}{,} \PYG{n}{av\PYGZus{}loss}\PYG{p}{)}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}t\PYGZbs{}n}\PYG{l+s+s2}{ \PYGZhy{} Average Accuracy: \PYGZdq{}}\PYG{p}{,} \PYG{n}{av\PYGZus{}acc}\PYG{p}{)}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}r\PYGZbs{}n\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+    \PYG{n}{best\PYGZus{}acc\PYGZus{}model} \PYG{o}{=} \PYG{n}{model\PYGZus{}set}\PYG{p}{[}\PYG{n}{np}\PYG{o}{.}\PYG{n}{argmax}\PYG{p}{(}\PYG{n}{acc\PYGZus{}res}\PYG{p}{)]}
+    \PYG{n}{best\PYGZus{}loss\PYGZus{}model} \PYG{o}{=} \PYG{n}{model\PYGZus{}set}\PYG{p}{[}\PYG{n}{np}\PYG{o}{.}\PYG{n}{argmax}\PYG{p}{(}\PYG{n}{loss\PYGZus{}res}\PYG{p}{)]}
+
+    \PYG{k}{return} \PYG{n}{best\PYGZus{}acc\PYGZus{}model}\PYG{p}{,} \PYG{n}{best\PYGZus{}loss\PYGZus{}model}
+
+
+\PYG{k}{def} \PYG{n+nf}{get\PYGZus{}folds}\PYG{p}{(}\PYG{n}{btch\PYGZus{}lens}\PYG{p}{):}
+
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}r\PYGZbs{}n}\PYG{l+s+s2}{READY to TRAIN the NN, Please insert the ratio of the data batches that will be used for testing:}\PYG{l+s+se}{\PYGZbs{}r\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{ratio} \PYG{o}{=} \PYG{n+nb}{input}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}RATIO: \PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{ratio} \PYG{o}{=} \PYG{n+nb}{float}\PYG{p}{(}\PYG{n}{ratio}\PYG{p}{)}
+
+    \PYG{n}{test\PYGZus{}batch\PYGZus{}num} \PYG{o}{=} \PYG{p}{[}\PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{round}\PYG{p}{(}\PYG{n}{ratio} \PYG{o}{*} \PYG{n}{btch\PYGZus{}lens}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{])),}
+                      \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{round}\PYG{p}{(}\PYG{n}{ratio} \PYG{o}{*} \PYG{n}{btch\PYGZus{}lens}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{])),}
+                      \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{round}\PYG{p}{(}\PYG{n}{ratio} \PYG{o}{*} \PYG{n}{btch\PYGZus{}lens}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{])),}
+                      \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{round}\PYG{p}{(}\PYG{n}{ratio} \PYG{o}{*} \PYG{n}{btch\PYGZus{}lens}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{]))]}
+    \PYG{n}{valid\PYGZus{}batch\PYGZus{}num} \PYG{o}{=} \PYG{p}{[}\PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{round}\PYG{p}{(}\PYG{n}{ratio} \PYG{o}{*} \PYG{n}{btch\PYGZus{}lens}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{])),}
+                       \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{round}\PYG{p}{(}\PYG{n}{ratio} \PYG{o}{*} \PYG{n}{btch\PYGZus{}lens}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{])),}
+                       \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{round}\PYG{p}{(}\PYG{n}{ratio} \PYG{o}{*} \PYG{n}{btch\PYGZus{}lens}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{])),}
+                       \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{round}\PYG{p}{(}\PYG{n}{ratio} \PYG{o}{*} \PYG{n}{btch\PYGZus{}lens}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{]))]}
+    \PYG{n}{max\PYGZus{}folds} \PYG{o}{=} \PYG{p}{[}\PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{floor}\PYG{p}{(}\PYG{n}{btch\PYGZus{}lens}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{/} \PYG{p}{(}\PYG{n}{test\PYGZus{}batch\PYGZus{}num}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{+} \PYG{n}{valid\PYGZus{}batch\PYGZus{}num}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]))),}
+                 \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{floor}\PYG{p}{(}\PYG{n}{btch\PYGZus{}lens}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{/} \PYG{p}{(}\PYG{n}{test\PYGZus{}batch\PYGZus{}num}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{+} \PYG{n}{valid\PYGZus{}batch\PYGZus{}num}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]))),}
+                 \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{floor}\PYG{p}{(}\PYG{n}{btch\PYGZus{}lens}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]} \PYG{o}{/} \PYG{p}{(}\PYG{n}{test\PYGZus{}batch\PYGZus{}num}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]} \PYG{o}{+} \PYG{n}{valid\PYGZus{}batch\PYGZus{}num}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]))),}
+                 \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{floor}\PYG{p}{(}\PYG{n}{btch\PYGZus{}lens}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{]} \PYG{o}{/} \PYG{p}{(}\PYG{n}{test\PYGZus{}batch\PYGZus{}num}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{]} \PYG{o}{+} \PYG{n}{valid\PYGZus{}batch\PYGZus{}num}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{])))]}
+
+    \PYG{n}{folds} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{min}\PYG{p}{(}\PYG{n}{max\PYGZus{}folds}\PYG{p}{)}
+
+    \PYG{k}{return} \PYG{n}{ratio}\PYG{p}{,} \PYG{n}{folds}
+
+
+
+\PYG{k}{def} \PYG{n+nf}{save\PYGZus{}best\PYGZus{}models}\PYG{p}{(}\PYG{n}{max\PYGZus{}acc\PYGZus{}mod}\PYG{p}{,} \PYG{n}{min\PYGZus{}loss\PYGZus{}mod}\PYG{p}{):}
+
+    \PYG{n}{loss\PYGZus{}mod\PYGZus{}path} \PYG{o}{=} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{join}\PYG{p}{(}\PYG{n}{best\PYGZus{}mod\PYGZus{}dir}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}best\PYGZus{}loss\PYGZus{}model\PYGZus{}\PYGZdq{}} \PYG{o}{+} \PYG{n}{dt}\PYG{o}{.}\PYG{n}{now}\PYG{p}{()}\PYG{o}{.}\PYG{n}{strftime}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+si}{\PYGZpc{}d}\PYG{l+s+s2}{\PYGZhy{}\PYGZpc{}m\PYGZhy{}\PYGZpc{}Y\PYGZus{}\PYGZpc{}H\PYGZpc{}M\PYGZpc{}S\PYGZdq{}}\PYG{p}{)} \PYG{o}{+} \PYG{l+s+s1}{\PYGZsq{}.h5\PYGZsq{}}\PYG{p}{)}
+    \PYG{n}{acc\PYGZus{}mod\PYGZus{}path} \PYG{o}{=} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{join}\PYG{p}{(}\PYG{n}{best\PYGZus{}mod\PYGZus{}dir}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}best\PYGZus{}acc\PYGZus{}model\PYGZus{}\PYGZdq{}} \PYG{o}{+} \PYG{n}{dt}\PYG{o}{.}\PYG{n}{now}\PYG{p}{()}\PYG{o}{.}\PYG{n}{strftime}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+si}{\PYGZpc{}d}\PYG{l+s+s2}{\PYGZhy{}\PYGZpc{}m\PYGZhy{}\PYGZpc{}Y\PYGZus{}\PYGZpc{}H\PYGZpc{}M\PYGZpc{}S\PYGZdq{}}\PYG{p}{)} \PYG{o}{+} \PYG{l+s+s1}{\PYGZsq{}.h5\PYGZsq{}}\PYG{p}{)}
+
+    \PYG{n}{min\PYGZus{}loss\PYGZus{}mod}\PYG{o}{.}\PYG{n}{save}\PYG{p}{(}\PYG{n}{loss\PYGZus{}mod\PYGZus{}path}\PYG{p}{)}
+    \PYG{n}{max\PYGZus{}acc\PYGZus{}mod}\PYG{o}{.}\PYG{n}{save}\PYG{p}{(}\PYG{n}{acc\PYGZus{}mod\PYGZus{}path}\PYG{p}{)}
+\end{Verbatim}
