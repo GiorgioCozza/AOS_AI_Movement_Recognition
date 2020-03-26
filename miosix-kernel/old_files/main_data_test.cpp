@@ -9,7 +9,6 @@
 #include "i2c_helper.h"
 #include "circular_queue.h"
 #include "LSM6DSL.h"
-#include "LSM6DSLSensor.h"
 #include "LSM303AGRAccSensor.h"
 #include "LSM303AGRMagSensor.h"
 #include "XNUCLEO_IKS01A2.h"
@@ -68,7 +67,6 @@ int main() {
 	float* int_vec = new float[VECTOR_SIZE];
 
 	LSM6DSLAccGyr* acc_gyr = new LSM6DSLAccGyr(LSM6DSL_I2C_ADDRESS_HIGH);
-	LSM6DSLSensor* acc_gyr2 = new LSM6DSLSensor(LSM6DSL_I2C_ADDRESS_HIGH);
 	LSM303AGRAccSensor* acc = new LSM303AGRAccSensor(LSM303AGRAcc_I2C_ADDR);  //++
 	LSM303AGRMagSensor* mag = new LSM303AGRMagSensor(LSM303AGRMag_I2C_ADDR);  //++
 
@@ -83,29 +81,15 @@ int main() {
 			startflag = false;
 			usrbtn::mode(Mode::INPUT_PULL_UP);
 			//enable board sensors
-			acc_gyr2->init(nullptr);
-			
+
 			bool en1 = acc_gyr->init();
-			int en4 = acc_gyr2->enable_x();
-			int en5 = acc_gyr2->enable_g();
 			int en2 = acc->enable();
 			int en3 = mag->enable();
-		
-
-			float c, v, f;
-			if (acc_gyr->get_acc_odr(&c) && en1)
-				printf("\r\n[LOG]: Sensors enabled! ODR: %f\r\n", c);
-
-			if(acc_gyr->get_acc_sensitivity(&v))
-				printf("\r\n[LOG]: Sensors enabled! SENSITIVITY: %f\r\n", v);
-
-			if(acc_gyr->get_acc_fs(&f))
-				printf("\r\n[LOG]: Sensors enabled! FS: %f\r\n", f);
 
 
 			/* Print sensor IDs*/
 
-			if (!acc_gyr->read_id(&(devId[lsm6dsl_acc])))
+			if (acc_gyr->read_id(&(devId[lsm6dsl_acc])))
 			{
 				printf("\r\n[LOG]: %s, device enabled ID: %d\r\n", LSM6DSL, devId[lsm6dsl_acc]);
 			}
@@ -119,7 +103,7 @@ int main() {
 			}
 			in_data = queue.getCircBuf();
 
-			if (!en4 && !en2 && !en3) {
+			if ( en1 && !en2 && !en3 ) {
 
 
 				printf("\r\n[LOG]: START, Batch collection...\r\n");
@@ -141,26 +125,26 @@ int main() {
 					sample_cnt++;
 
 
-					if (!acc_gyr->get_acc_axes(buf_reader)) {
-						int_vec[0] = (float)buf_reader[0];
+					if (acc_gyr->get_acc_axes(buf_reader)) {
+                        int_vec[0] = (float)buf_reader[0];
 						int_vec[1] = (float)buf_reader[1];
 						int_vec[2] = (float)buf_reader[2];
 					}
 
-					if (!acc_gyr->get_gyr_axes(buf_reader)) {
+					if (acc_gyr->get_gyr_axes(buf_reader)) {
 						int_vec[3] = (float)buf_reader[0];//
 						int_vec[4] = (float)buf_reader[1];// 
 						int_vec[5] = (float)buf_reader[2];//
 					}
 
-					if (!acc_gyr2->get_x_axes(buf_reader)) {
-						int_vec[6] = (float)buf_reader[0];
+					if (!acc->get_x_axes(buf_reader)) {
+                        int_vec[6] = (float)buf_reader[0];
 						int_vec[7] = (float)buf_reader[1];
 						int_vec[8] = (float)buf_reader[2];
 					}
 
-					if (!acc_gyr2->get_g_axes(buf_reader)) {
-						int_vec[9] = (float)buf_reader[0];
+					if (!mag->get_m_axes(buf_reader)) {
+                        int_vec[9] = (float)buf_reader[0];
 						int_vec[10] = (float)buf_reader[1];
 						int_vec[11] = (float)buf_reader[2];
 					}
