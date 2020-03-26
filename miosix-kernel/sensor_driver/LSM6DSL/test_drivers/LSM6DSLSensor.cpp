@@ -96,11 +96,11 @@ int LSM6DSLSensor::init(void *init)
     return 1;
   }
   
-  _x_last_odr = 104.0f;
+  _x_last_odr = 0.0f;
 
   _x_is_enabled = 0;
   
-  _g_last_odr = 104.0f;
+  _g_last_odr = 0.0f;
 
   _g_is_enabled = 0;
   
@@ -258,10 +258,7 @@ int LSM6DSLSensor::get_x_axes(int32_t *pData)
   pData[0] = ( int32_t )( dataRaw[0] * sensitivity );
   pData[1] = ( int32_t )( dataRaw[1] * sensitivity );
   pData[2] = (int32_t)(dataRaw[2] * sensitivity);  
-  /*
-  printf("\n%d\n", dataRaw[1]);
-  printf("\n%f\n", sensitivity);
-  */
+
   return 0;
 }
 
@@ -274,20 +271,20 @@ int LSM6DSLSensor::get_g_axes(int32_t *pData)
 {
   int16_t dataRaw[3];
   float sensitivity = 0;
-  
-  /* Read raw data from LSM6DSL output register. */
+
+    /* Read raw data from LSM6DSL output register. */
   if ( get_g_axes_raw( dataRaw ) == 1 )
   {
     return 1;
   }
-  
-  /* Get LSM6DSL actual sensitivity. */
+
+    /* Get LSM6DSL actual sensitivity. */
   if ( get_g_sensitivity( &sensitivity ) == 1 )
   {
     return 1;
   }
-  
-  /* Calculate the data. */
+
+    /* Calculate the data. */
   pData[0] = ( int32_t )( dataRaw[0] * sensitivity );
   pData[1] = ( int32_t )( dataRaw[1] * sensitivity );
   pData[2] = ( int32_t )( dataRaw[2] * sensitivity );

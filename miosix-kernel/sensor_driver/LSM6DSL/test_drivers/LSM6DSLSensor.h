@@ -256,9 +256,9 @@ public:
 	uint8_t io_read(uint8_t* pBuffer, uint8_t RegisterAddr, uint16_t NumByteToRead)
 	{
 		if (!((I2CHelper::getInstance())->read(pBuffer, address, RegisterAddr, NumByteToRead)))
-			return true;
-		else
 			return false;
+		else
+			return true;
 	}
 
 	/**
@@ -271,9 +271,9 @@ public:
 	uint8_t io_write(uint8_t* pBuffer, uint8_t RegisterAddr, uint16_t NumByteToWrite)
 	{
 		if (!((I2CHelper::getInstance())->write(pBuffer, address, RegisterAddr, NumByteToWrite, false)))
-			return true;
-		else
 			return false;
+		else
+			return true;
 	}
 
 private:

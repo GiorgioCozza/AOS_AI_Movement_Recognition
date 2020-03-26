@@ -16,7 +16,7 @@
 /**********************  info registers  *************************/
 
 #define LSM6DSL_WHO_AM_I 					0x6A
-#define LSM6DSL_WHO_AM_I_REG   0X0F
+#define LSM6DSL_WHO_AM_I_REG                0X0F
 
 
 /************************  I2C ADDRESSES  ************************/
@@ -26,38 +26,41 @@
 
 /************************  CONTROL REGISTERS  ********************/
 
-#define LSM6DSL_FIFO_CTRL1     0X06
-#define LSM6DSL_FIFO_CTRL2     0X07
-#define LSM6DSL_FIFO_CTRL3     0X08
-#define LSM6DSL_FIFO_CTRL4     0X09
-#define LSM6DSL_FIFO_CTRL5     0X0A
+#define LSM6DSL_FIFO_CTRL1                          0X06
+#define LSM6DSL_FIFO_CTRL2                          0X07
+#define LSM6DSL_FIFO_CTRL3                          0X08
+#define LSM6DSL_FIFO_CTRL4                          0X09
+#define LSM6DSL_FIFO_CTRL5                          0X0A
 
-#define LSM6DSL_CTRL10_C   0X19
-#define LSM6DSL_CTRL3_C    0X12
-#define LSM6DSL_CTRL4_C    0X13
-#define LSM6DSL_CTRL5_C    0X14
+#define LSM6DSL_CTRL10_C                            0X19
+#define LSM6DSL_CTRL3_C                             0X12
+#define LSM6DSL_CTRL4_C                             0X13
+#define LSM6DSL_CTRL5_C                             0X14
 
-typedef enum {
-    LSM6DSL_FIFO_MODE_BYPASS        =0x00,
-    LSM6DSL_FIFO_MODE_FIFO          =0x01,
-    LSM6DSL_FIFO_MODE_STREAM        =0x02,
-    LSM6DSL_FIFO_MODE_STF       =0x03,
-    LSM6DSL_FIFO_MODE_BTS       =0x04,
-    LSM6DSL_FIFO_MODE_DYN_STREAM        =0x05,
-    LSM6DSL_FIFO_MODE_DYN_STREAM_2          =0x06,
-    LSM6DSL_FIFO_MODE_BTF       =0x07,
-} LSM6DSL_FIFO_MODE_t;
+#define     LSM6DSL_FIFO_MODE_BYPASS                0x00
+#define     LSM6DSL_FIFO_MODE_FIFO                  0x01
+#define     LSM6DSL_FIFO_MODE_STREAM                0x02
+#define     LSM6DSL_FIFO_MODE_STF                   0x03
+#define     LSM6DSL_FIFO_MODE_BTS                   0x04
+#define     LSM6DSL_FIFO_MODE_DYN_STREAM            0x05
+#define     LSM6DSL_FIFO_MODE_DYN_STREAM_2          0x06
+#define     LSM6DSL_FIFO_MODE_BTF                   0x07
 
-#define       LSM6DSL_FIFO_MODE_MASK     0x07
+#define       LSM6DSL_FIFO_MODE_MASK                0x07
 
 
-typedef enum {
-    LSM6DSL_BDU_CONTINUOS       =0x00,
-    LSM6DSL_BDU_BLOCK_UPDATE        =0x40,
-} LSM6DSL_BDU_t;
 
-#define       LSM6DSL_BDU_MASK   0x40
+#define    LSM6DSL_BDU_CONTINUOS                    0x00
+#define    LSM6DSL_BDU_BLOCK_UPDATE                 0x40
 
+#define       LSM6DSL_BDU_MASK                      0x40
+
+
+
+#define     LSM6DSL_IF_INC_DISABLED                 0x00
+#define     LSM6DSL_IF_INC_ENABLED                  0x04
+
+#define     LSM6DSL_IF_INC_MASK                     0x04
 
 
 #include "LSM6DSL_accelerometer.h"
@@ -98,14 +101,14 @@ class LSM6DSLAccGyr
 		 * @param  pBuffer: pointer to data to be read.
 		 * @param  RegisterAddr: specifies internal address register to be read.
 		 * @param  NumByteToRead: number of bytes to be read.
-		 * @retval 0 if ok, an error code otherwise.
+		 * @retval true if ok, false otherwise.
 		 */
-		uint8_t io_read(uint8_t* pBuffer, uint8_t RegisterAddr, uint16_t NumByteToRead)
+		bool io_read(uint8_t* pBuffer, uint8_t RegisterAddr, uint16_t NumByteToRead)
 		{
 			if (!((I2CHelper::getInstance())->read(pBuffer, address, RegisterAddr, NumByteToRead)))
-				return true;
-			else
 				return false;
+			else
+				return true;
 		}
 
 		/**
@@ -113,14 +116,14 @@ class LSM6DSLAccGyr
 		 * @param  pBuffer: pointer to data to be written.
 		 * @param  RegisterAddr: specifies internal address register to be written.
 		 * @param  NumByteToWrite: number of bytes to write.
-		 * @retval 0 if ok, an error code otherwise.
+		 * @retval true if ok, false otherwise.
 		 */
-		uint8_t io_write(uint8_t* pBuffer, uint8_t RegisterAddr, uint16_t NumByteToWrite)
+		bool io_write(uint8_t* pBuffer, uint8_t RegisterAddr, uint16_t NumByteToWrite)
 		{
 			if (!((I2CHelper::getInstance())->write(pBuffer, address, RegisterAddr, NumByteToWrite, false)))
-				return true;
-			else
 				return false;
+			else
+				return true;
 		}
 
 

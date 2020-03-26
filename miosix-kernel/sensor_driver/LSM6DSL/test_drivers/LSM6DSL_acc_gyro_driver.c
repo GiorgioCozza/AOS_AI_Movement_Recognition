@@ -66,7 +66,7 @@ extern uint8_t LSM6DSL_io_read(void *handle, uint8_t ReadAddr, uint8_t *pBuffer,
 *******************************************************************************/
 mems_status_t LSM6DSL_ACC_GYRO_read_reg(void *handle, u8_t Reg, u8_t* Data, u16_t len) 
 {
-  if (LSM6DSL_io_read(handle, Reg, Data, len))
+  if (!LSM6DSL_io_read(handle, Reg, Data, len))
   {
     return MEMS_ERROR;
   }
@@ -86,7 +86,7 @@ mems_status_t LSM6DSL_ACC_GYRO_read_reg(void *handle, u8_t Reg, u8_t* Data, u16_
 *******************************************************************************/
 mems_status_t LSM6DSL_ACC_GYRO_write_reg(void *handle, u8_t Reg, u8_t *Data, u16_t len) 
 {
-  if (LSM6DSL_io_write(handle, Reg, Data, len))
+  if (!LSM6DSL_io_write(handle, Reg, Data, len))
   {
     return MEMS_ERROR;
   }
