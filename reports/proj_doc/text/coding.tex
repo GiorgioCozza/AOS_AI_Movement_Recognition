@@ -34,7 +34,7 @@ The obviousness of this first step should not mislead from its purpose, as well-
 There are many ways to measure movements and positions, \textit{inertial} sensors such as the \textit{accelerometer} and \textit{gyroscope} are well-established solutions. \textit{Magnetic} sensors (e.g:\textit{magnetometers}) can also help in capturing motion patterns if used in combination with accelerometers and gyroscopes. Some research work in fact, adopt this approach to detect position and orientation of body parts by using sensor fusion techniques \cite{navamelendez2016} and the patterns to be extracted from data are strongly shaped by this information. The problem in this case, is more abstract and requires a considerable amount of data to be collected, from many sources, to obtain accurate classification results. This observation is then accentuated considering the cost in terms of time and efforts required to perform data gathering, neural networks as well-known are "data hungry" and regardless their effectivness, no acceptable results can be achieved without a rich dataset. \newline
 
 \subsection{Data Gathering}
-This part is strongly affected by some a priori design decision. As stated before this work relies on the STM32CubeAI plugin to speed-up the process that allows to obtain the initializing firmware code of the neural network from some framework-generated model, so only STM32-family hardware has been used. After a deep analysis of topic-related studies it has been decided to use a single sensing device located at inguinal level (right-side). This location revealed to be extremely useful for two reasons:
+This part is strongly affected by some a priori design decision. As stated before this work relies on the STM32CubeAI plugin to speed-up the process that allows to obtain the initializing firmware code of the neural network from some framework-generated model, so only STM32-family hardware is used. After a deep analysis of topic-related studies it has been decided to use a single sensing device located at inguinal level (right-side). This location revealed to be extremely useful for two reasons:
 \begin{itemize}
 	\item Allows the sensors to detect directional and angular accelerations of the right lower limb which characterizes most of the movements and positions that must be classified 
 	\item Avoid the person wearing the device to be hampered during activity sessions
@@ -58,7 +58,7 @@ From hardware perspective, a first evaluation of the model complexity and resour
 \end{figure}
 A first problem to be solved at this stage consists in finding a feasable way to store sensor-collected information.\newline
 Unfortunately it is not possible to use memories on board. On the other hand, the intuitive solution of streaming data samples being directly connected to the laptop through the USB port, is unfeasable because of ambient and cable size constraints. Although Miosix provides support to manage a filesystem on an external SD card, this possibility has been discarded due to the unavailability of a proper board expansion. This forced at the beginning to consider an Arduino MKR1000 board as a WiFi shield to stream data to a laptop using a smartphone as hotspot, but attempts to transfer data from the Nucleo board to the MKR1000 using I2C met some problems and discouraged this approach. In any case the increasing size of the packed boards make them uncomfortable to be worn.\newline
-A final and simple solution to the mentioned problems relies on a simple Raspberry Pi Model 3 besides the board all supplied by a battery:
+A final and simple solution to the mentioned problems relies on a simple Raspberry Pi Model 3 besides the sensor board:
 \begin{center}
 	\begin{figure}[H]
 		\begin{subfigure}[H]{0.45\textwidth}
@@ -72,7 +72,8 @@ A final and simple solution to the mentioned problems relies on a simple Raspber
 		\end{subfigure}
 	\end{figure} 
 \end{center}
-The sensing device streams data in form of comma-separated values that are stored by the Raspberry into a file, while a simple python program on backend is in charge of creating and managing all the activity session files during data collection.
+The sensing device streams data in form of comma-separated values that are stored by the Raspberry into a file, while a simple python program on backend is in charge of creating and managing all the activity session files during data collection.\newline
+The implementation of such script is straightforward, less trivial is the design and implementation of the MEMS drivers considering the fact that 4 different sensors must be used. Fortunately, LSM6DSL and LSM303AGR are powerful SoCs providing 
 
 \subsection{Data Analysis and Neural Model Design}
 Almost immediately after data gathering it is required to plot some information about the collected datasets to outline a first strategy for a possible neural network model. A preliminary intuitive analysis is carried out by plotting the temporal distribution of a set of sequences (time windows) of data points from some activity files. This helps to infer some patterns that could reasonably be extracted by the algorithm.\newline
@@ -201,6 +202,7 @@ Before proceeding it is important to outline how the tool works in order to unde
 	\caption{X-CUBE AI Engine}
 \end{figure}  
 This new version of the model is used by the \textit{Validation Engine} to perform validation either locally or directly on the target board and the \textit{C-code generator} that generates the network code.\newline
+So the first step, the model is imported into the project
 Furthermore, it is important to highlight another interesting aspect that raises from a first analysis of the model summary created during training phase:
 
 \newcommand\T{\rule{0pt}{2.6ex}}       % Top strut
