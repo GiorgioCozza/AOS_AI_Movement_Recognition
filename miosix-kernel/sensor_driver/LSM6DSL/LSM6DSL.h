@@ -102,7 +102,7 @@ class LSM6DSLAccGyr
  * @param  NumByteToRead: number of bytes to be read.
  * @retval true if ok, false otherwise.
  */
-    uint8_t io_read(uint8_t* pBuffer, uint8_t RegisterAddr, uint16_t NumByteToRead, uint8_t reg_mask = 0xFF)
+    bool io_read(uint8_t* pBuffer, uint8_t RegisterAddr, uint16_t NumByteToRead, uint8_t reg_mask = 0xFF)
     {
         uint8_t i = 0;
         for (i = 0; i < NumByteToRead; i++) {
@@ -120,7 +120,7 @@ class LSM6DSLAccGyr
      * @param  NumByteToWrite: number of bytes to write.
      * @retval true if ok, false otherwise.
      */
-    uint8_t io_write(uint8_t* pBuffer, uint8_t RegisterAddr, uint16_t NumByteToWrite, uint8_t reg_mask = 0xFF) {
+    bool io_write(uint8_t* pBuffer, uint8_t RegisterAddr, uint16_t NumByteToWrite, uint8_t reg_mask = 0xFF) {
         uint8_t i = 0;
         uint8_t *tmp_buf = new uint8_t[NumByteToWrite];
         for (i = 0; i < NumByteToWrite; i++) {

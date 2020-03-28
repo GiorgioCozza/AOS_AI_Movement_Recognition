@@ -15,12 +15,12 @@ bool LSM6DSLAccGyr::init(){
 	uint8_t n_add = 0;
 
 
-    n_add |= LSM6DSL_IF_INC_DISABLED;
+    n_add |= LSM6DSL_IF_INC_ENABLED;
     if (!LSM6DSLAccGyr::io_write((uint8_t *)&n_add, LSM6DSL_CTRL3_C, 1, LSM6DSL_IF_INC_MASK))
         return false;
 
 
-	n_bdu |= LSM6DSL_BDU_CONTINUOS;
+	n_bdu |= LSM6DSL_BDU_BLOCK_UPDATE;
 	if (!LSM6DSLAccGyr::io_write((uint8_t *)&n_bdu, LSM6DSL_CTRL3_C, 1, LSM6DSL_BDU_MASK))
 		return false;
 
@@ -30,7 +30,7 @@ bool LSM6DSLAccGyr::init(){
 			return false;
 
 
-    if(!set_acc_odr(10.0f))
+    if(!set_acc_odr(104.0f))
 		return false;
 
 
@@ -38,10 +38,10 @@ bool LSM6DSLAccGyr::init(){
 		return false;
 
 
-    if (!set_gyr_odr(0.0f))
+    if (!set_gyr_odr(104.0f))
 		return false;
 
-    if (!set_gyr_fs(2000.0f))
+    if (!set_gyr_fs(245.0f))
 		return false;
 
     return true;
@@ -199,7 +199,7 @@ bool LSM6DSLAccGyr::get_acc_fs(float *aFs){
 
 bool LSM6DSLAccGyr::set_acc_fs(float aFs){
 
-    uint8_t n_fs = 0, o_fs = 0;
+    uint8_t n_fs = 0;
 
     if ( aFs <= 2.0f )
         n_fs = LSM6DSL_FS_XL_2g;
@@ -211,8 +211,7 @@ bool LSM6DSLAccGyr::set_acc_fs(float aFs){
         n_fs = LSM6DSL_FS_XL_16g;
 
 
-    o_fs |= n_fs;
-    if (!LSM6DSLAccGyr::io_write((uint8_t *)&o_fs, LSM6DSL_CTRL1_XL, 1, LSM6DSL_CTRL1_XL))
+    if (!LSM6DSLAccGyr::io_write((uint8_t *)&n_fs, LSM6DSL_CTRL1_XL, 1, LSM6DSL_CTRL1_XL))
         return false;
 
     return true;
@@ -222,7 +221,7 @@ bool LSM6DSLAccGyr::set_acc_fs(float aFs){
 
 bool LSM6DSLAccGyr::set_acc_odr(float aOdr) {
 
-    uint8_t n_odr = 0, o_odr = 0;
+    uint8_t n_odr = 0;
 
     if (aOdr == 0.0f)
         n_odr = LSM6DSL_ODR_XL_POWER_DOWN;
@@ -248,8 +247,7 @@ bool LSM6DSLAccGyr::set_acc_odr(float aOdr) {
         n_odr = LSM6DSL_ODR_XL_6660Hz;
 
 
-    o_odr |= n_odr;
-    if (!LSM6DSLAccGyr::io_write((uint8_t *)&o_odr, LSM6DSL_CTRL1_XL, 1, LSM6DSL_ODR_XL_MASK))
+    if (!LSM6DSLAccGyr::io_write((uint8_t *)&n_odr, LSM6DSL_CTRL1_XL, 1, LSM6DSL_ODR_XL_MASK))
         return false;
 
     return true;
@@ -261,7 +259,6 @@ bool LSM6DSLAccGyr::get_gyr_axes(int32_t * gData){
 
     uint8_t tmp_val[6] = {0,0,0,0,0,0};
     int16_t raw_val[3] = {0,0,0};
-    uint8_t k = 0, i = 0, j = 0;
     float sens;
 
 
