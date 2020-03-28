@@ -82,9 +82,9 @@ int main() {
 
 			/* Print sensor IDs*/
 
-			if (!acc_gyr->read_id(&(devId[lsm6dsl_acc])))
+			if (!acc_gyr->read_id(&(devId[lsm6dsl])))
 			{
-				printf("\r\n[LOG]: %s, device enabled ID: %d\r\n", LSM6DSL, devId[lsm6dsl_acc]);
+				printf("\r\n[LOG]: %s, device enabled ID: %d\r\n", LSM6DSL, devId[lsm6dsl]);
 			}
 			if (!acc->read_id(&(devId[lsm303agr_acc])))
 			{

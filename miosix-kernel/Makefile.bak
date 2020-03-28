@@ -28,7 +28,7 @@ SUBDIRS := $(KPATH)			\
 ## List here your source files (both .s, .c and .cpp)
 ##
 SRC :=                                				\
-./main.cpp											\
+./main_data_test.cpp											\
 $(SENSDRIV)/com_i2c/i2c_helper.cpp					\
 $(DATAUTL)/dataset_preproc.cpp						\
 $(SENSDRIV)/LSM6DSL/LSM6DSL.cpp				\
