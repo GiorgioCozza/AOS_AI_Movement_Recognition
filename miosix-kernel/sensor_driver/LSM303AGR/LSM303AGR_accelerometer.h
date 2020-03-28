@@ -5,8 +5,11 @@
 #define _LSM303AGR_ACCELEROMETER_H
 
 
+#define LSM303AGR_ACC_I2C_ADDRESS                               0x32
+
 #define LSM303AGR_ACC_WHO_AM_I_ADDR                             0x0F
 #define LSM303AGR_ACC_WHO_AM_I                                  0x33
+
 
 
 #define LSM303AGR_ACC_OUT_X_L                                   0x28
@@ -17,7 +20,6 @@
 #define LSM303AGR_ACC_OUT_Z_H                                   0x2D
 
 
-#define LSM303AGR_ACC_FIFO_CTRL                                 0x2F
 
 #define LSM303AGR_ACC_CTRL1                                     0x20
 #define LSM303AGR_ACC_CTRL2                                     0x21
@@ -25,6 +27,9 @@
 #define LSM303AGR_ACC_CTRL4                                     0x23
 #define LSM303AGR_ACC_CTRL5                                     0x24
 #define LSM303AGR_ACC_CTRL6                                     0x25
+#define LSM303AGR_ACC_FIFO_CTRL                                 0x2E
+
+
 
 #define LSM303AGR_ACC_BDU_DISABLED                              0x00
 #define LSM303AGR_ACC_BDU_ENABLED                               0x80
@@ -69,6 +74,38 @@
 #define LSM303AGR_CTRL1_XEN_YEN_ZEN_MASK                        0x07
 
 
+#define LSM303AGR_ACC_LP_DISABLED                               0x00
+#define LSM303AGR_ACC_LP_ENABLED                                0x08
 
+#define LSM303AGR_ACC_LP_MASK                                   0x08
+
+
+#define LSM303AGR_ACC_HR_DISABLED                               0x00
+#define LSM303AGR_ACC_HR_ENABLED                                0x08
+
+#define LSM303AGR_ACC_HR_MASK                                   0x08
+
+
+#define LSM303AGR_ACC_FS_2G                                     0x00
+#define LSM303AGR_ACC_FS_4G                                     0x10
+#define LSM303AGR_ACC_FS_8G                                     0x20
+#define LSM303AGR_ACC_FS_16G                                    0x30
+
+#define LSM303AGR_ACC_FS_MASK                                   0x30
+
+/*#######################  SENSITIVITY values  #############################*/
+
+#define LSM303AGR_X_SENSITIVITY_FS_2G_NORMAL                   3.900f
+#define LSM303AGR_X_SENSITIVITY_FS_2G_HIGH_RES                 0.980f
+#define LSM303AGR_X_SENSITIVITY_FS_2G_LOW_POWER                15.630f
+#define LSM303AGR_X_SENSITIVITY_FS_4G_NORMAL                   7.820f
+#define LSM303AGR_X_SENSITIVITY_FS_4G_HIGH_RES                 1.950f
+#define LSM303AGR_X_SENSITIVITY_FS_4G_LOW_POWER                31.260f
+#define LSM303AGR_X_SENSITIVITY_FS_8G_NORMAL                   15.630f
+#define LSM303AGR_X_SENSITIVITY_FS_8G_HIGH_RES                 3.900f
+#define LSM303AGR_X_SENSITIVITY_FS_8G_LOW_POWER                62.520f
+#define LSM303AGR_X_SENSITIVITY_FS_16G_NORMAL                  46.900f
+#define LSM303AGR_X_SENSITIVITY_FS_16G_HIGH_RES                11.720f
+#define LSM303AGR_X_SENSITIVITY_FS_16G_LOW_POWER               187.580f
 
 #endif

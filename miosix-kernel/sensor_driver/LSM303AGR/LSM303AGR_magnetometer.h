@@ -6,6 +6,7 @@
 
 
 #define LSM303AGR_MAG_I2C_ADDRESS                               0x3C
+#define LSM303AGR_MAGNETOMETER_I2C_ADDRESS                      0x3C
 
 /*############################  ID REGISTERS  ################################*/
 
@@ -39,6 +40,12 @@
 #define LSM303AGR_MAG_MD_MASK                                   0x03
 
 
+#define LSM303AGR_MAG_BDU_DISABLED                              0x00
+#define LSM303AGR_MAG_BDU_ENABLED                               0x10
+
+#define LSM303AGR_MAG_BDU_MASK                                  0x10
+
+
 /*##########################  ODR REGISTERS  ################################*/
 
 #define LSM303AGR_MAG_ODR_10HZ                                  0x00
@@ -51,18 +58,8 @@
 
 /*#######################  SENSITIVITY values  #############################*/
 
-#define LSM303AGR_X_SENSITIVITY_FS_2G_NORMAL                   3.900f
-#define LSM303AGR_X_SENSITIVITY_FS_2G_HIGH_RES                 0.980f
-#define LSM303AGR_X_SENSITIVITY_FS_2G_LOW_POWER                15.630f
-#define LSM303AGR_X_SENSITIVITY_FS_4G_NORMAL                   7.820f
-#define LSM303AGR_X_SENSITIVITY_FS_4G_HIGH_RES                 1.950f
-#define LSM303AGR_X_SENSITIVITY_FS_4G_LOW_POWER                31.260f
-#define LSM303AGR_X_SENSITIVITY_FS_8g_NORMAL                   15.630f
-#define LSM303AGR_X_SENSITIVITY_FS_8G_HIGH_RES                 3.900f
-#define LSM303AGR_X_SENSITIVITY_FS_8G_LOW_POWER                62.520f
-#define LSM303AGR_X_SENSITIVITY_FS_16G_NORMAL                  46.900f
-#define LSM303AGR_X_SENSITIVITY_FS_16G_HIGH_RES                11.720f
-#define LSM303AGR_X_SENSITIVITY_FS_16G_LOW_POWER               187.580f
+#define LSM303AGR_MAG_SENSITIVITY_VAL                           1.5f
+#define LSM303AGR_MAG_FS_VAL                                    49.152f
 
 
 

@@ -40,7 +40,6 @@
 
 #include "LSM303AGRMagSensor.h"
 
-
 /* Class Implementation ------------------------------------------------------*/
 
 
@@ -77,7 +76,7 @@ int LSM303AGRMagSensor::init(void *init)
   {
     return 1;
   }
-  
+
   return 0;
 }
 
@@ -147,14 +146,14 @@ int LSM303AGRMagSensor::get_m_axes(int32_t *pData)
   {
     return 1;
   }
-  
+
   /* Get LSM303AGR actual sensitivity. */
   if ( get_m_sensitivity( &sensitivity ) == 1 )
   {
     return 1;
   }
-  
-  /* Calculate the data. */
+
+    /* Calculate the data. */
   pData[0] = ( int32_t )( pDataRaw[0] * sensitivity );
   pData[1] = ( int32_t )( pDataRaw[1] * sensitivity );
   pData[2] = ( int32_t )( pDataRaw[2] * sensitivity );

@@ -14,37 +14,23 @@ bool LSM6DSLAccGyr::init(){
 	uint8_t n_odr = 0;
 	uint8_t n_add = 0;
 
-    if (!LSM6DSLAccGyr::io_read((uint8_t *)&n_add, LSM6DSL_CTRL3_C, 1))
-        return false;
 
-    n_add &= ~LSM6DSL_IF_INC_MASK;
-    n_add |= LSM6DSL_IF_INC_ENABLED;
-
-    if (!LSM6DSLAccGyr::io_write((uint8_t *)&n_add, LSM6DSL_CTRL3_C, 1))
+    n_add |= LSM6DSL_IF_INC_DISABLED;
+    if (!LSM6DSLAccGyr::io_write((uint8_t *)&n_add, LSM6DSL_CTRL3_C, 1, LSM6DSL_IF_INC_MASK))
         return false;
 
 
-    if (!LSM6DSLAccGyr::io_read((uint8_t *)&n_bdu, LSM6DSL_CTRL3_C, 1))
-		return false;
-		
-	n_bdu &= ~LSM6DSL_BDU_MASK;
-	n_bdu |= LSM6DSL_BDU_BLOCK_UPDATE;
-	
-	if (!LSM6DSLAccGyr::io_write((uint8_t *)&n_bdu, LSM6DSL_CTRL3_C, 1))
+	n_bdu |= LSM6DSL_BDU_CONTINUOS;
+	if (!LSM6DSLAccGyr::io_write((uint8_t *)&n_bdu, LSM6DSL_CTRL3_C, 1, LSM6DSL_BDU_MASK))
 		return false;
 
 
-    if (!LSM6DSLAccGyr::io_read((uint8_t *)&n_fifo, LSM6DSL_FIFO_CTRL5, 1))
-		return false;
-	
-	n_fifo &= LSM6DSL_FIFO_MODE_MASK;
 	n_fifo |= LSM6DSL_FIFO_MODE_BYPASS;
-	
-	if (!LSM6DSLAccGyr::io_write((uint8_t *)&n_fifo, LSM6DSL_FIFO_CTRL5, 1))
+	if (!LSM6DSLAccGyr::io_write((uint8_t *)&n_fifo, LSM6DSL_FIFO_CTRL5, 1, LSM6DSL_FIFO_MODE_MASK))
 			return false;
 
 
-    if(!set_acc_odr(0.0f))
+    if(!set_acc_odr(10.0f))
 		return false;
 
 
@@ -65,7 +51,7 @@ bool LSM6DSLAccGyr::init(){
 
 bool LSM6DSLAccGyr::read_id(uint8_t * id){
 
-	return LSM6DSLAccGyr::io_read((uint8_t *)&id, LSM6DSL_WHO_AM_I_REG, 1);
+	return LSM6DSLAccGyr::io_read((uint8_t *)id, LSM6DSL_WHO_AM_I_REG, 1);
 
 }
 
@@ -75,15 +61,10 @@ bool LSM6DSLAccGyr::get_acc_axes(int32_t * aData){
 
 	uint8_t tmp_val[6] = {0,0,0,0,0,0};
 	int16_t raw_val[3] = {0,0,0};
-	uint8_t k = 0, i = 0, j = 0;
 	float sens;
-	
-	for (i = 0; i < NUM_AXES; i++)
-		for(j = 0; j < BYTES_PER_DIMENSION; j++) {
-			if (!LSM6DSLAccGyr::io_read((uint8_t *)(tmp_val+k), LSM6DSL_OUTX_L_XL+k,1))
-                return false;
-            k++;
-            }
+
+    if (!LSM6DSLAccGyr::io_read((uint8_t *)tmp_val, LSM6DSL_OUTX_L_XL,6))
+        return false;
 
 
     raw_val[0] = ((((int16_t)tmp_val[1]) << 8 ) + (int16_t)tmp_val[0]);
@@ -96,7 +77,7 @@ bool LSM6DSLAccGyr::get_acc_axes(int32_t * aData){
 	aData[0] = (int32_t)(raw_val[0] * sens);
 	aData[1] = (int32_t)(raw_val[1] * sens);
 	aData[2] = (int32_t)(raw_val[2] * sens);
-	
+
 	return true;
 }
 
@@ -105,13 +86,11 @@ bool LSM6DSLAccGyr::get_acc_axes(int32_t * aData){
 bool LSM6DSLAccGyr::get_acc_sensitivity(float * aSens){
 	
 	uint8_t fscale = 0;
-	
-	
-	if (!LSM6DSLAccGyr::io_read((uint8_t *)&fscale, LSM6DSL_CTRL1_XL, 1))
+
+
+	if (!LSM6DSLAccGyr::io_read((uint8_t *)&fscale, LSM6DSL_CTRL1_XL, 1, LSM6DSL_FS_XL_MASK))
 		return false;
-	
-	fscale &= LSM6DSL_FS_XL_MASK;
-	
+
 	switch(fscale) {
 
         case LSM6DSL_FS_XL_2g:
@@ -139,10 +118,8 @@ bool LSM6DSLAccGyr::get_acc_odr(float *aOdr){
 
     uint8_t n_odr = 0;
 
-    if (!LSM6DSLAccGyr::io_read((uint8_t *)&n_odr, LSM6DSL_CTRL1_XL, 1))
+    if (!LSM6DSLAccGyr::io_read((uint8_t *)&n_odr, LSM6DSL_CTRL1_XL, 1, LSM6DSL_ODR_XL_MASK))
         return false;
-
-    n_odr &= LSM6DSL_ODR_XL_MASK;
 
 
     switch( n_odr )
@@ -194,10 +171,8 @@ bool LSM6DSLAccGyr::get_acc_fs(float *aFs){
 
     uint8_t n_fs = 0;
 
-    if (!LSM6DSLAccGyr::io_read((uint8_t *)&n_fs, LSM6DSL_CTRL1_XL, 1))
+    if (!LSM6DSLAccGyr::io_read((uint8_t *)&n_fs, LSM6DSL_CTRL1_XL, 1, LSM6DSL_FS_XL_MASK))
         return false;
-
-    n_fs &= LSM6DSL_FS_XL_MASK;
 
     switch( n_fs ){
 
@@ -235,13 +210,9 @@ bool LSM6DSLAccGyr::set_acc_fs(float aFs){
     else
         n_fs = LSM6DSL_FS_XL_16g;
 
-    if (!LSM6DSLAccGyr::io_read((uint8_t *)&o_fs, LSM6DSL_CTRL1_XL, 1))
-        return false;
 
-    o_fs &= ~LSM6DSL_CTRL1_XL;
     o_fs |= n_fs;
-
-    if (!LSM6DSLAccGyr::io_write((uint8_t *)&o_fs, LSM6DSL_CTRL1_XL, 1))
+    if (!LSM6DSLAccGyr::io_write((uint8_t *)&o_fs, LSM6DSL_CTRL1_XL, 1, LSM6DSL_CTRL1_XL))
         return false;
 
     return true;
@@ -253,7 +224,9 @@ bool LSM6DSLAccGyr::set_acc_odr(float aOdr) {
 
     uint8_t n_odr = 0, o_odr = 0;
 
-    if ( aOdr <= 13.0f )
+    if (aOdr == 0.0f)
+        n_odr = LSM6DSL_ODR_XL_POWER_DOWN;
+    else if ( aOdr <= 13.0f )
         n_odr = LSM6DSL_ODR_XL_13Hz;
     else if ( aOdr <= 26.0f )
         n_odr = LSM6DSL_ODR_XL_26Hz;
@@ -274,13 +247,9 @@ bool LSM6DSLAccGyr::set_acc_odr(float aOdr) {
     else
         n_odr = LSM6DSL_ODR_XL_6660Hz;
 
-    if (!LSM6DSLAccGyr::io_read((uint8_t *)&o_odr, LSM6DSL_CTRL1_XL, 1))
-        return false;
 
-    o_odr &= ~LSM6DSL_ODR_XL_MASK;
     o_odr |= n_odr;
-
-    if (!LSM6DSLAccGyr::io_write((uint8_t *)&o_odr, LSM6DSL_CTRL1_XL, 1))
+    if (!LSM6DSLAccGyr::io_write((uint8_t *)&o_odr, LSM6DSL_CTRL1_XL, 1, LSM6DSL_ODR_XL_MASK))
         return false;
 
     return true;
@@ -295,12 +264,10 @@ bool LSM6DSLAccGyr::get_gyr_axes(int32_t * gData){
     uint8_t k = 0, i = 0, j = 0;
     float sens;
 
-    for (i = 0; i < NUM_AXES; i++)
-        for(j = 0; j < BYTES_PER_DIMENSION; j++) {
-            if (!LSM6DSLAccGyr::io_read((uint8_t * )(tmp_val + k), LSM6DSL_OUTX_L_G + k, 1))
-                return false;
-            k++;
-        }
+
+    if (!LSM6DSLAccGyr::io_read((uint8_t * )tmp_val, LSM6DSL_OUTX_L_G, 6))
+        return false;
+
 
     raw_val[0] = ((((int16_t)tmp_val[1]) << 8 ) + (int16_t)tmp_val[0]);
     raw_val[1] = ((((int16_t)tmp_val[3]) << 8 ) + (int16_t)tmp_val[2]);
@@ -330,10 +297,9 @@ bool LSM6DSLAccGyr::get_gyr_sensitivity(float * aSens){
         *aSens = (float)LSM6DSL_GYRO_SENSITIVITY_FOR_FS_125DPS;
 
 
-    if (!LSM6DSLAccGyr::io_read((uint8_t *)&fscale, LSM6DSL_CTRL2_G, 1))
+    if (!LSM6DSLAccGyr::io_read((uint8_t *)&fscale, LSM6DSL_CTRL2_G, 1, LSM6DSL_FS_XL_MASK))
         return false;
 
-    fscale &= LSM6DSL_FS_XL_MASK;
 
     switch(fscale) {
         case LSM6DSL_FS_G_245dps:
@@ -361,10 +327,9 @@ bool LSM6DSLAccGyr::get_gyr_odr(float * gOdr){
 
     uint8_t n_odr = 0;
 
-    if (!LSM6DSLAccGyr::io_read((uint8_t *)&n_odr, LSM6DSL_CTRL2_G, 1))
+    if (!LSM6DSLAccGyr::io_read((uint8_t *)&n_odr, LSM6DSL_CTRL2_G, 1, LSM6DSL_ODR_G_MASK))
         return false;
 
-    n_odr &= LSM6DSL_ODR_G_MASK;
 
     switch( n_odr )
     {
@@ -416,10 +381,9 @@ bool LSM6DSLAccGyr::get_gyr_fs(float *gFs){
 
     uint8_t n_fs = 0, n_fs125 = 0;
 
-    if (!LSM6DSLAccGyr::io_read((uint8_t *)&n_fs125, LSM6DSL_CTRL2_G, 1))
+    if (!LSM6DSLAccGyr::io_read((uint8_t *)&n_fs125, LSM6DSL_CTRL2_G, 1, LSM6DSL_FS_125_MASK))
         return false;
 
-    n_fs125 &= LSM6DSL_FS_125_MASK;
 
     if ( n_fs125 == LSM6DSL_FS_125_ENABLED){
         *gFs = 125.0f;
@@ -459,13 +423,9 @@ bool LSM6DSLAccGyr::set_gyr_fs(float gFs){
     uint8_t n_fs125 = 0, o_fs125 = 0;
 
     if ( gFs <= 125.0f ) {
-        if (!LSM6DSLAccGyr::io_read((uint8_t * ) & o_fs125, LSM6DSL_CTRL2_G, 1))
-            return false;
 
-        o_fs125 &= ~LSM6DSL_FS_G_MASK;
         o_fs125 |= LSM6DSL_FS_125_ENABLED;
-
-        if (!LSM6DSLAccGyr::io_write((uint8_t * ) & o_fs125, LSM6DSL_CTRL2_G, 1))
+        if (!LSM6DSLAccGyr::io_write((uint8_t * ) & o_fs125, LSM6DSL_CTRL2_G, 1, LSM6DSL_FS_G_MASK))
             return false;
 
     }else{
@@ -480,23 +440,13 @@ bool LSM6DSLAccGyr::set_gyr_fs(float gFs){
             n_fs = LSM6DSL_FS_G_2000dps;
 
 
-        if (!LSM6DSLAccGyr::io_read((uint8_t * ) & o_fs125, LSM6DSL_CTRL2_G, 1))
-            return false;
-
-        o_fs125 &= ~LSM6DSL_FS_G_MASK;
         o_fs125 |= LSM6DSL_FS_125_DISABLED;
-
-        if (!LSM6DSLAccGyr::io_write((uint8_t * ) & o_fs125, LSM6DSL_CTRL2_G, 1))
+        if (!LSM6DSLAccGyr::io_write((uint8_t * ) & o_fs125, LSM6DSL_CTRL2_G, 1, LSM6DSL_FS_G_MASK))
             return false;
 
 
-        if (!LSM6DSLAccGyr::io_read((uint8_t * ) & o_fs, LSM6DSL_CTRL2_G, 1))
-            return false;
-
-        o_fs &= ~LSM6DSL_FS_G_MASK;
         o_fs |= LSM6DSL_FS_125_DISABLED;
-
-        if (!LSM6DSLAccGyr::io_write((uint8_t * ) & o_fs, LSM6DSL_CTRL2_G, 1))
+        if (!LSM6DSLAccGyr::io_write((uint8_t * ) & o_fs, LSM6DSL_CTRL2_G, 1, LSM6DSL_FS_G_MASK))
             return false;
 
     }
@@ -510,7 +460,9 @@ bool LSM6DSLAccGyr::set_gyr_odr(float gOdr) {
 
     uint8_t n_odr = 0, o_odr = 0;
 
-    if ( gOdr <= 13.0f )
+    if ( gOdr <= 0.0f )
+        n_odr = LSM6DSL_ODR_G_POWER_DOWN;
+    else if ( gOdr <= 13.0f )
         n_odr = LSM6DSL_ODR_G_13Hz;
     else if ( gOdr <= 26.0f )
         n_odr = LSM6DSL_ODR_G_26Hz;
@@ -531,13 +483,9 @@ bool LSM6DSLAccGyr::set_gyr_odr(float gOdr) {
     else
         n_odr = LSM6DSL_ODR_G_6660Hz;
 
-    if (!LSM6DSLAccGyr::io_read((uint8_t *)&o_odr, LSM6DSL_CTRL2_G, 1))
-        return false;
 
-    o_odr &= ~LSM6DSL_ODR_G_MASK;
     o_odr |= n_odr;
-
-    if (!LSM6DSLAccGyr::io_write((uint8_t *)&o_odr, LSM6DSL_CTRL2_G, 1))
+    if (!LSM6DSLAccGyr::io_write((uint8_t *)&o_odr, LSM6DSL_CTRL2_G, 1, LSM6DSL_ODR_G_MASK))
         return false;
 
     return true;

@@ -22,19 +22,19 @@
 #define LSM6DSL_WHO_AM_I_REG   			    0X0F
 
 
-/************************  I2C ADDRESSES  ************************/
+/**********************  I2C ADDRESSES  ************************/
 
 #define LSM6DSL_I2C_ADDRESS_LOW			    0xD4
 #define LSM6DSL_I2C_ADDRESS_HIGH			0xd6
 
 
-/************************  CONTROL REGISTERS  ********************/
+/**********************  CONTROL REGISTERS  ********************/
 
 #define LSM6DSL_CTRL1_XL                    0X10
 #define LSM6DSL_CTRL8_XL                    0X17
 #define LSM6DSL_CTRL9_XL                    0X18
 
-/************************  DATA REGISTERS  ***********************/
+/**********************  DATA REGISTERS  ***********************/
 
 #define LSM6DSL_OUTX_L_XL      			    0X28
 #define LSM6DSL_OUTX_H_XL      			    0X29

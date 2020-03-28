@@ -45,6 +45,6 @@
 
 
 typedef enum axis {X=0, Y, Z};
-typedef enum sensors{ lsm6dsl_acc = 0, lsm6dsl_gyr, lsm303agr_acc, lsm303agr_mag};
+typedef enum sensors{ lsm6dsl = 0, lsm303agr_acc, lsm303agr_mag};
 
 #endif

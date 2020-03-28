@@ -95,16 +95,15 @@ bool I2CHelper::write(uint8_t * buf, uint8_t devAddr, uint8_t regAddr, uint16_t 
 	}
 	else {
 
-		_i2c_dev::init();
+        for (int j = 0; j < numByte; j++) {
+            _i2c_dev::init();
+            _i2c_dev::sendStart();
+			if (_i2c_dev::send((unsigned char)(devAddr))) {
+                if (_i2c_dev::send((unsigned char)(regAddr + j))) {
+                    if( !_i2c_dev::send((unsigned char)buf[j]) )
+					    return false;
 
-		for (int j = 0; j < numByte; j++) {
-			_i2c_dev::sendStart();
-			if (_i2c_dev::send((unsigned char)devAddr)) {
-				if (_i2c_dev::send((unsigned char)(regAddr + j))) {
-
-					*(buf + j) = _i2c_dev::send((unsigned char) * (buf + j));
-
-				}
+                }
 				else {
 					return false;
 				}
@@ -112,9 +111,10 @@ bool I2CHelper::write(uint8_t * buf, uint8_t devAddr, uint8_t regAddr, uint16_t 
 			else {
 				return false;
 			}
-		}
-		_i2c_dev::sendStop();
-		delayUs(10);
+            _i2c_dev::sendStop();
+            delayUs(10);
+        }
+
 		return true;
 	}
 }

@@ -187,8 +187,8 @@ int LSM303AGRAccSensor::get_x_axes(int32_t *pData)
   {
     return 1;
   }
-  
-  /* Calculate the data. */
+
+    /* Calculate the data. */
   pData[0] = (int32_t)data[0];
   pData[1] = (int32_t)data[1];
   pData[2] = (int32_t)data[2];

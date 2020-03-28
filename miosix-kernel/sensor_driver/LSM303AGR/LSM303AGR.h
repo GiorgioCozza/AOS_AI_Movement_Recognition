@@ -23,8 +23,8 @@ public:
 
     virtual ~LSM303AGRAccMag(){}
     bool init(void);
-    bool read_id(uint8_t* id);
 
+    bool read_acc_id(uint8_t* id);
     bool get_acc_axes(int32_t* aData);
     bool get_acc_sensitivity(float* aSens);
     bool get_acc_odr(float* aOdr);
@@ -34,12 +34,12 @@ public:
     bool set_acc_odr(float aOdr);
 
 
+    bool read_mag_id(uint8_t* id);
     bool get_mag_axes(int32_t* mData);
     bool get_mag_sensitivity(float* mSens);
     bool get_mag_fs(float* mFs);
     bool get_mag_odr(float* mOdr);
 
-    bool set_mag_fs(float mFs);
     bool set_mag_odr(float mOdr);
 
 
@@ -52,12 +52,15 @@ protected:
 	 * @param  NumByteToRead: number of bytes to be read.
 	 * @retval true if ok, false otherwise.
 	 */
-    uint8_t io_read(uint8_t* pBuffer, uint8_t RegisterAddr, uint16_t NumByteToRead)
+    bool io_read(uint8_t* pBuffer, uint8_t RegisterAddr, uint16_t NumByteToRead, uint8_t dev_address , uint8_t reg_mask = 0xFF)
     {
-        if (!((I2CHelper::getInstance())->read(pBuffer, address, RegisterAddr, NumByteToRead)))
-            return false;
-        else
-            return true;
+        uint8_t i = 0;
+        for (i = 0; i < NumByteToRead; i++) {
+            if (!((I2CHelper::getInstance())->read(pBuffer + i, dev_address, RegisterAddr + i, 1)))
+                return false;
+            *(pBuffer + i) &= reg_mask;
+        }
+        return true;
     }
 
     /**
@@ -67,13 +70,25 @@ protected:
      * @param  NumByteToWrite: number of bytes to write.
      * @retval true if ok, false otherwise.
      */
-    uint8_t io_write(uint8_t* pBuffer, uint8_t RegisterAddr, uint16_t NumByteToWrite)
+    bool io_write(uint8_t* pBuffer, uint8_t RegisterAddr, uint16_t NumByteToWrite, uint8_t dev_address , uint8_t reg_mask = 0xFF)
     {
-        if (!((I2CHelper::getInstance())->write(pBuffer, address, RegisterAddr, NumByteToWrite, false)))
-            return false;
-        else
-            return true;
+        uint8_t i = 0;
+        uint8_t * tmp_buf = new uint8_t[NumByteToWrite];
+        for (i = 0; i < NumByteToWrite; i++) {
+            if (!((I2CHelper::getInstance())->read((tmp_buf + i), dev_address, RegisterAddr + i, 1)))
+                return false;
+            else {
+                *(tmp_buf + i) &= ~reg_mask;
+                *(tmp_buf + i) |= *(pBuffer + i);
+
+                if (!((I2CHelper::getInstance())->write((tmp_buf + i), dev_address, RegisterAddr + i, 1, false)))
+                    return false;
+            }
+        }
+        delete[] tmp_buf;
+        return true;
     }
+
 
 
 private:
