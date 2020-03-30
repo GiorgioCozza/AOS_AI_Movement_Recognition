@@ -7,11 +7,11 @@
 \contentsline {section}{\numberline {2}Design and implementation}{5}{section.2}% 
 \contentsline {subsection}{\numberline {2.1}Problem Definition}{6}{subsection.2.1}% 
 \contentsline {subsection}{\numberline {2.2}Data Gathering}{6}{subsection.2.2}% 
-\contentsline {subsection}{\numberline {2.3}Data Analysis and Neural Model Design}{8}{subsection.2.3}% 
-\contentsline {subsection}{\numberline {2.4}Network Training and Validation}{13}{subsection.2.4}% 
-\contentsline {subsection}{\numberline {2.5}Network Code Generation and on-target Testing}{14}{subsection.2.5}% 
-\contentsline {subsection}{\numberline {2.6}Code Integration and Final Firmware Development}{15}{subsection.2.6}% 
-\contentsline {section}{\numberline {3}Experimental evaluation}{15}{section.3}% 
-\contentsline {subsection}{\numberline {3.1}Experimental setup}{15}{subsection.3.1}% 
-\contentsline {subsection}{\numberline {3.2}Results}{15}{subsection.3.2}% 
-\contentsline {section}{\numberline {4}Conclusions and Future Works}{16}{section.4}% 
+\contentsline {subsection}{\numberline {2.3}Data Analysis and Neural Model Design}{9}{subsection.2.3}% 
+\contentsline {subsection}{\numberline {2.4}Network Training and Validation}{14}{subsection.2.4}% 
+\contentsline {subsection}{\numberline {2.5}Network Code Generation and on-target Testing}{15}{subsection.2.5}% 
+\contentsline {subsection}{\numberline {2.6}Code Integration and Final Firmware Development}{16}{subsection.2.6}% 
+\contentsline {section}{\numberline {3}Experimental evaluation}{16}{section.3}% 
+\contentsline {subsection}{\numberline {3.1}Experimental setup}{16}{subsection.3.1}% 
+\contentsline {subsection}{\numberline {3.2}Results}{16}{subsection.3.2}% 
+\contentsline {section}{\numberline {4}Conclusions and Future Works}{17}{section.4}% 
