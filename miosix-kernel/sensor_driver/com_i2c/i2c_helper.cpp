@@ -95,9 +95,11 @@ bool I2CHelper::write(uint8_t * buf, uint8_t devAddr, uint8_t regAddr, uint16_t 
 	}
 	else {
 
+        _i2c_dev::init();
+        _i2c_dev::sendStart();
+
         for (int j = 0; j < numByte; j++) {
-            _i2c_dev::init();
-            _i2c_dev::sendStart();
+
 			if (_i2c_dev::send((unsigned char)(devAddr))) {
                 if (_i2c_dev::send((unsigned char)(regAddr + j))) {
                     if( !_i2c_dev::send((unsigned char)buf[j]) )

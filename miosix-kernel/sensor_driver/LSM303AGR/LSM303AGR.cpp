@@ -36,7 +36,7 @@ bool LSM303AGRAccMag::init(){
         return false;
 
     /* Set Output Data Rate (accelerometer) */
-    if (!set_acc_odr(10.0f))
+    if (!set_acc_odr(100.0f))
         return false;
 
 
@@ -54,7 +54,7 @@ bool LSM303AGRAccMag::init(){
         return false;
 
     /* Set Output Data Rate (magnetometer)*/
-    if ( !set_mag_odr( 50.0f ) )
+    if ( !set_mag_odr( 100.0f ) )
         return false;
 
     return true;
