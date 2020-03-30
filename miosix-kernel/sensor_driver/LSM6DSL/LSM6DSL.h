@@ -61,7 +61,7 @@
 
 #define LSM6DSL_IF_INC_MASK                         0x04
 
-
+#include "XNUCLEO_IKS01A2.h"
 #include "LSM6DSL_accelerometer.h"
 #include "LSM6DSL_gyroscope.h"
 

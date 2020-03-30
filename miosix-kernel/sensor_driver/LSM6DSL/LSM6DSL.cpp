@@ -30,18 +30,18 @@ bool LSM6DSLAccGyr::init(){
 			return false;
 
 
-    if(!set_acc_odr(208.0f))
+    if(!set_acc_odr( C_LSM6DSL_ACC_ODR ))
 		return false;
 
 
-    if (!set_acc_fs(8.0f))
+    if (!set_acc_fs( C_LSM6DSL_ACC_FS ))
 		return false;
 
 
-    if (!set_gyr_odr(208.0f))
+    if (!set_gyr_odr( C_LSM6DSL_GYRO_ODR ))
 		return false;
 
-    if (!set_gyr_fs(2000.0f))
+    if (!set_gyr_fs( C_LSM6DSL_GYRO_FS ))
 		return false;
 
     return true;

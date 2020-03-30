@@ -27,7 +27,7 @@ bool LSM303AGRAccMag::init(){
         return false;
 
     /* Set Full Scale for the accelerometer*/
-    if (!set_acc_fs(2.0f))
+    if (!set_acc_fs( C_LSM303AGR_ACC_FS ))
         return false;
 
     /* Set the POWER MODE valid for all the sensor axes*/
@@ -36,7 +36,7 @@ bool LSM303AGRAccMag::init(){
         return false;
 
     /* Set Output Data Rate (accelerometer) */
-    if (!set_acc_odr(100.0f))
+    if (!set_acc_odr( C_LSM303AGR_ACC_ODR ))
         return false;
 
 
@@ -54,7 +54,7 @@ bool LSM303AGRAccMag::init(){
         return false;
 
     /* Set Output Data Rate (magnetometer)*/
-    if ( !set_mag_odr( 100.0f ) )
+    if ( !set_mag_odr( C_LSM303AGR_MAG_ODR ) )
         return false;
 
     return true;

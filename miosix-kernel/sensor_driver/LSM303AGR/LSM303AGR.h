@@ -8,10 +8,9 @@
 #include "i2c_helper.h"
 #include <stdint.h>
 
-
 #include "LSM303AGR_accelerometer.h"
 #include "LSM303AGR_magnetometer.h"
-
+#include "XNUCLEO_IKS01A2.h"
 
 
 class LSM303AGRAccMag {
