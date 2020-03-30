@@ -200,7 +200,7 @@ int main() {
 						
 						printf("\r\n****************	AI NN NETWORK RESULT	*********************\r\n");
 						printf("\n[LOG]: You are %s\n\n", movements[argmax(out_data, NUM_CLASSES)]);
-						Thread::sleep(50);						
+						Thread::sleep(100);						
 
 						//for (int i = 0; i < NUM_CLASSES; i++)
 						//	printf("[OUTPUT]: Class %s (acc): %.2f %\r\n", movements[i], out_data[i]);
