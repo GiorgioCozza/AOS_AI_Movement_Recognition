@@ -16,8 +16,6 @@
 using namespace std;
 using namespace miosix;
 
-sensors sens;
-axis ax;
 
 bool startflag = false;
 typedef Gpio<GPIOC_BASE, 13> usrbtn;
