@@ -99,10 +99,10 @@ An initial remark regards the design pattern adopted for this part. Four sensors
 			\vspace{-20pt}
 			\caption{i2c\_helper.cpp: write}\label{fig:4d}
 		\end{subfigure}
-	\end{figure} 
-
-	
+	\end{figure}
 \end{center}
+
+Before proceeding to read data from MEMS, it is required to configure the control registers. Activation and initialization are performed in a single step implemented by \mintinline[bgcolor=whitesmoke]{C++}{init()}. It runs similarly for both LSM6DSL and LSM303AGR
 
 
 
