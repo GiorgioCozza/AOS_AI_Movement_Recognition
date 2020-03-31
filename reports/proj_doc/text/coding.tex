@@ -102,7 +102,24 @@ An initial remark regards the design pattern adopted for this part. Four sensors
 	\end{figure}
 \end{center}
 
-Before proceeding to read data from MEMS, it is required to configure the control registers. Activation and initialization are performed in a single step implemented by \mintinline[bgcolor=whitesmoke]{C++}{init()}. It runs similarly for both LSM6DSL and LSM303AGR
+Before proceeding to read data from MEMS, it is required to configure the control registers. Activation and initialization are performed in a single step implemented by the \mintinline[bgcolor=whitesmoke]{C++}{init()} method. It runs similarly for both LSM6DSL and LSM303AGR, setting the values to those registers that are more likely to be used for gathering purpose. In both classes, with slight differences, \mintinline[bgcolor=whitesmoke]{C++}{io_read()} and \mintinline[bgcolor=whitesmoke]{C++}{io_write()} act as a I2C interface to allow read and write operation respectively involving sensor-specific features: 
+
+\begin{subfigure}[H]{0.5\textwidth}
+	\inputminted[framesep=1.5cm, firstline=46, lastline=67, bgcolor=whitesmoke, fontsize=\tiny]{C++}{code/i2c_helper.cpp}
+	\vspace{-20pt}
+	\caption{i2c\_helper.cpp: read}\label{fig:4c}
+\end{subfigure}
+\hfill
+\begin{subfigure}[H]{0.45\textwidth}
+	\vspace{+1pt}
+	\inputminted[framesep=1.5cm, firstline=90, lastline=112, bgcolor=whitesmoke, fontsize=\tiny]{C++}{code/i2c_helper.cpp}
+	\vspace{-20pt}
+	\caption{i2c\_helper.cpp: write}\label{fig:4d}
+\end{subfigure}
+\end{figure}
+\end{center}
+
+Some of them, such as 
 
 
 
