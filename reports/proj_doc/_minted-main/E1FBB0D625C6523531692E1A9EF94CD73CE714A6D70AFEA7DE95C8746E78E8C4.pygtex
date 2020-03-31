@@ -45,9 +45,9 @@
 
 
 \PYG{n}{\PYGZus{}i2c\PYGZus{}dev}\PYG{o}{::}\PYG{n}{init}\PYG{p}{();}
+\PYG{n}{\PYGZus{}i2c\PYGZus{}dev}\PYG{o}{::}\PYG{n}{sendStart}\PYG{p}{();}
 
 \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{j} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{j} \PYG{o}{\PYGZlt{}} \PYG{n}{numbByte}\PYG{p}{;} \PYG{n}{j}\PYG{o}{++}\PYG{p}{)} \PYG{p}{\PYGZob{}}
-	\PYG{n}{\PYGZus{}i2c\PYGZus{}dev}\PYG{o}{::}\PYG{n}{sendStart}\PYG{p}{();}
 	\PYG{k}{if} \PYG{p}{(}\PYG{n}{\PYGZus{}i2c\PYGZus{}dev}\PYG{o}{::}\PYG{n}{send}\PYG{p}{((}\PYG{k+kt}{unsigned} \PYG{k+kt}{char}\PYG{p}{)}\PYG{n}{devAddr}\PYG{p}{))} \PYG{p}{\PYGZob{}}
 		\PYG{k}{if} \PYG{p}{(}\PYG{n}{\PYGZus{}i2c\PYGZus{}dev}\PYG{o}{::}\PYG{n}{send}\PYG{p}{((}\PYG{k+kt}{unsigned} \PYG{k+kt}{char}\PYG{p}{)(}\PYG{n}{regAddr} \PYG{o}{+} \PYG{n}{j}\PYG{p}{)))} \PYG{p}{\PYGZob{}}
 			\PYG{n}{\PYGZus{}i2c\PYGZus{}dev}\PYG{o}{::}\PYG{n}{sendRepeatedStart}\PYG{p}{();}
