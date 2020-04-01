@@ -1,26 +1,28 @@
+/**
+ *******************************************************************************
+  *   @file LSM6DSL_gyroscope.h
+  *   @author Cozza Giorgio
+  *   @date 25/03/20
+  *   @version 1.0
+  *   @brief Header file with info about the LSM6DSL's gyroscope.
+ *******************************************************************************
 
+  This is a free software released into public domain. Anyone is free to copy,
+  modify, publish, use, compile or distribute this software, either in source
+  code form or as compiled binary
 
-
-
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+  IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+  OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+  OTHER DEALINGS IN THE SOFTWARE.
+********************************************************************************
+ */
 
 #ifndef __LSM6DSL_GYROSCOPE_H
 #define __LSM6DSL_GYROSCOPE_H
-
-
-/***********************   REGISTERS  ****************************/
-
-/*************************  REGISTERS INFO  **********************/
-#define NUM_AXES 									3
-#define BYTES_PER_DIMENSION							2
-
-
-
-/************************  SENSITIVITY INFO  *********************/
-#define LSM6DSL_GYRO_SENSITIVITY_FOR_FS_125DPS   04.375  /**< Sensitivity value for 125 dps full scale [mdps/LSB] */
-#define LSM6DSL_GYRO_SENSITIVITY_FOR_FS_245DPS   08.750  /**< Sensitivity value for 245 dps full scale [mdps/LSB] */
-#define LSM6DSL_GYRO_SENSITIVITY_FOR_FS_500DPS   17.500  /**< Sensitivity value for 500 dps full scale [mdps/LSB] */
-#define LSM6DSL_GYRO_SENSITIVITY_FOR_FS_1000DPS  35.000  /**< Sensitivity value for 1000 dps full scale [mdps/LSB] */
-#define LSM6DSL_GYRO_SENSITIVITY_FOR_FS_2000DPS  70.000  /**< Sensitivity value for 2000 dps full scale [mdps/LSB] */
 
 
 
@@ -41,7 +43,7 @@
 
 
 
-/*********************  FULL SCALE REGISTERS  ********************/
+/*************************  FULL SCALE  ************************/
 #define LSM6DSL_FS_G_245dps                     0x00
 #define LSM6DSL_FS_G_500dps                     0x04
 #define LSM6DSL_FS_G_1000dps                    0x08
@@ -56,7 +58,7 @@
 
 
 
-/************************  ODR REGISTERS  ***********************/
+/****************************  ODR  *****************************/
 #define LSM6DSL_ODR_G_POWER_DOWN                0x00
 #define LSM6DSL_ODR_G_13Hz          	        0x10
 #define LSM6DSL_ODR_G_26Hz          	        0x20
@@ -72,6 +74,12 @@
 #define LSM6DSL_ODR_G_MASK                  0xF0
 
 
+/************************  SENSITIVITY  **************************/
+#define LSM6DSL_GYRO_SENSITIVITY_FOR_FS_125DPS   04.375
+#define LSM6DSL_GYRO_SENSITIVITY_FOR_FS_245DPS   08.750
+#define LSM6DSL_GYRO_SENSITIVITY_FOR_FS_500DPS   17.500
+#define LSM6DSL_GYRO_SENSITIVITY_FOR_FS_1000DPS  35.000
+#define LSM6DSL_GYRO_SENSITIVITY_FOR_FS_2000DPS  70.000
 
 
 

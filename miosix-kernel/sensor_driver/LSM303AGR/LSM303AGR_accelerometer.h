@@ -1,17 +1,39 @@
+/**
+ *******************************************************************************
+  *   @file LSM303AGR_accelerometer.h
+  *   @author Cozza Giorgio
+  *   @date 25/03/20
+  *   @version 1.0
+  *   @brief Header file with info about the LSM303AGR's accelerometer.
+ *******************************************************************************
 
+  This is a free software released into public domain. Anyone is free to copy,
+  modify, publish, use, compile or distribute this software, either in source
+  code form or as compiled binary
 
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+  IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+  OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+  OTHER DEALINGS IN THE SOFTWARE.
+********************************************************************************
+ */
 
 #ifndef _LSM303AGR_ACCELEROMETER_H
 #define _LSM303AGR_ACCELEROMETER_H
 
-
+/**************************    I2C   *****************************/
 #define LSM303AGR_ACC_I2C_ADDRESS                               0x32
 
+
+/**********************  info registers  *************************/
 #define LSM303AGR_ACC_WHO_AM_I_ADDR                             0x0F
 #define LSM303AGR_ACC_WHO_AM_I                                  0x33
 
 
-
+/************************  DATA REGISTERS  ***********************/
 #define LSM303AGR_ACC_OUT_X_L                                   0x28
 #define LSM303AGR_ACC_OUT_X_H                                   0x29
 #define LSM303AGR_ACC_OUT_Y_L                                   0x2A
@@ -20,7 +42,7 @@
 #define LSM303AGR_ACC_OUT_Z_H                                   0x2D
 
 
-
+/***********************  CONTROL REGISTERS  ********************/
 #define LSM303AGR_ACC_CTRL1                                     0x20
 #define LSM303AGR_ACC_CTRL2                                     0x21
 #define LSM303AGR_ACC_CTRL3                                     0x22
@@ -45,7 +67,7 @@
 #define LSM303AGR_ACC_FIFO_MASK                                 0xC0
 
 
-
+/****************************  ODR  *****************************/
 #define LSM303AGR_ACC_ODR_POWER_DOWN                            0x00
 #define LSM303AGR_ACC_ODR_1HZ                                   0x10
 #define LSM303AGR_ACC_ODR_10HZ                                  0x20
@@ -86,6 +108,7 @@
 #define LSM303AGR_ACC_HR_MASK                                   0x08
 
 
+/*************************  FULL SCALE  ************************/
 #define LSM303AGR_ACC_FS_2G                                     0x00
 #define LSM303AGR_ACC_FS_4G                                     0x10
 #define LSM303AGR_ACC_FS_8G                                     0x20
@@ -93,8 +116,8 @@
 
 #define LSM303AGR_ACC_FS_MASK                                   0x30
 
-/*#######################  SENSITIVITY values  #############################*/
 
+/************************  SENSITIVITY  **************************/
 #define LSM303AGR_X_SENSITIVITY_FS_2G_NORMAL                   3.900f
 #define LSM303AGR_X_SENSITIVITY_FS_2G_HIGH_RES                 0.980f
 #define LSM303AGR_X_SENSITIVITY_FS_2G_LOW_POWER                15.630f
