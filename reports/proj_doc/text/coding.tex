@@ -102,7 +102,7 @@ An initial remark regards the design pattern adopted for this part. Four sensors
 	\end{figure}
 \end{center}
 
-Before proceeding to read data from MEMS, it is required to configure the control registers. Activation and initialization are performed in a single step implemented by the \mintinline[bgcolor=whitesmoke]{C++}{init()} method in both sensors.\newline
+Before proceeding to read data from MEMS, it is required to configure the control registers. Activation and initialization are performed in a single step implemented by the \mintinline[bgcolor=whitesmoke]{C++}{init()} method.\newline
 
 \begin{center}
 	\begin{figure}[H]
@@ -120,14 +120,74 @@ Before proceeding to read data from MEMS, it is required to configure the contro
 		\end{subfigure}
 	\end{figure}
 \end{center}
-It runs similarly for both LSM6DSL and LSM303AGR, setting the values to those registers that are more likely to be used for gathering purposes. In both classes, with slight differences, \mintinline[bgcolor=whitesmoke]{C++}{io_read()} and \mintinline[bgcolor=whitesmoke]{C++}{io_write()} act as a I2C interface to allow read and write operation respectively involving device, register addresses and bit masks\newline 
+It runs similarly for both LSM6DSL and LSM303AGR, sets default values in those registers that are more likely to be used for data gathering. In both classes, with slight differences, \mintinline[bgcolor=whitesmoke]{C++}{io_read()} and \mintinline[bgcolor=whitesmoke]{C++}{io_write()} act as a I2C interface to allow read and write operation respectively involving device, register addresses and bit masks\newline 
 Crucial aspects of sensor configuration are:
 \begin{itemize}
-	\item \textit{Output data rate}: representing the frequency at which sensor provides new values
-	\item \textit{Full scale value}: the maximum range of values that is possible to represent
-	\item \textit{Sensitivity}: the minimum variation of the quantity to be measured that can be percepted by the MEMS. In some case changes according to the power mode in which the sensor is used.
+	\item \textbf{Output data rate}: representing the frequency at which sensor provides new values
+	\item \textbf{Full scale value}: the range of values that is possible to measure.
+	\item \textbf{Sensitivity}: the minimum variation of the quantity to be measured that can be percepted by the MEMS. In some case changes according to the power mode in which the sensor is used.
 \end{itemize}
-All these values are set and shown in the initial steps of the program execution. 
+All these values are set and shown in the initial steps of the program execution, specifically in this work: 
+
+
+
+\begin{table}[H]
+	\begin{subtable}[H]{0.45\textwidth}
+		\begin{tabular}{||p{6cm}|p{1.8cm}||}
+			\hline
+			\textbf{LSM6DSL Accelerometer} 	& 				 \T\B  \\ 
+			\hline
+			ODR				  				& 	    208 Hz 	 \T\B  \\
+			Full scale						&	    2.0 g 	 \T\B  \\
+			Sensitivity						& 		0.061	 \T\B  \\
+			\hline
+		\end{tabular}
+		\vspace{10pt}
+	\end{subtable}
+	\hfill
+	\begin{subtable}[H]{0.45\textwidth}
+		\begin{tabular}{||p{6cm}|p{1.8cm}||}
+			\hline
+			\textbf{LSM6DSL Gyroscpe} 	& 				 	 	 \T\B  \\ 
+			\hline
+			ODR				  				& 	    208 Hz 	 	 \T\B  \\
+			Full scale						&	    2000 dps 	 \T\B  \\
+			Sensitivity						& 		7.0	 	     \T\B  \\
+			\hline
+		\end{tabular}
+	\vspace{10pt}
+	\end{subtable}
+
+	\begin{subtable}[H]{0.45\textwidth}
+		\begin{tabular}{||p{6cm}|p{1.8cm}||}
+			\hline
+			\textbf{LSM303AGR Accelerometer} 	& 				 \T\B  \\ 
+			\hline
+			ODR				  				& 	    100 Hz 	 \T\B  \\
+			Full scale						&	    2.0 g 	 \T\B  \\
+			Sensitivity						& 		3.9	(NM) \T\B  \\
+			\hline
+		\end{tabular}
+		\vspace{10pt}
+	\end{subtable}
+	\hfill
+	\begin{subtable}[H]{0.45\textwidth}
+		\begin{tabular}{||p{6cm}|p{1.8cm}||}
+			\hline 
+			\textbf{LSM303AGR Magnetometer} & 				 	 \T\B  \\ 
+			\hline
+			ODR				  				& 	    100 Hz 	 	 \T\B  \\
+			Full scale						&	    49.12 g 	 \T\B  \\
+			Sensitivity						& 		1.5	 		 \T\B  \\
+			\hline
+		\end{tabular}
+		\vspace{10pt}
+	\end{subtable}
+	\centering
+	\caption{Data Gathering settings}\label{tab:1}
+\end{table}
+
+
 
 
 
@@ -262,8 +322,6 @@ This new version of the model is used by the \textit{Validation Engine} to perfo
 So the first step, the model is imported into the project
 Furthermore, it is important to highlight another interesting aspect that raises from a first analysis of the model summary created during training phase:
 
-\newcommand\T{\rule{0pt}{2.6ex}}       % Top strut
-\newcommand\B{\rule[-1.2ex]{0pt}{0pt}} % Bottom strut
 
 \begin{table}[H]
 	\begin{tabular}{||p{5cm}cc||}
@@ -291,7 +349,7 @@ Furthermore, it is important to highlight another interesting aspect that raises
 		
 	\end{tabular}
 	\centering
-	\caption{\label{tab:1}Recurrent Neural Network: Model Summary}
+	\caption{\label{tab:2}Recurrent Neural Network: Model Summary}
 \end{table}
 
 \subsection{Code Integration and Final Firmware Development}
