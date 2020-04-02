@@ -2,71 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09f50ed0-32f5-4dad-a37d-a2b12a97fb75" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Inc/network.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Inc/network.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Inc/network_data.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Inc/network_data.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/ai_common_config.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/ai_common_config.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/ai_datatypes_defines.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/ai_datatypes_defines.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/ai_datatypes_format.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/ai_datatypes_format.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/ai_datatypes_internal.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/ai_datatypes_internal.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/ai_log.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/ai_log.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/ai_math_helpers.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/ai_math_helpers.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/ai_network_inspector.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/ai_network_inspector.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/ai_platform.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/ai_platform.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/ai_platform_interface.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/ai_platform_interface.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/core_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/core_common.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/core_convert.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/core_convert.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/core_datatypes.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/core_datatypes.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/core_log.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/core_log.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/core_net_inspect.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/core_net_inspect.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/core_net_inspect_interface.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/core_net_inspect_interface.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/datatypes_network.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/datatypes_network.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/formats_list.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/formats_list.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/layers.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/layers.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/layers_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/layers_common.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/layers_conv2d.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/layers_conv2d.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/layers_dense.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/layers_dense.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/layers_generic.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/layers_generic.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/layers_list.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/layers_list.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/layers_nl.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/layers_nl.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/layers_norm.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/layers_norm.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/layers_pool.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/layers_pool.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/layers_rnn.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/layers_rnn.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/layers_sm.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/AI/Inc/layers_sm.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Inc/aiPbMgr.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Inc/aiPbMgr.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Inc/aiTestUtility.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Inc/aiTestUtility.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Inc/aiValidation.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Inc/aiValidation.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Inc/pb.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Inc/pb.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Inc/pb_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Inc/pb_common.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Inc/pb_decode.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Inc/pb_decode.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Inc/pb_encode.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Inc/pb_encode.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Inc/stm32msg.pb.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Inc/stm32msg.pb.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Src/aiPbMgr.c" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Src/aiPbMgr.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Src/aiTestUtility.c" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Src/aiTestUtility.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Src/aiValidation.c" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Src/aiValidation.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Src/pb_common.c" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Src/pb_common.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Src/pb_decode.c" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Src/pb_decode.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Src/pb_encode.c" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Src/pb_encode.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Src/stm32msg.pb.c" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Middlewares/ST/Application/Validation/Src/stm32msg.pb.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/NN.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/NN.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/NN.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/NN.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Src/network.c" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Src/network.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/Src/network_data.c" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/Src/network_data.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/ai_module/nn_config.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/ai_module/nn_config.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/data_util/dataset_processing.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/data_util/dataset_processing.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/old_files/main_collections.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/old_files/main_neural_net.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/prog_config.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/prog_config.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../miosix-kernel/sensor_driver/LSM6DSL/LSM6DSLSensor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/sensor_driver/LSM6DSL/LSM6DSLSensor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/best_models/best_acc_model_26-02-2020_202223.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/best_models/best_loss_model_26-02-2020_202223.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/data_visualization.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/data_visualization.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/dataset_processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/dataset_processing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/neural_network.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/neural_network.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/nn_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/_minted-main/9B93ED238F93F71A0A401ADD8372BE755226287D929C83DD17DA07F330B35F9C.pygtex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/code/data_gathering.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/code/data_gathering.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/code/data_gathering.cpp.bak" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/code/data_gathering.cpp.bak" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/main.aux" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/main.aux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/main.bbl" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/main.bbl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/main.blg" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/main.blg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/main.lof" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/main.lof" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/main.log" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/main.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/main.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/main.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/main.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/main.synctex.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/main.toc" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/main.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/text/coding.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/text/coding.tex" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -89,7 +36,7 @@
         <entry file="file://$PROJECT_DIR$/scripts/main.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="39">
-              <caret line="21" column="40" lean-forward="true" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
+              <caret line="21" column="40" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
               <folding>
                 <element signature="e#9#27#0" expanded="true" />
               </folding>
@@ -219,6 +166,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -235,7 +183,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -414,7 +361,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.04095112" />
       <window_info id="Structure" order="1" weight="0.24966975" />
@@ -585,7 +531,7 @@
     <entry file="file://$PROJECT_DIR$/scripts/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="39">
-          <caret line="21" column="40" lean-forward="true" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
+          <caret line="21" column="40" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
           <folding>
             <element signature="e#9#27#0" expanded="true" />
           </folding>
