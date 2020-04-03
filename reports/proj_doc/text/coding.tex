@@ -133,46 +133,46 @@ All these values are set and shown in the initial steps of the program execution
 
 \begin{table}[H]
 	\begin{subtable}[H]{0.45\textwidth}
-		\begin{tabular}{||p{6cm}|p{1.8cm}||}
+		\begin{tabular}{||p{6cm}|p{2cm}||}
 			\hline
-			\textbf{LSM6DSL Accelerometer} 	& 				 \T\B  \\ 
+			\textbf{LSM6DSL Accelerometer} 	& 				 		\T\B  \\ 
 			\hline
-			ODR				  				& 	    208 Hz 	 \T\B  \\
-			Full scale						&	    2.0 g 	 \T\B  \\
-			Sensitivity						& 		0.061	 \T\B  \\
+			ODR				  				& 	    208 Hz 	 		\T\B  \\
+			Full scale						&	    2.0 g 	 		 \T\B  \\
+			Sensitivity						& 		0.061	\tiny[mg/LSB]	 \T\B  \\
 			\hline
 		\end{tabular}
 		\vspace{10pt}
 	\end{subtable}
 	\hfill
 	\begin{subtable}[H]{0.45\textwidth}
-		\begin{tabular}{||p{6cm}|p{1.8cm}||}
+		\begin{tabular}{||p{6cm}|p{2cm}||}
 			\hline
-			\textbf{LSM6DSL Gyroscpe} 	& 				 	 	 \T\B  \\ 
+			\textbf{LSM6DSL Gyroscpe} 	& 				 	 				 \T\B  \\ 
 			\hline
-			ODR				  				& 	    208 Hz 	 	 \T\B  \\
-			Full scale						&	    2000 dps 	 \T\B  \\
-			Sensitivity						& 		7.0	 	     \T\B  \\
+			ODR				  				& 	    208 Hz 	 				 \T\B  \\
+			Full scale						&	    2000 dps 				 \T\B  \\
+			Sensitivity						& 		70.0 \tiny[mdps/LSB]	 \T\B  \\
 			\hline
 		\end{tabular}
 	\vspace{10pt}
 	\end{subtable}
 
 	\begin{subtable}[H]{0.45\textwidth}
-		\begin{tabular}{||p{6cm}|p{1.8cm}||}
+		\begin{tabular}{||p{6cm}|p{2cm}||}
 			\hline
 			\textbf{LSM303AGR Accelerometer} 	& 				 \T\B  \\ 
 			\hline
-			ODR				  				& 	    100 Hz 	 \T\B  \\
-			Full scale						&	    2.0 g 	 \T\B  \\
-			Sensitivity						& 		3.9	(NM) \T\B  \\
+			ODR				  				& 	    100 Hz 		 \T\B  \\
+			Full scale						&	    2.0 g 	 	 \T\B  \\
+			Sensitivity						& 		3.9	\tiny[mg/LSB] 	 \T\B  \\
 			\hline
 		\end{tabular}
 		\vspace{10pt}
 	\end{subtable}
 	\hfill
 	\begin{subtable}[H]{0.45\textwidth}
-		\begin{tabular}{||p{6cm}|p{1.8cm}||}
+		\begin{tabular}{||p{6cm}|p{2cm}||}
 			\hline 
 			\textbf{LSM303AGR Magnetometer} & 				 	 \T\B  \\ 
 			\hline
@@ -186,6 +186,8 @@ All these values are set and shown in the initial steps of the program execution
 	\centering
 	\caption{Data Gathering settings}\label{tab:1}
 \end{table}
+As it can be noticed, both the accelerometers have been set to the same full scale value, to mantain data coherent with previous datasets already collected, whereas an high value (2000dps) has been chosen for the gyroscope to increase the sensitivity of the MEMS to even small movements of the leg (typical of some positions).\newline
+Axes values are read almost the same way for all the sensors, since by design data registers are contiguous a single read scan of 6 bytes (2 byte-value/axis) is performed, raw bytes are then composed and multiplied by the sensitivity. The \mintinline[bgcolor=whitesmoke]{C++}{LSM303AGR::get_acc_axes()} is slightly complex, since it must consider the power mode in which the sensor is used that affects the sensitivity value. However, this solution does not strongly affect the performance since the accelerometer produces data samples at a maximum rate of 100 Hz:
 
 
 

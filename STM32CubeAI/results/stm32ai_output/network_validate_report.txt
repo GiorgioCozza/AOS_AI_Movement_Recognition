@@ -1,0 +1,67 @@
+Neural Network Tools for STM32 v1.0.0 (AI tools v4.0.0)
+Created date    : 2020-04-03 18:28:33
+
+Exec/report summary (validate 0.000s err=-1)
+------------------------------------------------------------------------------------------------------------------------
+error           : TOOL ERROR: Weights are incompatible with model: 125436 loaded, 221276 found
+model file      : C:\Users\grgcz\Desktop\dev_space_win\AOS_Project\AOS_MovementRecognition\neural_net-py\best_models\best_acc_model_RNN_fold1_02-04-2020_191256.h5
+type            : keras (keras_dump)
+c_name          : network
+compression     : None
+quantize        : None
+L2r error       : NOT EVALUATED
+workspace dir   : C:\Users\grgcz\Desktop\dev_space_win\AOS_Project\AOS_MovementRecognition\stm32ai_ws
+output dir      : C:\Users\grgcz\Desktop\dev_space_win\AOS_Project\AOS_MovementRecognition\stm32ai_output
+vinput files    : C:\Users\grgcz\Desktop\dev_space_win\AOS_Project\AOS_MovementRecognition\neural_net-py\test_csv\test_Apr02_20\test_input_fold-1_Apr02_19-04-24.csv
+voutput files   : C:\Users\grgcz\Desktop\dev_space_win\AOS_Project\AOS_MovementRecognition\neural_net-py\test_csv\test_Apr02_20\test_output_fold-1_Apr02_19-04-24.csv
+
+model_name      : best_acc_model_RNN_fold1_02042020_191256
+model_hash      : 9a318b55ace4f0e13625fc4c0edee66c
+input           : input_0 (item#=360, size=1.41 KiB, fmt=FLOAT32)
+input (total)   : 1.41 KiB
+output          : FCN1_nl (item#=7, size=28 B, fmt=FLOAT32)
+output (total)  : 28 B
+params #        : 30,975 (121.00 KiB)
+macc            : 926,489
+rom (ro)        : 125,436 (122.50 KiB) 1.24%
+ram (rw)        : 7,680 + 1,468 (7.50 KiB + 1.43 KiB)
+
+------------------------------------------------------------------------------------------------------------------------
+id  layer (type)                      output shape      param #     connected to             macc           rom                
+------------------------------------------------------------------------------------------------------------------------
+0   input_0 (Input)                   (30, 1, 12)                                                                              
+    batch_normalization_2 (ScaleBias) (30, 1, 12)       24          input_0                  720            96                 
+------------------------------------------------------------------------------------------------------------------------
+1   LSTM1 (LSTM)                      (30, 1, 32)       5,760       batch_normalization_2    173,760        23,424             
+------------------------------------------------------------------------------------------------------------------------
+3   LSTM2 (LSTM)                      (30, 1, 32)       8,320       LSTM1                    250,560        33,664             
+------------------------------------------------------------------------------------------------------------------------
+5   LSTM3 (LSTM)                      (30, 1, 32)       8,320       LSTM2                    250,560        33,664             
+------------------------------------------------------------------------------------------------------------------------
+7   LSTM4 (LSTM)                      (1, 1, 32)        8,320       LSTM3                    250,560        33,664             
+------------------------------------------------------------------------------------------------------------------------
+9   FCN1 (Dense)                      (1, 1, 7)         231         LSTM4                    224            924                
+    FCN1_nl (Nonlinearity)            (1, 1, 7)                     FCN1                     105                               
+------------------------------------------------------------------------------------------------------------------------
+best_acc_model_RNN_fold1_02042020_191256 p=30975(121.00 KBytes) macc=926489 rom=122.50 KBytes ram=7.50 KBytes 1.24%
+
+ 
+Complexity by layer - macc=926,489 rom=125,436
+------------------------------------------------------------------------------------------------------------------------
+id      layer (type)                      macc                                    rom                                    
+------------------------------------------------------------------------------------------------------------------------
+0       batch_normalization_2 (ScaleBias) |                                 0.1%  |                                 0.1% 
+1       LSTM1 (LSTM)                      |||||||||||||||||||||            18.8%  |||||||||||||||||||||            18.7% 
+3       LSTM2 (LSTM)                      |||||||||||||||||||||||||||||||  27.0%  |||||||||||||||||||||||||||||||  26.8% 
+5       LSTM3 (LSTM)                      |||||||||||||||||||||||||||||||  27.0%  |||||||||||||||||||||||||||||||  26.8% 
+7       LSTM4 (LSTM)                      |||||||||||||||||||||||||||||||  27.0%  |||||||||||||||||||||||||||||||  26.8% 
+9       FCN1 (Dense)                      |                                 0.0%  |                                 0.7% 
+9       FCN1_nl (Nonlinearity)            |                                 0.0%  |                                 0.0% 
+------------------------------------------------------------------------------------------------------------------------
+
+
+TOOL ERROR: Weights are incompatible with model: 125436 loaded, 221276 found
+
+Evaluation report (summary)
+--------------------------------------------------
+NOT EVALUATED

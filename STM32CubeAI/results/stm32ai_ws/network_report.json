@@ -1,0 +1,471 @@
+{
+    "cli_version": {
+        "major": 1,
+        "micro": 0,
+        "minor": 0
+    },
+    "cli_version_str": "1.0.0",
+    "compression": {
+        "factor": null,
+        "layers": {}
+    },
+    "date_time": "Fri Apr  3 18:28:37 2020",
+    "error": 0,
+    "error_str": [],
+    "evaluation_measures": [],
+    "evaluation_status": "NOT EVALUATED",
+    "exec_cmd": "generate",
+    "exec_duration": 1.6403834819793701,
+    "hash": "9a318b55ace4f0e13625fc4c0edee66c",
+    "inputs": [
+        "input_0"
+    ],
+    "l2_error": -1.0,
+    "l2_status": "NOT EVALUATED",
+    "layers": [
+        {
+            "extras": {
+                "c_l2_error": 0,
+                "c_l2_id": -1,
+                "n_macc": 0,
+                "n_params": 0,
+                "psize": 0,
+                "rom_n_params": 0,
+                "rom_output": {
+                    "fmt_bits": [
+                        32,
+                        0
+                    ],
+                    "fmt_data": "AI_ARRAY_FORMAT_FLOAT|AI_FMT_FLAG_IS_IO",
+                    "shape": [
+                        30,
+                        1,
+                        12,
+                        1
+                    ]
+                },
+                "rom_size": 0,
+                "rom_size_params": 0,
+                "rom_trans": null
+            },
+            "id": 0,
+            "inputs": [],
+            "name": "input_0",
+            "out_shapes": [
+                [
+                    12,
+                    30,
+                    1
+                ]
+            ],
+            "outputs": [
+                "input_0"
+            ],
+            "shape": [
+                12,
+                30,
+                1
+            ],
+            "type": "Input"
+        },
+        {
+            "axes": [
+                0
+            ],
+            "extras": {
+                "c_l2_error": 0,
+                "c_l2_id": -1,
+                "n_macc": 720,
+                "n_params": 24,
+                "psize": 96,
+                "rom_n_params": 24,
+                "rom_output": {
+                    "fmt_bits": [
+                        32,
+                        0
+                    ],
+                    "fmt_data": "AI_ARRAY_FORMAT_FLOAT",
+                    "shape": [
+                        30,
+                        1,
+                        12,
+                        1
+                    ]
+                },
+                "rom_size": 96,
+                "rom_size_params": 96,
+                "rom_trans": null
+            },
+            "id": 0,
+            "inputs": [
+                "input_0"
+            ],
+            "name": "batch_normalization_2",
+            "out_shapes": [
+                [
+                    12,
+                    30,
+                    1
+                ]
+            ],
+            "outputs": [
+                "batch_normalization_2"
+            ],
+            "type": "ScaleBias",
+            "use_bias": true
+        },
+        {
+            "activation_nl": "tanh",
+            "extras": {
+                "c_l2_error": 0,
+                "c_l2_id": -1,
+                "n_macc": 173760,
+                "n_params": 5760,
+                "psize": 23040,
+                "rom_n_params": 5856,
+                "rom_output": {
+                    "fmt_bits": [
+                        32,
+                        0
+                    ],
+                    "fmt_data": "AI_ARRAY_FORMAT_FLOAT",
+                    "shape": [
+                        30,
+                        1,
+                        32,
+                        1
+                    ]
+                },
+                "rom_size": 23424,
+                "rom_size_params": 23424,
+                "rom_trans": null
+            },
+            "go_backwards": false,
+            "id": 1,
+            "inputs": [
+                "batch_normalization_2"
+            ],
+            "n_features": 12,
+            "name": "LSTM1",
+            "num_units": 32,
+            "out_shapes": [
+                [
+                    32,
+                    30,
+                    1
+                ]
+            ],
+            "outputs": [
+                "LSTM1"
+            ],
+            "peepholes": false,
+            "recurrent_nl": "hard_sigmoid",
+            "return_sequences": true,
+            "return_state": false,
+            "stateful": false,
+            "type": "LSTM",
+            "unroll": false,
+            "use_bias": true
+        },
+        {
+            "activation_nl": "tanh",
+            "extras": {
+                "c_l2_error": 0,
+                "c_l2_id": -1,
+                "n_macc": 250560,
+                "n_params": 8320,
+                "psize": 33280,
+                "rom_n_params": 8416,
+                "rom_output": {
+                    "fmt_bits": [
+                        32,
+                        0
+                    ],
+                    "fmt_data": "AI_ARRAY_FORMAT_FLOAT",
+                    "shape": [
+                        30,
+                        1,
+                        32,
+                        1
+                    ]
+                },
+                "rom_size": 33664,
+                "rom_size_params": 33664,
+                "rom_trans": null
+            },
+            "go_backwards": false,
+            "id": 3,
+            "inputs": [
+                "LSTM1"
+            ],
+            "n_features": 32,
+            "name": "LSTM2",
+            "num_units": 32,
+            "out_shapes": [
+                [
+                    32,
+                    30,
+                    1
+                ]
+            ],
+            "outputs": [
+                "LSTM2"
+            ],
+            "peepholes": false,
+            "recurrent_nl": "hard_sigmoid",
+            "return_sequences": true,
+            "return_state": false,
+            "stateful": false,
+            "type": "LSTM",
+            "unroll": false,
+            "use_bias": true
+        },
+        {
+            "activation_nl": "tanh",
+            "extras": {
+                "c_l2_error": 0,
+                "c_l2_id": -1,
+                "n_macc": 250560,
+                "n_params": 8320,
+                "psize": 33280,
+                "rom_n_params": 8416,
+                "rom_output": {
+                    "fmt_bits": [
+                        32,
+                        0
+                    ],
+                    "fmt_data": "AI_ARRAY_FORMAT_FLOAT",
+                    "shape": [
+                        30,
+                        1,
+                        32,
+                        1
+                    ]
+                },
+                "rom_size": 33664,
+                "rom_size_params": 33664,
+                "rom_trans": null
+            },
+            "go_backwards": false,
+            "id": 5,
+            "inputs": [
+                "LSTM2"
+            ],
+            "n_features": 32,
+            "name": "LSTM3",
+            "num_units": 32,
+            "out_shapes": [
+                [
+                    32,
+                    30,
+                    1
+                ]
+            ],
+            "outputs": [
+                "LSTM3"
+            ],
+            "peepholes": false,
+            "recurrent_nl": "hard_sigmoid",
+            "return_sequences": true,
+            "return_state": false,
+            "stateful": false,
+            "type": "LSTM",
+            "unroll": false,
+            "use_bias": true
+        },
+        {
+            "activation_nl": "tanh",
+            "extras": {
+                "c_l2_error": 0,
+                "c_l2_id": -1,
+                "n_macc": 250560,
+                "n_params": 8320,
+                "psize": 33280,
+                "rom_n_params": 8416,
+                "rom_output": {
+                    "fmt_bits": [
+                        32,
+                        0
+                    ],
+                    "fmt_data": "AI_ARRAY_FORMAT_FLOAT",
+                    "shape": [
+                        1,
+                        1,
+                        32,
+                        1
+                    ]
+                },
+                "rom_size": 33664,
+                "rom_size_params": 33664,
+                "rom_trans": null
+            },
+            "go_backwards": false,
+            "id": 7,
+            "inputs": [
+                "LSTM3"
+            ],
+            "n_features": 32,
+            "name": "LSTM4",
+            "num_units": 32,
+            "out_shapes": [
+                [
+                    32,
+                    1,
+                    1
+                ]
+            ],
+            "outputs": [
+                "LSTM4"
+            ],
+            "peepholes": false,
+            "recurrent_nl": "hard_sigmoid",
+            "return_sequences": false,
+            "return_state": false,
+            "stateful": false,
+            "type": "LSTM",
+            "unroll": false,
+            "use_bias": true
+        },
+        {
+            "extras": {
+                "c_l2_error": 0,
+                "c_l2_id": -1,
+                "n_macc": 224,
+                "n_params": 231,
+                "psize": 924,
+                "rom_n_params": 231,
+                "rom_output": {
+                    "fmt_bits": [
+                        32,
+                        0
+                    ],
+                    "fmt_data": "AI_ARRAY_FORMAT_FLOAT",
+                    "shape": [
+                        1,
+                        1,
+                        7,
+                        1
+                    ]
+                },
+                "rom_size": 924,
+                "rom_size_params": 924,
+                "rom_trans": null
+            },
+            "id": 9,
+            "inputs": [
+                "LSTM4"
+            ],
+            "name": "FCN1",
+            "num_units": 7,
+            "out_shapes": [
+                [
+                    7,
+                    1,
+                    1
+                ]
+            ],
+            "outputs": [
+                "FCN1"
+            ],
+            "type": "Dense",
+            "use_bias": true
+        },
+        {
+            "extras": {
+                "c_l2_error": 0,
+                "c_l2_id": -1,
+                "n_macc": 105,
+                "n_params": 0,
+                "psize": 0,
+                "rom_n_params": 0,
+                "rom_output": {
+                    "fmt_bits": [
+                        32,
+                        0
+                    ],
+                    "fmt_data": "AI_ARRAY_FORMAT_FLOAT|AI_FMT_FLAG_IS_IO",
+                    "shape": [
+                        1,
+                        1,
+                        7,
+                        1
+                    ]
+                },
+                "rom_size": 0,
+                "rom_size_params": 0,
+                "rom_trans": null
+            },
+            "id": 9,
+            "inputs": [
+                "FCN1"
+            ],
+            "name": "FCN1_nl",
+            "nonlinearity": "softmax",
+            "out_shapes": [
+                [
+                    7,
+                    1,
+                    1
+                ]
+            ],
+            "outputs": [
+                "FCN1_nl"
+            ],
+            "type": "Nonlinearity"
+        }
+    ],
+    "maxlen_name": 33,
+    "md5": "9a318b55ace4f0e13625fc4c0edee66c",
+    "model_files": [
+        "C:\\Users\\grgcz\\Desktop\\dev_space_win\\AOS_Project\\AOS_MovementRecognition\\neural_net-py\\best_models\\best_acc_model_RNN_fold1_02-04-2020_191256.h5"
+    ],
+    "model_n_params": 30975,
+    "model_name": "best_acc_model_RNN_fold1_02042020_191256",
+    "model_size": 123900,
+    "model_type": "keras (keras_dump)",
+    "name": "network",
+    "outputs": [
+        "FCN1_nl"
+    ],
+    "ram_io_size": [
+        1440,
+        28
+    ],
+    "ram_size": [
+        7680,
+        7680
+    ],
+    "rom_cfact": 0.012397094430992735,
+    "rom_heap": [
+        0,
+        0
+    ],
+    "rom_heap_inspector": 2048,
+    "rom_inputs": [
+        "input_0"
+    ],
+    "rom_l2_error_max": 0.0,
+    "rom_n_c_nodes": 7,
+    "rom_n_macc": 926489,
+    "rom_n_macc_max": 250560,
+    "rom_outputs": [
+        "FCN1_nl"
+    ],
+    "rom_size": 125436,
+    "rom_size_max": 33664,
+    "rom_stack": [
+        0,
+        0
+    ],
+    "tools_api_version": {
+        "major": 1,
+        "micro": 0,
+        "minor": 3
+    },
+    "tools_version": {
+        "major": 4,
+        "micro": 0,
+        "minor": 0
+    },
+    "version": "0.2"
+}

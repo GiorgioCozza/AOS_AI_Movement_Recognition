@@ -1,0 +1,152 @@
+{
+    "layers": [
+        {
+            "id": 0,
+            "inputs": [],
+            "name": "input_0",
+            "outputs": [
+                "input_0"
+            ],
+            "shape": [
+                12,
+                30,
+                1
+            ],
+            "type": "Input"
+        },
+        {
+            "axes": [
+                0
+            ],
+            "id": 0,
+            "inputs": [
+                "input_0"
+            ],
+            "name": "batch_normalization_2",
+            "outputs": [
+                "batch_normalization_2"
+            ],
+            "type": "ScaleBias",
+            "use_bias": true
+        },
+        {
+            "activation_nl": "tanh",
+            "go_backwards": false,
+            "id": 1,
+            "inputs": [
+                "batch_normalization_2"
+            ],
+            "n_features": 12,
+            "name": "LSTM1",
+            "num_units": 32,
+            "outputs": [
+                "LSTM1"
+            ],
+            "peepholes": false,
+            "recurrent_nl": "hard_sigmoid",
+            "return_sequences": true,
+            "return_state": false,
+            "stateful": false,
+            "type": "LSTM",
+            "unroll": false,
+            "use_bias": true
+        },
+        {
+            "activation_nl": "tanh",
+            "go_backwards": false,
+            "id": 3,
+            "inputs": [
+                "LSTM1"
+            ],
+            "n_features": 32,
+            "name": "LSTM2",
+            "num_units": 32,
+            "outputs": [
+                "LSTM2"
+            ],
+            "peepholes": false,
+            "recurrent_nl": "hard_sigmoid",
+            "return_sequences": true,
+            "return_state": false,
+            "stateful": false,
+            "type": "LSTM",
+            "unroll": false,
+            "use_bias": true
+        },
+        {
+            "activation_nl": "tanh",
+            "go_backwards": false,
+            "id": 5,
+            "inputs": [
+                "LSTM2"
+            ],
+            "n_features": 32,
+            "name": "LSTM3",
+            "num_units": 32,
+            "outputs": [
+                "LSTM3"
+            ],
+            "peepholes": false,
+            "recurrent_nl": "hard_sigmoid",
+            "return_sequences": true,
+            "return_state": false,
+            "stateful": false,
+            "type": "LSTM",
+            "unroll": false,
+            "use_bias": true
+        },
+        {
+            "activation_nl": "tanh",
+            "go_backwards": false,
+            "id": 7,
+            "inputs": [
+                "LSTM3"
+            ],
+            "n_features": 32,
+            "name": "LSTM4",
+            "num_units": 32,
+            "outputs": [
+                "LSTM4"
+            ],
+            "peepholes": false,
+            "recurrent_nl": "hard_sigmoid",
+            "return_sequences": false,
+            "return_state": false,
+            "stateful": false,
+            "type": "LSTM",
+            "unroll": false,
+            "use_bias": true
+        },
+        {
+            "id": 9,
+            "inputs": [
+                "LSTM4"
+            ],
+            "name": "FCN1",
+            "num_units": 7,
+            "outputs": [
+                "FCN1"
+            ],
+            "type": "Dense",
+            "use_bias": true
+        },
+        {
+            "id": 9,
+            "inputs": [
+                "FCN1"
+            ],
+            "name": "FCN1_nl",
+            "nonlinearity": "softmax",
+            "outputs": [
+                "FCN1_nl"
+            ],
+            "type": "Nonlinearity"
+        }
+    ],
+    "md5": "9a318b55ace4f0e13625fc4c0edee66c",
+    "name": "network",
+    "outputs": [
+        "FCN1_nl"
+    ],
+    "version": "0.2"
+}

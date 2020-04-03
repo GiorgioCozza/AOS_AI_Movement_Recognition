@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{LSM303AGR}\PYG{o}{::}\PYG{n}{get\PYGZus{}acc\PYGZus{}axes}\PYG{p}{()}
+\end{Verbatim}
