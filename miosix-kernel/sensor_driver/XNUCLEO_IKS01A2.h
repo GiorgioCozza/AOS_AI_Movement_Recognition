@@ -1,4 +1,3 @@
-
 /**
  *******************************************************************************
   *   @file X-NUCLEO-IKS01A2.h
@@ -22,12 +21,13 @@
 ********************************************************************************
  */
 
-
 #ifndef _X_NUCLEO_IKS01A2_H
 #define _X_NUCLEO_IKS01A2_H
 
+#include "LSM6DSL.h"
+#include "LSM303AGR.h"
 
-#define LSM6DSL_I2C_ADDR		LSM6DSL_ACC_GYRO_I2C_ADDRESS_HIGH
+#define LSM6DSL_I2C_ADDR		LSM6DSL_I2C_ADDRESS_HIGH
 #define HTS221_I2C_ADDR			HTS221_I2C_ADDRESS
 #define LSM303AGR_I2C_ADDR		LSM303AGR_MAG_I2C_ADDRESS
 #define LSM6DSL_I2C_ADDR		LSM6DSL_ACC_GYRO_I2C_ADDRESS_HIGH
@@ -44,7 +44,109 @@
 
 
 
-typedef enum axis {X=0, Y, Z};
-typedef enum sensors{ lsm6dsl_acc = 0, lsm6dsl_gyr, lsm303agr_acc, lsm303agr_mag};
+
+/***************  LSM6DSL Accelerometer Output Data Rates  ************/
+/*                                                                    */
+/*          - LSM6DSL_ODR_XL_POWER_DOWN                               */
+/*          - LSM6DSL_ODR_XL_13Hz      	                              */
+/*          - LSM6DSL_ODR_XL_26Hz          	                          */
+/*          - LSM6DSL_ODR_XL_52Hz          	                          */
+/*          - LSM6DSL_ODR_XL_104Hz         	                          */
+/*          - LSM6DSL_ODR_XL_208Hz         	                          */
+/*          - LSM6DSL_ODR_XL_416Hz         	                          */
+/*          - LSM6DSL_ODR_XL_833Hz         	                          */
+/*          - LSM6DSL_ODR_XL_1660Hz        	                          */
+/*          - LSM6DSL_ODR_XL_3330Hz        	                          */
+/*          - LSM6DSL_ODR_XL_6660Hz        	                          */
+/*                                                                    */
+/**********************************************************************/
+
+#define C_LSM6DSL_ACC_ODR                          208.0f
+
+/***********  LSM6DSL Accelerometer Full Scale Values  ****************/
+/*                                                                    */
+/*          - LSM6DSL_FS_XL_2g                                        */
+/*          - LSM6DSL_FS_XL_4g          	                          */
+/*          - LSM6DSL_FS_XL_8g          	                          */
+/*          - LSM6DSL_FS_XL_16g         	                          */
+/*                                                                    */
+/**********************************************************************/
+
+#define C_LSM6DSL_ACC_FS                           2.0f
+
+
+/*****************  LSM6DSL Gyroscope Output Data Rates  **************/
+/*                                                                    */
+/*          - LSM6DSL_ODR_G_POWER_DOWN                                */
+/*          - LSM6DSL_ODR_G_13Hz      	                              */
+/*          - LSM6DSL_ODR_G_26Hz          	                          */
+/*          - LSM6DSL_ODR_G_52Hz          	                          */
+/*          - LSM6DSL_ODR_G_104Hz         	                          */
+/*          - LSM6DSL_ODR_G_208Hz         	                          */
+/*          - LSM6DSL_ODR_G_416Hz         	                          */
+/*          - LSM6DSL_ODR_G_833Hz         	                          */
+/*          - LSM6DSL_ODR_G_1660Hz        	                          */
+/*          - LSM6DSL_ODR_G_3330Hz        	                          */
+/*          - LSM6DSL_ODR_G_6660Hz        	                          */
+/*                                                                    */
+/**********************************************************************/
+
+#define C_LSM6DSL_GYRO_ODR                         208.0f
+
+
+/************  LSM6DSL Gyroscope Full Scale Values  *******************/
+/*                                                                    */
+/*          - LSM6DSL_FS_G_245dps                                     */
+/*          - LSM6DSL_FS_G_245dps                                     */
+/*          - LSM6DSL_FS_G_500dps          	                          */
+/*          - LSM6DSL_FS_G_1000dps          	                      */
+/*          - LSM6DSL_FS_G_2000dps         	                          */
+/*                                                                    */
+/**********************************************************************/
+
+#define C_LSM6DSL_GYRO_FS                          2000.0f
+
+
+/***********  LSM303AGR Magnetometer Output Data Rates  ***************/
+/*                                                                    */
+/*          - LSM303AGR_MAG_ODR_10HZ                                  */
+/*          - LSM303AGR_MAG_ODR_20HZ                                  */
+/*          - LSM303AGR_MAG_ODR_50HZ          	                      */
+/*          - LSM303AGR_MAG_ODR_100HZ          	                      */
+/*                                                                    */
+/**********************************************************************/
+
+#define C_LSM303AGR_MAG_ODR                        100.0f
+
+
+/***********  LSM303AGR Accelerometer Output Data Rates  **************/
+/*                                                                    */
+/*          - LSM303AGR_ACC_ODR_POWER_DOWN                            */
+/*          - LSM303AGR_ACC_ODR_1HZ      	                          */
+/*          - LSM303AGR_ACC_ODR_10HZ          	                      */
+/*          - LSM303AGR_ACC_ODR_25HZ          	                      */
+/*          - LSM303AGR_ACC_ODR_50HZ         	                      */
+/*          - LSM303AGR_ACC_ODR_100HZ         	                      */
+/*          - LSM303AGR_ACC_ODR_200HZ         	                      */
+/*          - LSM303AGR_ACC_ODR_400HZ         	                      */
+/*          - LSM303AGR_ACC_ODR_1620HZ        	                      */
+/*          - LSM303AGR_ACC_ODR_1344HZ        	                      */
+/*          - LSM6DSL_ODR_G_6660Hz        	                          */
+/*                                                                    */
+/**********************************************************************/
+
+#define C_LSM303AGR_ACC_ODR                         100.0f
+
+
+/***********  LSM303AGR Accelerometer Full Scale Values  **************/
+/*                                                                    */
+/*          - LSM303AGR_ACC_FS_2G                                     */
+/*          - LSM303AGR_ACC_FS_4G          	                          */
+/*          - LSM303AGR_ACC_FS_8G          	                          */
+/*          - LSM303AGR_ACC_FS_16G         	                          */
+/*                                                                    */
+/**********************************************************************/
+
+#define C_LSM303AGR_ACC_FS                           2.0f
 
 #endif
