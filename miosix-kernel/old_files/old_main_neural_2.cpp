@@ -184,31 +184,31 @@ int main() {
 					printing2(int_vec, "LSM303A_MAGNETOMETER", 3);
 					*/
 					//Clear terminal screen
-					printf("%c[H", ESC);
-					printf("%c[2J", ESC);
-					//Thread::sleep(100);
+                printf("%c[H", ESC);
+                printf("%c[2J", ESC);
+                //Thread::sleep(100);
 
-					count++;
+                count++;
 
-					if (count == WINDOW_SIZE) {
-						count = 0;
-						
-						neural_net->prepareData(&ds_pp, in_data, out_data, &ai_input, &ai_output, 1);
+                if (count == WINDOW_SIZE) {
+                    count = 0;
 
-						//printf("\r\n[LOG]: Running the Neural Network...\r\n");
-						int n_b = neural_net->nnRun(network, &ai_input, &ai_output, 1);
-						
-						printf("\r\n****************	AI NN NETWORK RESULT	*********************\r\n");
-						printf("\n[LOG]: You are %s\n\n", movements[argmax(out_data, NUM_CLASSES)]);
-						Thread::sleep(100);						
+                    neural_net->prepareData(&ds_pp, in_data, out_data, &ai_input, &ai_output, 1);
 
-						//for (int i = 0; i < NUM_CLASSES; i++)
-						//	printf("[OUTPUT]: Class %s (acc): %.2f %\r\n", movements[i], out_data[i]);
+                    //printf("\r\n[LOG]: Running the Neural Network...\r\n");
+                    int n_b = neural_net->nnRun(network, &ai_input, &ai_output, 1);
+
+                    printf("\r\n****************	AI NN NETWORK RESULT	*********************\r\n");
+                    printf("\n[LOG]: You are %s\n\n", movements[argmax(out_data, NUM_CLASSES)]);
+                    Thread::sleep(50);
+
+                    //for (int i = 0; i < NUM_CLASSES; i++)
+                    //	printf("[OUTPUT]: Class %s (acc): %.2f %\r\n", movements[i], out_data[i]);
 
 
-					}
+                }
 
-				}
+            }
 
 
 			}

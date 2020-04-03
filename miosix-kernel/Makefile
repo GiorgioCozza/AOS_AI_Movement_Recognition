@@ -31,6 +31,8 @@ SRC :=                                				\
 ./main.cpp											\
 $(SENSDRIV)/com_i2c/i2c_helper.cpp					\
 $(DATAUTL)/dataset_preproc.cpp						\
+$(SENSDRIV)/LSM6DSL/LSM6DSL.cpp				\
+$(SENSDRIV)/LSM303AGR/LSM303AGR.cpp		\
 $(SENSDRIV)/LSM6DSL/LSM6DSL_acc_gyro_driver.c	    \
 $(SENSDRIV)/LSM6DSL/LSM6DSLSensor.cpp				\
 $(SENSDRIV)/LSM303AGR/LSM303AGR_acc_driver.c        \
