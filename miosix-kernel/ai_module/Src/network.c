@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    network.c
   * @author  AST Embedded Analytics Research Platform
-  * @date    Mon Mar 30 12:53:57 2020
+  * @date    Fri Apr  3 18:28:37 2020
   * @brief   AI Tool Automatic Code Generator for Embedded NN computing
   ******************************************************************************
   * @attention
@@ -46,14 +46,14 @@
 #define AI_NET_OBJ_INSTANCE g_network
  
 #undef AI_NETWORK_MODEL_SIGNATURE
-#define AI_NETWORK_MODEL_SIGNATURE     "cd86bbd457be1a47fb04710a137c2640"
+#define AI_NETWORK_MODEL_SIGNATURE     "9a318b55ace4f0e13625fc4c0edee66c"
 
 #ifndef AI_TOOLS_REVISION_ID
 #define AI_TOOLS_REVISION_ID     "(rev-)"
 #endif
 
 #undef AI_TOOLS_DATE_TIME
-#define AI_TOOLS_DATE_TIME   "Mon Mar 30 12:53:57 2020"
+#define AI_TOOLS_DATE_TIME   "Fri Apr  3 18:28:37 2020"
 
 #undef AI_TOOLS_COMPILE_TIME
 #define AI_TOOLS_COMPILE_TIME    __DATE__ " " __TIME__
@@ -66,54 +66,75 @@ AI_STATIC ai_network AI_NET_OBJ_INSTANCE;
 
 
 /**  Forward network array declarations  **************************************/
-AI_STATIC ai_array conv2d_1_scratch0_array;   /* Array #0 */
-AI_STATIC ai_array dense_3_bias_array;   /* Array #1 */
-AI_STATIC ai_array dense_3_weights_array;   /* Array #2 */
-AI_STATIC ai_array dense_2_bias_array;   /* Array #3 */
-AI_STATIC ai_array dense_2_weights_array;   /* Array #4 */
-AI_STATIC ai_array dense_1_bias_array;   /* Array #5 */
-AI_STATIC ai_array dense_1_weights_array;   /* Array #6 */
-AI_STATIC ai_array conv2d_1_bias_array;   /* Array #7 */
-AI_STATIC ai_array conv2d_1_weights_array;   /* Array #8 */
-AI_STATIC ai_array input_0_output_array;   /* Array #9 */
-AI_STATIC ai_array conv2d_1_output_array;   /* Array #10 */
-AI_STATIC ai_array dense_1_output_array;   /* Array #12 */
-AI_STATIC ai_array dense_1_nl_output_array;   /* Array #13 */
-AI_STATIC ai_array dense_2_output_array;   /* Array #14 */
-AI_STATIC ai_array dense_2_nl_output_array;   /* Array #15 */
-AI_STATIC ai_array dense_3_output_array;   /* Array #16 */
-AI_STATIC ai_array dense_3_nl_output_array;   /* Array #17 */
+AI_STATIC ai_array FCN1_bias_array;   /* Array #0 */
+AI_STATIC ai_array FCN1_weights_array;   /* Array #1 */
+AI_STATIC ai_array LSTM4_bias_array;   /* Array #2 */
+AI_STATIC ai_array LSTM4_peephole_array;   /* Array #3 */
+AI_STATIC ai_array LSTM4_recurrent_array;   /* Array #4 */
+AI_STATIC ai_array LSTM4_kernel_array;   /* Array #5 */
+AI_STATIC ai_array LSTM3_bias_array;   /* Array #6 */
+AI_STATIC ai_array LSTM3_peephole_array;   /* Array #7 */
+AI_STATIC ai_array LSTM3_recurrent_array;   /* Array #8 */
+AI_STATIC ai_array LSTM3_kernel_array;   /* Array #9 */
+AI_STATIC ai_array LSTM2_bias_array;   /* Array #10 */
+AI_STATIC ai_array LSTM2_peephole_array;   /* Array #11 */
+AI_STATIC ai_array LSTM2_recurrent_array;   /* Array #12 */
+AI_STATIC ai_array LSTM2_kernel_array;   /* Array #13 */
+AI_STATIC ai_array LSTM1_bias_array;   /* Array #14 */
+AI_STATIC ai_array LSTM1_peephole_array;   /* Array #15 */
+AI_STATIC ai_array LSTM1_recurrent_array;   /* Array #16 */
+AI_STATIC ai_array LSTM1_kernel_array;   /* Array #17 */
+AI_STATIC ai_array batch_normalization_2_bias_array;   /* Array #18 */
+AI_STATIC ai_array batch_normalization_2_scale_array;   /* Array #19 */
+AI_STATIC ai_array input_0_output_array;   /* Array #20 */
+AI_STATIC ai_array batch_normalization_2_output_array;   /* Array #21 */
+AI_STATIC ai_array LSTM1_output_array;   /* Array #22 */
+AI_STATIC ai_array LSTM2_output_array;   /* Array #23 */
+AI_STATIC ai_array LSTM3_output_array;   /* Array #24 */
+AI_STATIC ai_array LSTM4_output_array;   /* Array #25 */
+AI_STATIC ai_array FCN1_output_array;   /* Array #26 */
+AI_STATIC ai_array FCN1_nl_output_array;   /* Array #27 */
 
 
 /**  Forward network tensor declarations  *************************************/
-AI_STATIC ai_tensor conv2d_1_scratch0;   /* Tensor #0 */
-AI_STATIC ai_tensor dense_3_bias;   /* Tensor #1 */
-AI_STATIC ai_tensor dense_3_weights;   /* Tensor #2 */
-AI_STATIC ai_tensor dense_2_bias;   /* Tensor #3 */
-AI_STATIC ai_tensor dense_2_weights;   /* Tensor #4 */
-AI_STATIC ai_tensor dense_1_bias;   /* Tensor #5 */
-AI_STATIC ai_tensor dense_1_weights;   /* Tensor #6 */
-AI_STATIC ai_tensor conv2d_1_bias;   /* Tensor #7 */
-AI_STATIC ai_tensor conv2d_1_weights;   /* Tensor #8 */
-AI_STATIC ai_tensor input_0_output;   /* Tensor #9 */
-AI_STATIC ai_tensor conv2d_1_output;   /* Tensor #10 */
-AI_STATIC ai_tensor conv2d_1_output0;   /* Tensor #11 */
-AI_STATIC ai_tensor dense_1_output;   /* Tensor #12 */
-AI_STATIC ai_tensor dense_1_nl_output;   /* Tensor #13 */
-AI_STATIC ai_tensor dense_2_output;   /* Tensor #14 */
-AI_STATIC ai_tensor dense_2_nl_output;   /* Tensor #15 */
-AI_STATIC ai_tensor dense_3_output;   /* Tensor #16 */
-AI_STATIC ai_tensor dense_3_nl_output;   /* Tensor #17 */
+AI_STATIC ai_tensor FCN1_bias;   /* Tensor #0 */
+AI_STATIC ai_tensor FCN1_weights;   /* Tensor #1 */
+AI_STATIC ai_tensor LSTM4_bias;   /* Tensor #2 */
+AI_STATIC ai_tensor LSTM4_peephole;   /* Tensor #3 */
+AI_STATIC ai_tensor LSTM4_recurrent;   /* Tensor #4 */
+AI_STATIC ai_tensor LSTM4_kernel;   /* Tensor #5 */
+AI_STATIC ai_tensor LSTM3_bias;   /* Tensor #6 */
+AI_STATIC ai_tensor LSTM3_peephole;   /* Tensor #7 */
+AI_STATIC ai_tensor LSTM3_recurrent;   /* Tensor #8 */
+AI_STATIC ai_tensor LSTM3_kernel;   /* Tensor #9 */
+AI_STATIC ai_tensor LSTM2_bias;   /* Tensor #10 */
+AI_STATIC ai_tensor LSTM2_peephole;   /* Tensor #11 */
+AI_STATIC ai_tensor LSTM2_recurrent;   /* Tensor #12 */
+AI_STATIC ai_tensor LSTM2_kernel;   /* Tensor #13 */
+AI_STATIC ai_tensor LSTM1_bias;   /* Tensor #14 */
+AI_STATIC ai_tensor LSTM1_peephole;   /* Tensor #15 */
+AI_STATIC ai_tensor LSTM1_recurrent;   /* Tensor #16 */
+AI_STATIC ai_tensor LSTM1_kernel;   /* Tensor #17 */
+AI_STATIC ai_tensor batch_normalization_2_bias;   /* Tensor #18 */
+AI_STATIC ai_tensor batch_normalization_2_scale;   /* Tensor #19 */
+AI_STATIC ai_tensor input_0_output;   /* Tensor #20 */
+AI_STATIC ai_tensor batch_normalization_2_output;   /* Tensor #21 */
+AI_STATIC ai_tensor LSTM1_output;   /* Tensor #22 */
+AI_STATIC ai_tensor LSTM2_output;   /* Tensor #23 */
+AI_STATIC ai_tensor LSTM3_output;   /* Tensor #24 */
+AI_STATIC ai_tensor LSTM4_output;   /* Tensor #25 */
+AI_STATIC ai_tensor FCN1_output;   /* Tensor #26 */
+AI_STATIC ai_tensor FCN1_nl_output;   /* Tensor #27 */
 
 
 /**  Forward network tensor chain declarations  *******************************/
-AI_STATIC_CONST ai_tensor_chain conv2d_1_chain;   /* Chain #0 */
-AI_STATIC_CONST ai_tensor_chain dense_1_chain;   /* Chain #1 */
-AI_STATIC_CONST ai_tensor_chain dense_1_nl_chain;   /* Chain #2 */
-AI_STATIC_CONST ai_tensor_chain dense_2_chain;   /* Chain #3 */
-AI_STATIC_CONST ai_tensor_chain dense_2_nl_chain;   /* Chain #4 */
-AI_STATIC_CONST ai_tensor_chain dense_3_chain;   /* Chain #5 */
-AI_STATIC_CONST ai_tensor_chain dense_3_nl_chain;   /* Chain #6 */
+AI_STATIC_CONST ai_tensor_chain batch_normalization_2_chain;   /* Chain #0 */
+AI_STATIC_CONST ai_tensor_chain LSTM1_chain;   /* Chain #1 */
+AI_STATIC_CONST ai_tensor_chain LSTM2_chain;   /* Chain #2 */
+AI_STATIC_CONST ai_tensor_chain LSTM3_chain;   /* Chain #3 */
+AI_STATIC_CONST ai_tensor_chain LSTM4_chain;   /* Chain #4 */
+AI_STATIC_CONST ai_tensor_chain FCN1_chain;   /* Chain #5 */
+AI_STATIC_CONST ai_tensor_chain FCN1_nl_chain;   /* Chain #6 */
 
 
 /**  Subgraph network operator tensor chain declarations  *********************/
@@ -123,194 +144,298 @@ AI_STATIC_CONST ai_tensor_chain dense_3_nl_chain;   /* Chain #6 */
 
 
 /**  Forward network layer declarations  **************************************/
-AI_STATIC ai_layer_conv2d_nl_pool conv2d_1_layer; /* Layer #0 */
-AI_STATIC ai_layer_dense dense_1_layer; /* Layer #1 */
-AI_STATIC ai_layer_nl dense_1_nl_layer; /* Layer #2 */
-AI_STATIC ai_layer_dense dense_2_layer; /* Layer #3 */
-AI_STATIC ai_layer_nl dense_2_nl_layer; /* Layer #4 */
-AI_STATIC ai_layer_dense dense_3_layer; /* Layer #5 */
-AI_STATIC ai_layer_nl dense_3_nl_layer; /* Layer #6 */
+AI_STATIC ai_layer_bn batch_normalization_2_layer; /* Layer #0 */
+AI_STATIC ai_layer_lstm LSTM1_layer; /* Layer #1 */
+AI_STATIC ai_layer_lstm LSTM2_layer; /* Layer #2 */
+AI_STATIC ai_layer_lstm LSTM3_layer; /* Layer #3 */
+AI_STATIC ai_layer_lstm LSTM4_layer; /* Layer #4 */
+AI_STATIC ai_layer_dense FCN1_layer; /* Layer #5 */
+AI_STATIC ai_layer_nl FCN1_nl_layer; /* Layer #6 */
 
 
 /**  Array declarations section  **********************************************/
 AI_ARRAY_OBJ_DECLARE(
-  conv2d_1_scratch0_array, AI_ARRAY_FORMAT_FLOAT,
-  NULL, NULL, 480,
-  AI_STATIC)
-AI_ARRAY_OBJ_DECLARE(
-  dense_3_bias_array, AI_ARRAY_FORMAT_FLOAT,
+  FCN1_bias_array, AI_ARRAY_FORMAT_FLOAT,
   NULL, NULL, 7,
   AI_STATIC)
 AI_ARRAY_OBJ_DECLARE(
-  dense_3_weights_array, AI_ARRAY_FORMAT_FLOAT,
+  FCN1_weights_array, AI_ARRAY_FORMAT_FLOAT,
   NULL, NULL, 224,
   AI_STATIC)
 AI_ARRAY_OBJ_DECLARE(
-  dense_2_bias_array, AI_ARRAY_FORMAT_FLOAT,
-  NULL, NULL, 32,
+  LSTM4_bias_array, AI_ARRAY_FORMAT_FLOAT,
+  NULL, NULL, 128,
   AI_STATIC)
 AI_ARRAY_OBJ_DECLARE(
-  dense_2_weights_array, AI_ARRAY_FORMAT_FLOAT,
-  NULL, NULL, 1024,
+  LSTM4_peephole_array, AI_ARRAY_FORMAT_FLOAT,
+  NULL, NULL, 96,
   AI_STATIC)
 AI_ARRAY_OBJ_DECLARE(
-  dense_1_bias_array, AI_ARRAY_FORMAT_FLOAT,
-  NULL, NULL, 32,
+  LSTM4_recurrent_array, AI_ARRAY_FORMAT_FLOAT,
+  NULL, NULL, 4096,
   AI_STATIC)
 AI_ARRAY_OBJ_DECLARE(
-  dense_1_weights_array, AI_ARRAY_FORMAT_FLOAT,
-  NULL, NULL, 53760,
+  LSTM4_kernel_array, AI_ARRAY_FORMAT_FLOAT,
+  NULL, NULL, 4096,
   AI_STATIC)
 AI_ARRAY_OBJ_DECLARE(
-  conv2d_1_bias_array, AI_ARRAY_FORMAT_FLOAT,
-  NULL, NULL, 24,
+  LSTM3_bias_array, AI_ARRAY_FORMAT_FLOAT,
+  NULL, NULL, 128,
   AI_STATIC)
 AI_ARRAY_OBJ_DECLARE(
-  conv2d_1_weights_array, AI_ARRAY_FORMAT_FLOAT,
-  NULL, NULL, 216,
+  LSTM3_peephole_array, AI_ARRAY_FORMAT_FLOAT,
+  NULL, NULL, 96,
+  AI_STATIC)
+AI_ARRAY_OBJ_DECLARE(
+  LSTM3_recurrent_array, AI_ARRAY_FORMAT_FLOAT,
+  NULL, NULL, 4096,
+  AI_STATIC)
+AI_ARRAY_OBJ_DECLARE(
+  LSTM3_kernel_array, AI_ARRAY_FORMAT_FLOAT,
+  NULL, NULL, 4096,
+  AI_STATIC)
+AI_ARRAY_OBJ_DECLARE(
+  LSTM2_bias_array, AI_ARRAY_FORMAT_FLOAT,
+  NULL, NULL, 128,
+  AI_STATIC)
+AI_ARRAY_OBJ_DECLARE(
+  LSTM2_peephole_array, AI_ARRAY_FORMAT_FLOAT,
+  NULL, NULL, 96,
+  AI_STATIC)
+AI_ARRAY_OBJ_DECLARE(
+  LSTM2_recurrent_array, AI_ARRAY_FORMAT_FLOAT,
+  NULL, NULL, 4096,
+  AI_STATIC)
+AI_ARRAY_OBJ_DECLARE(
+  LSTM2_kernel_array, AI_ARRAY_FORMAT_FLOAT,
+  NULL, NULL, 4096,
+  AI_STATIC)
+AI_ARRAY_OBJ_DECLARE(
+  LSTM1_bias_array, AI_ARRAY_FORMAT_FLOAT,
+  NULL, NULL, 128,
+  AI_STATIC)
+AI_ARRAY_OBJ_DECLARE(
+  LSTM1_peephole_array, AI_ARRAY_FORMAT_FLOAT,
+  NULL, NULL, 96,
+  AI_STATIC)
+AI_ARRAY_OBJ_DECLARE(
+  LSTM1_recurrent_array, AI_ARRAY_FORMAT_FLOAT,
+  NULL, NULL, 4096,
+  AI_STATIC)
+AI_ARRAY_OBJ_DECLARE(
+  LSTM1_kernel_array, AI_ARRAY_FORMAT_FLOAT,
+  NULL, NULL, 1536,
+  AI_STATIC)
+AI_ARRAY_OBJ_DECLARE(
+  batch_normalization_2_bias_array, AI_ARRAY_FORMAT_FLOAT,
+  NULL, NULL, 12,
+  AI_STATIC)
+AI_ARRAY_OBJ_DECLARE(
+  batch_normalization_2_scale_array, AI_ARRAY_FORMAT_FLOAT,
+  NULL, NULL, 12,
   AI_STATIC)
 AI_ARRAY_OBJ_DECLARE(
   input_0_output_array, AI_ARRAY_FORMAT_FLOAT|AI_FMT_FLAG_IS_IO,
   NULL, NULL, 360,
   AI_STATIC)
 AI_ARRAY_OBJ_DECLARE(
-  conv2d_1_output_array, AI_ARRAY_FORMAT_FLOAT,
-  NULL, NULL, 1680,
+  batch_normalization_2_output_array, AI_ARRAY_FORMAT_FLOAT,
+  NULL, NULL, 360,
   AI_STATIC)
 AI_ARRAY_OBJ_DECLARE(
-  dense_1_output_array, AI_ARRAY_FORMAT_FLOAT,
+  LSTM1_output_array, AI_ARRAY_FORMAT_FLOAT,
+  NULL, NULL, 960,
+  AI_STATIC)
+AI_ARRAY_OBJ_DECLARE(
+  LSTM2_output_array, AI_ARRAY_FORMAT_FLOAT,
+  NULL, NULL, 960,
+  AI_STATIC)
+AI_ARRAY_OBJ_DECLARE(
+  LSTM3_output_array, AI_ARRAY_FORMAT_FLOAT,
+  NULL, NULL, 960,
+  AI_STATIC)
+AI_ARRAY_OBJ_DECLARE(
+  LSTM4_output_array, AI_ARRAY_FORMAT_FLOAT,
   NULL, NULL, 32,
   AI_STATIC)
 AI_ARRAY_OBJ_DECLARE(
-  dense_1_nl_output_array, AI_ARRAY_FORMAT_FLOAT,
-  NULL, NULL, 32,
-  AI_STATIC)
-AI_ARRAY_OBJ_DECLARE(
-  dense_2_output_array, AI_ARRAY_FORMAT_FLOAT,
-  NULL, NULL, 32,
-  AI_STATIC)
-AI_ARRAY_OBJ_DECLARE(
-  dense_2_nl_output_array, AI_ARRAY_FORMAT_FLOAT,
-  NULL, NULL, 32,
-  AI_STATIC)
-AI_ARRAY_OBJ_DECLARE(
-  dense_3_output_array, AI_ARRAY_FORMAT_FLOAT,
+  FCN1_output_array, AI_ARRAY_FORMAT_FLOAT,
   NULL, NULL, 7,
   AI_STATIC)
 AI_ARRAY_OBJ_DECLARE(
-  dense_3_nl_output_array, AI_ARRAY_FORMAT_FLOAT|AI_FMT_FLAG_IS_IO,
+  FCN1_nl_output_array, AI_ARRAY_FORMAT_FLOAT|AI_FMT_FLAG_IS_IO,
   NULL, NULL, 7,
   AI_STATIC)
 
 
 /**  Tensor declarations section  *********************************************/
 AI_TENSOR_OBJ_DECLARE(
-  conv2d_1_scratch0,
-  AI_SHAPE_INIT(2, 10, 24, 1),
-  AI_STRIDE_INIT(960, 96, 4, 4),
-  &conv2d_1_scratch0_array,
-  AI_STATIC)
-AI_TENSOR_OBJ_DECLARE(
-  dense_3_bias,
+  FCN1_bias,
   AI_SHAPE_INIT(1, 1, 7, 1),
   AI_STRIDE_INIT(28, 28, 4, 4),
-  &dense_3_bias_array,
+  &FCN1_bias_array,
   AI_STATIC)
 AI_TENSOR_OBJ_DECLARE(
-  dense_3_weights,
+  FCN1_weights,
   AI_SHAPE_INIT(1, 1, 7, 32),
   AI_STRIDE_INIT(896, 896, 128, 4),
-  &dense_3_weights_array,
+  &FCN1_weights_array,
   AI_STATIC)
 AI_TENSOR_OBJ_DECLARE(
-  dense_2_bias,
-  AI_SHAPE_INIT(1, 1, 32, 1),
-  AI_STRIDE_INIT(128, 128, 4, 4),
-  &dense_2_bias_array,
+  LSTM4_bias,
+  AI_SHAPE_INIT(1, 1, 128, 1),
+  AI_STRIDE_INIT(512, 512, 4, 4),
+  &LSTM4_bias_array,
   AI_STATIC)
 AI_TENSOR_OBJ_DECLARE(
-  dense_2_weights,
-  AI_SHAPE_INIT(1, 1, 32, 32),
-  AI_STRIDE_INIT(4096, 4096, 128, 4),
-  &dense_2_weights_array,
+  LSTM4_peephole,
+  AI_SHAPE_INIT(1, 1, 96, 1),
+  AI_STRIDE_INIT(384, 384, 4, 4),
+  &LSTM4_peephole_array,
   AI_STATIC)
 AI_TENSOR_OBJ_DECLARE(
-  dense_1_bias,
-  AI_SHAPE_INIT(1, 1, 32, 1),
-  AI_STRIDE_INIT(128, 128, 4, 4),
-  &dense_1_bias_array,
+  LSTM4_recurrent,
+  AI_SHAPE_INIT(128, 1, 1, 32),
+  AI_STRIDE_INIT(128, 128, 128, 4),
+  &LSTM4_recurrent_array,
   AI_STATIC)
 AI_TENSOR_OBJ_DECLARE(
-  dense_1_weights,
-  AI_SHAPE_INIT(1, 1, 32, 1680),
-  AI_STRIDE_INIT(215040, 215040, 6720, 4),
-  &dense_1_weights_array,
+  LSTM4_kernel,
+  AI_SHAPE_INIT(128, 1, 1, 32),
+  AI_STRIDE_INIT(128, 128, 128, 4),
+  &LSTM4_kernel_array,
   AI_STATIC)
 AI_TENSOR_OBJ_DECLARE(
-  conv2d_1_bias,
-  AI_SHAPE_INIT(1, 1, 24, 1),
-  AI_STRIDE_INIT(96, 96, 4, 4),
-  &conv2d_1_bias_array,
+  LSTM3_bias,
+  AI_SHAPE_INIT(1, 1, 128, 1),
+  AI_STRIDE_INIT(512, 512, 4, 4),
+  &LSTM3_bias_array,
   AI_STATIC)
 AI_TENSOR_OBJ_DECLARE(
-  conv2d_1_weights,
-  AI_SHAPE_INIT(24, 3, 3, 1),
-  AI_STRIDE_INIT(36, 12, 4, 4),
-  &conv2d_1_weights_array,
+  LSTM3_peephole,
+  AI_SHAPE_INIT(1, 1, 96, 1),
+  AI_STRIDE_INIT(384, 384, 4, 4),
+  &LSTM3_peephole_array,
+  AI_STATIC)
+AI_TENSOR_OBJ_DECLARE(
+  LSTM3_recurrent,
+  AI_SHAPE_INIT(128, 1, 1, 32),
+  AI_STRIDE_INIT(128, 128, 128, 4),
+  &LSTM3_recurrent_array,
+  AI_STATIC)
+AI_TENSOR_OBJ_DECLARE(
+  LSTM3_kernel,
+  AI_SHAPE_INIT(128, 1, 1, 32),
+  AI_STRIDE_INIT(128, 128, 128, 4),
+  &LSTM3_kernel_array,
+  AI_STATIC)
+AI_TENSOR_OBJ_DECLARE(
+  LSTM2_bias,
+  AI_SHAPE_INIT(1, 1, 128, 1),
+  AI_STRIDE_INIT(512, 512, 4, 4),
+  &LSTM2_bias_array,
+  AI_STATIC)
+AI_TENSOR_OBJ_DECLARE(
+  LSTM2_peephole,
+  AI_SHAPE_INIT(1, 1, 96, 1),
+  AI_STRIDE_INIT(384, 384, 4, 4),
+  &LSTM2_peephole_array,
+  AI_STATIC)
+AI_TENSOR_OBJ_DECLARE(
+  LSTM2_recurrent,
+  AI_SHAPE_INIT(128, 1, 1, 32),
+  AI_STRIDE_INIT(128, 128, 128, 4),
+  &LSTM2_recurrent_array,
+  AI_STATIC)
+AI_TENSOR_OBJ_DECLARE(
+  LSTM2_kernel,
+  AI_SHAPE_INIT(128, 1, 1, 32),
+  AI_STRIDE_INIT(128, 128, 128, 4),
+  &LSTM2_kernel_array,
+  AI_STATIC)
+AI_TENSOR_OBJ_DECLARE(
+  LSTM1_bias,
+  AI_SHAPE_INIT(1, 1, 128, 1),
+  AI_STRIDE_INIT(512, 512, 4, 4),
+  &LSTM1_bias_array,
+  AI_STATIC)
+AI_TENSOR_OBJ_DECLARE(
+  LSTM1_peephole,
+  AI_SHAPE_INIT(1, 1, 96, 1),
+  AI_STRIDE_INIT(384, 384, 4, 4),
+  &LSTM1_peephole_array,
+  AI_STATIC)
+AI_TENSOR_OBJ_DECLARE(
+  LSTM1_recurrent,
+  AI_SHAPE_INIT(128, 1, 1, 32),
+  AI_STRIDE_INIT(128, 128, 128, 4),
+  &LSTM1_recurrent_array,
+  AI_STATIC)
+AI_TENSOR_OBJ_DECLARE(
+  LSTM1_kernel,
+  AI_SHAPE_INIT(128, 1, 1, 12),
+  AI_STRIDE_INIT(48, 48, 48, 4),
+  &LSTM1_kernel_array,
+  AI_STATIC)
+AI_TENSOR_OBJ_DECLARE(
+  batch_normalization_2_bias,
+  AI_SHAPE_INIT(1, 1, 12, 1),
+  AI_STRIDE_INIT(48, 48, 4, 4),
+  &batch_normalization_2_bias_array,
+  AI_STATIC)
+AI_TENSOR_OBJ_DECLARE(
+  batch_normalization_2_scale,
+  AI_SHAPE_INIT(1, 1, 12, 1),
+  AI_STRIDE_INIT(48, 48, 4, 4),
+  &batch_normalization_2_scale_array,
   AI_STATIC)
 AI_TENSOR_OBJ_DECLARE(
   input_0_output,
-  AI_SHAPE_INIT(30, 12, 1, 1),
-  AI_STRIDE_INIT(48, 4, 4, 4),
+  AI_SHAPE_INIT(30, 1, 12, 1),
+  AI_STRIDE_INIT(48, 48, 4, 4),
   &input_0_output_array,
   AI_STATIC)
 AI_TENSOR_OBJ_DECLARE(
-  conv2d_1_output,
-  AI_SHAPE_INIT(14, 5, 24, 1),
-  AI_STRIDE_INIT(480, 96, 4, 4),
-  &conv2d_1_output_array,
+  batch_normalization_2_output,
+  AI_SHAPE_INIT(30, 1, 12, 1),
+  AI_STRIDE_INIT(48, 48, 4, 4),
+  &batch_normalization_2_output_array,
   AI_STATIC)
 AI_TENSOR_OBJ_DECLARE(
-  conv2d_1_output0,
-  AI_SHAPE_INIT(1, 1, 1680, 1),
-  AI_STRIDE_INIT(6720, 6720, 4, 4),
-  &conv2d_1_output_array,
+  LSTM1_output,
+  AI_SHAPE_INIT(30, 1, 32, 1),
+  AI_STRIDE_INIT(128, 128, 4, 4),
+  &LSTM1_output_array,
   AI_STATIC)
 AI_TENSOR_OBJ_DECLARE(
-  dense_1_output,
+  LSTM2_output,
+  AI_SHAPE_INIT(30, 1, 32, 1),
+  AI_STRIDE_INIT(128, 128, 4, 4),
+  &LSTM2_output_array,
+  AI_STATIC)
+AI_TENSOR_OBJ_DECLARE(
+  LSTM3_output,
+  AI_SHAPE_INIT(30, 1, 32, 1),
+  AI_STRIDE_INIT(128, 128, 4, 4),
+  &LSTM3_output_array,
+  AI_STATIC)
+AI_TENSOR_OBJ_DECLARE(
+  LSTM4_output,
   AI_SHAPE_INIT(1, 1, 32, 1),
   AI_STRIDE_INIT(128, 128, 4, 4),
-  &dense_1_output_array,
+  &LSTM4_output_array,
   AI_STATIC)
 AI_TENSOR_OBJ_DECLARE(
-  dense_1_nl_output,
-  AI_SHAPE_INIT(1, 1, 32, 1),
-  AI_STRIDE_INIT(128, 128, 4, 4),
-  &dense_1_nl_output_array,
-  AI_STATIC)
-AI_TENSOR_OBJ_DECLARE(
-  dense_2_output,
-  AI_SHAPE_INIT(1, 1, 32, 1),
-  AI_STRIDE_INIT(128, 128, 4, 4),
-  &dense_2_output_array,
-  AI_STATIC)
-AI_TENSOR_OBJ_DECLARE(
-  dense_2_nl_output,
-  AI_SHAPE_INIT(1, 1, 32, 1),
-  AI_STRIDE_INIT(128, 128, 4, 4),
-  &dense_2_nl_output_array,
-  AI_STATIC)
-AI_TENSOR_OBJ_DECLARE(
-  dense_3_output,
+  FCN1_output,
   AI_SHAPE_INIT(1, 1, 7, 1),
   AI_STRIDE_INIT(28, 28, 4, 4),
-  &dense_3_output_array,
+  &FCN1_output_array,
   AI_STATIC)
 AI_TENSOR_OBJ_DECLARE(
-  dense_3_nl_output,
+  FCN1_nl_output,
   AI_SHAPE_INIT(1, 1, 7, 1),
   AI_STRIDE_INIT(28, 28, 4, 4),
-  &dense_3_nl_output_array,
+  &FCN1_nl_output_array,
   AI_STATIC)
 
 
@@ -319,138 +444,153 @@ AI_TENSOR_OBJ_DECLARE(
 
 
 AI_TENSOR_CHAIN_OBJ_DECLARE(
-  conv2d_1_chain, AI_STATIC_CONST, 
+  batch_normalization_2_chain, AI_STATIC_CONST, 
   AI_TENSOR_LIST_ENTRY(&input_0_output),
-  AI_TENSOR_LIST_ENTRY(&conv2d_1_output),
-  AI_TENSOR_LIST_ENTRY(&conv2d_1_weights, &conv2d_1_bias, NULL),
-  AI_TENSOR_LIST_ENTRY(&conv2d_1_scratch0)
-)
-
-AI_LAYER_OBJ_DECLARE(
-  conv2d_1_layer, 1,
-  OPTIMIZED_CONV2D_TYPE,
-  conv2d_nl_pool, forward_conv2d_nl_pool,
-  &AI_NET_OBJ_INSTANCE, &dense_1_layer, AI_STATIC,
-  .tensors = &conv2d_1_chain, 
-  .groups = 1, 
-  .nl_func = nl_func_relu_array_f32, 
-  .filter_stride = AI_SHAPE_2D_INIT(1, 1), 
-  .dilation = AI_SHAPE_2D_INIT(1, 1), 
-  .filter_pad = AI_SHAPE_ND_INIT(4, 0, 0, 0, 0), 
-  .pool_size = AI_SHAPE_2D_INIT(2, 2), 
-  .pool_stride = AI_SHAPE_2D_INIT(2, 2), 
-  .pool_pad = AI_SHAPE_ND_INIT(4, 0, 0, 0, 0), 
-  .pool_func = pool_func_mp_array_f32, 
-)
-
-AI_TENSOR_CHAIN_OBJ_DECLARE(
-  dense_1_chain, AI_STATIC_CONST, 
-  AI_TENSOR_LIST_ENTRY(&conv2d_1_output0),
-  AI_TENSOR_LIST_ENTRY(&dense_1_output),
-  AI_TENSOR_LIST_ENTRY(&dense_1_weights, &dense_1_bias),
+  AI_TENSOR_LIST_ENTRY(&batch_normalization_2_output),
+  AI_TENSOR_LIST_ENTRY(&batch_normalization_2_scale, &batch_normalization_2_bias),
   AI_TENSOR_LIST_EMPTY
 )
 
 AI_LAYER_OBJ_DECLARE(
-  dense_1_layer, 4,
-  DENSE_TYPE,
-  dense, forward_dense,
-  &AI_NET_OBJ_INSTANCE, &dense_1_nl_layer, AI_STATIC,
-  .tensors = &dense_1_chain, 
+  batch_normalization_2_layer, 0,
+  BN_TYPE,
+  bn, forward_bn,
+  &AI_NET_OBJ_INSTANCE, &LSTM1_layer, AI_STATIC,
+  .tensors = &batch_normalization_2_chain, 
 )
 
 AI_TENSOR_CHAIN_OBJ_DECLARE(
-  dense_1_nl_chain, AI_STATIC_CONST, 
-  AI_TENSOR_LIST_ENTRY(&dense_1_output),
-  AI_TENSOR_LIST_ENTRY(&dense_1_nl_output),
+  LSTM1_chain, AI_STATIC_CONST, 
+  AI_TENSOR_LIST_ENTRY(&batch_normalization_2_output),
+  AI_TENSOR_LIST_ENTRY(&LSTM1_output),
+  AI_TENSOR_LIST_ENTRY(&LSTM1_kernel, &LSTM1_recurrent, &LSTM1_peephole, &LSTM1_bias),
+  AI_TENSOR_LIST_EMPTY
+)
+
+AI_LAYER_OBJ_DECLARE(
+  LSTM1_layer, 1,
+  LSTM_TYPE,
+  lstm, forward_lstm,
+  &AI_NET_OBJ_INSTANCE, &LSTM2_layer, AI_STATIC,
+  .tensors = &LSTM1_chain, 
+  .n_units = 32, 
+  .activation_nl = ai_math_tanh, 
+  .recurrent_nl = ai_math_hard_sigmoid, 
+  .go_backwards = false, 
+  .reverse_seq = false, 
+  .out_nl = ai_math_tanh, 
+)
+
+AI_TENSOR_CHAIN_OBJ_DECLARE(
+  LSTM2_chain, AI_STATIC_CONST, 
+  AI_TENSOR_LIST_ENTRY(&LSTM1_output),
+  AI_TENSOR_LIST_ENTRY(&LSTM2_output),
+  AI_TENSOR_LIST_ENTRY(&LSTM2_kernel, &LSTM2_recurrent, &LSTM2_peephole, &LSTM2_bias),
+  AI_TENSOR_LIST_EMPTY
+)
+
+AI_LAYER_OBJ_DECLARE(
+  LSTM2_layer, 3,
+  LSTM_TYPE,
+  lstm, forward_lstm,
+  &AI_NET_OBJ_INSTANCE, &LSTM3_layer, AI_STATIC,
+  .tensors = &LSTM2_chain, 
+  .n_units = 32, 
+  .activation_nl = ai_math_tanh, 
+  .recurrent_nl = ai_math_hard_sigmoid, 
+  .go_backwards = false, 
+  .reverse_seq = false, 
+  .out_nl = ai_math_tanh, 
+)
+
+AI_TENSOR_CHAIN_OBJ_DECLARE(
+  LSTM3_chain, AI_STATIC_CONST, 
+  AI_TENSOR_LIST_ENTRY(&LSTM2_output),
+  AI_TENSOR_LIST_ENTRY(&LSTM3_output),
+  AI_TENSOR_LIST_ENTRY(&LSTM3_kernel, &LSTM3_recurrent, &LSTM3_peephole, &LSTM3_bias),
+  AI_TENSOR_LIST_EMPTY
+)
+
+AI_LAYER_OBJ_DECLARE(
+  LSTM3_layer, 5,
+  LSTM_TYPE,
+  lstm, forward_lstm,
+  &AI_NET_OBJ_INSTANCE, &LSTM4_layer, AI_STATIC,
+  .tensors = &LSTM3_chain, 
+  .n_units = 32, 
+  .activation_nl = ai_math_tanh, 
+  .recurrent_nl = ai_math_hard_sigmoid, 
+  .go_backwards = false, 
+  .reverse_seq = false, 
+  .out_nl = ai_math_tanh, 
+)
+
+AI_TENSOR_CHAIN_OBJ_DECLARE(
+  LSTM4_chain, AI_STATIC_CONST, 
+  AI_TENSOR_LIST_ENTRY(&LSTM3_output),
+  AI_TENSOR_LIST_ENTRY(&LSTM4_output),
+  AI_TENSOR_LIST_ENTRY(&LSTM4_kernel, &LSTM4_recurrent, &LSTM4_peephole, &LSTM4_bias),
+  AI_TENSOR_LIST_EMPTY
+)
+
+AI_LAYER_OBJ_DECLARE(
+  LSTM4_layer, 7,
+  LSTM_TYPE,
+  lstm, forward_lstm,
+  &AI_NET_OBJ_INSTANCE, &FCN1_layer, AI_STATIC,
+  .tensors = &LSTM4_chain, 
+  .n_units = 32, 
+  .activation_nl = ai_math_tanh, 
+  .recurrent_nl = ai_math_hard_sigmoid, 
+  .go_backwards = false, 
+  .reverse_seq = false, 
+  .out_nl = ai_math_tanh, 
+)
+
+AI_TENSOR_CHAIN_OBJ_DECLARE(
+  FCN1_chain, AI_STATIC_CONST, 
+  AI_TENSOR_LIST_ENTRY(&LSTM4_output),
+  AI_TENSOR_LIST_ENTRY(&FCN1_output),
+  AI_TENSOR_LIST_ENTRY(&FCN1_weights, &FCN1_bias),
+  AI_TENSOR_LIST_EMPTY
+)
+
+AI_LAYER_OBJ_DECLARE(
+  FCN1_layer, 9,
+  DENSE_TYPE,
+  dense, forward_dense,
+  &AI_NET_OBJ_INSTANCE, &FCN1_nl_layer, AI_STATIC,
+  .tensors = &FCN1_chain, 
+)
+
+AI_TENSOR_CHAIN_OBJ_DECLARE(
+  FCN1_nl_chain, AI_STATIC_CONST, 
+  AI_TENSOR_LIST_ENTRY(&FCN1_output),
+  AI_TENSOR_LIST_ENTRY(&FCN1_nl_output),
   AI_TENSOR_LIST_EMPTY,
   AI_TENSOR_LIST_EMPTY
 )
 
 AI_LAYER_OBJ_DECLARE(
-  dense_1_nl_layer, 4,
-  NL_TYPE,
-  nl, forward_relu,
-  &AI_NET_OBJ_INSTANCE, &dense_2_layer, AI_STATIC,
-  .tensors = &dense_1_nl_chain, 
-)
-
-AI_TENSOR_CHAIN_OBJ_DECLARE(
-  dense_2_chain, AI_STATIC_CONST, 
-  AI_TENSOR_LIST_ENTRY(&dense_1_nl_output),
-  AI_TENSOR_LIST_ENTRY(&dense_2_output),
-  AI_TENSOR_LIST_ENTRY(&dense_2_weights, &dense_2_bias),
-  AI_TENSOR_LIST_EMPTY
-)
-
-AI_LAYER_OBJ_DECLARE(
-  dense_2_layer, 6,
-  DENSE_TYPE,
-  dense, forward_dense,
-  &AI_NET_OBJ_INSTANCE, &dense_2_nl_layer, AI_STATIC,
-  .tensors = &dense_2_chain, 
-)
-
-AI_TENSOR_CHAIN_OBJ_DECLARE(
-  dense_2_nl_chain, AI_STATIC_CONST, 
-  AI_TENSOR_LIST_ENTRY(&dense_2_output),
-  AI_TENSOR_LIST_ENTRY(&dense_2_nl_output),
-  AI_TENSOR_LIST_EMPTY,
-  AI_TENSOR_LIST_EMPTY
-)
-
-AI_LAYER_OBJ_DECLARE(
-  dense_2_nl_layer, 6,
-  NL_TYPE,
-  nl, forward_relu,
-  &AI_NET_OBJ_INSTANCE, &dense_3_layer, AI_STATIC,
-  .tensors = &dense_2_nl_chain, 
-)
-
-AI_TENSOR_CHAIN_OBJ_DECLARE(
-  dense_3_chain, AI_STATIC_CONST, 
-  AI_TENSOR_LIST_ENTRY(&dense_2_nl_output),
-  AI_TENSOR_LIST_ENTRY(&dense_3_output),
-  AI_TENSOR_LIST_ENTRY(&dense_3_weights, &dense_3_bias),
-  AI_TENSOR_LIST_EMPTY
-)
-
-AI_LAYER_OBJ_DECLARE(
-  dense_3_layer, 8,
-  DENSE_TYPE,
-  dense, forward_dense,
-  &AI_NET_OBJ_INSTANCE, &dense_3_nl_layer, AI_STATIC,
-  .tensors = &dense_3_chain, 
-)
-
-AI_TENSOR_CHAIN_OBJ_DECLARE(
-  dense_3_nl_chain, AI_STATIC_CONST, 
-  AI_TENSOR_LIST_ENTRY(&dense_3_output),
-  AI_TENSOR_LIST_ENTRY(&dense_3_nl_output),
-  AI_TENSOR_LIST_EMPTY,
-  AI_TENSOR_LIST_EMPTY
-)
-
-AI_LAYER_OBJ_DECLARE(
-  dense_3_nl_layer, 8,
+  FCN1_nl_layer, 9,
   NL_TYPE,
   nl, forward_sm,
-  &AI_NET_OBJ_INSTANCE, &dense_3_nl_layer, AI_STATIC,
-  .tensors = &dense_3_nl_chain, 
+  &AI_NET_OBJ_INSTANCE, &FCN1_nl_layer, AI_STATIC,
+  .tensors = &FCN1_nl_chain, 
 )
 
 
 AI_NETWORK_OBJ_DECLARE(
   AI_NET_OBJ_INSTANCE,
   AI_BUFFER_OBJ_INIT(AI_BUFFER_FORMAT_U8,
-                     1, 1, 221276, 1,
+                     1, 1, 125436, 1,
                      NULL),
   AI_BUFFER_OBJ_INIT(AI_BUFFER_FORMAT_U8,
-                     1, 1, 8640, 1,
+                     1, 1, 7680, 1,
                      NULL),
   AI_TENSOR_LIST_IO_ENTRY(AI_FLAG_NONE, AI_NETWORK_IN_NUM, &input_0_output),
-  AI_TENSOR_LIST_IO_ENTRY(AI_FLAG_NONE, AI_NETWORK_OUT_NUM, &dense_3_nl_output),
-  &conv2d_1_layer, 0)
+  AI_TENSOR_LIST_IO_ENTRY(AI_FLAG_NONE, AI_NETWORK_OUT_NUM, &FCN1_nl_output),
+  &batch_normalization_2_layer, 0)
 
 
 
@@ -465,24 +605,22 @@ ai_bool network_configure_activations(
 
   {
     /* Updating activations (byte) offsets */
-    conv2d_1_scratch0_array.data = AI_PTR(activations + 0);
-    conv2d_1_scratch0_array.data_start = AI_PTR(activations + 0);
     input_0_output_array.data = AI_PTR(NULL);
     input_0_output_array.data_start = AI_PTR(NULL);
-    conv2d_1_output_array.data = AI_PTR(activations + 1920);
-    conv2d_1_output_array.data_start = AI_PTR(activations + 1920);
-    dense_1_output_array.data = AI_PTR(activations + 0);
-    dense_1_output_array.data_start = AI_PTR(activations + 0);
-    dense_1_nl_output_array.data = AI_PTR(activations + 0);
-    dense_1_nl_output_array.data_start = AI_PTR(activations + 0);
-    dense_2_output_array.data = AI_PTR(activations + 128);
-    dense_2_output_array.data_start = AI_PTR(activations + 128);
-    dense_2_nl_output_array.data = AI_PTR(activations + 128);
-    dense_2_nl_output_array.data_start = AI_PTR(activations + 128);
-    dense_3_output_array.data = AI_PTR(activations + 0);
-    dense_3_output_array.data_start = AI_PTR(activations + 0);
-    dense_3_nl_output_array.data = AI_PTR(NULL);
-    dense_3_nl_output_array.data_start = AI_PTR(NULL);
+    batch_normalization_2_output_array.data = AI_PTR(activations + 0);
+    batch_normalization_2_output_array.data_start = AI_PTR(activations + 0);
+    LSTM1_output_array.data = AI_PTR(activations + 3840);
+    LSTM1_output_array.data_start = AI_PTR(activations + 3840);
+    LSTM2_output_array.data = AI_PTR(activations + 0);
+    LSTM2_output_array.data_start = AI_PTR(activations + 0);
+    LSTM3_output_array.data = AI_PTR(activations + 3840);
+    LSTM3_output_array.data_start = AI_PTR(activations + 3840);
+    LSTM4_output_array.data = AI_PTR(activations + 0);
+    LSTM4_output_array.data_start = AI_PTR(activations + 0);
+    FCN1_output_array.data = AI_PTR(activations + 128);
+    FCN1_output_array.data_start = AI_PTR(activations + 128);
+    FCN1_nl_output_array.data = AI_PTR(NULL);
+    FCN1_nl_output_array.data_start = AI_PTR(NULL);
     
   }
   return true;
@@ -501,30 +639,66 @@ ai_bool network_configure_weights(
 
   {
     /* Updating weights (byte) offsets */
-    dense_3_bias_array.format |= AI_FMT_FLAG_CONST;
-    dense_3_bias_array.data = AI_PTR(weights + 221248);
-    dense_3_bias_array.data_start = AI_PTR(weights + 221248);
-  dense_3_weights_array.format |= AI_FMT_FLAG_CONST;
-    dense_3_weights_array.data = AI_PTR(weights + 220352);
-    dense_3_weights_array.data_start = AI_PTR(weights + 220352);
-  dense_2_bias_array.format |= AI_FMT_FLAG_CONST;
-    dense_2_bias_array.data = AI_PTR(weights + 220224);
-    dense_2_bias_array.data_start = AI_PTR(weights + 220224);
-  dense_2_weights_array.format |= AI_FMT_FLAG_CONST;
-    dense_2_weights_array.data = AI_PTR(weights + 216128);
-    dense_2_weights_array.data_start = AI_PTR(weights + 216128);
-  dense_1_bias_array.format |= AI_FMT_FLAG_CONST;
-    dense_1_bias_array.data = AI_PTR(weights + 216000);
-    dense_1_bias_array.data_start = AI_PTR(weights + 216000);
-  dense_1_weights_array.format |= AI_FMT_FLAG_CONST;
-    dense_1_weights_array.data = AI_PTR(weights + 960);
-    dense_1_weights_array.data_start = AI_PTR(weights + 960);
-  conv2d_1_bias_array.format |= AI_FMT_FLAG_CONST;
-    conv2d_1_bias_array.data = AI_PTR(weights + 864);
-    conv2d_1_bias_array.data_start = AI_PTR(weights + 864);
-  conv2d_1_weights_array.format |= AI_FMT_FLAG_CONST;
-    conv2d_1_weights_array.data = AI_PTR(weights + 0);
-    conv2d_1_weights_array.data_start = AI_PTR(weights + 0);
+    FCN1_bias_array.format |= AI_FMT_FLAG_CONST;
+    FCN1_bias_array.data = AI_PTR(weights + 125408);
+    FCN1_bias_array.data_start = AI_PTR(weights + 125408);
+  FCN1_weights_array.format |= AI_FMT_FLAG_CONST;
+    FCN1_weights_array.data = AI_PTR(weights + 124512);
+    FCN1_weights_array.data_start = AI_PTR(weights + 124512);
+  LSTM4_bias_array.format |= AI_FMT_FLAG_CONST;
+    LSTM4_bias_array.data = AI_PTR(weights + 124000);
+    LSTM4_bias_array.data_start = AI_PTR(weights + 124000);
+  LSTM4_peephole_array.format |= AI_FMT_FLAG_CONST;
+    LSTM4_peephole_array.data = AI_PTR(weights + 123616);
+    LSTM4_peephole_array.data_start = AI_PTR(weights + 123616);
+  LSTM4_recurrent_array.format |= AI_FMT_FLAG_CONST;
+    LSTM4_recurrent_array.data = AI_PTR(weights + 107232);
+    LSTM4_recurrent_array.data_start = AI_PTR(weights + 107232);
+  LSTM4_kernel_array.format |= AI_FMT_FLAG_CONST;
+    LSTM4_kernel_array.data = AI_PTR(weights + 90848);
+    LSTM4_kernel_array.data_start = AI_PTR(weights + 90848);
+  LSTM3_bias_array.format |= AI_FMT_FLAG_CONST;
+    LSTM3_bias_array.data = AI_PTR(weights + 90336);
+    LSTM3_bias_array.data_start = AI_PTR(weights + 90336);
+  LSTM3_peephole_array.format |= AI_FMT_FLAG_CONST;
+    LSTM3_peephole_array.data = AI_PTR(weights + 89952);
+    LSTM3_peephole_array.data_start = AI_PTR(weights + 89952);
+  LSTM3_recurrent_array.format |= AI_FMT_FLAG_CONST;
+    LSTM3_recurrent_array.data = AI_PTR(weights + 73568);
+    LSTM3_recurrent_array.data_start = AI_PTR(weights + 73568);
+  LSTM3_kernel_array.format |= AI_FMT_FLAG_CONST;
+    LSTM3_kernel_array.data = AI_PTR(weights + 57184);
+    LSTM3_kernel_array.data_start = AI_PTR(weights + 57184);
+  LSTM2_bias_array.format |= AI_FMT_FLAG_CONST;
+    LSTM2_bias_array.data = AI_PTR(weights + 56672);
+    LSTM2_bias_array.data_start = AI_PTR(weights + 56672);
+  LSTM2_peephole_array.format |= AI_FMT_FLAG_CONST;
+    LSTM2_peephole_array.data = AI_PTR(weights + 56288);
+    LSTM2_peephole_array.data_start = AI_PTR(weights + 56288);
+  LSTM2_recurrent_array.format |= AI_FMT_FLAG_CONST;
+    LSTM2_recurrent_array.data = AI_PTR(weights + 39904);
+    LSTM2_recurrent_array.data_start = AI_PTR(weights + 39904);
+  LSTM2_kernel_array.format |= AI_FMT_FLAG_CONST;
+    LSTM2_kernel_array.data = AI_PTR(weights + 23520);
+    LSTM2_kernel_array.data_start = AI_PTR(weights + 23520);
+  LSTM1_bias_array.format |= AI_FMT_FLAG_CONST;
+    LSTM1_bias_array.data = AI_PTR(weights + 23008);
+    LSTM1_bias_array.data_start = AI_PTR(weights + 23008);
+  LSTM1_peephole_array.format |= AI_FMT_FLAG_CONST;
+    LSTM1_peephole_array.data = AI_PTR(weights + 22624);
+    LSTM1_peephole_array.data_start = AI_PTR(weights + 22624);
+  LSTM1_recurrent_array.format |= AI_FMT_FLAG_CONST;
+    LSTM1_recurrent_array.data = AI_PTR(weights + 6240);
+    LSTM1_recurrent_array.data_start = AI_PTR(weights + 6240);
+  LSTM1_kernel_array.format |= AI_FMT_FLAG_CONST;
+    LSTM1_kernel_array.data = AI_PTR(weights + 96);
+    LSTM1_kernel_array.data_start = AI_PTR(weights + 96);
+  batch_normalization_2_bias_array.format |= AI_FMT_FLAG_CONST;
+    batch_normalization_2_bias_array.data = AI_PTR(weights + 48);
+    batch_normalization_2_bias_array.data_start = AI_PTR(weights + 48);
+  batch_normalization_2_scale_array.format |= AI_FMT_FLAG_CONST;
+    batch_normalization_2_scale_array.data = AI_PTR(weights + 0);
+    batch_normalization_2_scale_array.data_start = AI_PTR(weights + 0);
   
   }
 
@@ -561,7 +735,7 @@ ai_bool ai_network_get_info(
       .api_version            = ai_platform_api_get_version(),
       .interface_api_version  = ai_platform_interface_api_get_version(),
       
-      .n_macc            = 129121,
+      .n_macc            = 926489,
       .n_inputs          = 0,
       .inputs            = NULL,
       .n_outputs         = 0,

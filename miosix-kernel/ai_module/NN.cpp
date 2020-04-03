@@ -60,7 +60,7 @@ ai_bool NN::nnInit(ai_handle net, ai_network_params* net_par, ai_u8* activations
 
 	if (!ai_network_init(net, (const ai_network_params*)NN::params)) {
 		NN::last_error_rep = ai_network_get_error(net);
-		printf("\r\n[ERROR]: Error during initialization!\r\n[CODE]: -type: %lu code: %lu\r\n", last_error_rep.type, last_error_rep.code);
+		printf("\r\n[ERROR]: Error during initialization!\r\n[CODE]: -type: %x code: %x\r\n", last_error_rep.type, last_error_rep.code);
 		return false;
 	}
 	printf("\r\n[LOG]: Network correctly initialized!\r\n");
@@ -79,7 +79,7 @@ ai_i32 NN::nnRun(ai_handle net, ai_buffer* ai_input, ai_buffer* ai_output, const
 
 		if (nbatch != batch_size) {
 			NN::last_error_rep = ai_network_get_error(net);
-			printf("\r\n[ERROR]: The neural network has not processed the expected number of batches!\r\n[CODE]: -type: %lu code: %lu\r\n", last_error_rep.type, last_error_rep.code);
+			printf("\r\n[ERROR]: The neural network has not processed the expected number of batches!\r\n[CODE]: -type: %x code: %x\r\n", last_error_rep.type, last_error_rep.code);
 
 			return -1;
 		}
