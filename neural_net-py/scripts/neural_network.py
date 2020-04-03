@@ -78,7 +78,7 @@ def train_model(model, x_train, y_train, x_valid, y_valid):
 
     # Hyper-parameters
     BATCH_SIZE = 32
-    EPOCHS = 60
+    EPOCHS = 50
 
     learning_rate = 0.0001
     rms = RMSprop(lr=learning_rate)

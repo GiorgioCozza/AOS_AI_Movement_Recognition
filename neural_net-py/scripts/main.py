@@ -77,17 +77,17 @@ def main():
 
     c = show_activity_files()
     # copy into the list all the activity files to be plotted
-    act_files_scat = ['walking_23-02-2020_165231.txt',
-                 'standing_29-12-2019_063829.txt',
-                 'jumping_25-02-2020_094215.txt',
-                 'running_24-02-2020_151633.txt',
-                 'supine_24-02-2020_125443.txt',
-                 'sitting_24-02-2020_081708.txt',
-                 'lying_on_side_24-02-2020_134922.txt']
+    act_files_scat = ['walking_31-03-2020_094946_new_1.txt',
+                      'standing_01-04-2020_083046_new_1.txt',
+                      'jumping_25-02-2020_094215.txt',
+                      'running_02-04-2020_123531_new_2.txt',
+                      'supine_01-04-2020_122912_new_1.txt',
+                      'sitting_30-03-2020_212100_new_2.txt',
+                      'lying_on_side_02-04-2020_135508_new_2.txt']
 
-    act_files_plot = ['supine_24-02-2020_125443.txt',
-                 'sitting_24-02-2020_081708.txt',
-                 'lying_on_side_24-02-2020_134922.txt']
+    act_files_plot = ['supine_01-04-2020_122912_new_1.txt',
+                      'sitting_30-03-2020_212100_new_2.txt',
+                      'lying_on_side_02-04-2020_135508_new_2.txt']
 
     # UNCOMMENT TO SHOW PLOTS
     act_files_scat = [os.path.join(session_dir, af) for af in act_files_scat]
