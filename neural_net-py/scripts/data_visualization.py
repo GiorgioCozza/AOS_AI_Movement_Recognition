@@ -11,7 +11,7 @@ import numpy as np
 from scripts.config import *
 from scripts.dataset_processing import get_activity_session, get_dataset
 
-
+# Plot session data samples
 def plot_temporal_activity(filepaths=[], limit=0):
 
     activities = [el.split('\\')[-1].split('_')[0] for el in filepaths]
@@ -59,6 +59,7 @@ def plot_axis(ax, x, y, title):
     ax.grid(True)
 
 
+# Show results of testing in form of confusion matrix
 def show_confusion_matrix(validations, predictions):
 
     matrix = metrics.confusion_matrix(validations, predictions)
@@ -79,7 +80,7 @@ def show_confusion_matrix(validations, predictions):
     fig.savefig(plot_path)
     plt.show()
 
-
+# Show activity data distribution
 def show_activities_histogram():
     plt.style.use('ggplot')
     smp_cnt = []
@@ -102,9 +103,11 @@ def show_activities_histogram():
     plt.show()
 
 
+# Show all the current session files
 def show_activity_files():
 
     m_c = 1
+    print("\n")
     print("###########################   SESSION FILES   ###################################")
     print("\n")
     actfiles = os.listdir(session_dir)
@@ -116,7 +119,7 @@ def show_activity_files():
 
 
 
-
+# Show 3D scatter plot of a single sample window per each activity and sensor
 def activity_scattering3D(filepaths=[], limit=0):
 
     activities = [el.split('\\')[-1].split('_')[0] for el in filepaths]

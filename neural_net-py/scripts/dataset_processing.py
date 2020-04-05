@@ -11,6 +11,7 @@ ds_model = {"ACC_LSM6DSL_DS": {"x": [], "y": [], "z": []}, "GYR_LSM6DSL_DS": {"x
             "ACC_LSM303AGR_DS": {"x": [], "y": [], "z": []}, "MAG_LSM303AGR_DS": {"x": [], "y": [], "z": []}}
 
 
+# Merge all the session files per activity into a dataset
 def merge_session_files(dir_path, activity):
     act_filename = activity + '.txt'
     actfile_dir = os.path.join(dir_path, 'activity_files')
@@ -34,6 +35,7 @@ def merge_session_files(dir_path, activity):
     fw.close()
 
 
+# Get all samples from an activity dataset
 def get_activity_session(filename):
     res = cp.deepcopy(ds_model)
 
@@ -62,7 +64,7 @@ def get_activity_session(filename):
     return res
 
 
-# Dataset partitioning (training, testing)
+# Dataset partitioning (training, validation, testing)
 def split_train_valid_test(ds_batches, labels, ratio, fold):
     ds_batch_num = ds_batches.shape[0]
     test_batch_num = int(np.round(ratio * ds_batch_num))
@@ -92,7 +94,7 @@ def split_train_valid_test(ds_batches, labels, ratio, fold):
     split_dict = {"training": {"input": ds_train_batches, "output": train_labels},
                   "validation": {"input": ds_val_batches, "output": val_labels},
                   "testing": {"input": ds_test_batches, "output": test_labels}}
-    # print(split_dict["testing"]["input"][0])
+
     return split_dict
 
 
@@ -137,7 +139,7 @@ def normalize(dataset_dict, activity):
     return norm_dataset
 
 
-# Reshape and organize the input and output sets
+# Reshape and organize the input and target into group of batches
 def prepare_data(ds, label):
     segments = np.empty((0, WINDOW_SAMPLES, SENS_VALUES))
     step = WINDOW_SAMPLES
@@ -176,6 +178,7 @@ def prepare_data(ds, label):
     return segments, labels
 
 
+# put all the test batches into a csv file
 def test_on_csv(xtest, ytest, find_dir=None, fold_n=0):
     icsv_fname = 'test_input_' + 'fold-' + str(fold_n) + '_' + dt.now().strftime('%b%d_%H-%M-%S') + '.csv'
     ocsv_fname = 'test_output_' + 'fold-' + str(fold_n) + '_' + dt.now().strftime('%b%d_%H-%M-%S') + '.csv'
@@ -209,6 +212,7 @@ def test_on_csv(xtest, ytest, find_dir=None, fold_n=0):
     return icsv_fname, ocsv_fname
 
 
+# Test the neural network using data from csv file
 def test_from_csv(test_in_set, test_out_set, model):
     test_set = np.array([])
 
@@ -257,6 +261,7 @@ def test_from_csv(test_in_set, test_out_set, model):
     return test_set
 
 
+# Shuffle data samples
 def shuffle_dataset(x_ds, y_ds):
     zip_ds = list(zip(x_ds, y_ds))
     rnd.shuffle(zip_ds)

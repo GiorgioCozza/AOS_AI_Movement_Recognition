@@ -4,6 +4,7 @@ import keras
 from scripts.dataset_processing import get_dataset, normalize, prepare_data, \
                                        split_train_valid_test, test_on_csv, test_from_csv, \
                                        shuffle_dataset, merge_session_files
+
 import os
 from scripts.data_visualization import plot_temporal_activity, show_activities_histogram, show_activity_files, activity_scattering3D
 from scripts.config import *
@@ -13,11 +14,6 @@ from datetime import datetime as dt
 
 def set_env():
     workspace = os.getcwd()
-    mod_path = os.path.join(workspace, mod_dir)
-
-    if not os.path.exists(mod_path):
-        os.makedirs(mod_path)
-        os.makedirs(best_mod_dir)
 
     if not os.path.exists(best_mod_dir):
         os.makedirs(best_mod_dir)
@@ -79,15 +75,14 @@ def main():
     # copy into the list all the activity files to be plotted
     act_files_scat = ['walking_31-03-2020_094946_new_1.txt',
                       'standing_01-04-2020_083046_new_1.txt',
-                      'jumping_25-02-2020_094215.txt',
+                      'jumping_03-04-2020_165632_new_1.txt',
                       'running_02-04-2020_123531_new_2.txt',
                       'supine_01-04-2020_122912_new_1.txt',
                       'sitting_30-03-2020_212100_new_2.txt',
                       'lying_on_side_02-04-2020_135508_new_2.txt']
 
-    act_files_plot = ['supine_01-04-2020_122912_new_1.txt',
-                      'sitting_30-03-2020_212100_new_2.txt',
-                      'lying_on_side_02-04-2020_135508_new_2.txt']
+    act_files_plot = ['standing_01-04-2020_083046_new_1.txt',
+                      'jumping_03-04-2020_165632_new_1.txt']
 
     # UNCOMMENT TO SHOW PLOTS
     act_files_scat = [os.path.join(session_dir, af) for af in act_files_scat]
@@ -97,7 +92,7 @@ def main():
     #show_activities_histogram()
 
 
-    # dataset collection
+    # data gathering from files
     stand_dataset = get_dataset(stand_ds_path)
     run_dataset = get_dataset(run_ds_path)
     walk_dataset = get_dataset(walk_ds_path)
@@ -137,7 +132,7 @@ def main():
         mod_fun = RNN_model
 
     for j in range(0, folds):
-        nn_models.append(mod_fun())       #substitute with CNN_model()/RNN_model() to train the two solutions
+        nn_models.append(mod_fun())
 
     print("\r\nMINIMUM FOLD CYCLE: " + str(folds))
     for i in range(0, folds):

@@ -32,7 +32,6 @@ plot_dir = "../plots"
 log_dir = "../log/"
 curlog_dir = ""
 plot_dir = "../plots"
-mod_dir = "../saved_models"
 csv_dir = "../test_csv"
 best_mod_dir = "../best_models"
 

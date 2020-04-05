@@ -8,6 +8,7 @@ from keras.callbacks import EarlyStopping
 from keras.callbacks import TensorBoard
 import keras.backend as K
 from datetime import datetime as dt
+import tensorflow as tf
 import os
 from scripts.data_visualization import show_confusion_matrix
 from scripts.config import *
@@ -17,7 +18,7 @@ x_test = []
 y_train = []
 y_test = []
 
-
+# print model summary in a text file
 def model_summary(model, mod_type=''):
     if mod_type == '':
         model.summary()
@@ -29,9 +30,9 @@ def model_summary(model, mod_type=''):
         f.close()
 
 
-# Definition of the neural network model
+# Convolutional Neural Network model
 def CNN_model():
-    numFilters = 30
+    numFilters = 24
 
     cnn_model = Sequential()
     cnn_model.add(BatchNormalization(input_shape=(WINDOW_SAMPLES, SENS_VALUES, 1)))
@@ -45,7 +46,7 @@ def CNN_model():
     model_summary(cnn_model, mod_type='CNN')
     return cnn_model
 
-
+# Recurrent Neural Network model
 def RNN_model():
     hid_nodes_lstm = 32
     rnn_model = Sequential()
@@ -64,6 +65,7 @@ def RNN_model():
     return rnn_model
 
 
+
 def train_model(model, x_train, y_train, x_valid, y_valid):
     # Training logging
     now = dt.now()
@@ -72,13 +74,13 @@ def train_model(model, x_train, y_train, x_valid, y_valid):
     tensorboard_cb = TensorBoard(log_dir=logfile_path, histogram_freq=0)
     # callback list
     callback_list = [
-        EarlyStopping(monitor='val_acc', mode='max', verbose=1, patience=40),
+        EarlyStopping(monitor='val_acc', mode='max', verbose=1, patience=10),
         tensorboard_cb
     ]
 
-    # Hyper-parameters
+
     BATCH_SIZE = 32
-    EPOCHS = 50
+    EPOCHS = 40
 
     learning_rate = 0.0001
     rms = RMSprop(lr=learning_rate)
@@ -130,7 +132,7 @@ def test_model_set(model_set, test_set):
     print("\r\n\n")
 
     best_acc_fold = np.argmax(acc_res)
-    best_loss_fold = np.argmax(loss_res)
+    best_loss_fold = np.argmin(loss_res)
     best_acc_model = model_set[best_acc_fold]
     best_loss_model = model_set[best_loss_fold]
 
@@ -138,6 +140,7 @@ def test_model_set(model_set, test_set):
 
 
 def save_best_models(max_acc_mod, min_loss_mod, model_name, acc_fold, loss_fold):
+
     loss_mod_path = os.path.join(best_mod_dir,
                                  "best_loss_" + model_name + '_fold' + str(loss_fold) + '_' + dt.now().strftime("%d-%m-%Y_%H%M%S") + '.h5')
     acc_mod_path = os.path.join(best_mod_dir,
@@ -145,3 +148,4 @@ def save_best_models(max_acc_mod, min_loss_mod, model_name, acc_fold, loss_fold)
 
     min_loss_mod.save(loss_mod_path)
     max_acc_mod.save(acc_mod_path)
+
