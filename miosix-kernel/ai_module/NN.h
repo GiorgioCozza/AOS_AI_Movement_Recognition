@@ -1,7 +1,7 @@
 
 /**
  *******************************************************************************
-  *   @file NNManager.h
+  *   @file NN.h
   *   @author Cozza Giorgio, Liu Jiaqi
   *   @date 08/04/19
   *   @version 1.0
@@ -23,8 +23,8 @@
  */
 
 
-#ifndef NNMANAGER_H
-#define NNMANAGER_H
+#ifndef NN_H
+#define NN_H
 
 
  /*-----------------  INCLUDES  --------------------------------*/

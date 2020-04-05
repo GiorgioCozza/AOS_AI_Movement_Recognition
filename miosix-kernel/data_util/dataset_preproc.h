@@ -30,7 +30,7 @@
 #include "network.h"
 #include "network_data.h"
 #include "ai_math_helpers.h"
-#include "XNUCLEO_IKS01A2.h"
+#include "IKS01A2_config.h"
 #include <stdint.h>
 #include "prog_config.h"
 

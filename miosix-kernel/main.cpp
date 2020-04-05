@@ -8,9 +8,9 @@
 #include "circular_queue.h"
 #include "LSM6DSL.h"
 #include "LSM303AGR.h"
-#include "XNUCLEO_IKS01A2.h"
 #include "NN.h"
 
+#define PRED_SIZE  6
 
 using namespace std;
 using namespace miosix;
@@ -34,7 +34,7 @@ void print_on_serial(float* int_vec, uint32_t smp_cnt) {
 
 void print_config(LSM6DSLAccGyr * acc_gyr_ptr, LSM303AGRAccMag * acc_mag_ptr){
 
-    uint8_t id = 0;
+    uint8_t id = 0, pred_cnt = 0;
     float odr = 0.0, fs = 0.0, sens = 0.0;
 
     if (acc_gyr_ptr->read_id(&id))
@@ -97,6 +97,19 @@ uint8_t argmax(float * vec, uint16_t vec_sz){
     return idx_max;
 }
 
+uint8_t mode(uint8_t * vec, uint16_t vec_sz){
+
+    uint8_t acts[NUM_CLASSES] = {0,0,0,0,0,0,0};
+    uint8_t _max = 0, mode_idx = 0;
+    for(int i = 0; i < vec_sz; i++){
+        acts[vec[i]] += 1;
+        if (acts[vec[i]] > _max ) {
+            _max = acts[vec[i]];
+            mode_idx = vec[i];
+        }
+    }
+    return mode_idx;
+}
 
 
 int main() {
@@ -106,7 +119,7 @@ int main() {
         RCC->AHB1ENR |= RCC_AHB1ENR_CRCEN;
         CRC->CR = CRC_CR_RESET;
     }
-    printf("#######################   |AOS: Neural Network on STM32 with STM32CubeAI|	#####################################\r\n");
+    printf("#######################   |AOS: Neural Network on STM32 with STM32CubeAI|	###########################\r\n");
 
     int32_t buf_reader[3];
 
@@ -114,9 +127,11 @@ int main() {
     float *out_data = (float *) malloc(NUM_CLASSES * sizeof(float));
     float *int_vec = new float[VECTOR_SIZE];
     uint16_t vec_sz = WINDOW_SIZE * VECTOR_SIZE;
+    uint8_t preds[PRED_SIZE];
+    uint8_t pred_cnt = 0;
 
-    LSM6DSLAccGyr *acc_gyr = new LSM6DSLAccGyr(LSM6DSL_I2C_ADDRESS_HIGH);
-    LSM303AGRAccMag *acc_mag = new LSM303AGRAccMag(LSM303AGRMag_I2C_ADDR, LSM303AGRAcc_I2C_ADDR);  //++
+    LSM6DSLAccGyr *acc_gyr = new LSM6DSLAccGyr();
+    LSM303AGRAccMag *acc_mag = new LSM303AGRAccMag();  //++
 
     // struct declaration to use for input segment preprocessing
 
@@ -148,9 +163,6 @@ int main() {
 
     if (neural_net->nnCreate(&network)) {
         if (neural_net->nnInit(network, (ai_network_params*)AI_NETWORK_DATA_CONFIG, activations)) {
-
-
-            printf("\r\n[LOG]: START, Batch collection...\r\n");
 
             while (1) {
 
@@ -197,7 +209,6 @@ int main() {
 
 
                 queue.insert(int_vec, VECTOR_SIZE);
-
                 //Clear terminal screen
                 printf("%c[H", ESC);
                 printf("%c[2J", ESC);
@@ -212,16 +223,16 @@ int main() {
 
                     //printf("\r\n[LOG]: Running the Neural Network...\r\n");
                     int n_b = neural_net->nnRun(network, &ai_input, &ai_output, 1);
+                    preds[pred_cnt] = argmax(out_data, NUM_CLASSES);
 
-                    printf("\r\n****************	AI NN NETWORK RESULT	*********************\r\n");
-                    printf("\n[LOG]: You are %s\n\n", movements[argmax(out_data, NUM_CLASSES)]);
-                    Thread::sleep(50);
-                    /*
-                    printf("\r\n****************	AI NN NETWORK RESULT	*********************\r\n");
-                    printf("\r\n[LOG]: OUTPUT N_BATCHES: %d\r\n", n_b);
-                    for (int i = 0; i < NUM_CLASSES; i++)
-                        printf("[OUTPUT]: Class %s (acc): %.2f %\r\n", movements[i], out_data[i]);
-    */
+                    if (pred_cnt == PRED_SIZE) {
+                        printf("\r\n****************	AI NN NETWORK RESULT	*********************\r\n");
+                        printf("\n[LOG]: You are %s\n\n", movements[mode(preds, PRED_SIZE)]);
+                        pred_cnt = 0;
+                        startflag = false;
+                    }
+
+                    pred_cnt++;
                 }
 
             }

@@ -33,12 +33,6 @@ $(SENSDRIV)/com_i2c/i2c_helper.cpp					\
 $(DATAUTL)/dataset_preproc.cpp						\
 $(SENSDRIV)/LSM6DSL/LSM6DSL.cpp				\
 $(SENSDRIV)/LSM303AGR/LSM303AGR.cpp		\
-$(SENSDRIV)/LSM6DSL/LSM6DSL_acc_gyro_driver.c	    \
-$(SENSDRIV)/LSM6DSL/LSM6DSLSensor.cpp				\
-$(SENSDRIV)/LSM303AGR/LSM303AGR_acc_driver.c        \
-$(SENSDRIV)/LSM303AGR/LSM303AGRAccSensor.cpp		\
-$(SENSDRIV)/LSM303AGR/LSM303AGR_mag_driver.c		\
-$(SENSDRIV)/LSM303AGR/LSM303AGRMagSensor.cpp		\
 $(AIPATH)/Drivers/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_f32.c 			\
 $(AIPATH)/NN.cpp																\
 ./eabi_glibc/aeabi_memclr.c								\

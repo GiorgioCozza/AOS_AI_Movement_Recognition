@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    network.c
   * @author  AST Embedded Analytics Research Platform
-  * @date    Fri Apr  3 18:28:37 2020
+  * @date    Sun Apr  5 16:38:35 2020
   * @brief   AI Tool Automatic Code Generator for Embedded NN computing
   ******************************************************************************
   * @attention
@@ -46,14 +46,14 @@
 #define AI_NET_OBJ_INSTANCE g_network
  
 #undef AI_NETWORK_MODEL_SIGNATURE
-#define AI_NETWORK_MODEL_SIGNATURE     "9a318b55ace4f0e13625fc4c0edee66c"
+#define AI_NETWORK_MODEL_SIGNATURE     "84e83c874b5eefc495d6b86c996aa7cd"
 
 #ifndef AI_TOOLS_REVISION_ID
 #define AI_TOOLS_REVISION_ID     "(rev-)"
 #endif
 
 #undef AI_TOOLS_DATE_TIME
-#define AI_TOOLS_DATE_TIME   "Fri Apr  3 18:28:37 2020"
+#define AI_TOOLS_DATE_TIME   "Sun Apr  5 16:38:35 2020"
 
 #undef AI_TOOLS_COMPILE_TIME
 #define AI_TOOLS_COMPILE_TIME    __DATE__ " " __TIME__
@@ -84,10 +84,10 @@ AI_STATIC ai_array LSTM1_bias_array;   /* Array #14 */
 AI_STATIC ai_array LSTM1_peephole_array;   /* Array #15 */
 AI_STATIC ai_array LSTM1_recurrent_array;   /* Array #16 */
 AI_STATIC ai_array LSTM1_kernel_array;   /* Array #17 */
-AI_STATIC ai_array batch_normalization_2_bias_array;   /* Array #18 */
-AI_STATIC ai_array batch_normalization_2_scale_array;   /* Array #19 */
+AI_STATIC ai_array batch_normalization_4_bias_array;   /* Array #18 */
+AI_STATIC ai_array batch_normalization_4_scale_array;   /* Array #19 */
 AI_STATIC ai_array input_0_output_array;   /* Array #20 */
-AI_STATIC ai_array batch_normalization_2_output_array;   /* Array #21 */
+AI_STATIC ai_array batch_normalization_4_output_array;   /* Array #21 */
 AI_STATIC ai_array LSTM1_output_array;   /* Array #22 */
 AI_STATIC ai_array LSTM2_output_array;   /* Array #23 */
 AI_STATIC ai_array LSTM3_output_array;   /* Array #24 */
@@ -115,10 +115,10 @@ AI_STATIC ai_tensor LSTM1_bias;   /* Tensor #14 */
 AI_STATIC ai_tensor LSTM1_peephole;   /* Tensor #15 */
 AI_STATIC ai_tensor LSTM1_recurrent;   /* Tensor #16 */
 AI_STATIC ai_tensor LSTM1_kernel;   /* Tensor #17 */
-AI_STATIC ai_tensor batch_normalization_2_bias;   /* Tensor #18 */
-AI_STATIC ai_tensor batch_normalization_2_scale;   /* Tensor #19 */
+AI_STATIC ai_tensor batch_normalization_4_bias;   /* Tensor #18 */
+AI_STATIC ai_tensor batch_normalization_4_scale;   /* Tensor #19 */
 AI_STATIC ai_tensor input_0_output;   /* Tensor #20 */
-AI_STATIC ai_tensor batch_normalization_2_output;   /* Tensor #21 */
+AI_STATIC ai_tensor batch_normalization_4_output;   /* Tensor #21 */
 AI_STATIC ai_tensor LSTM1_output;   /* Tensor #22 */
 AI_STATIC ai_tensor LSTM2_output;   /* Tensor #23 */
 AI_STATIC ai_tensor LSTM3_output;   /* Tensor #24 */
@@ -128,7 +128,7 @@ AI_STATIC ai_tensor FCN1_nl_output;   /* Tensor #27 */
 
 
 /**  Forward network tensor chain declarations  *******************************/
-AI_STATIC_CONST ai_tensor_chain batch_normalization_2_chain;   /* Chain #0 */
+AI_STATIC_CONST ai_tensor_chain batch_normalization_4_chain;   /* Chain #0 */
 AI_STATIC_CONST ai_tensor_chain LSTM1_chain;   /* Chain #1 */
 AI_STATIC_CONST ai_tensor_chain LSTM2_chain;   /* Chain #2 */
 AI_STATIC_CONST ai_tensor_chain LSTM3_chain;   /* Chain #3 */
@@ -144,7 +144,7 @@ AI_STATIC_CONST ai_tensor_chain FCN1_nl_chain;   /* Chain #6 */
 
 
 /**  Forward network layer declarations  **************************************/
-AI_STATIC ai_layer_bn batch_normalization_2_layer; /* Layer #0 */
+AI_STATIC ai_layer_bn batch_normalization_4_layer; /* Layer #0 */
 AI_STATIC ai_layer_lstm LSTM1_layer; /* Layer #1 */
 AI_STATIC ai_layer_lstm LSTM2_layer; /* Layer #2 */
 AI_STATIC ai_layer_lstm LSTM3_layer; /* Layer #3 */
@@ -227,11 +227,11 @@ AI_ARRAY_OBJ_DECLARE(
   NULL, NULL, 1536,
   AI_STATIC)
 AI_ARRAY_OBJ_DECLARE(
-  batch_normalization_2_bias_array, AI_ARRAY_FORMAT_FLOAT,
+  batch_normalization_4_bias_array, AI_ARRAY_FORMAT_FLOAT,
   NULL, NULL, 12,
   AI_STATIC)
 AI_ARRAY_OBJ_DECLARE(
-  batch_normalization_2_scale_array, AI_ARRAY_FORMAT_FLOAT,
+  batch_normalization_4_scale_array, AI_ARRAY_FORMAT_FLOAT,
   NULL, NULL, 12,
   AI_STATIC)
 AI_ARRAY_OBJ_DECLARE(
@@ -239,7 +239,7 @@ AI_ARRAY_OBJ_DECLARE(
   NULL, NULL, 360,
   AI_STATIC)
 AI_ARRAY_OBJ_DECLARE(
-  batch_normalization_2_output_array, AI_ARRAY_FORMAT_FLOAT,
+  batch_normalization_4_output_array, AI_ARRAY_FORMAT_FLOAT,
   NULL, NULL, 360,
   AI_STATIC)
 AI_ARRAY_OBJ_DECLARE(
@@ -378,16 +378,16 @@ AI_TENSOR_OBJ_DECLARE(
   &LSTM1_kernel_array,
   AI_STATIC)
 AI_TENSOR_OBJ_DECLARE(
-  batch_normalization_2_bias,
+  batch_normalization_4_bias,
   AI_SHAPE_INIT(1, 1, 12, 1),
   AI_STRIDE_INIT(48, 48, 4, 4),
-  &batch_normalization_2_bias_array,
+  &batch_normalization_4_bias_array,
   AI_STATIC)
 AI_TENSOR_OBJ_DECLARE(
-  batch_normalization_2_scale,
+  batch_normalization_4_scale,
   AI_SHAPE_INIT(1, 1, 12, 1),
   AI_STRIDE_INIT(48, 48, 4, 4),
-  &batch_normalization_2_scale_array,
+  &batch_normalization_4_scale_array,
   AI_STATIC)
 AI_TENSOR_OBJ_DECLARE(
   input_0_output,
@@ -396,10 +396,10 @@ AI_TENSOR_OBJ_DECLARE(
   &input_0_output_array,
   AI_STATIC)
 AI_TENSOR_OBJ_DECLARE(
-  batch_normalization_2_output,
+  batch_normalization_4_output,
   AI_SHAPE_INIT(30, 1, 12, 1),
   AI_STRIDE_INIT(48, 48, 4, 4),
-  &batch_normalization_2_output_array,
+  &batch_normalization_4_output_array,
   AI_STATIC)
 AI_TENSOR_OBJ_DECLARE(
   LSTM1_output,
@@ -444,24 +444,24 @@ AI_TENSOR_OBJ_DECLARE(
 
 
 AI_TENSOR_CHAIN_OBJ_DECLARE(
-  batch_normalization_2_chain, AI_STATIC_CONST, 
+  batch_normalization_4_chain, AI_STATIC_CONST, 
   AI_TENSOR_LIST_ENTRY(&input_0_output),
-  AI_TENSOR_LIST_ENTRY(&batch_normalization_2_output),
-  AI_TENSOR_LIST_ENTRY(&batch_normalization_2_scale, &batch_normalization_2_bias),
+  AI_TENSOR_LIST_ENTRY(&batch_normalization_4_output),
+  AI_TENSOR_LIST_ENTRY(&batch_normalization_4_scale, &batch_normalization_4_bias),
   AI_TENSOR_LIST_EMPTY
 )
 
 AI_LAYER_OBJ_DECLARE(
-  batch_normalization_2_layer, 0,
+  batch_normalization_4_layer, 0,
   BN_TYPE,
   bn, forward_bn,
   &AI_NET_OBJ_INSTANCE, &LSTM1_layer, AI_STATIC,
-  .tensors = &batch_normalization_2_chain, 
+  .tensors = &batch_normalization_4_chain, 
 )
 
 AI_TENSOR_CHAIN_OBJ_DECLARE(
   LSTM1_chain, AI_STATIC_CONST, 
-  AI_TENSOR_LIST_ENTRY(&batch_normalization_2_output),
+  AI_TENSOR_LIST_ENTRY(&batch_normalization_4_output),
   AI_TENSOR_LIST_ENTRY(&LSTM1_output),
   AI_TENSOR_LIST_ENTRY(&LSTM1_kernel, &LSTM1_recurrent, &LSTM1_peephole, &LSTM1_bias),
   AI_TENSOR_LIST_EMPTY
@@ -590,7 +590,7 @@ AI_NETWORK_OBJ_DECLARE(
                      NULL),
   AI_TENSOR_LIST_IO_ENTRY(AI_FLAG_NONE, AI_NETWORK_IN_NUM, &input_0_output),
   AI_TENSOR_LIST_IO_ENTRY(AI_FLAG_NONE, AI_NETWORK_OUT_NUM, &FCN1_nl_output),
-  &batch_normalization_2_layer, 0)
+  &batch_normalization_4_layer, 0)
 
 
 
@@ -607,8 +607,8 @@ ai_bool network_configure_activations(
     /* Updating activations (byte) offsets */
     input_0_output_array.data = AI_PTR(NULL);
     input_0_output_array.data_start = AI_PTR(NULL);
-    batch_normalization_2_output_array.data = AI_PTR(activations + 0);
-    batch_normalization_2_output_array.data_start = AI_PTR(activations + 0);
+    batch_normalization_4_output_array.data = AI_PTR(activations + 0);
+    batch_normalization_4_output_array.data_start = AI_PTR(activations + 0);
     LSTM1_output_array.data = AI_PTR(activations + 3840);
     LSTM1_output_array.data_start = AI_PTR(activations + 3840);
     LSTM2_output_array.data = AI_PTR(activations + 0);
@@ -693,12 +693,12 @@ ai_bool network_configure_weights(
   LSTM1_kernel_array.format |= AI_FMT_FLAG_CONST;
     LSTM1_kernel_array.data = AI_PTR(weights + 96);
     LSTM1_kernel_array.data_start = AI_PTR(weights + 96);
-  batch_normalization_2_bias_array.format |= AI_FMT_FLAG_CONST;
-    batch_normalization_2_bias_array.data = AI_PTR(weights + 48);
-    batch_normalization_2_bias_array.data_start = AI_PTR(weights + 48);
-  batch_normalization_2_scale_array.format |= AI_FMT_FLAG_CONST;
-    batch_normalization_2_scale_array.data = AI_PTR(weights + 0);
-    batch_normalization_2_scale_array.data_start = AI_PTR(weights + 0);
+  batch_normalization_4_bias_array.format |= AI_FMT_FLAG_CONST;
+    batch_normalization_4_bias_array.data = AI_PTR(weights + 48);
+    batch_normalization_4_bias_array.data_start = AI_PTR(weights + 48);
+  batch_normalization_4_scale_array.format |= AI_FMT_FLAG_CONST;
+    batch_normalization_4_scale_array.data = AI_PTR(weights + 0);
+    batch_normalization_4_scale_array.data_start = AI_PTR(weights + 0);
   
   }
 
