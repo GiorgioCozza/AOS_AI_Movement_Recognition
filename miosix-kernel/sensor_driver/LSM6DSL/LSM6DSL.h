@@ -79,10 +79,9 @@
 
 #define LSM6DSL_IF_INC_MASK                         0x04
 
-#include "IKS01A2_config.h"
 #include "LSM6DSL_accelerometer.h"
 #include "LSM6DSL_gyroscope.h"
-
+#include "IKS01A2_config.h"
 
 class LSM6DSLAccGyr
 {
@@ -117,7 +116,7 @@ class LSM6DSLAccGyr
         {
             uint8_t i = 0;
             for (i = 0; i < NumByteToRead; i++) {
-                if (!((I2CHelper::getInstance())->read(pBuffer + i, address, RegisterAddr + i, 1)))
+                if (!((I2CHelper::getInstance())->read(pBuffer + i, LSM6DSL_I2C_ADDR, RegisterAddr + i, 1)))
                     return false;
                 *(pBuffer + i) &= reg_mask;
             }
@@ -129,12 +128,12 @@ class LSM6DSLAccGyr
             uint8_t i = 0;
             uint8_t *tmp_buf = new uint8_t[NumByteToWrite];
             for (i = 0; i < NumByteToWrite; i++) {
-                if (!((I2CHelper::getInstance())->read(tmp_buf + i, address, RegisterAddr + i, 1)))
+                if (!((I2CHelper::getInstance())->read(tmp_buf + i, LSM6DSL_I2C_ADDR, RegisterAddr + i, 1)))
                     return false;
                 else {
                     *(tmp_buf + i) &= ~reg_mask;
                     *(tmp_buf + i) |= *(pBuffer + i);
-                    if (!((I2CHelper::getInstance())->write(tmp_buf + i, address, RegisterAddr + i, 1, false)))
+                    if (!((I2CHelper::getInstance())->write(tmp_buf + i, LSM6DSL_I2C_ADDR, RegisterAddr + i, 1, false)))
                         return false;
                 }
             }

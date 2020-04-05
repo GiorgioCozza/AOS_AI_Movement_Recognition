@@ -1,6 +1,6 @@
 /**
  *******************************************************************************
-  *   @file X-NUCLEO-IKS01A2.h
+  *   @file IKS01A2_config.h
   *   @author Cozza Giorgio
   *   @date 13/06/19
   *   @version 1.0
@@ -21,22 +21,16 @@
 ********************************************************************************
  */
 
-#ifndef _X_NUCLEO_IKS01A2_H
-#define _X_NUCLEO_IKS01A2_H
+#ifndef _IKS01A2_CONFIG_H
+#define _IKS01A2_CONFIG_H
 
-#include "LSM6DSL.h"
-#include "LSM303AGR.h"
 
 #define LSM6DSL_I2C_ADDR		LSM6DSL_I2C_ADDRESS_HIGH
-#define HTS221_I2C_ADDR			HTS221_I2C_ADDRESS
-#define LSM303AGR_I2C_ADDR		LSM303AGR_MAG_I2C_ADDRESS
-#define LSM6DSL_I2C_ADDR		LSM6DSL_ACC_GYRO_I2C_ADDRESS_HIGH
 #define HTS221_I2C_ADDR			HTS221_I2C_ADDRESS
 #define LSM303AGRAcc_I2C_ADDR	0x32
 #define LSM303AGRMag_I2C_ADDR	LSM303AGR_MAG_I2C_ADDRESS 
 
 #define SENSOR_NUM				4
-#define LSM6DSL					"LSM6DSL_ACC_GYR"
 #define LSM6DSL_ACC				"LSM6DSL_ACCELEROMETER"
 #define LSM6DSL_GYR				"LSM6DSL_GYROSCOPE"
 #define LSM303AGR_ACC			"LSM303AGR_ACCELEROMETER"
