@@ -1,4 +1,25 @@
+/**
+ *******************************************************************************
+  *   @file LSM303AGR.h
+  *   @author Cozza Giorgio
+  *   @date 25/03/20
+  *   @version 1.0
+  *   @brief Header definition of class LSM303AGRAccMag.
+ *******************************************************************************
 
+  This is a free software released into public domain. Anyone is free to copy,
+  modify, publish, use, compile or distribute this software, either in source
+  code form or as compiled binary
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+  IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+  OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+  OTHER DEALINGS IN THE SOFTWARE.
+********************************************************************************
+ */
 
 
 #ifndef _LSM303AGR_H
@@ -10,17 +31,15 @@
 
 #include "LSM303AGR_accelerometer.h"
 #include "LSM303AGR_magnetometer.h"
-#include "XNUCLEO_IKS01A2.h"
+#include "IKS01A2_config.h"
 
 
 class LSM303AGRAccMag {
 
 public:
-    LSM303AGRAccMag(uint8_t mag_addr = LSM303AGR_MAG_I2C_ADDRESS,
-                    uint8_t acc_addr = LSM303AGR_ACC_I2C_ADDRESS)
-                    { mag_addr = mag_addr; acc_addr = acc_addr; }
-
+    LSM303AGRAccMag(){}
     virtual ~LSM303AGRAccMag(){}
+
     bool init(void);
 
     bool read_acc_id(uint8_t* id);
@@ -44,13 +63,7 @@ public:
 
 protected:
 
-    /**
-	 * @brief Utility function to read data.
-	 * @param  pBuffer: pointer to data to be read.
-	 * @param  RegisterAddr: specifies internal address register to be read.
-	 * @param  NumByteToRead: number of bytes to be read.
-	 * @retval true if ok, false otherwise.
-	 */
+
     bool io_read(uint8_t* pBuffer, uint8_t RegisterAddr, uint16_t NumByteToRead, uint8_t dev_address , uint8_t reg_mask = 0xFF)
     {
         uint8_t i = 0;
@@ -62,13 +75,7 @@ protected:
         return true;
     }
 
-    /**
-     * @brief Utility function to write data.
-     * @param  pBuffer: pointer to data to be written.
-     * @param  RegisterAddr: specifies internal address register to be written.
-     * @param  NumByteToWrite: number of bytes to write.
-     * @retval true if ok, false otherwise.
-     */
+
     bool io_write(uint8_t* pBuffer, uint8_t RegisterAddr, uint16_t NumByteToWrite, uint8_t dev_address , uint8_t reg_mask = 0xFF)
     {
         uint8_t i = 0;
@@ -90,9 +97,7 @@ protected:
 
 
 
-private:
-    uint8_t mag_addr;
-    uint8_t acc_addr;
+    private:
 
 };
 

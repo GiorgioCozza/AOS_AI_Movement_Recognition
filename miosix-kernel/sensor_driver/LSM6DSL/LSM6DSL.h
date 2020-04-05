@@ -79,7 +79,7 @@
 
 #define LSM6DSL_IF_INC_MASK                         0x04
 
-#include "XNUCLEO_IKS01A2.h"
+#include "IKS01A2_config.h"
 #include "LSM6DSL_accelerometer.h"
 #include "LSM6DSL_gyroscope.h"
 
@@ -88,7 +88,7 @@ class LSM6DSLAccGyr
 {
 	
 	public:
-		LSM6DSLAccGyr(uint8_t addr = LSM6DSL_I2C_ADDRESS_HIGH) { address = addr; }
+		LSM6DSLAccGyr() {}
 		virtual ~LSM6DSLAccGyr() {}
 		bool init(void);
 		bool read_id(uint8_t* id);
@@ -113,52 +113,39 @@ class LSM6DSLAccGyr
 		
 	protected:
 
-    /**
- * @brief Utility function to read data.
- * @param  pBuffer: pointer to data to be read.
- * @param  RegisterAddr: specifies internal address register to be read.
- * @param  NumByteToRead: number of bytes to be read.
- * @retval true if ok, false otherwise.
- */
-    bool io_read(uint8_t* pBuffer, uint8_t RegisterAddr, uint16_t NumByteToRead, uint8_t reg_mask = 0xFF)
-    {
-        uint8_t i = 0;
-        for (i = 0; i < NumByteToRead; i++) {
-            if (!((I2CHelper::getInstance())->read(pBuffer + i, address, RegisterAddr + i, 1)))
-                return false;
-            *(pBuffer + i) &= reg_mask;
-        }
-        return true;
-    }
-
-    /**
-     * @brief Utility function to write data.
-     * @param  pBuffer: pointer to data to be written.
-     * @param  RegisterAddr: specifies internal address register to be written.
-     * @param  NumByteToWrite: number of bytes to write.
-     * @retval true if ok, false otherwise.
-     */
-    bool io_write(uint8_t* pBuffer, uint8_t RegisterAddr, uint16_t NumByteToWrite, uint8_t reg_mask = 0xFF) {
-        uint8_t i = 0;
-        uint8_t *tmp_buf = new uint8_t[NumByteToWrite];
-        for (i = 0; i < NumByteToWrite; i++) {
-            if (!((I2CHelper::getInstance())->read(tmp_buf + i, address, RegisterAddr + i, 1)))
-                return false;
-            else {
-                *(tmp_buf + i) &= ~reg_mask;
-                *(tmp_buf + i) |= *(pBuffer + i);
-                if (!((I2CHelper::getInstance())->write(tmp_buf + i, address, RegisterAddr + i, 1, false)))
+        bool io_read(uint8_t* pBuffer, uint8_t RegisterAddr, uint16_t NumByteToRead, uint8_t reg_mask = 0xFF)
+        {
+            uint8_t i = 0;
+            for (i = 0; i < NumByteToRead; i++) {
+                if (!((I2CHelper::getInstance())->read(pBuffer + i, address, RegisterAddr + i, 1)))
                     return false;
+                *(pBuffer + i) &= reg_mask;
             }
+            return true;
         }
-        delete[] tmp_buf;
-        return true;
-    }
+
+
+        bool io_write(uint8_t* pBuffer, uint8_t RegisterAddr, uint16_t NumByteToWrite, uint8_t reg_mask = 0xFF) {
+            uint8_t i = 0;
+            uint8_t *tmp_buf = new uint8_t[NumByteToWrite];
+            for (i = 0; i < NumByteToWrite; i++) {
+                if (!((I2CHelper::getInstance())->read(tmp_buf + i, address, RegisterAddr + i, 1)))
+                    return false;
+                else {
+                    *(tmp_buf + i) &= ~reg_mask;
+                    *(tmp_buf + i) |= *(pBuffer + i);
+                    if (!((I2CHelper::getInstance())->write(tmp_buf + i, address, RegisterAddr + i, 1, false)))
+                        return false;
+                }
+            }
+            delete[] tmp_buf;
+            return true;
+        }
 
 
 
         private:
-		uint8_t address;
+
 };
 
 
