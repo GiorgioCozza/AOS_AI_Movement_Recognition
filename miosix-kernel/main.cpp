@@ -10,7 +10,6 @@
 #include "LSM303AGR.h"
 #include "NN.h"
 
-#define PRED_SIZE  6
 
 using namespace std;
 using namespace miosix;
@@ -84,32 +83,6 @@ void print_config(LSM6DSLAccGyr * acc_gyr_ptr, LSM303AGRAccMag * acc_mag_ptr){
 }
 
 
-uint8_t argmax(float * vec, uint16_t vec_sz){
-
-    uint16_t idx_max=0;
-    float _max = 0;
-    for(int i = 0; i < vec_sz; i++)
-        if (vec[i] > _max){
-            idx_max = i;
-            _max = vec[i];
-        }
-
-    return idx_max;
-}
-
-uint8_t mode(uint8_t * vec, uint16_t vec_sz){
-
-    uint8_t acts[NUM_CLASSES] = {0,0,0,0,0,0,0};
-    uint8_t _max = 0, mode_idx = 0;
-    for(int i = 0; i < vec_sz; i++){
-        acts[vec[i]] += 1;
-        if (acts[vec[i]] > _max ) {
-            _max = acts[vec[i]];
-            mode_idx = vec[i];
-        }
-    }
-    return mode_idx;
-}
 
 
 int main() {
@@ -127,16 +100,16 @@ int main() {
     float *out_data = (float *) malloc(NUM_CLASSES * sizeof(float));
     float *int_vec = new float[VECTOR_SIZE];
     uint16_t vec_sz = WINDOW_SIZE * VECTOR_SIZE;
-    uint8_t preds[PRED_SIZE];
     uint8_t pred_cnt = 0;
+    uint8_t pred_vec[PRED_SIZE];
 
     LSM6DSLAccGyr *acc_gyr = new LSM6DSLAccGyr();
     LSM303AGRAccMag *acc_mag = new LSM303AGRAccMag();  //++
 
     // struct declaration to use for input segment preprocessing
 
-    circularQueue<float> queue(VECTOR_SIZE * WINDOW_SIZE);
-    dataset_preproc ds_pp;
+    circularQueue<float> data_queue(VECTOR_SIZE * WINDOW_SIZE);
+    data_proc dt_proc;
 
     // network variable declaration
     ai_handle network = AI_HANDLE_NULL;
@@ -152,93 +125,98 @@ int main() {
 
     startflag = false;
     usrbtn::mode(Mode::INPUT_PULL_UP);
-    //enable board sensors
 
-    bool en1 = acc_gyr->init();
-    bool en2 = acc_mag->init();
+    //enable board sensors
+    bool ag_en = acc_gyr->init();
+    bool am_en = acc_mag->init();
 
     print_config(acc_gyr, acc_mag);
 
-    in_data = queue.getCircBuf();
+    in_data = data_queue.getCircBuf();
 
-    if (neural_net->nnCreate(&network)) {
-        if (neural_net->nnInit(network, (ai_network_params*)AI_NETWORK_DATA_CONFIG, activations)) {
+    if ( ag_en && am_en ) {
+        if (neural_net->nnCreate(&network)) {
+            if (neural_net->nnInit(network, (ai_network_params *) AI_NETWORK_DATA_CONFIG, activations)) {
 
-            while (1) {
+                printf("\n\r[LOG] Neural network initialized!\r\n");
+
+                while (1) {
 
 
-                while (startflag == false) {
-                    if (usrbtn::value() == 0) {
-                        startflag = true;
-                        printf("S");
-                        printf("\n");
-                        Thread::sleep(500);
+                    while (startflag == false) {
+                        if (usrbtn::value() == 0) {
+                            startflag = true;
+                            printf("S");
+                            printf("\n");
+                            Thread::sleep(500);
+                        }
+                        usrled::high();
                     }
-                    usrled::high();
-                }
-                usrled::low();
-                sample_cnt++;
+                    usrled::low();
+                    sample_cnt++;
 
-                char ESC = 27;
-                printf("%c[H", ESC);
-                printf("%c[2J", ESC);
+                    char ESC = 27;
+                    printf("%c[H", ESC);
+                    printf("%c[2J", ESC);
 
-                if (acc_gyr->get_acc_axes(buf_reader)) {
-                    int_vec[0] = (float) buf_reader[0];
-                    int_vec[1] = (float) buf_reader[1];
-                    int_vec[2] = (float) buf_reader[2];
-                }
+                    if (acc_gyr->get_acc_axes(buf_reader)) {
+                        int_vec[0] = (float) buf_reader[0];
+                        int_vec[1] = (float) buf_reader[1];
+                        int_vec[2] = (float) buf_reader[2];
+                    }
 
-                if (acc_gyr->get_gyr_axes(buf_reader)) {
-                    int_vec[3] = (float) buf_reader[0];//
-                    int_vec[4] = (float) buf_reader[1];//
-                    int_vec[5] = (float) buf_reader[2];//
-                }
+                    if (acc_gyr->get_gyr_axes(buf_reader)) {
+                        int_vec[3] = (float) buf_reader[0];//
+                        int_vec[4] = (float) buf_reader[1];//
+                        int_vec[5] = (float) buf_reader[2];//
+                    }
 
-                if (acc_mag->get_acc_axes(buf_reader)) {
-                    int_vec[6] = (float) buf_reader[0];
-                    int_vec[7] = (float) buf_reader[1];
-                    int_vec[8] = (float) buf_reader[2];
-                }
+                    if (acc_mag->get_acc_axes(buf_reader)) {
+                        int_vec[6] = (float) buf_reader[0];
+                        int_vec[7] = (float) buf_reader[1];
+                        int_vec[8] = (float) buf_reader[2];
+                    }
 
-                if (acc_mag->get_mag_axes(buf_reader)) {
-                    int_vec[9] = (float) buf_reader[0];
-                    int_vec[10] = (float) buf_reader[1];
-                    int_vec[11] = (float) buf_reader[2];
-                }
+                    if (acc_mag->get_mag_axes(buf_reader)) {
+                        int_vec[9] = (float) buf_reader[0];
+                        int_vec[10] = (float) buf_reader[1];
+                        int_vec[11] = (float) buf_reader[2];
+                    }
 
 
-                queue.insert(int_vec, VECTOR_SIZE);
-                //Clear terminal screen
-                printf("%c[H", ESC);
-                printf("%c[2J", ESC);
-                //Thread::sleep(100);
+                    data_queue.insert(int_vec, VECTOR_SIZE);
+                    //Clear terminal screen
+                    printf("%c[H", ESC);
+                    printf("%c[2J", ESC);
+                    //Thread::sleep(100);
 
-                count++;
+                    count++;
 
-                if (count == WINDOW_SIZE) {
-                    count = 0;
+                    if (count == WINDOW_SIZE) {
+                        count = 0;
 
-                    neural_net->prepareData(&ds_pp, in_data, out_data, &ai_input, &ai_output, 1);
+                        neural_net->prepareData(&dt_proc, in_data, out_data, &ai_input, &ai_output, 1);
 
-                    //printf("\r\n[LOG]: Running the Neural Network...\r\n");
-                    int n_b = neural_net->nnRun(network, &ai_input, &ai_output, 1);
-                    preds[pred_cnt] = argmax(out_data, NUM_CLASSES);
+                        //printf("\r\n[LOG]: Running the Neural Network...\r\n");
+                        int n_b = neural_net->nnRun(network, &ai_input, &ai_output, 1);
+                        pred_vec[pred_cnt] = dt_proc.get_argmax((const float *) out_data, (const uint8_t) NUM_CLASSES);
 
-                    if (pred_cnt == PRED_SIZE) {
-                        printf("\r\n****************	AI NN NETWORK RESULT	*********************\r\n");
-                        printf("\n[LOG]: You are %s\n\n", movements[mode(preds, PRED_SIZE)]);
-                        pred_cnt = 0;
+                        if (pred_cnt == PRED_SIZE) {
+                            printf("\r\n****************	AI NN NETWORK RESULT	*********************\r\n");
+                            printf("\n[LOG]: You are %s\n\n", movements[dt_proc.get_mode((const uint8_t *) pred_vec, \
+                                                                                 (const uint16_t) PRED_SIZE, \
+                                                                                 (const uint8_t) NUM_CLASSES)]);
+                            pred_cnt = 0;
+                        }
                         startflag = false;
+                        pred_cnt++;
                     }
 
-                    pred_cnt++;
                 }
-
             }
+
+
         }
-
-
     }
 
 }

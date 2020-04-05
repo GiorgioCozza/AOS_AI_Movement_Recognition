@@ -1,11 +1,11 @@
 
 /**
  *******************************************************************************
-  *   @file dataset_preprocessor.h
+  *   @file data_proc.h
   *   @author Cozza Giorgio
   *   @date 08/10/19
   *   @version 1.0
-  *   @brief Function toolkit to pre-process the NN input dataset.
+  *   @brief Function toolkit to process data.
  *******************************************************************************
 
   This is a free software released into public domain. Anyone is free to copy,
@@ -22,8 +22,8 @@
 ********************************************************************************
  */
 
-#ifndef DATASET_PREPROCESSOR_H
-#define DATASET_PREPROCESSOR_H
+#ifndef _DATA_PROC_H
+#define _DATA_PROC_H
 
  /*----------------------------   INCLUDES	----------------------------------*/
 #include <stdio.h>
@@ -35,7 +35,7 @@
 #include "prog_config.h"
 
 
-class dataset_preproc {
+class data_proc {
 
 private:
 	float min[VECTOR_SIZE];
@@ -45,7 +45,7 @@ private:
 protected:
 
 public:
-	dataset_preproc(void) {
+	data_proc(void) {
 		for (int i = 0; i < VECTOR_SIZE; i++) {
 			fst_read[i] = 1;
 			min[i] = 0;
@@ -53,7 +53,7 @@ public:
 		}
 	}
 
-	~dataset_preproc(void) {
+	~data_proc(void) {
 		delete[] min;
 		delete[] max;
 	}
@@ -64,7 +64,9 @@ public:
 	float* get_max_ptr() { return max; };
 	void update_min_max(int32_t* sen_read, int sen);
 	void normalize(float* in_vect);
-
+    uint8_t get_argmax(const float * vec, const uint16_t vec_sz);
+    uint8_t get_mode(const uint8_t * vec, const uint16_t vec_sz, const uint8_t cat_num);
+    
 	void print_min(void);
 	void print_max(void);
 	void print_dataset(float* in_vect);

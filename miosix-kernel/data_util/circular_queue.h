@@ -28,8 +28,7 @@ public:
 	void insert(const T *result, const uint8_t vec_sz);  //insert value
     bool isReady (){ return ready; };              //check if it already have 50 number
 	T* getCircBuf();
-	//T* getVectSmp(uint16_t pos);
-	//void printing();                 //printing the current 50 data
+
 };
 
 
@@ -44,6 +43,7 @@ circularQueue<T>::circularQueue(uint16_t size) {
 	
 	currentLength = 0;
 }
+
 
 template <typename T>
 void circularQueue<T>::insert(const T* result, const uint8_t vec_sz) {
@@ -60,29 +60,11 @@ void circularQueue<T>::insert(const T* result, const uint8_t vec_sz) {
 	if(f_idx >= size)
 		circularQueue::clear();
 }
-/*
-template <typename T>
-T* circularQueue::getVectSmp(uint16_t pos) {
-	return (circularQueue::smp_buf + (pos - 1) * VECTOR_SIZE);
-}
-*/
+
+
 template<typename T>
 T* circularQueue<T>::getCircBuf() {
 	return circularQueue::smp_buf;
 }
-
-/*
-void circularQueue::printing() {
-	int i, j, flag = 0;
-	printf("\n--------------segm_start--------------\n");
-	for (i = 0; i < WINDOW_SIZE; i++) {
-		for (j = 0; j < VECTOR_SIZE; j++) {
-			printf("%.6f,	", *(smp_buf + VECTOR_SIZE*i + j));
-		}
-	}
-	printf("\n--------------segm_end--------------\n");
-}
-*/
-
 
 #endif

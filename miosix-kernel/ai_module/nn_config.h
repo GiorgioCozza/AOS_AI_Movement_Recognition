@@ -30,6 +30,7 @@
 
 #define NUM_CLASSES 7
 #define NUM_ACTIVITIES 6
+#define PRED_SIZE  15
 
 
 static const char* movements[7] = { "RUNNING", "WALKING", "JUMPING", "STANDING", "SITTING", "SUPINE", "LYING ON SIDE"};

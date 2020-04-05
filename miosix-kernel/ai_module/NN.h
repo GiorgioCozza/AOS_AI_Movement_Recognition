@@ -32,12 +32,8 @@
 #include "network.h"
 #include "network_data.h"
 #include "miosix.h"
-#include "dataset_preproc.h"
+#include "data_proc.h"
 #include "nn_config.h"
- /*-----------------  DEFINE  --------------------------------*/
-
-
-/*-----------------  CLASS  ---------------------------------*/
 
 /**
   *	NN class to manage a single neural network operations
@@ -80,7 +76,7 @@ public:
 	 * \param out_data ai_float reference
 	 * \return the result of the operation.
 	*/
-	ai_bool prepareData(dataset_preproc* ds_pp, ai_float* in_data, ai_float* out_data, ai_buffer* ai_input, ai_buffer* ai_output, const ai_u16 batches);
+	ai_bool prepareData(data_proc* ds_pp, ai_float* in_data, ai_float* out_data, ai_buffer* ai_input, ai_buffer* ai_output, const ai_u16 batches);
 	/**
 	 * Show neural network info.
 	 * \param net ai_handle reference.

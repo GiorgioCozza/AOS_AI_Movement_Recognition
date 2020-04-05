@@ -93,7 +93,7 @@ ai_i32 NN::nnRun(ai_handle net, ai_buffer* ai_input, ai_buffer* ai_output, const
 }
 
 
-ai_bool NN::prepareData(dataset_preproc* ds_pp, ai_float* in_data, ai_float* out_data, ai_buffer* ai_input, ai_buffer* ai_output, const ai_u16 batches) {
+ai_bool NN::prepareData(data_proc* ds_pp, ai_float* in_data, ai_float* out_data, ai_buffer* ai_input, ai_buffer* ai_output, const ai_u16 batches) {
 
 	uint16_t req_out_sz = sizeof(ai_float) * batches;
 	//printf("\r\n[LOG]: Preparing the neural network datasets...\r\n");

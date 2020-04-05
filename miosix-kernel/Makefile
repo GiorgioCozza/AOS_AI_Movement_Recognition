@@ -30,7 +30,7 @@ SUBDIRS := $(KPATH)			\
 SRC :=                                				\
 ./main.cpp											\
 $(SENSDRIV)/com_i2c/i2c_helper.cpp					\
-$(DATAUTL)/dataset_preproc.cpp						\
+$(DATAUTL)/data_proc.cpp						\
 $(SENSDRIV)/LSM6DSL/LSM6DSL.cpp				\
 $(SENSDRIV)/LSM303AGR/LSM303AGR.cpp		\
 $(AIPATH)/Drivers/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_f32.c 			\
