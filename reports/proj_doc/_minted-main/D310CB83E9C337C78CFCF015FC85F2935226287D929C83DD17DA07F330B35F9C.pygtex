@@ -146,11 +146,15 @@
 									\PYG{n}{LSM303AGR\PYGZus{}ACC\PYGZus{}I2C\PYGZus{}ADDRESS}\PYG{p}{,} \PYG{n}{LSM303AGR\PYGZus{}ACC\PYGZus{}HR\PYGZus{}MASK}\PYG{p}{))}
         \PYG{k}{return} \PYG{n+nb}{false}\PYG{p}{;}
 
-    \PYG{k}{if} \PYG{p}{(} \PYG{n}{a\PYGZus{}lp} \PYG{o}{==} \PYG{n}{LSM303AGR\PYGZus{}ACC\PYGZus{}LP\PYGZus{}ENABLED} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{a\PYGZus{}hr} \PYG{o}{==} \PYG{n}{LSM303AGR\PYGZus{}ACC\PYGZus{}HR\PYGZus{}DISABLED} \PYG{p}{)} \PYG{p}{\PYGZob{}}
+
+    \PYG{k}{if} \PYG{p}{(} \PYG{n}{a\PYGZus{}lp} \PYG{o}{==} \PYG{n}{LSM303AGR\PYGZus{}ACC\PYGZus{}LP\PYGZus{}ENABLED} \PYG{o}{\PYGZam{}\PYGZam{}} \PYGZbs{}
+	     \PYG{n}{a\PYGZus{}hr} \PYG{o}{==} \PYG{n}{LSM303AGR\PYGZus{}ACC\PYGZus{}HR\PYGZus{}DISABLED} \PYG{p}{)} \PYG{p}{\PYGZob{}}
         \PYG{n}{shift} \PYG{o}{=} \PYG{l+m+mi}{8}\PYG{p}{;}
-    \PYG{p}{\PYGZcb{}}\PYG{k}{else} \PYG{k}{if} \PYG{p}{(} \PYG{n}{a\PYGZus{}lp} \PYG{o}{==} \PYG{n}{LSM303AGR\PYGZus{}ACC\PYGZus{}LP\PYGZus{}DISABLED} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{a\PYGZus{}hr} \PYG{o}{==} \PYG{n}{LSM303AGR\PYGZus{}ACC\PYGZus{}HR\PYGZus{}DISABLED} \PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{p}{\PYGZcb{}}\PYG{k}{else} \PYG{k}{if} \PYG{p}{(} \PYG{n}{a\PYGZus{}lp} \PYG{o}{==} \PYG{n}{LSM303AGR\PYGZus{}ACC\PYGZus{}LP\PYGZus{}DISABLED} \PYG{o}{\PYGZam{}\PYGZam{}} \PYGZbs{}
+               \PYG{n}{a\PYGZus{}hr} \PYG{o}{==} \PYG{n}{LSM303AGR\PYGZus{}ACC\PYGZus{}HR\PYGZus{}DISABLED} \PYG{p}{)} \PYG{p}{\PYGZob{}}
         \PYG{n}{shift} \PYG{o}{=} \PYG{l+m+mi}{6}\PYG{p}{;}
-    \PYG{p}{\PYGZcb{}}\PYG{k}{else} \PYG{k}{if} \PYG{p}{(} \PYG{n}{a\PYGZus{}lp} \PYG{o}{==} \PYG{n}{LSM303AGR\PYGZus{}ACC\PYGZus{}LP\PYGZus{}DISABLED} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{a\PYGZus{}hr} \PYG{o}{==} \PYG{n}{LSM303AGR\PYGZus{}ACC\PYGZus{}HR\PYGZus{}ENABLED} \PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{p}{\PYGZcb{}}\PYG{k}{else} \PYG{k}{if} \PYG{p}{(} \PYG{n}{a\PYGZus{}lp} \PYG{o}{==} \PYG{n}{LSM303AGR\PYGZus{}ACC\PYGZus{}LP\PYGZus{}DISABLED} \PYG{o}{\PYGZam{}\PYGZam{}} \PYGZbs{}
+   	           \PYG{n}{a\PYGZus{}hr} \PYG{o}{==} \PYG{n}{LSM303AGR\PYGZus{}ACC\PYGZus{}HR\PYGZus{}ENABLED} \PYG{p}{)} \PYG{p}{\PYGZob{}}
         \PYG{n}{shift} \PYG{o}{=} \PYG{l+m+mi}{4}\PYG{p}{;}
     \PYG{p}{\PYGZcb{}}\PYG{k}{else}
         \PYG{k}{return} \PYG{n+nb}{false}\PYG{p}{;}

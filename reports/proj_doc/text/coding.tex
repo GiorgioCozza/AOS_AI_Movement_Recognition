@@ -123,9 +123,9 @@ Before proceeding to read data from MEMS, it is required to configure the contro
 It runs similarly for both LSM6DSL and LSM303AGR, sets default values in those registers that are more likely to be used for data gathering. In both classes, with slight differences, \mintinline[bgcolor=whitesmoke]{C++}{io_read()} and \mintinline[bgcolor=whitesmoke]{C++}{io_write()} act as a I2C interface to allow read and write operation respectively involving device, register addresses and bit masks\newline 
 Crucial aspects of sensor configuration are:
 \begin{itemize}
-	\item \textbf{Output data rate}: representing the frequency at which sensor provides new values
-	\item \textbf{Full scale value}: the range of values that is possible to measure.
-	\item \textbf{Sensitivity}: the minimum variation of the quantity to be measured that can be percepted by the MEMS. In some case changes according to the power mode in which the sensor is used.
+	\item \textbf{Output data rate}: representing the frequency at which the device provides new values
+	\item \textbf{Full scale value}: the range of values that the sensor can represent, changing the FS, the sensitivity is affected as well.  
+	\item \textbf{Sensitivity}: the minimum variation of the quantity to be measured that can be percepted by the MEMS. Sensitivity can also change according to the power mode in which the sensor is used.
 \end{itemize}
 All these values are set and shown in the initial steps of the program execution, specifically in this work: 
 
@@ -186,14 +186,27 @@ All these values are set and shown in the initial steps of the program execution
 	\centering
 	\caption{Data Gathering settings}\label{tab:1}
 \end{table}
-As it can be noticed, both the accelerometers have been set to the same full scale value, to mantain data coherent with previous datasets already collected, whereas an high value (2000dps) has been chosen for the gyroscope to increase the sensitivity of the MEMS to even small movements of the leg (typical of some positions).\newline
-Axes values are read almost the same way for all the sensors, since by design data registers are contiguous a single read scan of 6 bytes (2 byte-value/axis) is performed, raw bytes are then composed and multiplied by the sensitivity. The \mintinline[bgcolor=whitesmoke]{C++}{LSM303AGR::get_acc_axes()} is slightly complex, since it must consider the power mode in which the sensor is used that affects the sensitivity value. However, this solution does not strongly affect the performance since the accelerometer produces data samples at a maximum rate of 100 Hz:
-
-
-
-
-
-\newpage
+As it can be noticed, both the accelerometers have been set to the same full scale value, to mantain data coherent with previous datasets already collected, whereas an high value (2000dps) has been chosen for the gyroscope to increase the sensitivity of the MEMS to even small movements of the leg (typical of some positions). In all the cases the configuration can be changed by modifying the \mintinline[bgcolor=whitesmoke]{C++}{IKS01A2_config.h}.\newline
+Axes values are read almost the same way for all the sensors, since by design data registers are contiguous a single read scan of 6 bytes (2 byte-value/axis) is performed, raw bytes are then composed and multiplied by the sensitivity. The \mintinline[bgcolor=whitesmoke]{C++}{LSM303AGR::get_acc_axes()} is slightly complex, since it must consider the power mode in which the sensor is used that affects the sensitivity value:
+\begin{center}
+	\begin{figure}[H]
+		\begin{subfigure}[H]{0.5\textwidth}
+			\inputminted[framesep=1.5cm, firstline=101, lastline=127, bgcolor=whitesmoke, fontsize=\tiny]{C++}{code/data_gathering.cpp}
+			\vspace{-20pt}
+			\caption{LSM6DSL.cpp: get\_acc\_axes()}\label{fig:5a}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}[H]{0.5\textwidth}
+			\vspace{+1pt}
+			\inputminted[framesep=1.5cm, firstline=149, lastline=189, bgcolor=whitesmoke, fontsize=\tiny]{C++}{code/data_gathering.cpp}
+			\vspace{-20pt}
+			\caption{LSM303AGR.cpp: get\_acc\_axes()}\label{fig:5b}
+		\end{subfigure}
+	\end{figure}
+\end{center}
+ In the implementation of the method \mintinline[bgcolor=whitesmoke]{C++}{LSM303AGR:: get_acc_axes()} the variables \mintinline[bgcolor=whitesmoke]{C++}{a_hr} and \mintinline[bgcolor=whitesmoke]{C++}{a_lp} contain values that encode the resolution and power modes at which the device is used and according to such information a proper shifting is applied to the read values.\newline
+ Another interesting aspects of the LSM6DSL (iNEMO) is the maximum ODR the device is able to reach: 1660 Hz. Under strict power requirements, this high rate may represent a problem, fortunately both the sensors offer the possibility to store data in a FIFO  buffer in order to burst all the read values at once and allows the MCU to sleep in the meanwhile. Since the low output data rate, this possibility has not been exploited.
+ \newpage 
 \subsection{Data Analysis and Neural Model Design}
 Almost immediately after data gathering it is required to plot some information about the collected datasets to outline a first strategy for a possible neural network model. A preliminary intuitive analysis is carried out by plotting the temporal distribution of a set of sequences (time windows) of data points from some activity files. This helps to infer some patterns that could reasonably be extracted by the algorithm.\newline
 In order to understand the trend of each activity type, is important to show the orientation of the MEMS with respect to the body:
@@ -211,7 +224,7 @@ In order to understand the trend of each activity type, is important to show the
 \end{center}
 From MEMS positions it is possible to remark some considerations. Intuitively, it is expected to have some regular behaviour of the directional acceleration towards Z for walking and running activities:
 \begin{figure}[H]
-		\hfill\includegraphics[scale=0.8]{figures/plot_ACC_LSM6DSL_DS_walking_running_Z.png}\hspace*{\fill}
+		\hfill\includegraphics[scale=0.8]{figures/plot_ACC_LSM6DSL_DS_walking_running_X.png}\hspace*{\fill}
 		\caption{LSM6DSL Accelerometer: running and walking}\label{fig:5}
 		\centering
 \end{figure}
@@ -224,7 +237,7 @@ An easier comparison regards jumping and standing activities which instead, pres
 \end{figure} 
 Same observation for supine, lying on side and sitting positions:
 \begin{figure}[H]
-	\hfill\includegraphics[scale=0.8]{figures/plot_ACC_LSM6DSL_DS_supine_sitting_lying_X.png}\hspace*{\fill}
+	\hfill\includegraphics[scale=0.8]{figures/plot_ACC_LSM303AGR_DS_supine_sitting_lying_Y.png}\hspace*{\fill}
 	\caption{LSM6DSL Accelerometer: sitting, supine, lying on side}\label{fig:7}
 	\centering
 \end{figure} 
@@ -312,19 +325,6 @@ One of the most important features of STM32Cube.AI, is that it allows to perform
 As it can be noticed from the code, at a certain point preprocessed data are stacked in a categorical manner, this condition forces the algorithm to learn parameters per class, biasing the final result. As usual in such cases, an effective solution is to shuffle the entire dataset adding stochasticity in the way in which different data samples are fed to the network during training, this solution is implemented by the \mintinline[bgcolor=whitesmoke]{python}{shuffle_dataset} method.\newline
 After data preprocessing, each network instance is trained sequentially for 60-80 epochs with 32 samples per batch, using RMSProp as optimization algorithm. Whatever solution is chosen the training settings are more or less the same except for the number of epochs which is tuned according to the adopted  solution.
 
-
-\subsection{Network Code Generation and on-target Testing}
-STM32CubeMX, as mentioned in previous discussions, is in charge of generating the C-code from the Keras model, precisely an initialization of the network on which is possible to build a specific application, so what is really important in this step is that the developer is not worried about the embedded implementation of each network layer features.\newline
-Before proceeding it is important to outline how the tool works in order to understand the way the network model is treated within the program environment, the AI plugin in fact, lives into STM32CubeMX that requires some preliminary configuration including the creation of a new project and some specification of the development board used. After that, one of the h5 model files produced during training is imported and from the specific framework model, the tool builds a platform-independent representation (PINNR).\newline 
-\begin{figure}[H]
-	\hfill\includegraphics[width=0.8\textwidth]{figures/stm32cubeai_arch.png}\hspace*{\fill}
-	\caption{X-CUBE AI Engine}
-\end{figure}  
-This new version of the model is used by the \textit{Validation Engine} to perform validation either locally or directly on the target board and the \textit{C-code generator} that generates the network code.\newline
-So the first step, the model is imported into the project
-Furthermore, it is important to highlight another interesting aspect that raises from a first analysis of the model summary created during training phase:
-
-
 \begin{table}[H]
 	\begin{tabular}{||p{5cm}cc||}
 		\hline
@@ -353,6 +353,24 @@ Furthermore, it is important to highlight another interesting aspect that raises
 	\centering
 	\caption{\label{tab:2}Recurrent Neural Network: Model Summary}
 \end{table}
+
+
+\subsection{Network Code Generation and on-target Testing}
+STM32CubeMX, as mentioned in previous discussions, is in charge of generating the C-code from the Keras model, precisely an initialization of the network on which is possible to build a specific application, so what is really important in this step is that the developer is not worried about the embedded implementation of each network layer features.\newline
+Before proceeding it is important to outline how the tool works in order to understand the way the network model is treated within the program environment, the AI plugin in fact, lives into STM32CubeMX that requires some preliminary configuration including the creation of a new project and some specification of the development board used. 
+
+\begin{figure}[H]
+	\hfill\includegraphics[width=0.8\textwidth]{figures/stm32cubeai_arch.png}\hspace*{\fill}
+	\caption{X-CUBE AI Engine}
+\end{figure}
+
+After that, one of the h5 model files produced during training is imported and from the specific framework model, the tool builds a platform-independent representation (PINNR).\newline 
+This new version of the model is used by the \textit{Validation Engine} to perform validation either locally or directly on the target board and the \textit{C-code generator} that generates the network code.\newline
+So the first step, the model is imported into the project
+Furthermore, it is important to highlight another interesting aspect that raises from a first analysis of the model summary created during training phase:
+
+
+
 
 \subsection{Code Integration and Final Firmware Development}
  A challenging part in this work is represented by the integration  It includes the following folders:

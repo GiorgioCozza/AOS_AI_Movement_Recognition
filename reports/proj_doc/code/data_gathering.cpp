@@ -98,7 +98,7 @@ bool io_write(uint8_t* pBuffer, uint8_t RegisterAddr, uint16_t NumByteToWrite,
 }
 
 
-/*******************************************************************************************************/
+/*******  LSM6DSL::get_acc_axes()  ********************************************/
 
 bool LSM6DSLAccGyr::get_acc_axes(int32_t * aData){
 
@@ -124,10 +124,9 @@ bool LSM6DSLAccGyr::get_acc_axes(int32_t * aData){
     return true;
 }
 
+/******************************************************************************/
 
 
-
-/**********************************************************************************************************/
 
 
 bool LSM303AGRAccMag::get_acc_axes(int32_t * aData){
@@ -137,6 +136,7 @@ bool LSM303AGRAccMag::get_acc_axes(int32_t * aData){
     uint8_t a_lp = 0, a_hr = 0, shift = 0;
     float sens;
 
+
     if (!LSM303AGRAccMag::io_read((uint8_t *)&a_lp, LSM303AGR_ACC_CTRL1,
               1, LSM303AGR_ACC_I2C_ADDRESS, LSM303AGR_ACC_LP_MASK))
         return false;
@@ -145,11 +145,17 @@ bool LSM303AGRAccMag::get_acc_axes(int32_t * aData){
 									LSM303AGR_ACC_I2C_ADDRESS, LSM303AGR_ACC_HR_MASK))
         return false;
 
-    if ( a_lp == LSM303AGR_ACC_LP_ENABLED && a_hr == LSM303AGR_ACC_HR_DISABLED ) {
+
+/*******  LSM303AGRAccMag::get_acc_axes  ****************************************/
+
+    if ( a_lp == LSM303AGR_ACC_LP_ENABLED && \
+	     a_hr == LSM303AGR_ACC_HR_DISABLED ) {
         shift = 8;
-    }else if ( a_lp == LSM303AGR_ACC_LP_DISABLED && a_hr == LSM303AGR_ACC_HR_DISABLED ) {
+    }else if ( a_lp == LSM303AGR_ACC_LP_DISABLED && \
+               a_hr == LSM303AGR_ACC_HR_DISABLED ) {
         shift = 6;
-    }else if ( a_lp == LSM303AGR_ACC_LP_DISABLED && a_hr == LSM303AGR_ACC_HR_ENABLED ) {
+    }else if ( a_lp == LSM303AGR_ACC_LP_DISABLED && \
+   	           a_hr == LSM303AGR_ACC_HR_ENABLED ) {
         shift = 4;
     }else
         return false;
@@ -160,7 +166,7 @@ bool LSM303AGRAccMag::get_acc_axes(int32_t * aData){
     sens *= 1000.0f;
 
     if (!LSM303AGRAccMag::io_read((uint8_t *)tmp_val, LSM303AGR_ACC_OUT_X_L,6,
-								LSM303AGR_ACC_I2C_ADDRESS, 0xFF))
+					LSM303AGR_ACC_I2C_ADDRESS, 0xFF))
         return false;
 
 
@@ -179,3 +185,5 @@ bool LSM303AGRAccMag::get_acc_axes(int32_t * aData){
 
     return true;
 }
+
+/*******************************************************************************/
