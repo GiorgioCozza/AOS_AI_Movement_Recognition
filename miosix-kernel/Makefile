@@ -39,12 +39,6 @@ $(AIPATH)/NN.cpp																	\
 ./eabi_glibc/aeabi_memcpy.c 										\
 $(AIPATH)/Src/network_data.c 										\
 $(AIPATH)/Src/network.c  											\
-$(SENSDRIV)/LSM6DSL/LSM6DSLSensor.cpp				\
-$(SENSDRIV)/LSM303AGR/LSM303AGRMagSensor.cpp		\
-$(SENSDRIV)/LSM303AGR/LSM303AGRAccSensor.cpp		\
-$(SENSDRIV)/LSM6DSL/LSM6DSL_acc_gyro_driver.c		\
-$(SENSDRIV)/LSM303AGR/LSM303AGR_acc_driver.c		\
-$(SENSDRIV)/LSM303AGR/LSM303AGR_mag_driver.c		\
 
 
 ##
