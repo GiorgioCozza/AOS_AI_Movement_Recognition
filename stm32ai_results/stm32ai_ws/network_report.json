@@ -9,14 +9,14 @@
         "factor": null,
         "layers": {}
     },
-    "date_time": "Fri Apr  3 18:28:37 2020",
+    "date_time": "Sun Apr  5 16:38:35 2020",
     "error": 0,
     "error_str": [],
     "evaluation_measures": [],
     "evaluation_status": "NOT EVALUATED",
     "exec_cmd": "generate",
-    "exec_duration": 1.6403834819793701,
-    "hash": "9a318b55ace4f0e13625fc4c0edee66c",
+    "exec_duration": 1.6610679626464844,
+    "hash": "84e83c874b5eefc495d6b86c996aa7cd",
     "inputs": [
         "input_0"
     ],
@@ -100,7 +100,7 @@
             "inputs": [
                 "input_0"
             ],
-            "name": "batch_normalization_2",
+            "name": "batch_normalization_4",
             "out_shapes": [
                 [
                     12,
@@ -109,7 +109,7 @@
                 ]
             ],
             "outputs": [
-                "batch_normalization_2"
+                "batch_normalization_4"
             ],
             "type": "ScaleBias",
             "use_bias": true
@@ -143,7 +143,7 @@
             "go_backwards": false,
             "id": 1,
             "inputs": [
-                "batch_normalization_2"
+                "batch_normalization_4"
             ],
             "n_features": 12,
             "name": "LSTM1",
@@ -415,12 +415,12 @@
         }
     ],
     "maxlen_name": 33,
-    "md5": "9a318b55ace4f0e13625fc4c0edee66c",
+    "md5": "84e83c874b5eefc495d6b86c996aa7cd",
     "model_files": [
-        "C:\\Users\\grgcz\\Desktop\\dev_space_win\\AOS_Project\\AOS_MovementRecognition\\neural_net-py\\best_models\\best_acc_model_RNN_fold1_02-04-2020_191256.h5"
+        "C:\\Users\\grgcz\\Desktop\\dev_space_win\\AOS_Project\\AOS_MovementRecognition\\neural_net-py\\best_models\\best_acc_model_RNN_fold3_05-04-2020_122927.h5"
     ],
     "model_n_params": 30975,
-    "model_name": "best_acc_model_RNN_fold1_02042020_191256",
+    "model_name": "best_acc_model_RNN_fold3_05042020_122927",
     "model_size": 123900,
     "model_type": "keras (keras_dump)",
     "name": "network",

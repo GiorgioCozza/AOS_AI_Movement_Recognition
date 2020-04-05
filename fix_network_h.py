@@ -17,9 +17,9 @@ cor_in_line2 = "#define AI_NETWORK_IN_SIZE (30 * 1 * 12)\n"
 cor_in_line3 = "#define AI_NETWORK_OUT AI_BUFFER_OBJ_INIT(AI_BUFFER_FORMAT_FLOAT, 1, 1, 7, 1, NULL)\n"
 cor_in_line4 = "#define AI_NETWORK_OUT_SIZE (1 * 1 * 7)\n"
 
-
+proj_dir = os.getcwd()
 fh, abs_path = mkstemp()
-nn_dir = os.path.join(os.getcwd(), 'STM32CubeAI')
+nn_dir = os.path.join(proj_dir, 'NN_Code/Inc')
 network_h_path = os.path.join(nn_dir, 'network.h')
 
 # fix network.h file for compilation in Miosix OS
@@ -52,7 +52,7 @@ os.remove(network_h_path)
 move(abs_path, network_h_path)
 
 # remove old results of stm32ai
-result_dir = os.path.join(nn_dir, 'results')
+result_dir = os.path.join(proj_dir, 'stm32ai_results')
 try:
     rmtree(result_dir)
 except OSError as e:
@@ -64,8 +64,9 @@ if not os.path.exists(result_dir):
 	os.makedirs(result_dir)
 
 
+
 # move all stm32ai files into results directory
-for file in os.listdir(os.getcwd()):
+for file in os.listdir(proj_dir):
 	if file.startswith('stm32ai_'):
 		move(file, result_dir)
 
