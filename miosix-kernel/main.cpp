@@ -10,7 +10,7 @@
 #include "LSM303AGR.h"
 #include "NN.h"
 
-
+#define ESC     27
 using namespace std;
 using namespace miosix;
 
@@ -155,7 +155,6 @@ int main() {
                     usrled::low();
                     sample_cnt++;
 
-                    char ESC = 27;
                     printf("%c[H", ESC);
                     printf("%c[2J", ESC);
 
@@ -200,15 +199,19 @@ int main() {
                         //printf("\r\n[LOG]: Running the Neural Network...\r\n");
                         int n_b = neural_net->nnRun(network, &ai_input, &ai_output, 1);
                         pred_vec[pred_cnt] = dt_proc.get_argmax((const float *) out_data, (const uint8_t) NUM_CLASSES);
+                        printf("\n[LOG]: You are %s\n\n", movements[pred_vec[pred_cnt]]);
 
                         if (pred_cnt == PRED_SIZE) {
+
+                            printf("%c[H", ESC);
+                            printf("%c[2J", ESC);
                             printf("\r\n****************	AI NN NETWORK RESULT	*********************\r\n");
                             printf("\n[LOG]: You are %s\n\n", movements[dt_proc.get_mode((const uint8_t *) pred_vec, \
                                                                                  (const uint16_t) PRED_SIZE, \
                                                                                  (const uint8_t) NUM_CLASSES)]);
                             pred_cnt = 0;
+                            startflag = false;
                         }
-                        startflag = false;
                         pred_cnt++;
                     }
 

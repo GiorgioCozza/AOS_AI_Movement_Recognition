@@ -1,7 +1,4 @@
-ai_module/NN.o: ai_module/NN.cpp ai_module/NN.h ai_module/Inc/network.h \
- ai_module/Middlewares/ST/AI/Inc/ai_platform.h \
- ai_module/Inc/network_data.h miosix/miosix.h \
- miosix/interfaces/arch_registers.h \
+main.o: main.cpp miosix/miosix.h miosix/interfaces/arch_registers.h \
  miosix/arch/cortexM4_stm32f4/stm32f401re_nucleo/interfaces-impl/arch_registers_impl.h \
  miosix/arch/common/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h \
  miosix/arch/common/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h \
@@ -34,23 +31,23 @@ ai_module/NN.o: ai_module/NN.cpp ai_module/NN.h ai_module/Inc/network.h \
  miosix/stdlib_integration/libstdcpp_integration.h miosix/kernel/error.h \
  miosix/kernel/sync.h miosix/kernel/kernel.h miosix/kernel/queue.h \
  miosix/kernel/error.h miosix/util/util.h miosix/util/software_i2c.h \
- miosix/interfaces/delays.h miosix/config/miosix_settings.h \
- data_util/data_proc.h ai_module/Middlewares/ST/AI/Inc/ai_math_helpers.h \
+ miosix/interfaces/delays.h miosix/config/miosix_settings.h prog_config.h \
+ ai_module/nn_config.h sensor_driver/com_i2c/i2c_helper.h \
+ data_util/circular_queue.h prog_config.h sensor_driver/LSM6DSL/LSM6DSL.h \
+ sensor_driver/LSM6DSL/LSM6DSL_accelerometer.h \
+ sensor_driver/LSM6DSL/LSM6DSL_gyroscope.h sensor_driver/IKS01A2_config.h \
+ sensor_driver/LSM303AGR/LSM303AGR.h \
+ sensor_driver/LSM303AGR/LSM303AGR_accelerometer.h \
+ sensor_driver/LSM303AGR/LSM303AGR_magnetometer.h ai_module/NN.h \
+ ai_module/Inc/network.h ai_module/Middlewares/ST/AI/Inc/ai_platform.h \
+ ai_module/Inc/network_data.h data_util/data_proc.h \
+ ai_module/Middlewares/ST/AI/Inc/ai_math_helpers.h \
  ai_module/Middlewares/ST/AI/Inc/ai_platform_interface.h \
  ai_module/Middlewares/ST/AI/Inc/datatypes_network.h \
  ai_module/Middlewares/ST/AI/Inc/ai_datatypes_format.h \
  ai_module/Middlewares/ST/AI/Inc/ai_datatypes_defines.h \
  ai_module/Middlewares/ST/AI/Inc/core_datatypes.h \
- ai_module/Middlewares/ST/AI/Inc/formats_list.h \
- sensor_driver/IKS01A2_config.h prog_config.h ai_module/nn_config.h
-
-ai_module/NN.h:
-
-ai_module/Inc/network.h:
-
-ai_module/Middlewares/ST/AI/Inc/ai_platform.h:
-
-ai_module/Inc/network_data.h:
+ ai_module/Middlewares/ST/AI/Inc/formats_list.h ai_module/nn_config.h
 
 miosix/miosix.h:
 
@@ -140,6 +137,38 @@ miosix/interfaces/delays.h:
 
 miosix/config/miosix_settings.h:
 
+prog_config.h:
+
+ai_module/nn_config.h:
+
+sensor_driver/com_i2c/i2c_helper.h:
+
+data_util/circular_queue.h:
+
+prog_config.h:
+
+sensor_driver/LSM6DSL/LSM6DSL.h:
+
+sensor_driver/LSM6DSL/LSM6DSL_accelerometer.h:
+
+sensor_driver/LSM6DSL/LSM6DSL_gyroscope.h:
+
+sensor_driver/IKS01A2_config.h:
+
+sensor_driver/LSM303AGR/LSM303AGR.h:
+
+sensor_driver/LSM303AGR/LSM303AGR_accelerometer.h:
+
+sensor_driver/LSM303AGR/LSM303AGR_magnetometer.h:
+
+ai_module/NN.h:
+
+ai_module/Inc/network.h:
+
+ai_module/Middlewares/ST/AI/Inc/ai_platform.h:
+
+ai_module/Inc/network_data.h:
+
 data_util/data_proc.h:
 
 ai_module/Middlewares/ST/AI/Inc/ai_math_helpers.h:
@@ -155,9 +184,5 @@ ai_module/Middlewares/ST/AI/Inc/ai_datatypes_defines.h:
 ai_module/Middlewares/ST/AI/Inc/core_datatypes.h:
 
 ai_module/Middlewares/ST/AI/Inc/formats_list.h:
-
-sensor_driver/IKS01A2_config.h:
-
-prog_config.h:
 
 ai_module/nn_config.h:

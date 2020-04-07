@@ -9,14 +9,14 @@
         "factor": null,
         "layers": {}
     },
-    "date_time": "Sun Apr  5 16:38:35 2020",
+    "date_time": "Tue Apr  7 22:50:46 2020",
     "error": 0,
     "error_str": [],
     "evaluation_measures": [],
     "evaluation_status": "NOT EVALUATED",
     "exec_cmd": "generate",
-    "exec_duration": 1.6610679626464844,
-    "hash": "84e83c874b5eefc495d6b86c996aa7cd",
+    "exec_duration": 1.1419978141784668,
+    "hash": "4e3b68bf8f739b38d9079e156a879c7c",
     "inputs": [
         "input_0"
     ],
@@ -119,10 +119,10 @@
             "extras": {
                 "c_l2_error": 0,
                 "c_l2_id": -1,
-                "n_macc": 173760,
-                "n_params": 5760,
-                "psize": 23040,
-                "rom_n_params": 5856,
+                "n_macc": 593280,
+                "n_params": 19712,
+                "psize": 78848,
+                "rom_n_params": 19904,
                 "rom_output": {
                     "fmt_bits": [
                         32,
@@ -130,14 +130,14 @@
                     ],
                     "fmt_data": "AI_ARRAY_FORMAT_FLOAT",
                     "shape": [
-                        30,
                         1,
-                        32,
+                        1,
+                        64,
                         1
                     ]
                 },
-                "rom_size": 23424,
-                "rom_size_params": 23424,
+                "rom_size": 79616,
+                "rom_size_params": 79616,
                 "rom_trans": null
             },
             "go_backwards": false,
@@ -147,175 +147,16 @@
             ],
             "n_features": 12,
             "name": "LSTM1",
-            "num_units": 32,
+            "num_units": 64,
             "out_shapes": [
                 [
-                    32,
-                    30,
-                    1
-                ]
-            ],
-            "outputs": [
-                "LSTM1"
-            ],
-            "peepholes": false,
-            "recurrent_nl": "hard_sigmoid",
-            "return_sequences": true,
-            "return_state": false,
-            "stateful": false,
-            "type": "LSTM",
-            "unroll": false,
-            "use_bias": true
-        },
-        {
-            "activation_nl": "tanh",
-            "extras": {
-                "c_l2_error": 0,
-                "c_l2_id": -1,
-                "n_macc": 250560,
-                "n_params": 8320,
-                "psize": 33280,
-                "rom_n_params": 8416,
-                "rom_output": {
-                    "fmt_bits": [
-                        32,
-                        0
-                    ],
-                    "fmt_data": "AI_ARRAY_FORMAT_FLOAT",
-                    "shape": [
-                        30,
-                        1,
-                        32,
-                        1
-                    ]
-                },
-                "rom_size": 33664,
-                "rom_size_params": 33664,
-                "rom_trans": null
-            },
-            "go_backwards": false,
-            "id": 3,
-            "inputs": [
-                "LSTM1"
-            ],
-            "n_features": 32,
-            "name": "LSTM2",
-            "num_units": 32,
-            "out_shapes": [
-                [
-                    32,
-                    30,
-                    1
-                ]
-            ],
-            "outputs": [
-                "LSTM2"
-            ],
-            "peepholes": false,
-            "recurrent_nl": "hard_sigmoid",
-            "return_sequences": true,
-            "return_state": false,
-            "stateful": false,
-            "type": "LSTM",
-            "unroll": false,
-            "use_bias": true
-        },
-        {
-            "activation_nl": "tanh",
-            "extras": {
-                "c_l2_error": 0,
-                "c_l2_id": -1,
-                "n_macc": 250560,
-                "n_params": 8320,
-                "psize": 33280,
-                "rom_n_params": 8416,
-                "rom_output": {
-                    "fmt_bits": [
-                        32,
-                        0
-                    ],
-                    "fmt_data": "AI_ARRAY_FORMAT_FLOAT",
-                    "shape": [
-                        30,
-                        1,
-                        32,
-                        1
-                    ]
-                },
-                "rom_size": 33664,
-                "rom_size_params": 33664,
-                "rom_trans": null
-            },
-            "go_backwards": false,
-            "id": 5,
-            "inputs": [
-                "LSTM2"
-            ],
-            "n_features": 32,
-            "name": "LSTM3",
-            "num_units": 32,
-            "out_shapes": [
-                [
-                    32,
-                    30,
-                    1
-                ]
-            ],
-            "outputs": [
-                "LSTM3"
-            ],
-            "peepholes": false,
-            "recurrent_nl": "hard_sigmoid",
-            "return_sequences": true,
-            "return_state": false,
-            "stateful": false,
-            "type": "LSTM",
-            "unroll": false,
-            "use_bias": true
-        },
-        {
-            "activation_nl": "tanh",
-            "extras": {
-                "c_l2_error": 0,
-                "c_l2_id": -1,
-                "n_macc": 250560,
-                "n_params": 8320,
-                "psize": 33280,
-                "rom_n_params": 8416,
-                "rom_output": {
-                    "fmt_bits": [
-                        32,
-                        0
-                    ],
-                    "fmt_data": "AI_ARRAY_FORMAT_FLOAT",
-                    "shape": [
-                        1,
-                        1,
-                        32,
-                        1
-                    ]
-                },
-                "rom_size": 33664,
-                "rom_size_params": 33664,
-                "rom_trans": null
-            },
-            "go_backwards": false,
-            "id": 7,
-            "inputs": [
-                "LSTM3"
-            ],
-            "n_features": 32,
-            "name": "LSTM4",
-            "num_units": 32,
-            "out_shapes": [
-                [
-                    32,
+                    64,
                     1,
                     1
                 ]
             ],
             "outputs": [
-                "LSTM4"
+                "LSTM1"
             ],
             "peepholes": false,
             "recurrent_nl": "hard_sigmoid",
@@ -325,6 +166,180 @@
             "type": "LSTM",
             "unroll": false,
             "use_bias": true
+        },
+        {
+            "extras": {
+                "c_l2_error": 0,
+                "c_l2_id": -1,
+                "n_macc": 2048,
+                "n_params": 2080,
+                "psize": 8320,
+                "rom_n_params": 2080,
+                "rom_output": {
+                    "fmt_bits": [
+                        32,
+                        0
+                    ],
+                    "fmt_data": "AI_ARRAY_FORMAT_FLOAT",
+                    "shape": [
+                        1,
+                        1,
+                        32,
+                        1
+                    ]
+                },
+                "rom_size": 8320,
+                "rom_size_params": 8320,
+                "rom_trans": null
+            },
+            "id": 3,
+            "inputs": [
+                "LSTM1"
+            ],
+            "name": "FCN1",
+            "num_units": 32,
+            "out_shapes": [
+                [
+                    32,
+                    1,
+                    1
+                ]
+            ],
+            "outputs": [
+                "FCN1"
+            ],
+            "type": "Dense",
+            "use_bias": true
+        },
+        {
+            "extras": {
+                "c_l2_error": 0,
+                "c_l2_id": -1,
+                "n_macc": 32,
+                "n_params": 0,
+                "psize": 0,
+                "rom_n_params": 0,
+                "rom_output": {
+                    "fmt_bits": [
+                        32,
+                        0
+                    ],
+                    "fmt_data": "AI_ARRAY_FORMAT_FLOAT",
+                    "shape": [
+                        1,
+                        1,
+                        32,
+                        1
+                    ]
+                },
+                "rom_size": 0,
+                "rom_size_params": 0,
+                "rom_trans": null
+            },
+            "id": 3,
+            "inputs": [
+                "FCN1"
+            ],
+            "name": "FCN1_nl",
+            "nonlinearity": "relu",
+            "out_shapes": [
+                [
+                    32,
+                    1,
+                    1
+                ]
+            ],
+            "outputs": [
+                "FCN1_nl"
+            ],
+            "type": "Nonlinearity"
+        },
+        {
+            "extras": {
+                "c_l2_error": 0,
+                "c_l2_id": -1,
+                "n_macc": 1024,
+                "n_params": 1056,
+                "psize": 4224,
+                "rom_n_params": 1056,
+                "rom_output": {
+                    "fmt_bits": [
+                        32,
+                        0
+                    ],
+                    "fmt_data": "AI_ARRAY_FORMAT_FLOAT",
+                    "shape": [
+                        1,
+                        1,
+                        32,
+                        1
+                    ]
+                },
+                "rom_size": 4224,
+                "rom_size_params": 4224,
+                "rom_trans": null
+            },
+            "id": 5,
+            "inputs": [
+                "FCN1_nl"
+            ],
+            "name": "FCN2",
+            "num_units": 32,
+            "out_shapes": [
+                [
+                    32,
+                    1,
+                    1
+                ]
+            ],
+            "outputs": [
+                "FCN2"
+            ],
+            "type": "Dense",
+            "use_bias": true
+        },
+        {
+            "extras": {
+                "c_l2_error": 0,
+                "c_l2_id": -1,
+                "n_macc": 32,
+                "n_params": 0,
+                "psize": 0,
+                "rom_n_params": 0,
+                "rom_output": {
+                    "fmt_bits": [
+                        32,
+                        0
+                    ],
+                    "fmt_data": "AI_ARRAY_FORMAT_FLOAT",
+                    "shape": [
+                        1,
+                        1,
+                        32,
+                        1
+                    ]
+                },
+                "rom_size": 0,
+                "rom_size_params": 0,
+                "rom_trans": null
+            },
+            "id": 5,
+            "inputs": [
+                "FCN2"
+            ],
+            "name": "FCN2_nl",
+            "nonlinearity": "relu",
+            "out_shapes": [
+                [
+                    32,
+                    1,
+                    1
+                ]
+            ],
+            "outputs": [
+                "FCN2_nl"
+            ],
+            "type": "Nonlinearity"
         },
         {
             "extras": {
@@ -351,11 +366,11 @@
                 "rom_size_params": 924,
                 "rom_trans": null
             },
-            "id": 9,
+            "id": 7,
             "inputs": [
-                "LSTM4"
+                "FCN2_nl"
             ],
-            "name": "FCN1",
+            "name": "FCN3",
             "num_units": 7,
             "out_shapes": [
                 [
@@ -365,7 +380,7 @@
                 ]
             ],
             "outputs": [
-                "FCN1"
+                "FCN3"
             ],
             "type": "Dense",
             "use_bias": true
@@ -395,11 +410,11 @@
                 "rom_size_params": 0,
                 "rom_trans": null
             },
-            "id": 9,
+            "id": 7,
             "inputs": [
-                "FCN1"
+                "FCN3"
             ],
-            "name": "FCN1_nl",
+            "name": "FCN3_nl",
             "nonlinearity": "softmax",
             "out_shapes": [
                 [
@@ -409,33 +424,33 @@
                 ]
             ],
             "outputs": [
-                "FCN1_nl"
+                "FCN3_nl"
             ],
             "type": "Nonlinearity"
         }
     ],
     "maxlen_name": 33,
-    "md5": "84e83c874b5eefc495d6b86c996aa7cd",
+    "md5": "4e3b68bf8f739b38d9079e156a879c7c",
     "model_files": [
-        "C:\\Users\\grgcz\\Desktop\\dev_space_win\\AOS_Project\\AOS_MovementRecognition\\neural_net-py\\best_models\\best_acc_model_RNN_fold3_05-04-2020_122927.h5"
+        "C:\\Users\\grgcz\\Desktop\\dev_space_win\\AOS_Project\\AOS_MovementRecognition\\neural_net-py\\best_models\\best_acc_model_RNN_fold3_07-04-2020_202702.h5"
     ],
-    "model_n_params": 30975,
-    "model_name": "best_acc_model_RNN_fold3_05042020_122927",
-    "model_size": 123900,
+    "model_n_params": 23103,
+    "model_name": "best_acc_model_RNN_fold3_07042020_202702",
+    "model_size": 92412,
     "model_type": "keras (keras_dump)",
     "name": "network",
     "outputs": [
-        "FCN1_nl"
+        "FCN3_nl"
     ],
     "ram_io_size": [
         1440,
         28
     ],
     "ram_size": [
-        7680,
-        7680
+        1696,
+        1696
     ],
-    "rom_cfact": 0.012397094430992735,
+    "rom_cfact": 0.008310609011816647,
     "rom_heap": [
         0,
         0
@@ -445,14 +460,14 @@
         "input_0"
     ],
     "rom_l2_error_max": 0.0,
-    "rom_n_c_nodes": 7,
-    "rom_n_macc": 926489,
-    "rom_n_macc_max": 250560,
+    "rom_n_c_nodes": 8,
+    "rom_n_macc": 597465,
+    "rom_n_macc_max": 593280,
     "rom_outputs": [
-        "FCN1_nl"
+        "FCN3_nl"
     ],
-    "rom_size": 125436,
-    "rom_size_max": 33664,
+    "rom_size": 93180,
+    "rom_size_max": 79616,
     "rom_stack": [
         0,
         0

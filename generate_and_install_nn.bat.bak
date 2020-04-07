@@ -27,7 +27,7 @@ set ARM_MIOSIX_EABI=C:\arm-miosix-eabi\bin
 set MODEL_NAME=best_acc_model_RNN_fold3_07-04-2020_202702.h5
 
 :: TEST_CSV_DIR
-set TEST_CSV_DIR=test_Apr07_20
+set TEST_CSV_DIR=test_Apr05_20
 
 :: TEST_CSV_IN
 set TEST_CSV_IN=test_input_fold-3_Apr07_20-25-28.csv

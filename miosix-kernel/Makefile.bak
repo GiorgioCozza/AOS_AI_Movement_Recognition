@@ -46,7 +46,7 @@ $(AIPATH)/Src/network.c  										\
 ## List here additional static libraries with relative path
 ##
 LIBS :=	\
-$(AIPATH)/Middlewares/ST/AI/Lib/NetworkRuntime500_CM4_GCC.a               \
+$(AIPATH)/Middlewares/ST/AI/Lib/NetworkRuntime400_CM4_GCC.a               \
 $(AIPATH)/Drivers/CMSIS/Lib/GCC/libarm_cortexM4lf_math.a		\
 ##
 ## List here additional include directories (in the form -Iinclude_dir)

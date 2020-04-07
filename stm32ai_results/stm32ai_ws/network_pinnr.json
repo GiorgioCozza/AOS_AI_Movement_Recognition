@@ -38,75 +38,9 @@
             ],
             "n_features": 12,
             "name": "LSTM1",
-            "num_units": 32,
+            "num_units": 64,
             "outputs": [
                 "LSTM1"
-            ],
-            "peepholes": false,
-            "recurrent_nl": "hard_sigmoid",
-            "return_sequences": true,
-            "return_state": false,
-            "stateful": false,
-            "type": "LSTM",
-            "unroll": false,
-            "use_bias": true
-        },
-        {
-            "activation_nl": "tanh",
-            "go_backwards": false,
-            "id": 3,
-            "inputs": [
-                "LSTM1"
-            ],
-            "n_features": 32,
-            "name": "LSTM2",
-            "num_units": 32,
-            "outputs": [
-                "LSTM2"
-            ],
-            "peepholes": false,
-            "recurrent_nl": "hard_sigmoid",
-            "return_sequences": true,
-            "return_state": false,
-            "stateful": false,
-            "type": "LSTM",
-            "unroll": false,
-            "use_bias": true
-        },
-        {
-            "activation_nl": "tanh",
-            "go_backwards": false,
-            "id": 5,
-            "inputs": [
-                "LSTM2"
-            ],
-            "n_features": 32,
-            "name": "LSTM3",
-            "num_units": 32,
-            "outputs": [
-                "LSTM3"
-            ],
-            "peepholes": false,
-            "recurrent_nl": "hard_sigmoid",
-            "return_sequences": true,
-            "return_state": false,
-            "stateful": false,
-            "type": "LSTM",
-            "unroll": false,
-            "use_bias": true
-        },
-        {
-            "activation_nl": "tanh",
-            "go_backwards": false,
-            "id": 7,
-            "inputs": [
-                "LSTM3"
-            ],
-            "n_features": 32,
-            "name": "LSTM4",
-            "num_units": 32,
-            "outputs": [
-                "LSTM4"
             ],
             "peepholes": false,
             "recurrent_nl": "hard_sigmoid",
@@ -118,12 +52,12 @@
             "use_bias": true
         },
         {
-            "id": 9,
+            "id": 3,
             "inputs": [
-                "LSTM4"
+                "LSTM1"
             ],
             "name": "FCN1",
-            "num_units": 7,
+            "num_units": 32,
             "outputs": [
                 "FCN1"
             ],
@@ -131,22 +65,72 @@
             "use_bias": true
         },
         {
-            "id": 9,
+            "id": 3,
             "inputs": [
                 "FCN1"
             ],
             "name": "FCN1_nl",
-            "nonlinearity": "softmax",
+            "nonlinearity": "relu",
             "outputs": [
                 "FCN1_nl"
             ],
             "type": "Nonlinearity"
+        },
+        {
+            "id": 5,
+            "inputs": [
+                "FCN1_nl"
+            ],
+            "name": "FCN2",
+            "num_units": 32,
+            "outputs": [
+                "FCN2"
+            ],
+            "type": "Dense",
+            "use_bias": true
+        },
+        {
+            "id": 5,
+            "inputs": [
+                "FCN2"
+            ],
+            "name": "FCN2_nl",
+            "nonlinearity": "relu",
+            "outputs": [
+                "FCN2_nl"
+            ],
+            "type": "Nonlinearity"
+        },
+        {
+            "id": 7,
+            "inputs": [
+                "FCN2_nl"
+            ],
+            "name": "FCN3",
+            "num_units": 7,
+            "outputs": [
+                "FCN3"
+            ],
+            "type": "Dense",
+            "use_bias": true
+        },
+        {
+            "id": 7,
+            "inputs": [
+                "FCN3"
+            ],
+            "name": "FCN3_nl",
+            "nonlinearity": "softmax",
+            "outputs": [
+                "FCN3_nl"
+            ],
+            "type": "Nonlinearity"
         }
     ],
-    "md5": "84e83c874b5eefc495d6b86c996aa7cd",
+    "md5": "4e3b68bf8f739b38d9079e156a879c7c",
     "name": "network",
     "outputs": [
-        "FCN1_nl"
+        "FCN3_nl"
     ],
     "version": "0.2"
 }
