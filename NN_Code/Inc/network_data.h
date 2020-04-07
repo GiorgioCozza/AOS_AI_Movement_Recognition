@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    network_data.h
   * @author  AST Embedded Analytics Research Platform
-  * @date    Sun Apr  5 16:38:35 2020
+  * @date    Tue Apr  7 22:51:44 2020
   * @brief   AI Tool Automatic Code Generator for Embedded NN computing
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2018 STMicroelectronics.
+  * All rights reserved.
   *
   * This software component is licensed by ST under Ultimate Liberty license
   * SLA0044, the "License"; You may not use this file except in compliance with
@@ -26,9 +26,9 @@
 
 #define AI_NETWORK_DATA_CONFIG           AI_HANDLE_NULL
 
-#define AI_NETWORK_DATA_ACTIVATIONS_SIZE     (7680)
+#define AI_NETWORK_DATA_ACTIVATIONS_SIZE     (1696)
 
-#define AI_NETWORK_DATA_WEIGHTS_SIZE         (125436)
+#define AI_NETWORK_DATA_WEIGHTS_SIZE         (93180)
 
 #define AI_NETWORK_DATA_ACTIVATIONS(ptr_)  \
   AI_BUFFER_OBJ_INIT( \
