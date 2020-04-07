@@ -48,18 +48,17 @@ def CNN_model():
 
 # Recurrent Neural Network model
 def RNN_model():
-    hid_nodes_lstm = 32
+    hid_nodes_lstm = 64
+    fcn_nodes = 32
     rnn_model = Sequential()
     rnn_model.add(BatchNormalization(input_shape=(WINDOW_SAMPLES, SENS_VALUES)))
-    rnn_model.add(LSTM(units=hid_nodes_lstm, return_sequences=True, name='LSTM1'))
+    rnn_model.add(LSTM(units=hid_nodes_lstm, return_sequences=False, name='LSTM1'))
     rnn_model.add(Dropout(0.2))
-    rnn_model.add(LSTM(units=hid_nodes_lstm, return_sequences=True, name='LSTM2'))
+    rnn_model.add(Dense(fcn_nodes, activation='relu', name='FCN1'))
     rnn_model.add(Dropout(0.2))
-    rnn_model.add(LSTM(units=hid_nodes_lstm, return_sequences=True, name='LSTM3'))
+    rnn_model.add(Dense(fcn_nodes, activation='relu', name='FCN2'))
     rnn_model.add(Dropout(0.2))
-    rnn_model.add(LSTM(units=hid_nodes_lstm, return_sequences=False, name='LSTM4'))
-    rnn_model.add(Dropout(0.2))
-    rnn_model.add(Dense(num_classes, activation='softmax', name='FCN1'))
+    rnn_model.add(Dense(num_classes, activation='softmax', name='FCN3'))
 
     model_summary(rnn_model, mod_type='RNN')
     return rnn_model

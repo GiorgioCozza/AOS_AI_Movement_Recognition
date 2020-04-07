@@ -121,7 +121,8 @@ def get_dataset(filename):
 def normalize(dataset_dict, activity):
     norm_dataset = cp.deepcopy(ds_model)
 
-    log_file = 'preprocessing_log_' + activity + '_' + dt.now().strftime("%d-%m-%Y_%H%M") + '.txt'
+    log_file = 'preprocessing_norm_' \
+               'log_' + activity + '_' + dt.now().strftime("%d-%m-%Y_%H%M") + '.txt'
     norm_log = os.path.join(log_dir, log_file)
     with open(norm_log, 'w') as f:
 
@@ -137,6 +138,29 @@ def normalize(dataset_dict, activity):
 
     f.close()
     return norm_dataset
+
+
+# Dataset normalization
+def standardize(dataset_dict, activity):
+    std_dataset = cp.deepcopy(ds_model)
+
+    log_file = 'preprocessing_std_log_' + activity + '_' + dt.now().strftime("%d-%m-%Y_%H%M") + '.txt'
+    norm_log = os.path.join(log_dir, log_file)
+    with open(norm_log, 'w') as f:
+
+        f.write(activity)
+        f.write("\n")
+        for s in SENSORS:
+            for ax in AXIS:
+                mean_ax = np.mean(dataset_dict[s][ax])
+                std_ax = np.std(dataset_dict[s][ax])
+                ar = s + ', ' + ax + ', MEAN: ' + str(mean_ax) + ', STD_DEV: ' + str(std_ax) + "\n"
+                f.write(ar)
+                std_dataset[s][ax] = (dataset_dict[s][ax] - mean_ax) / std_ax
+
+    f.close()
+    return std_dataset
+
 
 
 # Reshape and organize the input and target into group of batches

@@ -2,86 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09f50ed0-32f5-4dad-a37d-a2b12a97fb75" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../.keras/keras.json" beforeDir="false" afterPath="$PROJECT_DIR$/../.keras/keras.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../STM32CubeAI/fix_network_h.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../STM32CubeAI/network.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../STM32CubeAI/network.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../STM32CubeAI/network_data.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../STM32CubeAI/network_data.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../STM32CubeAI/network_generate_report.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../STM32CubeAI/results/stm32ai_output/network_analyze_report.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../STM32CubeAI/results/stm32ai_output/network_validate_report.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../STM32CubeAI/results/stm32ai_ws/network_pinnr.hdf5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../STM32CubeAI/results/stm32ai_ws/network_pinnr.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../STM32CubeAI/results/stm32ai_ws/network_report.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ai_stm32_msg.log" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../generate_and_install_nn.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../generate_and_install_nn.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/best_models/best_acc_model_16-03-2020_160146.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/best_models/best_acc_model_RNN_fold1_02-04-2020_191256.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/best_models/best_loss_RNN_fold0_02-04-2020_191256.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/best_models/best_loss_model_16-03-2020_160146.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/datasets/activity_files/jumping_23-02-2020_111922.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/datasets/activity_files/jumping_25-02-2020_094215.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/datasets/jumping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/datasets/jumping.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/confmat_02-04-2020_172511.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/confmat_02-04-2020_172526.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/confmat_02-04-2020_172530.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/confmat_02-04-2020_173804.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/confmat_02-04-2020_173818.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/confmat_02-04-2020_181357.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/confmat_02-04-2020_181402.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/confmat_02-04-2020_191008.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/confmat_02-04-2020_191015.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/data_dist.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/data_dist.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/plot_ACC_LSM303AGR_DS_standing_jumping.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/plot_ACC_LSM303AGR_DS_standing_jumping.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/plot_ACC_LSM303AGR_DS_walking_running.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/plot_ACC_LSM303AGR_DS_walking_running.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/plot_ACC_LSM6DSL_DS_standing_jumping.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/plot_ACC_LSM6DSL_DS_standing_jumping.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/plot_ACC_LSM6DSL_DS_walking_running.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/plot_ACC_LSM6DSL_DS_walking_running.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/plot_GYR_LSM6DSL_DS_standing_jumping.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/plot_GYR_LSM6DSL_DS_standing_jumping.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/plot_GYR_LSM6DSL_DS_walking_running.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/plot_GYR_LSM6DSL_DS_walking_running.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/plot_MAG_LSM303AGR_DS_standing_jumping.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/plot_MAG_LSM303AGR_DS_standing_jumping.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/plot_MAG_LSM303AGR_DS_walking_running.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/plot_MAG_LSM303AGR_DS_walking_running.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/RNN_summary05-04-2020_121527.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/RNN_summary05-04-2020_121528.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/RNN_summary05-04-2020_121529.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/plots/scatter3d_ACC_LSM303AGR_DS.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/scatter3d_ACC_LSM303AGR_DS.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plots/scatter3d_ACC_LSM6DSL_DS.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/scatter3d_ACC_LSM6DSL_DS.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plots/scatter3d_GYR_LSM6DSL_DS.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/scatter3d_GYR_LSM6DSL_DS.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plots/scatter3d_MAG_LSM303AGR_DS.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/scatter3d_MAG_LSM303AGR_DS.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/data_visualization.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/data_visualization.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/dataset_processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/dataset_processing.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/neural_network.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/neural_network.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_csv/test_Apr02_20/test_input_fold-0_Apr02_18-58-48.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_csv/test_Apr02_20/test_input_fold-1_Apr02_19-04-24.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_csv/test_Apr02_20/test_output_fold-0_Apr02_18-58-48.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_csv/test_Apr02_20/test_output_fold-1_Apr02_19-04-24.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_csv/test_Feb26_20/test_input_fold-0_Feb26_20-04-20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_csv/test_Feb26_20/test_input_fold-0_Feb26_20-13-51.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_csv/test_Feb26_20/test_output_fold-0_Feb26_20-04-20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_csv/test_Feb26_20/test_output_fold-0_Feb26_20-13-51.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reports/STM32CubeAI_doc/Release_Note.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reports/STM32CubeAI_doc/an_x_cube_ai_4.0_cli.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reports/STM32CubeAI_doc/an_x_cube_ai_4.0_embedded_client_api.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reports/STM32CubeAI_doc/an_x_cube_ai_4.0_evaluation_metrics.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reports/STM32CubeAI_doc/an_x_cube_ai_4.0_layer_support.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reports/STM32CubeAI_doc/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reports/STM32CubeMX_generation_report.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/_minted-main/0346948872361778594E4618051E20155226287D929C83DD17DA07F330B35F9C.pygtex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/code/data_gathering.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/code/data_gathering.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/code/data_gathering.cpp.bak" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/code/data_gathering.cpp.bak" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/figures/data_dist.png" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/figures/data_dist.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/figures/plot_ACC_LSM303AGR_DS_walking_running.png" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/figures/plot_ACC_LSM303AGR_DS_walking_running.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/figures/plot_ACC_LSM6DSL_DS_standing_jumping_X.png" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/figures/plot_ACC_LSM6DSL_DS_standing_jumping_X.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/figures/plot_ACC_LSM6DSL_DS_walking_running.png" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/figures/plot_ACC_LSM6DSL_DS_walking_running.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/figures/plot_ACC_LSM6DSL_DS_walking_running_X.png" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/figures/plot_ACC_LSM6DSL_DS_walking_running_X.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/figures/plot_GYR_LSM6DSL_DS_standing_jumping.png" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/figures/plot_GYR_LSM6DSL_DS_standing_jumping.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/figures/plot_GYR_LSM6DSL_DS_walking_running.png" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/figures/plot_GYR_LSM6DSL_DS_walking_running.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/figures/plot_MAG_LSM303AGR_DS_standing_jumping.png" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/figures/plot_MAG_LSM303AGR_DS_standing_jumping.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/figures/plot_MAG_LSM303AGR_DS_walking_running.png" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/figures/plot_MAG_LSM303AGR_DS_walking_running.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/figures/scatter3d_ACC_LSM303AGR_DS.png" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/figures/scatter3d_ACC_LSM303AGR_DS.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/figures/scatter3d_ACC_LSM6DSL_DS.png" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/figures/scatter3d_ACC_LSM6DSL_DS.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/figures/scatter3d_GYR_LSM6DSL_DS.png" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/figures/scatter3d_GYR_LSM6DSL_DS.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/figures/scatter3d_MAG_LSM303AGR_DS.png" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/figures/scatter3d_MAG_LSM303AGR_DS.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../reports/proj_doc/main.aux" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/main.aux" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../reports/proj_doc/main.bbl" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/main.bbl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../reports/proj_doc/main.blg" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/main.blg" afterDir="false" />
@@ -91,7 +22,6 @@
       <change beforePath="$PROJECT_DIR$/../reports/proj_doc/main.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/main.synctex.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../reports/proj_doc/main.toc" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/main.toc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../reports/proj_doc/text/coding.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/text/coding.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reports/stm32cubeai_validation" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -104,17 +34,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/config.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
+            <state relative-caret-position="578">
               <caret line="34" selection-start-line="34" selection-end-line="34" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2384">
-              <caret line="36" selection-start-line="36" selection-end-line="36" />
+            <state relative-caret-position="308">
+              <caret line="139" lean-forward="true" selection-start-line="139" selection-end-line="139" />
               <folding>
                 <element signature="e#9#27#0" expanded="true" />
               </folding>
@@ -125,8 +55,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/data_visualization.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="121" column="77" selection-start-line="121" selection-start-column="77" selection-end-line="121" selection-end-column="77" />
+            <state relative-caret-position="-12">
+              <caret line="125" selection-start-line="125" selection-end-line="125" />
               <folding>
                 <element signature="e#1#22#0" expanded="true" />
               </folding>
@@ -134,11 +64,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/neural_network.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="20" column="21" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
+            <state relative-caret-position="68">
+              <caret line="51" column="18" selection-start-line="51" selection-start-column="18" selection-end-line="51" selection-end-column="18" />
               <folding>
                 <element signature="e#9#27#0" expanded="true" />
               </folding>
@@ -149,8 +79,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/dataset_processing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1649">
-              <caret line="97" selection-start-line="97" selection-end-line="97" />
+            <state relative-caret-position="857">
+              <caret line="124" column="16" selection-start-line="124" selection-start-column="16" selection-end-line="124" selection-end-column="16" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -184,6 +114,7 @@
       <find>keras</find>
       <find>glorot</find>
       <find>NUM_CLAS</find>
+      <find>normalize</find>
     </findStrings>
     <replaceStrings>
       <replace>running</replace>
@@ -224,11 +155,11 @@
         <option value="$PROJECT_DIR$/scripts/CNN_model.py" />
         <option value="$PROJECT_DIR$/scripts/data_gathering.py" />
         <option value="$PROJECT_DIR$/scripts/nn_config.py" />
-        <option value="$PROJECT_DIR$/scripts/neural_network.py" />
+        <option value="$PROJECT_DIR$/scripts/config.py" />
         <option value="$PROJECT_DIR$/scripts/dataset_processing.py" />
         <option value="$PROJECT_DIR$/scripts/data_visualization.py" />
-        <option value="$PROJECT_DIR$/scripts/config.py" />
         <option value="$PROJECT_DIR$/scripts/main.py" />
+        <option value="$PROJECT_DIR$/scripts/neural_network.py" />
       </list>
     </option>
   </component>
@@ -244,6 +175,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -260,7 +192,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -569,20 +500,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/neural_network.py">
+    <entry file="file://$PROJECT_DIR$/scripts/config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="20" column="21" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
-          <folding>
-            <element signature="e#9#27#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="578">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/dataset_processing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1649">
-          <caret line="97" selection-start-line="97" selection-end-line="97" />
+        <state relative-caret-position="857">
+          <caret line="124" column="16" selection-start-line="124" selection-start-column="16" selection-end-line="124" selection-end-column="16" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -591,25 +519,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/data_visualization.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="121" column="77" selection-start-line="121" selection-start-column="77" selection-end-line="121" selection-end-column="77" />
+        <state relative-caret-position="-12">
+          <caret line="125" selection-start-line="125" selection-end-line="125" />
           <folding>
             <element signature="e#1#22#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/config.py">
+    <entry file="file://$PROJECT_DIR$/scripts/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
+        <state relative-caret-position="308">
+          <caret line="139" lean-forward="true" selection-start-line="139" selection-end-line="139" />
+          <folding>
+            <element signature="e#9#27#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/main.py">
+    <entry file="file://$PROJECT_DIR$/scripts/neural_network.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2384">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
+        <state relative-caret-position="68">
+          <caret line="51" column="18" selection-start-line="51" selection-start-column="18" selection-end-line="51" selection-end-column="18" />
           <folding>
             <element signature="e#9#27#0" expanded="true" />
           </folding>

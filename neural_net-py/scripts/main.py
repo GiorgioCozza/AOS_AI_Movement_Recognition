@@ -88,7 +88,7 @@ def main():
     act_files_scat = [os.path.join(session_dir, af) for af in act_files_scat]
     act_files_plot = [os.path.join(session_dir, af) for af in act_files_plot]
     #plot_temporal_activity(act_files_plot, limit=WINDOW_SAMPLES*3)
-    #activity_scattering3D(act_files_scat, limit=WINDOW_SAMPLES)
+    #activity_scattering3D(act_files_scat, limit=500)
     #show_activities_histogram()
 
 
