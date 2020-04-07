@@ -5,6 +5,7 @@
 \contentsline {figure}{\numberline {10}{\ignorespaces LSM6DSL Accelerometer: sitting, supine, lying on side\relax }}{12}{figure.caption.13}% 
 \contentsline {figure}{\numberline {11}{\ignorespaces LSM303AGR Magnetometer, Scattering Plot \relax }}{13}{figure.caption.14}% 
 \contentsline {figure}{\numberline {13}{\ignorespaces RNN model graph\relax }}{14}{figure.caption.16}% 
-\contentsline {figure}{\numberline {14}{\ignorespaces Dataset Distribution\relax }}{16}{figure.caption.17}% 
-\contentsline {figure}{\numberline {15}{\ignorespaces Dataset partitioning\relax }}{16}{figure.caption.18}% 
-\contentsline {figure}{\numberline {16}{\ignorespaces X-CUBE AI Engine\relax }}{17}{figure.caption.20}% 
+\contentsline {figure}{\numberline {14}{\ignorespaces Dataset Distribution\relax }}{15}{figure.caption.17}% 
+\contentsline {figure}{\numberline {15}{\ignorespaces Dataset partitioning\relax }}{15}{figure.caption.18}% 
+\contentsline {figure}{\numberline {17}{\ignorespaces Confusion Matrix: Testing\relax }}{17}{figure.caption.21}% 
+\contentsline {figure}{\numberline {18}{\ignorespaces X-CUBE AI Engine\relax }}{17}{figure.caption.22}% 

@@ -1,11 +1,11 @@
 \section{Introduction}
-As the AI goes further in its evolution, together with explosion of interconnected IoT devices, the need to move the computation to the "edge" gets more urgent. Wereable devices relying on AI algorithms (such as neural networks) most of the times must stream data to general-purpose devices (such as smartphones and laptops) or to cloud services. The fact that, in real-time applications this represents a serious issue, is known, as well as the numerous legal concerns regarding data manipulation and privacy. All these problems get more mitigated as data and computation are kept local. But close to these debats there is more subtle problem related to scalability. As heterogeneus data sources increase in number, in fact it becomes computationally expensive to scale a cloud-hosted AI application, in such cases is required to process a huge amount of different kinds of information for instance from a wide network of distributed sensor nodes. It is particularly intuitive that this stage In this study a simple classification problem using embedded neural network will be analyzed in order to highlight which advantages can be obtained by moving AI algorithms on embedded devices 
+As the AI goes further in its evolution, together with explosion of interconnected IoT devices, the need to move the computation to the "edge" gets more urgent. Wereable devices relying on AI algorithms (such as neural networks) most of the times must stream data to general-purpose devices (such as smartphones and laptops) or to cloud services. The fact that, in real-time applications this represents a serious issue, is known, as well as the numerous legal concerns regarding data manipulation and privacy. All these problems get more mitigated as data and computation are kept local. But close to these debats there is a more subtle problem related to scalability. As heterogeneus data sources increase in number, in fact it becomes computationally expensive to scale a cloud-hosted AI application, in such cases is required to process a huge amount of different kinds of information for instance from a wide network of distributed sensor nodes. It may help, in such cases to let small sensing devices to solve simple classification tasks without involving external services, or even think to partition a complex AI task in smaller ones, moving part of the problem to the edge of a large infrastructure. This kind of scenario now are more feasable thanks to new tools such as STM32CubeAI, that speeds up embedded code development involing neural networks. In this study a simple classification problem using embedded neural network will be analyzed in order to highlight which advantages can be obtained by moving AI algorithms on embedded devices 
 
-\subsection{Problem statement}
+\subsection{A Possible Scenario}
 Let suppose to be in an hospital with several patients with serious pathological conditions or mental illness. In some case a patient is constrained in its movements, he cannot wake up from bed doing particular stressful movements or take specific positions, it may also be  that such movements are symptoms of agitation that requires immediate medical intervention. These kind of patients must be monitored by mean of wereable sensors to detect anomaly conditions. Such system most of the times consists in a centralized architectures based on a AI algorithm processing data acquired from heterogeneous sensors distributed all over the building complex, in charge of classifying the condition of each specific patient. As the number of patients to be observed grows up the need of c
 
 \subsection{Summary of the work}
-In this project a possible solution to the above mentioned problem is proposed in sort of toy example that can perfectly represent the potential effects of moving classification tasks on special-purpose embedded platforms. The purpose of the classification task is to recognize a set of movements and positions of the human body by simply using an STM32 Nucleo board. The motivation of this early choice is based on the fact that when dealing with AI in the embedded field, one of the most tricky task for programmers is the implementation of standard aspects related to popular AI algorithms (in case of neural networks: layers, activation functions implementation and so on), sometime is possible to speed-up this long and tedious part of the development process thanks to libraries and tools provided by silicon manufacturers. All the stages from data gathering, through modeling and training the neural network, to the development of the firmware code will be discussed, remarking the advantages of recurring to embedded software tools and APIs directly provided by MCU manufacturing companies. The peculiarity of the study is the simplicity of the path that led from the network model to the embedded code. At this stage most of the work was performed by a powerful plugin integrated into the STM32CubeMX program, STM32Cube.AI realized by ST Microelectronics to facilitate bare-metal development. Another important result of this work is that the generated network code has been deployed directly on top of a real-time operating system, Miosix, showing the possibility to exploit typical real-time features of these OSs in the field of edge AI.   
+In this project a possible solution to the above mentioned problem is proposed in sort of toy example that can perfectly represent the potential effects of moving classification tasks on special-purpose embedded platforms. The purpose of the classification task is to recognize a set of movements and positions of the human body by simply using an STM32 Nucleo board. The motivation of this early choice is based on the fact that when dealing with AI in the embedded field, one of the most tricky task for programmers is the implementation of standard aspects related to popular AI algorithms (in case of neural networks: layers, activation functions and so on), sometime is possible to speed-up this long and tedious part of the development process thanks to libraries and tools provided by silicon manufacturers. All the stages from data gathering, through modeling and training the neural network, to the development of the firmware code will be discussed, remarking the advantages of recurring to embedded software tools and APIs directly provided by MCU manufacturing companies. The peculiarity of the study is the simplicity of the process that led from the network model to the embedded code. At this stage most of the work was performed by a powerful plugin integrated into the STM32CubeMX program, STM32Cube.AI realized by ST Microelectronics to facilitate bare-metal development. Another important result of this work is that the generated network code has been deployed directly on top of a real-time operating system, Miosix, showing the benefits of exploiting typical characteristics of this OS in the field of edge AI.   
 \pagebreak
 
 \section{Design and implementation}
@@ -247,7 +247,7 @@ This kind of analysis also helps to understand qualitatively the amount of effor
 	\caption{LSM303AGR Magnetometer, Scattering Plot }\label{fig:8}
 	\centering
 \end{figure}
-Most of the activity distributions appear to be distinguishable, but as it can be noticed, it is very difficult to discriminate between running and walking, or between standing and jumping in a certain range of values. The scattering plot of the LSM6DSL's accelerometer and gyroscope is even more confused and difficult to be analyzed:
+Most of the activity distributions appear to be distinguishable, but as it can be noticed, it is very difficult to discriminate between running and walking, or between standing and jumping in a certain range of values. The scattering plots of the LSM6DSL's accelerometer and gyroscope are even more confused and difficult to be analyzed:
 \begin{center}
 	\begin{figure}[H]
 		\begin{subfigure}[H]{0.45\textwidth}
@@ -261,15 +261,15 @@ Most of the activity distributions appear to be distinguishable, but as it can b
 	\end{figure} 
 \end{center}
 This is the reason why it is not so easy to write an algorithm to classify among 7 activities, by doing some statistical evaluation on samples in a very tight time window. This consideration does not preclude the possibility to use other machine learning techniques to solve this problem, but since such techniques have been frequently used in many similar research works, it has been decided to rely on neural networks this time.\newline
-Focusing on the architecture, Recurrent Neural Networks (RNN) are an established standard in classification problems that involve time series. But beside a common LSTM-based model  an alternative solution is adopted, a simple Convolutional Neural Network (CNN) to demonstrate that even under constrained hardware, it is possible to deploy computationally expensive models.\newline
-The first one consists in a 4-layer LSTM architecture, characterized by the following layers:
+Focusing on the architecture, Recurrent Neural Networks (RNN) are an established standard in classification problems that involve time series. Besides this LSTM-based model  an alternative solution was developed originally, a simple Convolutional Neural Network (CNN) that  unfortunately did not provide satisfying results for this specific task. It will not be discussed in this report.\newline
+The RNN solution consists in a single-cell LSTM architecture on top of a classifier, characterized by the following layers:
 
 
 \begin{wrapfigure}{r}{0.4\textwidth}
-	\hfill\includegraphics[width=0.2\textwidth]{figures/lstm_nn.png}\hspace*{\fill}
+	\hfill\includegraphics[width=0.2\textwidth]{figures/rnn.png}\hspace*{\fill}
 	\caption{RNN model graph}\label{fig:9}
 	\centering
-	\vspace{-90pt}
+	\vspace{-250pt}
 \end{wrapfigure}
 \noindent
 \begin{itemize}
@@ -279,24 +279,16 @@ The first one consists in a 4-layer LSTM architecture, characterized by the foll
 		 \hat{x_{i}} = \frac{x_{i} - \mu_{B}}{\sqrt{\sigma_{B}^2 + \epsilon}}
 	\]
 	in which $x_{i}$ is a data point of the batch, $ \mu_{B} $ and $ \sigma_{B} $is the batch mean and variance respectively, whereas $ \gamma $ and $ \beta $ are paramters used to properly scale the normalization result, $ \epsilon $ at the end avoids zero-division. 
-	\item \textbf{4 LSTM} cells: to capture patterns on different time scales. The specific number of layers does not have a real explanation, is the combination that has given the best performance so far. Each of these has 32 hidden nodes, the activation and recurrent activation functions chosen are \textit{tanh} and \textit{sigmoid} respectively. 
-	\item \textbf{Fully-connected} layer: composed of 7 neurons implementing a \textit{softmax} function, these last step of the neural network is the real classifier, it evaluates a score per each activity class starting from the state of the last LSTM step. 
+	\item \textbf{single LSTM} cell: characterized by 64 hidden nodes, with \textit{tanh} as activation function and \textit{sigmoid} as recurrent activation function. This part of the architecture is in charge of capturing time dependences in data sequence  
+	\item \textbf{3 Fully-connected} layers: to classify features extracted by the LSTM cell, first layers (FCN1 and FCN2) composed of 32 neurons using a \textit{rectified-linear unit} as non-linear activation function and a last step of \textit{softmax} normalization . 
 \end{itemize}
 Here some implementation details:
 
 
-\inputminted[framesep=1cm, firstline=52, lastline=66, bgcolor=whitesmoke, fontsize=\footnotesize]{python}{code/neural_network.py}
+\inputminted[framesep=1cm, firstline=52, lastline=68, bgcolor=whitesmoke, fontsize=\tiny]{python}{code/neural_network.py}
 \newpage
 
 
-The other solution consists in a small Convolutional Neural Network, with the following architecture:
-\newline
-\noindent
-\begin{itemize}
-	\item \textbf{Batch Normalization}
-	\item \textbf{2D Convolutional} layer: performs the convolution to learn a set of 24 filters. In this case batches are represented as groups of matrices $ 30 \times 12 $, so can be thought as a sort of image and each filter scans all the "image" pixels  
-\end{itemize}
-\newpage
 
 
 
@@ -333,19 +325,17 @@ After data preprocessing, each network instance is trained sequentially for 60-8
 		\hline
 		BatchNormalization    &		  (None, 30, 12)       &     48          \T\B \\
 		\hline
-		LSTM1 (LSTM)          &       (None, 30, 32)       &     5760      	\T\B \\
+		LSTM1 (LSTM)          &       (None, 64)           &     19712     	 \T\B \\
 		\hline
-		LSTM2 (LSTM)          &       (None, 30, 32)       &     8320       \T\B \\
+		FCN1 (Dense)          &       (None, 32)           &     2080       \T\B \\
 		\hline
-		LSTM3 (LSTM)          &       (None, 30, 32)       &     8320      	\T\B \\
+		FCN2 (Dense)          &       (None, 32)           &     1056      	\T\B \\
 		\hline
-		LSTM4 (LSTM)          &       (None, 32)           &     8320       \T\B \\ 
-		\hline
-		FCN1 (Dense)         &        (None, 7)            &     231      	\T\B \\ 
+		FCN3 (Dense)          &       (None, 7)            &     231       \T\B \\ 
 		\hline
 		\hline
-		Total params:   &&										30,999\T  \\
-		Trainable params:  && 	  								30,975\\
+		Total params:   &&										23,127\T  \\
+		Trainable params:  && 	  								23,103\\
 		Non-trainable params:  && 								24\B  \\
 		\hline
 		
@@ -353,11 +343,40 @@ After data preprocessing, each network instance is trained sequentially for 60-8
 	\centering
 	\caption{\label{tab:2}Recurrent Neural Network: Model Summary}
 \end{table}
+As the number of trainable parameters suggests, the network architecture is not so complex. Although this seems an advantage from computational perspective, it implies that the model is affected by a considerable amount of variance and it tends therefore to overfit and as experimented in final testing, regardless good validation results, the final application presents some slight performance degradation under changes in testing conditions.\newline
+Hence different Dropout layers are added at training time and Early Stopping regularization technique has been adopted to prevent overfitting as well.
 
+\begin{center}
+	\begin{figure}[H]
+		\begin{subfigure}[H]{0.45\textwidth}
+			\hfill\includegraphics[scale=0.6]{figures/last_model_val_acc.png}\vspace*{\fill}
+			\caption{Validation accuracy trend through epochs}\label{fig:8a}
+		\end{subfigure}
+		\begin{subfigure}[H]{0.45\textwidth}
+			\hfill\includegraphics[scale=0.6]{figures/last_model_val_loss.png}\vspace*{\fill}
+			\caption{Validation loss trend through epochs}\label{fig:8b}
+		\end{subfigure}
+	\end{figure} 
+\end{center}
+The training algorithm converges sharply after few epochs. From final validation considering all the trained models the average results appears better than expected, with:\\
+
+\begin{wrapfigure}{r}{0.4\textwidth}
+	\hfill\includegraphics[width=0.6\textwidth]{figures/confmat_07-04-2020_202659.png}\hspace*{\fill}
+	\caption{Confusion Matrix: Testing}\label{fig:9}
+	\centering
+	\vspace{-60pt}
+\end{wrapfigure}
+\noindent
+
+\begin{itemize}
+	\item \textbf{Average Validation Accuracy}: 0.9913
+	\item \textbf{Average Validation Loss}: 0.0305
+\end{itemize}
+More optimistic results, instead come from the best trained model (fold 3) as shown in the confusion matrix (fig 17), that gives even a perfect prediction of all testing cases, the estimation however is even too optimistic as confirmed with other trained instances of the same architecture: some of them for example completely mispredicts jumping cases, so even if the chosen model is the best one, it should not be expected to have a perfect classifier at the end. Model ensemble techniques suggested by the literature are instead discouraged due to hardware constrains.
 
 \subsection{Network Code Generation and on-target Testing}
-STM32CubeMX, as mentioned in previous discussions, is in charge of generating the C-code from the Keras model, precisely an initialization of the network on which is possible to build a specific application, so what is really important in this step is that the developer is not worried about the embedded implementation of each network layer features.\newline
-Before proceeding it is important to outline how the tool works in order to understand the way the network model is treated within the program environment, the AI plugin in fact, lives into STM32CubeMX that requires some preliminary configuration including the creation of a new project and some specification of the development board used. 
+STM32CubeMX, as mentioned in previous discussions, is in charge of generating the C-code from the Keras model, precisely an initialization of the network on which is possible to build a specific application, so what is really important in this step is that the developer is not worried about the embedded implementation of each network layer details.\newline
+Before proceeding it is important to outline how the tool works in order to understand the way the network model is treated within the program environment, the AI plugin in fact, lives within STM32CubeMX that requires some preliminary configuration including the creation of a new project and some specification of the development board used. This step must be repeated at least once to generate all the required network files. STM32CubeAI offers a command-line interface that is exploited in this work to automatize validation and code generation
 
 \begin{figure}[H]
 	\hfill\includegraphics[width=0.8\textwidth]{figures/stm32cubeai_arch.png}\hspace*{\fill}

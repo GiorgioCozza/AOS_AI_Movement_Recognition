@@ -50,24 +50,22 @@
     \PYG{k}{return} \PYG{n}{cnn\PYGZus{}model}
 
 
+\PYG{c+c1}{\PYGZsh{} **************   Recurrent Neural Network model   *****************************************}
 \PYG{k}{def} \PYG{n+nf}{RNN\PYGZus{}model}\PYG{p}{():}
-
-    \PYG{n}{hid\PYGZus{}nodes\PYGZus{}lstm} \PYG{o}{=} \PYG{l+m+mi}{32}
+    \PYG{n}{hid\PYGZus{}nodes\PYGZus{}lstm} \PYG{o}{=} \PYG{l+m+mi}{64}
+    \PYG{n}{fcn\PYGZus{}nodes} \PYG{o}{=} \PYG{l+m+mi}{32}
     \PYG{n}{rnn\PYGZus{}model} \PYG{o}{=} \PYG{n}{Sequential}\PYG{p}{()}
     \PYG{n}{rnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{BatchNormalization}\PYG{p}{(}\PYG{n}{input\PYGZus{}shape}\PYG{o}{=}\PYG{p}{(}\PYG{n}{WINDOW\PYGZus{}SAMPLES}\PYG{p}{,} \PYG{n}{SENS\PYGZus{}VALUES}\PYG{p}{)))}
-    \PYG{n}{rnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{LSTM}\PYG{p}{(}\PYG{n}{units}\PYG{o}{=}\PYG{n}{hid\PYGZus{}nodes\PYGZus{}lstm}\PYG{p}{,} \PYG{n}{return\PYGZus{}sequences}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{name}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}RNN1\PYGZsq{}}\PYG{p}{))}
+    \PYG{n}{rnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{LSTM}\PYG{p}{(}\PYG{n}{units}\PYG{o}{=}\PYG{n}{hid\PYGZus{}nodes\PYGZus{}lstm}\PYG{p}{,} \PYG{n}{return\PYGZus{}sequences}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,} \PYG{n}{name}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}LSTM1\PYGZsq{}}\PYG{p}{))}
     \PYG{n}{rnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dropout}\PYG{p}{(}\PYG{l+m+mf}{0.2}\PYG{p}{))}
-    \PYG{n}{rnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{LSTM}\PYG{p}{(}\PYG{n}{units}\PYG{o}{=}\PYG{n}{hid\PYGZus{}nodes\PYGZus{}lstm}\PYG{p}{,} \PYG{n}{return\PYGZus{}sequences}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{name}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}RNN2\PYGZsq{}}\PYG{p}{))}
+    \PYG{n}{rnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dense}\PYG{p}{(}\PYG{n}{fcn\PYGZus{}nodes}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}relu\PYGZsq{}}\PYG{p}{,} \PYG{n}{name}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}FCN1\PYGZsq{}}\PYG{p}{))}
     \PYG{n}{rnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dropout}\PYG{p}{(}\PYG{l+m+mf}{0.2}\PYG{p}{))}
-    \PYG{n}{rnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{LSTM}\PYG{p}{(}\PYG{n}{units}\PYG{o}{=}\PYG{n}{hid\PYGZus{}nodes\PYGZus{}lstm}\PYG{p}{,} \PYG{n}{return\PYGZus{}sequences}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{name}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}RNN3\PYGZsq{}}\PYG{p}{))}
+    \PYG{n}{rnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dense}\PYG{p}{(}\PYG{n}{fcn\PYGZus{}nodes}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}relu\PYGZsq{}}\PYG{p}{,} \PYG{n}{name}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}FCN2\PYGZsq{}}\PYG{p}{))}
     \PYG{n}{rnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dropout}\PYG{p}{(}\PYG{l+m+mf}{0.2}\PYG{p}{))}
-    \PYG{n}{rnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{LSTM}\PYG{p}{(}\PYG{n}{units}\PYG{o}{=}\PYG{n}{hid\PYGZus{}nodes\PYGZus{}lstm}\PYG{p}{,} \PYG{n}{return\PYGZus{}sequences}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,} \PYG{n}{name}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}RNN4\PYGZsq{}}\PYG{p}{))}
-    \PYG{n}{rnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dropout}\PYG{p}{(}\PYG{l+m+mf}{0.2}\PYG{p}{))}
-    \PYG{n}{rnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dense}\PYG{p}{(}\PYG{n}{num\PYGZus{}classes}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}softmax\PYGZsq{}}\PYG{p}{))}
-
+    \PYG{n}{rnn\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dense}\PYG{p}{(}\PYG{n}{num\PYGZus{}classes}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}softmax\PYGZsq{}}\PYG{p}{,} \PYG{n}{name}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}FCN3\PYGZsq{}}\PYG{p}{))}
     \PYG{n}{model\PYGZus{}summary}\PYG{p}{(}\PYG{n}{rnn\PYGZus{}model}\PYG{p}{,} \PYG{n}{mod\PYGZus{}type}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}RNN\PYGZsq{}}\PYG{p}{)}
     \PYG{k}{return} \PYG{n}{rnn\PYGZus{}model}
-
+\PYG{c+c1}{\PYGZsh{} ********************************************************************************************}
 
 \PYG{k}{def} \PYG{n+nf}{train\PYGZus{}model}\PYG{p}{(}\PYG{n}{model}\PYG{p}{,} \PYG{n}{x\PYGZus{}train}\PYG{p}{,} \PYG{n}{y\PYGZus{}train}\PYG{p}{,} \PYG{n}{x\PYGZus{}valid}\PYG{p}{,} \PYG{n}{y\PYGZus{}valid}\PYG{p}{):}
     \PYG{c+c1}{\PYGZsh{} set model}

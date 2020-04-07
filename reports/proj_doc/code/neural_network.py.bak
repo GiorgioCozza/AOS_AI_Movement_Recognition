@@ -52,7 +52,7 @@ def CNN_model():
 # **************   Recurrent Neural Network model   *****************************************
 def RNN_model():
     hid_nodes_lstm = 64
-    fcn_nodes = 32
+    fcn_nodes = 64
     rnn_model = Sequential()
     rnn_model.add(BatchNormalization(input_shape=(WINDOW_SAMPLES, SENS_VALUES)))
     rnn_model.add(LSTM(units=hid_nodes_lstm, return_sequences=False, name='LSTM1'))
