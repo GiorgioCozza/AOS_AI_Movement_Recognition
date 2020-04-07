@@ -26,7 +26,11 @@
  *  - v2.0 - Add FXP support
  *           Adding initial multiple IO support (legacy mode)
  *           Removing compile-time STM32 family checking
- *
+ *  - v2.1 - Adding integer (scale/zero-point) support
+ *           Add support for external memory for data activations
+ *  - v3.0 - Adding multiple IO support
+ *  - v3.1 - Adding L5 support
+ *  - v3.2 - Adding support for inputs in activations buffer
  */
 
 #ifndef HAS_INSPECTOR
@@ -78,11 +82,13 @@
 /* APP configuration 0: disabled 1: enabled */
 #define _APP_DEBUG_         			0
 
-#define _APP_VERSION_MAJOR_     (0x02)
-#define _APP_VERSION_MINOR_     (0x00)
+#define _APP_VERSION_MAJOR_     (0x03)
+#define _APP_VERSION_MINOR_     (0x02)
 #define _APP_VERSION_   ((_APP_VERSION_MAJOR_ << 8) | _APP_VERSION_MINOR_)
 
 #define _APP_NAME_   "AI Validation"
+
+
 
 /* -----------------------------------------------------------------------------
  * AI-related functions
@@ -115,19 +121,22 @@ static struct ai_network_exec_ctx {
     AI_HANDLE_PTR(ptr_))
 
 
+#if defined(AI_MNETWORK_DATA_ACTIVATIONS_INT_SIZE)
+#if AI_MNETWORK_DATA_ACTIVATIONS_INT_SIZE != 0
+AI_ALIGNED(4)
+static ai_u8 activations[AI_MNETWORK_DATA_ACTIVATIONS_INT_SIZE];
+#else
+AI_ALIGNED(4)
+static ai_u8 activations[1];
+#endif
+#else
 AI_ALIGNED(4)
 static ai_u8 activations[AI_MNETWORK_DATA_ACTIVATIONS_SIZE];
-
-#if defined(AI_MNETWORK_IN_1_SIZE_BYTES)
-AI_ALIGNED(4)
-static ai_u8 in_data[AI_MNETWORK_IN_1_SIZE_BYTES];
-
-AI_ALIGNED(4)
-static ai_u8 out_data[AI_MNETWORK_OUT_1_SIZE_BYTES];
-#else
-static ai_float in_data[AI_MNETWORK_IN_1_SIZE];
-static ai_float out_data[AI_MNETWORK_OUT_1_SIZE];
 #endif
+
+DEF_DATA_IN;
+
+DEF_DATA_OUT;
 
 #ifdef HAS_INSPECTOR
 static void aiOnExecNode_cb(const ai_handle cookie,
@@ -206,6 +215,7 @@ void aiSetPbContext(struct ai_network_exec_ctx *ctx,
 static int aiBootstrap(const char *nn_name, const int idx)
 {
     ai_error err;
+    ai_u32 ext_addr, sz;
 
     /* Creating the network */
     printf("Creating the network \"%s\"..\r\n", nn_name);
@@ -213,6 +223,39 @@ static int aiBootstrap(const char *nn_name, const int idx)
     if (err.type) {
         aiLogErr(err, "ai_mnetwork_create");
         return -1;
+    }
+
+    /* Initialize the instance */
+    printf("Initializing the network\r\n");
+    /* build params structure to provide the reference of the
+     * activation and weight buffers */
+#if !defined(AI_MNETWORK_DATA_ACTIVATIONS_INT_SIZE)
+    const ai_network_params params = {
+            AI_BUFFER_NULL(NULL),
+            AI_BUFFER_NULL(activations) };
+#else
+    ai_network_params params = {
+                AI_BUFFER_NULL(NULL),
+                AI_BUFFER_NULL(NULL) };
+
+    if (ai_mnetwork_get_ext_data_activations(net_exec_ctx[idx].network, &ext_addr, &sz) == 0) {
+    	if (ext_addr == 0xFFFFFFFF) {
+    		params.activations.data = (ai_handle)activations;
+    		ext_addr = (ai_u32)activations;
+    		sz = (ai_u32)AI_BUFFER_SIZE(&net_exec_ctx[idx].report.activations);
+    	}
+    	else {
+    		params.activations.data = (ai_handle)ext_addr;
+    	}
+    }
+#endif
+
+    if (!ai_mnetwork_init(net_exec_ctx[idx].network, &params)) {
+        err = ai_mnetwork_get_error(net_exec_ctx[idx].network);
+        aiLogErr(err, "ai_mnetwork_init");
+        ai_mnetwork_destroy(net_exec_ctx[idx].network);
+        net_exec_ctx[idx].network = AI_HANDLE_NULL;
+        return -4;
     }
 
     /* Query the created network to get relevant info from it */
@@ -227,21 +270,6 @@ static int aiBootstrap(const char *nn_name, const int idx)
         return -2;
     }
 
-    /* Initialize the instance */
-    printf("Initializing the network\r\n");
-    /* build params structure to provide the reference of the
-     * activation and weight buffers */
-    const ai_network_params params = {
-            AI_BUFFER_NULL(NULL),
-            AI_BUFFER_NULL(activations) };
-
-    if (!ai_mnetwork_init(net_exec_ctx[idx].network, &params)) {
-        err = ai_mnetwork_get_error(net_exec_ctx[idx].network);
-        aiLogErr(err, "ai_mnetwork_init");
-        ai_mnetwork_destroy(net_exec_ctx[idx].network);
-        net_exec_ctx[idx].network = AI_HANDLE_NULL;
-        return -4;
-    }
     return 0;
 }
 
@@ -474,8 +502,8 @@ void aiPbCmdNNRun(const reqMsg *req, respMsg *resp, void *param)
     bool inspector_mode = false;
     uint32_t ints;
 
-    ai_buffer ai_input[1];
-    ai_buffer ai_output[1];
+    ai_buffer ai_input[AI_MNETWORK_IN_NUM];
+    ai_buffer ai_output[AI_MNETWORK_OUT_NUM];
 
     UNUSED(param);
 
@@ -502,23 +530,37 @@ void aiPbCmdNNRun(const reqMsg *req, respMsg *resp, void *param)
     ctx->tnodes = 0ULL;
 #endif
 
-    ai_input[0] = ctx->report.inputs[0];
-    ai_output[0] = ctx->report.outputs[0];
+    /* Fill the input tensor descriptors */
+    for (int i = 0; i < ctx->report.n_inputs; i++) {
+        ai_input[i] = ctx->report.inputs[i];
+        ai_input[i].n_batches  = 1;
+        if (ctx->report.inputs[i].data)
+        	ai_input[i].data = AI_HANDLE_PTR(ctx->report.inputs[i].data);
+        else
+        	ai_input[i].data = AI_HANDLE_PTR(data_ins[i]);
+    }
 
-    ai_input[0].n_batches  = 1;
-    ai_input[0].data = AI_HANDLE_PTR(in_data);
-    ai_output[0].n_batches = 1;
-    ai_output[0].data = AI_HANDLE_PTR(out_data);
+    /* Fill the output tensor descriptors */
+    for (int i = 0; i < ctx->report.n_outputs; i++) {
+    	ai_output[i] = ctx->report.outputs[i];
+        ai_output[i].n_batches = 1;
+        ai_output[i].data = AI_HANDLE_PTR(data_outs[i]);
+    }
 
-    /* 1 Send a ACK (ready to receive a buffer) */
+    /* 1 - Send a ACK (ready to receive a buffer) */
     aiPbMgrSendAck(req, resp, EnumState_S_WAITING,
             aiPbAiBufferSize(&ai_input[0]), EnumError_E_NONE);
 
-    /* 2 Read buffer */
-    res = aiPbMgrReceiveAiBuffer3(req, resp, EnumState_S_PROCESSING,
-            &ai_input[0]);
-    if (res != true)
-        return;
+    /* 2 - Receive all input tensors */
+    for (int i = 0; i < ctx->report.n_inputs; i++) {
+    	/* upload a buffer */
+    	EnumState state = EnumState_S_WAITING;
+    	if ((i + 1) == ctx->report.n_inputs)
+    		state = EnumState_S_PROCESSING;
+        res = aiPbMgrReceiveAiBuffer3(req, resp, state, &ai_input[i]);
+        if (res != true)
+            return;
+    }
 
     ints = disableInts();
 
@@ -531,8 +573,7 @@ void aiPbCmdNNRun(const reqMsg *req, respMsg *resp, void *param)
     /* Processing */
     dwtReset();
 
-    batch = ai_mnetwork_run(ctx->network,
-            &ai_input[0], &ai_output[0]);
+    batch = ai_mnetwork_run(ctx->network, ai_input, ai_output);
     if (batch != 1) {
         aiLogErr(ai_mnetwork_get_error(ctx->network),
                 "ai_mnetwork_run");
@@ -550,11 +591,17 @@ void aiPbCmdNNRun(const reqMsg *req, respMsg *resp, void *param)
         aiInspectorSendReport(req, resp, EnumState_S_PROCESSING, ctx,
                 dwtCyclesToFloatMs(tend));
 
-    /* 3 Write buffer */
-    aiPbMgrSendAiBuffer3(req, resp, EnumState_S_DONE,
-            EnumLayerType_LAYER_TYPE_OUTPUT << 16 | 0,
-            0, dwtCyclesToFloatMs(tend),
-            &ai_output[0]);
+    /* 3 - Send all output tensors */
+    for (int i = 0; i < ctx->report.n_outputs; i++) {
+    	/* download a buffer */
+    	EnumState state = EnumState_S_PROCESSING;
+    	if ((i + 1) == ctx->report.n_outputs)
+    		state = EnumState_S_DONE;
+        aiPbMgrSendAiBuffer3(req, resp, state,
+                EnumLayerType_LAYER_TYPE_OUTPUT << 16 | 0,
+                0, dwtCyclesToFloatMs(tend),
+                &ai_output[i]);
+    }
 
     if (inspector_mode)
         aiInspectorUnbindAndDestroy(ctx);

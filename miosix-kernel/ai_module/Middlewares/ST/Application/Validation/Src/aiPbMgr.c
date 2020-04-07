@@ -179,6 +179,8 @@ static bool aiPbBuffer_read_cb3(pb_istream_t *stream, const pb_field_t *field,
     msg = (aiBufferByteMsg *)bm->msg;
     format = aiPbMsgFmtToAiFmt(msg->shape.format);
 
+    /* todo(jmd) - adding scale/zeropoint values */
+
     /* Check shape/format */
     bm->err = EnumError_E_NONE;
     if ((format == AI_BUFFER_FORMAT_NONE) || (format != bm->buffer->format)) {
@@ -282,10 +284,26 @@ bool aiPbMgrReceiveAiBuffer3(const reqMsg *req, respMsg *resp,
     return res;
 }
 
+static void aiPbMgrSetMetaInfo(const ai_buffer_meta_info *meta_info, const int idx,
+		aiBufferShapeMsg *shape)
+{
+	shape->scale = 0.0f;
+	shape->zeropoint = 0;
+	if (AI_BUFFER_META_INFO_INTQ(meta_info)) {
+		shape->scale = AI_BUFFER_META_INFO_INTQ_GET_SCALE(meta_info, idx);
+		shape->zeropoint = AI_BUFFER_META_INFO_INTQ_GET_ZEROPOINT(meta_info, idx);
+	}
+}
+
 bool aiPbMgrSendAiBuffer3(const reqMsg *req, respMsg *resp, EnumState state,
         uint32_t type, uint32_t id, ai_float dur_ms, const ai_buffer *buffer)
 {
     struct aiPbMgrBuffer hdlb;
+    const ai_buffer_meta_info *meta_info = AI_BUFFER_META_INFO(buffer);
+
+#if defined(AI_PB_FULL_IO) && (AI_PB_FULL_IO == 1)
+    const int is_io = AI_BUFFER_FMT_FLAG_IS_IO & buffer->format;
+#endif
 
     hdlb.n_ops = 0;
     hdlb.buffer = (ai_buffer *)buffer;
@@ -293,10 +311,16 @@ bool aiPbMgrSendAiBuffer3(const reqMsg *req, respMsg *resp, EnumState state,
     hdlb.n_max = aiPbAiBufferSize(buffer);
     hdlb.msg = NULL;
 
+#if defined(AI_PB_FULL_IO) && (AI_PB_FULL_IO == 1)
+    if ((type & PB_BUFFER_TYPE_SEND_WITHOUT_DATA) && (!is_io)) {
+        hdlb.n_max  = 0;
+    }
+#else
     if (type & PB_BUFFER_TYPE_SEND_WITHOUT_DATA) {
         hdlb.n_max  = 0;
-        type &= (~PB_BUFFER_TYPE_SEND_WITHOUT_DATA);
     }
+#endif
+    type &= (~PB_BUFFER_TYPE_SEND_WITHOUT_DATA);
 
     /* Fill Node sub-message */
     resp->which_payload = respMsg_node_tag;
@@ -308,6 +332,8 @@ bool aiPbMgrSendAiBuffer3(const reqMsg *req, respMsg *resp, EnumState state,
     resp->payload.node.buffer.shape.height = buffer->height;
     resp->payload.node.buffer.shape.width = buffer->width;
     resp->payload.node.buffer.shape.channels = buffer->channels;
+    aiPbMgrSetMetaInfo(meta_info, 0, &resp->payload.node.buffer.shape);
+
     resp->payload.node.buffer.datas.funcs.encode = &aiPbBuffer_write_cb3;
     resp->payload.node.buffer.datas.arg = &hdlb;
 
@@ -360,11 +386,14 @@ static void init_aibuffer_msg(const ai_buffer *aibuffer, aiBufferShapeMsg *msg)
     if ((!aibuffer) || (!msg))
         return;
 
+    const ai_buffer_meta_info *meta_info = AI_BUFFER_META_INFO(aibuffer);
+
     msg->format = aiPbAiFmtToMsgFmt(aibuffer->format);
     msg->channels = aibuffer->channels;
     msg->height = aibuffer->height;
     msg->width = aibuffer->width;
     msg->n_batches = aibuffer->n_batches;
+    aiPbMgrSetMetaInfo(meta_info, 0, msg);
 }
 
 static bool nn_shape_w_cb(pb_ostream_t *stream, const pb_field_t *field,
@@ -392,7 +421,7 @@ static bool nn_inputs_w_cb(pb_ostream_t *stream, const pb_field_t *field,
     if (!report)
         return true;
 
-    return nn_shape_w_cb(stream, field, &report->inputs[0], 1);
+    return nn_shape_w_cb(stream, field, &report->inputs[0], report->n_inputs);
 }
 
 static bool nn_outputs_w_cb(pb_ostream_t *stream, const pb_field_t *field,
@@ -403,7 +432,7 @@ static bool nn_outputs_w_cb(pb_ostream_t *stream, const pb_field_t *field,
     if (!report)
         return true;
 
-    return nn_shape_w_cb(stream, field, &report->outputs[0], 1);
+    return nn_shape_w_cb(stream, field, &report->outputs[0], report->n_outputs);
 }
 
 void aiPbStrCopy(const char *src, char *dst, uint32_t max)

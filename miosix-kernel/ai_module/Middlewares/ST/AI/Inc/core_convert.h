@@ -47,17 +47,34 @@ AI_API_DECLARE_BEGIN
 
 /*!
  * @defgroup core_convert Core Convert Routines
- * @brief Implementation of core node format convertion routines (Q7 to float, ... etc.)
+ * @brief Implementation of core node format convertion routines
+ *   (Q7 to float, ... etc.)
  */
 
 
 /*!
- * @brief Convert input tensor array from input format to output format
+ * @brief Convert tensors from float to quantized or viceversa
  * @ingroup core_convert
- * @param[in] pNode in a handler to node (layer or operators) with tensor informations
+ * @param[in] pNode in a handler to node (layer or operator)
  */
 AI_INTERNAL_API
-void    node_convert(ai_node *pNode);
+void node_convert(ai_node *pNode);
+
+/*!
+ * @brief Convert integer tensors between QM.N formats (8/16 bits)
+ * @ingroup core_convert
+ * @param[in] pNode in a handler to node (layer or operator)
+ */
+AI_INTERNAL_API
+void node_convert_fixed(ai_node *pNode);
+
+/*!
+ * @brief Convert integer tensors between signed and usigned (int8/uint8) formats
+ * @ingroup core_convert
+ * @param[in] pNode in a handler to node (layer or operator)
+ */
+AI_INTERNAL_API
+void node_convert_integer(ai_node *pNode);
 
 /*!
  * @brief Convert a shape struct into a stride struct
@@ -66,33 +83,7 @@ void    node_convert(ai_node *pNode);
  * @return a condverted stride datastruct
  */
 AI_INTERNAL_API
-ai_stride core_shape_to_stride(const ai_shape* in);
+void core_shape_to_stride(ai_stride* out, const ai_shape* in);
 
-/*!
- * @brief Convert a shape 2D struct into a stride struct
- * @ingroup core_convert
- * @param[in] in a pointer to a shape to convert
- * @return a condverted stride datastruct
- */
-AI_INTERNAL_API
-ai_stride core_shape_2d_to_stride(const ai_shape_2d* in);
-
-/*!
- * @brief Convert a shape struct into a ND stride struct (multi dimensional)
- * @ingroup core_convert
- * @param[in] in a pointer to a shape to convert
- * @return a condverted ND stride datastruct
- */
-AI_INTERNAL_API
-ai_stride_nd core_shape_to_stride_nd(const ai_shape* in);
-
-/*!
- * @brief Convert a shape 2D struct into a ND stride struct (multi dimensional)
- * @ingroup core_convert
- * @param[in] in a pointer to a shape 2D to convert
- * @return a condverted ND stride datastruct
- */
-AI_INTERNAL_API
-ai_stride_nd core_shape_2d_to_stride_nd(const ai_shape_2d* in);
 
 #endif    /*__CORE_CONVERT_H_*/

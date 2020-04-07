@@ -69,8 +69,8 @@ extern UART_HandleTypeDef UartHandle;
  */
 
 #if defined(CHECK_STM32_FAMILY)
-#if !defined(STM32F7) && !defined(STM32L4) && !defined(STM32F4) && !defined(STM32H7) && !defined(STM32F3)
-#error Only STM32H7, STM32F7, STM32F4, STM32L4 or STM32F3 device are supported
+#if !defined(STM32F7) && !defined(STM32L4) && !defined(STM32L5) && !defined(STM32F4) && !defined(STM32H7) && !defined(STM32F3)
+#error Only STM32H7, STM32F7, STM32F4, STM32L4, STM32L5 or STM32F3 device are supported
 #endif
 #endif
 
@@ -148,6 +148,7 @@ float dwtCyclesToFloatMs(uint64_t clks)
 
 __STATIC_INLINE const char *devIdToStr(uint16_t dev_id)
 {
+	/* DEV_ID field from DBGMCU register */
     const char *str;
     switch (dev_id) {
     case 0x422: str = "STM32F303xB/C"; break;
@@ -158,6 +159,7 @@ __STATIC_INLINE const char *devIdToStr(uint16_t dev_id)
     case 0x462: str = "STM32L45xxx"; break;
     case 0x415: str = "STM32L4x6xx"; break;
     case 0x470: str = "STM32L4Rxxx"; break;
+    case 0x472: str = "STM32L5[5,6]2xx"; break;
     case 0x449: str = "STM32F74xxx"; break;
     case 0x450: str = "STM32H743/753 and STM32H750"; break;
     default:    str = "UNKNOWN";
@@ -185,7 +187,9 @@ uint32_t getFlashCacheConf(void)
 
 void logDeviceConf(void)
 {
+#if !defined(STM32L5)
     uint32_t acr = FLASH->ACR ;
+#endif
     uint32_t val;
 
     printf("STM32 Runtime configuration...\r\n");
@@ -243,6 +247,7 @@ void logDeviceConf(void)
             (int)acr,
             (int)((acr & FLASH_ACR_LATENCY_Msk) >> FLASH_ACR_LATENCY_Pos));
 #endif
+#if !defined(CORE_M4)
     if (val & SCB_CCR_IC_Msk)
         mconf |= (1 << 10);
     if (val & SCB_CCR_DC_Msk)
@@ -250,8 +255,9 @@ void logDeviceConf(void)
     printf(" CACHE conf.  : $I/$D=(%s,%s)\r\n",
             bitToStr(val & SCB_CCR_IC_Msk),
             bitToStr(val & SCB_CCR_DC_Msk));
+#endif
 #else
-#if !defined(STM32F3)
+#if !defined(STM32F3) && !defined(STM32L5)
     mconf |= (1 << 24);  /* F4/L4 conf. */
     mconf |= ((acr & FLASH_ACR_LATENCY_Msk) >> FLASH_ACR_LATENCY_Pos);
     if ((acr & FLASH_ACR_PRFTEN_Msk) >> FLASH_ACR_PRFTEN_Pos)
@@ -266,6 +272,9 @@ void logDeviceConf(void)
             bitToStr((acr & FLASH_ACR_ICEN_Msk) >> FLASH_ACR_ICEN_Pos),
             bitToStr((acr & FLASH_ACR_DCEN_Msk) >> FLASH_ACR_DCEN_Pos),
             (int)((acr & FLASH_ACR_LATENCY_Msk) >> FLASH_ACR_LATENCY_Pos));
+#endif
+#if defined(STM32L5)
+    printf(" ICACHE       : %s\r\n", bitToStr(READ_BIT(ICACHE->CR, ICACHE_CR_EN)));
 #endif
 #endif
 }
@@ -462,24 +471,35 @@ __STATIC_INLINE void aiPrintLayoutBuffer(const char *msg, int idx,
         const ai_buffer* buffer)
 {
     uint32_t type_id = AI_BUFFER_FMT_GET_TYPE(buffer->format);
-    printf("%s [%d]          : shape(HWC):(%d,%d,%ld) format=",
-            msg, idx, buffer->height, buffer->width, buffer->channels);
-    if (type_id == AI_BUFFER_FMT_TYPE_Q)
-        printf("Q%d.%d (%dbits, %s)",
-                (int)AI_BUFFER_FMT_GET_BITS(buffer->format)
-                - ((int)AI_BUFFER_FMT_GET_FBITS(buffer->format) +
-                   (int)AI_BUFFER_FMT_GET_SIGN(buffer->format)),
-                AI_BUFFER_FMT_GET_FBITS(buffer->format),
-                (int)AI_BUFFER_FMT_GET_BITS(buffer->format),
-                AI_BUFFER_FMT_GET_SIGN(buffer->format)?"signed":"unsigned");
+    printf("%s[%d] ",msg, idx);
+    if (type_id == AI_BUFFER_FMT_TYPE_Q) {
+        printf(" %s%d,",
+        		AI_BUFFER_FMT_GET_SIGN(buffer->format)?"s":"u",
+                (int)AI_BUFFER_FMT_GET_BITS(buffer->format));
+        if (AI_BUFFER_META_INFO_INTQ(buffer->meta_info)) {
+    		ai_float scale = AI_BUFFER_META_INFO_INTQ_GET_SCALE(buffer->meta_info, 0);
+    		int zero_point = AI_BUFFER_META_INFO_INTQ_GET_ZEROPOINT(buffer->meta_info, 0);
+    		printf(" scale=%f, zero=%d,", (float)scale, (int)zero_point);
+    	} else {
+    		printf("Q%d.%d,",
+    				(int)AI_BUFFER_FMT_GET_BITS(buffer->format)
+					- ((int)AI_BUFFER_FMT_GET_FBITS(buffer->format) +
+					(int)AI_BUFFER_FMT_GET_SIGN(buffer->format)),
+					AI_BUFFER_FMT_GET_FBITS(buffer->format));
+    	}
+    }
     else if (type_id == AI_BUFFER_FMT_TYPE_FLOAT)
-        printf("FLOAT (%dbits, %s)",
-                (int)AI_BUFFER_FMT_GET_BITS(buffer->format),
-                AI_BUFFER_FMT_GET_SIGN(buffer->format)?"signed":"unsigned");
+        printf(" float%d,",
+                (int)AI_BUFFER_FMT_GET_BITS(buffer->format));
     else
         printf("NONE");
-    printf(" size=%ldbytes\r\n", AI_BUFFER_BYTE_SIZE(AI_BUFFER_SIZE(buffer),
-            buffer->format));
+    printf(" %ld bytes, shape=(%d,%d,%ld)",
+    		AI_BUFFER_BYTE_SIZE(AI_BUFFER_SIZE(buffer), buffer->format),
+			buffer->height, buffer->width, buffer->channels);
+    if (buffer->data)
+    	printf(" (@0x%08x)\r\n", (int)buffer->data);
+    else
+    	printf("\r\n");
 }
 
 void aiPrintNetworkInfo(const ai_network_report* report)
@@ -508,9 +528,9 @@ void aiPrintNetworkInfo(const ai_network_report* report)
     printf("  inputs/outputs    : %u/%u\r\n",
             report->n_inputs, report->n_outputs);
     for (i=0; i<report->n_inputs; i++)
-        aiPrintLayoutBuffer("   IN ", i, &report->inputs[i]);
+        aiPrintLayoutBuffer("   I", i, &report->inputs[i]);
     for (i=0; i<report->n_outputs; i++)
-        aiPrintLayoutBuffer("   OUT", i, &report->outputs[i]);
+        aiPrintLayoutBuffer("   O", i, &report->outputs[i]);
 }
 
 

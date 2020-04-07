@@ -29,6 +29,11 @@
 #define AI_PB_TEST 0
 #endif
 
+/* AI_PB_FULL_IO - force the upload of the ai_buffer with AI_BUFFER_FMT_FLAG_IS_IO flag
+ *                 (see aiPbMgrSendAiBuffer3() function) */
+#ifndef AI_PB_FULL_IO
+#define AI_PB_FULL_IO 0
+#endif
 
 #ifdef __cplusplus
 extern "C" {
