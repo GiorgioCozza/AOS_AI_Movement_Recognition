@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <unistd.h>
 #include <malloc.h>
-#include "prog_config.h"
+#include "main_config.h"
 
 
 //-----------------class------------------

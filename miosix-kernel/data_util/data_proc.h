@@ -32,7 +32,7 @@
 #include "ai_math_helpers.h"
 #include "IKS01A2_config.h"
 #include <stdint.h>
-#include "prog_config.h"
+#include "main_config.h"
 
 
 class data_proc {

@@ -10,7 +10,7 @@ KPATH := miosix
 CONFPATH := $(KPATH)
 
 ## MODULE PATHS
-AIPATH := ./ai_module
+AIPATH := ./AI
 SENSDRIV := sensor_driver
 DATAUTL := data_util
 
@@ -27,16 +27,15 @@ SUBDIRS := $(KPATH)			\
 ##
 ## List here your source files (both .s, .c and .cpp)
 ##
-SRC :=                                				\
-./main.cpp											\
-$(SENSDRIV)/com_i2c/i2c_helper.cpp					\
-$(DATAUTL)/data_proc.cpp						\
-$(SENSDRIV)/LSM6DSL/LSM6DSL.cpp				\
-$(SENSDRIV)/LSM303AGR/LSM303AGR.cpp		\
-$(AIPATH)/Drivers/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_f32.c 			\
-$(AIPATH)/NN.cpp																\
-./eabi_glibc/aeabi_memclr.c								\
-./eabi_glibc/aeabi_memcpy.c 										\
+SRC :=                                							\
+./main.cpp														\
+$(SENSDRIV)/com_i2c/i2c_helper.cpp								\
+$(DATAUTL)/data_proc.cpp										\
+$(SENSDRIV)/LSM6DSL/LSM6DSL.cpp									\
+$(SENSDRIV)/LSM303AGR/LSM303AGR.cpp								\
+$(AIPATH)/Src/NN.cpp											\
+$(AIPATH)/eabi_glibc/aeabi_memclr.c								\
+$(AIPATH)/eabi_glibc/aeabi_memcpy.c 							\
 $(AIPATH)/Src/network_data.c 									\
 $(AIPATH)/Src/network.c  										\
 
@@ -47,7 +46,7 @@ $(AIPATH)/Src/network.c  										\
 ##
 LIBS :=	\
 $(AIPATH)/Middlewares/ST/AI/Lib/NetworkRuntime500_CM4_GCC.a               \
-$(AIPATH)/Drivers/CMSIS/Lib/GCC/libarm_cortexM4lf_math.a		\
+
 ##
 ## List here additional include directories (in the form -Iinclude_dir)
 ##
@@ -61,11 +60,6 @@ INCLUDE_DIRS :=			\
 -I$(AIPATH)										\
 -I$(AIPATH)/Inc 								\
 -I$(AIPATH)/Middlewares/ST/AI/Inc				\
--I$(AIPATH)/Drivers/CMSIS/DSP/Include 			\
--I$(AIPATH)/Drivers/STM32F4xx_HAL_Driver/Inc 	\
--I$(AIPATH)/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy 				\
--I$(AIPATH)/Drivers/CMSIS/Device/ST/STM32F4xx/Include 				\
--I$(AIPATH)/Drivers/CMSIS/Include 									\
 
 ##############################################################################
 ## You should not need to modify anything below                             ##
