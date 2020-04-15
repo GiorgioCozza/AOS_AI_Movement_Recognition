@@ -36,6 +36,7 @@
 #define  __RTE_COMPONENTS_H__ 
 
 /* Defines ------------------------------------------------------------------*/
-#define AI_VALIDATION 
+/* STMicroelectronics.X-CUBE-AI.5.0.0 */
+#define AI_ApplicationTemplate 
  
 #endif /* __RTE_COMPONENTS_H__ */
