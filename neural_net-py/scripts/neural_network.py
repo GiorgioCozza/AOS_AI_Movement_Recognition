@@ -1,9 +1,9 @@
 # IMPORT
 import numpy as np
-from keras.layers import Dense, Conv2D, Flatten, Dropout, MaxPooling2D, BatchNormalization, LSTM
+#from keras.layers import Dense, Conv2D, Flatten, Dropout, MaxPooling2D, BatchNormalization, LSTM
 from keras.losses import categorical_crossentropy
 from keras.optimizers import Adam, RMSprop, SGD
-from keras import Sequential
+from keras.models import Sequential
 from keras.callbacks import EarlyStopping
 from keras.callbacks import TensorBoard
 import keras.backend as K
@@ -34,31 +34,32 @@ def model_summary(model, mod_type=''):
 def CNN_model():
     numFilters = 24
 
-    cnn_model = Sequential()
-    cnn_model.add(BatchNormalization(input_shape=(WINDOW_SAMPLES, SENS_VALUES, 1)))
-    cnn_model.add(Conv2D(numFilters, kernel_size=3, strides=(1, 1), activation='relu', name='Conv2D_1'))
-    cnn_model.add(MaxPooling2D(pool_size=(2, 2), padding='valid', name='MaxPool_1'))
-    cnn_model.add(Flatten())
-    cnn_model.add(Dense(32, activation='relu', name='FCN2'))
-    cnn_model.add(Dropout(0.2))
-    cnn_model.add(Dense(num_classes, activation='softmax', name='FCN3'))
+    cnn_model = tf.keras.Sequential()
+    cnn_model.add(tf.keras.layers.BatchNormalization(input_shape=(WINDOW_SAMPLES, SENS_VALUES, 1)))
+    cnn_model.add(tf.keras.layers.Conv2D(numFilters, kernel_size=3, strides=(1, 1), activation='relu', name='Conv2D_1'))
+    cnn_model.add(tf.keras.layers.MaxPooling2D(pool_size=(2, 2), padding='valid', name='MaxPool_1'))
+    cnn_model.add(tf.keras.layers.Flatten())
+    cnn_model.add(tf.keras.layers.Dense(32, activation='relu', name='FCN2'))
+    cnn_model.add(tf.keras.layers.Dropout(0.2))
+    cnn_model.add(tf.keras.layers.Dense(num_classes, activation='softmax', name='FCN3'))
 
     model_summary(cnn_model, mod_type='CNN')
     return cnn_model
+
 
 # Recurrent Neural Network model
 def RNN_model():
     hid_nodes_lstm = 64
     fcn_nodes = 32
-    rnn_model = Sequential()
-    rnn_model.add(BatchNormalization(input_shape=(WINDOW_SAMPLES, SENS_VALUES)))
-    rnn_model.add(LSTM(units=hid_nodes_lstm, return_sequences=False, name='LSTM1'))
-    rnn_model.add(Dropout(0.2))
-    rnn_model.add(Dense(fcn_nodes, activation='relu', name='FCN1'))
-    rnn_model.add(Dropout(0.2))
-    rnn_model.add(Dense(fcn_nodes, activation='relu', name='FCN2'))
-    rnn_model.add(Dropout(0.2))
-    rnn_model.add(Dense(num_classes, activation='softmax', name='FCN3'))
+    rnn_model = tf.keras.Sequential()
+    rnn_model.add(tf.keras.layers.BatchNormalization(input_shape=(WINDOW_SAMPLES, SENS_VALUES)))
+    rnn_model.add(tf.keras.layers.LSTM(units=hid_nodes_lstm, return_sequences=False, name='LSTM1'))
+    rnn_model.add(tf.keras.layers.Dropout(0.2))
+    rnn_model.add(tf.keras.layers.Dense(fcn_nodes, activation='relu', name='FCN1'))
+    rnn_model.add(tf.keras.layers.Dropout(0.2))
+    rnn_model.add(tf.keras.layers.Dense(fcn_nodes, activation='relu', name='FCN2'))
+    rnn_model.add(tf.keras.layers.Dropout(0.2))
+    rnn_model.add(tf.keras.layers.Dense(num_classes, activation='softmax', name='FCN3'))
 
     model_summary(rnn_model, mod_type='RNN')
     return rnn_model
@@ -73,7 +74,7 @@ def train_model(model, x_train, y_train, x_valid, y_valid):
     tensorboard_cb = TensorBoard(log_dir=logfile_path, histogram_freq=0)
     # callback list
     callback_list = [
-        EarlyStopping(monitor='val_acc', mode='max', verbose=1, patience=10),
+        EarlyStopping(monitor='val_accuracy', mode='max', verbose=1, patience=10),
         tensorboard_cb
     ]
 
@@ -82,7 +83,7 @@ def train_model(model, x_train, y_train, x_valid, y_valid):
     EPOCHS = 40
 
     learning_rate = 0.0001
-    rms = RMSprop(lr=learning_rate)
+    rms = tf.optimizers.RMSprop(lr=learning_rate)
 
     model.compile(loss='categorical_crossentropy',
                   optimizer=rms, metrics=['accuracy'])

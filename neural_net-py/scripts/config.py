@@ -28,12 +28,12 @@ sit_ds_path =os.path.join( datasets_dir, "sitting.txt")
 sup_ds_path = os.path.join(datasets_dir, "supine.txt")
 los_ds_path = os.path.join(datasets_dir, "lying_on_side.txt")
 
-plot_dir = "../plots"
-log_dir = "../log/"
+plot_dir = "..\\plots"
+log_dir = "..\\log"
 curlog_dir = ""
-plot_dir = "../plots"
-csv_dir = "../test_csv"
-best_mod_dir = "../best_models"
+plot_dir = "..\\plots"
+csv_dir = "..\\test_csv"
+best_mod_dir = "..\\best_models"
 
 cmod = {'CNN': 1, 'RNN': 2}
 
