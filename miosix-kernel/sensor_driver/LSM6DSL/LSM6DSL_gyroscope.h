@@ -71,7 +71,7 @@
 #define LSM6DSL_ODR_G_3330Hz        	        0x90
 #define LSM6DSL_ODR_G_6660Hz        	        0xA0
 
-#define LSM6DSL_ODR_G_MASK                  0xF0
+#define LSM6DSL_ODR_G_MASK                      0xF0
 
 
 /************************  SENSITIVITY  **************************/

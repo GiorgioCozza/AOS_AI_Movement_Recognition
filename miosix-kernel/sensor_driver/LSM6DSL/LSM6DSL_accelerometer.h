@@ -25,18 +25,6 @@
 #define __LSM6DSL_ACCELEROMETER_H
 
 
-
-/**********************  info registers  *************************/
-#define LSM6DSL_WHO_AM_I 					0x6A
-#define LSM6DSL_WHO_AM_I_REG   			    0X0F
-
-
-
-/**************************    I2C   *****************************/
-#define LSM6DSL_I2C_ADDRESS_LOW			    0xD4
-#define LSM6DSL_I2C_ADDRESS_HIGH			0xd6
-
-
 /***********************  CONTROL REGISTERS  *********************/
 #define LSM6DSL_CTRL1_XL                    0X10
 #define LSM6DSL_CTRL8_XL                    0X17

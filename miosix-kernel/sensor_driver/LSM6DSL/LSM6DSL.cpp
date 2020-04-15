@@ -28,7 +28,6 @@ bool LSM6DSLAccGyr::init(){
 
 	uint8_t n_bdu = 0;
 	uint8_t n_fifo = 0;
-	uint8_t n_odr = 0;
 	uint8_t n_add = 0;
 
 
