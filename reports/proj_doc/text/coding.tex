@@ -241,7 +241,7 @@ Same observation for supine, lying on side and sitting positions:
 	\caption{LSM6DSL Accelerometer: sitting, supine, lying on side}\label{fig:7}
 	\centering
 \end{figure} 
-This kind of analysis also helps to understand qualitatively the amount of efforts to dedicate in further session of data collection: if trends show evident patterns, it is reasonable to think that the AI algorithm needs not so many samples to learn them. Although other sensor trends do not show interesting regularities, from another perspective the importance of magnetometer in the pattern recognition is remarked by seeing directly to the distribution of a bunch of data points in a 3D scattering plot:
+This kind of analysis also helps to understand qualitatively the amount of efforts to dedicate in further session of data collection: if trends show evident patterns, it is reasonable to think that the AI algorithm does not need so many samples to learn them. Although other sensor trends do not show interesting regularities, the role of the magnetometer in pattern recognition is inferred from the distribution of a bunch of data points in a 3D scattering plot:
 \begin{figure}[H]
 	\hfill\includegraphics[scale=0.8]{figures/scatter3d_MAG_LSM303AGR_DS.png}\hspace*{\fill}
 	\caption{LSM303AGR Magnetometer, Scattering Plot }\label{fig:8}
@@ -343,40 +343,42 @@ After data preprocessing, each network instance is trained sequentially for 60-8
 	\centering
 	\caption{\label{tab:2}Recurrent Neural Network: Model Summary}
 \end{table}
-As the number of trainable parameters suggests, the network architecture is not so complex. Although this seems an advantage from computational perspective, it implies that the model is affected by a considerable amount of variance and it tends therefore to overfit and as experimented in final testing, regardless good validation results, the final application presents some slight performance degradation under changes in testing conditions.\newline
+As the number of trainable parameters suggests, the network architecture is not so complex. Although this seems an advantage from computational perspective, it implies that the model is affected by an high variance and it tends therefore to overfit and as experimented in final testing, regardless good validation results, the application presents some slight performance degradation under changes in working conditions.\newline
 Hence different Dropout layers are added at training time and Early Stopping regularization technique has been adopted to prevent overfitting as well.
 
 \begin{center}
 	\begin{figure}[H]
 		\begin{subfigure}[H]{0.45\textwidth}
-			\hfill\includegraphics[scale=0.6]{figures/last_model_val_acc.png}\vspace*{\fill}
+			\hfill\includegraphics[scale=0.8]{figures/last_model_val_acc.png}\vspace*{\fill}
 			\caption{Validation accuracy trend through epochs}\label{fig:8a}
 		\end{subfigure}
 		\begin{subfigure}[H]{0.45\textwidth}
-			\hfill\includegraphics[scale=0.6]{figures/last_model_val_loss.png}\vspace*{\fill}
+			\hfill\includegraphics[scale=0.8]{figures/last_model_val_loss.png}\vspace*{\fill}
 			\caption{Validation loss trend through epochs}\label{fig:8b}
 		\end{subfigure}
 	\end{figure} 
 \end{center}
 The training algorithm converges sharply after few epochs. From final validation considering all the trained models the average results appears better than expected, with:\\
 
-\begin{wrapfigure}{r}{0.4\textwidth}
-	\hfill\includegraphics[width=0.6\textwidth]{figures/confmat_07-04-2020_202659.png}\hspace*{\fill}
+
+\begin{wrapfigure}{r}{0.55\textwidth}
+	\hfill\includegraphics[width=0.6\textwidth]{figures/confmat_09-04-2020_221220.png}\hspace*{\fill}
 	\caption{Confusion Matrix: Testing}\label{fig:9}
 	\centering
-	\vspace{-60pt}
+	\vspace{-30pt}
 \end{wrapfigure}
 \noindent
 
+
 \begin{itemize}
-	\item \textbf{Average Validation Accuracy}: 0.9913
-	\item \textbf{Average Validation Loss}: 0.0305
+	\item \textbf{Average Validation Accuracy}: 0.9927
+	\item \textbf{Average Validation Loss}: 0.0204
 \end{itemize}
-More optimistic results, instead come from the best trained model (fold 3) as shown in the confusion matrix (fig 17), that gives even a perfect prediction of all testing cases, the estimation however is even too optimistic as confirmed with other trained instances of the same architecture: some of them for example completely mispredicts jumping cases, so even if the chosen model is the best one, it should not be expected to have a perfect classifier at the end. Model ensemble techniques suggested by the literature are instead discouraged due to hardware constrains.
+More optimistic results, instead come from the best trained model (fold 1) as shown in the confusion matrix (fig 17), that gives even a perfect prediction of all testing cases, the estimation however is even too optimistic as confirmed with other trained instances of the same architecture: some of them completely mispredicts jumping cases, so even if the chosen model is the best one, it should not be expected to have a perfect classifier at the end. The use \textit{k-fold cross validation} to train multiple classifiers opens up the possibility to use model ensemble techniques to obtain more reliable results, averaging predictions from all the trained networks. Unfortunately the complexity of the current architecture allows a single instance of the network to be executed on the board because of the constrained hardware.
 
 \subsection{Network Code Generation and on-target Testing}
 STM32CubeMX, as mentioned in previous discussions, is in charge of generating the C-code from the Keras model, precisely an initialization of the network on which is possible to build a specific application, so what is really important in this step is that the developer is not worried about the embedded implementation of each network layer details.\newline
-Before proceeding it is important to outline how the tool works in order to understand the way the network model is treated within the program environment, the AI plugin in fact, lives within STM32CubeMX that requires some preliminary configuration including the creation of a new project and some specification of the development board used. This step must be repeated at least once to generate all the required network files. STM32CubeAI offers a command-line interface that is exploited in this work to automatize validation and code generation
+Before proceeding it is important to outline how the tool works in order to understand the way the network model is treated within the program environment, the AI plugin in fact, lives within STM32CubeMX that requires some preliminary configuration including the creation of a new project and some specification of the development board used.
 
 \begin{figure}[H]
 	\hfill\includegraphics[width=0.8\textwidth]{figures/stm32cubeai_arch.png}\hspace*{\fill}
@@ -384,18 +386,58 @@ Before proceeding it is important to outline how the tool works in order to unde
 \end{figure}
 
 After that, one of the h5 model files produced during training is imported and from the specific framework model, the tool builds a platform-independent representation (PINNR).\newline 
-This new version of the model is used by the \textit{Validation Engine} to perform validation either locally or directly on the target board and the \textit{C-code generator} that generates the network code.\newline
-So the first step, the model is imported into the project
-Furthermore, it is important to highlight another interesting aspect that raises from a first analysis of the model summary created during training phase:
+This new version of the model is used by the \textit{Validation Engine} to perform validation either locally or directly on the target board and the \textit{C-code generator} that generates the network code. All this procedure can be done mainly on the GUI. However, STM32CubeAI offers a command-line interface that is exploited in this work to automatize validation and code generation and speed up this development stage, this utility is still unfinished.\newline
+In any case, in order to do cross-validation, the related code must be generated, compiled and flashed. This particular kind of application is provided by the tool and it is used to test the neural network directly on target and comparing validation performance between the original model, the x86 and stm32-based code.
+\begin{center}
+	\begin{figure}[H]
+		\begin{subfigure}[H]{0.45\textwidth}
+			\hfill\includegraphics[scale=0.55]{figures/validation_gui.png}\vspace*{\fill}
+			\caption{Selection of model and validation files}
+		\end{subfigure}
+	\hfill
+		\begin{subfigure}[H]{0.45\textwidth}
+			\hfill\includegraphics[scale=0.7]{figures/x86_stm32_validation.png}\vspace*{\fill}
+			\caption{Validation results on x86 and stm32}
+		\end{subfigure}
+	\end{figure}
+\end{center}
+According to both the results 100\% accuracy is perfectly coherent with testing performance obtained in Python scripts at training step. Since small differences in Flash occupation, moreover no compression has been applied to the model.
+
+
+
 
 
 
 
 \subsection{Code Integration and Final Firmware Development}
- A challenging part in this work is represented by the integration  It includes the following folders:
+This part of the development process, begins by creating an application that easily exploits the client API generated by STM32CubeAI to compute and visualize one or multiple predictions starting from a set of certain set of data batches. The \mintinline[bgcolor=whitesmoke]{C++}{NN} class for instance is perfectly suitable for such purpose, it encapsulates essential information and implements methods to create, initialize and run a single instance of the neural network. 
+In order to correctly integrate only the required source and object files within Miosix environment, STM32CubeAI is configured as follow:
+\begin{center}
+	\begin{figure}[H]
+		\begin{subfigure}[H]{0.5\textwidth}
+			\hfill\includegraphics[scale=0.55]{figures/stm32cubemx_conf2.png}\vspace*{\fill}
+			\hfill\caption{Selection of model and validation files}\vspace*{\fill}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}[H]{0.5\textwidth}
+			\hfill\includegraphics[scale=0.55]{figures/stm32cubemx_conf1.png}\vspace*{\fill}
+			\caption{Validation results on x86 and stm32}
+		\end{subfigure}
+	\end{figure}
+\end{center}
+Regardless the selected application (\textit{aiSystemPerformance, aiValidation, ApplicationTemplate}), the overall structure of the generated code is the same and includes the following directories:
+
+\begin{itemize}
+	\item \textbf{Drivers}: containing architecture-specific source and object files: Arm CMSIS library part of the STM32 HAL package, libc memory and libm math routines. 
+	\item \textbf{Inc}: in which all header files related to the specific AI application are located, in this folder only \textit{network.h} and \textit{network\_data.h} are specifically required in final application
+	\item \textbf{Middlewares}: that as the name suggests includes the crucial \textit{network\_runtime} library, containing the implementation of each network specific layer and features and other header files
+	\item \textbf{Src}: containing source application specific source-files. In the final firmware only \textit{network.c} and \textit{network}
+\end{itemize} 
+To automatize code generation and installation a small batch script \mintinline[bgcolor=whitesmoke]{C++}{build_NN.bat} performs a preliminar analysis of the keras model, exploiting the STM32CubeAI CLI generates and install all the needed sources into Miosix folder, then builds the binary file using Miosix toolchain. Of course this rundimental installer is still under development and must be improved and tested properly, it does not update neither the Makefile nor the client application in case, some additional source files are added into the project and the name of the neural network is changed. However, in code integration, even though Drivers folder can be excluded some external files must be manually included in the final firmware, they are implementaions of some memory routines in glibc \textit{eabi\_memcpy.c} and \textit{eabi\_memclr.c}, corrected versions are located in \mintinline[bgcolor=whitesmoke]{C++}{installer_py/additional_files}.    by a batch  Regardless All these drivers are not required since some of them are provided by Miosix OS and the related toolchain, excepted for \textit{eabi\_memcpy} and \textit{eabi\_memclr} that must be manually included in the project (from arm glibc) the  the neural network is entirely encapsulated in the \mintinline[bgcolor=whitesmoke]{C++}{NN} class, that implements methods to create, initialize and run a single neural network instance. The integration of the tool-generated files starts immediately after that. First of all It includes the following folders:
+
 \begin{itemize}
 	\item \textbf{Drivers}: containing architecture-specific source files and in particular the implementation of network layer operations and non-linear activation functions
-	\item \textbf{Inc}:  
+	\item \textbf{Inc}:
 \end{itemize} 
 
 
