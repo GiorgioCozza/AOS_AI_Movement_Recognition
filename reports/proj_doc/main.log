@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.6.6)  15 APR 2020 22:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.6.6)  16 APR 2020 00:00
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -2290,6 +2290,11 @@ Overfull \hbox (21.40569pt too wide) in paragraph at lines 399--400
 [] [] 
  []
 
+\openout7 = `main.pyg'.
+
+
+(./_minted-main/2B790470F563DC3184BD2AA2BA12FAE48F486593A96B47FBC569AA596ACDDA5
+4.pygtex)
 <figures/stm32cubemx_conf2.png, id=226, 284.86424pt x 203.5605pt>
 File: figures/stm32cubemx_conf2.png Graphic file (type png)
 <use figures/stm32cubemx_conf2.png>
@@ -2315,10 +2320,6 @@ res/stm32cubemx_conf2.png> <./figures/stm32cubemx_conf1.png>]
 (./_minted-main/CD87E1D84D12CFE41064605FF72C35DB8F486593A96B47FBC569AA596ACDDA5
 4.pygtex)
 \openout7 = `main.pyg'.
-
-runsystem(pygmentize -l C++ -f latex -P commandprefix=PYG -F tokenmerge -o _min
-ted-main/44B420C5A61E21E1B3AB652E1E9141A18F486593A96B47FBC569AA596ACDDA54.pygte
-x main.pyg)...executed.
 
 
 (./_minted-main/44B420C5A61E21E1B3AB652E1E9141A18F486593A96B47FBC569AA596ACDDA5
@@ -2361,9 +2362,9 @@ runsystem(del main.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 40819 strings out of 492609
- 801037 string characters out of 6132819
- 1134817 words of memory out of 5000000
+ 40821 strings out of 492609
+ 801207 string characters out of 6132819
+ 1134811 words of memory out of 5000000
  43939 multiletter control sequences out of 15000+600000
  605255 words of font info for 143 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -2384,7 +2385,7 @@ ive/2019/texmf-dist/fonts/type1/public/mathdesign/mdbch/md-chri7m.pfb><c:/texli
 ve/2019/texmf-dist/fonts/type1/public/cm-super/sfsx1200.pfb><c:/texlive/2019/te
 xmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb><c:/texlive/2019/texmf-dist/f
 onts/type1/public/cm-super/sfsx1728.pfb>
-Output written on main.pdf (21 pages, 1609046 bytes).
+Output written on main.pdf (21 pages, 1609444 bytes).
 PDF statistics:
  364 PDF objects out of 1000 (max. 8388607)
  283 compressed objects within 3 object streams
