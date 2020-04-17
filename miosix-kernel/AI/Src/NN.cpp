@@ -28,42 +28,44 @@
 
 bool NN::nnCreate(ai_handle* net) {
 
-	printf("\r\n[LOG]: AI Network (AI platform API %u.%u.%u)...\r\n",
+	printf("\r\n[LOG] AI Network (AI platform API %u.%u.%u)",
 		AI_PLATFORM_API_MAJOR,
 		AI_PLATFORM_API_MINOR,
 		AI_PLATFORM_API_MICRO);
 
-	//if (NN::params == AI_HANDLE_NULL) {
-		//create the neural network
 	NN::last_error_rep = ai_network_create(net, (const ai_buffer*)AI_NETWORK_DATA_CONFIG);
-	printf("\r\n[LOG]: creating a new neural network...\r\n");
-	return true;
-	if (last_error_rep.type != AI_ERROR_NONE) {
-		printf("\r\n[ERROR]: an error occurred during creation!\r\n[CODE]: -type: %lu code: %lu\r\n", last_error_rep.type, last_error_rep.code);
+	printf("\r\n[LOG] Creating a new neural network...");
 
-	}
-	//}
-	return false;
+    if (NN::last_error_rep.type != AI_ERROR_NONE) {
+        printf("\r\n[ERROR]: An error occurred during creation!\r\n[CODE]: -type: %lu code: %lu\r\n",
+               last_error_rep.type, last_error_rep.code);
+        return false;
+
+    }else{
+        printf("\r\n[LOG] New neural network created!\r\n");
+        return true;
+    }
+
 }
 
 bool NN::nnInit(ai_handle net, ai_network_params* net_par, ai_u8* activations) {
 
+    printf("\r\n[LOG] Neural network initialization...");
 	if (net_par == AI_NETWORK_DATA_CONFIG) {
 		// initialize network using NN default params
-		ai_network_params params = { AI_NETWORK_DATA_WEIGHTS(ai_network_data_weights_get()), AI_NETWORK_DATA_ACTIVATIONS(activations) };
-		NN::params = &params;
-
-	}
+        ai_network_params params = { AI_NETWORK_DATA_WEIGHTS(ai_network_data_weights_get()), AI_NETWORK_DATA_ACTIVATIONS(activations) };
+        NN::params = &params;
+    }
 	else {
 		NN::params = net_par;
 	}
-
-	if (!ai_network_init(net, (const ai_network_params*)NN::params)) {
-		NN::last_error_rep = ai_network_get_error(net);
+    if (!ai_network_init(net, (const ai_network_params*)NN::params)) {
+        NN::last_error_rep = ai_network_get_error(net);
 		printf("\r\n[ERROR]: Error during initialization!\r\n[CODE]: -type: %lu code: %lu\r\n", last_error_rep.type, last_error_rep.code);
 		return false;
 	}
-	printf("\r\n[LOG]: Network correctly initialized!\r\n");
+
+	printf("\r\n[LOG] Network correctly initialized!\r\n");
 	return true;
 }
 
@@ -111,36 +113,43 @@ bool NN::prepareData(data_proc* ds_pp, ai_float* in_data, ai_float* out_data,\
 }
 
 
-ai_handle NN::nnDestroy(ai_handle net) {
+bool NN::nnDestroy(ai_handle net) {
 
-	printf("\r\n[LOG]: Removing neural network...\r\n");
+	printf("\r\n[LOG]: Removing neural network...");
 
 	net = ai_network_destroy(net);
 
 	if (net == nullptr) {
-		printf("\r\n[LOG]: Neural network successfully deleted!\r\n");
-		return net;
-	}
-	else
-		printf("\r\n[ERROR]: Removing process failed!\r\n");
 
-	return AI_HANDLE_NULL;
+	    //if (NN::params != nullptr){ delete NN::params;}
+	    //if (NN::report != nullptr){ delete NN::report;}
+	    NN::last_error_rep = AI_ERROR_INIT(NONE, NONE);
+
+		printf("\r\n[LOG]: Neural network successfully deleted!");
+		return true;
+	}
+	else {
+        printf("\r\n[ERROR]: Deleting process failed!\r\n");
+        return false;
+    }
+
 }
 
 
 
 void NN::showNNInfo(const ai_handle net) {
 
-	ai_network_get_info(net, NN::report);
-	printf("\r\n ##########################   NEURAL NETWORK INFO ##################################\r\n");
-	printf("\n");
-	if ( this->report != nullptr ) {
+    ai_network_report rep;
+	if(ai_network_get_info(net, &rep)){
+	    NN::report = &rep;
+        printf("\r\n*************************   NEURAL NETWORK INFO   ****************************\r\n");
+        printf("\n");
         printf("Network info: \n");
-        printf("\n\t[NAME]: %s", report->model_name);
-        printf("\n\t[MODEL_DATETIME]: %s ", report->model_datetime);
-        printf("\n\t[COMPILE_DATETIME]: %s", report->compile_datetime);
-        printf("\n\t[API_VERSION]: %u.%u.%u", AI_PLATFORM_API_MAJOR, AI_PLATFORM_API_MINOR, AI_PLATFORM_API_MICRO);
+        printf("\n\t[NAME]: %s", NN::report->model_name);
+        printf("\n\t[MODEL_DATETIME]: %s ", NN::report->model_datetime);
+        printf("\n\t[COMPILE_DATETIME]: %s", NN::report->compile_datetime);
+        printf("\n\t[API_VERSION]: %u.%u.%u\r\n", AI_PLATFORM_API_MAJOR, AI_PLATFORM_API_MINOR, AI_PLATFORM_API_MICRO);
     }else{
-	    printf("\r\n[ERROR] No network info!");
+	    printf("\r\n[ERROR] No network info!\r\n");
 	}
 }

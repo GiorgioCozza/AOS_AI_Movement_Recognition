@@ -50,7 +50,7 @@ public:
 	/**
 	 * Method that creates the neural network.
 	 * \param net ai_handle reference.
-	 * \return the result of the operation.
+	 * \return bool.
 	*/
 	bool nnCreate(ai_handle * net);
 	/**
@@ -58,9 +58,9 @@ public:
 	 * \param net ai_handle reference.
 	 * \return the reference of the deleted network.
 	*/
-	ai_handle nnDestroy(ai_handle net);
+	bool nnDestroy(ai_handle net);
 	/**
-	 * Method that runs the neural network.
+	 * Runs the neural network.
 	 * \param net ai_handle reference.
 	 * \param ai_input an ai_buffer reference that contains processed input segment
 	 * \param ai_output ai_buffer reference to store results
@@ -68,7 +68,7 @@ public:
 	*/
 	int nnRun(ai_handle net, const ai_buffer* ai_input, ai_buffer* ai_output, const ai_u16 batch_size);
 	/**
-	 * Method that initializes input and output datasets of the neural network.
+	 * Initializes input and output of the neural network.
 	 * \param net ai_handle reference.
 	 * \param ai_input an ai_buffer reference in which processed input will be stored
 	 * \param ai_output ai_buffer reference to perform initialization
@@ -89,7 +89,7 @@ public:
 	 * \param activations array reference
 	 * \return the result of the operation.
 	*/
-	ai_bool nnInit(ai_handle net, ai_network_params* net_par, ai_u8 * activations);
+	bool nnInit(ai_handle net, ai_network_params* net_par, ai_u8 * activations);
 
 
 protected:
