@@ -78,7 +78,7 @@ void print_config(LSM6DSLAccGyr * acc_gyr_ptr, LSM303AGRAccMag * acc_mag_ptr){
     if (acc_mag_ptr->get_mag_sensitivity(&sens))
         printf("\n\t- Sensitivity: %.3f", sens);
 
-    printf("\n");
+    printf("\r\n");
 
 }
 
@@ -129,17 +129,18 @@ int main() {
 
     in_data = data_queue.getCircBuf();
 
-    printf("#######################   |AOS: Neural Network on STM32 with STM32CubeAI|	###########################\r\n");
+    printf("\r\n********************   AOS: Neural Network on STM32 with STM32CubeAI	 **********************\r\n");
 
     if ( ag_en && am_en ) {
         if (neural_net->nnCreate(&network)) {
             if (neural_net->nnInit(network, (ai_network_params *) AI_NETWORK_DATA_CONFIG, activations)) {
 
-                printf("\n\r[LOG] Neural network initialized!\r\n");
+                neural_net->showNNInfo((const ai_handle) network);
 
                 while (1) {
 
                     // check USR button to start
+                    printf("\r\nPress USR button to start...\r\n");
                     while (startflag == false) {
                         if (usrbtn::value() == 0) {
                             startflag = true;
@@ -188,17 +189,17 @@ int main() {
 
                         neural_net->prepareData(&dt_proc, in_data, out_data, &ai_input, &ai_output, 1);
 
-                        //printf("\r\n[LOG]: Running the Neural Network...\r\n");
-
                         if (PRED_SIZE == 0) {
 
-                            // real-time neural network results
+                            // real-time predictions
                             printf("%c[H", ESC);
                             printf("%c[2J", ESC);
                             if(neural_net->nnRun(network, &ai_input, &ai_output, 1) > 0) {
-                                pred_vec[pred_cnt] = dt_proc.get_argmax((const float *) out_data,
+                                uint8_t pred = dt_proc.get_argmax((const float *) out_data,
                                                                         (const uint8_t) NUM_CLASSES);
-                                printf("\n[LOG]: You are %s\n\n", movements[pred_vec[pred_cnt]]);
+                                printf("\n[LOG]: You are %s\n\n", movements[pred]);
+
+                                startflag = false;
                             }
                         } else if (pred_cnt >= PRED_SIZE) {
 

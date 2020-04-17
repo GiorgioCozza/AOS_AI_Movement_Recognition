@@ -17,6 +17,6 @@
 
 #define NUM_CLASSES 7
 #define NUM_ACTIVITIES 6
-#define PRED_SIZE  15
+#define PRED_SIZE  0
 
 #endif
