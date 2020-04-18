@@ -75,6 +75,7 @@ ECHO [LOG] Model analysis...
 ECHO.
 stm32ai analyze -m %PY_MODEL_PATH% --type keras
 
+stm32ai generate -m %PY_MODEL_PATH% -o %CUBEAI_PROJ_PATH%
 ECHO.
 ECHO [LOG] Validation on Desktop:
 ECHO.

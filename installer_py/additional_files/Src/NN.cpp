@@ -48,6 +48,8 @@ bool NN::nnCreate(ai_handle* net) {
 
 }
 
+
+
 bool NN::nnInit(ai_handle net, ai_network_params* net_par, ai_u8* activations) {
 
     printf("\r\n[LOG] Neural network initialization...");
@@ -68,6 +70,27 @@ bool NN::nnInit(ai_handle net, ai_network_params* net_par, ai_u8* activations) {
 	printf("\r\n[LOG] Network correctly initialized!\r\n");
 	return true;
 }
+
+
+
+bool NN::prepareData(data_proc* ds_pp, ai_float* in_data, ai_float* out_data,\
+                        ai_buffer* ai_input, ai_buffer* ai_output, const ai_u16 batches) {
+
+    // input  preprocessing
+    //ds_pp->normalize(in_data);
+
+    if (in_data == NULL) {
+        printf("\r\n[ERROR]: An error occurred during dataset processing\r\n");
+        return false;
+    }
+    ai_input->n_batches = batches;
+    ai_input->data = AI_HANDLE_PTR(in_data);
+    ai_output->n_batches = batches;
+    ai_output->data = AI_HANDLE_PTR(out_data);
+
+    return true;
+}
+
 
 
 int NN::nnRun(ai_handle net, const ai_buffer* ai_input, ai_buffer* ai_output, const ai_u16 batch_size) {
@@ -93,24 +116,6 @@ int NN::nnRun(ai_handle net, const ai_buffer* ai_input, ai_buffer* ai_output, co
 	return nbatch;
 }
 
-
-bool NN::prepareData(data_proc* ds_pp, ai_float* in_data, ai_float* out_data,\
-                        ai_buffer* ai_input, ai_buffer* ai_output, const ai_u16 batches) {
-
-	// input  preprocessing
-	//ds_pp->normalize(in_data);
-
-	if (in_data == NULL) {
-		printf("\r\n[ERROR]: An error occurred during dataset processing\r\n");
-		return false;
-	}
-	ai_input->n_batches = batches;
-	ai_input->data = AI_HANDLE_PTR(in_data);
-	ai_output->n_batches = batches;
-	ai_output->data = AI_HANDLE_PTR(out_data);
-	
-	return true;
-}
 
 
 bool NN::nnDestroy(ai_handle net) {

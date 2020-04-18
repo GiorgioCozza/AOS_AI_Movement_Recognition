@@ -10,19 +10,38 @@
         "factor": null,
         "layers": {}
     },
-    "date_time": "Thu Apr 16 15:59:45 2020",
+    "date_time": "Sat Apr 18 17:05:36 2020",
     "error": 0,
     "error_str": [],
-    "evaluation_measures": [],
-    "evaluation_status": "NOT EVALUATED",
-    "exec_cmd": "generate",
-    "exec_duration": 0.9595732688903809,
-    "hash": "2559c3dfd7ce636226c72ce2fb678298",
+    "evaluation_measures": [
+        {
+            "acc": 100.0,
+            "desc": "stm32 C-model #1",
+            "mae": 0.00042500896961428225,
+            "rmse": 0.004269074182957411
+        },
+        {
+            "acc": 100.0,
+            "desc": "original model #1",
+            "mae": 0.00042500896961428225,
+            "rmse": 0.004269074648618698
+        },
+        {
+            "acc": 100.0,
+            "desc": "X-cross #1",
+            "mae": 6.871543611897124e-11,
+            "rmse": 1.0878694611804463e-09
+        }
+    ],
+    "evaluation_status": "stm32 C-model #1: acc=100.0%,rmse=0.004269,mae=0.000425;original model #1: acc=100.0%,rmse=0.004269,mae=0.000425;X-cross #1: acc=100.0%,rmse=0.000000,mae=0.000000;L2r status: l2r=2.88233859e-09,status=PASSED;",
+    "exec_cmd": "validate",
+    "exec_duration": 201.80327796936035,
+    "hash": "fc8f821a7f3a5c7c278e772d8331cb75",
     "inputs": [
         "input_0"
     ],
-    "l2_error": -1.0,
-    "l2_status": "NOT EVALUATED",
+    "l2_error": 2.882338590026734e-09,
+    "l2_status": "PASSED",
     "layers": [
         {
             "extras": {
@@ -113,7 +132,7 @@
             "inputs": [
                 "input_0"
             ],
-            "name": "batch_normalization_3",
+            "name": "batch_normalization_1",
             "out_shapes": [
                 [
                     12,
@@ -122,7 +141,7 @@
                 ]
             ],
             "outputs": [
-                "batch_normalization_3"
+                "batch_normalization_1"
             ],
             "type": "ScaleBias",
             "use_bias": true
@@ -162,7 +181,7 @@
             "go_backwards": false,
             "id": 1,
             "inputs": [
-                "batch_normalization_3"
+                "batch_normalization_1"
             ],
             "n_features": 12,
             "name": "LSTM1",
@@ -436,8 +455,8 @@
         },
         {
             "extras": {
-                "c_l2_error": 0,
-                "c_l2_id": -1,
+                "c_l2_error": 2.882338590026734e-09,
+                "c_l2_id": 7,
                 "n_macc": 105,
                 "n_params": 0,
                 "psize": 0,
@@ -485,12 +504,12 @@
         }
     ],
     "maxlen_name": 33,
-    "md5": "2559c3dfd7ce636226c72ce2fb678298",
+    "md5": "fc8f821a7f3a5c7c278e772d8331cb75",
     "model_files": [
-        "C:\\Users\\grgcz\\Desktop\\dev_space_win\\AOS_Project\\AOS_MovementRecognition\\neural_net-py\\best_models\\best_loss_RNN_fold3_09-04-2020_221243.h5"
+        "C:\\Users\\grgcz\\Desktop\\dev_space_win\\AOS_Project\\AOS_MovementRecognition\\neural_net-py\\best_models\\best_acc_model_RNN_fold1_09-04-2020_221243.h5"
     ],
     "model_n_params": 23103,
-    "model_name": "best_loss_RNN_fold3_09042020_221243",
+    "model_name": "best_acc_model_RNN_fold1_09042020_221243",
     "model_size": 92412,
     "model_type": "keras (keras_dump)",
     "name": "network",
@@ -519,7 +538,7 @@
             "name": "input_0"
         }
     ],
-    "rom_l2_error_max": 0.0,
+    "rom_l2_error_max": 2.882338590026734e-09,
     "rom_n_c_nodes": 8,
     "rom_n_macc": 597465,
     "rom_n_macc_max": 593280,

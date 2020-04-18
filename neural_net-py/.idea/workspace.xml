@@ -2,57 +2,42 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09f50ed0-32f5-4dad-a37d-a2b12a97fb75" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/best_models/best_acc_model_RNN_fold1_09-04-2020_221243.h5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/best_models/best_loss_RNN_fold3_09-04-2020_221243.h5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/log/RNN_summary09-04-2020_220904.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/log/RNN_summary09-04-2020_220905.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/log/train_log_09-04-2020_220905.log/train/events.out.tfevents.1586462945.BIGMUSSELME.10128.3102.v2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/log/train_log_09-04-2020_220905.log/train/events.out.tfevents.1586462947.BIGMUSSELME.profile-empty" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/log/train_log_09-04-2020_220905.log/train/plugins/profile/2020-04-09_22-09-07/local.trace" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/log/train_log_09-04-2020_220905.log/validation/events.out.tfevents.1586462950.BIGMUSSELME.10128.7512.v2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/log/train_log_09-04-2020_220951.log/train/events.out.tfevents.1586462991.BIGMUSSELME.10128.32527.v2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/log/train_log_09-04-2020_220951.log/train/events.out.tfevents.1586462993.BIGMUSSELME.profile-empty" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/log/train_log_09-04-2020_220951.log/train/plugins/profile/2020-04-09_22-09-53/local.trace" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/log/train_log_09-04-2020_220951.log/validation/events.out.tfevents.1586462995.BIGMUSSELME.10128.36937.v2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/log/train_log_09-04-2020_221034.log/train/events.out.tfevents.1586463034.BIGMUSSELME.10128.59966.v2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/log/train_log_09-04-2020_221034.log/train/events.out.tfevents.1586463035.BIGMUSSELME.profile-empty" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/log/train_log_09-04-2020_221034.log/train/plugins/profile/2020-04-09_22-10-35/local.trace" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/log/train_log_09-04-2020_221034.log/validation/events.out.tfevents.1586463037.BIGMUSSELME.10128.64376.v2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/log/train_log_09-04-2020_221102.log/train/events.out.tfevents.1586463062.BIGMUSSELME.10128.78468.v2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/log/train_log_09-04-2020_221102.log/train/events.out.tfevents.1586463064.BIGMUSSELME.profile-empty" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/log/train_log_09-04-2020_221102.log/train/plugins/profile/2020-04-09_22-11-04/local.trace" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/log/train_log_09-04-2020_221102.log/validation/events.out.tfevents.1586463066.BIGMUSSELME.10128.82878.v2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plots/confmat_09-04-2020_221210.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plots/confmat_09-04-2020_221220.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plots/confmat_09-04-2020_221224.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plots/confmat_09-04-2020_221240.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/train_log_09-04-2020_220620.log/train/events.out.tfevents.1586462780.BIGMUSSELME.7892.3102.v2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/train_log_09-04-2020_220620.log/train/events.out.tfevents.1586462782.BIGMUSSELME.profile-empty" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/train_log_09-04-2020_220620.log/train/plugins/profile/2020-04-09_22-06-22/local.trace" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_csv/test_Apr09_20/test_input_fold-0_Apr09_22-09-05.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_csv/test_Apr09_20/test_input_fold-1_Apr09_22-09-51.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_csv/test_Apr09_20/test_input_fold-2_Apr09_22-10-34.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_csv/test_Apr09_20/test_input_fold-3_Apr09_22-11-02.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_csv/test_Apr09_20/test_output_fold-0_Apr09_22-09-05.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_csv/test_Apr09_20/test_output_fold-1_Apr09_22-09-51.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_csv/test_Apr09_20/test_output_fold-2_Apr09_22-10-34.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_csv/test_Apr09_20/test_output_fold-3_Apr09_22-11-02.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.keras/keras.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fix_network_h.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../generate_and_install_nn.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../generate_and_install_nn.bat.bak" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/train_log_07-04-2020_202201.log/events.out.tfevents.1586283724.BIGMUSSELME" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/train_log_07-04-2020_202322.log/events.out.tfevents.1586283804.BIGMUSSELME" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/train_log_07-04-2020_202404.log/events.out.tfevents.1586283845.BIGMUSSELME" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/train_log_07-04-2020_202528.log/events.out.tfevents.1586283930.BIGMUSSELME" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/neural_network.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/neural_network.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stm32ai_results/stm32ai_output/network_analyze_report.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stm32ai_results/stm32ai_output/network_validate_report.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stm32ai_results/stm32ai_ws/network_pinnr.hdf5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stm32ai_results/stm32ai_ws/network_pinnr.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stm32ai_results/stm32ai_ws/network_report.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NN_Code/Inc/network.h" beforeDir="false" afterPath="$PROJECT_DIR$/../NN_Code/Inc/network.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NN_Code/Inc/network_data.h" beforeDir="false" afterPath="$PROJECT_DIR$/../NN_Code/Inc/network_data.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NN_Code/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../NN_Code/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NN_Code/NN_Code.ioc" beforeDir="false" afterPath="$PROJECT_DIR$/../NN_Code/NN_Code.ioc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NN_Code/Src/network.c" beforeDir="false" afterPath="$PROJECT_DIR$/../NN_Code/Src/network.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NN_Code/Src/network_data.c" beforeDir="false" afterPath="$PROJECT_DIR$/../NN_Code/Src/network_data.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NN_Code/network_generate_report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../NN_Code/network_generate_report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../installer_py/additional_files/Inc/NN.h" beforeDir="false" afterPath="$PROJECT_DIR$/../installer_py/additional_files/Inc/NN.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../installer_py/additional_files/Src/NN.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../installer_py/additional_files/Src/NN.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/AI/Inc/NN.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/AI/Inc/NN.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/AI/Src/NN.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/AI/Src/NN.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../miosix-kernel/main_config.h" beforeDir="false" afterPath="$PROJECT_DIR$/../miosix-kernel/main_config.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/diagrams/dev_flow.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/diagrams/dev_flow.drawio" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/figures/plot_ACC_LSM6DSL_DS_walking_running_Z.png" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/figures/plot_ACC_LSM6DSL_DS_walking_running_Z.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/main.aux" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/main.aux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/main.lof" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/main.lof" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/main.log" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/main.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/main.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/main.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/main.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/main.synctex.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/main.toc" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/main.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reports/proj_doc/text/coding.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/proj_doc/text/coding.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stm32ai_output/network_analyze_report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../stm32ai_output/network_analyze_report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stm32ai_output/network_val_c_inputs_1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../stm32ai_output/network_val_c_inputs_1.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stm32ai_output/network_val_c_outputs_1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../stm32ai_output/network_val_c_outputs_1.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stm32ai_output/network_val_io.npz" beforeDir="false" afterPath="$PROJECT_DIR$/../stm32ai_output/network_val_io.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stm32ai_output/network_val_m_inputs_1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../stm32ai_output/network_val_m_inputs_1.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stm32ai_output/network_val_m_outputs_1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../stm32ai_output/network_val_m_outputs_1.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stm32ai_output/network_validate_report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../stm32ai_output/network_validate_report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stm32ai_ws/inspector_network/workspace/generated/network.c" beforeDir="false" afterPath="$PROJECT_DIR$/../stm32ai_ws/inspector_network/workspace/generated/network.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stm32ai_ws/inspector_network/workspace/generated/network.h" beforeDir="false" afterPath="$PROJECT_DIR$/../stm32ai_ws/inspector_network/workspace/generated/network.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stm32ai_ws/inspector_network/workspace/generated/network_data.h" beforeDir="false" afterPath="$PROJECT_DIR$/../stm32ai_ws/inspector_network/workspace/generated/network_data.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stm32ai_ws/network_pinnr.hdf5" beforeDir="false" afterPath="$PROJECT_DIR$/../stm32ai_ws/network_pinnr.hdf5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stm32ai_ws/network_pinnr.json" beforeDir="false" afterPath="$PROJECT_DIR$/../stm32ai_ws/network_pinnr.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stm32ai_ws/network_report.json" beforeDir="false" afterPath="$PROJECT_DIR$/../stm32ai_ws/network_report.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../validate_NN.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../validate_NN.bat" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -86,7 +71,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/data_visualization.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="625">
+            <state relative-caret-position="1955">
               <caret line="125" selection-start-line="125" selection-end-line="125" />
               <folding>
                 <element signature="e#1#22#0" expanded="true" />
@@ -98,7 +83,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/neural_network.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1224">
+            <state relative-caret-position="142">
               <caret line="72" column="39" selection-start-line="72" selection-start-column="39" selection-end-line="72" selection-end-column="39" />
               <folding>
                 <element signature="e#9#27#0" expanded="true" />
@@ -206,6 +191,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -227,7 +213,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -420,7 +405,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32956153" />
       <window_info anchor="bottom" id="Python Console" order="8" weight="0.3281471" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50416666" side_tool="true" weight="0.32446808" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32956153" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32956153" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -559,6 +544,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/data_visualization.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1955">
+          <caret line="125" selection-start-line="125" selection-end-line="125" />
+          <folding>
+            <element signature="e#1#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/dataset_processing.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="646">
@@ -569,19 +564,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/data_visualization.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="625">
-          <caret line="125" selection-start-line="125" selection-end-line="125" />
-          <folding>
-            <element signature="e#1#22#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/neural_network.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1224">
+        <state relative-caret-position="142">
           <caret line="72" column="39" selection-start-line="72" selection-start-column="39" selection-end-line="72" selection-end-column="39" />
           <folding>
             <element signature="e#9#27#0" expanded="true" />

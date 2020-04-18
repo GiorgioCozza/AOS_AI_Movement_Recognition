@@ -22,9 +22,9 @@
             "inputs": [
                 "input_0"
             ],
-            "name": "batch_normalization_3",
+            "name": "batch_normalization_1",
             "outputs": [
-                "batch_normalization_3"
+                "batch_normalization_1"
             ],
             "type": "ScaleBias",
             "use_bias": true
@@ -34,7 +34,7 @@
             "go_backwards": false,
             "id": 1,
             "inputs": [
-                "batch_normalization_3"
+                "batch_normalization_1"
             ],
             "n_features": 12,
             "name": "LSTM1",
@@ -127,7 +127,7 @@
             "type": "Nonlinearity"
         }
     ],
-    "md5": "2559c3dfd7ce636226c72ce2fb678298",
+    "md5": "fc8f821a7f3a5c7c278e772d8331cb75",
     "name": "network",
     "outputs": [
         "FCN3_nl"
