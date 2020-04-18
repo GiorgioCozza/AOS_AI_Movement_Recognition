@@ -9,7 +9,7 @@
 #include "LSM303AGR.h"
 #include "NN.h"
 
-#define ESC     27
+
 using namespace std;
 using namespace miosix;
 
@@ -82,7 +82,12 @@ void print_config(LSM6DSLAccGyr * acc_gyr_ptr, LSM303AGRAccMag * acc_mag_ptr){
 
 }
 
+void clear_s(void){
 
+    char ESC = 27;
+    printf("%c[H", ESC);
+    printf("%c[2J", ESC);
+}
 
 
 int main() {
@@ -92,6 +97,7 @@ int main() {
         RCC->AHB1ENR |= RCC_AHB1ENR_CRCEN;
         CRC->CR = CRC_CR_RESET;
     }
+
 
     float *in_data = nullptr;
     float *out_data = (float *) malloc(NUM_CLASSES * sizeof(float));
@@ -129,6 +135,8 @@ int main() {
 
     in_data = data_queue.getCircBuf();
 
+    Timer time;
+
     printf("\r\n********************   AOS: Neural Network on STM32 with STM32CubeAI	 **********************\r\n");
 
     if ( ag_en && am_en ) {
@@ -140,7 +148,8 @@ int main() {
                 while (1) {
 
                     // check USR button to start
-                    printf("\r\nPress USR button to start...\r\n");
+                    if (startflag == false)
+                        printf("\r\nPress USR button to start...\r\n");
                     while (startflag == false) {
                         if (usrbtn::value() == 0) {
                             startflag = true;
@@ -151,6 +160,7 @@ int main() {
                         usrled::high();
                     }
                     usrled::low();
+
 
                     // read LSM6DSL accelerometer axes
                     if (acc_gyr->get_acc_axes(buf_reader)) {
@@ -189,31 +199,37 @@ int main() {
 
                         neural_net->prepareData(&dt_proc, in_data, out_data, &ai_input, &ai_output, 1);
 
-                        if (PRED_SIZE == 0) {
+                        if (neural_net->nnRun(network, &ai_input, &ai_output, 1) > 0) {
+                            pred_vec[pred_cnt] = dt_proc.get_argmax((const float *) out_data,
+                                                                    (const uint8_t) NUM_CLASSES);
 
-                            // real-time predictions
-                            printf("%c[H", ESC);
-                            printf("%c[2J", ESC);
-                            if(neural_net->nnRun(network, &ai_input, &ai_output, 1) > 0) {
-                                uint8_t pred = dt_proc.get_argmax((const float *) out_data,
-                                                                        (const uint8_t) NUM_CLASSES);
-                                printf("\n[LOG]: You are %s\n\n", movements[pred]);
+                            if (PRED_SIZE == 0) {
 
+                                // real-time predictions
+                                clear_s();
+
+                                printf("\n[RESULT] You are %s\n\n", movements[pred_vec[pred_cnt]]);
+                                pred_cnt = 0;
+
+                            } else if (pred_cnt >= PRED_SIZE) {
+
+                                // final prediction as mode of several observations
+                                clear_s();
+
+                                uint8_t pred_mode = dt_proc.get_mode((const uint8_t *) pred_vec,
+                                                                (const uint16_t) PRED_SIZE,
+                                                                (const uint8_t) NUM_CLASSES);
+
+                                printf("\n[RESULT] You are %s\n\n", movements[pred_mode]);
+
+                                pred_cnt = 0;
                                 startflag = false;
-                            }
-                        } else if (pred_cnt >= PRED_SIZE) {
 
-                            // final prediction as mode of several observations
-                            printf("%c[H", ESC);
-                            printf("%c[2J", ESC);
-                            printf("\r\n****************	AI NN NETWORK RESULT	*********************\r\n");
-                            printf("\n[LOG]: You are %s\n\n", movements[dt_proc.get_mode((const uint8_t *) pred_vec, \
-                                                                                 (const uint16_t) PRED_SIZE, \
-                                                                                 (const uint8_t) NUM_CLASSES)]);
-                            pred_cnt = 0;
-                            startflag = false;
+                            }
+                            pred_cnt++;
+
+
                         }
-                        pred_cnt++;
                     }
 
                 }
@@ -222,6 +238,7 @@ int main() {
 
         }
     }
+
 
 }
 
