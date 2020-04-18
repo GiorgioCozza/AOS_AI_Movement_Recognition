@@ -1,11 +1,13 @@
 \babel@toc {english}{}
 \contentsline {figure}{\numberline {1}{\ignorespaces Design Process Chart\relax }}{5}{figure.caption.3}% 
-\contentsline {figure}{\numberline {8}{\ignorespaces LSM6DSL Accelerometer: running and walking\relax }}{11}{figure.caption.11}% 
-\contentsline {figure}{\numberline {9}{\ignorespaces LSM6DSL Accelerometer: jumping and standing\relax }}{12}{figure.caption.12}% 
-\contentsline {figure}{\numberline {10}{\ignorespaces LSM6DSL Accelerometer: sitting, supine, lying on side\relax }}{12}{figure.caption.13}% 
-\contentsline {figure}{\numberline {11}{\ignorespaces LSM303AGR Magnetometer, Scattering Plot \relax }}{13}{figure.caption.14}% 
-\contentsline {figure}{\numberline {13}{\ignorespaces RNN model graph\relax }}{14}{figure.caption.16}% 
-\contentsline {figure}{\numberline {14}{\ignorespaces Dataset Distribution\relax }}{15}{figure.caption.17}% 
-\contentsline {figure}{\numberline {15}{\ignorespaces Dataset partitioning\relax }}{15}{figure.caption.18}% 
-\contentsline {figure}{\numberline {17}{\ignorespaces Confusion Matrix: Testing\relax }}{17}{figure.caption.21}% 
-\contentsline {figure}{\numberline {18}{\ignorespaces X-CUBE AI Engine\relax }}{17}{figure.caption.22}% 
+\contentsline {figure}{\numberline {8}{\ignorespaces LSM6DSL Accelerometer: running and walking on X axis\relax }}{11}{figure.caption.11}% 
+\contentsline {figure}{\numberline {9}{\ignorespaces LSM6DSL Accelerometer: running and walking on Z axis\relax }}{12}{figure.caption.12}% 
+\contentsline {figure}{\numberline {10}{\ignorespaces LSM6DSL Accelerometer: jumping and standing\relax }}{12}{figure.caption.13}% 
+\contentsline {figure}{\numberline {11}{\ignorespaces LSM6DSL Accelerometer: sitting, supine, lying on side\relax }}{12}{figure.caption.14}% 
+\contentsline {figure}{\numberline {12}{\ignorespaces LSM303AGR Magnetometer, Scattering Plot \relax }}{13}{figure.caption.15}% 
+\contentsline {figure}{\numberline {14}{\ignorespaces RNN model graph\relax }}{14}{figure.caption.17}% 
+\contentsline {figure}{\numberline {15}{\ignorespaces Dataset Distribution\relax }}{15}{figure.caption.18}% 
+\contentsline {figure}{\numberline {16}{\ignorespaces Dataset partitioning\relax }}{15}{figure.caption.19}% 
+\contentsline {figure}{\numberline {18}{\ignorespaces Confusion Matrix: Testing\relax }}{17}{figure.caption.22}% 
+\contentsline {figure}{\numberline {19}{\ignorespaces X-CUBE AI Engine\relax }}{17}{figure.caption.23}% 
+\contentsline {figure}{\numberline {21}{\ignorespaces Class Diagram\relax }}{19}{figure.caption.25}% 

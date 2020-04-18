@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.6.6)  16 APR 2020 00:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.6.6)  19 APR 2020 00:34
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1515,47 +1515,7 @@ in.aex <nul: /p x=^%~$PATH:i>> main.aex)...executed.
 
 runsystem(del main.aex)...executed.
 
- (./main.aux
-
-LaTeX Warning: Label `fig:5a' multiply defined.
-
-
-LaTeX Warning: Label `sub@fig:5a' multiply defined.
-
-
-LaTeX Warning: Label `fig:5b' multiply defined.
-
-
-LaTeX Warning: Label `sub@fig:5b' multiply defined.
-
-
-LaTeX Warning: Label `fig:4a' multiply defined.
-
-
-LaTeX Warning: Label `sub@fig:4a' multiply defined.
-
-
-LaTeX Warning: Label `fig:4b' multiply defined.
-
-
-LaTeX Warning: Label `sub@fig:4b' multiply defined.
-
-
-LaTeX Warning: Label `fig:8a' multiply defined.
-
-
-LaTeX Warning: Label `sub@fig:8a' multiply defined.
-
-
-LaTeX Warning: Label `fig:8b' multiply defined.
-
-
-LaTeX Warning: Label `sub@fig:8b' multiply defined.
-
-
-LaTeX Warning: Label `fig:9' multiply defined.
-
-)
+ (./main.aux)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 108.
@@ -1886,10 +1846,10 @@ LaTeX Font Info:    Font shape `T1/cmss/b/n' in size <14.4> not available
 LaTeX Font Info:    Font shape `T1/cmss/bx/n' will be
 (Font)              scaled to size 14.96161pt on input line 4.
  [4]
-<figures/design_steps.png, id=114, 395.4775pt x 894.34125pt>
-File: figures/design_steps.png Graphic file (type png)
-<use figures/design_steps.png>
-Package pdftex.def Info: figures/design_steps.png  used on input line 15.
+<figures/dev_flow.png, id=120, 395.4775pt x 894.34125pt>
+File: figures/dev_flow.png Graphic file (type png)
+<use figures/dev_flow.png>
+Package pdftex.def Info: figures/dev_flow.png  used on input line 15.
 (pdftex.def)             Requested size: 237.28833pt x 536.60889pt.
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
 (Font)              scaled to size 10.51207pt on input line 16.
@@ -1910,26 +1870,16 @@ LaTeX Font Info:    Font shape `TS1/mdbch/m/n' will be
 LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
 (Font)              scaled to size 11.52008pt on input line 22.
 
-Underfull \hbox (badness 1924) in paragraph at lines 24--25
-[]\T1/mdbch/b/n/12 Data Sci-ence and Net-work mod-el-ing\T1/mdbch/m/n/12 :
- []
-
-
-Underfull \hbox (badness 1112) in paragraph at lines 24--25
-\T1/mdbch/m/n/12 to man-age dataset files, study col-lected
- []
-
-
 Overfull \hbox (2.40192pt too wide) in paragraph at lines 26--27
 \T1/mdbch/b/n/12 Test-ing\T1/mdbch/m/n/12 : set-up of the ST tool STM32CubeAI
  []
 
 
-Underfull \hbox (badness 4096) in paragraph at lines 28--29
-[]\T1/mdbch/b/n/12 Final Test-ing\T1/mdbch/m/n/12 : test-ing of the em-bed-
+Underfull \hbox (badness 3439) in paragraph at lines 28--29
+\T1/mdbch/m/n/12 em-bed-ded neu-ral net-work by per-form-
  []
 
-[5 <./figures/design_steps.png>]
+[5 <./figures/dev_flow.png>]
 LaTeX Font Info:    Font shape `T1/mdbch/m/it' will be
 (Font)              scaled to size 11.52008pt on input line 34.
 
@@ -1937,7 +1887,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 33--35
 
  []
 
-<figures/iks01a2.jpg, id=122, 287.8755pt x 268.6035pt>
+<figures/iks01a2.jpg, id=128, 287.8755pt x 268.6035pt>
 File: figures/iks01a2.jpg Graphic file (type jpg)
 <use figures/iks01a2.jpg>
 Package pdftex.def Info: figures/iks01a2.jpg  used on input line 50.
@@ -1946,13 +1896,13 @@ LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
 (Font)              scaled to size 9.60007pt on input line 51.
 LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
 (Font)              scaled to size 9.60007pt on input line 51.
-<figures/stm32f401re.jpg, id=123, 207.77625pt x 250.9375pt>
+<figures/stm32f401re.jpg, id=129, 207.77625pt x 250.9375pt>
 File: figures/stm32f401re.jpg Graphic file (type jpg)
 <use figures/stm32f401re.jpg>
 Package pdftex.def Info: figures/stm32f401re.jpg  used on input line 55.
 (pdftex.def)             Requested size: 166.2212pt x 200.75026pt.
 [6]
-<figures/data_gathering_1.jpg, id=130, 770.88pt x 578.16pt>
+<figures/data_gathering_1.jpg, id=136, 770.88pt x 578.16pt>
 File: figures/data_gathering_1.jpg Graphic file (type jpg)
 <use figures/data_gathering_1.jpg>
 Package pdftex.def Info: figures/data_gathering_1.jpg  used on input line 65.
@@ -1962,7 +1912,7 @@ Overfull \hbox (39.96075pt too wide) in paragraph at lines 65--66
 [][] 
  []
 
-<figures/data_gathering_2.jpg, id=131, 770.88pt x 578.16pt>
+<figures/data_gathering_2.jpg, id=137, 770.88pt x 578.16pt>
 File: figures/data_gathering_2.jpg Graphic file (type jpg)
 <use figures/data_gathering_2.jpg>
 Package pdftex.def Info: figures/data_gathering_2.jpg  used on input line 70.
@@ -1995,7 +1945,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 75--78
 
 [7 <./figures/iks01a2.jpg> <./figures/stm32f401re.jpg> <./figures/data_gatherin
 g_1.jpg> <./figures/data_gathering_2.jpg>]
-<figures/lsm6dsl_datasheet.png, id=139, 408.92775pt x 234.27525pt>
+<figures/lsm6dsl_datasheet.png, id=145, 408.92775pt x 234.27525pt>
 File: figures/lsm6dsl_datasheet.png Graphic file (type png)
 <use figures/lsm6dsl_datasheet.png>
 Package pdftex.def Info: figures/lsm6dsl_datasheet.png  used on input line 82.
@@ -2005,7 +1955,7 @@ Overfull \hbox (15.50725pt too wide) in paragraph at lines 82--83
 [] []|  
  []
 
-<figures/i2c_com.png, id=140, 427.5975pt x 302.12875pt>
+<figures/i2c_com.png, id=146, 427.5975pt x 302.12875pt>
 File: figures/i2c_com.png Graphic file (type png)
 <use figures/i2c_com.png>
 Package pdftex.def Info: figures/i2c_com.png  used on input line 87.
@@ -2110,18 +2060,18 @@ Overfull \hbox (2.15425pt too wide) in paragraph at lines 193--205
 
 (./_minted-main/D11D878F5590DE896B2172CFF75F274C8F486593A96B47FBC569AA596ACDDA5
 4.pygtex) [10]
-<figures/mems_axes.png, id=161, 325.81725pt x 369.7815pt>
+<figures/mems_axes.png, id=167, 325.81725pt x 369.7815pt>
 File: figures/mems_axes.png Graphic file (type png)
 <use figures/mems_axes.png>
 Package pdftex.def Info: figures/mems_axes.png  used on input line 216.
 (pdftex.def)             Requested size: 179.20003pt x 203.38043pt.
-<figures/sensor_orientation.jpg, id=162, 511.31026pt x 494.44725pt>
+<figures/sensor_orientation.jpg, id=168, 511.31026pt x 494.44725pt>
 File: figures/sensor_orientation.jpg Graphic file (type jpg)
 <use figures/sensor_orientation.jpg>
 Package pdftex.def Info: figures/sensor_orientation.jpg  used on input line 220
 .
 (pdftex.def)             Requested size: 230.08748pt x 222.4992pt.
-<figures/plot_ACC_LSM6DSL_DS_walking_running_X.png, id=163, 517.33275pt x 177.6
+<figures/plot_ACC_LSM6DSL_DS_walking_running_X.png, id=169, 517.33275pt x 177.6
 6376pt>
 File: figures/plot_ACC_LSM6DSL_DS_walking_running_X.png Graphic file (type png)
 
@@ -2129,60 +2079,69 @@ File: figures/plot_ACC_LSM6DSL_DS_walking_running_X.png Graphic file (type png)
 Package pdftex.def Info: figures/plot_ACC_LSM6DSL_DS_walking_running_X.png  use
 d on input line 227.
 (pdftex.def)             Requested size: 413.86676pt x 142.13118pt.
-<figures/plot_ACC_LSM6DSL_DS_standing_jumping_X.png, id=164, 512.51476pt x 174.
+<figures/plot_ACC_LSM6DSL_DS_walking_running_Z.png, id=170, 511.31026pt x 172.8
+4575pt>
+File: figures/plot_ACC_LSM6DSL_DS_walking_running_Z.png Graphic file (type png)
+
+<use figures/plot_ACC_LSM6DSL_DS_walking_running_Z.png>
+Package pdftex.def Info: figures/plot_ACC_LSM6DSL_DS_walking_running_Z.png  use
+d on input line 234.
+(pdftex.def)             Requested size: 409.04875pt x 138.27676pt.
+ [11 <./figures/mems_axes.png> <./figures/sensor_orientation.jpg> <./figures/pl
+ot_ACC_LSM6DSL_DS_walking_running_X.png>]
+<figures/plot_ACC_LSM6DSL_DS_standing_jumping_X.png, id=178, 512.51476pt x 174.
 05025pt>
 File: figures/plot_ACC_LSM6DSL_DS_standing_jumping_X.png Graphic file (type png
 )
 <use figures/plot_ACC_LSM6DSL_DS_standing_jumping_X.png>
 Package pdftex.def Info: figures/plot_ACC_LSM6DSL_DS_standing_jumping_X.png  us
-ed on input line 234.
+ed on input line 240.
 (pdftex.def)             Requested size: 410.01234pt x 139.24037pt.
- [11 <./figures/mems_axes.png> <./figures/sensor_orientation.jpg> <./figures/pl
-ot_ACC_LSM6DSL_DS_walking_running_X.png>]
-<figures/plot_ACC_LSM303AGR_DS_supine_sitting_lying_Y.png, id=172, 514.92375pt 
+<figures/plot_ACC_LSM303AGR_DS_supine_sitting_lying_Y.png, id=179, 514.92375pt 
 x 172.84575pt>
 File: figures/plot_ACC_LSM303AGR_DS_supine_sitting_lying_Y.png Graphic file (ty
 pe png)
 <use figures/plot_ACC_LSM303AGR_DS_supine_sitting_lying_Y.png>
 Package pdftex.def Info: figures/plot_ACC_LSM303AGR_DS_supine_sitting_lying_Y.p
-ng  used on input line 240.
+ng  used on input line 247.
 (pdftex.def)             Requested size: 411.93954pt x 138.27676pt.
-<figures/scatter3d_MAG_LSM303AGR_DS.png, id=173, 462.528pt x 346.896pt>
+<figures/scatter3d_MAG_LSM303AGR_DS.png, id=180, 462.528pt x 346.896pt>
 File: figures/scatter3d_MAG_LSM303AGR_DS.png Graphic file (type png)
 <use figures/scatter3d_MAG_LSM303AGR_DS.png>
 Package pdftex.def Info: figures/scatter3d_MAG_LSM303AGR_DS.png  used on input 
-line 246.
+line 253.
 (pdftex.def)             Requested size: 370.02289pt x 277.51717pt.
- [12 <./figures/plot_ACC_LSM6DSL_DS_standing_jumping_X.png> <./figures/plot_ACC
-_LSM303AGR_DS_supine_sitting_lying_Y.png>]
-<figures/scatter3d_ACC_LSM6DSL_DS.png, id=180, 462.528pt x 346.896pt>
+ [12 <./figures/plot_ACC_LSM6DSL_DS_walking_running_Z.png> <./figures/plot_ACC_
+LSM6DSL_DS_standing_jumping_X.png> <./figures/plot_ACC_LSM303AGR_DS_supine_sitt
+ing_lying_Y.png>]
+<figures/scatter3d_ACC_LSM6DSL_DS.png, id=188, 462.528pt x 346.896pt>
 File: figures/scatter3d_ACC_LSM6DSL_DS.png Graphic file (type png)
 <use figures/scatter3d_ACC_LSM6DSL_DS.png>
 Package pdftex.def Info: figures/scatter3d_ACC_LSM6DSL_DS.png  used on input li
-ne 254.
+ne 261.
 (pdftex.def)             Requested size: 277.51894pt x 208.13919pt.
 
-Overfull \hbox (47.66765pt too wide) in paragraph at lines 254--255
+Overfull \hbox (47.66765pt too wide) in paragraph at lines 261--262
 [][] 
  []
 
-<figures/scatter3d_GYR_LSM6DSL_DS.png, id=181, 462.528pt x 346.896pt>
+<figures/scatter3d_GYR_LSM6DSL_DS.png, id=189, 462.528pt x 346.896pt>
 File: figures/scatter3d_GYR_LSM6DSL_DS.png Graphic file (type png)
 <use figures/scatter3d_GYR_LSM6DSL_DS.png>
 Package pdftex.def Info: figures/scatter3d_GYR_LSM6DSL_DS.png  used on input li
-ne 258.
+ne 265.
 (pdftex.def)             Requested size: 277.51894pt x 208.13919pt.
 
-Overfull \hbox (47.66765pt too wide) in paragraph at lines 258--259
+Overfull \hbox (47.66765pt too wide) in paragraph at lines 265--266
 [][] 
  []
 
 [13 <./figures/scatter3d_MAG_LSM303AGR_DS.png> <./figures/scatter3d_ACC_LSM6DSL
 _DS.png> <./figures/scatter3d_GYR_LSM6DSL_DS.png>]
-<figures/rnn.png, id=191, 89.73524pt x 486.01575pt>
+<figures/rnn.png, id=199, 89.73524pt x 486.01575pt>
 File: figures/rnn.png Graphic file (type png)
 <use figures/rnn.png>
-Package pdftex.def Info: figures/rnn.png  used on input line 269.
+Package pdftex.def Info: figures/rnn.png  used on input line 276.
 (pdftex.def)             Requested size: 102.15526pt x 553.28503pt.
 
 (./_minted-main/C080880F2B0FC85C9C811140151F7DDD632583D8117B2BD8CAF86C08E867222
@@ -2199,20 +2158,20 @@ LaTeX Font Info:    Font shape `TS1/zi4/m/n' will be
 
 (./_minted-main/718B1F79CED77C4EFCCF326AE5B44A534FBEEAFC55D0059826E664B9BBCF372
 1.pygtex)
-<figures/data_dist.png, id=201, 722.7pt x 505.89pt>
+<figures/data_dist.png, id=209, 722.7pt x 505.89pt>
 File: figures/data_dist.png Graphic file (type png)
 <use figures/data_dist.png>
-Package pdftex.def Info: figures/data_dist.png  used on input line 303.
+Package pdftex.def Info: figures/data_dist.png  used on input line 310.
 (pdftex.def)             Requested size: 332.00655pt x 232.40344pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 307--309
+Underfull \hbox (badness 10000) in paragraph at lines 314--316
 
  []
 
-<figures/k_fold_part.png, id=202, 684.5575pt x 171.64125pt>
+<figures/k_fold_part.png, id=210, 684.5575pt x 171.64125pt>
 File: figures/k_fold_part.png Graphic file (type png)
 <use figures/k_fold_part.png>
-Package pdftex.def Info: figures/k_fold_part.png  used on input line 311.
+Package pdftex.def Info: figures/k_fold_part.png  used on input line 318.
 (pdftex.def)             Requested size: 280.93282pt x 70.44145pt.
 \openout7 = `main.pyg'.
 
@@ -2224,96 +2183,135 @@ Package pdftex.def Info: figures/k_fold_part.png  used on input line 311.
 
 (./_minted-main/EFFE2D97B0E9E5ED2DA292F5E4BCB8444FBEEAFC55D0059826E664B9BBCF372
 1.pygtex) [15 <./figures/data_dist.png> <./figures/k_fold_part.png>]
-<figures/last_model_val_acc.png, id=209, 264.38776pt x 175.25475pt>
+<figures/last_model_val_acc.png, id=217, 264.38776pt x 175.25475pt>
 File: figures/last_model_val_acc.png Graphic file (type png)
 <use figures/last_model_val_acc.png>
-Package pdftex.def Info: figures/last_model_val_acc.png  used on input line 352
+Package pdftex.def Info: figures/last_model_val_acc.png  used on input line 359
 .
 (pdftex.def)             Requested size: 211.51048pt x 140.20396pt.
-<figures/last_model_val_loss.png, id=210, 264.99pt x 178.86826pt>
+<figures/last_model_val_loss.png, id=218, 264.99pt x 178.86826pt>
 File: figures/last_model_val_loss.png Graphic file (type png)
 <use figures/last_model_val_loss.png>
-Package pdftex.def Info: figures/last_model_val_loss.png  used on input line 35
-6.
+Package pdftex.def Info: figures/last_model_val_loss.png  used on input line 36
+3.
 (pdftex.def)             Requested size: 211.99228pt x 143.09479pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 361--362
+Underfull \hbox (badness 10000) in paragraph at lines 368--369
 
  []
 
-<figures/confmat_09-04-2020_221220.png, id=211, 505.89pt x 361.35pt>
+<figures/confmat_09-04-2020_221220.png, id=219, 505.89pt x 361.35pt>
 File: figures/confmat_09-04-2020_221220.png Graphic file (type png)
 <use figures/confmat_09-04-2020_221220.png>
 Package pdftex.def Info: figures/confmat_09-04-2020_221220.png  used on input l
-ine 365.
+ine 372.
 (pdftex.def)             Requested size: 306.47359pt x 218.91241pt.
 
-Overfull \hbox (25.54077pt too wide) in paragraph at lines 365--366
+Overfull \hbox (25.54077pt too wide) in paragraph at lines 372--373
 [] []|  
  []
 
 [16 <./figures/last_model_val_acc.png> <./figures/last_model_val_loss.png>]
-Overfull \hbox (0.88312pt too wide) in paragraph at lines 374--375
+Overfull \hbox (0.88312pt too wide) in paragraph at lines 381--382
 []\T1/mdbch/b/n/12 Average Val-i-da-tion Ac-cu-racy\T1/mdbch/m/n/12 : 0.9927 
  []
 
 
-Overfull \hbox (4.5626pt too wide) in paragraph at lines 380--382
+Overfull \hbox (4.5626pt too wide) in paragraph at lines 392--394
 \T1/mdbch/m/n/12 work model is treated within the pro-gram en-vi-ron-ment, the 
 AI plu-gin in fact, lives within STM32CubeMX
  []
 
-<figures/stm32cubeai_arch.png, id=218, 475.17525pt x 200.54926pt>
+<figures/stm32cubeai_arch.png, id=227, 475.17525pt x 200.54926pt>
 File: figures/stm32cubeai_arch.png Graphic file (type png)
 <use figures/stm32cubeai_arch.png>
-Package pdftex.def Info: figures/stm32cubeai_arch.png  used on input line 384.
+Package pdftex.def Info: figures/stm32cubeai_arch.png  used on input line 396.
 (pdftex.def)             Requested size: 408.62885pt x 172.46898pt.
 [17 <./figures/confmat_09-04-2020_221220.png> <./figures/stm32cubeai_arch.png>]
-<figures/validation_gui.png, id=224, 419.76825pt x 219.219pt>
+<figures/validation_gui.png, id=233, 419.76825pt x 219.219pt>
 File: figures/validation_gui.png Graphic file (type png)
 <use figures/validation_gui.png>
-Package pdftex.def Info: figures/validation_gui.png  used on input line 394.
+Package pdftex.def Info: figures/validation_gui.png  used on input line 406.
 (pdftex.def)             Requested size: 230.87325pt x 120.5708pt.
 
-Overfull \hbox (1.02196pt too wide) in paragraph at lines 394--395
-[] [] 
+Overfull \hbox (1.02196pt too wide) in paragraph at lines 406--407
+[] []|  
  []
 
-<figures/x86_stm32_validation.png, id=225, 358.941pt x 140.32425pt>
+<figures/x86_stm32_validation.png, id=234, 358.941pt x 140.32425pt>
 File: figures/x86_stm32_validation.png Graphic file (type png)
 <use figures/x86_stm32_validation.png>
-Package pdftex.def Info: figures/x86_stm32_validation.png  used on input line 3
-99.
+Package pdftex.def Info: figures/x86_stm32_validation.png  used on input line 4
+11.
 (pdftex.def)             Requested size: 251.25697pt x 98.22629pt.
 
-Overfull \hbox (21.40569pt too wide) in paragraph at lines 399--400
-[] [] 
+Overfull \hbox (21.40569pt too wide) in paragraph at lines 411--412
+[] []|  
  []
 
 \openout7 = `main.pyg'.
 
 
+(./_minted-main/503AF47B2BC948A4CF26B21F4A3BBC628F486593A96B47FBC569AA596ACDDA5
+4.pygtex)
+\openout7 = `main.pyg'.
+
+
 (./_minted-main/2B790470F563DC3184BD2AA2BA12FAE48F486593A96B47FBC569AA596ACDDA5
 4.pygtex)
-<figures/stm32cubemx_conf2.png, id=226, 284.86424pt x 203.5605pt>
+\openout7 = `main.pyg'.
+
+
+(./_minted-main/0BF1FC9444DC1BEB5FC71578048139C58F486593A96B47FBC569AA596ACDDA5
+4.pygtex)
+\openout7 = `main.pyg'.
+
+
+(./_minted-main/DCFE22B4EA5D5C33D7144C9723802BF78F486593A96B47FBC569AA596ACDDA5
+4.pygtex)
+\openout7 = `main.pyg'.
+
+
+(./_minted-main/4BC8543E338A590C831E7CBB9CF2141F8F486593A96B47FBC569AA596ACDDA5
+4.pygtex)
+\openout7 = `main.pyg'.
+
+
+(./_minted-main/B2D4DC6C650FE2702D9D29A1EE13D9908F486593A96B47FBC569AA596ACDDA5
+4.pygtex)
+\openout7 = `main.pyg'.
+
+
+(./_minted-main/DCFE22B4EA5D5C33D7144C9723802BF78F486593A96B47FBC569AA596ACDDA5
+4.pygtex)
+\openout7 = `main.pyg'.
+
+
+(./_minted-main/72F2FFD534EC960DB3FC7D63611745358F486593A96B47FBC569AA596ACDDA5
+4.pygtex) [18 <./figures/validation_gui.png> <./figures/x86_stm32_validation.pn
+g>]
+<figures/class_diagram.png, id=240, 522.95375pt x 492.84125pt>
+File: figures/class_diagram.png Graphic file (type png)
+<use figures/class_diagram.png>
+Package pdftex.def Info: figures/class_diagram.png  used on input line 427.
+(pdftex.def)             Requested size: 209.1778pt x 197.133pt.
+<figures/stm32cubemx_conf2.png, id=241, 284.86424pt x 203.5605pt>
 File: figures/stm32cubemx_conf2.png Graphic file (type png)
 <use figures/stm32cubemx_conf2.png>
-Package pdftex.def Info: figures/stm32cubemx_conf2.png  used on input line 418.
+Package pdftex.def Info: figures/stm32cubemx_conf2.png  used on input line 436.
 
 (pdftex.def)             Requested size: 156.67581pt x 111.95862pt.
-<figures/stm32cubemx_conf1.png, id=227, 426.393pt x 89.73524pt>
+<figures/stm32cubemx_conf1.png, id=242, 426.393pt x 89.73524pt>
 File: figures/stm32cubemx_conf1.png Graphic file (type png)
 <use figures/stm32cubemx_conf1.png>
-Package pdftex.def Info: figures/stm32cubemx_conf1.png  used on input line 423.
+Package pdftex.def Info: figures/stm32cubemx_conf1.png  used on input line 441.
 
 (pdftex.def)             Requested size: 234.51686pt x 49.35452pt.
 
-Overfull \hbox (2.15425pt too wide) in paragraph at lines 417--426
+Overfull \hbox (2.15425pt too wide) in paragraph at lines 435--444
 []$[]$  $[]$ 
  []
 
-[18 <./figures/validation_gui.png> <./figures/x86_stm32_validation.png> <./figu
-res/stm32cubemx_conf2.png> <./figures/stm32cubemx_conf1.png>]
 \openout7 = `main.pyg'.
 
 
@@ -2322,28 +2320,84 @@ res/stm32cubemx_conf2.png> <./figures/stm32cubemx_conf1.png>]
 \openout7 = `main.pyg'.
 
 
-(./_minted-main/44B420C5A61E21E1B3AB652E1E9141A18F486593A96B47FBC569AA596ACDDA5
+(./_minted-main/AC8ED5646B74C38BCD01D8D0CCA939648F486593A96B47FBC569AA596ACDDA5
 4.pygtex)
 \openout7 = `main.pyg'.
 
 
-(./_minted-main/2B790470F563DC3184BD2AA2BA12FAE48F486593A96B47FBC569AA596ACDDA5
+(./_minted-main/8D913711C0C419C966D0E40CC95518028F486593A96B47FBC569AA596ACDDA5
+4.pygtex) [19 <./figures/class_diagram.png> <./figures/stm32cubemx_conf2.png> <
+./figures/stm32cubemx_conf1.png>]
+\openout7 = `main.pyg'.
+
+
+(./_minted-main/DAD07C523C9E8D803C746984C73D9B828F486593A96B47FBC569AA596ACDDA5
+4.pygtex)
+\openout7 = `main.pyg'.
+
+
+(./_minted-main/B88CFBEA55BD71D82B826522E4C82FFB8F486593A96B47FBC569AA596ACDDA5
+4.pygtex)
+\openout7 = `main.pyg'.
+
+
+(./_minted-main/460246708FC285049724EBCBD08A6C0A8F486593A96B47FBC569AA596ACDDA5
+4.pygtex)
+\openout7 = `main.pyg'.
+
+
+(./_minted-main/B0C0720F90FA79976E0DA9A67B471C6F8F486593A96B47FBC569AA596ACDDA5
+4.pygtex)
+\openout7 = `main.pyg'.
+
+
+(./_minted-main/DCC467A0513DCAF144A6BA89E96E65578F486593A96B47FBC569AA596ACDDA5
+4.pygtex)
+Overfull \hbox (1.30899pt too wide) in paragraph at lines 457--458
+[][][][][][][] \T1/mdbch/m/n/12 and [][][][][][] are en-abled and ini-tial-ized
+ with the con-fig-u-ra-tion given
+ []
+
+\openout7 = `main.pyg'.
+
+
+(./_minted-main/7C897C2167F77748644493434066AE048F486593A96B47FBC569AA596ACDDA5
+4.pygtex)
+\openout7 = `main.pyg'.
+
+
+(./_minted-main/3941210BB25580BA5D0303A19D33AA7F8F486593A96B47FBC569AA596ACDDA5
+4.pygtex)
+\openout7 = `main.pyg'.
+
+
+(./_minted-main/D51DC8BCB5E313AA1D776F666F28C7068F486593A96B47FBC569AA596ACDDA5
+4.pygtex)
+\openout7 = `main.pyg'.
+
+
+(./_minted-main/E21922A200E799F876F1970DB945B0F78F486593A96B47FBC569AA596ACDDA5
+4.pygtex)
+\openout7 = `main.pyg'.
+
+
+(./_minted-main/2B9092B68271C94C4F13DDADBB227C038F486593A96B47FBC569AA596ACDDA5
 4.pygtex)
 LaTeX Font Info:    Font shape `OT1/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 467.
+(Font)              scaled to size 10.51207pt on input line 481.
 LaTeX Font Info:    Font shape `OML/mdbch/m/it' will be
-(Font)              scaled to size 10.51207pt on input line 467.
+(Font)              scaled to size 10.51207pt on input line 481.
 LaTeX Font Info:    Font shape `OMS/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 467.
+(Font)              scaled to size 10.51207pt on input line 481.
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 467.
+(Font)              scaled to size 10.51207pt on input line 481.
 LaTeX Font Info:    Font shape `OML/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 467.
+(Font)              scaled to size 10.51207pt on input line 481.
 LaTeX Font Info:    Font shape `MDA/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 467.
+(Font)              scaled to size 10.51207pt on input line 481.
 LaTeX Font Info:    Font shape `MDB/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 467.
- [19]) [20] (./main.bbl) [21]
+(Font)              scaled to size 10.51207pt on input line 481.
+ [20]) [21] (./main.bbl) [22]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 131.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 131.
  (./main.aux)
@@ -2355,17 +2409,14 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: There were multiply-defined labels.
-
 runsystem(del main.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 40821 strings out of 492609
- 801207 string characters out of 6132819
- 1134811 words of memory out of 5000000
- 43939 multiletter control sequences out of 15000+600000
+ 40934 strings out of 492609
+ 808121 string characters out of 6132819
+ 1132815 words of memory out of 5000000
+ 43999 multiletter control sequences out of 15000+600000
  605255 words of font info for 143 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  63i,20n,83p,9187b,877s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2385,10 +2436,10 @@ ive/2019/texmf-dist/fonts/type1/public/mathdesign/mdbch/md-chri7m.pfb><c:/texli
 ve/2019/texmf-dist/fonts/type1/public/cm-super/sfsx1200.pfb><c:/texlive/2019/te
 xmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb><c:/texlive/2019/texmf-dist/f
 onts/type1/public/cm-super/sfsx1728.pfb>
-Output written on main.pdf (21 pages, 1609444 bytes).
+Output written on main.pdf (22 pages, 1681607 bytes).
 PDF statistics:
- 364 PDF objects out of 1000 (max. 8388607)
- 283 compressed objects within 3 object streams
- 63 named destinations out of 1000 (max. 500000)
- 276 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 380 PDF objects out of 1000 (max. 8388607)
+ 294 compressed objects within 3 object streams
+ 66 named destinations out of 1000 (max. 500000)
+ 286 words of extra memory for PDF output out of 10000 (max. 10000000)
 

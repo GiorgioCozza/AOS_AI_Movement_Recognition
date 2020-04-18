@@ -1,18 +1,18 @@
 \section{Introduction}
-As the AI goes further in its evolution, together with explosion of interconnected IoT devices, the need to move the computation to the "edge" gets more urgent. Wereable devices relying on AI algorithms (such as neural networks) most of the times must stream data to general-purpose devices (such as smartphones and laptops) or to cloud services. The fact that, in real-time applications this represents a serious issue, is known, as well as the numerous legal concerns regarding data manipulation and privacy. All these problems get more mitigated as data and computation are kept local. But close to these debats there is a more subtle problem related to scalability. As heterogeneus data sources increase in number, in fact it becomes computationally expensive to scale a cloud-hosted AI application, in such cases is required to process a huge amount of different kinds of information for instance from a wide network of distributed sensor nodes. It may help, in such cases to let small sensing devices to solve simple classification tasks without involving external services, or even think to partition a complex AI task in smaller ones, moving part of the problem to the edge of a large infrastructure. This kind of scenario now are more feasable thanks to new tools such as STM32CubeAI, that speeds up embedded code development involing neural networks. In this study a simple classification problem using embedded neural network will be analyzed in order to highlight which advantages can be obtained by moving AI algorithms on embedded devices 
+As the AI goes further in its evolution, together with explosion of interconnected IoT devices, the need to move the computation to the "edge" gets more urgent. Wereable devices relying on AI algorithms (such as neural networks) most of the times must stream data to general-purpose devices (such as smartphones and laptops) or to cloud services. The fact that, in real-time applications this represents a serious issue, is known, as well as the numerous legal concerns regarding data manipulation and privacy. All these problems get more mitigated as data and computation are kept local. But close to these debats there is a more subtle problem related to scalability. As heterogeneus data sources increase in number, in fact it becomes computationally expensive to scale a cloud-hosted AI application, in such cases is required to process a huge amount of different kinds of information for instance from a wide network of distributed sensor nodes. It may help, in such cases to let small sensing devices to solve simple classification tasks without involving external services, or even think to partition a complex AI task in smaller ones, moving part of the problem to the edge of a large infrastructure. This kind of scenario now are more feasable thanks to new tools such as STM32CubeAI, that speeds up prototyping on embedded platforms using neural networks.
 
 \subsection{A Possible Scenario}
-Let suppose to be in an hospital with several patients with serious pathological conditions or mental illness. In some case a patient is constrained in its movements, he cannot wake up from bed doing particular stressful movements or take specific positions, it may also be  that such movements are symptoms of agitation that requires immediate medical intervention. These kind of patients must be monitored by mean of wereable sensors to detect anomaly conditions. Such system most of the times consists in a centralized architectures based on a AI algorithm processing data acquired from heterogeneous sensors distributed all over the building complex, in charge of classifying the condition of each specific patient. As the number of patients to be observed grows up the need of c
+Let suppose to be in an hospital with several patients with serious pathological conditions or mental illness. In some case a patient is constrained in its movements, he cannot wake up from bed doing particular stressful movements or take specific positions, it may also be  that such movements are symptoms of agitation that requires immediate medical intervention. These kind of patients must be monitored by mean of wereable sensors to detect anomaly conditions. Such system most of the times consists in a centralized architectures based on a AI algorithm processing data acquired from heterogeneous sensors distributed all over the building complex, in charge of classifying the condition of each specific patient. As the number of patients to be observed grows up it would be more efficient to allow each sensing device to provide directly the information related to the posture/movement of the patient instead of processing huge amount of data acquired from inertial sensors. This work aims to show that even under constrained hardware it is possible to achieve such a similar task.
 
 \subsection{Summary of the work}
-In this project a possible solution to the above mentioned problem is proposed in sort of toy example that can perfectly represent the potential effects of moving classification tasks on special-purpose embedded platforms. The purpose of the classification task is to recognize a set of movements and positions of the human body by simply using an STM32 Nucleo board. The motivation of this early choice is based on the fact that when dealing with AI in the embedded field, one of the most tricky task for programmers is the implementation of standard aspects related to popular AI algorithms (in case of neural networks: layers, activation functions and so on), sometime is possible to speed-up this long and tedious part of the development process thanks to libraries and tools provided by silicon manufacturers. All the stages from data gathering, through modeling and training the neural network, to the development of the firmware code will be discussed, remarking the advantages of recurring to embedded software tools and APIs directly provided by MCU manufacturing companies. The peculiarity of the study is the simplicity of the process that led from the network model to the embedded code. At this stage most of the work was performed by a powerful plugin integrated into the STM32CubeMX program, STM32Cube.AI realized by ST Microelectronics to facilitate bare-metal development. Another important result of this work is that the generated network code has been deployed directly on top of a real-time operating system, Miosix, showing the benefits of exploiting typical characteristics of this OS in the field of edge AI.   
+So a possible solution to the above mentioned problem is proposed in sort of toy example that can perfectly represent the potential effects of moving classification tasks on embedded platforms. The goal of this work is to solve a simple classification task involving a set of movements and postures of the human body by simply using an STM32 Nucleo board. All the stages from data gathering, through modeling and training the neural network, up to the implementation of the final firmware code will be discussed, remarking the advantages of recurring on specific tools to improve efficiency in all development stages. The peculiarity of this project is the simplicity of the process that led from the network model to the embedded code. At this step most of the work is performed by a powerful plugin integrated into the STM32CubeMX program, STM32CubeAI realized by ST Microelectronics to facilitate bare-metal development. Another important result is that the generated network code has been deployed directly on top of a real-time operating system, Miosix, showing the potential benefits of typical characteristics of this OS in the field of edge AI.   
 \pagebreak
 
 \section{Design and implementation}
-It may help to have an high-level view of all the steps of the development process before starting to describe in detail:\\
+It may help to have an high-level view of all the steps of the development process before starting to describe them in detail:\\
 \begin{wrapfigure}{r}{0.5\textwidth}
 	\begin{center}
-		\includegraphics[scale=0.6]{figures/design_steps.png}
+		\includegraphics[scale=0.6]{figures/dev_flow.png}
 		\caption{Design Process Chart}
 	\end{center}
 \centering
@@ -21,11 +21,11 @@ It may help to have an high-level view of all the steps of the development proce
 \begin{itemize}
 	\item \textbf{Problem Definition}: discussion about the topic of the project, identification of candidate sensors for data collection, first strategy of the design process and framework to be used for the AI part.
 	\item \textbf{Data Gathering}: after being provided with all the required hardware set, development of a basic set of drivers and a firmware for data collection
-	\item \textbf{Data Science and Network modeling}: writing and testing of a set of python scripts to manage dataset files, study collected data by computing and plotting some statistics and define a first architecture of the neural network.
+	\item \textbf{Data Analysis and Network Model Design}: writing and testing of a set of python scripts to manage dataset files, study collected data by computing and plotting some statistics and define a first architecture of the neural network.
 	\item \textbf{Network Training and Validation}: training and testing the network iteratively by changing settings, possibly defining new network models, or collecting new data sequence if required, until acceptable performance result is achieved.
 	\item \textbf{Network Code Generation and on-target Testing}: set-up of the ST tool STM32CubeAI within STM32CubeMX environment, providing the model obtained in the previous step, performing validation on desktop and on target (on the board) and generate the C code of the input model.
 	\item \textbf{Code Integration and Firmware Development}: integration of the output code within the Miosix environment, development of preprocessing routines (if required) and all the other aspects of the final firmware.
-	\item \textbf{Final Testing}: testing of the embedded neural network by performing real-time collection and classification of single batches of data samples. 
+	\item \textbf{Experimental Evaluation}: testing of the embedded neural network by performing  collection and classification of single batches of data samples in different operating modes. 
 \end{itemize}
 \newpage
 
@@ -34,7 +34,7 @@ The obviousness of this first step should not mislead from its purpose, as well-
 There are many ways to measure movements and positions, \textit{inertial} sensors such as the \textit{accelerometer} and \textit{gyroscope} are well-established solutions. \textit{Magnetic} sensors (e.g:\textit{magnetometers}) can also help in capturing motion patterns if used in combination with accelerometers and gyroscopes. Some research work in fact, adopt this approach to detect position and orientation of body parts by using sensor fusion techniques \cite{navamelendez2016} and the patterns to be extracted from data are strongly shaped by this information. The problem in this case, is more abstract and requires a considerable amount of data to be collected, from many sources, to obtain accurate classification results. This observation is then accentuated considering the cost in terms of time and efforts required to perform data gathering, neural networks as well-known are "data hungry" and regardless their effectivness, no acceptable results can be achieved without a rich dataset. \newline
 
 \subsection{Data Gathering}
-This part is strongly affected by some a priori design decision. As stated before this work relies on the STM32CubeAI plugin to speed-up the process that allows to obtain the initializing firmware code of the neural network from some framework-generated model, so only STM32-family hardware is used. After a deep analysis of topic-related studies it has been decided to use a single sensing device located at inguinal level (right-side). This location revealed to be extremely useful for two reasons:
+This part is strongly affected by some a priori decision. As stated before this work relies on the STM32CubeAI plugin to speed-up the process that allows to obtain the initializing firmware code of the neural network from some framework-generated model, so only STM32-family hardware is used. After a deep analysis of topic-related studies it has been decided to use a single sensing device located at inguinal level (right-side). This location revealed to be extremely useful for two reasons:
 \begin{itemize}
 	\item Allows the sensors to detect directional and angular accelerations of the right lower limb which characterizes most of the movements and positions that must be classified 
 	\item Avoid the person wearing the device to be hampered during activity sessions
@@ -193,14 +193,14 @@ Axes values are read almost the same way for all the sensors, since by design da
 		\begin{subfigure}[H]{0.5\textwidth}
 			\inputminted[framesep=1.5cm, firstline=101, lastline=127, bgcolor=whitesmoke, fontsize=\tiny]{C++}{code/data_gathering.cpp}
 			\vspace{-20pt}
-			\caption{LSM6DSL.cpp: get\_acc\_axes()}\label{fig:5a}
+			\caption{LSM6DSL.cpp: get\_acc\_axes()}\label{fig:6a}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[H]{0.5\textwidth}
 			\vspace{+1pt}
 			\inputminted[framesep=1.5cm, firstline=149, lastline=189, bgcolor=whitesmoke, fontsize=\tiny]{C++}{code/data_gathering.cpp}
 			\vspace{-20pt}
-			\caption{LSM303AGR.cpp: get\_acc\_axes()}\label{fig:5b}
+			\caption{LSM303AGR.cpp: get\_acc\_axes()}\label{fig:6b}
 		\end{subfigure}
 	\end{figure}
 \end{center}
@@ -214,37 +214,44 @@ In order to understand the trend of each activity type, is important to show the
 	\begin{figure}[H]
 		\begin{subfigure}[H]{0.45\textwidth}
 			\includegraphics[scale=0.55]{figures/mems_axes.png}
-			\caption{MEMS orientation}\label{fig:4a}
+			\caption{MEMS orientation}\label{fig:7a}
 		\end{subfigure}
 		\begin{subfigure}[H]{0.45\textwidth}
 			\includegraphics[scale=0.45]{figures/sensor_orientation.jpg}
-			\caption{Axes w.r.t the body}\label{fig:4b}
+			\caption{Axes w.r.t the body}\label{fig:7b}
 		\end{subfigure}
 	\end{figure} 
 \end{center}
 From MEMS positions it is possible to remark some considerations. Intuitively, it is expected to have some regular behaviour of the directional acceleration towards Z for walking and running activities:
 \begin{figure}[H]
 		\hfill\includegraphics[scale=0.8]{figures/plot_ACC_LSM6DSL_DS_walking_running_X.png}\hspace*{\fill}
-		\caption{LSM6DSL Accelerometer: running and walking}\label{fig:5}
+		\caption{LSM6DSL Accelerometer: running and walking on X axis}\label{fig:8}
 		\centering
 \end{figure}
-This can be noticed from the "weird" behaviour in running trend with respect to walking, that on the other hand presents accentuated, but more distanced peaks (representing various steps).\newline
+This can be noticed from the "weird" behaviour in running trend with respect to walking, that on the other hand presents less accentuated and more distanced peaks (representing various steps).\newline
+While on Z there are not appreciable information that can be extracted:
+\begin{figure}[H]
+	\hfill\includegraphics[scale=0.8]{figures/plot_ACC_LSM6DSL_DS_walking_running_Z.png}\hspace*{\fill}
+	\caption{LSM6DSL Accelerometer: running and walking on Z axis}\label{fig:9}
+	\centering
+\end{figure}
 An easier comparison regards jumping and standing activities which instead, present more distinguishable regularities on X:
 \begin{figure}[H]
 		\hfill\includegraphics[scale=0.8]{figures/plot_ACC_LSM6DSL_DS_standing_jumping_X.png}\hspace*{\fill}
-		\caption{LSM6DSL Accelerometer: jumping and standing}\label{fig:6}
+		\caption{LSM6DSL Accelerometer: jumping and standing}\label{fig:10}
 		\centering
 \end{figure} 
+
 Same observation for supine, lying on side and sitting positions:
 \begin{figure}[H]
 	\hfill\includegraphics[scale=0.8]{figures/plot_ACC_LSM303AGR_DS_supine_sitting_lying_Y.png}\hspace*{\fill}
-	\caption{LSM6DSL Accelerometer: sitting, supine, lying on side}\label{fig:7}
+	\caption{LSM6DSL Accelerometer: sitting, supine, lying on side}\label{fig:11}
 	\centering
 \end{figure} 
 This kind of analysis also helps to understand qualitatively the amount of efforts to dedicate in further session of data collection: if trends show evident patterns, it is reasonable to think that the AI algorithm does not need so many samples to learn them. Although other sensor trends do not show interesting regularities, the role of the magnetometer in pattern recognition is inferred from the distribution of a bunch of data points in a 3D scattering plot:
 \begin{figure}[H]
 	\hfill\includegraphics[scale=0.8]{figures/scatter3d_MAG_LSM303AGR_DS.png}\hspace*{\fill}
-	\caption{LSM303AGR Magnetometer, Scattering Plot }\label{fig:8}
+	\caption{LSM303AGR Magnetometer, Scattering Plot }\label{fig:12}
 	\centering
 \end{figure}
 Most of the activity distributions appear to be distinguishable, but as it can be noticed, it is very difficult to discriminate between running and walking, or between standing and jumping in a certain range of values. The scattering plots of the LSM6DSL's accelerometer and gyroscope are even more confused and difficult to be analyzed:
@@ -252,11 +259,11 @@ Most of the activity distributions appear to be distinguishable, but as it can b
 	\begin{figure}[H]
 		\begin{subfigure}[H]{0.45\textwidth}
 			\includegraphics[scale=0.6]{figures/scatter3d_ACC_LSM6DSL_DS.png}
-			\caption{LSM6DSL Accelerometer, Scattering Plot}\label{fig:8a}
+			\caption{LSM6DSL Accelerometer, Scattering Plot}\label{fig:13a}
 		\end{subfigure}
 		\begin{subfigure}[H]{0.45\textwidth}
 			\includegraphics[scale=0.6]{figures/scatter3d_GYR_LSM6DSL_DS.png}
-			\caption{LSM6DSL Gyroscope, Scattering Plot}\label{fig:8b}
+			\caption{LSM6DSL Gyroscope, Scattering Plot}\label{fig:14b}
 		\end{subfigure}
 	\end{figure} 
 \end{center}
@@ -267,7 +274,7 @@ The RNN solution consists in a single-cell LSTM architecture on top of a classif
 
 \begin{wrapfigure}{r}{0.4\textwidth}
 	\hfill\includegraphics[width=0.2\textwidth]{figures/rnn.png}\hspace*{\fill}
-	\caption{RNN model graph}\label{fig:9}
+	\caption{RNN model graph}\label{fig:15}
 	\centering
 	\vspace{-250pt}
 \end{wrapfigure}
@@ -301,7 +308,7 @@ After that, samples within each dataset are extracted into a dictionary to simpl
 \begin{wrapfigure}{r}{0.65\textwidth}
 	\vspace{-20pt}
 	\hfill\includegraphics[width=0.65\textwidth]{figures/data_dist.png}\hspace*{\fill}
-	\caption{Dataset Distribution}\label{fig:10}
+	\caption{Dataset Distribution}\label{fig:16}
 	\centering
 \end{wrapfigure}
 A first look to the sample distribution per class, helps to understand that there is a risk of biasing the model performance on the activity with the largest number of samples. The dataset in fact, is strongly unbalanced due to the particular efforts required to collect data for some class with respect to the others (e.g: see jumping) and this factor represents a limitation in the final result.\newline
@@ -309,7 +316,7 @@ The number of models to train reflects the number of folds. The technique as wel
 \par
 \begin{wrapfigure}{l}{0.6\textwidth}
 	\hfill\includegraphics[width=0.55\textwidth]{figures/k_fold_part.png}\hspace*{\fill}
-	\caption{Dataset partitioning}\label{fig:11}
+	\caption{Dataset partitioning}\label{fig:17}
 	\centering
 \end{wrapfigure}
 In order to compensate this unbalanced distribution, fold partitioning is performed on each activity subset and the partitions then are all grouped together. \newline
@@ -350,11 +357,11 @@ Hence different Dropout layers are added at training time and Early Stopping reg
 	\begin{figure}[H]
 		\begin{subfigure}[H]{0.45\textwidth}
 			\hfill\includegraphics[scale=0.8]{figures/last_model_val_acc.png}\vspace*{\fill}
-			\caption{Validation accuracy trend through epochs}\label{fig:8a}
+			\caption{Validation accuracy trend through epochs}\label{fig:18a}
 		\end{subfigure}
 		\begin{subfigure}[H]{0.45\textwidth}
 			\hfill\includegraphics[scale=0.8]{figures/last_model_val_loss.png}\vspace*{\fill}
-			\caption{Validation loss trend through epochs}\label{fig:8b}
+			\caption{Validation loss trend through epochs}\label{fig:18b}
 		\end{subfigure}
 	\end{figure} 
 \end{center}
@@ -363,7 +370,7 @@ The training algorithm converges sharply after few epochs. From final validation
 
 \begin{wrapfigure}{r}{0.55\textwidth}
 	\hfill\includegraphics[width=0.6\textwidth]{figures/confmat_09-04-2020_221220.png}\hspace*{\fill}
-	\caption{Confusion Matrix: Testing}\label{fig:9}
+	\caption{Confusion Matrix: Testing}\label{fig:19}
 	\centering
 	\vspace{-30pt}
 \end{wrapfigure}
@@ -374,7 +381,12 @@ The training algorithm converges sharply after few epochs. From final validation
 	\item \textbf{Average Validation Accuracy}: 0.9927
 	\item \textbf{Average Validation Loss}: 0.0204
 \end{itemize}
-More optimistic results, instead come from the best trained model (fold 1) as shown in the confusion matrix (fig 17), that gives even a perfect prediction of all testing cases, the estimation however is even too optimistic as confirmed with other trained instances of the same architecture: some of them completely mispredicts jumping cases, so even if the chosen model is the best one, it should not be expected to have a perfect classifier at the end. The use \textit{k-fold cross validation} to train multiple classifiers opens up the possibility to use model ensemble techniques to obtain more reliable results, averaging predictions from all the trained networks. Unfortunately the complexity of the current architecture allows a single instance of the network to be executed on the board because of the constrained hardware.
+More optimistic results, instead come from the best accuracy model (fold 1) as shown in the confusion matrix (\prettyref{fig:19}), that gives even a perfect prediction of all testing cases, the estimation however is even too optimistic:
+\begin{itemize}
+	\item \textbf{Validation Accuracy}: 1.0
+	\item \textbf{Validation Loss}: 1.682e-3
+\end{itemize} 
+As confirmed with other trained instances of the same architecture, some of them completely mispredict jumping cases, so even if the chosen model is the best one, it should not be expected to have a perfect classifier at the end. The use \textit{k-fold cross validation} to train multiple classifiers opens up the possibility to use model ensemble techniques to obtain more reliable results, averaging predictions from all the trained networks. Unfortunately the complexity of the current architecture allows a single instance of the network to be executed on the board because of the constrained hardware.
 
 \subsection{Network Code Generation and on-target Testing}
 STM32CubeMX, as mentioned in previous discussions, is in charge of generating the C-code from the Keras model, precisely an initialization of the network on which is possible to build a specific application, so what is really important in this step is that the developer is not worried about the embedded implementation of each network layer details.\newline
@@ -382,75 +394,80 @@ Before proceeding it is important to outline how the tool works in order to unde
 
 \begin{figure}[H]
 	\hfill\includegraphics[width=0.8\textwidth]{figures/stm32cubeai_arch.png}\hspace*{\fill}
-	\caption{X-CUBE AI Engine}
+	\caption{X-CUBE AI Engine}\label{fig:20}
 \end{figure}
 
 After that, one of the h5 model files produced during training is imported and from the specific framework model, the tool builds a platform-independent representation (PINNR).\newline 
-This new version of the model is used by the \textit{Validation Engine} to perform validation either locally or directly on the target board and the \textit{C-code generator} that generates the network code. All this procedure can be done mainly on the GUI. However, STM32CubeAI offers a command-line interface that is exploited in this work to automatize validation and code generation and speed up this development stage, this utility is still unfinished.\newline
+This new version of the model is used by the \textit{Validation Engine} to perform validation either locally or directly on the target board and the \textit{C-code generator} that generates the network code. All this procedure can be done mainly on the GUI. However, STM32CubeAI offers a command-line interface that is exploited in this work to automatize validation and code generation and speed up this development stage.\newline
 In any case, in order to do cross-validation, the related code must be generated, compiled and flashed. This particular kind of application is provided by the tool and it is used to test the neural network directly on target and comparing validation performance between the original model, the x86 and stm32-based code.
 \begin{center}
 	\begin{figure}[H]
 		\begin{subfigure}[H]{0.45\textwidth}
-			\hfill\includegraphics[scale=0.55]{figures/validation_gui.png}\vspace*{\fill}
-			\caption{Selection of model and validation files}
+			\hfill\includegraphics[scale=0.55]{figures/validation_gui.png}\hspace*{\fill}
+			\caption{Selection of model and validation files}\label{fig:21a}
 		\end{subfigure}
 	\hfill
 		\begin{subfigure}[H]{0.45\textwidth}
-			\hfill\includegraphics[scale=0.7]{figures/x86_stm32_validation.png}\vspace*{\fill}
-			\caption{Validation results on x86 and stm32}
+			\hfill\includegraphics[scale=0.7]{figures/x86_stm32_validation.png}\hspace*{\fill}
+			\caption{Validation results on x86 and stm32}\label{fig:21b}
 		\end{subfigure}
 	\end{figure}
 \end{center}
-According to both the results 100\% accuracy is perfectly coherent with testing performance obtained in Python scripts at training step. Since small differences in Flash occupation, moreover no compression has been applied to the model.
-
-
-
-
-
+According to both the results 100\% accuracy is perfectly coherent with testing performance obtained in Python scripts at training step. Since small differences in flash occupation, moreover no compression has been applied to the model.\newline
+The same operation as mentioned previously can be performed by mean of a simple batch script \mintinline[bgcolor=whitesmoke]{C++}{validate_NN.bat} that unfortunately requires a preliminar generation of the Middleware code that can be done only once from the GUI version of X\_CUBE\_AI, after that the script is able to generate model dependent files and performs the validation automatically.   
 
 
 \subsection{Code Integration and Final Firmware Development}
 
-This part of the development process, begins by creating an application that easily exploits the client API generated by STM32CubeAI to compute and show one or multiple predictions from a set of data batches processed by the network. The \mintinline[bgcolor=whitesmoke]{C++}{NN} class for instance is perfectly suitable for such purpose, it encapsulates essential information and implements methods to create, initialize and run a single instance of the neural network, it has a very essential structure. Among the others it defines functions as:
-\begin{itemize}
-	\item 
-	\item text
-\end{itemize}
-In order to correctly integrate only the required source and object files within Miosix environment, STM32CubeAI is configured as follow:
+This part of the development process begins from creating an application that easily exploits the client API generated by STM32CubeAI to compute and show one or multiple predictions from a set of data batches processed by the network. The \mintinline[bgcolor=whitesmoke]{C++}{NN} class for instance is perfectly suitable for such purpose, it encapsulates essential information and implements methods to create, initialize and run a single instance of the neural network, so it simply uses the generated interface. As in data gathering phase, \mintinline[bgcolor=whitesmoke]{C++}{circularQueue} is used for buffering sensor data as they are read. Furthermore, to support some preprocessing on collected samples, another class has been created, \mintinline[bgcolor=whitesmoke]{C++}{data_proc} it implements a normalization routine and some other useful operations such as  \mintinline[bgcolor=whitesmoke]{C++}{get_argmax} and \mintinline[bgcolor=whitesmoke]{C++}{get_mode} that compute the index of the maximum value and the mode given an input vector of integers respectively, they are ad-hoc optimized functions that help in prediction results visualization.
+Unfortunately, no preprocessing operation is performed on the input batch in this work since a batch normalization layer already does standardization on it, in general is possible to do any kind of batch preprocessing just implementing the desidered function in \mintinline[bgcolor=whitesmoke]{C++}{data_proc} and call it in \mintinline[bgcolor=whitesmoke]{C++}{NN::prepareData} since an instance reference of such class is passed to this method.
+
 \begin{center}
 	\begin{figure}[H]
+	\hfill\includegraphics[scale=0.4]{figures/class_diagram.png}\hspace*{\fill}
+	\caption{Class Diagram}\label{fig:22}
+	\end{figure}
+\end{center}
+
+Focusing on code generation, in order to correctly integrate the required source and object files within Miosix environment, STM32CubeAI is configured as follow:
+\begin{center}
+	\begin{figure}[h]
 		\begin{subfigure}[H]{0.5\textwidth}
-			\hfill\includegraphics[scale=0.55]{figures/stm32cubemx_conf2.png}\vspace*{\fill}
-			\hfill\caption{Selection of model and validation files}\vspace*{\fill}
+			\hfill\includegraphics[scale=0.55]{figures/stm32cubemx_conf2.png}\hspace*{\fill}
+			\caption{Selection of model and validation files}\label{fig:23a}
 		\end{subfigure}
 		\hfill
-		\begin{subfigure}[H]{0.5\textwidth}
-			\hfill\includegraphics[scale=0.55]{figures/stm32cubemx_conf1.png}\vspace*{\fill}
-			\caption{Validation results on x86 and stm32}
+		\begin{subfigure}[h]{0.5\textwidth}
+			\hfill\includegraphics[scale=0.55]{figures/stm32cubemx_conf1.png}\hspace*{\fill}
+			\caption{Validation results on x86 and stm32}\label{fig:23b}
 		\end{subfigure}
 	\end{figure}
 \end{center}
 Regardless the selected application (\textit{aiSystemPerformance, aiValidation, ApplicationTemplate}), the overall structure of the generated code is the same and includes the following directories:
 
 \begin{itemize}
-	\item \textbf{Drivers}: containing architecture-specific source and object files: Arm CMSIS library part of the STM32 HAL package, libc memory and libm math routines. 
 	\item \textbf{Inc}: in which all header files related to the specific AI application are located, in this folder only \textit{network.h} and \textit{network\_data.h} are specifically required in final application
 	\item \textbf{Middlewares}: that as the name suggests includes the crucial \textit{network\_runtime} library, containing the implementation of each network specific layer and features and other header files
 	\item \textbf{Src}: containing source application specific source-files. In the final firmware only \textit{network.c} and \textit{network}
 \end{itemize} 
-To automatize code generation and installation a small batch script \mintinline[bgcolor=whitesmoke]{C++}{build_NN.bat} performs a preliminar analysis of the keras model, exploiting the STM32CubeAI CLI generates and install all the needed sources into Miosix folder, then builds the binary file using Miosix toolchain. Of course this rundimental installer is still under development and must be improved and tested properly, it does not update neither the Makefile nor the client application in case, some additional source files are added into the project and the name of the neural network is changed. However, in code integration, even though Drivers folder can be excluded some external files must be manually included in the final firmware, they are implementaions of some memory routines in glibc \textit{eabi\_memcpy.c} and \textit{eabi\_memclr.c}, corrected versions are located in \mintinline[bgcolor=whitesmoke]{C++}{installer_py/additional_files}.    by a batch  Regardless All these drivers are not required since some of them are provided by Miosix OS and the related toolchain, excepted for \textit{eabi\_memcpy} and \textit{eabi\_memclr} that must be manually included in the project (from arm glibc) the  the neural network is entirely encapsulated in the \mintinline[bgcolor=whitesmoke]{C++}{NN} class, that implements methods to create, initialize and run a single neural network instance. The integration of the tool-generated files starts immediately after that. First of all It includes the following folders.
-The main goal of this work is to show the resulting performance in terms of accuracy and response time required for the network to provide a single prediction
+To automatize code generation and installation a small batch script \mintinline[bgcolor=whitesmoke]{C++}{build_NN.bat} performs a preliminar analysis of the keras model, exploiting the STM32CubeAI CLI generates and install all the needed sources into Miosix folder, then builds the binary file using Miosix toolchain and writes it into the F401RE's flash. Of course this simple installer is still under development and must be improved and tested properly, it does not update neither the Makefile nor the client application in case, some additional source files are added into the project or the name of the neural network is changed. Some external files moreover, must be manually included since they are related to some memory routines in glibc \textit{eabi\_memcpy.c} and \textit{eabi\_memclr.c}. Edited versions of such files are located in \mintinline[bgcolor=whitesmoke]{C++}{additional_files}.The remaining part of the firmware resides in the \mintinline[bgcolor=whitesmoke]{C++}{main.cpp}, in which:
+\begin{itemize}
+	\item the input and output buffers (\mintinline[bgcolor=whitesmoke]{C++}{ai_buffer}) are defined using client API's macros
+	\item neural network parameters are allocated and associated to the neural network with \mintinline[bgcolor=whitesmoke]{C++}{NN::nnInit} method
+	\item \mintinline[bgcolor=whitesmoke]{C++}{LSM6DSLAccGyr} and \mintinline[bgcolor=whitesmoke]{C++}{LSM303AGRAccMag} are enabled and initialized with the configuration given in the \mintinline[bgcolor=whitesmoke]{C++}{IKS01A2_config.h} header file
+\end{itemize}  
+The \mintinline[bgcolor=whitesmoke]{C++}{main} function runs iteratively reading from all the 4 sensors until an entire batch of 30 samples is collected, then feeds all the data to the neural network that performs a single prediction through \mintinline[bgcolor=whitesmoke]{C++}{NN::nnRun}. An interesting aspect that will be analyzed in further section is related to a mechanism developed to suppress mispredictions due to "noisy" transitions between an activity/posture and another. This simple algorithm consists in buffering several predictions provided by the neural network and computing the mode on such set. The number of predictions mentioned is defined by \mintinline[bgcolor=whitesmoke]{C++}{PRED_SIZE} in \mintinline[bgcolor=whitesmoke]{C++}{main_config.h} and can be changed arbitrarily, however this affects the time required to provide the prediction of an activity or posture. 
+
+
 
 
 \section{Experimental evaluation}
 
 \subsection{Experimental setup}
+In order to not perturb the conditions in which initial training datasets were collected the experimental setup is exactly the one adopted in data gathering phase. Since it is required to visualize network results while doing testing activities it has been decided to rely on VNC Viewer app to establish a connection between the Raspberry Pi and a tablet. In testing part \mintinline[bgcolor=whitesmoke]{C++}{data_gathering.py} is adapted and reused to show the output of the Nucleo board. 
 
 \subsection{Results}
-\textbf{Please make sure you explicitely cite the tables.
-\prettyref{tab:a_complex_table} shows a complex table.
-Please also make sure you provide each table with an exhaustive caption.
-Captions for tables must be placed before not after the tables.}
+Unfortunately due to the difficulty on keeping track of prediction results in "real-time" mode only the "noise-suppressing" solution has been tested with the results summarized in \prettyref{tab:a_complex_table}
 
 
 
@@ -458,7 +475,7 @@ Captions for tables must be placed before not after the tables.}
 \small
 \begin{center}
 
-\caption{Summary of the test scenarios.
+\caption{Testing .
 $M_1\xrightarrow{\alpha}M_2$ means that an application mapping
 is changed from $M_1$ to $M_2$ after application $\alpha$
 has terminated.}
@@ -484,23 +501,11 @@ Name of scenario & Application & Threads & $\frac{Threads}{Cores}$ & HMP & HMP w
 \hline
 
 
-\multirow{2}{*}{big 1} & vips & 3 & \multirow{2}{*}{1.00} & $4-7$ & $4-5 \xrightarrow{\dagger} 4-7$ \\
- & ferret$\dagger$ & 1 & & $4-7$ & $6-7$ \\
-\hline
-\multirow{2}{*}{big 2} & freqmine$\dagger$ & 2 & \multirow{2}{*}{1.25} & $4-7$ & $4-5$ \\
- & blackscholes & 3 &   & $4-7$ & $6-7 \xrightarrow{\dagger} 4-7$ \\
-\hline
-\multirow{2}{*}{big 3} & facesim & 2 & \multirow{2}{*}{1.25} & $4-7$ & $4-5$ \\
- & bodytrack & 3 &  & $4-7$ & $4-7$ \\
-\hline
-\multirow{2}{*}{big 4} & facesim & 3 & \multirow{2}{*}{1.50} & $4-7$ & $4-5\xrightarrow{\dagger}4-7$ \\
- & blackscholes$\dagger$ & 3 &  & $4-7$ & $4-7$ \\
-\hline
-
 \end{tabular}
   \label{tab:a_complex_table}
 \end{center}
 \end{table}
 
 \section{Conclusions and Future Works}
-
+There are many perspectives from which is possible to improve this work, first of which the adopted device. As it can be noticed in \prettyref{fig:3a} it is pretty uncomfortable to wear such equipment, there are many disturbing factors that affect negatively data gathering. ST Microelectronics provides in such case a very fancy solution, more packed and easy to be located on the body, the \textit{SensorTile STEVAL-STLCS01V1}, that includes all the adopted MEMS'. Such device together with a more rigorous methodology in collecting data would improve considerably the neural network performance. This last point in fact, is another aspect to be improved:  the training dataset is entirely profiled on a single person, movements and positions follow rigid sequences with few variations, so a tight range of cases are really provided during training phase, this is unfortunately caused by the considerable efforts requested to gather data for a single person and the unavailability of a range of subjects with different athletical skills and physical characteristics to improve the quality of the dataset.\newline
+Another interesting future goal is to enable the application to host a more complex neural model in order to open the way to a more specific and useful AI task also related to physical activity. 
