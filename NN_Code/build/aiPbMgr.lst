@@ -1,0 +1,3374 @@
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"aiPbMgr.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.aiPbMsgFmtToAiFmt,"ax",%progbits
+  18              		.align	1
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv4-sp-d16
+  25              	aiPbMsgFmtToAiFmt:
+  26              	.LVL0:
+  27              	.LFB137:
+  28              		.file 1 "Src/aiPbMgr.c"
+   1:Src/aiPbMgr.c **** /**
+   2:Src/aiPbMgr.c ****   ******************************************************************************
+   3:Src/aiPbMgr.c ****   * @file    aiPbMgr.c
+   4:Src/aiPbMgr.c ****   * @author  MCD Vertical Application Team
+   5:Src/aiPbMgr.c ****   * @brief   Helper function for AI ProtoBuffer support
+   6:Src/aiPbMgr.c ****   ******************************************************************************
+   7:Src/aiPbMgr.c ****   * @attention
+   8:Src/aiPbMgr.c ****   *
+   9:Src/aiPbMgr.c ****   * <h2><center>&copy; Copyright (c) YYYY STMicroelectronics.
+  10:Src/aiPbMgr.c ****   * All rights reserved.</center></h2>
+  11:Src/aiPbMgr.c ****   *
+  12:Src/aiPbMgr.c ****   * This software component is licensed by ST under Ultimate Liberty license
+  13:Src/aiPbMgr.c ****   * SLA0044, the "License"; You may not use this file except in compliance with
+  14:Src/aiPbMgr.c ****   * the License. You may obtain a copy of the License at:
+  15:Src/aiPbMgr.c ****   *                             www.st.com/SLA0044
+  16:Src/aiPbMgr.c ****   *
+  17:Src/aiPbMgr.c ****   ******************************************************************************
+  18:Src/aiPbMgr.c ****   */
+  19:Src/aiPbMgr.c **** 
+  20:Src/aiPbMgr.c **** #include <aiTestUtility.h>
+  21:Src/aiPbMgr.c **** #include <bsp_ai.h>
+  22:Src/aiPbMgr.c **** 
+  23:Src/aiPbMgr.c **** #include "aiPbMgr.h"
+  24:Src/aiPbMgr.c **** #include <pb_encode.h>
+  25:Src/aiPbMgr.c **** #include <pb_decode.h>
+  26:Src/aiPbMgr.c **** 
+  27:Src/aiPbMgr.c **** 
+  28:Src/aiPbMgr.c **** /*---------------------------------------------------------------------------*/
+  29:Src/aiPbMgr.c **** 
+  30:Src/aiPbMgr.c **** static struct pbContextMgr {
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 2
+
+
+  31:Src/aiPbMgr.c ****     pb_istream_t input;
+  32:Src/aiPbMgr.c ****     pb_ostream_t output;
+  33:Src/aiPbMgr.c ****     const aiPbCmdFunc *funcs;
+  34:Src/aiPbMgr.c ****     uint32_t  n_func;
+  35:Src/aiPbMgr.c **** } pbContextMgr;
+  36:Src/aiPbMgr.c **** 
+  37:Src/aiPbMgr.c **** void aiPbMgrInit(const aiPbCmdFunc *funcs)
+  38:Src/aiPbMgr.c **** {
+  39:Src/aiPbMgr.c ****     const aiPbCmdFunc *cfunc;
+  40:Src/aiPbMgr.c ****     pbContextMgr.input = pb_istream_from_uart(0);
+  41:Src/aiPbMgr.c ****     pbContextMgr.output = pb_ostream_to_uart(0);
+  42:Src/aiPbMgr.c **** 
+  43:Src/aiPbMgr.c ****     pbContextMgr.n_func = 0;
+  44:Src/aiPbMgr.c ****     pbContextMgr.funcs = NULL;
+  45:Src/aiPbMgr.c **** 
+  46:Src/aiPbMgr.c ****     if (funcs) {
+  47:Src/aiPbMgr.c ****         cfunc = funcs;
+  48:Src/aiPbMgr.c ****         while (cfunc->process) {
+  49:Src/aiPbMgr.c ****             pbContextMgr.n_func++;
+  50:Src/aiPbMgr.c ****             cfunc++;
+  51:Src/aiPbMgr.c ****         }
+  52:Src/aiPbMgr.c ****         pbContextMgr.funcs = funcs;
+  53:Src/aiPbMgr.c ****     }
+  54:Src/aiPbMgr.c **** }
+  55:Src/aiPbMgr.c **** 
+  56:Src/aiPbMgr.c **** int aiPbMgrWaitAndProcess(void)
+  57:Src/aiPbMgr.c **** {
+  58:Src/aiPbMgr.c ****     uint32_t idx;
+  59:Src/aiPbMgr.c ****     static reqMsg  req = reqMsg_init_zero;
+  60:Src/aiPbMgr.c ****     static respMsg resp = respMsg_init_default;
+  61:Src/aiPbMgr.c ****     const aiPbCmdFunc *cfunc;
+  62:Src/aiPbMgr.c **** 
+  63:Src/aiPbMgr.c ****     ioFlushRead();
+  64:Src/aiPbMgr.c ****     if (pb_decode_delimited(&pbContextMgr.input, reqMsg_fields, &req)) {
+  65:Src/aiPbMgr.c ****         ioFlushRead();
+  66:Src/aiPbMgr.c ****         for (idx = 0; idx < pbContextMgr.n_func; idx++) {
+  67:Src/aiPbMgr.c ****             cfunc = &pbContextMgr.funcs[idx];
+  68:Src/aiPbMgr.c ****             if (cfunc->cmd == req.cmd) {
+  69:Src/aiPbMgr.c ****                 cfunc->process(&req, &resp, cfunc->param);
+  70:Src/aiPbMgr.c ****                 break;
+  71:Src/aiPbMgr.c ****             }
+  72:Src/aiPbMgr.c ****         }
+  73:Src/aiPbMgr.c ****         if (idx == pbContextMgr.n_func) {
+  74:Src/aiPbMgr.c ****             aiPbMgrSendAck(&req, &resp, EnumState_S_ERROR,
+  75:Src/aiPbMgr.c ****                     EnumError_E_INVALID_PARAM, EnumError_E_INVALID_PARAM);
+  76:Src/aiPbMgr.c ****         }
+  77:Src/aiPbMgr.c ****     }
+  78:Src/aiPbMgr.c **** 
+  79:Src/aiPbMgr.c ****     ioFlushRead();
+  80:Src/aiPbMgr.c **** 
+  81:Src/aiPbMgr.c ****     return 0;
+  82:Src/aiPbMgr.c **** }
+  83:Src/aiPbMgr.c **** 
+  84:Src/aiPbMgr.c **** 
+  85:Src/aiPbMgr.c **** /*---------------------------------------------------------------------------*/
+  86:Src/aiPbMgr.c **** 
+  87:Src/aiPbMgr.c **** void aiPbMgrSendResp(const reqMsg *req, respMsg *resp,
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 3
+
+
+  88:Src/aiPbMgr.c ****         EnumState state)
+  89:Src/aiPbMgr.c **** {
+  90:Src/aiPbMgr.c ****     resp->reqid = req->reqid;
+  91:Src/aiPbMgr.c ****     resp->state = state;
+  92:Src/aiPbMgr.c ****     pb_encode(&pbContextMgr.output, respMsg_fields, resp);
+  93:Src/aiPbMgr.c ****     ioFlushWrite();
+  94:Src/aiPbMgr.c **** }
+  95:Src/aiPbMgr.c **** 
+  96:Src/aiPbMgr.c **** void aiPbMgrSendAck(const reqMsg *req, respMsg *resp,
+  97:Src/aiPbMgr.c ****         EnumState state, uint32_t param, EnumError error)
+  98:Src/aiPbMgr.c **** {
+  99:Src/aiPbMgr.c ****     resp->which_payload = respMsg_ack_tag;
+ 100:Src/aiPbMgr.c ****     resp->payload.ack.param = param;
+ 101:Src/aiPbMgr.c ****     resp->payload.ack.error = error;
+ 102:Src/aiPbMgr.c ****     aiPbMgrSendResp(req, resp, state);
+ 103:Src/aiPbMgr.c **** }
+ 104:Src/aiPbMgr.c **** 
+ 105:Src/aiPbMgr.c **** bool aiPbMgrWaitAck(void)
+ 106:Src/aiPbMgr.c **** {
+ 107:Src/aiPbMgr.c ****     bool res;
+ 108:Src/aiPbMgr.c ****     ackMsg ack = ackMsg_init_default;
+ 109:Src/aiPbMgr.c ****     res = pb_decode_delimited(&pbContextMgr.input, ackMsg_fields, &ack);
+ 110:Src/aiPbMgr.c ****     ioFlushRead();
+ 111:Src/aiPbMgr.c ****     return res;
+ 112:Src/aiPbMgr.c **** }
+ 113:Src/aiPbMgr.c **** 
+ 114:Src/aiPbMgr.c **** bool aiPbMgrSendLog(const reqMsg *req, respMsg *resp,
+ 115:Src/aiPbMgr.c ****         EnumState state, uint32_t lvl, const char *str)
+ 116:Src/aiPbMgr.c **** {
+ 117:Src/aiPbMgr.c ****     bool res;
+ 118:Src/aiPbMgr.c ****     ackMsg ack = ackMsg_init_default;
+ 119:Src/aiPbMgr.c **** 
+ 120:Src/aiPbMgr.c ****     size_t len = strlen(str);
+ 121:Src/aiPbMgr.c **** 
+ 122:Src/aiPbMgr.c ****     resp->which_payload = respMsg_log_tag;
+ 123:Src/aiPbMgr.c ****     resp->payload.log.level = lvl;
+ 124:Src/aiPbMgr.c ****     if (len >= sizeof(resp->payload.log.str))
+ 125:Src/aiPbMgr.c ****         len = sizeof(resp->payload.log.str) - 1;
+ 126:Src/aiPbMgr.c **** 
+ 127:Src/aiPbMgr.c ****     memcpy(&resp->payload.log.str[0], str, len+1);
+ 128:Src/aiPbMgr.c **** 
+ 129:Src/aiPbMgr.c ****     aiPbMgrSendResp(req, resp, state);
+ 130:Src/aiPbMgr.c **** 
+ 131:Src/aiPbMgr.c ****     res = pb_decode_delimited(&pbContextMgr.input, ackMsg_fields, &ack);
+ 132:Src/aiPbMgr.c ****     ioFlushRead();
+ 133:Src/aiPbMgr.c ****     return res;
+ 134:Src/aiPbMgr.c **** }
+ 135:Src/aiPbMgr.c **** 
+ 136:Src/aiPbMgr.c **** struct aiPbMgrBuffer {
+ 137:Src/aiPbMgr.c ****     ai_buffer *buffer;
+ 138:Src/aiPbMgr.c ****     uint32_t n_max;
+ 139:Src/aiPbMgr.c ****     uint32_t n_ops;
+ 140:Src/aiPbMgr.c ****     uint32_t err;
+ 141:Src/aiPbMgr.c ****     void *msg;
+ 142:Src/aiPbMgr.c **** };
+ 143:Src/aiPbMgr.c **** 
+ 144:Src/aiPbMgr.c **** uint32_t aiPbAiBufferSize(const ai_buffer *buffer)
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 4
+
+
+ 145:Src/aiPbMgr.c **** {
+ 146:Src/aiPbMgr.c ****     if (!buffer)
+ 147:Src/aiPbMgr.c ****         return 0;
+ 148:Src/aiPbMgr.c ****     else
+ 149:Src/aiPbMgr.c ****         return buffer->channels * buffer->height
+ 150:Src/aiPbMgr.c ****                 * buffer->width * buffer->n_batches;
+ 151:Src/aiPbMgr.c **** }
+ 152:Src/aiPbMgr.c **** 
+ 153:Src/aiPbMgr.c **** static ai_buffer_format aiPbMsgFmtToAiFmt(const uint32_t msgFmt)
+ 154:Src/aiPbMgr.c **** {
+  29              		.loc 1 154 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+ 155:Src/aiPbMgr.c ****     return (ai_buffer_format)msgFmt;
+  34              		.loc 1 155 5 view .LVU1
+ 156:Src/aiPbMgr.c **** }
+  35              		.loc 1 156 1 is_stmt 0 view .LVU2
+  36 0000 7047     		bx	lr
+  37              		.cfi_endproc
+  38              	.LFE137:
+  40              		.section	.text.aiPbAiFmtToMsgFmt,"ax",%progbits
+  41              		.align	1
+  42              		.syntax unified
+  43              		.thumb
+  44              		.thumb_func
+  45              		.fpu fpv4-sp-d16
+  47              	aiPbAiFmtToMsgFmt:
+  48              	.LVL1:
+  49              	.LFB138:
+ 157:Src/aiPbMgr.c **** 
+ 158:Src/aiPbMgr.c **** static uint32_t aiPbAiFmtToMsgFmt(const ai_buffer_format aiFmt)
+ 159:Src/aiPbMgr.c **** {
+  50              		.loc 1 159 1 is_stmt 1 view -0
+  51              		.cfi_startproc
+  52              		@ args = 0, pretend = 0, frame = 0
+  53              		@ frame_needed = 0, uses_anonymous_args = 0
+  54              		@ link register save eliminated.
+ 160:Src/aiPbMgr.c ****     return (uint32_t)aiFmt;
+  55              		.loc 1 160 5 view .LVU4
+ 161:Src/aiPbMgr.c **** }
+  56              		.loc 1 161 1 is_stmt 0 view .LVU5
+  57 0000 7047     		bx	lr
+  58              		.cfi_endproc
+  59              	.LFE138:
+  61              		.section	.text.aiPbBufferGetItemSize,"ax",%progbits
+  62              		.align	1
+  63              		.syntax unified
+  64              		.thumb
+  65              		.thumb_func
+  66              		.fpu fpv4-sp-d16
+  68              	aiPbBufferGetItemSize:
+  69              	.LVL2:
+  70              	.LFB139:
+ 162:Src/aiPbMgr.c **** 
+ 163:Src/aiPbMgr.c **** static size_t aiPbBufferGetItemSize(ai_buffer_format format)
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 5
+
+
+ 164:Src/aiPbMgr.c **** {
+  71              		.loc 1 164 1 is_stmt 1 view -0
+  72              		.cfi_startproc
+  73              		@ args = 0, pretend = 0, frame = 0
+  74              		@ frame_needed = 0, uses_anonymous_args = 0
+  75              		@ link register save eliminated.
+ 165:Src/aiPbMgr.c ****     return (size_t)AI_BUFFER_BYTE_SIZE(1,format);
+  76              		.loc 1 165 5 view .LVU7
+  77              		.loc 1 165 20 is_stmt 0 view .LVU8
+  78 0000 C0F3C610 		ubfx	r0, r0, #7, #7
+  79              	.LVL3:
+  80              		.loc 1 165 20 view .LVU9
+  81 0004 0430     		adds	r0, r0, #4
+ 166:Src/aiPbMgr.c **** }
+  82              		.loc 1 166 1 view .LVU10
+  83 0006 C010     		asrs	r0, r0, #3
+  84 0008 7047     		bx	lr
+  85              		.cfi_endproc
+  86              	.LFE139:
+  88              		.section	.text.aiPbMgrSetMetaInfo,"ax",%progbits
+  89              		.align	1
+  90              		.syntax unified
+  91              		.thumb
+  92              		.thumb_func
+  93              		.fpu fpv4-sp-d16
+  95              	aiPbMgrSetMetaInfo:
+  96              	.LVL4:
+  97              	.LFB143:
+ 167:Src/aiPbMgr.c **** 
+ 168:Src/aiPbMgr.c **** static bool aiPbBuffer_read_cb3(pb_istream_t *stream, const pb_field_t *field,
+ 169:Src/aiPbMgr.c ****         void **arg)
+ 170:Src/aiPbMgr.c **** {
+ 171:Src/aiPbMgr.c ****     struct aiPbMgrBuffer *bm = (struct aiPbMgrBuffer *)*arg;
+ 172:Src/aiPbMgr.c ****     aiBufferByteMsg *msg;
+ 173:Src/aiPbMgr.c ****     ai_buffer_format format;
+ 174:Src/aiPbMgr.c ****     size_t itsize;
+ 175:Src/aiPbMgr.c **** 
+ 176:Src/aiPbMgr.c ****     UNUSED(field);
+ 177:Src/aiPbMgr.c **** 
+ 178:Src/aiPbMgr.c ****     int maxr = bm->n_max;
+ 179:Src/aiPbMgr.c ****     msg = (aiBufferByteMsg *)bm->msg;
+ 180:Src/aiPbMgr.c ****     format = aiPbMsgFmtToAiFmt(msg->shape.format);
+ 181:Src/aiPbMgr.c **** 
+ 182:Src/aiPbMgr.c ****     /* todo(jmd) - adding scale/zeropoint values */
+ 183:Src/aiPbMgr.c **** 
+ 184:Src/aiPbMgr.c ****     /* Check shape/format */
+ 185:Src/aiPbMgr.c ****     bm->err = EnumError_E_NONE;
+ 186:Src/aiPbMgr.c ****     if ((format == AI_BUFFER_FORMAT_NONE) || (format != bm->buffer->format)) {
+ 187:Src/aiPbMgr.c ****         maxr = 0;
+ 188:Src/aiPbMgr.c ****         bm->err = EnumError_E_INVALID_FORMAT;
+ 189:Src/aiPbMgr.c ****     } else if ((msg->shape.channels != bm->buffer->channels) ||
+ 190:Src/aiPbMgr.c ****             (msg->shape.height != bm->buffer->height) ||
+ 191:Src/aiPbMgr.c ****             (msg->shape.width != bm->buffer->width) ||
+ 192:Src/aiPbMgr.c ****             (msg->shape.n_batches != bm->buffer->n_batches)) {
+ 193:Src/aiPbMgr.c ****         maxr = 0;
+ 194:Src/aiPbMgr.c ****         bm->err = EnumError_E_INVALID_SHAPE;
+ 195:Src/aiPbMgr.c ****     }
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 6
+
+
+ 196:Src/aiPbMgr.c **** 
+ 197:Src/aiPbMgr.c ****     itsize = aiPbBufferGetItemSize(format);
+ 198:Src/aiPbMgr.c **** 
+ 199:Src/aiPbMgr.c ****     /* Read data */
+ 200:Src/aiPbMgr.c ****     uint8_t *pw = (uint8_t *)bm->buffer->data;
+ 201:Src/aiPbMgr.c ****     while (stream->bytes_left) {
+ 202:Src/aiPbMgr.c ****         uint64_t number;
+ 203:Src/aiPbMgr.c ****         if (!pb_read(stream, (pb_byte_t *)&number, itsize))
+ 204:Src/aiPbMgr.c ****             return false;
+ 205:Src/aiPbMgr.c ****         if (maxr > 0) {
+ 206:Src/aiPbMgr.c ****             if (pw) {
+ 207:Src/aiPbMgr.c ****                 memcpy(pw, &number, itsize);
+ 208:Src/aiPbMgr.c ****                 pw += itsize;
+ 209:Src/aiPbMgr.c ****             }
+ 210:Src/aiPbMgr.c ****             maxr--;
+ 211:Src/aiPbMgr.c ****         }
+ 212:Src/aiPbMgr.c ****         bm->n_ops++;
+ 213:Src/aiPbMgr.c ****     }
+ 214:Src/aiPbMgr.c **** 
+ 215:Src/aiPbMgr.c ****     /* Check nb_op */
+ 216:Src/aiPbMgr.c ****     if ((bm->err == EnumError_E_NONE) && (bm->n_ops != bm->n_max))
+ 217:Src/aiPbMgr.c ****         bm->err = EnumError_E_INVALID_SIZE;
+ 218:Src/aiPbMgr.c **** 
+ 219:Src/aiPbMgr.c ****     return true;
+ 220:Src/aiPbMgr.c **** }
+ 221:Src/aiPbMgr.c **** 
+ 222:Src/aiPbMgr.c **** static bool aiPbBuffer_write_cb3(pb_ostream_t *stream, const pb_field_t *field,
+ 223:Src/aiPbMgr.c ****         void * const *arg)
+ 224:Src/aiPbMgr.c **** {
+ 225:Src/aiPbMgr.c ****     struct aiPbMgrBuffer *bm = (struct aiPbMgrBuffer *)*arg;
+ 226:Src/aiPbMgr.c ****     size_t itsize;
+ 227:Src/aiPbMgr.c **** 
+ 228:Src/aiPbMgr.c ****     int maxw = bm->n_max;
+ 229:Src/aiPbMgr.c ****     ai_buffer_format format;
+ 230:Src/aiPbMgr.c **** 
+ 231:Src/aiPbMgr.c ****     if ((maxw == 0) || (!bm->buffer))
+ 232:Src/aiPbMgr.c ****         return true;
+ 233:Src/aiPbMgr.c **** 
+ 234:Src/aiPbMgr.c ****     format = bm->buffer->format;
+ 235:Src/aiPbMgr.c **** 
+ 236:Src/aiPbMgr.c ****     itsize = aiPbBufferGetItemSize(format);
+ 237:Src/aiPbMgr.c **** 
+ 238:Src/aiPbMgr.c ****     /* Write data */
+ 239:Src/aiPbMgr.c ****     pb_byte_t *pr = (pb_byte_t *)bm->buffer->data;
+ 240:Src/aiPbMgr.c **** 
+ 241:Src/aiPbMgr.c ****     if (!pb_encode_tag_for_field(stream, field))
+ 242:Src/aiPbMgr.c ****         return false;
+ 243:Src/aiPbMgr.c **** 
+ 244:Src/aiPbMgr.c ****     if (!pb_encode_string(stream, pr, itsize * maxw))
+ 245:Src/aiPbMgr.c ****         return false;
+ 246:Src/aiPbMgr.c **** 
+ 247:Src/aiPbMgr.c ****     bm->n_ops = maxw;
+ 248:Src/aiPbMgr.c **** 
+ 249:Src/aiPbMgr.c ****     return true;
+ 250:Src/aiPbMgr.c **** }
+ 251:Src/aiPbMgr.c **** 
+ 252:Src/aiPbMgr.c **** bool aiPbMgrReceiveAiBuffer3(const reqMsg *req, respMsg *resp,
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 7
+
+
+ 253:Src/aiPbMgr.c ****         EnumState state, ai_buffer *buffer)
+ 254:Src/aiPbMgr.c **** {
+ 255:Src/aiPbMgr.c ****     aiBufferByteMsg msg;
+ 256:Src/aiPbMgr.c ****     struct aiPbMgrBuffer hdlb;
+ 257:Src/aiPbMgr.c ****     bool res = true;
+ 258:Src/aiPbMgr.c **** 
+ 259:Src/aiPbMgr.c ****     hdlb.n_ops = 0;
+ 260:Src/aiPbMgr.c ****     hdlb.buffer = buffer;
+ 261:Src/aiPbMgr.c ****     hdlb.err = EnumError_E_NONE;
+ 262:Src/aiPbMgr.c ****     hdlb.n_max = aiPbAiBufferSize(buffer);
+ 263:Src/aiPbMgr.c ****     hdlb.msg = &msg;
+ 264:Src/aiPbMgr.c **** 
+ 265:Src/aiPbMgr.c ****     msg.datas.funcs.decode = &aiPbBuffer_read_cb3;
+ 266:Src/aiPbMgr.c ****     msg.datas.arg = &hdlb;
+ 267:Src/aiPbMgr.c **** 
+ 268:Src/aiPbMgr.c ****     /* Waiting buffer message */
+ 269:Src/aiPbMgr.c ****     pb_decode_delimited(&pbContextMgr.input, aiBufferByteMsg_fields, &msg);
+ 270:Src/aiPbMgr.c ****     ioFlushRead();
+ 271:Src/aiPbMgr.c **** 
+ 272:Src/aiPbMgr.c ****     /* Send ACK and wait ACK (or send ACK only if error) */
+ 273:Src/aiPbMgr.c ****     if (hdlb.err) {
+ 274:Src/aiPbMgr.c ****         aiPbMgrSendAck(req, resp, EnumState_S_ERROR, hdlb.err,
+ 275:Src/aiPbMgr.c ****                 (EnumError)hdlb.err);
+ 276:Src/aiPbMgr.c ****         res = false;
+ 277:Src/aiPbMgr.c ****     } else {
+ 278:Src/aiPbMgr.c ****         aiPbMgrSendAck(req, resp, state, hdlb.n_ops, EnumError_E_NONE);
+ 279:Src/aiPbMgr.c ****         if ((state == EnumState_S_WAITING) ||
+ 280:Src/aiPbMgr.c ****                 (state == EnumState_S_PROCESSING))
+ 281:Src/aiPbMgr.c ****             aiPbMgrWaitAck();
+ 282:Src/aiPbMgr.c ****     }
+ 283:Src/aiPbMgr.c **** 
+ 284:Src/aiPbMgr.c ****     return res;
+ 285:Src/aiPbMgr.c **** }
+ 286:Src/aiPbMgr.c **** 
+ 287:Src/aiPbMgr.c **** static void aiPbMgrSetMetaInfo(const ai_buffer_meta_info *meta_info, const int idx,
+ 288:Src/aiPbMgr.c **** 		aiBufferShapeMsg *shape)
+ 289:Src/aiPbMgr.c **** {
+  98              		.loc 1 289 1 is_stmt 1 view -0
+  99              		.cfi_startproc
+ 100              		@ args = 0, pretend = 0, frame = 0
+ 101              		@ frame_needed = 0, uses_anonymous_args = 0
+ 102              		@ link register save eliminated.
+ 290:Src/aiPbMgr.c **** 	shape->scale = 0.0f;
+ 103              		.loc 1 290 2 view .LVU12
+ 104              		.loc 1 290 15 is_stmt 0 view .LVU13
+ 105 0000 0023     		movs	r3, #0
+ 106 0002 5361     		str	r3, [r2, #20]	@ float
+ 291:Src/aiPbMgr.c **** 	shape->zeropoint = 0;
+ 107              		.loc 1 291 2 is_stmt 1 view .LVU14
+ 108              		.loc 1 291 19 is_stmt 0 view .LVU15
+ 109 0004 0023     		movs	r3, #0
+ 110 0006 9361     		str	r3, [r2, #24]
+ 292:Src/aiPbMgr.c **** 	if (AI_BUFFER_META_INFO_INTQ(meta_info)) {
+ 111              		.loc 1 292 2 is_stmt 1 view .LVU16
+ 112              		.loc 1 292 5 is_stmt 0 view .LVU17
+ 113 0008 0028     		cmp	r0, #0
+ 114 000a 3FD0     		beq	.L18
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 8
+
+
+ 115 000c 0346     		mov	r3, r0
+ 116              		.loc 1 292 6 discriminator 1 view .LVU18
+ 117 000e 0068     		ldr	r0, [r0]
+ 118              	.LVL5:
+ 119              		.loc 1 292 6 discriminator 1 view .LVU19
+ 120 0010 10F0010F 		tst	r0, #1
+ 121 0014 3AD0     		beq	.L18
+ 122              		.loc 1 292 6 discriminator 2 view .LVU20
+ 123 0016 5868     		ldr	r0, [r3, #4]
+ 124 0018 0028     		cmp	r0, #0
+ 125 001a 37D0     		beq	.L18
+ 289:Src/aiPbMgr.c **** 	shape->scale = 0.0f;
+ 126              		.loc 1 289 1 discriminator 18 view .LVU21
+ 127 001c 10B4     		push	{r4}
+ 128              	.LCFI0:
+ 129              		.cfi_def_cfa_offset 4
+ 130              		.cfi_offset 4, -4
+ 293:Src/aiPbMgr.c **** 		shape->scale = AI_BUFFER_META_INFO_INTQ_GET_SCALE(meta_info, idx);
+ 131              		.loc 1 293 3 is_stmt 1 discriminator 18 view .LVU22
+ 132              		.loc 1 293 18 is_stmt 0 discriminator 18 view .LVU23
+ 133 001e 4468     		ldr	r4, [r0, #4]
+ 134 0020 3CB1     		cbz	r4, .L9
+ 135              		.loc 1 293 18 discriminator 26 view .LVU24
+ 136 0022 4088     		ldrh	r0, [r0, #2]
+ 137 0024 8842     		cmp	r0, r1
+ 138 0026 06DD     		ble	.L10
+ 139              		.loc 1 293 18 discriminator 34 view .LVU25
+ 140 0028 2068     		ldr	r0, [r4]
+ 141 002a 00EB8100 		add	r0, r0, r1, lsl #2
+ 142 002e 0068     		ldr	r0, [r0]	@ float
+ 143 0030 02E0     		b	.L6
+ 144              	.L9:
+ 145              		.loc 1 293 18 view .LVU26
+ 146 0032 0020     		movs	r0, #0
+ 147 0034 00E0     		b	.L6
+ 148              	.L10:
+ 149 0036 0020     		movs	r0, #0
+ 150              	.L6:
+ 151              		.loc 1 293 16 discriminator 36 view .LVU27
+ 152 0038 5061     		str	r0, [r2, #20]	@ float
+ 294:Src/aiPbMgr.c **** 		shape->zeropoint = AI_BUFFER_META_INFO_INTQ_GET_ZEROPOINT(meta_info, idx);
+ 153              		.loc 1 294 3 is_stmt 1 discriminator 36 view .LVU28
+ 154              		.loc 1 294 22 is_stmt 0 discriminator 36 view .LVU29
+ 155 003a 1868     		ldr	r0, [r3]
+ 156 003c 10F0010F 		tst	r0, #1
+ 157 0040 15D0     		beq	.L11
+ 158              		.loc 1 294 22 discriminator 3 view .LVU30
+ 159 0042 5B68     		ldr	r3, [r3, #4]
+ 160              	.LVL6:
+ 161              		.loc 1 294 22 discriminator 3 view .LVU31
+ 162 0044 C3B1     		cbz	r3, .L12
+ 163              		.loc 1 294 22 discriminator 18 view .LVU32
+ 164 0046 1888     		ldrh	r0, [r3]
+ 165 0048 10F0020F 		tst	r0, #2
+ 166 004c 07D0     		beq	.L8
+ 167              		.loc 1 294 22 discriminator 32 view .LVU33
+ 168 004e 5868     		ldr	r0, [r3, #4]
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 9
+
+
+ 169 0050 A0B1     		cbz	r0, .L13
+ 170              		.loc 1 294 22 discriminator 40 view .LVU34
+ 171 0052 5B88     		ldrh	r3, [r3, #2]
+ 172 0054 8B42     		cmp	r3, r1
+ 173 0056 13DD     		ble	.L14
+ 174              		.loc 1 294 22 discriminator 48 view .LVU35
+ 175 0058 4368     		ldr	r3, [r0, #4]
+ 176 005a 5B5C     		ldrb	r3, [r3, r1]	@ zero_extendqisi2
+ 177 005c 08E0     		b	.L7
+ 178              	.L8:
+ 179              		.loc 1 294 22 discriminator 63 view .LVU36
+ 180 005e 5868     		ldr	r0, [r3, #4]
+ 181 0060 80B1     		cbz	r0, .L15
+ 182              		.loc 1 294 22 discriminator 71 view .LVU37
+ 183 0062 5B88     		ldrh	r3, [r3, #2]
+ 184 0064 8B42     		cmp	r3, r1
+ 185 0066 0FDD     		ble	.L16
+ 186              		.loc 1 294 22 discriminator 79 view .LVU38
+ 187 0068 4368     		ldr	r3, [r0, #4]
+ 188 006a 5B56     		ldrsb	r3, [r3, r1]
+ 189 006c 00E0     		b	.L7
+ 190              	.LVL7:
+ 191              	.L11:
+ 192              		.loc 1 294 22 view .LVU39
+ 193 006e 0023     		movs	r3, #0
+ 194              	.LVL8:
+ 195              	.L7:
+ 196              		.loc 1 294 20 discriminator 84 view .LVU40
+ 197 0070 9361     		str	r3, [r2, #24]
+ 295:Src/aiPbMgr.c **** 	}
+ 296:Src/aiPbMgr.c **** }
+ 198              		.loc 1 296 1 discriminator 84 view .LVU41
+ 199 0072 5DF8044B 		ldr	r4, [sp], #4
+ 200              	.LCFI1:
+ 201              		.cfi_remember_state
+ 202              		.cfi_restore 4
+ 203              		.cfi_def_cfa_offset 0
+ 204 0076 7047     		bx	lr
+ 205              	.L12:
+ 206              	.LCFI2:
+ 207              		.cfi_restore_state
+ 294:Src/aiPbMgr.c **** 		shape->zeropoint = AI_BUFFER_META_INFO_INTQ_GET_ZEROPOINT(meta_info, idx);
+ 208              		.loc 1 294 22 view .LVU42
+ 209 0078 0023     		movs	r3, #0
+ 210 007a F9E7     		b	.L7
+ 211              	.L13:
+ 212 007c 0023     		movs	r3, #0
+ 213 007e F7E7     		b	.L7
+ 214              	.L14:
+ 294:Src/aiPbMgr.c **** 		shape->zeropoint = AI_BUFFER_META_INFO_INTQ_GET_ZEROPOINT(meta_info, idx);
+ 215              		.loc 1 294 22 view .LVU43
+ 216 0080 0023     		movs	r3, #0
+ 217 0082 F5E7     		b	.L7
+ 218              	.L15:
+ 294:Src/aiPbMgr.c **** 		shape->zeropoint = AI_BUFFER_META_INFO_INTQ_GET_ZEROPOINT(meta_info, idx);
+ 219              		.loc 1 294 22 view .LVU44
+ 220 0084 0023     		movs	r3, #0
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 10
+
+
+ 221 0086 F3E7     		b	.L7
+ 222              	.L16:
+ 294:Src/aiPbMgr.c **** 		shape->zeropoint = AI_BUFFER_META_INFO_INTQ_GET_ZEROPOINT(meta_info, idx);
+ 223              		.loc 1 294 22 view .LVU45
+ 224 0088 0023     		movs	r3, #0
+ 225 008a F1E7     		b	.L7
+ 226              	.L18:
+ 227              	.LCFI3:
+ 228              		.cfi_def_cfa_offset 0
+ 229              		.cfi_restore 4
+ 294:Src/aiPbMgr.c **** 		shape->zeropoint = AI_BUFFER_META_INFO_INTQ_GET_ZEROPOINT(meta_info, idx);
+ 230              		.loc 1 294 22 view .LVU46
+ 231 008c 7047     		bx	lr
+ 232              		.cfi_endproc
+ 233              	.LFE143:
+ 235              		.section	.text.init_aibuffer_msg,"ax",%progbits
+ 236              		.align	1
+ 237              		.syntax unified
+ 238              		.thumb
+ 239              		.thumb_func
+ 240              		.fpu fpv4-sp-d16
+ 242              	init_aibuffer_msg:
+ 243              	.LVL9:
+ 244              	.LFB147:
+ 297:Src/aiPbMgr.c **** 
+ 298:Src/aiPbMgr.c **** bool aiPbMgrSendAiBuffer3(const reqMsg *req, respMsg *resp, EnumState state,
+ 299:Src/aiPbMgr.c ****         uint32_t type, uint32_t id, ai_float dur_ms, const ai_buffer *buffer)
+ 300:Src/aiPbMgr.c **** {
+ 301:Src/aiPbMgr.c ****     struct aiPbMgrBuffer hdlb;
+ 302:Src/aiPbMgr.c ****     const ai_buffer_meta_info *meta_info = AI_BUFFER_META_INFO(buffer);
+ 303:Src/aiPbMgr.c **** 
+ 304:Src/aiPbMgr.c **** #if defined(AI_PB_FULL_IO) && (AI_PB_FULL_IO == 1)
+ 305:Src/aiPbMgr.c ****     const int is_io = AI_BUFFER_FMT_FLAG_IS_IO & buffer->format;
+ 306:Src/aiPbMgr.c **** #endif
+ 307:Src/aiPbMgr.c **** 
+ 308:Src/aiPbMgr.c ****     hdlb.n_ops = 0;
+ 309:Src/aiPbMgr.c ****     hdlb.buffer = (ai_buffer *)buffer;
+ 310:Src/aiPbMgr.c ****     hdlb.err = EnumError_E_NONE;
+ 311:Src/aiPbMgr.c ****     hdlb.n_max = aiPbAiBufferSize(buffer);
+ 312:Src/aiPbMgr.c ****     hdlb.msg = NULL;
+ 313:Src/aiPbMgr.c **** 
+ 314:Src/aiPbMgr.c **** #if defined(AI_PB_FULL_IO) && (AI_PB_FULL_IO == 1)
+ 315:Src/aiPbMgr.c ****     if ((type & PB_BUFFER_TYPE_SEND_WITHOUT_DATA) && (!is_io)) {
+ 316:Src/aiPbMgr.c ****         hdlb.n_max  = 0;
+ 317:Src/aiPbMgr.c ****     }
+ 318:Src/aiPbMgr.c **** #else
+ 319:Src/aiPbMgr.c ****     if (type & PB_BUFFER_TYPE_SEND_WITHOUT_DATA) {
+ 320:Src/aiPbMgr.c ****         hdlb.n_max  = 0;
+ 321:Src/aiPbMgr.c ****     }
+ 322:Src/aiPbMgr.c **** #endif
+ 323:Src/aiPbMgr.c ****     type &= (~PB_BUFFER_TYPE_SEND_WITHOUT_DATA);
+ 324:Src/aiPbMgr.c **** 
+ 325:Src/aiPbMgr.c ****     /* Fill Node sub-message */
+ 326:Src/aiPbMgr.c ****     resp->which_payload = respMsg_node_tag;
+ 327:Src/aiPbMgr.c ****     resp->payload.node.type = type;
+ 328:Src/aiPbMgr.c ****     resp->payload.node.id = id;
+ 329:Src/aiPbMgr.c ****     resp->payload.node.duration = dur_ms;
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 11
+
+
+ 330:Src/aiPbMgr.c ****     resp->payload.node.buffer.shape.format = aiPbAiFmtToMsgFmt(buffer->format);
+ 331:Src/aiPbMgr.c ****     resp->payload.node.buffer.shape.n_batches = buffer->n_batches;
+ 332:Src/aiPbMgr.c ****     resp->payload.node.buffer.shape.height = buffer->height;
+ 333:Src/aiPbMgr.c ****     resp->payload.node.buffer.shape.width = buffer->width;
+ 334:Src/aiPbMgr.c ****     resp->payload.node.buffer.shape.channels = buffer->channels;
+ 335:Src/aiPbMgr.c ****     aiPbMgrSetMetaInfo(meta_info, 0, &resp->payload.node.buffer.shape);
+ 336:Src/aiPbMgr.c **** 
+ 337:Src/aiPbMgr.c ****     resp->payload.node.buffer.datas.funcs.encode = &aiPbBuffer_write_cb3;
+ 338:Src/aiPbMgr.c ****     resp->payload.node.buffer.datas.arg = &hdlb;
+ 339:Src/aiPbMgr.c **** 
+ 340:Src/aiPbMgr.c ****     /* Send msg */
+ 341:Src/aiPbMgr.c ****     aiPbMgrSendResp(req, resp, state);
+ 342:Src/aiPbMgr.c **** 
+ 343:Src/aiPbMgr.c ****     /* Waiting ACK */
+ 344:Src/aiPbMgr.c ****     if (state == EnumState_S_PROCESSING)
+ 345:Src/aiPbMgr.c ****         return aiPbMgrWaitAck();
+ 346:Src/aiPbMgr.c ****     else
+ 347:Src/aiPbMgr.c ****         return true;
+ 348:Src/aiPbMgr.c **** }
+ 349:Src/aiPbMgr.c **** 
+ 350:Src/aiPbMgr.c **** /*---------------------------------------------------------------------------*/
+ 351:Src/aiPbMgr.c **** 
+ 352:Src/aiPbMgr.c **** void aiPbCmdSync(const reqMsg *req, respMsg *resp, void *param)
+ 353:Src/aiPbMgr.c **** {
+ 354:Src/aiPbMgr.c ****     resp->which_payload = respMsg_sync_tag;
+ 355:Src/aiPbMgr.c ****     resp->payload.sync.version =
+ 356:Src/aiPbMgr.c ****             EnumVersion_P_VERSION_MAJOR << 8 |
+ 357:Src/aiPbMgr.c ****             EnumVersion_P_VERSION_MINOR;
+ 358:Src/aiPbMgr.c **** 
+ 359:Src/aiPbMgr.c ****     resp->payload.sync.capability = EnumCapability_CAP_FIXED_POINT;
+ 360:Src/aiPbMgr.c **** 
+ 361:Src/aiPbMgr.c **** #if defined(AI_PB_TEST) && (AI_PB_TEST == 1)
+ 362:Src/aiPbMgr.c ****     resp->payload.sync.capability |= EnumCapability_CAP_SELF_TEST;
+ 363:Src/aiPbMgr.c **** #endif
+ 364:Src/aiPbMgr.c **** 
+ 365:Src/aiPbMgr.c ****     if (param)
+ 366:Src/aiPbMgr.c ****         resp->payload.sync.capability |= (uint32_t)param;
+ 367:Src/aiPbMgr.c **** 
+ 368:Src/aiPbMgr.c ****     aiPbMgrSendResp(req, resp, EnumState_S_IDLE);
+ 369:Src/aiPbMgr.c **** }
+ 370:Src/aiPbMgr.c **** 
+ 371:Src/aiPbMgr.c **** void aiPbCmdSysInfo(const reqMsg *req, respMsg *resp, void *param)
+ 372:Src/aiPbMgr.c **** {
+ 373:Src/aiPbMgr.c ****     UNUSED(param);
+ 374:Src/aiPbMgr.c ****     resp->which_payload = respMsg_sinfo_tag;
+ 375:Src/aiPbMgr.c ****     resp->payload.sinfo.devid = HAL_GetDEVID();
+ 376:Src/aiPbMgr.c ****     resp->payload.sinfo.sclock = HAL_RCC_GetSysClockFreq();
+ 377:Src/aiPbMgr.c ****     resp->payload.sinfo.hclock = HAL_RCC_GetHCLKFreq();
+ 378:Src/aiPbMgr.c ****     resp->payload.sinfo.cache = getFlashCacheConf();
+ 379:Src/aiPbMgr.c **** 
+ 380:Src/aiPbMgr.c ****     aiPbMgrSendResp(req, resp, EnumState_S_IDLE);
+ 381:Src/aiPbMgr.c **** }
+ 382:Src/aiPbMgr.c **** 
+ 383:Src/aiPbMgr.c **** 
+ 384:Src/aiPbMgr.c **** static void init_aibuffer_msg(const ai_buffer *aibuffer, aiBufferShapeMsg *msg)
+ 385:Src/aiPbMgr.c **** {
+ 245              		.loc 1 385 1 is_stmt 1 view -0
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 12
+
+
+ 246              		.cfi_startproc
+ 247              		@ args = 0, pretend = 0, frame = 0
+ 248              		@ frame_needed = 0, uses_anonymous_args = 0
+ 386:Src/aiPbMgr.c ****     if ((!aibuffer) || (!msg))
+ 249              		.loc 1 386 5 view .LVU48
+ 250              		.loc 1 386 8 is_stmt 0 view .LVU49
+ 251 0000 B0B1     		cbz	r0, .L24
+ 385:Src/aiPbMgr.c ****     if ((!aibuffer) || (!msg))
+ 252              		.loc 1 385 1 discriminator 1 view .LVU50
+ 253 0002 70B5     		push	{r4, r5, r6, lr}
+ 254              	.LCFI4:
+ 255              		.cfi_def_cfa_offset 16
+ 256              		.cfi_offset 4, -16
+ 257              		.cfi_offset 5, -12
+ 258              		.cfi_offset 6, -8
+ 259              		.cfi_offset 14, -4
+ 260 0004 0546     		mov	r5, r0
+ 261              		.loc 1 386 21 discriminator 1 view .LVU51
+ 262 0006 91B1     		cbz	r1, .L21
+ 263 0008 0C46     		mov	r4, r1
+ 387:Src/aiPbMgr.c ****         return;
+ 388:Src/aiPbMgr.c **** 
+ 389:Src/aiPbMgr.c ****     const ai_buffer_meta_info *meta_info = AI_BUFFER_META_INFO(aibuffer);
+ 264              		.loc 1 389 5 is_stmt 1 view .LVU52
+ 265              		.loc 1 389 32 is_stmt 0 view .LVU53
+ 266 000a 4669     		ldr	r6, [r0, #20]
+ 267              	.LVL10:
+ 390:Src/aiPbMgr.c **** 
+ 391:Src/aiPbMgr.c ****     msg->format = aiPbAiFmtToMsgFmt(aibuffer->format);
+ 268              		.loc 1 391 5 is_stmt 1 view .LVU54
+ 269              		.loc 1 391 19 is_stmt 0 view .LVU55
+ 270 000c 0068     		ldr	r0, [r0]
+ 271              	.LVL11:
+ 272              		.loc 1 391 19 view .LVU56
+ 273 000e FFF7FEFF 		bl	aiPbAiFmtToMsgFmt
+ 274              	.LVL12:
+ 275              		.loc 1 391 17 view .LVU57
+ 276 0012 2060     		str	r0, [r4]
+ 392:Src/aiPbMgr.c ****     msg->channels = aibuffer->channels;
+ 277              		.loc 1 392 5 is_stmt 1 view .LVU58
+ 278              		.loc 1 392 29 is_stmt 0 view .LVU59
+ 279 0014 EB68     		ldr	r3, [r5, #12]
+ 280              		.loc 1 392 19 view .LVU60
+ 281 0016 2361     		str	r3, [r4, #16]
+ 393:Src/aiPbMgr.c ****     msg->height = aibuffer->height;
+ 282              		.loc 1 393 5 is_stmt 1 view .LVU61
+ 283              		.loc 1 393 27 is_stmt 0 view .LVU62
+ 284 0018 EB88     		ldrh	r3, [r5, #6]
+ 285              		.loc 1 393 17 view .LVU63
+ 286 001a A360     		str	r3, [r4, #8]
+ 394:Src/aiPbMgr.c ****     msg->width = aibuffer->width;
+ 287              		.loc 1 394 5 is_stmt 1 view .LVU64
+ 288              		.loc 1 394 26 is_stmt 0 view .LVU65
+ 289 001c 2B89     		ldrh	r3, [r5, #8]
+ 290              		.loc 1 394 16 view .LVU66
+ 291 001e E360     		str	r3, [r4, #12]
+ 395:Src/aiPbMgr.c ****     msg->n_batches = aibuffer->n_batches;
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 13
+
+
+ 292              		.loc 1 395 5 is_stmt 1 view .LVU67
+ 293              		.loc 1 395 30 is_stmt 0 view .LVU68
+ 294 0020 AB88     		ldrh	r3, [r5, #4]
+ 295              		.loc 1 395 20 view .LVU69
+ 296 0022 6360     		str	r3, [r4, #4]
+ 396:Src/aiPbMgr.c ****     aiPbMgrSetMetaInfo(meta_info, 0, msg);
+ 297              		.loc 1 396 5 is_stmt 1 view .LVU70
+ 298 0024 2246     		mov	r2, r4
+ 299 0026 0021     		movs	r1, #0
+ 300 0028 3046     		mov	r0, r6
+ 301 002a FFF7FEFF 		bl	aiPbMgrSetMetaInfo
+ 302              	.LVL13:
+ 303              	.L21:
+ 397:Src/aiPbMgr.c **** }
+ 304              		.loc 1 397 1 is_stmt 0 view .LVU71
+ 305 002e 70BD     		pop	{r4, r5, r6, pc}
+ 306              	.LVL14:
+ 307              	.L24:
+ 308              	.LCFI5:
+ 309              		.cfi_def_cfa_offset 0
+ 310              		.cfi_restore 4
+ 311              		.cfi_restore 5
+ 312              		.cfi_restore 6
+ 313              		.cfi_restore 14
+ 314              		.loc 1 397 1 view .LVU72
+ 315 0030 7047     		bx	lr
+ 316              		.cfi_endproc
+ 317              	.LFE147:
+ 319              		.section	.text.aiPbBuffer_read_cb3,"ax",%progbits
+ 320              		.align	1
+ 321              		.syntax unified
+ 322              		.thumb
+ 323              		.thumb_func
+ 324              		.fpu fpv4-sp-d16
+ 326              	aiPbBuffer_read_cb3:
+ 327              	.LVL15:
+ 328              	.LFB140:
+ 170:Src/aiPbMgr.c ****     struct aiPbMgrBuffer *bm = (struct aiPbMgrBuffer *)*arg;
+ 329              		.loc 1 170 1 is_stmt 1 view -0
+ 330              		.cfi_startproc
+ 331              		@ args = 0, pretend = 0, frame = 8
+ 332              		@ frame_needed = 0, uses_anonymous_args = 0
+ 170:Src/aiPbMgr.c ****     struct aiPbMgrBuffer *bm = (struct aiPbMgrBuffer *)*arg;
+ 333              		.loc 1 170 1 is_stmt 0 view .LVU74
+ 334 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 335              	.LCFI6:
+ 336              		.cfi_def_cfa_offset 24
+ 337              		.cfi_offset 4, -24
+ 338              		.cfi_offset 5, -20
+ 339              		.cfi_offset 6, -16
+ 340              		.cfi_offset 7, -12
+ 341              		.cfi_offset 8, -8
+ 342              		.cfi_offset 14, -4
+ 343 0004 82B0     		sub	sp, sp, #8
+ 344              	.LCFI7:
+ 345              		.cfi_def_cfa_offset 32
+ 346 0006 0646     		mov	r6, r0
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 14
+
+
+ 171:Src/aiPbMgr.c ****     aiBufferByteMsg *msg;
+ 347              		.loc 1 171 5 is_stmt 1 view .LVU75
+ 171:Src/aiPbMgr.c ****     aiBufferByteMsg *msg;
+ 348              		.loc 1 171 27 is_stmt 0 view .LVU76
+ 349 0008 1468     		ldr	r4, [r2]
+ 350              	.LVL16:
+ 172:Src/aiPbMgr.c ****     ai_buffer_format format;
+ 351              		.loc 1 172 5 is_stmt 1 view .LVU77
+ 173:Src/aiPbMgr.c ****     size_t itsize;
+ 352              		.loc 1 173 5 view .LVU78
+ 174:Src/aiPbMgr.c **** 
+ 353              		.loc 1 174 5 view .LVU79
+ 176:Src/aiPbMgr.c **** 
+ 354              		.loc 1 176 5 view .LVU80
+ 178:Src/aiPbMgr.c ****     msg = (aiBufferByteMsg *)bm->msg;
+ 355              		.loc 1 178 5 view .LVU81
+ 178:Src/aiPbMgr.c ****     msg = (aiBufferByteMsg *)bm->msg;
+ 356              		.loc 1 178 18 is_stmt 0 view .LVU82
+ 357 000a 6568     		ldr	r5, [r4, #4]
+ 358              	.LVL17:
+ 179:Src/aiPbMgr.c ****     format = aiPbMsgFmtToAiFmt(msg->shape.format);
+ 359              		.loc 1 179 5 is_stmt 1 view .LVU83
+ 179:Src/aiPbMgr.c ****     format = aiPbMsgFmtToAiFmt(msg->shape.format);
+ 360              		.loc 1 179 9 is_stmt 0 view .LVU84
+ 361 000c 2769     		ldr	r7, [r4, #16]
+ 362              	.LVL18:
+ 180:Src/aiPbMgr.c **** 
+ 363              		.loc 1 180 5 is_stmt 1 view .LVU85
+ 180:Src/aiPbMgr.c **** 
+ 364              		.loc 1 180 14 is_stmt 0 view .LVU86
+ 365 000e 3868     		ldr	r0, [r7]
+ 366              	.LVL19:
+ 180:Src/aiPbMgr.c **** 
+ 367              		.loc 1 180 14 view .LVU87
+ 368 0010 FFF7FEFF 		bl	aiPbMsgFmtToAiFmt
+ 369              	.LVL20:
+ 185:Src/aiPbMgr.c ****     if ((format == AI_BUFFER_FORMAT_NONE) || (format != bm->buffer->format)) {
+ 370              		.loc 1 185 5 is_stmt 1 view .LVU88
+ 185:Src/aiPbMgr.c ****     if ((format == AI_BUFFER_FORMAT_NONE) || (format != bm->buffer->format)) {
+ 371              		.loc 1 185 13 is_stmt 0 view .LVU89
+ 372 0014 0023     		movs	r3, #0
+ 373 0016 E360     		str	r3, [r4, #12]
+ 186:Src/aiPbMgr.c ****         maxr = 0;
+ 374              		.loc 1 186 5 is_stmt 1 view .LVU90
+ 186:Src/aiPbMgr.c ****         maxr = 0;
+ 375              		.loc 1 186 8 is_stmt 0 view .LVU91
+ 376 0018 4028     		cmp	r0, #64
+ 377 001a 03D0     		beq	.L28
+ 186:Src/aiPbMgr.c ****         maxr = 0;
+ 378              		.loc 1 186 59 discriminator 1 view .LVU92
+ 379 001c 2368     		ldr	r3, [r4]
+ 186:Src/aiPbMgr.c ****         maxr = 0;
+ 380              		.loc 1 186 67 discriminator 1 view .LVU93
+ 381 001e 1A68     		ldr	r2, [r3]
+ 186:Src/aiPbMgr.c ****         maxr = 0;
+ 382              		.loc 1 186 43 discriminator 1 view .LVU94
+ 383 0020 8242     		cmp	r2, r0
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 15
+
+
+ 384 0022 09D0     		beq	.L29
+ 385              	.L28:
+ 187:Src/aiPbMgr.c ****         bm->err = EnumError_E_INVALID_FORMAT;
+ 386              		.loc 1 187 9 is_stmt 1 view .LVU95
+ 387              	.LVL21:
+ 188:Src/aiPbMgr.c ****     } else if ((msg->shape.channels != bm->buffer->channels) ||
+ 388              		.loc 1 188 9 view .LVU96
+ 188:Src/aiPbMgr.c ****     } else if ((msg->shape.channels != bm->buffer->channels) ||
+ 389              		.loc 1 188 17 is_stmt 0 view .LVU97
+ 390 0024 0223     		movs	r3, #2
+ 391 0026 E360     		str	r3, [r4, #12]
+ 187:Src/aiPbMgr.c ****         bm->err = EnumError_E_INVALID_FORMAT;
+ 392              		.loc 1 187 14 view .LVU98
+ 393 0028 0025     		movs	r5, #0
+ 394              	.LVL22:
+ 395              	.L30:
+ 197:Src/aiPbMgr.c **** 
+ 396              		.loc 1 197 5 is_stmt 1 view .LVU99
+ 197:Src/aiPbMgr.c **** 
+ 397              		.loc 1 197 14 is_stmt 0 view .LVU100
+ 398 002a FFF7FEFF 		bl	aiPbBufferGetItemSize
+ 399              	.LVL23:
+ 197:Src/aiPbMgr.c **** 
+ 400              		.loc 1 197 14 view .LVU101
+ 401 002e 0746     		mov	r7, r0
+ 402              	.LVL24:
+ 200:Src/aiPbMgr.c ****     while (stream->bytes_left) {
+ 403              		.loc 1 200 5 is_stmt 1 view .LVU102
+ 200:Src/aiPbMgr.c ****     while (stream->bytes_left) {
+ 404              		.loc 1 200 32 is_stmt 0 view .LVU103
+ 405 0030 2368     		ldr	r3, [r4]
+ 200:Src/aiPbMgr.c ****     while (stream->bytes_left) {
+ 406              		.loc 1 200 14 view .LVU104
+ 407 0032 D3F81080 		ldr	r8, [r3, #16]
+ 408              	.LVL25:
+ 201:Src/aiPbMgr.c ****         uint64_t number;
+ 409              		.loc 1 201 5 is_stmt 1 view .LVU105
+ 201:Src/aiPbMgr.c ****         uint64_t number;
+ 410              		.loc 1 201 11 is_stmt 0 view .LVU106
+ 411 0036 18E0     		b	.L32
+ 412              	.LVL26:
+ 413              	.L29:
+ 189:Src/aiPbMgr.c ****             (msg->shape.height != bm->buffer->height) ||
+ 414              		.loc 1 189 12 is_stmt 1 view .LVU107
+ 189:Src/aiPbMgr.c ****             (msg->shape.height != bm->buffer->height) ||
+ 415              		.loc 1 189 27 is_stmt 0 view .LVU108
+ 416 0038 3969     		ldr	r1, [r7, #16]
+ 189:Src/aiPbMgr.c ****             (msg->shape.height != bm->buffer->height) ||
+ 417              		.loc 1 189 50 view .LVU109
+ 418 003a DA68     		ldr	r2, [r3, #12]
+ 189:Src/aiPbMgr.c ****             (msg->shape.height != bm->buffer->height) ||
+ 419              		.loc 1 189 15 view .LVU110
+ 420 003c 9142     		cmp	r1, r2
+ 421 003e 03D0     		beq	.L41
+ 422              	.L31:
+ 193:Src/aiPbMgr.c ****         bm->err = EnumError_E_INVALID_SHAPE;
+ 423              		.loc 1 193 9 is_stmt 1 view .LVU111
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 16
+
+
+ 424              	.LVL27:
+ 194:Src/aiPbMgr.c ****     }
+ 425              		.loc 1 194 9 view .LVU112
+ 194:Src/aiPbMgr.c ****     }
+ 426              		.loc 1 194 17 is_stmt 0 view .LVU113
+ 427 0040 0523     		movs	r3, #5
+ 428 0042 E360     		str	r3, [r4, #12]
+ 193:Src/aiPbMgr.c ****         bm->err = EnumError_E_INVALID_SHAPE;
+ 429              		.loc 1 193 14 view .LVU114
+ 430 0044 0025     		movs	r5, #0
+ 431 0046 F0E7     		b	.L30
+ 432              	.LVL28:
+ 433              	.L41:
+ 190:Src/aiPbMgr.c ****             (msg->shape.width != bm->buffer->width) ||
+ 434              		.loc 1 190 24 discriminator 1 view .LVU115
+ 435 0048 B968     		ldr	r1, [r7, #8]
+ 190:Src/aiPbMgr.c ****             (msg->shape.width != bm->buffer->width) ||
+ 436              		.loc 1 190 45 discriminator 1 view .LVU116
+ 437 004a DA88     		ldrh	r2, [r3, #6]
+ 189:Src/aiPbMgr.c ****             (msg->shape.height != bm->buffer->height) ||
+ 438              		.loc 1 189 62 discriminator 1 view .LVU117
+ 439 004c 9142     		cmp	r1, r2
+ 440 004e F7D1     		bne	.L31
+ 191:Src/aiPbMgr.c ****             (msg->shape.n_batches != bm->buffer->n_batches)) {
+ 441              		.loc 1 191 24 view .LVU118
+ 442 0050 F968     		ldr	r1, [r7, #12]
+ 191:Src/aiPbMgr.c ****             (msg->shape.n_batches != bm->buffer->n_batches)) {
+ 443              		.loc 1 191 44 view .LVU119
+ 444 0052 1A89     		ldrh	r2, [r3, #8]
+ 190:Src/aiPbMgr.c ****             (msg->shape.width != bm->buffer->width) ||
+ 445              		.loc 1 190 55 view .LVU120
+ 446 0054 9142     		cmp	r1, r2
+ 447 0056 F3D1     		bne	.L31
+ 192:Src/aiPbMgr.c ****         maxr = 0;
+ 448              		.loc 1 192 24 view .LVU121
+ 449 0058 7A68     		ldr	r2, [r7, #4]
+ 192:Src/aiPbMgr.c ****         maxr = 0;
+ 450              		.loc 1 192 48 view .LVU122
+ 451 005a 9B88     		ldrh	r3, [r3, #4]
+ 191:Src/aiPbMgr.c ****             (msg->shape.n_batches != bm->buffer->n_batches)) {
+ 452              		.loc 1 191 53 view .LVU123
+ 453 005c 9A42     		cmp	r2, r3
+ 454 005e EFD1     		bne	.L31
+ 455 0060 E3E7     		b	.L30
+ 456              	.LVL29:
+ 457              	.L36:
+ 458              	.LBB2:
+ 210:Src/aiPbMgr.c ****         }
+ 459              		.loc 1 210 13 is_stmt 1 view .LVU124
+ 210:Src/aiPbMgr.c ****         }
+ 460              		.loc 1 210 17 is_stmt 0 view .LVU125
+ 461 0062 013D     		subs	r5, r5, #1
+ 462              	.LVL30:
+ 463              	.L35:
+ 212:Src/aiPbMgr.c ****     }
+ 464              		.loc 1 212 9 is_stmt 1 view .LVU126
+ 212:Src/aiPbMgr.c ****     }
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 17
+
+
+ 465              		.loc 1 212 11 is_stmt 0 view .LVU127
+ 466 0064 A368     		ldr	r3, [r4, #8]
+ 212:Src/aiPbMgr.c ****     }
+ 467              		.loc 1 212 18 view .LVU128
+ 468 0066 0133     		adds	r3, r3, #1
+ 469 0068 A360     		str	r3, [r4, #8]
+ 470              	.L32:
+ 212:Src/aiPbMgr.c ****     }
+ 471              		.loc 1 212 18 view .LVU129
+ 472              	.LBE2:
+ 201:Src/aiPbMgr.c ****         uint64_t number;
+ 473              		.loc 1 201 18 view .LVU130
+ 474 006a B368     		ldr	r3, [r6, #8]
+ 201:Src/aiPbMgr.c ****         uint64_t number;
+ 475              		.loc 1 201 11 view .LVU131
+ 476 006c 93B1     		cbz	r3, .L42
+ 477              	.LBB3:
+ 202:Src/aiPbMgr.c ****         if (!pb_read(stream, (pb_byte_t *)&number, itsize))
+ 478              		.loc 1 202 9 is_stmt 1 view .LVU132
+ 203:Src/aiPbMgr.c ****             return false;
+ 479              		.loc 1 203 9 view .LVU133
+ 203:Src/aiPbMgr.c ****             return false;
+ 480              		.loc 1 203 14 is_stmt 0 view .LVU134
+ 481 006e 3A46     		mov	r2, r7
+ 482 0070 6946     		mov	r1, sp
+ 483 0072 3046     		mov	r0, r6
+ 484 0074 FFF7FEFF 		bl	pb_read
+ 485              	.LVL31:
+ 203:Src/aiPbMgr.c ****             return false;
+ 486              		.loc 1 203 12 view .LVU135
+ 487 0078 0346     		mov	r3, r0
+ 488 007a A8B1     		cbz	r0, .L34
+ 205:Src/aiPbMgr.c ****             if (pw) {
+ 489              		.loc 1 205 9 is_stmt 1 view .LVU136
+ 205:Src/aiPbMgr.c ****             if (pw) {
+ 490              		.loc 1 205 12 is_stmt 0 view .LVU137
+ 491 007c 002D     		cmp	r5, #0
+ 492 007e F1DD     		ble	.L35
+ 206:Src/aiPbMgr.c ****                 memcpy(pw, &number, itsize);
+ 493              		.loc 1 206 13 is_stmt 1 view .LVU138
+ 206:Src/aiPbMgr.c ****                 memcpy(pw, &number, itsize);
+ 494              		.loc 1 206 16 is_stmt 0 view .LVU139
+ 495 0080 B8F1000F 		cmp	r8, #0
+ 496 0084 EDD0     		beq	.L36
+ 207:Src/aiPbMgr.c ****                 pw += itsize;
+ 497              		.loc 1 207 17 is_stmt 1 view .LVU140
+ 498 0086 3A46     		mov	r2, r7
+ 499 0088 6946     		mov	r1, sp
+ 500 008a 4046     		mov	r0, r8
+ 501 008c FFF7FEFF 		bl	memcpy
+ 502              	.LVL32:
+ 208:Src/aiPbMgr.c ****             }
+ 503              		.loc 1 208 17 view .LVU141
+ 208:Src/aiPbMgr.c ****             }
+ 504              		.loc 1 208 20 is_stmt 0 view .LVU142
+ 505 0090 B844     		add	r8, r8, r7
+ 506              	.LVL33:
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 18
+
+
+ 208:Src/aiPbMgr.c ****             }
+ 507              		.loc 1 208 20 view .LVU143
+ 508 0092 E6E7     		b	.L36
+ 509              	.L42:
+ 208:Src/aiPbMgr.c ****             }
+ 510              		.loc 1 208 20 view .LVU144
+ 511              	.LBE3:
+ 216:Src/aiPbMgr.c ****         bm->err = EnumError_E_INVALID_SIZE;
+ 512              		.loc 1 216 5 is_stmt 1 view .LVU145
+ 216:Src/aiPbMgr.c ****         bm->err = EnumError_E_INVALID_SIZE;
+ 513              		.loc 1 216 12 is_stmt 0 view .LVU146
+ 514 0094 E368     		ldr	r3, [r4, #12]
+ 216:Src/aiPbMgr.c ****         bm->err = EnumError_E_INVALID_SIZE;
+ 515              		.loc 1 216 8 view .LVU147
+ 516 0096 33B9     		cbnz	r3, .L38
+ 216:Src/aiPbMgr.c ****         bm->err = EnumError_E_INVALID_SIZE;
+ 517              		.loc 1 216 45 discriminator 1 view .LVU148
+ 518 0098 A268     		ldr	r2, [r4, #8]
+ 216:Src/aiPbMgr.c ****         bm->err = EnumError_E_INVALID_SIZE;
+ 519              		.loc 1 216 58 discriminator 1 view .LVU149
+ 520 009a 6368     		ldr	r3, [r4, #4]
+ 216:Src/aiPbMgr.c ****         bm->err = EnumError_E_INVALID_SIZE;
+ 521              		.loc 1 216 39 discriminator 1 view .LVU150
+ 522 009c 9A42     		cmp	r2, r3
+ 523 009e 07D0     		beq	.L39
+ 217:Src/aiPbMgr.c **** 
+ 524              		.loc 1 217 9 is_stmt 1 view .LVU151
+ 217:Src/aiPbMgr.c **** 
+ 525              		.loc 1 217 17 is_stmt 0 view .LVU152
+ 526 00a0 0123     		movs	r3, #1
+ 527 00a2 E360     		str	r3, [r4, #12]
+ 528 00a4 00E0     		b	.L34
+ 529              	.L38:
+ 219:Src/aiPbMgr.c **** }
+ 530              		.loc 1 219 12 view .LVU153
+ 531 00a6 0123     		movs	r3, #1
+ 532              	.L34:
+ 220:Src/aiPbMgr.c **** 
+ 533              		.loc 1 220 1 view .LVU154
+ 534 00a8 1846     		mov	r0, r3
+ 535 00aa 02B0     		add	sp, sp, #8
+ 536              	.LCFI8:
+ 537              		.cfi_remember_state
+ 538              		.cfi_def_cfa_offset 24
+ 539              		@ sp needed
+ 540 00ac BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 541              	.LVL34:
+ 542              	.L39:
+ 543              	.LCFI9:
+ 544              		.cfi_restore_state
+ 219:Src/aiPbMgr.c **** }
+ 545              		.loc 1 219 12 view .LVU155
+ 546 00b0 0123     		movs	r3, #1
+ 547 00b2 F9E7     		b	.L34
+ 548              		.cfi_endproc
+ 549              	.LFE140:
+ 551              		.section	.text.aiPbBuffer_write_cb3,"ax",%progbits
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 19
+
+
+ 552              		.align	1
+ 553              		.syntax unified
+ 554              		.thumb
+ 555              		.thumb_func
+ 556              		.fpu fpv4-sp-d16
+ 558              	aiPbBuffer_write_cb3:
+ 559              	.LVL35:
+ 560              	.LFB141:
+ 224:Src/aiPbMgr.c ****     struct aiPbMgrBuffer *bm = (struct aiPbMgrBuffer *)*arg;
+ 561              		.loc 1 224 1 is_stmt 1 view -0
+ 562              		.cfi_startproc
+ 563              		@ args = 0, pretend = 0, frame = 0
+ 564              		@ frame_needed = 0, uses_anonymous_args = 0
+ 224:Src/aiPbMgr.c ****     struct aiPbMgrBuffer *bm = (struct aiPbMgrBuffer *)*arg;
+ 565              		.loc 1 224 1 is_stmt 0 view .LVU157
+ 566 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+ 567              	.LCFI10:
+ 568              		.cfi_def_cfa_offset 32
+ 569              		.cfi_offset 4, -32
+ 570              		.cfi_offset 5, -28
+ 571              		.cfi_offset 6, -24
+ 572              		.cfi_offset 7, -20
+ 573              		.cfi_offset 8, -16
+ 574              		.cfi_offset 9, -12
+ 575              		.cfi_offset 10, -8
+ 576              		.cfi_offset 14, -4
+ 225:Src/aiPbMgr.c ****     size_t itsize;
+ 577              		.loc 1 225 5 is_stmt 1 view .LVU158
+ 225:Src/aiPbMgr.c ****     size_t itsize;
+ 578              		.loc 1 225 27 is_stmt 0 view .LVU159
+ 579 0004 1468     		ldr	r4, [r2]
+ 580              	.LVL36:
+ 226:Src/aiPbMgr.c **** 
+ 581              		.loc 1 226 5 is_stmt 1 view .LVU160
+ 228:Src/aiPbMgr.c ****     ai_buffer_format format;
+ 582              		.loc 1 228 5 view .LVU161
+ 228:Src/aiPbMgr.c ****     ai_buffer_format format;
+ 583              		.loc 1 228 18 is_stmt 0 view .LVU162
+ 584 0006 6668     		ldr	r6, [r4, #4]
+ 585              	.LVL37:
+ 229:Src/aiPbMgr.c **** 
+ 586              		.loc 1 229 5 is_stmt 1 view .LVU163
+ 231:Src/aiPbMgr.c ****         return true;
+ 587              		.loc 1 231 5 view .LVU164
+ 231:Src/aiPbMgr.c ****         return true;
+ 588              		.loc 1 231 8 is_stmt 0 view .LVU165
+ 589 0008 CEB1     		cbz	r6, .L45
+ 231:Src/aiPbMgr.c ****         return true;
+ 590              		.loc 1 231 28 discriminator 1 view .LVU166
+ 591 000a 2768     		ldr	r7, [r4]
+ 231:Src/aiPbMgr.c ****         return true;
+ 592              		.loc 1 231 21 discriminator 1 view .LVU167
+ 593 000c DFB1     		cbz	r7, .L46
+ 594 000e 8A46     		mov	r10, r1
+ 595 0010 0546     		mov	r5, r0
+ 234:Src/aiPbMgr.c **** 
+ 596              		.loc 1 234 5 is_stmt 1 view .LVU168
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 20
+
+
+ 597              	.LVL38:
+ 236:Src/aiPbMgr.c **** 
+ 598              		.loc 1 236 5 view .LVU169
+ 236:Src/aiPbMgr.c **** 
+ 599              		.loc 1 236 14 is_stmt 0 view .LVU170
+ 600 0012 3868     		ldr	r0, [r7]
+ 601              	.LVL39:
+ 236:Src/aiPbMgr.c **** 
+ 602              		.loc 1 236 14 view .LVU171
+ 603 0014 FFF7FEFF 		bl	aiPbBufferGetItemSize
+ 604              	.LVL40:
+ 236:Src/aiPbMgr.c **** 
+ 605              		.loc 1 236 14 view .LVU172
+ 606 0018 8146     		mov	r9, r0
+ 607              	.LVL41:
+ 239:Src/aiPbMgr.c **** 
+ 608              		.loc 1 239 5 is_stmt 1 view .LVU173
+ 239:Src/aiPbMgr.c **** 
+ 609              		.loc 1 239 16 is_stmt 0 view .LVU174
+ 610 001a D7F81080 		ldr	r8, [r7, #16]
+ 611              	.LVL42:
+ 241:Src/aiPbMgr.c ****         return false;
+ 612              		.loc 1 241 5 is_stmt 1 view .LVU175
+ 241:Src/aiPbMgr.c ****         return false;
+ 613              		.loc 1 241 10 is_stmt 0 view .LVU176
+ 614 001e 5146     		mov	r1, r10
+ 615 0020 2846     		mov	r0, r5
+ 616              	.LVL43:
+ 241:Src/aiPbMgr.c ****         return false;
+ 617              		.loc 1 241 10 view .LVU177
+ 618 0022 FFF7FEFF 		bl	pb_encode_tag_for_field
+ 619              	.LVL44:
+ 241:Src/aiPbMgr.c ****         return false;
+ 620              		.loc 1 241 8 view .LVU178
+ 621 0026 0346     		mov	r3, r0
+ 622 0028 50B1     		cbz	r0, .L44
+ 244:Src/aiPbMgr.c ****         return false;
+ 623              		.loc 1 244 5 is_stmt 1 view .LVU179
+ 244:Src/aiPbMgr.c ****         return false;
+ 624              		.loc 1 244 10 is_stmt 0 view .LVU180
+ 625 002a 09FB06F2 		mul	r2, r9, r6
+ 626 002e 4146     		mov	r1, r8
+ 627 0030 2846     		mov	r0, r5
+ 628 0032 FFF7FEFF 		bl	pb_encode_string
+ 629              	.LVL45:
+ 244:Src/aiPbMgr.c ****         return false;
+ 630              		.loc 1 244 8 view .LVU181
+ 631 0036 0346     		mov	r3, r0
+ 632 0038 10B1     		cbz	r0, .L44
+ 247:Src/aiPbMgr.c **** 
+ 633              		.loc 1 247 5 is_stmt 1 view .LVU182
+ 247:Src/aiPbMgr.c **** 
+ 634              		.loc 1 247 15 is_stmt 0 view .LVU183
+ 635 003a A660     		str	r6, [r4, #8]
+ 249:Src/aiPbMgr.c **** }
+ 636              		.loc 1 249 5 is_stmt 1 view .LVU184
+ 249:Src/aiPbMgr.c **** }
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 21
+
+
+ 637              		.loc 1 249 12 is_stmt 0 view .LVU185
+ 638 003c 00E0     		b	.L44
+ 639              	.LVL46:
+ 640              	.L45:
+ 232:Src/aiPbMgr.c **** 
+ 641              		.loc 1 232 16 view .LVU186
+ 642 003e 0123     		movs	r3, #1
+ 643              	.LVL47:
+ 644              	.L44:
+ 250:Src/aiPbMgr.c **** 
+ 645              		.loc 1 250 1 view .LVU187
+ 646 0040 1846     		mov	r0, r3
+ 647 0042 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 648              	.LVL48:
+ 649              	.L46:
+ 232:Src/aiPbMgr.c **** 
+ 650              		.loc 1 232 16 view .LVU188
+ 651 0046 0123     		movs	r3, #1
+ 652 0048 FAE7     		b	.L44
+ 653              		.cfi_endproc
+ 654              	.LFE141:
+ 656              		.section	.text.nn_shape_w_cb,"ax",%progbits
+ 657              		.align	1
+ 658              		.syntax unified
+ 659              		.thumb
+ 660              		.thumb_func
+ 661              		.fpu fpv4-sp-d16
+ 663              	nn_shape_w_cb:
+ 664              	.LVL49:
+ 665              	.LFB148:
+ 398:Src/aiPbMgr.c **** 
+ 399:Src/aiPbMgr.c **** static bool nn_shape_w_cb(pb_ostream_t *stream, const pb_field_t *field,
+ 400:Src/aiPbMgr.c ****         const ai_buffer *aibuffer, int maxw)
+ 401:Src/aiPbMgr.c **** {
+ 666              		.loc 1 401 1 is_stmt 1 view -0
+ 667              		.cfi_startproc
+ 668              		@ args = 0, pretend = 0, frame = 32
+ 669              		@ frame_needed = 0, uses_anonymous_args = 0
+ 670              		.loc 1 401 1 is_stmt 0 view .LVU190
+ 671 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 672              	.LCFI11:
+ 673              		.cfi_def_cfa_offset 24
+ 674              		.cfi_offset 4, -24
+ 675              		.cfi_offset 5, -20
+ 676              		.cfi_offset 6, -16
+ 677              		.cfi_offset 7, -12
+ 678              		.cfi_offset 8, -8
+ 679              		.cfi_offset 14, -4
+ 680 0004 88B0     		sub	sp, sp, #32
+ 681              	.LCFI12:
+ 682              		.cfi_def_cfa_offset 56
+ 683 0006 0546     		mov	r5, r0
+ 684 0008 0F46     		mov	r7, r1
+ 685 000a 9046     		mov	r8, r2
+ 686 000c 1E46     		mov	r6, r3
+ 402:Src/aiPbMgr.c ****     aiBufferShapeMsg msg;
+ 687              		.loc 1 402 5 is_stmt 1 view .LVU191
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 22
+
+
+ 403:Src/aiPbMgr.c **** 
+ 404:Src/aiPbMgr.c ****     for (int i = 0; i < maxw; i++) {
+ 688              		.loc 1 404 5 view .LVU192
+ 689              	.LBB4:
+ 690              		.loc 1 404 10 view .LVU193
+ 691              	.LVL50:
+ 692              		.loc 1 404 14 is_stmt 0 view .LVU194
+ 693 000e 0024     		movs	r4, #0
+ 694              	.LVL51:
+ 695              	.L49:
+ 696              		.loc 1 404 5 discriminator 1 view .LVU195
+ 697 0010 B442     		cmp	r4, r6
+ 698 0012 15DA     		bge	.L53
+ 405:Src/aiPbMgr.c ****         if (!pb_encode_tag_for_field(stream, field))
+ 699              		.loc 1 405 9 is_stmt 1 view .LVU196
+ 700              		.loc 1 405 14 is_stmt 0 view .LVU197
+ 701 0014 3946     		mov	r1, r7
+ 702 0016 2846     		mov	r0, r5
+ 703 0018 FFF7FEFF 		bl	pb_encode_tag_for_field
+ 704              	.LVL52:
+ 705              		.loc 1 405 12 view .LVU198
+ 706 001c 0346     		mov	r3, r0
+ 707 001e 80B1     		cbz	r0, .L50
+ 406:Src/aiPbMgr.c ****             return false;
+ 407:Src/aiPbMgr.c **** 
+ 408:Src/aiPbMgr.c ****         init_aibuffer_msg(&aibuffer[i], &msg);
+ 708              		.loc 1 408 9 is_stmt 1 view .LVU199
+ 709              		.loc 1 408 36 is_stmt 0 view .LVU200
+ 710 0020 04EB4403 		add	r3, r4, r4, lsl #1
+ 711 0024 D800     		lsls	r0, r3, #3
+ 712              		.loc 1 408 9 view .LVU201
+ 713 0026 01A9     		add	r1, sp, #4
+ 714 0028 4044     		add	r0, r0, r8
+ 715 002a FFF7FEFF 		bl	init_aibuffer_msg
+ 716              	.LVL53:
+ 409:Src/aiPbMgr.c **** 
+ 410:Src/aiPbMgr.c ****         if (!pb_encode_submessage(stream, aiBufferShapeMsg_fields, &msg))
+ 717              		.loc 1 410 9 is_stmt 1 view .LVU202
+ 718              		.loc 1 410 14 is_stmt 0 view .LVU203
+ 719 002e 01AA     		add	r2, sp, #4
+ 720 0030 0649     		ldr	r1, .L54
+ 721 0032 2846     		mov	r0, r5
+ 722 0034 FFF7FEFF 		bl	pb_encode_submessage
+ 723              	.LVL54:
+ 724              		.loc 1 410 12 view .LVU204
+ 725 0038 0346     		mov	r3, r0
+ 726 003a 10B1     		cbz	r0, .L50
+ 404:Src/aiPbMgr.c ****         if (!pb_encode_tag_for_field(stream, field))
+ 727              		.loc 1 404 32 discriminator 2 view .LVU205
+ 728 003c 0134     		adds	r4, r4, #1
+ 729              	.LVL55:
+ 404:Src/aiPbMgr.c ****         if (!pb_encode_tag_for_field(stream, field))
+ 730              		.loc 1 404 32 discriminator 2 view .LVU206
+ 731 003e E7E7     		b	.L49
+ 732              	.L53:
+ 404:Src/aiPbMgr.c ****         if (!pb_encode_tag_for_field(stream, field))
+ 733              		.loc 1 404 32 discriminator 2 view .LVU207
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 23
+
+
+ 734              	.LBE4:
+ 411:Src/aiPbMgr.c ****             return false;
+ 412:Src/aiPbMgr.c ****     }
+ 413:Src/aiPbMgr.c ****     return true;
+ 735              		.loc 1 413 12 view .LVU208
+ 736 0040 0123     		movs	r3, #1
+ 737              	.L50:
+ 414:Src/aiPbMgr.c **** }
+ 738              		.loc 1 414 1 view .LVU209
+ 739 0042 1846     		mov	r0, r3
+ 740 0044 08B0     		add	sp, sp, #32
+ 741              	.LCFI13:
+ 742              		.cfi_def_cfa_offset 24
+ 743              		@ sp needed
+ 744 0046 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 745              	.LVL56:
+ 746              	.L55:
+ 747              		.loc 1 414 1 view .LVU210
+ 748 004a 00BF     		.align	2
+ 749              	.L54:
+ 750 004c 00000000 		.word	aiBufferShapeMsg_fields
+ 751              		.cfi_endproc
+ 752              	.LFE148:
+ 754              		.section	.text.nn_outputs_w_cb,"ax",%progbits
+ 755              		.align	1
+ 756              		.syntax unified
+ 757              		.thumb
+ 758              		.thumb_func
+ 759              		.fpu fpv4-sp-d16
+ 761              	nn_outputs_w_cb:
+ 762              	.LVL57:
+ 763              	.LFB150:
+ 415:Src/aiPbMgr.c **** 
+ 416:Src/aiPbMgr.c **** static bool nn_inputs_w_cb(pb_ostream_t *stream, const pb_field_t *field,
+ 417:Src/aiPbMgr.c ****         void * const *arg)
+ 418:Src/aiPbMgr.c **** {
+ 419:Src/aiPbMgr.c ****     ai_network_report *report = (ai_network_report *)*arg;
+ 420:Src/aiPbMgr.c **** 
+ 421:Src/aiPbMgr.c ****     if (!report)
+ 422:Src/aiPbMgr.c ****         return true;
+ 423:Src/aiPbMgr.c **** 
+ 424:Src/aiPbMgr.c ****     return nn_shape_w_cb(stream, field, &report->inputs[0], report->n_inputs);
+ 425:Src/aiPbMgr.c **** }
+ 426:Src/aiPbMgr.c **** 
+ 427:Src/aiPbMgr.c **** static bool nn_outputs_w_cb(pb_ostream_t *stream, const pb_field_t *field,
+ 428:Src/aiPbMgr.c ****         void * const *arg)
+ 429:Src/aiPbMgr.c **** {
+ 764              		.loc 1 429 1 is_stmt 1 view -0
+ 765              		.cfi_startproc
+ 766              		@ args = 0, pretend = 0, frame = 0
+ 767              		@ frame_needed = 0, uses_anonymous_args = 0
+ 430:Src/aiPbMgr.c ****     ai_network_report *report = (ai_network_report *)*arg;
+ 768              		.loc 1 430 5 view .LVU212
+ 769              		.loc 1 430 24 is_stmt 0 view .LVU213
+ 770 0000 1268     		ldr	r2, [r2]
+ 771              	.LVL58:
+ 431:Src/aiPbMgr.c **** 
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 24
+
+
+ 432:Src/aiPbMgr.c ****     if (!report)
+ 772              		.loc 1 432 5 is_stmt 1 view .LVU214
+ 773              		.loc 1 432 8 is_stmt 0 view .LVU215
+ 774 0002 2AB1     		cbz	r2, .L58
+ 429:Src/aiPbMgr.c ****     ai_network_report *report = (ai_network_report *)*arg;
+ 775              		.loc 1 429 1 view .LVU216
+ 776 0004 08B5     		push	{r3, lr}
+ 777              	.LCFI14:
+ 778              		.cfi_def_cfa_offset 8
+ 779              		.cfi_offset 3, -8
+ 780              		.cfi_offset 14, -4
+ 433:Src/aiPbMgr.c ****         return true;
+ 434:Src/aiPbMgr.c **** 
+ 435:Src/aiPbMgr.c ****     return nn_shape_w_cb(stream, field, &report->outputs[0], report->n_outputs);
+ 781              		.loc 1 435 5 is_stmt 1 view .LVU217
+ 782              		.loc 1 435 12 is_stmt 0 view .LVU218
+ 783 0006 538E     		ldrh	r3, [r2, #50]
+ 784 0008 926B     		ldr	r2, [r2, #56]
+ 785              	.LVL59:
+ 786              		.loc 1 435 12 view .LVU219
+ 787 000a FFF7FEFF 		bl	nn_shape_w_cb
+ 788              	.LVL60:
+ 436:Src/aiPbMgr.c **** }
+ 789              		.loc 1 436 1 view .LVU220
+ 790 000e 08BD     		pop	{r3, pc}
+ 791              	.LVL61:
+ 792              	.L58:
+ 793              	.LCFI15:
+ 794              		.cfi_def_cfa_offset 0
+ 795              		.cfi_restore 3
+ 796              		.cfi_restore 14
+ 433:Src/aiPbMgr.c ****         return true;
+ 797              		.loc 1 433 16 view .LVU221
+ 798 0010 0120     		movs	r0, #1
+ 799              	.LVL62:
+ 800              		.loc 1 436 1 view .LVU222
+ 801 0012 7047     		bx	lr
+ 802              		.cfi_endproc
+ 803              	.LFE150:
+ 805              		.section	.text.nn_inputs_w_cb,"ax",%progbits
+ 806              		.align	1
+ 807              		.syntax unified
+ 808              		.thumb
+ 809              		.thumb_func
+ 810              		.fpu fpv4-sp-d16
+ 812              	nn_inputs_w_cb:
+ 813              	.LVL63:
+ 814              	.LFB149:
+ 418:Src/aiPbMgr.c ****     ai_network_report *report = (ai_network_report *)*arg;
+ 815              		.loc 1 418 1 is_stmt 1 view -0
+ 816              		.cfi_startproc
+ 817              		@ args = 0, pretend = 0, frame = 0
+ 818              		@ frame_needed = 0, uses_anonymous_args = 0
+ 419:Src/aiPbMgr.c **** 
+ 819              		.loc 1 419 5 view .LVU224
+ 419:Src/aiPbMgr.c **** 
+ 820              		.loc 1 419 24 is_stmt 0 view .LVU225
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 25
+
+
+ 821 0000 1268     		ldr	r2, [r2]
+ 822              	.LVL64:
+ 421:Src/aiPbMgr.c ****         return true;
+ 823              		.loc 1 421 5 is_stmt 1 view .LVU226
+ 421:Src/aiPbMgr.c ****         return true;
+ 824              		.loc 1 421 8 is_stmt 0 view .LVU227
+ 825 0002 2AB1     		cbz	r2, .L65
+ 418:Src/aiPbMgr.c ****     ai_network_report *report = (ai_network_report *)*arg;
+ 826              		.loc 1 418 1 view .LVU228
+ 827 0004 08B5     		push	{r3, lr}
+ 828              	.LCFI16:
+ 829              		.cfi_def_cfa_offset 8
+ 830              		.cfi_offset 3, -8
+ 831              		.cfi_offset 14, -4
+ 424:Src/aiPbMgr.c **** }
+ 832              		.loc 1 424 5 is_stmt 1 view .LVU229
+ 424:Src/aiPbMgr.c **** }
+ 833              		.loc 1 424 12 is_stmt 0 view .LVU230
+ 834 0006 138E     		ldrh	r3, [r2, #48]
+ 835 0008 526B     		ldr	r2, [r2, #52]
+ 836              	.LVL65:
+ 424:Src/aiPbMgr.c **** }
+ 837              		.loc 1 424 12 view .LVU231
+ 838 000a FFF7FEFF 		bl	nn_shape_w_cb
+ 839              	.LVL66:
+ 425:Src/aiPbMgr.c **** 
+ 840              		.loc 1 425 1 view .LVU232
+ 841 000e 08BD     		pop	{r3, pc}
+ 842              	.LVL67:
+ 843              	.L65:
+ 844              	.LCFI17:
+ 845              		.cfi_def_cfa_offset 0
+ 846              		.cfi_restore 3
+ 847              		.cfi_restore 14
+ 422:Src/aiPbMgr.c **** 
+ 848              		.loc 1 422 16 view .LVU233
+ 849 0010 0120     		movs	r0, #1
+ 850              	.LVL68:
+ 425:Src/aiPbMgr.c **** 
+ 851              		.loc 1 425 1 view .LVU234
+ 852 0012 7047     		bx	lr
+ 853              		.cfi_endproc
+ 854              	.LFE149:
+ 856              		.section	.text.aiPbMgrInit,"ax",%progbits
+ 857              		.align	1
+ 858              		.global	aiPbMgrInit
+ 859              		.syntax unified
+ 860              		.thumb
+ 861              		.thumb_func
+ 862              		.fpu fpv4-sp-d16
+ 864              	aiPbMgrInit:
+ 865              	.LVL69:
+ 866              	.LFB130:
+  38:Src/aiPbMgr.c ****     const aiPbCmdFunc *cfunc;
+ 867              		.loc 1 38 1 is_stmt 1 view -0
+ 868              		.cfi_startproc
+ 869              		@ args = 0, pretend = 0, frame = 40
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 26
+
+
+ 870              		@ frame_needed = 0, uses_anonymous_args = 0
+  38:Src/aiPbMgr.c ****     const aiPbCmdFunc *cfunc;
+ 871              		.loc 1 38 1 is_stmt 0 view .LVU236
+ 872 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 873              	.LCFI18:
+ 874              		.cfi_def_cfa_offset 20
+ 875              		.cfi_offset 4, -20
+ 876              		.cfi_offset 5, -16
+ 877              		.cfi_offset 6, -12
+ 878              		.cfi_offset 7, -8
+ 879              		.cfi_offset 14, -4
+ 880 0002 8BB0     		sub	sp, sp, #44
+ 881              	.LCFI19:
+ 882              		.cfi_def_cfa_offset 64
+ 883 0004 0646     		mov	r6, r0
+  39:Src/aiPbMgr.c ****     pbContextMgr.input = pb_istream_from_uart(0);
+ 884              		.loc 1 39 5 is_stmt 1 view .LVU237
+  40:Src/aiPbMgr.c ****     pbContextMgr.output = pb_ostream_to_uart(0);
+ 885              		.loc 1 40 5 view .LVU238
+  40:Src/aiPbMgr.c ****     pbContextMgr.output = pb_ostream_to_uart(0);
+ 886              		.loc 1 40 26 is_stmt 0 view .LVU239
+ 887 0006 134D     		ldr	r5, .L77
+ 888 0008 06AC     		add	r4, sp, #24
+ 889 000a 0021     		movs	r1, #0
+ 890 000c 2046     		mov	r0, r4
+ 891              	.LVL70:
+  40:Src/aiPbMgr.c ****     pbContextMgr.output = pb_ostream_to_uart(0);
+ 892              		.loc 1 40 26 view .LVU240
+ 893 000e FFF7FEFF 		bl	pb_istream_from_uart
+ 894              	.LVL71:
+ 895 0012 94E80F00 		ldm	r4, {r0, r1, r2, r3}
+ 896 0016 85E80F00 		stm	r5, {r0, r1, r2, r3}
+  41:Src/aiPbMgr.c **** 
+ 897              		.loc 1 41 5 is_stmt 1 view .LVU241
+  41:Src/aiPbMgr.c **** 
+ 898              		.loc 1 41 27 is_stmt 0 view .LVU242
+ 899 001a 0021     		movs	r1, #0
+ 900 001c 6846     		mov	r0, sp
+ 901 001e FFF7FEFF 		bl	pb_ostream_to_uart
+ 902              	.LVL72:
+ 903 0022 05F11007 		add	r7, r5, #16
+ 904 0026 6C46     		mov	r4, sp
+ 905 0028 0FCC     		ldmia	r4!, {r0, r1, r2, r3}
+ 906 002a 0FC7     		stmia	r7!, {r0, r1, r2, r3}
+ 907 002c 2368     		ldr	r3, [r4]
+ 908 002e 3B60     		str	r3, [r7]
+  43:Src/aiPbMgr.c ****     pbContextMgr.funcs = NULL;
+ 909              		.loc 1 43 5 is_stmt 1 view .LVU243
+  43:Src/aiPbMgr.c ****     pbContextMgr.funcs = NULL;
+ 910              		.loc 1 43 25 is_stmt 0 view .LVU244
+ 911 0030 0023     		movs	r3, #0
+ 912 0032 AB62     		str	r3, [r5, #40]
+  44:Src/aiPbMgr.c **** 
+ 913              		.loc 1 44 5 is_stmt 1 view .LVU245
+  44:Src/aiPbMgr.c **** 
+ 914              		.loc 1 44 24 is_stmt 0 view .LVU246
+ 915 0034 6B62     		str	r3, [r5, #36]
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 27
+
+
+  46:Src/aiPbMgr.c ****         cfunc = funcs;
+ 916              		.loc 1 46 5 is_stmt 1 view .LVU247
+  46:Src/aiPbMgr.c ****         cfunc = funcs;
+ 917              		.loc 1 46 8 is_stmt 0 view .LVU248
+ 918 0036 56B1     		cbz	r6, .L70
+  47:Src/aiPbMgr.c ****         while (cfunc->process) {
+ 919              		.loc 1 47 15 view .LVU249
+ 920 0038 3246     		mov	r2, r6
+ 921              	.L71:
+ 922              	.LVL73:
+  48:Src/aiPbMgr.c ****             pbContextMgr.n_func++;
+ 923              		.loc 1 48 21 view .LVU250
+ 924 003a 5368     		ldr	r3, [r2, #4]
+  48:Src/aiPbMgr.c ****             pbContextMgr.n_func++;
+ 925              		.loc 1 48 15 view .LVU251
+ 926 003c 2BB1     		cbz	r3, .L76
+  49:Src/aiPbMgr.c ****             cfunc++;
+ 927              		.loc 1 49 13 is_stmt 1 view .LVU252
+  49:Src/aiPbMgr.c ****             cfunc++;
+ 928              		.loc 1 49 25 is_stmt 0 view .LVU253
+ 929 003e 0549     		ldr	r1, .L77
+ 930 0040 8B6A     		ldr	r3, [r1, #40]
+  49:Src/aiPbMgr.c ****             cfunc++;
+ 931              		.loc 1 49 32 view .LVU254
+ 932 0042 0133     		adds	r3, r3, #1
+ 933 0044 8B62     		str	r3, [r1, #40]
+  50:Src/aiPbMgr.c ****         }
+ 934              		.loc 1 50 13 is_stmt 1 view .LVU255
+  50:Src/aiPbMgr.c ****         }
+ 935              		.loc 1 50 18 is_stmt 0 view .LVU256
+ 936 0046 0C32     		adds	r2, r2, #12
+ 937              	.LVL74:
+  50:Src/aiPbMgr.c ****         }
+ 938              		.loc 1 50 18 view .LVU257
+ 939 0048 F7E7     		b	.L71
+ 940              	.L76:
+  52:Src/aiPbMgr.c ****     }
+ 941              		.loc 1 52 9 is_stmt 1 view .LVU258
+  52:Src/aiPbMgr.c ****     }
+ 942              		.loc 1 52 28 is_stmt 0 view .LVU259
+ 943 004a 024B     		ldr	r3, .L77
+ 944 004c 5E62     		str	r6, [r3, #36]
+ 945              	.LVL75:
+ 946              	.L70:
+  54:Src/aiPbMgr.c **** 
+ 947              		.loc 1 54 1 view .LVU260
+ 948 004e 0BB0     		add	sp, sp, #44
+ 949              	.LCFI20:
+ 950              		.cfi_def_cfa_offset 20
+ 951              		@ sp needed
+ 952 0050 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 953              	.LVL76:
+ 954              	.L78:
+  54:Src/aiPbMgr.c **** 
+ 955              		.loc 1 54 1 view .LVU261
+ 956 0052 00BF     		.align	2
+ 957              	.L77:
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 28
+
+
+ 958 0054 00000000 		.word	.LANCHOR0
+ 959              		.cfi_endproc
+ 960              	.LFE130:
+ 962              		.section	.text.aiPbMgrSendResp,"ax",%progbits
+ 963              		.align	1
+ 964              		.global	aiPbMgrSendResp
+ 965              		.syntax unified
+ 966              		.thumb
+ 967              		.thumb_func
+ 968              		.fpu fpv4-sp-d16
+ 970              	aiPbMgrSendResp:
+ 971              	.LVL77:
+ 972              	.LFB132:
+  89:Src/aiPbMgr.c ****     resp->reqid = req->reqid;
+ 973              		.loc 1 89 1 is_stmt 1 view -0
+ 974              		.cfi_startproc
+ 975              		@ args = 0, pretend = 0, frame = 0
+ 976              		@ frame_needed = 0, uses_anonymous_args = 0
+  89:Src/aiPbMgr.c ****     resp->reqid = req->reqid;
+ 977              		.loc 1 89 1 is_stmt 0 view .LVU263
+ 978 0000 08B5     		push	{r3, lr}
+ 979              	.LCFI21:
+ 980              		.cfi_def_cfa_offset 8
+ 981              		.cfi_offset 3, -8
+ 982              		.cfi_offset 14, -4
+  90:Src/aiPbMgr.c ****     resp->state = state;
+ 983              		.loc 1 90 5 is_stmt 1 view .LVU264
+  90:Src/aiPbMgr.c ****     resp->state = state;
+ 984              		.loc 1 90 22 is_stmt 0 view .LVU265
+ 985 0002 0368     		ldr	r3, [r0]
+  90:Src/aiPbMgr.c ****     resp->state = state;
+ 986              		.loc 1 90 17 view .LVU266
+ 987 0004 0B60     		str	r3, [r1]
+  91:Src/aiPbMgr.c ****     pb_encode(&pbContextMgr.output, respMsg_fields, resp);
+ 988              		.loc 1 91 5 is_stmt 1 view .LVU267
+  91:Src/aiPbMgr.c ****     pb_encode(&pbContextMgr.output, respMsg_fields, resp);
+ 989              		.loc 1 91 17 is_stmt 0 view .LVU268
+ 990 0006 0A71     		strb	r2, [r1, #4]
+  92:Src/aiPbMgr.c ****     ioFlushWrite();
+ 991              		.loc 1 92 5 is_stmt 1 view .LVU269
+ 992 0008 0A46     		mov	r2, r1
+ 993              	.LVL78:
+  92:Src/aiPbMgr.c ****     ioFlushWrite();
+ 994              		.loc 1 92 5 is_stmt 0 view .LVU270
+ 995 000a 0349     		ldr	r1, .L81
+ 996              	.LVL79:
+  92:Src/aiPbMgr.c ****     ioFlushWrite();
+ 997              		.loc 1 92 5 view .LVU271
+ 998 000c 0348     		ldr	r0, .L81+4
+ 999              	.LVL80:
+  92:Src/aiPbMgr.c ****     ioFlushWrite();
+ 1000              		.loc 1 92 5 view .LVU272
+ 1001 000e FFF7FEFF 		bl	pb_encode
+ 1002              	.LVL81:
+  93:Src/aiPbMgr.c **** }
+ 1003              		.loc 1 93 5 is_stmt 1 view .LVU273
+ 1004 0012 FFF7FEFF 		bl	ioFlushWrite
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 29
+
+
+ 1005              	.LVL82:
+  94:Src/aiPbMgr.c **** 
+ 1006              		.loc 1 94 1 is_stmt 0 view .LVU274
+ 1007 0016 08BD     		pop	{r3, pc}
+ 1008              	.L82:
+ 1009              		.align	2
+ 1010              	.L81:
+ 1011 0018 00000000 		.word	respMsg_fields
+ 1012 001c 10000000 		.word	.LANCHOR0+16
+ 1013              		.cfi_endproc
+ 1014              	.LFE132:
+ 1016              		.section	.text.aiPbMgrSendAck,"ax",%progbits
+ 1017              		.align	1
+ 1018              		.global	aiPbMgrSendAck
+ 1019              		.syntax unified
+ 1020              		.thumb
+ 1021              		.thumb_func
+ 1022              		.fpu fpv4-sp-d16
+ 1024              	aiPbMgrSendAck:
+ 1025              	.LVL83:
+ 1026              	.LFB133:
+  98:Src/aiPbMgr.c ****     resp->which_payload = respMsg_ack_tag;
+ 1027              		.loc 1 98 1 is_stmt 1 view -0
+ 1028              		.cfi_startproc
+ 1029              		@ args = 4, pretend = 0, frame = 0
+ 1030              		@ frame_needed = 0, uses_anonymous_args = 0
+  98:Src/aiPbMgr.c ****     resp->which_payload = respMsg_ack_tag;
+ 1031              		.loc 1 98 1 is_stmt 0 view .LVU276
+ 1032 0000 38B5     		push	{r3, r4, r5, lr}
+ 1033              	.LCFI22:
+ 1034              		.cfi_def_cfa_offset 16
+ 1035              		.cfi_offset 3, -16
+ 1036              		.cfi_offset 4, -12
+ 1037              		.cfi_offset 5, -8
+ 1038              		.cfi_offset 14, -4
+  99:Src/aiPbMgr.c ****     resp->payload.ack.param = param;
+ 1039              		.loc 1 99 5 is_stmt 1 view .LVU277
+  99:Src/aiPbMgr.c ****     resp->payload.ack.param = param;
+ 1040              		.loc 1 99 25 is_stmt 0 view .LVU278
+ 1041 0002 0C25     		movs	r5, #12
+ 1042 0004 CD80     		strh	r5, [r1, #6]	@ movhi
+ 100:Src/aiPbMgr.c ****     resp->payload.ack.error = error;
+ 1043              		.loc 1 100 5 is_stmt 1 view .LVU279
+ 100:Src/aiPbMgr.c ****     resp->payload.ack.error = error;
+ 1044              		.loc 1 100 29 is_stmt 0 view .LVU280
+ 1045 0006 8B60     		str	r3, [r1, #8]
+ 101:Src/aiPbMgr.c ****     aiPbMgrSendResp(req, resp, state);
+ 1046              		.loc 1 101 5 is_stmt 1 view .LVU281
+ 101:Src/aiPbMgr.c ****     aiPbMgrSendResp(req, resp, state);
+ 1047              		.loc 1 101 29 is_stmt 0 view .LVU282
+ 1048 0008 9DF81030 		ldrb	r3, [sp, #16]	@ zero_extendqisi2
+ 1049              	.LVL84:
+ 101:Src/aiPbMgr.c ****     aiPbMgrSendResp(req, resp, state);
+ 1050              		.loc 1 101 29 view .LVU283
+ 1051 000c 0B73     		strb	r3, [r1, #12]
+ 102:Src/aiPbMgr.c **** }
+ 1052              		.loc 1 102 5 is_stmt 1 view .LVU284
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 30
+
+
+ 1053 000e FFF7FEFF 		bl	aiPbMgrSendResp
+ 1054              	.LVL85:
+ 103:Src/aiPbMgr.c **** 
+ 1055              		.loc 1 103 1 is_stmt 0 view .LVU285
+ 1056 0012 38BD     		pop	{r3, r4, r5, pc}
+ 103:Src/aiPbMgr.c **** 
+ 1057              		.loc 1 103 1 view .LVU286
+ 1058              		.cfi_endproc
+ 1059              	.LFE133:
+ 1061              		.section	.text.aiPbMgrWaitAndProcess,"ax",%progbits
+ 1062              		.align	1
+ 1063              		.global	aiPbMgrWaitAndProcess
+ 1064              		.syntax unified
+ 1065              		.thumb
+ 1066              		.thumb_func
+ 1067              		.fpu fpv4-sp-d16
+ 1069              	aiPbMgrWaitAndProcess:
+ 1070              	.LFB131:
+  57:Src/aiPbMgr.c ****     uint32_t idx;
+ 1071              		.loc 1 57 1 is_stmt 1 view -0
+ 1072              		.cfi_startproc
+ 1073              		@ args = 0, pretend = 0, frame = 0
+ 1074              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1075 0000 10B5     		push	{r4, lr}
+ 1076              	.LCFI23:
+ 1077              		.cfi_def_cfa_offset 8
+ 1078              		.cfi_offset 4, -8
+ 1079              		.cfi_offset 14, -4
+ 1080 0002 82B0     		sub	sp, sp, #8
+ 1081              	.LCFI24:
+ 1082              		.cfi_def_cfa_offset 16
+  58:Src/aiPbMgr.c ****     static reqMsg  req = reqMsg_init_zero;
+ 1083              		.loc 1 58 5 view .LVU288
+  59:Src/aiPbMgr.c ****     static respMsg resp = respMsg_init_default;
+ 1084              		.loc 1 59 5 view .LVU289
+  60:Src/aiPbMgr.c ****     const aiPbCmdFunc *cfunc;
+ 1085              		.loc 1 60 5 view .LVU290
+  61:Src/aiPbMgr.c **** 
+ 1086              		.loc 1 61 5 view .LVU291
+  63:Src/aiPbMgr.c ****     if (pb_decode_delimited(&pbContextMgr.input, reqMsg_fields, &req)) {
+ 1087              		.loc 1 63 5 view .LVU292
+ 1088 0004 FFF7FEFF 		bl	ioFlushRead
+ 1089              	.LVL86:
+  64:Src/aiPbMgr.c ****         ioFlushRead();
+ 1090              		.loc 1 64 5 view .LVU293
+  64:Src/aiPbMgr.c ****         ioFlushRead();
+ 1091              		.loc 1 64 9 is_stmt 0 view .LVU294
+ 1092 0008 174A     		ldr	r2, .L94
+ 1093 000a 1849     		ldr	r1, .L94+4
+ 1094 000c 1848     		ldr	r0, .L94+8
+ 1095 000e FFF7FEFF 		bl	pb_decode_delimited
+ 1096              	.LVL87:
+  64:Src/aiPbMgr.c ****         ioFlushRead();
+ 1097              		.loc 1 64 8 view .LVU295
+ 1098 0012 20B9     		cbnz	r0, .L92
+ 1099              	.L86:
+  79:Src/aiPbMgr.c **** 
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 31
+
+
+ 1100              		.loc 1 79 5 is_stmt 1 view .LVU296
+ 1101 0014 FFF7FEFF 		bl	ioFlushRead
+ 1102              	.LVL88:
+  81:Src/aiPbMgr.c **** }
+ 1103              		.loc 1 81 5 view .LVU297
+  82:Src/aiPbMgr.c **** 
+ 1104              		.loc 1 82 1 is_stmt 0 view .LVU298
+ 1105 0018 0020     		movs	r0, #0
+ 1106 001a 02B0     		add	sp, sp, #8
+ 1107              	.LCFI25:
+ 1108              		.cfi_remember_state
+ 1109              		.cfi_def_cfa_offset 8
+ 1110              		@ sp needed
+ 1111 001c 10BD     		pop	{r4, pc}
+ 1112              	.L92:
+ 1113              	.LCFI26:
+ 1114              		.cfi_restore_state
+  65:Src/aiPbMgr.c ****         for (idx = 0; idx < pbContextMgr.n_func; idx++) {
+ 1115              		.loc 1 65 9 is_stmt 1 view .LVU299
+ 1116 001e FFF7FEFF 		bl	ioFlushRead
+ 1117              	.LVL89:
+  66:Src/aiPbMgr.c ****             cfunc = &pbContextMgr.funcs[idx];
+ 1118              		.loc 1 66 9 view .LVU300
+  66:Src/aiPbMgr.c ****             cfunc = &pbContextMgr.funcs[idx];
+ 1119              		.loc 1 66 18 is_stmt 0 view .LVU301
+ 1120 0022 0024     		movs	r4, #0
+ 1121              	.LVL90:
+ 1122              	.L87:
+  66:Src/aiPbMgr.c ****             cfunc = &pbContextMgr.funcs[idx];
+ 1123              		.loc 1 66 41 discriminator 1 view .LVU302
+ 1124 0024 124B     		ldr	r3, .L94+8
+ 1125 0026 9B6A     		ldr	r3, [r3, #40]
+  66:Src/aiPbMgr.c ****             cfunc = &pbContextMgr.funcs[idx];
+ 1126              		.loc 1 66 9 discriminator 1 view .LVU303
+ 1127 0028 A342     		cmp	r3, r4
+ 1128 002a 11D9     		bls	.L89
+  67:Src/aiPbMgr.c ****             if (cfunc->cmd == req.cmd) {
+ 1129              		.loc 1 67 13 is_stmt 1 view .LVU304
+  67:Src/aiPbMgr.c ****             if (cfunc->cmd == req.cmd) {
+ 1130              		.loc 1 67 34 is_stmt 0 view .LVU305
+ 1131 002c 104B     		ldr	r3, .L94+8
+ 1132 002e 5A6A     		ldr	r2, [r3, #36]
+  67:Src/aiPbMgr.c ****             if (cfunc->cmd == req.cmd) {
+ 1133              		.loc 1 67 40 view .LVU306
+ 1134 0030 04EB4401 		add	r1, r4, r4, lsl #1
+ 1135 0034 8B00     		lsls	r3, r1, #2
+  67:Src/aiPbMgr.c ****             if (cfunc->cmd == req.cmd) {
+ 1136              		.loc 1 67 19 view .LVU307
+ 1137 0036 D118     		adds	r1, r2, r3
+ 1138              	.LVL91:
+  68:Src/aiPbMgr.c ****                 cfunc->process(&req, &resp, cfunc->param);
+ 1139              		.loc 1 68 13 is_stmt 1 view .LVU308
+  68:Src/aiPbMgr.c ****                 cfunc->process(&req, &resp, cfunc->param);
+ 1140              		.loc 1 68 22 is_stmt 0 view .LVU309
+ 1141 0038 D25C     		ldrb	r2, [r2, r3]	@ zero_extendqisi2
+  68:Src/aiPbMgr.c ****                 cfunc->process(&req, &resp, cfunc->param);
+ 1142              		.loc 1 68 34 view .LVU310
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 32
+
+
+ 1143 003a 0B4B     		ldr	r3, .L94
+ 1144 003c 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+  68:Src/aiPbMgr.c ****                 cfunc->process(&req, &resp, cfunc->param);
+ 1145              		.loc 1 68 16 view .LVU311
+ 1146 003e 9A42     		cmp	r2, r3
+ 1147 0040 01D0     		beq	.L93
+  66:Src/aiPbMgr.c ****             cfunc = &pbContextMgr.funcs[idx];
+ 1148              		.loc 1 66 53 discriminator 2 view .LVU312
+ 1149 0042 0134     		adds	r4, r4, #1
+ 1150              	.LVL92:
+  66:Src/aiPbMgr.c ****             cfunc = &pbContextMgr.funcs[idx];
+ 1151              		.loc 1 66 53 discriminator 2 view .LVU313
+ 1152 0044 EEE7     		b	.L87
+ 1153              	.L93:
+  69:Src/aiPbMgr.c ****                 break;
+ 1154              		.loc 1 69 17 is_stmt 1 view .LVU314
+  69:Src/aiPbMgr.c ****                 break;
+ 1155              		.loc 1 69 22 is_stmt 0 view .LVU315
+ 1156 0046 4B68     		ldr	r3, [r1, #4]
+  69:Src/aiPbMgr.c ****                 break;
+ 1157              		.loc 1 69 17 view .LVU316
+ 1158 0048 8A68     		ldr	r2, [r1, #8]
+ 1159 004a 0A49     		ldr	r1, .L94+12
+ 1160              	.LVL93:
+  69:Src/aiPbMgr.c ****                 break;
+ 1161              		.loc 1 69 17 view .LVU317
+ 1162 004c 0648     		ldr	r0, .L94
+ 1163 004e 9847     		blx	r3
+ 1164              	.LVL94:
+  70:Src/aiPbMgr.c ****             }
+ 1165              		.loc 1 70 17 is_stmt 1 view .LVU318
+ 1166              	.L89:
+  73:Src/aiPbMgr.c ****             aiPbMgrSendAck(&req, &resp, EnumState_S_ERROR,
+ 1167              		.loc 1 73 9 view .LVU319
+  73:Src/aiPbMgr.c ****             aiPbMgrSendAck(&req, &resp, EnumState_S_ERROR,
+ 1168              		.loc 1 73 32 is_stmt 0 view .LVU320
+ 1169 0050 074B     		ldr	r3, .L94+8
+ 1170 0052 9B6A     		ldr	r3, [r3, #40]
+  73:Src/aiPbMgr.c ****             aiPbMgrSendAck(&req, &resp, EnumState_S_ERROR,
+ 1171              		.loc 1 73 12 view .LVU321
+ 1172 0054 A342     		cmp	r3, r4
+ 1173 0056 DDD1     		bne	.L86
+  74:Src/aiPbMgr.c ****                     EnumError_E_INVALID_PARAM, EnumError_E_INVALID_PARAM);
+ 1174              		.loc 1 74 13 is_stmt 1 view .LVU322
+ 1175 0058 0422     		movs	r2, #4
+ 1176 005a 0092     		str	r2, [sp]
+ 1177 005c 1346     		mov	r3, r2
+ 1178 005e 0549     		ldr	r1, .L94+12
+ 1179 0060 0148     		ldr	r0, .L94
+ 1180 0062 FFF7FEFF 		bl	aiPbMgrSendAck
+ 1181              	.LVL95:
+ 1182 0066 D5E7     		b	.L86
+ 1183              	.L95:
+ 1184              		.align	2
+ 1185              	.L94:
+ 1186 0068 00000000 		.word	.LANCHOR1
+ 1187 006c 00000000 		.word	reqMsg_fields
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 33
+
+
+ 1188 0070 00000000 		.word	.LANCHOR0
+ 1189 0074 00000000 		.word	.LANCHOR2
+ 1190              		.cfi_endproc
+ 1191              	.LFE131:
+ 1193              		.section	.text.aiPbMgrWaitAck,"ax",%progbits
+ 1194              		.align	1
+ 1195              		.global	aiPbMgrWaitAck
+ 1196              		.syntax unified
+ 1197              		.thumb
+ 1198              		.thumb_func
+ 1199              		.fpu fpv4-sp-d16
+ 1201              	aiPbMgrWaitAck:
+ 1202              	.LFB134:
+ 106:Src/aiPbMgr.c ****     bool res;
+ 1203              		.loc 1 106 1 view -0
+ 1204              		.cfi_startproc
+ 1205              		@ args = 0, pretend = 0, frame = 8
+ 1206              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1207 0000 10B5     		push	{r4, lr}
+ 1208              	.LCFI27:
+ 1209              		.cfi_def_cfa_offset 8
+ 1210              		.cfi_offset 4, -8
+ 1211              		.cfi_offset 14, -4
+ 1212 0002 82B0     		sub	sp, sp, #8
+ 1213              	.LCFI28:
+ 1214              		.cfi_def_cfa_offset 16
+ 107:Src/aiPbMgr.c ****     ackMsg ack = ackMsg_init_default;
+ 1215              		.loc 1 107 5 view .LVU324
+ 108:Src/aiPbMgr.c ****     res = pb_decode_delimited(&pbContextMgr.input, ackMsg_fields, &ack);
+ 1216              		.loc 1 108 5 view .LVU325
+ 108:Src/aiPbMgr.c ****     res = pb_decode_delimited(&pbContextMgr.input, ackMsg_fields, &ack);
+ 1217              		.loc 1 108 12 is_stmt 0 view .LVU326
+ 1218 0004 0023     		movs	r3, #0
+ 1219 0006 0093     		str	r3, [sp]
+ 1220 0008 8DF80430 		strb	r3, [sp, #4]
+ 109:Src/aiPbMgr.c ****     ioFlushRead();
+ 1221              		.loc 1 109 5 is_stmt 1 view .LVU327
+ 109:Src/aiPbMgr.c ****     ioFlushRead();
+ 1222              		.loc 1 109 11 is_stmt 0 view .LVU328
+ 1223 000c 6A46     		mov	r2, sp
+ 1224 000e 0549     		ldr	r1, .L98
+ 1225 0010 0548     		ldr	r0, .L98+4
+ 1226 0012 FFF7FEFF 		bl	pb_decode_delimited
+ 1227              	.LVL96:
+ 1228 0016 0446     		mov	r4, r0
+ 1229              	.LVL97:
+ 110:Src/aiPbMgr.c ****     return res;
+ 1230              		.loc 1 110 5 is_stmt 1 view .LVU329
+ 1231 0018 FFF7FEFF 		bl	ioFlushRead
+ 1232              	.LVL98:
+ 111:Src/aiPbMgr.c **** }
+ 1233              		.loc 1 111 5 view .LVU330
+ 112:Src/aiPbMgr.c **** 
+ 1234              		.loc 1 112 1 is_stmt 0 view .LVU331
+ 1235 001c 2046     		mov	r0, r4
+ 1236 001e 02B0     		add	sp, sp, #8
+ 1237              	.LCFI29:
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 34
+
+
+ 1238              		.cfi_def_cfa_offset 8
+ 1239              		@ sp needed
+ 1240 0020 10BD     		pop	{r4, pc}
+ 1241              	.LVL99:
+ 1242              	.L99:
+ 112:Src/aiPbMgr.c **** 
+ 1243              		.loc 1 112 1 view .LVU332
+ 1244 0022 00BF     		.align	2
+ 1245              	.L98:
+ 1246 0024 00000000 		.word	ackMsg_fields
+ 1247 0028 00000000 		.word	.LANCHOR0
+ 1248              		.cfi_endproc
+ 1249              	.LFE134:
+ 1251              		.section	.text.aiPbMgrSendLog,"ax",%progbits
+ 1252              		.align	1
+ 1253              		.global	aiPbMgrSendLog
+ 1254              		.syntax unified
+ 1255              		.thumb
+ 1256              		.thumb_func
+ 1257              		.fpu fpv4-sp-d16
+ 1259              	aiPbMgrSendLog:
+ 1260              	.LVL100:
+ 1261              	.LFB135:
+ 116:Src/aiPbMgr.c ****     bool res;
+ 1262              		.loc 1 116 1 is_stmt 1 view -0
+ 1263              		.cfi_startproc
+ 1264              		@ args = 4, pretend = 0, frame = 8
+ 1265              		@ frame_needed = 0, uses_anonymous_args = 0
+ 116:Src/aiPbMgr.c ****     bool res;
+ 1266              		.loc 1 116 1 is_stmt 0 view .LVU334
+ 1267 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 1268              	.LCFI30:
+ 1269              		.cfi_def_cfa_offset 20
+ 1270              		.cfi_offset 4, -20
+ 1271              		.cfi_offset 5, -16
+ 1272              		.cfi_offset 6, -12
+ 1273              		.cfi_offset 7, -8
+ 1274              		.cfi_offset 14, -4
+ 1275 0002 83B0     		sub	sp, sp, #12
+ 1276              	.LCFI31:
+ 1277              		.cfi_def_cfa_offset 32
+ 1278 0004 0546     		mov	r5, r0
+ 1279 0006 0C46     		mov	r4, r1
+ 1280 0008 1646     		mov	r6, r2
+ 1281 000a 1F46     		mov	r7, r3
+ 117:Src/aiPbMgr.c ****     ackMsg ack = ackMsg_init_default;
+ 1282              		.loc 1 117 5 is_stmt 1 view .LVU335
+ 118:Src/aiPbMgr.c **** 
+ 1283              		.loc 1 118 5 view .LVU336
+ 118:Src/aiPbMgr.c **** 
+ 1284              		.loc 1 118 12 is_stmt 0 view .LVU337
+ 1285 000c 0023     		movs	r3, #0
+ 1286              	.LVL101:
+ 118:Src/aiPbMgr.c **** 
+ 1287              		.loc 1 118 12 view .LVU338
+ 1288 000e 0093     		str	r3, [sp]
+ 1289 0010 8DF80430 		strb	r3, [sp, #4]
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 35
+
+
+ 120:Src/aiPbMgr.c **** 
+ 1290              		.loc 1 120 5 is_stmt 1 view .LVU339
+ 120:Src/aiPbMgr.c **** 
+ 1291              		.loc 1 120 18 is_stmt 0 view .LVU340
+ 1292 0014 0898     		ldr	r0, [sp, #32]
+ 1293              	.LVL102:
+ 120:Src/aiPbMgr.c **** 
+ 1294              		.loc 1 120 18 view .LVU341
+ 1295 0016 FFF7FEFF 		bl	strlen
+ 1296              	.LVL103:
+ 122:Src/aiPbMgr.c ****     resp->payload.log.level = lvl;
+ 1297              		.loc 1 122 5 is_stmt 1 view .LVU342
+ 122:Src/aiPbMgr.c ****     resp->payload.log.level = lvl;
+ 1298              		.loc 1 122 25 is_stmt 0 view .LVU343
+ 1299 001a 0D23     		movs	r3, #13
+ 1300 001c E380     		strh	r3, [r4, #6]	@ movhi
+ 123:Src/aiPbMgr.c ****     if (len >= sizeof(resp->payload.log.str))
+ 1301              		.loc 1 123 5 is_stmt 1 view .LVU344
+ 123:Src/aiPbMgr.c ****     if (len >= sizeof(resp->payload.log.str))
+ 1302              		.loc 1 123 29 is_stmt 0 view .LVU345
+ 1303 001e A760     		str	r7, [r4, #8]
+ 124:Src/aiPbMgr.c ****         len = sizeof(resp->payload.log.str) - 1;
+ 1304              		.loc 1 124 5 is_stmt 1 view .LVU346
+ 124:Src/aiPbMgr.c ****         len = sizeof(resp->payload.log.str) - 1;
+ 1305              		.loc 1 124 8 is_stmt 0 view .LVU347
+ 1306 0020 7F28     		cmp	r0, #127
+ 1307 0022 00D9     		bls	.L101
+ 125:Src/aiPbMgr.c **** 
+ 1308              		.loc 1 125 13 view .LVU348
+ 1309 0024 7F20     		movs	r0, #127
+ 1310              	.LVL104:
+ 1311              	.L101:
+ 127:Src/aiPbMgr.c **** 
+ 1312              		.loc 1 127 5 is_stmt 1 view .LVU349
+ 1313 0026 421C     		adds	r2, r0, #1
+ 1314 0028 0899     		ldr	r1, [sp, #32]
+ 1315 002a 04F10C00 		add	r0, r4, #12
+ 1316              	.LVL105:
+ 127:Src/aiPbMgr.c **** 
+ 1317              		.loc 1 127 5 is_stmt 0 view .LVU350
+ 1318 002e FFF7FEFF 		bl	memcpy
+ 1319              	.LVL106:
+ 129:Src/aiPbMgr.c **** 
+ 1320              		.loc 1 129 5 is_stmt 1 view .LVU351
+ 1321 0032 3246     		mov	r2, r6
+ 1322 0034 2146     		mov	r1, r4
+ 1323 0036 2846     		mov	r0, r5
+ 1324 0038 FFF7FEFF 		bl	aiPbMgrSendResp
+ 1325              	.LVL107:
+ 131:Src/aiPbMgr.c ****     ioFlushRead();
+ 1326              		.loc 1 131 5 view .LVU352
+ 131:Src/aiPbMgr.c ****     ioFlushRead();
+ 1327              		.loc 1 131 11 is_stmt 0 view .LVU353
+ 1328 003c 6A46     		mov	r2, sp
+ 1329 003e 0549     		ldr	r1, .L104
+ 1330 0040 0548     		ldr	r0, .L104+4
+ 1331 0042 FFF7FEFF 		bl	pb_decode_delimited
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 36
+
+
+ 1332              	.LVL108:
+ 1333 0046 0446     		mov	r4, r0
+ 1334              	.LVL109:
+ 132:Src/aiPbMgr.c ****     return res;
+ 1335              		.loc 1 132 5 is_stmt 1 view .LVU354
+ 1336 0048 FFF7FEFF 		bl	ioFlushRead
+ 1337              	.LVL110:
+ 133:Src/aiPbMgr.c **** }
+ 1338              		.loc 1 133 5 view .LVU355
+ 134:Src/aiPbMgr.c **** 
+ 1339              		.loc 1 134 1 is_stmt 0 view .LVU356
+ 1340 004c 2046     		mov	r0, r4
+ 1341 004e 03B0     		add	sp, sp, #12
+ 1342              	.LCFI32:
+ 1343              		.cfi_def_cfa_offset 20
+ 1344              		@ sp needed
+ 1345 0050 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1346              	.LVL111:
+ 1347              	.L105:
+ 134:Src/aiPbMgr.c **** 
+ 1348              		.loc 1 134 1 view .LVU357
+ 1349 0052 00BF     		.align	2
+ 1350              	.L104:
+ 1351 0054 00000000 		.word	ackMsg_fields
+ 1352 0058 00000000 		.word	.LANCHOR0
+ 1353              		.cfi_endproc
+ 1354              	.LFE135:
+ 1356              		.section	.text.aiPbAiBufferSize,"ax",%progbits
+ 1357              		.align	1
+ 1358              		.global	aiPbAiBufferSize
+ 1359              		.syntax unified
+ 1360              		.thumb
+ 1361              		.thumb_func
+ 1362              		.fpu fpv4-sp-d16
+ 1364              	aiPbAiBufferSize:
+ 1365              	.LVL112:
+ 1366              	.LFB136:
+ 145:Src/aiPbMgr.c ****     if (!buffer)
+ 1367              		.loc 1 145 1 is_stmt 1 view -0
+ 1368              		.cfi_startproc
+ 1369              		@ args = 0, pretend = 0, frame = 0
+ 1370              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1371              		@ link register save eliminated.
+ 146:Src/aiPbMgr.c ****         return 0;
+ 1372              		.loc 1 146 5 view .LVU359
+ 146:Src/aiPbMgr.c ****         return 0;
+ 1373              		.loc 1 146 8 is_stmt 0 view .LVU360
+ 1374 0000 0346     		mov	r3, r0
+ 1375 0002 50B1     		cbz	r0, .L108
+ 149:Src/aiPbMgr.c ****                 * buffer->width * buffer->n_batches;
+ 1376              		.loc 1 149 9 is_stmt 1 view .LVU361
+ 149:Src/aiPbMgr.c ****                 * buffer->width * buffer->n_batches;
+ 1377              		.loc 1 149 22 is_stmt 0 view .LVU362
+ 1378 0004 C068     		ldr	r0, [r0, #12]
+ 1379              	.LVL113:
+ 149:Src/aiPbMgr.c ****                 * buffer->width * buffer->n_batches;
+ 1380              		.loc 1 149 41 view .LVU363
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 37
+
+
+ 1381 0006 DA88     		ldrh	r2, [r3, #6]
+ 149:Src/aiPbMgr.c ****                 * buffer->width * buffer->n_batches;
+ 1382              		.loc 1 149 33 view .LVU364
+ 1383 0008 02FB00F2 		mul	r2, r2, r0
+ 150:Src/aiPbMgr.c **** }
+ 1384              		.loc 1 150 25 view .LVU365
+ 1385 000c 1889     		ldrh	r0, [r3, #8]
+ 150:Src/aiPbMgr.c **** }
+ 1386              		.loc 1 150 17 view .LVU366
+ 1387 000e 00FB02F2 		mul	r2, r0, r2
+ 150:Src/aiPbMgr.c **** }
+ 1388              		.loc 1 150 41 view .LVU367
+ 1389 0012 9888     		ldrh	r0, [r3, #4]
+ 150:Src/aiPbMgr.c **** }
+ 1390              		.loc 1 150 33 view .LVU368
+ 1391 0014 00FB02F0 		mul	r0, r0, r2
+ 1392 0018 7047     		bx	lr
+ 1393              	.LVL114:
+ 1394              	.L108:
+ 147:Src/aiPbMgr.c ****     else
+ 1395              		.loc 1 147 16 view .LVU369
+ 1396 001a 0020     		movs	r0, #0
+ 1397              	.LVL115:
+ 151:Src/aiPbMgr.c **** 
+ 1398              		.loc 1 151 1 view .LVU370
+ 1399 001c 7047     		bx	lr
+ 1400              		.cfi_endproc
+ 1401              	.LFE136:
+ 1403              		.section	.text.aiPbMgrReceiveAiBuffer3,"ax",%progbits
+ 1404              		.align	1
+ 1405              		.global	aiPbMgrReceiveAiBuffer3
+ 1406              		.syntax unified
+ 1407              		.thumb
+ 1408              		.thumb_func
+ 1409              		.fpu fpv4-sp-d16
+ 1411              	aiPbMgrReceiveAiBuffer3:
+ 1412              	.LVL116:
+ 1413              	.LFB142:
+ 254:Src/aiPbMgr.c ****     aiBufferByteMsg msg;
+ 1414              		.loc 1 254 1 is_stmt 1 view -0
+ 1415              		.cfi_startproc
+ 1416              		@ args = 0, pretend = 0, frame = 56
+ 1417              		@ frame_needed = 0, uses_anonymous_args = 0
+ 254:Src/aiPbMgr.c ****     aiBufferByteMsg msg;
+ 1418              		.loc 1 254 1 is_stmt 0 view .LVU372
+ 1419 0000 70B5     		push	{r4, r5, r6, lr}
+ 1420              	.LCFI33:
+ 1421              		.cfi_def_cfa_offset 16
+ 1422              		.cfi_offset 4, -16
+ 1423              		.cfi_offset 5, -12
+ 1424              		.cfi_offset 6, -8
+ 1425              		.cfi_offset 14, -4
+ 1426 0002 90B0     		sub	sp, sp, #64
+ 1427              	.LCFI34:
+ 1428              		.cfi_def_cfa_offset 80
+ 1429 0004 0546     		mov	r5, r0
+ 1430 0006 0E46     		mov	r6, r1
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 38
+
+
+ 1431 0008 1446     		mov	r4, r2
+ 255:Src/aiPbMgr.c ****     struct aiPbMgrBuffer hdlb;
+ 1432              		.loc 1 255 5 is_stmt 1 view .LVU373
+ 256:Src/aiPbMgr.c ****     bool res = true;
+ 1433              		.loc 1 256 5 view .LVU374
+ 257:Src/aiPbMgr.c **** 
+ 1434              		.loc 1 257 5 view .LVU375
+ 1435              	.LVL117:
+ 259:Src/aiPbMgr.c ****     hdlb.buffer = buffer;
+ 1436              		.loc 1 259 5 view .LVU376
+ 259:Src/aiPbMgr.c ****     hdlb.buffer = buffer;
+ 1437              		.loc 1 259 16 is_stmt 0 view .LVU377
+ 1438 000a 0022     		movs	r2, #0
+ 1439              	.LVL118:
+ 259:Src/aiPbMgr.c ****     hdlb.buffer = buffer;
+ 1440              		.loc 1 259 16 view .LVU378
+ 1441 000c 0492     		str	r2, [sp, #16]
+ 260:Src/aiPbMgr.c ****     hdlb.err = EnumError_E_NONE;
+ 1442              		.loc 1 260 5 is_stmt 1 view .LVU379
+ 260:Src/aiPbMgr.c ****     hdlb.err = EnumError_E_NONE;
+ 1443              		.loc 1 260 17 is_stmt 0 view .LVU380
+ 1444 000e 0293     		str	r3, [sp, #8]
+ 261:Src/aiPbMgr.c ****     hdlb.n_max = aiPbAiBufferSize(buffer);
+ 1445              		.loc 1 261 5 is_stmt 1 view .LVU381
+ 261:Src/aiPbMgr.c ****     hdlb.n_max = aiPbAiBufferSize(buffer);
+ 1446              		.loc 1 261 14 is_stmt 0 view .LVU382
+ 1447 0010 0592     		str	r2, [sp, #20]
+ 262:Src/aiPbMgr.c ****     hdlb.msg = &msg;
+ 1448              		.loc 1 262 5 is_stmt 1 view .LVU383
+ 262:Src/aiPbMgr.c ****     hdlb.msg = &msg;
+ 1449              		.loc 1 262 18 is_stmt 0 view .LVU384
+ 1450 0012 1846     		mov	r0, r3
+ 1451              	.LVL119:
+ 262:Src/aiPbMgr.c ****     hdlb.msg = &msg;
+ 1452              		.loc 1 262 18 view .LVU385
+ 1453 0014 FFF7FEFF 		bl	aiPbAiBufferSize
+ 1454              	.LVL120:
+ 262:Src/aiPbMgr.c ****     hdlb.msg = &msg;
+ 1455              		.loc 1 262 16 view .LVU386
+ 1456 0018 0390     		str	r0, [sp, #12]
+ 263:Src/aiPbMgr.c **** 
+ 1457              		.loc 1 263 5 is_stmt 1 view .LVU387
+ 263:Src/aiPbMgr.c **** 
+ 1458              		.loc 1 263 14 is_stmt 0 view .LVU388
+ 1459 001a 07AA     		add	r2, sp, #28
+ 1460 001c 0692     		str	r2, [sp, #24]
+ 265:Src/aiPbMgr.c ****     msg.datas.arg = &hdlb;
+ 1461              		.loc 1 265 5 is_stmt 1 view .LVU389
+ 265:Src/aiPbMgr.c ****     msg.datas.arg = &hdlb;
+ 1462              		.loc 1 265 28 is_stmt 0 view .LVU390
+ 1463 001e 144B     		ldr	r3, .L115
+ 1464 0020 0E93     		str	r3, [sp, #56]
+ 266:Src/aiPbMgr.c **** 
+ 1465              		.loc 1 266 5 is_stmt 1 view .LVU391
+ 266:Src/aiPbMgr.c **** 
+ 1466              		.loc 1 266 19 is_stmt 0 view .LVU392
+ 1467 0022 02AB     		add	r3, sp, #8
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 39
+
+
+ 1468 0024 0F93     		str	r3, [sp, #60]
+ 269:Src/aiPbMgr.c ****     ioFlushRead();
+ 1469              		.loc 1 269 5 is_stmt 1 view .LVU393
+ 1470 0026 1349     		ldr	r1, .L115+4
+ 1471 0028 1348     		ldr	r0, .L115+8
+ 1472 002a FFF7FEFF 		bl	pb_decode_delimited
+ 1473              	.LVL121:
+ 270:Src/aiPbMgr.c **** 
+ 1474              		.loc 1 270 5 view .LVU394
+ 1475 002e FFF7FEFF 		bl	ioFlushRead
+ 1476              	.LVL122:
+ 273:Src/aiPbMgr.c ****         aiPbMgrSendAck(req, resp, EnumState_S_ERROR, hdlb.err,
+ 1477              		.loc 1 273 5 view .LVU395
+ 273:Src/aiPbMgr.c ****         aiPbMgrSendAck(req, resp, EnumState_S_ERROR, hdlb.err,
+ 1478              		.loc 1 273 13 is_stmt 0 view .LVU396
+ 1479 0032 059B     		ldr	r3, [sp, #20]
+ 273:Src/aiPbMgr.c ****         aiPbMgrSendAck(req, resp, EnumState_S_ERROR, hdlb.err,
+ 1480              		.loc 1 273 8 view .LVU397
+ 1481 0034 4BB1     		cbz	r3, .L110
+ 274:Src/aiPbMgr.c ****                 (EnumError)hdlb.err);
+ 1482              		.loc 1 274 9 is_stmt 1 view .LVU398
+ 1483 0036 DAB2     		uxtb	r2, r3
+ 1484 0038 0092     		str	r2, [sp]
+ 1485 003a 0422     		movs	r2, #4
+ 1486 003c 3146     		mov	r1, r6
+ 1487 003e 2846     		mov	r0, r5
+ 1488 0040 FFF7FEFF 		bl	aiPbMgrSendAck
+ 1489              	.LVL123:
+ 276:Src/aiPbMgr.c ****     } else {
+ 1490              		.loc 1 276 9 view .LVU399
+ 276:Src/aiPbMgr.c ****     } else {
+ 1491              		.loc 1 276 13 is_stmt 0 view .LVU400
+ 1492 0044 0020     		movs	r0, #0
+ 1493              	.LVL124:
+ 1494              	.L111:
+ 284:Src/aiPbMgr.c **** }
+ 1495              		.loc 1 284 5 is_stmt 1 view .LVU401
+ 285:Src/aiPbMgr.c **** 
+ 1496              		.loc 1 285 1 is_stmt 0 view .LVU402
+ 1497 0046 10B0     		add	sp, sp, #64
+ 1498              	.LCFI35:
+ 1499              		.cfi_remember_state
+ 1500              		.cfi_def_cfa_offset 16
+ 1501              		@ sp needed
+ 1502 0048 70BD     		pop	{r4, r5, r6, pc}
+ 1503              	.LVL125:
+ 1504              	.L110:
+ 1505              	.LCFI36:
+ 1506              		.cfi_restore_state
+ 278:Src/aiPbMgr.c ****         if ((state == EnumState_S_WAITING) ||
+ 1507              		.loc 1 278 9 is_stmt 1 view .LVU403
+ 1508 004a 0023     		movs	r3, #0
+ 1509 004c 0093     		str	r3, [sp]
+ 1510 004e 049B     		ldr	r3, [sp, #16]
+ 1511 0050 2246     		mov	r2, r4
+ 1512 0052 3146     		mov	r1, r6
+ 1513 0054 2846     		mov	r0, r5
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 40
+
+
+ 1514 0056 FFF7FEFF 		bl	aiPbMgrSendAck
+ 1515              	.LVL126:
+ 279:Src/aiPbMgr.c ****                 (state == EnumState_S_PROCESSING))
+ 1516              		.loc 1 279 9 view .LVU404
+ 279:Src/aiPbMgr.c ****                 (state == EnumState_S_PROCESSING))
+ 1517              		.loc 1 279 44 is_stmt 0 view .LVU405
+ 1518 005a 013C     		subs	r4, r4, #1
+ 1519 005c E4B2     		uxtb	r4, r4
+ 279:Src/aiPbMgr.c ****                 (state == EnumState_S_PROCESSING))
+ 1520              		.loc 1 279 12 view .LVU406
+ 1521 005e 012C     		cmp	r4, #1
+ 1522 0060 01D9     		bls	.L114
+ 257:Src/aiPbMgr.c **** 
+ 1523              		.loc 1 257 10 view .LVU407
+ 1524 0062 0120     		movs	r0, #1
+ 1525 0064 EFE7     		b	.L111
+ 1526              	.L114:
+ 281:Src/aiPbMgr.c ****     }
+ 1527              		.loc 1 281 13 is_stmt 1 view .LVU408
+ 1528 0066 FFF7FEFF 		bl	aiPbMgrWaitAck
+ 1529              	.LVL127:
+ 257:Src/aiPbMgr.c **** 
+ 1530              		.loc 1 257 10 is_stmt 0 view .LVU409
+ 1531 006a 0120     		movs	r0, #1
+ 1532 006c EBE7     		b	.L111
+ 1533              	.L116:
+ 1534 006e 00BF     		.align	2
+ 1535              	.L115:
+ 1536 0070 00000000 		.word	aiPbBuffer_read_cb3
+ 1537 0074 00000000 		.word	aiBufferByteMsg_fields
+ 1538 0078 00000000 		.word	.LANCHOR0
+ 1539              		.cfi_endproc
+ 1540              	.LFE142:
+ 1542              		.section	.text.aiPbMgrSendAiBuffer3,"ax",%progbits
+ 1543              		.align	1
+ 1544              		.global	aiPbMgrSendAiBuffer3
+ 1545              		.syntax unified
+ 1546              		.thumb
+ 1547              		.thumb_func
+ 1548              		.fpu fpv4-sp-d16
+ 1550              	aiPbMgrSendAiBuffer3:
+ 1551              	.LVL128:
+ 1552              	.LFB144:
+ 300:Src/aiPbMgr.c ****     struct aiPbMgrBuffer hdlb;
+ 1553              		.loc 1 300 1 is_stmt 1 view -0
+ 1554              		.cfi_startproc
+ 1555              		@ args = 8, pretend = 0, frame = 24
+ 1556              		@ frame_needed = 0, uses_anonymous_args = 0
+ 300:Src/aiPbMgr.c ****     struct aiPbMgrBuffer hdlb;
+ 1557              		.loc 1 300 1 is_stmt 0 view .LVU411
+ 1558 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+ 1559              	.LCFI37:
+ 1560              		.cfi_def_cfa_offset 32
+ 1561              		.cfi_offset 4, -32
+ 1562              		.cfi_offset 5, -28
+ 1563              		.cfi_offset 6, -24
+ 1564              		.cfi_offset 7, -20
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 41
+
+
+ 1565              		.cfi_offset 8, -16
+ 1566              		.cfi_offset 9, -12
+ 1567              		.cfi_offset 10, -8
+ 1568              		.cfi_offset 14, -4
+ 1569 0004 2DED028B 		vpush.64	{d8}
+ 1570              	.LCFI38:
+ 1571              		.cfi_def_cfa_offset 40
+ 1572              		.cfi_offset 80, -40
+ 1573              		.cfi_offset 81, -36
+ 1574 0008 86B0     		sub	sp, sp, #24
+ 1575              	.LCFI39:
+ 1576              		.cfi_def_cfa_offset 64
+ 1577 000a 8146     		mov	r9, r0
+ 1578 000c 0C46     		mov	r4, r1
+ 1579 000e 9046     		mov	r8, r2
+ 1580 0010 1E46     		mov	r6, r3
+ 1581 0012 B0EE408A 		vmov.f32	s16, s0
+ 1582 0016 119D     		ldr	r5, [sp, #68]
+ 301:Src/aiPbMgr.c ****     const ai_buffer_meta_info *meta_info = AI_BUFFER_META_INFO(buffer);
+ 1583              		.loc 1 301 5 is_stmt 1 view .LVU412
+ 302:Src/aiPbMgr.c **** 
+ 1584              		.loc 1 302 5 view .LVU413
+ 302:Src/aiPbMgr.c **** 
+ 1585              		.loc 1 302 32 is_stmt 0 view .LVU414
+ 1586 0018 D5F814A0 		ldr	r10, [r5, #20]
+ 1587              	.LVL129:
+ 308:Src/aiPbMgr.c ****     hdlb.buffer = (ai_buffer *)buffer;
+ 1588              		.loc 1 308 5 is_stmt 1 view .LVU415
+ 308:Src/aiPbMgr.c ****     hdlb.buffer = (ai_buffer *)buffer;
+ 1589              		.loc 1 308 16 is_stmt 0 view .LVU416
+ 1590 001c 0027     		movs	r7, #0
+ 1591 001e 0397     		str	r7, [sp, #12]
+ 309:Src/aiPbMgr.c ****     hdlb.err = EnumError_E_NONE;
+ 1592              		.loc 1 309 5 is_stmt 1 view .LVU417
+ 309:Src/aiPbMgr.c ****     hdlb.err = EnumError_E_NONE;
+ 1593              		.loc 1 309 17 is_stmt 0 view .LVU418
+ 1594 0020 0195     		str	r5, [sp, #4]
+ 310:Src/aiPbMgr.c ****     hdlb.n_max = aiPbAiBufferSize(buffer);
+ 1595              		.loc 1 310 5 is_stmt 1 view .LVU419
+ 310:Src/aiPbMgr.c ****     hdlb.n_max = aiPbAiBufferSize(buffer);
+ 1596              		.loc 1 310 14 is_stmt 0 view .LVU420
+ 1597 0022 0497     		str	r7, [sp, #16]
+ 311:Src/aiPbMgr.c ****     hdlb.msg = NULL;
+ 1598              		.loc 1 311 5 is_stmt 1 view .LVU421
+ 311:Src/aiPbMgr.c ****     hdlb.msg = NULL;
+ 1599              		.loc 1 311 18 is_stmt 0 view .LVU422
+ 1600 0024 2846     		mov	r0, r5
+ 1601              	.LVL130:
+ 311:Src/aiPbMgr.c ****     hdlb.msg = NULL;
+ 1602              		.loc 1 311 18 view .LVU423
+ 1603 0026 FFF7FEFF 		bl	aiPbAiBufferSize
+ 1604              	.LVL131:
+ 311:Src/aiPbMgr.c ****     hdlb.msg = NULL;
+ 1605              		.loc 1 311 16 view .LVU424
+ 1606 002a 0290     		str	r0, [sp, #8]
+ 312:Src/aiPbMgr.c **** 
+ 1607              		.loc 1 312 5 is_stmt 1 view .LVU425
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 42
+
+
+ 312:Src/aiPbMgr.c **** 
+ 1608              		.loc 1 312 14 is_stmt 0 view .LVU426
+ 1609 002c 0597     		str	r7, [sp, #20]
+ 319:Src/aiPbMgr.c ****         hdlb.n_max  = 0;
+ 1610              		.loc 1 319 5 is_stmt 1 view .LVU427
+ 319:Src/aiPbMgr.c ****         hdlb.n_max  = 0;
+ 1611              		.loc 1 319 8 is_stmt 0 view .LVU428
+ 1612 002e BE42     		cmp	r6, r7
+ 1613 0030 2CDB     		blt	.L122
+ 1614              	.L118:
+ 323:Src/aiPbMgr.c **** 
+ 1615              		.loc 1 323 5 is_stmt 1 view .LVU429
+ 323:Src/aiPbMgr.c **** 
+ 1616              		.loc 1 323 10 is_stmt 0 view .LVU430
+ 1617 0032 26F00046 		bic	r6, r6, #-2147483648
+ 1618              	.LVL132:
+ 326:Src/aiPbMgr.c ****     resp->payload.node.type = type;
+ 1619              		.loc 1 326 5 is_stmt 1 view .LVU431
+ 326:Src/aiPbMgr.c ****     resp->payload.node.type = type;
+ 1620              		.loc 1 326 25 is_stmt 0 view .LVU432
+ 1621 0036 0E23     		movs	r3, #14
+ 1622 0038 E380     		strh	r3, [r4, #6]	@ movhi
+ 327:Src/aiPbMgr.c ****     resp->payload.node.id = id;
+ 1623              		.loc 1 327 5 is_stmt 1 view .LVU433
+ 327:Src/aiPbMgr.c ****     resp->payload.node.id = id;
+ 1624              		.loc 1 327 29 is_stmt 0 view .LVU434
+ 1625 003a A660     		str	r6, [r4, #8]
+ 328:Src/aiPbMgr.c ****     resp->payload.node.duration = dur_ms;
+ 1626              		.loc 1 328 5 is_stmt 1 view .LVU435
+ 328:Src/aiPbMgr.c ****     resp->payload.node.duration = dur_ms;
+ 1627              		.loc 1 328 27 is_stmt 0 view .LVU436
+ 1628 003c 109B     		ldr	r3, [sp, #64]
+ 1629 003e E360     		str	r3, [r4, #12]
+ 329:Src/aiPbMgr.c ****     resp->payload.node.buffer.shape.format = aiPbAiFmtToMsgFmt(buffer->format);
+ 1630              		.loc 1 329 5 is_stmt 1 view .LVU437
+ 329:Src/aiPbMgr.c ****     resp->payload.node.buffer.shape.format = aiPbAiFmtToMsgFmt(buffer->format);
+ 1631              		.loc 1 329 33 is_stmt 0 view .LVU438
+ 1632 0040 84ED048A 		vstr.32	s16, [r4, #16]
+ 330:Src/aiPbMgr.c ****     resp->payload.node.buffer.shape.n_batches = buffer->n_batches;
+ 1633              		.loc 1 330 5 is_stmt 1 view .LVU439
+ 330:Src/aiPbMgr.c ****     resp->payload.node.buffer.shape.n_batches = buffer->n_batches;
+ 1634              		.loc 1 330 46 is_stmt 0 view .LVU440
+ 1635 0044 2868     		ldr	r0, [r5]
+ 1636 0046 FFF7FEFF 		bl	aiPbAiFmtToMsgFmt
+ 1637              	.LVL133:
+ 330:Src/aiPbMgr.c ****     resp->payload.node.buffer.shape.n_batches = buffer->n_batches;
+ 1638              		.loc 1 330 44 view .LVU441
+ 1639 004a 6061     		str	r0, [r4, #20]
+ 331:Src/aiPbMgr.c ****     resp->payload.node.buffer.shape.height = buffer->height;
+ 1640              		.loc 1 331 5 is_stmt 1 view .LVU442
+ 331:Src/aiPbMgr.c ****     resp->payload.node.buffer.shape.height = buffer->height;
+ 1641              		.loc 1 331 55 is_stmt 0 view .LVU443
+ 1642 004c AB88     		ldrh	r3, [r5, #4]
+ 331:Src/aiPbMgr.c ****     resp->payload.node.buffer.shape.height = buffer->height;
+ 1643              		.loc 1 331 47 view .LVU444
+ 1644 004e A361     		str	r3, [r4, #24]
+ 332:Src/aiPbMgr.c ****     resp->payload.node.buffer.shape.width = buffer->width;
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 43
+
+
+ 1645              		.loc 1 332 5 is_stmt 1 view .LVU445
+ 332:Src/aiPbMgr.c ****     resp->payload.node.buffer.shape.width = buffer->width;
+ 1646              		.loc 1 332 52 is_stmt 0 view .LVU446
+ 1647 0050 EB88     		ldrh	r3, [r5, #6]
+ 332:Src/aiPbMgr.c ****     resp->payload.node.buffer.shape.width = buffer->width;
+ 1648              		.loc 1 332 44 view .LVU447
+ 1649 0052 E361     		str	r3, [r4, #28]
+ 333:Src/aiPbMgr.c ****     resp->payload.node.buffer.shape.channels = buffer->channels;
+ 1650              		.loc 1 333 5 is_stmt 1 view .LVU448
+ 333:Src/aiPbMgr.c ****     resp->payload.node.buffer.shape.channels = buffer->channels;
+ 1651              		.loc 1 333 51 is_stmt 0 view .LVU449
+ 1652 0054 2B89     		ldrh	r3, [r5, #8]
+ 333:Src/aiPbMgr.c ****     resp->payload.node.buffer.shape.channels = buffer->channels;
+ 1653              		.loc 1 333 43 view .LVU450
+ 1654 0056 2362     		str	r3, [r4, #32]
+ 334:Src/aiPbMgr.c ****     aiPbMgrSetMetaInfo(meta_info, 0, &resp->payload.node.buffer.shape);
+ 1655              		.loc 1 334 5 is_stmt 1 view .LVU451
+ 334:Src/aiPbMgr.c ****     aiPbMgrSetMetaInfo(meta_info, 0, &resp->payload.node.buffer.shape);
+ 1656              		.loc 1 334 54 is_stmt 0 view .LVU452
+ 1657 0058 EB68     		ldr	r3, [r5, #12]
+ 334:Src/aiPbMgr.c ****     aiPbMgrSetMetaInfo(meta_info, 0, &resp->payload.node.buffer.shape);
+ 1658              		.loc 1 334 46 view .LVU453
+ 1659 005a 6362     		str	r3, [r4, #36]
+ 335:Src/aiPbMgr.c **** 
+ 1660              		.loc 1 335 5 is_stmt 1 view .LVU454
+ 1661 005c 04F11402 		add	r2, r4, #20
+ 1662 0060 0021     		movs	r1, #0
+ 1663 0062 5046     		mov	r0, r10
+ 1664 0064 FFF7FEFF 		bl	aiPbMgrSetMetaInfo
+ 1665              	.LVL134:
+ 337:Src/aiPbMgr.c ****     resp->payload.node.buffer.datas.arg = &hdlb;
+ 1666              		.loc 1 337 5 view .LVU455
+ 337:Src/aiPbMgr.c ****     resp->payload.node.buffer.datas.arg = &hdlb;
+ 1667              		.loc 1 337 50 is_stmt 0 view .LVU456
+ 1668 0068 0B4B     		ldr	r3, .L124
+ 1669 006a 2363     		str	r3, [r4, #48]
+ 338:Src/aiPbMgr.c **** 
+ 1670              		.loc 1 338 5 is_stmt 1 view .LVU457
+ 338:Src/aiPbMgr.c **** 
+ 1671              		.loc 1 338 41 is_stmt 0 view .LVU458
+ 1672 006c 01AB     		add	r3, sp, #4
+ 1673 006e 6363     		str	r3, [r4, #52]
+ 341:Src/aiPbMgr.c **** 
+ 1674              		.loc 1 341 5 is_stmt 1 view .LVU459
+ 1675 0070 4246     		mov	r2, r8
+ 1676 0072 2146     		mov	r1, r4
+ 1677 0074 4846     		mov	r0, r9
+ 1678 0076 FFF7FEFF 		bl	aiPbMgrSendResp
+ 1679              	.LVL135:
+ 344:Src/aiPbMgr.c ****         return aiPbMgrWaitAck();
+ 1680              		.loc 1 344 5 view .LVU460
+ 344:Src/aiPbMgr.c ****         return aiPbMgrWaitAck();
+ 1681              		.loc 1 344 8 is_stmt 0 view .LVU461
+ 1682 007a B8F1020F 		cmp	r8, #2
+ 1683 007e 07D0     		beq	.L123
+ 347:Src/aiPbMgr.c **** }
+ 1684              		.loc 1 347 16 view .LVU462
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 44
+
+
+ 1685 0080 0120     		movs	r0, #1
+ 1686              	.L119:
+ 348:Src/aiPbMgr.c **** 
+ 1687              		.loc 1 348 1 view .LVU463
+ 1688 0082 06B0     		add	sp, sp, #24
+ 1689              	.LCFI40:
+ 1690              		.cfi_remember_state
+ 1691              		.cfi_def_cfa_offset 40
+ 1692              		@ sp needed
+ 1693 0084 BDEC028B 		vldm	sp!, {d8}
+ 1694              	.LCFI41:
+ 1695              		.cfi_restore 80
+ 1696              		.cfi_restore 81
+ 1697              		.cfi_def_cfa_offset 32
+ 1698              	.LVL136:
+ 348:Src/aiPbMgr.c **** 
+ 1699              		.loc 1 348 1 view .LVU464
+ 1700 0088 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 1701              	.LVL137:
+ 1702              	.L122:
+ 1703              	.LCFI42:
+ 1704              		.cfi_restore_state
+ 320:Src/aiPbMgr.c ****     }
+ 1705              		.loc 1 320 9 is_stmt 1 view .LVU465
+ 320:Src/aiPbMgr.c ****     }
+ 1706              		.loc 1 320 21 is_stmt 0 view .LVU466
+ 1707 008c 0297     		str	r7, [sp, #8]
+ 1708 008e D0E7     		b	.L118
+ 1709              	.L123:
+ 345:Src/aiPbMgr.c ****     else
+ 1710              		.loc 1 345 9 is_stmt 1 view .LVU467
+ 345:Src/aiPbMgr.c ****     else
+ 1711              		.loc 1 345 16 is_stmt 0 view .LVU468
+ 1712 0090 FFF7FEFF 		bl	aiPbMgrWaitAck
+ 1713              	.LVL138:
+ 1714 0094 F5E7     		b	.L119
+ 1715              	.L125:
+ 1716 0096 00BF     		.align	2
+ 1717              	.L124:
+ 1718 0098 00000000 		.word	aiPbBuffer_write_cb3
+ 1719              		.cfi_endproc
+ 1720              	.LFE144:
+ 1722              		.section	.text.aiPbCmdSync,"ax",%progbits
+ 1723              		.align	1
+ 1724              		.global	aiPbCmdSync
+ 1725              		.syntax unified
+ 1726              		.thumb
+ 1727              		.thumb_func
+ 1728              		.fpu fpv4-sp-d16
+ 1730              	aiPbCmdSync:
+ 1731              	.LVL139:
+ 1732              	.LFB145:
+ 353:Src/aiPbMgr.c ****     resp->which_payload = respMsg_sync_tag;
+ 1733              		.loc 1 353 1 is_stmt 1 view -0
+ 1734              		.cfi_startproc
+ 1735              		@ args = 0, pretend = 0, frame = 0
+ 1736              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 45
+
+
+ 353:Src/aiPbMgr.c ****     resp->which_payload = respMsg_sync_tag;
+ 1737              		.loc 1 353 1 is_stmt 0 view .LVU470
+ 1738 0000 08B5     		push	{r3, lr}
+ 1739              	.LCFI43:
+ 1740              		.cfi_def_cfa_offset 8
+ 1741              		.cfi_offset 3, -8
+ 1742              		.cfi_offset 14, -4
+ 354:Src/aiPbMgr.c ****     resp->payload.sync.version =
+ 1743              		.loc 1 354 5 is_stmt 1 view .LVU471
+ 354:Src/aiPbMgr.c ****     resp->payload.sync.version =
+ 1744              		.loc 1 354 25 is_stmt 0 view .LVU472
+ 1745 0002 0A23     		movs	r3, #10
+ 1746 0004 CB80     		strh	r3, [r1, #6]	@ movhi
+ 355:Src/aiPbMgr.c ****             EnumVersion_P_VERSION_MAJOR << 8 |
+ 1747              		.loc 1 355 5 is_stmt 1 view .LVU473
+ 355:Src/aiPbMgr.c ****             EnumVersion_P_VERSION_MAJOR << 8 |
+ 1748              		.loc 1 355 32 is_stmt 0 view .LVU474
+ 1749 0006 40F20123 		movw	r3, #513
+ 1750 000a 8B60     		str	r3, [r1, #8]
+ 359:Src/aiPbMgr.c **** 
+ 1751              		.loc 1 359 5 is_stmt 1 view .LVU475
+ 359:Src/aiPbMgr.c **** 
+ 1752              		.loc 1 359 35 is_stmt 0 view .LVU476
+ 1753 000c 0223     		movs	r3, #2
+ 1754 000e CB60     		str	r3, [r1, #12]
+ 365:Src/aiPbMgr.c ****         resp->payload.sync.capability |= (uint32_t)param;
+ 1755              		.loc 1 365 5 is_stmt 1 view .LVU477
+ 365:Src/aiPbMgr.c ****         resp->payload.sync.capability |= (uint32_t)param;
+ 1756              		.loc 1 365 8 is_stmt 0 view .LVU478
+ 1757 0010 12B1     		cbz	r2, .L127
+ 366:Src/aiPbMgr.c **** 
+ 1758              		.loc 1 366 9 is_stmt 1 view .LVU479
+ 366:Src/aiPbMgr.c **** 
+ 1759              		.loc 1 366 39 is_stmt 0 view .LVU480
+ 1760 0012 42F00203 		orr	r3, r2, #2
+ 1761 0016 CB60     		str	r3, [r1, #12]
+ 1762              	.L127:
+ 368:Src/aiPbMgr.c **** }
+ 1763              		.loc 1 368 5 is_stmt 1 view .LVU481
+ 1764 0018 0022     		movs	r2, #0
+ 1765              	.LVL140:
+ 368:Src/aiPbMgr.c **** }
+ 1766              		.loc 1 368 5 is_stmt 0 view .LVU482
+ 1767 001a FFF7FEFF 		bl	aiPbMgrSendResp
+ 1768              	.LVL141:
+ 369:Src/aiPbMgr.c **** 
+ 1769              		.loc 1 369 1 view .LVU483
+ 1770 001e 08BD     		pop	{r3, pc}
+ 1771              		.cfi_endproc
+ 1772              	.LFE145:
+ 1774              		.section	.text.aiPbCmdSysInfo,"ax",%progbits
+ 1775              		.align	1
+ 1776              		.global	aiPbCmdSysInfo
+ 1777              		.syntax unified
+ 1778              		.thumb
+ 1779              		.thumb_func
+ 1780              		.fpu fpv4-sp-d16
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 46
+
+
+ 1782              	aiPbCmdSysInfo:
+ 1783              	.LVL142:
+ 1784              	.LFB146:
+ 372:Src/aiPbMgr.c ****     UNUSED(param);
+ 1785              		.loc 1 372 1 is_stmt 1 view -0
+ 1786              		.cfi_startproc
+ 1787              		@ args = 0, pretend = 0, frame = 0
+ 1788              		@ frame_needed = 0, uses_anonymous_args = 0
+ 372:Src/aiPbMgr.c ****     UNUSED(param);
+ 1789              		.loc 1 372 1 is_stmt 0 view .LVU485
+ 1790 0000 38B5     		push	{r3, r4, r5, lr}
+ 1791              	.LCFI44:
+ 1792              		.cfi_def_cfa_offset 16
+ 1793              		.cfi_offset 3, -16
+ 1794              		.cfi_offset 4, -12
+ 1795              		.cfi_offset 5, -8
+ 1796              		.cfi_offset 14, -4
+ 1797 0002 0546     		mov	r5, r0
+ 1798 0004 0C46     		mov	r4, r1
+ 373:Src/aiPbMgr.c ****     resp->which_payload = respMsg_sinfo_tag;
+ 1799              		.loc 1 373 5 is_stmt 1 view .LVU486
+ 374:Src/aiPbMgr.c ****     resp->payload.sinfo.devid = HAL_GetDEVID();
+ 1800              		.loc 1 374 5 view .LVU487
+ 374:Src/aiPbMgr.c ****     resp->payload.sinfo.devid = HAL_GetDEVID();
+ 1801              		.loc 1 374 25 is_stmt 0 view .LVU488
+ 1802 0006 0B23     		movs	r3, #11
+ 1803 0008 CB80     		strh	r3, [r1, #6]	@ movhi
+ 375:Src/aiPbMgr.c ****     resp->payload.sinfo.sclock = HAL_RCC_GetSysClockFreq();
+ 1804              		.loc 1 375 5 is_stmt 1 view .LVU489
+ 375:Src/aiPbMgr.c ****     resp->payload.sinfo.sclock = HAL_RCC_GetSysClockFreq();
+ 1805              		.loc 1 375 33 is_stmt 0 view .LVU490
+ 1806 000a FFF7FEFF 		bl	HAL_GetDEVID
+ 1807              	.LVL143:
+ 375:Src/aiPbMgr.c ****     resp->payload.sinfo.sclock = HAL_RCC_GetSysClockFreq();
+ 1808              		.loc 1 375 31 view .LVU491
+ 1809 000e A060     		str	r0, [r4, #8]
+ 376:Src/aiPbMgr.c ****     resp->payload.sinfo.hclock = HAL_RCC_GetHCLKFreq();
+ 1810              		.loc 1 376 5 is_stmt 1 view .LVU492
+ 376:Src/aiPbMgr.c ****     resp->payload.sinfo.hclock = HAL_RCC_GetHCLKFreq();
+ 1811              		.loc 1 376 34 is_stmt 0 view .LVU493
+ 1812 0010 FFF7FEFF 		bl	HAL_RCC_GetSysClockFreq
+ 1813              	.LVL144:
+ 376:Src/aiPbMgr.c ****     resp->payload.sinfo.hclock = HAL_RCC_GetHCLKFreq();
+ 1814              		.loc 1 376 32 view .LVU494
+ 1815 0014 E060     		str	r0, [r4, #12]
+ 377:Src/aiPbMgr.c ****     resp->payload.sinfo.cache = getFlashCacheConf();
+ 1816              		.loc 1 377 5 is_stmt 1 view .LVU495
+ 377:Src/aiPbMgr.c ****     resp->payload.sinfo.cache = getFlashCacheConf();
+ 1817              		.loc 1 377 34 is_stmt 0 view .LVU496
+ 1818 0016 FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
+ 1819              	.LVL145:
+ 377:Src/aiPbMgr.c ****     resp->payload.sinfo.cache = getFlashCacheConf();
+ 1820              		.loc 1 377 32 view .LVU497
+ 1821 001a 2061     		str	r0, [r4, #16]
+ 378:Src/aiPbMgr.c **** 
+ 1822              		.loc 1 378 5 is_stmt 1 view .LVU498
+ 378:Src/aiPbMgr.c **** 
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 47
+
+
+ 1823              		.loc 1 378 33 is_stmt 0 view .LVU499
+ 1824 001c FFF7FEFF 		bl	getFlashCacheConf
+ 1825              	.LVL146:
+ 378:Src/aiPbMgr.c **** 
+ 1826              		.loc 1 378 31 view .LVU500
+ 1827 0020 6061     		str	r0, [r4, #20]
+ 380:Src/aiPbMgr.c **** }
+ 1828              		.loc 1 380 5 is_stmt 1 view .LVU501
+ 1829 0022 0022     		movs	r2, #0
+ 1830 0024 2146     		mov	r1, r4
+ 1831 0026 2846     		mov	r0, r5
+ 1832 0028 FFF7FEFF 		bl	aiPbMgrSendResp
+ 1833              	.LVL147:
+ 381:Src/aiPbMgr.c **** 
+ 1834              		.loc 1 381 1 is_stmt 0 view .LVU502
+ 1835 002c 38BD     		pop	{r3, r4, r5, pc}
+ 381:Src/aiPbMgr.c **** 
+ 1836              		.loc 1 381 1 view .LVU503
+ 1837              		.cfi_endproc
+ 1838              	.LFE146:
+ 1840              		.section	.text.aiPbStrCopy,"ax",%progbits
+ 1841              		.align	1
+ 1842              		.global	aiPbStrCopy
+ 1843              		.syntax unified
+ 1844              		.thumb
+ 1845              		.thumb_func
+ 1846              		.fpu fpv4-sp-d16
+ 1848              	aiPbStrCopy:
+ 1849              	.LVL148:
+ 1850              	.LFB151:
+ 437:Src/aiPbMgr.c **** 
+ 438:Src/aiPbMgr.c **** void aiPbStrCopy(const char *src, char *dst, uint32_t max)
+ 439:Src/aiPbMgr.c **** {
+ 1851              		.loc 1 439 1 is_stmt 1 view -0
+ 1852              		.cfi_startproc
+ 1853              		@ args = 0, pretend = 0, frame = 16
+ 1854              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1855              		.loc 1 439 1 is_stmt 0 view .LVU505
+ 1856 0000 70B5     		push	{r4, r5, r6, lr}
+ 1857              	.LCFI45:
+ 1858              		.cfi_def_cfa_offset 16
+ 1859              		.cfi_offset 4, -16
+ 1860              		.cfi_offset 5, -12
+ 1861              		.cfi_offset 6, -8
+ 1862              		.cfi_offset 14, -4
+ 1863 0002 84B0     		sub	sp, sp, #16
+ 1864              	.LCFI46:
+ 1865              		.cfi_def_cfa_offset 32
+ 1866 0004 0446     		mov	r4, r0
+ 1867 0006 0D46     		mov	r5, r1
+ 1868 0008 1646     		mov	r6, r2
+ 440:Src/aiPbMgr.c ****     const char undef[] = "UNDEFINED";
+ 1869              		.loc 1 440 5 is_stmt 1 view .LVU506
+ 1870              		.loc 1 440 16 is_stmt 0 view .LVU507
+ 1871 000a 0F4A     		ldr	r2, .L139
+ 1872              	.LVL149:
+ 1873              		.loc 1 440 16 view .LVU508
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 48
+
+
+ 1874 000c 01AB     		add	r3, sp, #4
+ 1875 000e 07CA     		ldm	r2, {r0, r1, r2}
+ 1876              	.LVL150:
+ 1877              		.loc 1 440 16 view .LVU509
+ 1878 0010 03C3     		stmia	r3!, {r0, r1}
+ 1879 0012 1A80     		strh	r2, [r3]	@ movhi
+ 441:Src/aiPbMgr.c ****     size_t l = strlen(src);
+ 1880              		.loc 1 441 5 is_stmt 1 view .LVU510
+ 1881              		.loc 1 441 16 is_stmt 0 view .LVU511
+ 1882 0014 2046     		mov	r0, r4
+ 1883 0016 FFF7FEFF 		bl	strlen
+ 1884              	.LVL151:
+ 442:Src/aiPbMgr.c **** 
+ 443:Src/aiPbMgr.c ****     if (l > max)
+ 1885              		.loc 1 443 5 is_stmt 1 view .LVU512
+ 1886              		.loc 1 443 8 is_stmt 0 view .LVU513
+ 1887 001a B042     		cmp	r0, r6
+ 1888 001c 00D9     		bls	.L132
+ 444:Src/aiPbMgr.c ****         l = max-1;
+ 1889              		.loc 1 444 9 is_stmt 1 view .LVU514
+ 1890              		.loc 1 444 11 is_stmt 0 view .LVU515
+ 1891 001e 701E     		subs	r0, r6, #1
+ 1892              	.LVL152:
+ 1893              	.L132:
+ 445:Src/aiPbMgr.c **** 
+ 446:Src/aiPbMgr.c ****     if (!dst)
+ 1894              		.loc 1 446 5 is_stmt 1 view .LVU516
+ 1895              		.loc 1 446 8 is_stmt 0 view .LVU517
+ 1896 0020 4DB1     		cbz	r5, .L131
+ 447:Src/aiPbMgr.c ****         return;
+ 448:Src/aiPbMgr.c **** 
+ 449:Src/aiPbMgr.c ****     if (src && l)
+ 1897              		.loc 1 449 5 is_stmt 1 view .LVU518
+ 1898              		.loc 1 449 8 is_stmt 0 view .LVU519
+ 1899 0022 04B1     		cbz	r4, .L135
+ 1900              		.loc 1 449 13 discriminator 1 view .LVU520
+ 1901 0024 48B9     		cbnz	r0, .L138
+ 1902              	.L135:
+ 450:Src/aiPbMgr.c ****         memcpy(dst, src, l+1);
+ 451:Src/aiPbMgr.c ****     else
+ 452:Src/aiPbMgr.c ****         memcpy(dst, undef, strlen(undef)+1);
+ 1903              		.loc 1 452 9 is_stmt 1 view .LVU521
+ 1904              		.loc 1 452 28 is_stmt 0 view .LVU522
+ 1905 0026 01A8     		add	r0, sp, #4
+ 1906              	.LVL153:
+ 1907              		.loc 1 452 28 view .LVU523
+ 1908 0028 FFF7FEFF 		bl	strlen
+ 1909              	.LVL154:
+ 1910              		.loc 1 452 9 view .LVU524
+ 1911 002c 421C     		adds	r2, r0, #1
+ 1912 002e 01A9     		add	r1, sp, #4
+ 1913 0030 2846     		mov	r0, r5
+ 1914 0032 FFF7FEFF 		bl	memcpy
+ 1915              	.LVL155:
+ 1916              	.L131:
+ 453:Src/aiPbMgr.c **** }
+ 1917              		.loc 1 453 1 view .LVU525
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 49
+
+
+ 1918 0036 04B0     		add	sp, sp, #16
+ 1919              	.LCFI47:
+ 1920              		.cfi_remember_state
+ 1921              		.cfi_def_cfa_offset 16
+ 1922              		@ sp needed
+ 1923 0038 70BD     		pop	{r4, r5, r6, pc}
+ 1924              	.LVL156:
+ 1925              	.L138:
+ 1926              	.LCFI48:
+ 1927              		.cfi_restore_state
+ 450:Src/aiPbMgr.c ****         memcpy(dst, src, l+1);
+ 1928              		.loc 1 450 9 is_stmt 1 view .LVU526
+ 1929 003a 421C     		adds	r2, r0, #1
+ 1930 003c 2146     		mov	r1, r4
+ 1931 003e 2846     		mov	r0, r5
+ 1932              	.LVL157:
+ 450:Src/aiPbMgr.c ****         memcpy(dst, src, l+1);
+ 1933              		.loc 1 450 9 is_stmt 0 view .LVU527
+ 1934 0040 FFF7FEFF 		bl	memcpy
+ 1935              	.LVL158:
+ 450:Src/aiPbMgr.c ****         memcpy(dst, src, l+1);
+ 1936              		.loc 1 450 9 view .LVU528
+ 1937 0044 F7E7     		b	.L131
+ 1938              	.L140:
+ 1939 0046 00BF     		.align	2
+ 1940              	.L139:
+ 1941 0048 00000000 		.word	.LC0
+ 1942              		.cfi_endproc
+ 1943              	.LFE151:
+ 1945              		.section	.text.aiPbVersionToUint32,"ax",%progbits
+ 1946              		.align	1
+ 1947              		.global	aiPbVersionToUint32
+ 1948              		.syntax unified
+ 1949              		.thumb
+ 1950              		.thumb_func
+ 1951              		.fpu fpv4-sp-d16
+ 1953              	aiPbVersionToUint32:
+ 1954              	.LVL159:
+ 1955              	.LFB152:
+ 454:Src/aiPbMgr.c **** 
+ 455:Src/aiPbMgr.c **** uint32_t aiPbVersionToUint32(const ai_platform_version *ver)
+ 456:Src/aiPbMgr.c **** {
+ 1956              		.loc 1 456 1 is_stmt 1 view -0
+ 1957              		.cfi_startproc
+ 1958              		@ args = 0, pretend = 0, frame = 0
+ 1959              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1960              		@ link register save eliminated.
+ 457:Src/aiPbMgr.c ****     if (!ver)
+ 1961              		.loc 1 457 5 view .LVU530
+ 1962              		.loc 1 457 8 is_stmt 0 view .LVU531
+ 1963 0000 0346     		mov	r3, r0
+ 1964 0002 50B1     		cbz	r0, .L143
+ 458:Src/aiPbMgr.c ****         return 0;
+ 459:Src/aiPbMgr.c **** 
+ 460:Src/aiPbMgr.c ****     return ver->major << 24 | ver->minor << 16
+ 1965              		.loc 1 460 5 is_stmt 1 view .LVU532
+ 1966              		.loc 1 460 15 is_stmt 0 view .LVU533
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 50
+
+
+ 1967 0004 0278     		ldrb	r2, [r0]	@ zero_extendqisi2
+ 1968              		.loc 1 460 34 view .LVU534
+ 1969 0006 4078     		ldrb	r0, [r0, #1]	@ zero_extendqisi2
+ 1970              	.LVL160:
+ 1971              		.loc 1 460 42 view .LVU535
+ 1972 0008 0004     		lsls	r0, r0, #16
+ 1973              		.loc 1 460 29 view .LVU536
+ 1974 000a 40EA0260 		orr	r0, r0, r2, lsl #24
+ 461:Src/aiPbMgr.c ****             | ver->micro << 8 | ver->reserved;
+ 1975              		.loc 1 461 18 view .LVU537
+ 1976 000e 9A78     		ldrb	r2, [r3, #2]	@ zero_extendqisi2
+ 1977              		.loc 1 461 13 view .LVU538
+ 1978 0010 40EA0220 		orr	r0, r0, r2, lsl #8
+ 1979              		.loc 1 461 36 view .LVU539
+ 1980 0014 DB78     		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+ 1981              	.LVL161:
+ 1982              		.loc 1 461 31 view .LVU540
+ 1983 0016 1843     		orrs	r0, r0, r3
+ 1984 0018 7047     		bx	lr
+ 1985              	.LVL162:
+ 1986              	.L143:
+ 458:Src/aiPbMgr.c ****         return 0;
+ 1987              		.loc 1 458 16 view .LVU541
+ 1988 001a 0020     		movs	r0, #0
+ 1989              	.LVL163:
+ 462:Src/aiPbMgr.c **** }
+ 1990              		.loc 1 462 1 view .LVU542
+ 1991 001c 7047     		bx	lr
+ 1992              		.cfi_endproc
+ 1993              	.LFE152:
+ 1995              		.section	.text.aiPbMgrSendNNInfo,"ax",%progbits
+ 1996              		.align	1
+ 1997              		.global	aiPbMgrSendNNInfo
+ 1998              		.syntax unified
+ 1999              		.thumb
+ 2000              		.thumb_func
+ 2001              		.fpu fpv4-sp-d16
+ 2003              	aiPbMgrSendNNInfo:
+ 2004              	.LVL164:
+ 2005              	.LFB153:
+ 463:Src/aiPbMgr.c **** 
+ 464:Src/aiPbMgr.c **** void aiPbMgrSendNNInfo(const reqMsg *req, respMsg *resp,
+ 465:Src/aiPbMgr.c ****         EnumState state, const ai_network_report *nn)
+ 466:Src/aiPbMgr.c **** {
+ 2006              		.loc 1 466 1 is_stmt 1 view -0
+ 2007              		.cfi_startproc
+ 2008              		@ args = 0, pretend = 0, frame = 0
+ 2009              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2010              		.loc 1 466 1 is_stmt 0 view .LVU544
+ 2011 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 2012              	.LCFI49:
+ 2013              		.cfi_def_cfa_offset 24
+ 2014              		.cfi_offset 3, -24
+ 2015              		.cfi_offset 4, -20
+ 2016              		.cfi_offset 5, -16
+ 2017              		.cfi_offset 6, -12
+ 2018              		.cfi_offset 7, -8
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 51
+
+
+ 2019              		.cfi_offset 14, -4
+ 2020 0002 0646     		mov	r6, r0
+ 2021 0004 0C46     		mov	r4, r1
+ 2022 0006 1746     		mov	r7, r2
+ 2023 0008 1D46     		mov	r5, r3
+ 467:Src/aiPbMgr.c ****     resp->which_payload = respMsg_ninfo_tag;
+ 2024              		.loc 1 467 5 is_stmt 1 view .LVU545
+ 2025              		.loc 1 467 25 is_stmt 0 view .LVU546
+ 2026 000a 1423     		movs	r3, #20
+ 2027              	.LVL165:
+ 2028              		.loc 1 467 25 view .LVU547
+ 2029 000c CB80     		strh	r3, [r1, #6]	@ movhi
+ 468:Src/aiPbMgr.c **** 
+ 469:Src/aiPbMgr.c ****     aiPbStrCopy(nn->model_name,
+ 2030              		.loc 1 469 5 is_stmt 1 view .LVU548
+ 2031 000e 4022     		movs	r2, #64
+ 2032              	.LVL166:
+ 2033              		.loc 1 469 5 is_stmt 0 view .LVU549
+ 2034 0010 0831     		adds	r1, r1, #8
+ 2035              	.LVL167:
+ 2036              		.loc 1 469 5 view .LVU550
+ 2037 0012 2868     		ldr	r0, [r5]
+ 2038              	.LVL168:
+ 2039              		.loc 1 469 5 view .LVU551
+ 2040 0014 FFF7FEFF 		bl	aiPbStrCopy
+ 2041              	.LVL169:
+ 470:Src/aiPbMgr.c ****             &resp->payload.ninfo.model_name[0],
+ 471:Src/aiPbMgr.c ****             sizeof(resp->payload.ninfo.model_name));
+ 472:Src/aiPbMgr.c ****     aiPbStrCopy(nn->model_signature,
+ 2042              		.loc 1 472 5 is_stmt 1 view .LVU552
+ 2043 0018 4022     		movs	r2, #64
+ 2044 001a 04F14801 		add	r1, r4, #72
+ 2045 001e 6868     		ldr	r0, [r5, #4]
+ 2046 0020 FFF7FEFF 		bl	aiPbStrCopy
+ 2047              	.LVL170:
+ 473:Src/aiPbMgr.c ****             &resp->payload.ninfo.model_signature[0],
+ 474:Src/aiPbMgr.c ****             sizeof(resp->payload.ninfo.model_signature));
+ 475:Src/aiPbMgr.c ****     aiPbStrCopy(nn->model_datetime,
+ 2048              		.loc 1 475 5 view .LVU553
+ 2049 0024 4022     		movs	r2, #64
+ 2050 0026 04F18801 		add	r1, r4, #136
+ 2051 002a A868     		ldr	r0, [r5, #8]
+ 2052 002c FFF7FEFF 		bl	aiPbStrCopy
+ 2053              	.LVL171:
+ 476:Src/aiPbMgr.c ****             &resp->payload.ninfo.model_datetime[0],
+ 477:Src/aiPbMgr.c ****             sizeof(resp->payload.ninfo.model_datetime));
+ 478:Src/aiPbMgr.c ****     aiPbStrCopy(nn->compile_datetime,
+ 2054              		.loc 1 478 5 view .LVU554
+ 2055 0030 4022     		movs	r2, #64
+ 2056 0032 04F1C801 		add	r1, r4, #200
+ 2057 0036 E868     		ldr	r0, [r5, #12]
+ 2058 0038 FFF7FEFF 		bl	aiPbStrCopy
+ 2059              	.LVL172:
+ 479:Src/aiPbMgr.c ****             &resp->payload.ninfo.compile_datetime[0],
+ 480:Src/aiPbMgr.c ****             sizeof(resp->payload.ninfo.compile_datetime));
+ 481:Src/aiPbMgr.c ****     aiPbStrCopy(nn->runtime_revision,
+ 2060              		.loc 1 481 5 view .LVU555
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 52
+
+
+ 2061 003c 4022     		movs	r2, #64
+ 2062 003e 04F58471 		add	r1, r4, #264
+ 2063 0042 2869     		ldr	r0, [r5, #16]
+ 2064 0044 FFF7FEFF 		bl	aiPbStrCopy
+ 2065              	.LVL173:
+ 482:Src/aiPbMgr.c ****             &resp->payload.ninfo.runtime_revision[0],
+ 483:Src/aiPbMgr.c ****             sizeof(resp->payload.ninfo.runtime_revision));
+ 484:Src/aiPbMgr.c ****     aiPbStrCopy(nn->tool_revision,
+ 2066              		.loc 1 484 5 view .LVU556
+ 2067 0048 4022     		movs	r2, #64
+ 2068 004a 04F5A671 		add	r1, r4, #332
+ 2069 004e A869     		ldr	r0, [r5, #24]
+ 2070 0050 FFF7FEFF 		bl	aiPbStrCopy
+ 2071              	.LVL174:
+ 485:Src/aiPbMgr.c ****             &resp->payload.ninfo.tool_revision[0],
+ 486:Src/aiPbMgr.c ****             sizeof(resp->payload.ninfo.tool_revision));
+ 487:Src/aiPbMgr.c **** 
+ 488:Src/aiPbMgr.c ****     resp->payload.ninfo.n_inputs = nn->n_inputs;
+ 2072              		.loc 1 488 5 view .LVU557
+ 2073              		.loc 1 488 38 is_stmt 0 view .LVU558
+ 2074 0054 2B8E     		ldrh	r3, [r5, #48]
+ 2075              		.loc 1 488 34 view .LVU559
+ 2076 0056 C4F8A031 		str	r3, [r4, #416]
+ 489:Src/aiPbMgr.c ****     resp->payload.ninfo.n_outputs = nn->n_outputs;
+ 2077              		.loc 1 489 5 is_stmt 1 view .LVU560
+ 2078              		.loc 1 489 39 is_stmt 0 view .LVU561
+ 2079 005a 6B8E     		ldrh	r3, [r5, #50]
+ 2080              		.loc 1 489 35 view .LVU562
+ 2081 005c C4F8A431 		str	r3, [r4, #420]
+ 490:Src/aiPbMgr.c ****     resp->payload.ninfo.n_nodes = nn->n_nodes;
+ 2082              		.loc 1 490 5 is_stmt 1 view .LVU563
+ 2083              		.loc 1 490 37 is_stmt 0 view .LVU564
+ 2084 0060 EB6E     		ldr	r3, [r5, #108]
+ 2085              		.loc 1 490 33 view .LVU565
+ 2086 0062 C4F8A831 		str	r3, [r4, #424]
+ 491:Src/aiPbMgr.c ****     resp->payload.ninfo.n_macc = nn->n_macc;
+ 2087              		.loc 1 491 5 is_stmt 1 view .LVU566
+ 2088              		.loc 1 491 36 is_stmt 0 view .LVU567
+ 2089 0066 EB6A     		ldr	r3, [r5, #44]
+ 2090              		.loc 1 491 32 view .LVU568
+ 2091 0068 C4F89C31 		str	r3, [r4, #412]
+ 492:Src/aiPbMgr.c **** 
+ 493:Src/aiPbMgr.c ****     resp->payload.ninfo.signature = nn->signature;
+ 2092              		.loc 1 493 5 is_stmt 1 view .LVU569
+ 2093              		.loc 1 493 39 is_stmt 0 view .LVU570
+ 2094 006c 2B6F     		ldr	r3, [r5, #112]
+ 2095              		.loc 1 493 35 view .LVU571
+ 2096 006e C4F8F431 		str	r3, [r4, #500]
+ 494:Src/aiPbMgr.c ****     resp->payload.ninfo.api_version =
+ 2097              		.loc 1 494 5 is_stmt 1 view .LVU572
+ 495:Src/aiPbMgr.c ****             aiPbVersionToUint32(&nn->api_version);
+ 2098              		.loc 1 495 13 is_stmt 0 view .LVU573
+ 2099 0072 05F12400 		add	r0, r5, #36
+ 2100 0076 FFF7FEFF 		bl	aiPbVersionToUint32
+ 2101              	.LVL175:
+ 494:Src/aiPbMgr.c ****     resp->payload.ninfo.api_version =
+ 2102              		.loc 1 494 37 view .LVU574
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 53
+
+
+ 2103 007a C4F89401 		str	r0, [r4, #404]
+ 496:Src/aiPbMgr.c ****     resp->payload.ninfo.interface_api_version =
+ 2104              		.loc 1 496 5 is_stmt 1 view .LVU575
+ 497:Src/aiPbMgr.c ****             aiPbVersionToUint32(&nn->interface_api_version);
+ 2105              		.loc 1 497 13 is_stmt 0 view .LVU576
+ 2106 007e 05F12800 		add	r0, r5, #40
+ 2107 0082 FFF7FEFF 		bl	aiPbVersionToUint32
+ 2108              	.LVL176:
+ 496:Src/aiPbMgr.c ****     resp->payload.ninfo.interface_api_version =
+ 2109              		.loc 1 496 47 view .LVU577
+ 2110 0086 C4F89801 		str	r0, [r4, #408]
+ 498:Src/aiPbMgr.c ****     resp->payload.ninfo.runtime_version =
+ 2111              		.loc 1 498 5 is_stmt 1 view .LVU578
+ 499:Src/aiPbMgr.c ****             aiPbVersionToUint32(&nn->runtime_version);
+ 2112              		.loc 1 499 13 is_stmt 0 view .LVU579
+ 2113 008a 05F11400 		add	r0, r5, #20
+ 2114 008e FFF7FEFF 		bl	aiPbVersionToUint32
+ 2115              	.LVL177:
+ 498:Src/aiPbMgr.c ****     resp->payload.ninfo.runtime_version =
+ 2116              		.loc 1 498 41 view .LVU580
+ 2117 0092 C4F84801 		str	r0, [r4, #328]
+ 500:Src/aiPbMgr.c ****     resp->payload.ninfo.tool_version =
+ 2118              		.loc 1 500 5 is_stmt 1 view .LVU581
+ 501:Src/aiPbMgr.c ****             aiPbVersionToUint32(&nn->tool_version);
+ 2119              		.loc 1 501 13 is_stmt 0 view .LVU582
+ 2120 0096 05F11C00 		add	r0, r5, #28
+ 2121 009a FFF7FEFF 		bl	aiPbVersionToUint32
+ 2122              	.LVL178:
+ 500:Src/aiPbMgr.c ****     resp->payload.ninfo.tool_version =
+ 2123              		.loc 1 500 38 view .LVU583
+ 2124 009e C4F88C01 		str	r0, [r4, #396]
+ 502:Src/aiPbMgr.c ****     resp->payload.ninfo.tool_api_version =
+ 2125              		.loc 1 502 5 is_stmt 1 view .LVU584
+ 503:Src/aiPbMgr.c ****             aiPbVersionToUint32(&nn->tool_api_version);
+ 2126              		.loc 1 503 13 is_stmt 0 view .LVU585
+ 2127 00a2 05F12000 		add	r0, r5, #32
+ 2128 00a6 FFF7FEFF 		bl	aiPbVersionToUint32
+ 2129              	.LVL179:
+ 502:Src/aiPbMgr.c ****     resp->payload.ninfo.tool_api_version =
+ 2130              		.loc 1 502 42 view .LVU586
+ 2131 00aa C4F89001 		str	r0, [r4, #400]
+ 504:Src/aiPbMgr.c **** 
+ 505:Src/aiPbMgr.c ****     init_aibuffer_msg(&nn->activations, &resp->payload.ninfo.activations);
+ 2132              		.loc 1 505 5 is_stmt 1 view .LVU587
+ 2133 00ae 04F5DE71 		add	r1, r4, #444
+ 2134 00b2 05F13C00 		add	r0, r5, #60
+ 2135 00b6 FFF7FEFF 		bl	init_aibuffer_msg
+ 2136              	.LVL180:
+ 506:Src/aiPbMgr.c ****     init_aibuffer_msg(&nn->params, &resp->payload.ninfo.weights);
+ 2137              		.loc 1 506 5 view .LVU588
+ 2138 00ba 04F5EC71 		add	r1, r4, #472
+ 2139 00be 05F15400 		add	r0, r5, #84
+ 2140 00c2 FFF7FEFF 		bl	init_aibuffer_msg
+ 2141              	.LVL181:
+ 507:Src/aiPbMgr.c **** 
+ 508:Src/aiPbMgr.c ****     resp->payload.ninfo.inputs.funcs.encode = nn_inputs_w_cb;
+ 2142              		.loc 1 508 5 view .LVU589
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 54
+
+
+ 2143              		.loc 1 508 45 is_stmt 0 view .LVU590
+ 2144 00c6 084B     		ldr	r3, .L146
+ 2145 00c8 C4F8AC31 		str	r3, [r4, #428]
+ 509:Src/aiPbMgr.c ****     resp->payload.ninfo.inputs.arg = (void *)nn;
+ 2146              		.loc 1 509 5 is_stmt 1 view .LVU591
+ 2147              		.loc 1 509 36 is_stmt 0 view .LVU592
+ 2148 00cc C4F8B051 		str	r5, [r4, #432]
+ 510:Src/aiPbMgr.c **** 
+ 511:Src/aiPbMgr.c ****     resp->payload.ninfo.outputs.funcs.encode = nn_outputs_w_cb;
+ 2149              		.loc 1 511 5 is_stmt 1 view .LVU593
+ 2150              		.loc 1 511 46 is_stmt 0 view .LVU594
+ 2151 00d0 064B     		ldr	r3, .L146+4
+ 2152 00d2 C4F8B431 		str	r3, [r4, #436]
+ 512:Src/aiPbMgr.c ****     resp->payload.ninfo.outputs.arg = (void *)nn;
+ 2153              		.loc 1 512 5 is_stmt 1 view .LVU595
+ 2154              		.loc 1 512 37 is_stmt 0 view .LVU596
+ 2155 00d6 C4F8B851 		str	r5, [r4, #440]
+ 513:Src/aiPbMgr.c **** 
+ 514:Src/aiPbMgr.c ****     aiPbMgrSendResp(req, resp, state);
+ 2156              		.loc 1 514 5 is_stmt 1 view .LVU597
+ 2157 00da 3A46     		mov	r2, r7
+ 2158 00dc 2146     		mov	r1, r4
+ 2159 00de 3046     		mov	r0, r6
+ 2160 00e0 FFF7FEFF 		bl	aiPbMgrSendResp
+ 2161              	.LVL182:
+ 515:Src/aiPbMgr.c **** }
+ 2162              		.loc 1 515 1 is_stmt 0 view .LVU598
+ 2163 00e4 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 2164              	.LVL183:
+ 2165              	.L147:
+ 2166              		.loc 1 515 1 view .LVU599
+ 2167 00e6 00BF     		.align	2
+ 2168              	.L146:
+ 2169 00e8 00000000 		.word	nn_inputs_w_cb
+ 2170 00ec 00000000 		.word	nn_outputs_w_cb
+ 2171              		.cfi_endproc
+ 2172              	.LFE153:
+ 2174              		.section	.bss.pbContextMgr,"aw",%nobits
+ 2175              		.align	2
+ 2176              		.set	.LANCHOR0,. + 0
+ 2179              	pbContextMgr:
+ 2180 0000 00000000 		.space	44
+ 2180      00000000 
+ 2180      00000000 
+ 2180      00000000 
+ 2180      00000000 
+ 2181              		.section	.bss.req.8650,"aw",%nobits
+ 2182              		.align	2
+ 2183              		.set	.LANCHOR1,. + 0
+ 2186              	req.8650:
+ 2187 0000 00000000 		.space	80
+ 2187      00000000 
+ 2187      00000000 
+ 2187      00000000 
+ 2187      00000000 
+ 2188              		.section	.bss.resp.8651,"aw",%nobits
+ 2189              		.align	2
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 55
+
+
+ 2190              		.set	.LANCHOR2,. + 0
+ 2193              	resp.8651:
+ 2194 0000 00000000 		.space	504
+ 2194      00000000 
+ 2194      00000000 
+ 2194      00000000 
+ 2194      00000000 
+ 2195              		.section	.rodata.aiPbStrCopy.str1.4,"aMS",%progbits,1
+ 2196              		.align	2
+ 2197              	.LC0:
+ 2198 0000 554E4445 		.ascii	"UNDEFINED\000"
+ 2198      46494E45 
+ 2198      4400
+ 2199              		.text
+ 2200              	.Letext0:
+ 2201              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 2202              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 2203              		.file 4 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 2204              		.file 5 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\lib\\gcc\\arm-none-eab
+ 2205              		.file 6 "Middlewares/ST/AI/Inc/ai_platform.h"
+ 2206              		.file 7 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 2207              		.file 8 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 2208              		.file 9 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 2209              		.file 10 "Inc/pb.h"
+ 2210              		.file 11 "Inc/pb_decode.h"
+ 2211              		.file 12 "Inc/pb_encode.h"
+ 2212              		.file 13 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include/core_c
+ 2213              		.file 14 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Device/ST/STM3
+ 2214              		.file 15 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver
+ 2215              		.file 16 "Inc/stm32msg.pb.h"
+ 2216              		.file 17 "Inc/aiPbMgr.h"
+ 2217              		.file 18 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\includ
+ 2218              		.file 19 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver
+ 2219              		.file 20 "Inc/aiTestUtility.h"
+ 2220              		.file 21 "<built-in>"
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 56
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 aiPbMgr.c
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:18     .text.aiPbMsgFmtToAiFmt:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:25     .text.aiPbMsgFmtToAiFmt:00000000 aiPbMsgFmtToAiFmt
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:41     .text.aiPbAiFmtToMsgFmt:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:47     .text.aiPbAiFmtToMsgFmt:00000000 aiPbAiFmtToMsgFmt
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:62     .text.aiPbBufferGetItemSize:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:68     .text.aiPbBufferGetItemSize:00000000 aiPbBufferGetItemSize
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:89     .text.aiPbMgrSetMetaInfo:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:95     .text.aiPbMgrSetMetaInfo:00000000 aiPbMgrSetMetaInfo
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:236    .text.init_aibuffer_msg:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:242    .text.init_aibuffer_msg:00000000 init_aibuffer_msg
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:320    .text.aiPbBuffer_read_cb3:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:326    .text.aiPbBuffer_read_cb3:00000000 aiPbBuffer_read_cb3
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:552    .text.aiPbBuffer_write_cb3:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:558    .text.aiPbBuffer_write_cb3:00000000 aiPbBuffer_write_cb3
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:657    .text.nn_shape_w_cb:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:663    .text.nn_shape_w_cb:00000000 nn_shape_w_cb
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:750    .text.nn_shape_w_cb:0000004c $d
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:755    .text.nn_outputs_w_cb:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:761    .text.nn_outputs_w_cb:00000000 nn_outputs_w_cb
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:806    .text.nn_inputs_w_cb:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:812    .text.nn_inputs_w_cb:00000000 nn_inputs_w_cb
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:857    .text.aiPbMgrInit:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:864    .text.aiPbMgrInit:00000000 aiPbMgrInit
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:958    .text.aiPbMgrInit:00000054 $d
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:963    .text.aiPbMgrSendResp:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:970    .text.aiPbMgrSendResp:00000000 aiPbMgrSendResp
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1011   .text.aiPbMgrSendResp:00000018 $d
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1017   .text.aiPbMgrSendAck:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1024   .text.aiPbMgrSendAck:00000000 aiPbMgrSendAck
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1062   .text.aiPbMgrWaitAndProcess:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1069   .text.aiPbMgrWaitAndProcess:00000000 aiPbMgrWaitAndProcess
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1186   .text.aiPbMgrWaitAndProcess:00000068 $d
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1194   .text.aiPbMgrWaitAck:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1201   .text.aiPbMgrWaitAck:00000000 aiPbMgrWaitAck
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1246   .text.aiPbMgrWaitAck:00000024 $d
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1252   .text.aiPbMgrSendLog:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1259   .text.aiPbMgrSendLog:00000000 aiPbMgrSendLog
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1351   .text.aiPbMgrSendLog:00000054 $d
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1357   .text.aiPbAiBufferSize:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1364   .text.aiPbAiBufferSize:00000000 aiPbAiBufferSize
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1404   .text.aiPbMgrReceiveAiBuffer3:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1411   .text.aiPbMgrReceiveAiBuffer3:00000000 aiPbMgrReceiveAiBuffer3
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1536   .text.aiPbMgrReceiveAiBuffer3:00000070 $d
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1543   .text.aiPbMgrSendAiBuffer3:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1550   .text.aiPbMgrSendAiBuffer3:00000000 aiPbMgrSendAiBuffer3
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1718   .text.aiPbMgrSendAiBuffer3:00000098 $d
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1723   .text.aiPbCmdSync:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1730   .text.aiPbCmdSync:00000000 aiPbCmdSync
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1775   .text.aiPbCmdSysInfo:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1782   .text.aiPbCmdSysInfo:00000000 aiPbCmdSysInfo
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1841   .text.aiPbStrCopy:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1848   .text.aiPbStrCopy:00000000 aiPbStrCopy
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1941   .text.aiPbStrCopy:00000048 $d
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1946   .text.aiPbVersionToUint32:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1953   .text.aiPbVersionToUint32:00000000 aiPbVersionToUint32
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s 			page 57
+
+
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:1996   .text.aiPbMgrSendNNInfo:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:2003   .text.aiPbMgrSendNNInfo:00000000 aiPbMgrSendNNInfo
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:2169   .text.aiPbMgrSendNNInfo:000000e8 $d
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:2175   .bss.pbContextMgr:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:2179   .bss.pbContextMgr:00000000 pbContextMgr
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:2182   .bss.req.8650:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:2186   .bss.req.8650:00000000 req.8650
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:2189   .bss.resp.8651:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:2193   .bss.resp.8651:00000000 resp.8651
+C:\Users\grgcz\AppData\Local\Temp\ccZdqsVw.s:2196   .rodata.aiPbStrCopy.str1.4:00000000 $d
+
+UNDEFINED SYMBOLS
+pb_read
+memcpy
+pb_encode_tag_for_field
+pb_encode_string
+pb_encode_submessage
+aiBufferShapeMsg_fields
+pb_istream_from_uart
+pb_ostream_to_uart
+pb_encode
+ioFlushWrite
+respMsg_fields
+ioFlushRead
+pb_decode_delimited
+reqMsg_fields
+ackMsg_fields
+strlen
+aiBufferByteMsg_fields
+HAL_GetDEVID
+HAL_RCC_GetSysClockFreq
+HAL_RCC_GetHCLKFreq
+getFlashCacheConf

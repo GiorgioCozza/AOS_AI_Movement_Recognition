@@ -1,0 +1,3416 @@
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"network.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.ai_network_get_info,"ax",%progbits
+  18              		.align	1
+  19              		.global	ai_network_get_info
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	ai_network_get_info:
+  27              	.LVL0:
+  28              	.LFB10:
+  29              		.file 1 "Src/network.c"
+   1:Src/network.c **** /**
+   2:Src/network.c ****   ******************************************************************************
+   3:Src/network.c ****   * @file    network.c
+   4:Src/network.c ****   * @author  AST Embedded Analytics Research Platform
+   5:Src/network.c ****   * @date    Sat Apr 18 17:04:59 2020
+   6:Src/network.c ****   * @brief   AI Tool Automatic Code Generator for Embedded NN computing
+   7:Src/network.c ****   ******************************************************************************
+   8:Src/network.c ****   * @attention
+   9:Src/network.c ****   *
+  10:Src/network.c ****   * Copyright (c) 2018 STMicroelectronics.
+  11:Src/network.c ****   * All rights reserved.
+  12:Src/network.c ****   *
+  13:Src/network.c ****   * This software component is licensed by ST under Ultimate Liberty license
+  14:Src/network.c ****   * SLA0044, the "License"; You may not use this file except in compliance with
+  15:Src/network.c ****   * the License. You may obtain a copy of the License at:
+  16:Src/network.c ****   *                             www.st.com/SLA0044
+  17:Src/network.c ****   *
+  18:Src/network.c ****   ******************************************************************************
+  19:Src/network.c ****   */
+  20:Src/network.c **** 
+  21:Src/network.c **** 
+  22:Src/network.c **** #include "network.h"
+  23:Src/network.c **** 
+  24:Src/network.c **** #include "ai_platform_interface.h"
+  25:Src/network.c **** #include "ai_math_helpers.h"
+  26:Src/network.c **** 
+  27:Src/network.c **** #include "core_common.h"
+  28:Src/network.c **** #include "layers.h"
+  29:Src/network.c **** 
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 2
+
+
+  30:Src/network.c **** #undef AI_TOOLS_VERSION_MAJOR
+  31:Src/network.c **** #undef AI_TOOLS_VERSION_MINOR
+  32:Src/network.c **** #undef AI_TOOLS_VERSION_MICRO
+  33:Src/network.c **** #define AI_TOOLS_VERSION_MAJOR 5
+  34:Src/network.c **** #define AI_TOOLS_VERSION_MINOR 0
+  35:Src/network.c **** #define AI_TOOLS_VERSION_MICRO 0
+  36:Src/network.c **** 
+  37:Src/network.c **** 
+  38:Src/network.c **** #undef AI_TOOLS_API_VERSION_MAJOR
+  39:Src/network.c **** #undef AI_TOOLS_API_VERSION_MINOR
+  40:Src/network.c **** #undef AI_TOOLS_API_VERSION_MICRO
+  41:Src/network.c **** #define AI_TOOLS_API_VERSION_MAJOR 1
+  42:Src/network.c **** #define AI_TOOLS_API_VERSION_MINOR 3
+  43:Src/network.c **** #define AI_TOOLS_API_VERSION_MICRO 0
+  44:Src/network.c **** 
+  45:Src/network.c **** #undef AI_NET_OBJ_INSTANCE
+  46:Src/network.c **** #define AI_NET_OBJ_INSTANCE g_network
+  47:Src/network.c ****  
+  48:Src/network.c **** #undef AI_NETWORK_MODEL_SIGNATURE
+  49:Src/network.c **** #define AI_NETWORK_MODEL_SIGNATURE     "fc8f821a7f3a5c7c278e772d8331cb75"
+  50:Src/network.c **** 
+  51:Src/network.c **** #ifndef AI_TOOLS_REVISION_ID
+  52:Src/network.c **** #define AI_TOOLS_REVISION_ID     "(rev-5.0.0)"
+  53:Src/network.c **** #endif
+  54:Src/network.c **** 
+  55:Src/network.c **** #undef AI_TOOLS_DATE_TIME
+  56:Src/network.c **** #define AI_TOOLS_DATE_TIME   "Sat Apr 18 17:04:59 2020"
+  57:Src/network.c **** 
+  58:Src/network.c **** #undef AI_TOOLS_COMPILE_TIME
+  59:Src/network.c **** #define AI_TOOLS_COMPILE_TIME    __DATE__ " " __TIME__
+  60:Src/network.c **** 
+  61:Src/network.c **** #undef AI_NETWORK_N_BATCHES
+  62:Src/network.c **** #define AI_NETWORK_N_BATCHES         (1)
+  63:Src/network.c **** 
+  64:Src/network.c **** /**  Forward network declaration section  *************************************/
+  65:Src/network.c **** AI_STATIC ai_network AI_NET_OBJ_INSTANCE;
+  66:Src/network.c **** 
+  67:Src/network.c **** 
+  68:Src/network.c **** /**  Forward network array declarations  **************************************/
+  69:Src/network.c **** AI_STATIC ai_array FCN3_bias_array;   /* Array #0 */
+  70:Src/network.c **** AI_STATIC ai_array FCN3_weights_array;   /* Array #1 */
+  71:Src/network.c **** AI_STATIC ai_array FCN2_bias_array;   /* Array #2 */
+  72:Src/network.c **** AI_STATIC ai_array FCN2_weights_array;   /* Array #3 */
+  73:Src/network.c **** AI_STATIC ai_array FCN1_bias_array;   /* Array #4 */
+  74:Src/network.c **** AI_STATIC ai_array FCN1_weights_array;   /* Array #5 */
+  75:Src/network.c **** AI_STATIC ai_array LSTM1_bias_array;   /* Array #6 */
+  76:Src/network.c **** AI_STATIC ai_array LSTM1_peephole_array;   /* Array #7 */
+  77:Src/network.c **** AI_STATIC ai_array LSTM1_recurrent_array;   /* Array #8 */
+  78:Src/network.c **** AI_STATIC ai_array LSTM1_kernel_array;   /* Array #9 */
+  79:Src/network.c **** AI_STATIC ai_array batch_normalization_1_bias_array;   /* Array #10 */
+  80:Src/network.c **** AI_STATIC ai_array batch_normalization_1_scale_array;   /* Array #11 */
+  81:Src/network.c **** AI_STATIC ai_array input_0_output_array;   /* Array #12 */
+  82:Src/network.c **** AI_STATIC ai_array batch_normalization_1_output_array;   /* Array #13 */
+  83:Src/network.c **** AI_STATIC ai_array LSTM1_output_array;   /* Array #14 */
+  84:Src/network.c **** AI_STATIC ai_array FCN1_output_array;   /* Array #15 */
+  85:Src/network.c **** AI_STATIC ai_array FCN1_nl_output_array;   /* Array #16 */
+  86:Src/network.c **** AI_STATIC ai_array FCN2_output_array;   /* Array #17 */
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 3
+
+
+  87:Src/network.c **** AI_STATIC ai_array FCN2_nl_output_array;   /* Array #18 */
+  88:Src/network.c **** AI_STATIC ai_array FCN3_output_array;   /* Array #19 */
+  89:Src/network.c **** AI_STATIC ai_array FCN3_nl_output_array;   /* Array #20 */
+  90:Src/network.c **** 
+  91:Src/network.c **** 
+  92:Src/network.c **** /**  Forward network tensor declarations  *************************************/
+  93:Src/network.c **** AI_STATIC ai_tensor FCN3_bias;   /* Tensor #0 */
+  94:Src/network.c **** AI_STATIC ai_tensor FCN3_weights;   /* Tensor #1 */
+  95:Src/network.c **** AI_STATIC ai_tensor FCN2_bias;   /* Tensor #2 */
+  96:Src/network.c **** AI_STATIC ai_tensor FCN2_weights;   /* Tensor #3 */
+  97:Src/network.c **** AI_STATIC ai_tensor FCN1_bias;   /* Tensor #4 */
+  98:Src/network.c **** AI_STATIC ai_tensor FCN1_weights;   /* Tensor #5 */
+  99:Src/network.c **** AI_STATIC ai_tensor LSTM1_bias;   /* Tensor #6 */
+ 100:Src/network.c **** AI_STATIC ai_tensor LSTM1_peephole;   /* Tensor #7 */
+ 101:Src/network.c **** AI_STATIC ai_tensor LSTM1_recurrent;   /* Tensor #8 */
+ 102:Src/network.c **** AI_STATIC ai_tensor LSTM1_kernel;   /* Tensor #9 */
+ 103:Src/network.c **** AI_STATIC ai_tensor batch_normalization_1_bias;   /* Tensor #10 */
+ 104:Src/network.c **** AI_STATIC ai_tensor batch_normalization_1_scale;   /* Tensor #11 */
+ 105:Src/network.c **** AI_STATIC ai_tensor input_0_output;   /* Tensor #12 */
+ 106:Src/network.c **** AI_STATIC ai_tensor batch_normalization_1_output;   /* Tensor #13 */
+ 107:Src/network.c **** AI_STATIC ai_tensor LSTM1_output;   /* Tensor #14 */
+ 108:Src/network.c **** AI_STATIC ai_tensor FCN1_output;   /* Tensor #15 */
+ 109:Src/network.c **** AI_STATIC ai_tensor FCN1_nl_output;   /* Tensor #16 */
+ 110:Src/network.c **** AI_STATIC ai_tensor FCN2_output;   /* Tensor #17 */
+ 111:Src/network.c **** AI_STATIC ai_tensor FCN2_nl_output;   /* Tensor #18 */
+ 112:Src/network.c **** AI_STATIC ai_tensor FCN3_output;   /* Tensor #19 */
+ 113:Src/network.c **** AI_STATIC ai_tensor FCN3_nl_output;   /* Tensor #20 */
+ 114:Src/network.c **** 
+ 115:Src/network.c **** 
+ 116:Src/network.c **** /**  Forward network tensor chain declarations  *******************************/
+ 117:Src/network.c **** AI_STATIC_CONST ai_tensor_chain batch_normalization_1_chain;   /* Chain #0 */
+ 118:Src/network.c **** AI_STATIC_CONST ai_tensor_chain LSTM1_chain;   /* Chain #1 */
+ 119:Src/network.c **** AI_STATIC_CONST ai_tensor_chain FCN1_chain;   /* Chain #2 */
+ 120:Src/network.c **** AI_STATIC_CONST ai_tensor_chain FCN1_nl_chain;   /* Chain #3 */
+ 121:Src/network.c **** AI_STATIC_CONST ai_tensor_chain FCN2_chain;   /* Chain #4 */
+ 122:Src/network.c **** AI_STATIC_CONST ai_tensor_chain FCN2_nl_chain;   /* Chain #5 */
+ 123:Src/network.c **** AI_STATIC_CONST ai_tensor_chain FCN3_chain;   /* Chain #6 */
+ 124:Src/network.c **** AI_STATIC_CONST ai_tensor_chain FCN3_nl_chain;   /* Chain #7 */
+ 125:Src/network.c **** 
+ 126:Src/network.c **** 
+ 127:Src/network.c **** /**  Forward network layer declarations  **************************************/
+ 128:Src/network.c **** AI_STATIC ai_layer_bn batch_normalization_1_layer; /* Layer #0 */
+ 129:Src/network.c **** AI_STATIC ai_layer_lstm LSTM1_layer; /* Layer #1 */
+ 130:Src/network.c **** AI_STATIC ai_layer_dense FCN1_layer; /* Layer #2 */
+ 131:Src/network.c **** AI_STATIC ai_layer_nl FCN1_nl_layer; /* Layer #3 */
+ 132:Src/network.c **** AI_STATIC ai_layer_dense FCN2_layer; /* Layer #4 */
+ 133:Src/network.c **** AI_STATIC ai_layer_nl FCN2_nl_layer; /* Layer #5 */
+ 134:Src/network.c **** AI_STATIC ai_layer_dense FCN3_layer; /* Layer #6 */
+ 135:Src/network.c **** AI_STATIC ai_layer_nl FCN3_nl_layer; /* Layer #7 */
+ 136:Src/network.c **** 
+ 137:Src/network.c **** 
+ 138:Src/network.c **** /**  Array declarations section  **********************************************/
+ 139:Src/network.c **** AI_ARRAY_OBJ_DECLARE(
+ 140:Src/network.c ****     FCN3_bias_array, AI_ARRAY_FORMAT_FLOAT,
+ 141:Src/network.c ****     NULL, NULL, 7,
+ 142:Src/network.c ****      AI_STATIC)
+ 143:Src/network.c **** AI_ARRAY_OBJ_DECLARE(
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 4
+
+
+ 144:Src/network.c ****     FCN3_weights_array, AI_ARRAY_FORMAT_FLOAT,
+ 145:Src/network.c ****     NULL, NULL, 224,
+ 146:Src/network.c ****      AI_STATIC)
+ 147:Src/network.c **** AI_ARRAY_OBJ_DECLARE(
+ 148:Src/network.c ****     FCN2_bias_array, AI_ARRAY_FORMAT_FLOAT,
+ 149:Src/network.c ****     NULL, NULL, 32,
+ 150:Src/network.c ****      AI_STATIC)
+ 151:Src/network.c **** AI_ARRAY_OBJ_DECLARE(
+ 152:Src/network.c ****     FCN2_weights_array, AI_ARRAY_FORMAT_FLOAT,
+ 153:Src/network.c ****     NULL, NULL, 1024,
+ 154:Src/network.c ****      AI_STATIC)
+ 155:Src/network.c **** AI_ARRAY_OBJ_DECLARE(
+ 156:Src/network.c ****     FCN1_bias_array, AI_ARRAY_FORMAT_FLOAT,
+ 157:Src/network.c ****     NULL, NULL, 32,
+ 158:Src/network.c ****      AI_STATIC)
+ 159:Src/network.c **** AI_ARRAY_OBJ_DECLARE(
+ 160:Src/network.c ****     FCN1_weights_array, AI_ARRAY_FORMAT_FLOAT,
+ 161:Src/network.c ****     NULL, NULL, 2048,
+ 162:Src/network.c ****      AI_STATIC)
+ 163:Src/network.c **** AI_ARRAY_OBJ_DECLARE(
+ 164:Src/network.c ****     LSTM1_bias_array, AI_ARRAY_FORMAT_FLOAT,
+ 165:Src/network.c ****     NULL, NULL, 256,
+ 166:Src/network.c ****      AI_STATIC)
+ 167:Src/network.c **** AI_ARRAY_OBJ_DECLARE(
+ 168:Src/network.c ****     LSTM1_peephole_array, AI_ARRAY_FORMAT_FLOAT,
+ 169:Src/network.c ****     NULL, NULL, 192,
+ 170:Src/network.c ****      AI_STATIC)
+ 171:Src/network.c **** AI_ARRAY_OBJ_DECLARE(
+ 172:Src/network.c ****     LSTM1_recurrent_array, AI_ARRAY_FORMAT_FLOAT,
+ 173:Src/network.c ****     NULL, NULL, 16384,
+ 174:Src/network.c ****      AI_STATIC)
+ 175:Src/network.c **** AI_ARRAY_OBJ_DECLARE(
+ 176:Src/network.c ****     LSTM1_kernel_array, AI_ARRAY_FORMAT_FLOAT,
+ 177:Src/network.c ****     NULL, NULL, 3072,
+ 178:Src/network.c ****      AI_STATIC)
+ 179:Src/network.c **** AI_ARRAY_OBJ_DECLARE(
+ 180:Src/network.c ****     batch_normalization_1_bias_array, AI_ARRAY_FORMAT_FLOAT,
+ 181:Src/network.c ****     NULL, NULL, 12,
+ 182:Src/network.c ****      AI_STATIC)
+ 183:Src/network.c **** AI_ARRAY_OBJ_DECLARE(
+ 184:Src/network.c ****     batch_normalization_1_scale_array, AI_ARRAY_FORMAT_FLOAT,
+ 185:Src/network.c ****     NULL, NULL, 12,
+ 186:Src/network.c ****      AI_STATIC)
+ 187:Src/network.c **** AI_ARRAY_OBJ_DECLARE(
+ 188:Src/network.c ****     input_0_output_array, AI_ARRAY_FORMAT_FLOAT|AI_FMT_FLAG_IS_IO,
+ 189:Src/network.c ****     NULL, NULL, 360,
+ 190:Src/network.c ****      AI_STATIC)
+ 191:Src/network.c **** AI_ARRAY_OBJ_DECLARE(
+ 192:Src/network.c ****     batch_normalization_1_output_array, AI_ARRAY_FORMAT_FLOAT,
+ 193:Src/network.c ****     NULL, NULL, 360,
+ 194:Src/network.c ****      AI_STATIC)
+ 195:Src/network.c **** AI_ARRAY_OBJ_DECLARE(
+ 196:Src/network.c ****     LSTM1_output_array, AI_ARRAY_FORMAT_FLOAT,
+ 197:Src/network.c ****     NULL, NULL, 64,
+ 198:Src/network.c ****      AI_STATIC)
+ 199:Src/network.c **** AI_ARRAY_OBJ_DECLARE(
+ 200:Src/network.c ****     FCN1_output_array, AI_ARRAY_FORMAT_FLOAT,
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 5
+
+
+ 201:Src/network.c ****     NULL, NULL, 32,
+ 202:Src/network.c ****      AI_STATIC)
+ 203:Src/network.c **** AI_ARRAY_OBJ_DECLARE(
+ 204:Src/network.c ****     FCN1_nl_output_array, AI_ARRAY_FORMAT_FLOAT,
+ 205:Src/network.c ****     NULL, NULL, 32,
+ 206:Src/network.c ****      AI_STATIC)
+ 207:Src/network.c **** AI_ARRAY_OBJ_DECLARE(
+ 208:Src/network.c ****     FCN2_output_array, AI_ARRAY_FORMAT_FLOAT,
+ 209:Src/network.c ****     NULL, NULL, 32,
+ 210:Src/network.c ****      AI_STATIC)
+ 211:Src/network.c **** AI_ARRAY_OBJ_DECLARE(
+ 212:Src/network.c ****     FCN2_nl_output_array, AI_ARRAY_FORMAT_FLOAT,
+ 213:Src/network.c ****     NULL, NULL, 32,
+ 214:Src/network.c ****      AI_STATIC)
+ 215:Src/network.c **** AI_ARRAY_OBJ_DECLARE(
+ 216:Src/network.c ****     FCN3_output_array, AI_ARRAY_FORMAT_FLOAT,
+ 217:Src/network.c ****     NULL, NULL, 7,
+ 218:Src/network.c ****      AI_STATIC)
+ 219:Src/network.c **** AI_ARRAY_OBJ_DECLARE(
+ 220:Src/network.c ****     FCN3_nl_output_array, AI_ARRAY_FORMAT_FLOAT|AI_FMT_FLAG_IS_IO,
+ 221:Src/network.c ****     NULL, NULL, 7,
+ 222:Src/network.c ****      AI_STATIC)
+ 223:Src/network.c **** 
+ 224:Src/network.c **** 
+ 225:Src/network.c **** 
+ 226:Src/network.c **** 
+ 227:Src/network.c **** /**  Tensor declarations section  *********************************************/
+ 228:Src/network.c **** AI_TENSOR_OBJ_DECLARE(
+ 229:Src/network.c ****   FCN3_bias, AI_STATIC,
+ 230:Src/network.c ****   0x0, 0x0, AI_SHAPE_INIT(4, 1, 7, 1, 1), AI_STRIDE_INIT(4, 4, 4, 28, 28),
+ 231:Src/network.c ****   1, &FCN3_bias_array, NULL)
+ 232:Src/network.c **** AI_TENSOR_OBJ_DECLARE(
+ 233:Src/network.c ****   FCN3_weights, AI_STATIC,
+ 234:Src/network.c ****   0x0, 0x0, AI_SHAPE_INIT(4, 32, 7, 1, 1), AI_STRIDE_INIT(4, 4, 128, 896, 896),
+ 235:Src/network.c ****   1, &FCN3_weights_array, NULL)
+ 236:Src/network.c **** AI_TENSOR_OBJ_DECLARE(
+ 237:Src/network.c ****   FCN2_bias, AI_STATIC,
+ 238:Src/network.c ****   0x0, 0x0, AI_SHAPE_INIT(4, 1, 32, 1, 1), AI_STRIDE_INIT(4, 4, 4, 128, 128),
+ 239:Src/network.c ****   1, &FCN2_bias_array, NULL)
+ 240:Src/network.c **** AI_TENSOR_OBJ_DECLARE(
+ 241:Src/network.c ****   FCN2_weights, AI_STATIC,
+ 242:Src/network.c ****   0x0, 0x0, AI_SHAPE_INIT(4, 32, 32, 1, 1), AI_STRIDE_INIT(4, 4, 128, 4096, 4096),
+ 243:Src/network.c ****   1, &FCN2_weights_array, NULL)
+ 244:Src/network.c **** AI_TENSOR_OBJ_DECLARE(
+ 245:Src/network.c ****   FCN1_bias, AI_STATIC,
+ 246:Src/network.c ****   0x0, 0x0, AI_SHAPE_INIT(4, 1, 32, 1, 1), AI_STRIDE_INIT(4, 4, 4, 128, 128),
+ 247:Src/network.c ****   1, &FCN1_bias_array, NULL)
+ 248:Src/network.c **** AI_TENSOR_OBJ_DECLARE(
+ 249:Src/network.c ****   FCN1_weights, AI_STATIC,
+ 250:Src/network.c ****   0x0, 0x0, AI_SHAPE_INIT(4, 64, 32, 1, 1), AI_STRIDE_INIT(4, 4, 256, 8192, 8192),
+ 251:Src/network.c ****   1, &FCN1_weights_array, NULL)
+ 252:Src/network.c **** AI_TENSOR_OBJ_DECLARE(
+ 253:Src/network.c ****   LSTM1_bias, AI_STATIC,
+ 254:Src/network.c ****   0x0, 0x0, AI_SHAPE_INIT(4, 1, 256, 1, 1), AI_STRIDE_INIT(4, 4, 4, 1024, 1024),
+ 255:Src/network.c ****   1, &LSTM1_bias_array, NULL)
+ 256:Src/network.c **** AI_TENSOR_OBJ_DECLARE(
+ 257:Src/network.c ****   LSTM1_peephole, AI_STATIC,
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 6
+
+
+ 258:Src/network.c ****   0x0, 0x0, AI_SHAPE_INIT(4, 1, 192, 1, 1), AI_STRIDE_INIT(4, 4, 4, 768, 768),
+ 259:Src/network.c ****   1, &LSTM1_peephole_array, NULL)
+ 260:Src/network.c **** AI_TENSOR_OBJ_DECLARE(
+ 261:Src/network.c ****   LSTM1_recurrent, AI_STATIC,
+ 262:Src/network.c ****   0x0, 0x0, AI_SHAPE_INIT(4, 64, 1, 1, 256), AI_STRIDE_INIT(4, 4, 256, 256, 256),
+ 263:Src/network.c ****   1, &LSTM1_recurrent_array, NULL)
+ 264:Src/network.c **** AI_TENSOR_OBJ_DECLARE(
+ 265:Src/network.c ****   LSTM1_kernel, AI_STATIC,
+ 266:Src/network.c ****   0x0, 0x0, AI_SHAPE_INIT(4, 12, 1, 1, 256), AI_STRIDE_INIT(4, 4, 48, 48, 48),
+ 267:Src/network.c ****   1, &LSTM1_kernel_array, NULL)
+ 268:Src/network.c **** AI_TENSOR_OBJ_DECLARE(
+ 269:Src/network.c ****   batch_normalization_1_bias, AI_STATIC,
+ 270:Src/network.c ****   0x0, 0x0, AI_SHAPE_INIT(4, 1, 12, 1, 1), AI_STRIDE_INIT(4, 4, 4, 48, 48),
+ 271:Src/network.c ****   1, &batch_normalization_1_bias_array, NULL)
+ 272:Src/network.c **** AI_TENSOR_OBJ_DECLARE(
+ 273:Src/network.c ****   batch_normalization_1_scale, AI_STATIC,
+ 274:Src/network.c ****   0x0, 0x0, AI_SHAPE_INIT(4, 1, 12, 1, 1), AI_STRIDE_INIT(4, 4, 4, 48, 48),
+ 275:Src/network.c ****   1, &batch_normalization_1_scale_array, NULL)
+ 276:Src/network.c **** AI_TENSOR_OBJ_DECLARE(
+ 277:Src/network.c ****   input_0_output, AI_STATIC,
+ 278:Src/network.c ****   0x0, 0x0, AI_SHAPE_INIT(4, 1, 12, 1, 30), AI_STRIDE_INIT(4, 4, 4, 48, 48),
+ 279:Src/network.c ****   1, &input_0_output_array, NULL)
+ 280:Src/network.c **** AI_TENSOR_OBJ_DECLARE(
+ 281:Src/network.c ****   batch_normalization_1_output, AI_STATIC,
+ 282:Src/network.c ****   0x0, 0x0, AI_SHAPE_INIT(4, 1, 12, 1, 30), AI_STRIDE_INIT(4, 4, 4, 48, 48),
+ 283:Src/network.c ****   1, &batch_normalization_1_output_array, NULL)
+ 284:Src/network.c **** AI_TENSOR_OBJ_DECLARE(
+ 285:Src/network.c ****   LSTM1_output, AI_STATIC,
+ 286:Src/network.c ****   0x0, 0x0, AI_SHAPE_INIT(4, 1, 64, 1, 1), AI_STRIDE_INIT(4, 4, 4, 256, 256),
+ 287:Src/network.c ****   1, &LSTM1_output_array, NULL)
+ 288:Src/network.c **** AI_TENSOR_OBJ_DECLARE(
+ 289:Src/network.c ****   FCN1_output, AI_STATIC,
+ 290:Src/network.c ****   0x0, 0x0, AI_SHAPE_INIT(4, 1, 32, 1, 1), AI_STRIDE_INIT(4, 4, 4, 128, 128),
+ 291:Src/network.c ****   1, &FCN1_output_array, NULL)
+ 292:Src/network.c **** AI_TENSOR_OBJ_DECLARE(
+ 293:Src/network.c ****   FCN1_nl_output, AI_STATIC,
+ 294:Src/network.c ****   0x0, 0x0, AI_SHAPE_INIT(4, 1, 32, 1, 1), AI_STRIDE_INIT(4, 4, 4, 128, 128),
+ 295:Src/network.c ****   1, &FCN1_nl_output_array, NULL)
+ 296:Src/network.c **** AI_TENSOR_OBJ_DECLARE(
+ 297:Src/network.c ****   FCN2_output, AI_STATIC,
+ 298:Src/network.c ****   0x0, 0x0, AI_SHAPE_INIT(4, 1, 32, 1, 1), AI_STRIDE_INIT(4, 4, 4, 128, 128),
+ 299:Src/network.c ****   1, &FCN2_output_array, NULL)
+ 300:Src/network.c **** AI_TENSOR_OBJ_DECLARE(
+ 301:Src/network.c ****   FCN2_nl_output, AI_STATIC,
+ 302:Src/network.c ****   0x0, 0x0, AI_SHAPE_INIT(4, 1, 32, 1, 1), AI_STRIDE_INIT(4, 4, 4, 128, 128),
+ 303:Src/network.c ****   1, &FCN2_nl_output_array, NULL)
+ 304:Src/network.c **** AI_TENSOR_OBJ_DECLARE(
+ 305:Src/network.c ****   FCN3_output, AI_STATIC,
+ 306:Src/network.c ****   0x0, 0x0, AI_SHAPE_INIT(4, 1, 7, 1, 1), AI_STRIDE_INIT(4, 4, 4, 28, 28),
+ 307:Src/network.c ****   1, &FCN3_output_array, NULL)
+ 308:Src/network.c **** AI_TENSOR_OBJ_DECLARE(
+ 309:Src/network.c ****   FCN3_nl_output, AI_STATIC,
+ 310:Src/network.c ****   0x0, 0x0, AI_SHAPE_INIT(4, 1, 7, 1, 1), AI_STRIDE_INIT(4, 4, 4, 28, 28),
+ 311:Src/network.c ****   1, &FCN3_nl_output_array, NULL)
+ 312:Src/network.c **** 
+ 313:Src/network.c **** 
+ 314:Src/network.c **** /**  Layer declarations section  **********************************************/
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 7
+
+
+ 315:Src/network.c **** 
+ 316:Src/network.c **** 
+ 317:Src/network.c **** AI_TENSOR_CHAIN_OBJ_DECLARE(
+ 318:Src/network.c ****   batch_normalization_1_chain, AI_STATIC_CONST, 4,
+ 319:Src/network.c ****   AI_TENSOR_LIST_ENTRY(&input_0_output),
+ 320:Src/network.c ****   AI_TENSOR_LIST_ENTRY(&batch_normalization_1_output),
+ 321:Src/network.c ****   AI_TENSOR_LIST_ENTRY(&batch_normalization_1_scale, &batch_normalization_1_bias),
+ 322:Src/network.c ****   AI_TENSOR_LIST_EMPTY
+ 323:Src/network.c **** )
+ 324:Src/network.c **** 
+ 325:Src/network.c **** AI_LAYER_OBJ_DECLARE(
+ 326:Src/network.c ****   batch_normalization_1_layer, 0,
+ 327:Src/network.c ****   BN_TYPE,
+ 328:Src/network.c ****   bn, forward_bn,
+ 329:Src/network.c ****   &AI_NET_OBJ_INSTANCE, &LSTM1_layer, AI_STATIC,
+ 330:Src/network.c ****   .tensors = &batch_normalization_1_chain, 
+ 331:Src/network.c **** )
+ 332:Src/network.c **** 
+ 333:Src/network.c **** AI_TENSOR_CHAIN_OBJ_DECLARE(
+ 334:Src/network.c ****   LSTM1_chain, AI_STATIC_CONST, 4,
+ 335:Src/network.c ****   AI_TENSOR_LIST_ENTRY(&batch_normalization_1_output),
+ 336:Src/network.c ****   AI_TENSOR_LIST_ENTRY(&LSTM1_output),
+ 337:Src/network.c ****   AI_TENSOR_LIST_ENTRY(&LSTM1_kernel, &LSTM1_recurrent, &LSTM1_peephole, &LSTM1_bias),
+ 338:Src/network.c ****   AI_TENSOR_LIST_EMPTY
+ 339:Src/network.c **** )
+ 340:Src/network.c **** 
+ 341:Src/network.c **** AI_LAYER_OBJ_DECLARE(
+ 342:Src/network.c ****   LSTM1_layer, 1,
+ 343:Src/network.c ****   LSTM_TYPE,
+ 344:Src/network.c ****   lstm, forward_lstm,
+ 345:Src/network.c ****   &AI_NET_OBJ_INSTANCE, &FCN1_layer, AI_STATIC,
+ 346:Src/network.c ****   .tensors = &LSTM1_chain, 
+ 347:Src/network.c ****   .n_units = 64, 
+ 348:Src/network.c ****   .activation_nl = ai_math_tanh, 
+ 349:Src/network.c ****   .recurrent_nl = ai_math_sigmoid, 
+ 350:Src/network.c ****   .go_backwards = false, 
+ 351:Src/network.c ****   .reverse_seq = false, 
+ 352:Src/network.c ****   .out_nl = ai_math_tanh, 
+ 353:Src/network.c **** )
+ 354:Src/network.c **** 
+ 355:Src/network.c **** AI_TENSOR_CHAIN_OBJ_DECLARE(
+ 356:Src/network.c ****   FCN1_chain, AI_STATIC_CONST, 4,
+ 357:Src/network.c ****   AI_TENSOR_LIST_ENTRY(&LSTM1_output),
+ 358:Src/network.c ****   AI_TENSOR_LIST_ENTRY(&FCN1_output),
+ 359:Src/network.c ****   AI_TENSOR_LIST_ENTRY(&FCN1_weights, &FCN1_bias),
+ 360:Src/network.c ****   AI_TENSOR_LIST_EMPTY
+ 361:Src/network.c **** )
+ 362:Src/network.c **** 
+ 363:Src/network.c **** AI_LAYER_OBJ_DECLARE(
+ 364:Src/network.c ****   FCN1_layer, 3,
+ 365:Src/network.c ****   DENSE_TYPE,
+ 366:Src/network.c ****   dense, forward_dense,
+ 367:Src/network.c ****   &AI_NET_OBJ_INSTANCE, &FCN1_nl_layer, AI_STATIC,
+ 368:Src/network.c ****   .tensors = &FCN1_chain, 
+ 369:Src/network.c **** )
+ 370:Src/network.c **** 
+ 371:Src/network.c **** AI_TENSOR_CHAIN_OBJ_DECLARE(
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 8
+
+
+ 372:Src/network.c ****   FCN1_nl_chain, AI_STATIC_CONST, 4,
+ 373:Src/network.c ****   AI_TENSOR_LIST_ENTRY(&FCN1_output),
+ 374:Src/network.c ****   AI_TENSOR_LIST_ENTRY(&FCN1_nl_output),
+ 375:Src/network.c ****   AI_TENSOR_LIST_EMPTY,
+ 376:Src/network.c ****   AI_TENSOR_LIST_EMPTY
+ 377:Src/network.c **** )
+ 378:Src/network.c **** 
+ 379:Src/network.c **** AI_LAYER_OBJ_DECLARE(
+ 380:Src/network.c ****   FCN1_nl_layer, 3,
+ 381:Src/network.c ****   NL_TYPE,
+ 382:Src/network.c ****   nl, forward_relu,
+ 383:Src/network.c ****   &AI_NET_OBJ_INSTANCE, &FCN2_layer, AI_STATIC,
+ 384:Src/network.c ****   .tensors = &FCN1_nl_chain, 
+ 385:Src/network.c **** )
+ 386:Src/network.c **** 
+ 387:Src/network.c **** AI_TENSOR_CHAIN_OBJ_DECLARE(
+ 388:Src/network.c ****   FCN2_chain, AI_STATIC_CONST, 4,
+ 389:Src/network.c ****   AI_TENSOR_LIST_ENTRY(&FCN1_nl_output),
+ 390:Src/network.c ****   AI_TENSOR_LIST_ENTRY(&FCN2_output),
+ 391:Src/network.c ****   AI_TENSOR_LIST_ENTRY(&FCN2_weights, &FCN2_bias),
+ 392:Src/network.c ****   AI_TENSOR_LIST_EMPTY
+ 393:Src/network.c **** )
+ 394:Src/network.c **** 
+ 395:Src/network.c **** AI_LAYER_OBJ_DECLARE(
+ 396:Src/network.c ****   FCN2_layer, 5,
+ 397:Src/network.c ****   DENSE_TYPE,
+ 398:Src/network.c ****   dense, forward_dense,
+ 399:Src/network.c ****   &AI_NET_OBJ_INSTANCE, &FCN2_nl_layer, AI_STATIC,
+ 400:Src/network.c ****   .tensors = &FCN2_chain, 
+ 401:Src/network.c **** )
+ 402:Src/network.c **** 
+ 403:Src/network.c **** AI_TENSOR_CHAIN_OBJ_DECLARE(
+ 404:Src/network.c ****   FCN2_nl_chain, AI_STATIC_CONST, 4,
+ 405:Src/network.c ****   AI_TENSOR_LIST_ENTRY(&FCN2_output),
+ 406:Src/network.c ****   AI_TENSOR_LIST_ENTRY(&FCN2_nl_output),
+ 407:Src/network.c ****   AI_TENSOR_LIST_EMPTY,
+ 408:Src/network.c ****   AI_TENSOR_LIST_EMPTY
+ 409:Src/network.c **** )
+ 410:Src/network.c **** 
+ 411:Src/network.c **** AI_LAYER_OBJ_DECLARE(
+ 412:Src/network.c ****   FCN2_nl_layer, 5,
+ 413:Src/network.c ****   NL_TYPE,
+ 414:Src/network.c ****   nl, forward_relu,
+ 415:Src/network.c ****   &AI_NET_OBJ_INSTANCE, &FCN3_layer, AI_STATIC,
+ 416:Src/network.c ****   .tensors = &FCN2_nl_chain, 
+ 417:Src/network.c **** )
+ 418:Src/network.c **** 
+ 419:Src/network.c **** AI_TENSOR_CHAIN_OBJ_DECLARE(
+ 420:Src/network.c ****   FCN3_chain, AI_STATIC_CONST, 4,
+ 421:Src/network.c ****   AI_TENSOR_LIST_ENTRY(&FCN2_nl_output),
+ 422:Src/network.c ****   AI_TENSOR_LIST_ENTRY(&FCN3_output),
+ 423:Src/network.c ****   AI_TENSOR_LIST_ENTRY(&FCN3_weights, &FCN3_bias),
+ 424:Src/network.c ****   AI_TENSOR_LIST_EMPTY
+ 425:Src/network.c **** )
+ 426:Src/network.c **** 
+ 427:Src/network.c **** AI_LAYER_OBJ_DECLARE(
+ 428:Src/network.c ****   FCN3_layer, 7,
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 9
+
+
+ 429:Src/network.c ****   DENSE_TYPE,
+ 430:Src/network.c ****   dense, forward_dense,
+ 431:Src/network.c ****   &AI_NET_OBJ_INSTANCE, &FCN3_nl_layer, AI_STATIC,
+ 432:Src/network.c ****   .tensors = &FCN3_chain, 
+ 433:Src/network.c **** )
+ 434:Src/network.c **** 
+ 435:Src/network.c **** AI_TENSOR_CHAIN_OBJ_DECLARE(
+ 436:Src/network.c ****   FCN3_nl_chain, AI_STATIC_CONST, 4,
+ 437:Src/network.c ****   AI_TENSOR_LIST_ENTRY(&FCN3_output),
+ 438:Src/network.c ****   AI_TENSOR_LIST_ENTRY(&FCN3_nl_output),
+ 439:Src/network.c ****   AI_TENSOR_LIST_EMPTY,
+ 440:Src/network.c ****   AI_TENSOR_LIST_EMPTY
+ 441:Src/network.c **** )
+ 442:Src/network.c **** 
+ 443:Src/network.c **** AI_LAYER_OBJ_DECLARE(
+ 444:Src/network.c ****   FCN3_nl_layer, 7,
+ 445:Src/network.c ****   NL_TYPE,
+ 446:Src/network.c ****   nl, forward_sm,
+ 447:Src/network.c ****   &AI_NET_OBJ_INSTANCE, &FCN3_nl_layer, AI_STATIC,
+ 448:Src/network.c ****   .tensors = &FCN3_nl_chain, 
+ 449:Src/network.c **** )
+ 450:Src/network.c **** 
+ 451:Src/network.c **** 
+ 452:Src/network.c **** AI_NETWORK_OBJ_DECLARE(
+ 453:Src/network.c ****   AI_NET_OBJ_INSTANCE, AI_STATIC,
+ 454:Src/network.c ****   AI_BUFFER_OBJ_INIT(AI_BUFFER_FORMAT_U8,
+ 455:Src/network.c ****                      1, 1, 93180, 1,
+ 456:Src/network.c ****                      NULL),
+ 457:Src/network.c ****   AI_BUFFER_OBJ_INIT(AI_BUFFER_FORMAT_U8,
+ 458:Src/network.c ****                      1, 1, 1696, 1,
+ 459:Src/network.c ****                      NULL),
+ 460:Src/network.c ****   AI_TENSOR_LIST_IO_ENTRY(AI_FLAG_NONE, AI_NETWORK_IN_NUM, &input_0_output),
+ 461:Src/network.c ****   AI_TENSOR_LIST_IO_ENTRY(AI_FLAG_NONE, AI_NETWORK_OUT_NUM, &FCN3_nl_output),
+ 462:Src/network.c ****   &batch_normalization_1_layer, 0, NULL)
+ 463:Src/network.c **** 
+ 464:Src/network.c **** 
+ 465:Src/network.c **** 
+ 466:Src/network.c **** AI_DECLARE_STATIC
+ 467:Src/network.c **** ai_bool network_configure_activations(
+ 468:Src/network.c ****   ai_network* net_ctx, const ai_buffer* activation_buffer)
+ 469:Src/network.c **** {
+ 470:Src/network.c ****   AI_ASSERT(net_ctx &&  activation_buffer && activation_buffer->data)
+ 471:Src/network.c **** 
+ 472:Src/network.c ****   ai_ptr activations = AI_PTR(AI_PTR_ALIGN(activation_buffer->data, 4));
+ 473:Src/network.c ****   AI_ASSERT(activations)
+ 474:Src/network.c ****   AI_UNUSED(net_ctx)
+ 475:Src/network.c **** 
+ 476:Src/network.c ****   {
+ 477:Src/network.c ****     /* Updating activations (byte) offsets */
+ 478:Src/network.c ****     input_0_output_array.data = AI_PTR(NULL);
+ 479:Src/network.c ****     input_0_output_array.data_start = AI_PTR(NULL);
+ 480:Src/network.c ****     batch_normalization_1_output_array.data = AI_PTR(activations + 0);
+ 481:Src/network.c ****     batch_normalization_1_output_array.data_start = AI_PTR(activations + 0);
+ 482:Src/network.c ****     LSTM1_output_array.data = AI_PTR(activations + 1440);
+ 483:Src/network.c ****     LSTM1_output_array.data_start = AI_PTR(activations + 1440);
+ 484:Src/network.c ****     FCN1_output_array.data = AI_PTR(activations + 0);
+ 485:Src/network.c ****     FCN1_output_array.data_start = AI_PTR(activations + 0);
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 10
+
+
+ 486:Src/network.c ****     FCN1_nl_output_array.data = AI_PTR(activations + 0);
+ 487:Src/network.c ****     FCN1_nl_output_array.data_start = AI_PTR(activations + 0);
+ 488:Src/network.c ****     FCN2_output_array.data = AI_PTR(activations + 128);
+ 489:Src/network.c ****     FCN2_output_array.data_start = AI_PTR(activations + 128);
+ 490:Src/network.c ****     FCN2_nl_output_array.data = AI_PTR(activations + 128);
+ 491:Src/network.c ****     FCN2_nl_output_array.data_start = AI_PTR(activations + 128);
+ 492:Src/network.c ****     FCN3_output_array.data = AI_PTR(activations + 0);
+ 493:Src/network.c ****     FCN3_output_array.data_start = AI_PTR(activations + 0);
+ 494:Src/network.c ****     FCN3_nl_output_array.data = AI_PTR(NULL);
+ 495:Src/network.c ****     FCN3_nl_output_array.data_start = AI_PTR(NULL);
+ 496:Src/network.c ****     
+ 497:Src/network.c ****   }
+ 498:Src/network.c ****   return true;
+ 499:Src/network.c **** }
+ 500:Src/network.c **** 
+ 501:Src/network.c **** 
+ 502:Src/network.c **** 
+ 503:Src/network.c **** AI_DECLARE_STATIC
+ 504:Src/network.c **** ai_bool network_configure_weights(
+ 505:Src/network.c ****   ai_network* net_ctx, const ai_buffer* weights_buffer)
+ 506:Src/network.c **** {
+ 507:Src/network.c ****   AI_ASSERT(net_ctx &&  weights_buffer && weights_buffer->data)
+ 508:Src/network.c **** 
+ 509:Src/network.c ****   ai_ptr weights = AI_PTR(weights_buffer->data);
+ 510:Src/network.c ****   AI_ASSERT(weights)
+ 511:Src/network.c ****   AI_UNUSED(net_ctx)
+ 512:Src/network.c **** 
+ 513:Src/network.c ****   {
+ 514:Src/network.c ****     /* Updating weights (byte) offsets */
+ 515:Src/network.c ****     
+ 516:Src/network.c ****     FCN3_bias_array.format |= AI_FMT_FLAG_CONST;
+ 517:Src/network.c ****     FCN3_bias_array.data = AI_PTR(weights + 93152);
+ 518:Src/network.c ****     FCN3_bias_array.data_start = AI_PTR(weights + 93152);
+ 519:Src/network.c ****     FCN3_weights_array.format |= AI_FMT_FLAG_CONST;
+ 520:Src/network.c ****     FCN3_weights_array.data = AI_PTR(weights + 92256);
+ 521:Src/network.c ****     FCN3_weights_array.data_start = AI_PTR(weights + 92256);
+ 522:Src/network.c ****     FCN2_bias_array.format |= AI_FMT_FLAG_CONST;
+ 523:Src/network.c ****     FCN2_bias_array.data = AI_PTR(weights + 92128);
+ 524:Src/network.c ****     FCN2_bias_array.data_start = AI_PTR(weights + 92128);
+ 525:Src/network.c ****     FCN2_weights_array.format |= AI_FMT_FLAG_CONST;
+ 526:Src/network.c ****     FCN2_weights_array.data = AI_PTR(weights + 88032);
+ 527:Src/network.c ****     FCN2_weights_array.data_start = AI_PTR(weights + 88032);
+ 528:Src/network.c ****     FCN1_bias_array.format |= AI_FMT_FLAG_CONST;
+ 529:Src/network.c ****     FCN1_bias_array.data = AI_PTR(weights + 87904);
+ 530:Src/network.c ****     FCN1_bias_array.data_start = AI_PTR(weights + 87904);
+ 531:Src/network.c ****     FCN1_weights_array.format |= AI_FMT_FLAG_CONST;
+ 532:Src/network.c ****     FCN1_weights_array.data = AI_PTR(weights + 79712);
+ 533:Src/network.c ****     FCN1_weights_array.data_start = AI_PTR(weights + 79712);
+ 534:Src/network.c ****     LSTM1_bias_array.format |= AI_FMT_FLAG_CONST;
+ 535:Src/network.c ****     LSTM1_bias_array.data = AI_PTR(weights + 78688);
+ 536:Src/network.c ****     LSTM1_bias_array.data_start = AI_PTR(weights + 78688);
+ 537:Src/network.c ****     LSTM1_peephole_array.format |= AI_FMT_FLAG_CONST;
+ 538:Src/network.c ****     LSTM1_peephole_array.data = AI_PTR(weights + 77920);
+ 539:Src/network.c ****     LSTM1_peephole_array.data_start = AI_PTR(weights + 77920);
+ 540:Src/network.c ****     LSTM1_recurrent_array.format |= AI_FMT_FLAG_CONST;
+ 541:Src/network.c ****     LSTM1_recurrent_array.data = AI_PTR(weights + 12384);
+ 542:Src/network.c ****     LSTM1_recurrent_array.data_start = AI_PTR(weights + 12384);
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 11
+
+
+ 543:Src/network.c ****     LSTM1_kernel_array.format |= AI_FMT_FLAG_CONST;
+ 544:Src/network.c ****     LSTM1_kernel_array.data = AI_PTR(weights + 96);
+ 545:Src/network.c ****     LSTM1_kernel_array.data_start = AI_PTR(weights + 96);
+ 546:Src/network.c ****     batch_normalization_1_bias_array.format |= AI_FMT_FLAG_CONST;
+ 547:Src/network.c ****     batch_normalization_1_bias_array.data = AI_PTR(weights + 48);
+ 548:Src/network.c ****     batch_normalization_1_bias_array.data_start = AI_PTR(weights + 48);
+ 549:Src/network.c ****     batch_normalization_1_scale_array.format |= AI_FMT_FLAG_CONST;
+ 550:Src/network.c ****     batch_normalization_1_scale_array.data = AI_PTR(weights + 0);
+ 551:Src/network.c ****     batch_normalization_1_scale_array.data_start = AI_PTR(weights + 0);
+ 552:Src/network.c ****   }
+ 553:Src/network.c **** 
+ 554:Src/network.c ****   return true;
+ 555:Src/network.c **** }
+ 556:Src/network.c **** 
+ 557:Src/network.c **** 
+ 558:Src/network.c **** /**  PUBLIC APIs SECTION  *****************************************************/
+ 559:Src/network.c **** 
+ 560:Src/network.c **** AI_API_ENTRY
+ 561:Src/network.c **** ai_bool ai_network_get_info(
+ 562:Src/network.c ****   ai_handle network, ai_network_report* report)
+ 563:Src/network.c **** {
+  30              		.loc 1 563 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 120
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 563 1 is_stmt 0 view .LVU1
+  35 0000 30B5     		push	{r4, r5, lr}
+  36              	.LCFI0:
+  37              		.cfi_def_cfa_offset 12
+  38              		.cfi_offset 4, -12
+  39              		.cfi_offset 5, -8
+  40              		.cfi_offset 14, -4
+  41 0002 9FB0     		sub	sp, sp, #124
+  42              	.LCFI1:
+  43              		.cfi_def_cfa_offset 136
+  44 0004 0546     		mov	r5, r0
+  45 0006 0C46     		mov	r4, r1
+ 564:Src/network.c ****   ai_network* net_ctx = AI_NETWORK_ACQUIRE_CTX(network);
+  46              		.loc 1 564 3 is_stmt 1 view .LVU2
+  47              		.loc 1 564 25 is_stmt 0 view .LVU3
+  48 0008 FFF7FEFF 		bl	ai_platform_context_acquire
+  49              	.LVL1:
+ 565:Src/network.c **** 
+ 566:Src/network.c ****   if ( report && net_ctx )
+  50              		.loc 1 566 3 is_stmt 1 view .LVU4
+  51              		.loc 1 566 6 is_stmt 0 view .LVU5
+  52 000c 002C     		cmp	r4, #0
+  53 000e 33D0     		beq	.L4
+  54              		.loc 1 566 15 discriminator 1 view .LVU6
+  55 0010 0028     		cmp	r0, #0
+  56 0012 33D0     		beq	.L5
+  57              	.LBB2:
+ 567:Src/network.c ****   {
+ 568:Src/network.c ****     ai_network_report r = {
+  58              		.loc 1 568 5 is_stmt 1 view .LVU7
+  59              		.loc 1 568 23 is_stmt 0 view .LVU8
+  60 0014 6422     		movs	r2, #100
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 12
+
+
+  61 0016 0021     		movs	r1, #0
+  62 0018 05A8     		add	r0, sp, #20
+  63              	.LVL2:
+  64              		.loc 1 568 23 view .LVU9
+  65 001a FFF7FEFF 		bl	memset
+  66              	.LVL3:
+  67 001e 194B     		ldr	r3, .L7
+  68 0020 0193     		str	r3, [sp, #4]
+  69 0022 194B     		ldr	r3, .L7+4
+  70 0024 0293     		str	r3, [sp, #8]
+  71 0026 194B     		ldr	r3, .L7+8
+  72 0028 0393     		str	r3, [sp, #12]
+  73 002a 194B     		ldr	r3, .L7+12
+  74 002c 0493     		str	r3, [sp, #16]
+ 569:Src/network.c ****       .model_name        = AI_NETWORK_MODEL_NAME,
+ 570:Src/network.c ****       .model_signature   = AI_NETWORK_MODEL_SIGNATURE,
+ 571:Src/network.c ****       .model_datetime    = AI_TOOLS_DATE_TIME,
+ 572:Src/network.c ****       
+ 573:Src/network.c ****       .compile_datetime  = AI_TOOLS_COMPILE_TIME,
+ 574:Src/network.c ****       
+ 575:Src/network.c ****       .runtime_revision  = ai_platform_runtime_get_revision(),
+  75              		.loc 1 575 28 view .LVU10
+  76 002e FFF7FEFF 		bl	ai_platform_runtime_get_revision
+  77              	.LVL4:
+ 568:Src/network.c ****       .model_name        = AI_NETWORK_MODEL_NAME,
+  78              		.loc 1 568 23 view .LVU11
+  79 0032 0590     		str	r0, [sp, #20]
+ 576:Src/network.c ****       .runtime_version   = ai_platform_runtime_get_version(),
+  80              		.loc 1 576 28 view .LVU12
+  81 0034 FFF7FEFF 		bl	ai_platform_runtime_get_version
+  82              	.LVL5:
+  83 0038 0690     		str	r0, [sp, #24]
+ 568:Src/network.c ****       .model_name        = AI_NETWORK_MODEL_NAME,
+  84              		.loc 1 568 23 view .LVU13
+  85 003a 164B     		ldr	r3, .L7+16
+  86 003c 0793     		str	r3, [sp, #28]
+  87 003e 0523     		movs	r3, #5
+  88 0040 8DF82030 		strb	r3, [sp, #32]
+  89 0044 0123     		movs	r3, #1
+  90 0046 8DF82430 		strb	r3, [sp, #36]
+  91 004a 0323     		movs	r3, #3
+  92 004c 8DF82530 		strb	r3, [sp, #37]
+ 577:Src/network.c **** 
+ 578:Src/network.c ****       .tool_revision     = AI_TOOLS_REVISION_ID,
+ 579:Src/network.c ****       .tool_version      = {AI_TOOLS_VERSION_MAJOR, AI_TOOLS_VERSION_MINOR,
+ 580:Src/network.c ****                             AI_TOOLS_VERSION_MICRO, 0x0},
+ 581:Src/network.c ****       .tool_api_version  = {AI_TOOLS_API_VERSION_MAJOR, AI_TOOLS_API_VERSION_MINOR,
+ 582:Src/network.c ****                             AI_TOOLS_API_VERSION_MICRO, 0x0},
+ 583:Src/network.c **** 
+ 584:Src/network.c ****       .api_version            = ai_platform_api_get_version(),
+  93              		.loc 1 584 33 view .LVU14
+  94 0050 FFF7FEFF 		bl	ai_platform_api_get_version
+  95              	.LVL6:
+  96 0054 0A90     		str	r0, [sp, #40]
+ 585:Src/network.c ****       .interface_api_version  = ai_platform_interface_api_get_version(),
+  97              		.loc 1 585 33 view .LVU15
+  98 0056 FFF7FEFF 		bl	ai_platform_interface_api_get_version
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 13
+
+
+  99              	.LVL7:
+ 100 005a 0B90     		str	r0, [sp, #44]
+ 568:Src/network.c ****       .model_name        = AI_NETWORK_MODEL_NAME,
+ 101              		.loc 1 568 23 view .LVU16
+ 102 005c 0E4B     		ldr	r3, .L7+20
+ 103 005e 0C93     		str	r3, [sp, #48]
+ 586:Src/network.c ****       
+ 587:Src/network.c ****       .n_macc            = 597465,
+ 588:Src/network.c ****       .n_inputs          = 0,
+ 589:Src/network.c ****       .inputs            = NULL,
+ 590:Src/network.c ****       .n_outputs         = 0,
+ 591:Src/network.c ****       .outputs           = NULL,
+ 592:Src/network.c ****       .activations       = AI_STRUCT_INIT,
+ 593:Src/network.c ****       .params            = AI_STRUCT_INIT,
+ 594:Src/network.c ****       .n_nodes           = 0,
+ 595:Src/network.c ****       .signature         = 0x0,
+ 596:Src/network.c ****     };
+ 597:Src/network.c **** 
+ 598:Src/network.c ****     if ( !ai_platform_api_get_network_report(network, &r) ) return false;
+ 104              		.loc 1 598 5 is_stmt 1 view .LVU17
+ 105              		.loc 1 598 11 is_stmt 0 view .LVU18
+ 106 0060 01A9     		add	r1, sp, #4
+ 107 0062 2846     		mov	r0, r5
+ 108 0064 FFF7FEFF 		bl	ai_platform_api_get_network_report
+ 109              	.LVL8:
+ 110              		.loc 1 598 8 view .LVU19
+ 111 0068 0546     		mov	r5, r0
+ 112              	.LVL9:
+ 113              		.loc 1 598 8 view .LVU20
+ 114 006a 40B1     		cbz	r0, .L2
+ 599:Src/network.c **** 
+ 600:Src/network.c ****     *report = r;
+ 115              		.loc 1 600 5 is_stmt 1 view .LVU21
+ 116              		.loc 1 600 13 is_stmt 0 view .LVU22
+ 117 006c 7422     		movs	r2, #116
+ 118 006e 01A9     		add	r1, sp, #4
+ 119 0070 2046     		mov	r0, r4
+ 120 0072 FFF7FEFF 		bl	memcpy
+ 121              	.LVL10:
+ 601:Src/network.c ****     return true;
+ 122              		.loc 1 601 5 is_stmt 1 view .LVU23
+ 123              		.loc 1 601 12 is_stmt 0 view .LVU24
+ 124 0076 02E0     		b	.L2
+ 125              	.LVL11:
+ 126              	.L4:
+ 127              		.loc 1 601 12 view .LVU25
+ 128              	.LBE2:
+ 602:Src/network.c ****   }
+ 603:Src/network.c **** 
+ 604:Src/network.c ****   return false;
+ 129              		.loc 1 604 10 view .LVU26
+ 130 0078 0025     		movs	r5, #0
+ 131              	.LVL12:
+ 132              		.loc 1 604 10 view .LVU27
+ 133 007a 00E0     		b	.L2
+ 134              	.LVL13:
+ 135              	.L5:
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 14
+
+
+ 136              		.loc 1 604 10 view .LVU28
+ 137 007c 0025     		movs	r5, #0
+ 138              	.LVL14:
+ 139              	.L2:
+ 605:Src/network.c **** }
+ 140              		.loc 1 605 1 discriminator 1 view .LVU29
+ 141 007e 2846     		mov	r0, r5
+ 142 0080 1FB0     		add	sp, sp, #124
+ 143              	.LCFI2:
+ 144              		.cfi_def_cfa_offset 12
+ 145              		@ sp needed
+ 146 0082 30BD     		pop	{r4, r5, pc}
+ 147              	.LVL15:
+ 148              	.L8:
+ 149              		.loc 1 605 1 discriminator 1 view .LVU30
+ 150              		.align	2
+ 151              	.L7:
+ 152 0084 00000000 		.word	.LC0
+ 153 0088 08000000 		.word	.LC1
+ 154 008c 2C000000 		.word	.LC2
+ 155 0090 48000000 		.word	.LC3
+ 156 0094 60000000 		.word	.LC4
+ 157 0098 D91D0900 		.word	597465
+ 158              		.cfi_endproc
+ 159              	.LFE10:
+ 161              		.section	.text.ai_network_get_error,"ax",%progbits
+ 162              		.align	1
+ 163              		.global	ai_network_get_error
+ 164              		.syntax unified
+ 165              		.thumb
+ 166              		.thumb_func
+ 167              		.fpu fpv4-sp-d16
+ 169              	ai_network_get_error:
+ 170              	.LVL16:
+ 171              	.LFB11:
+ 606:Src/network.c **** 
+ 607:Src/network.c **** AI_API_ENTRY
+ 608:Src/network.c **** ai_error ai_network_get_error(ai_handle network)
+ 609:Src/network.c **** {
+ 172              		.loc 1 609 1 is_stmt 1 view -0
+ 173              		.cfi_startproc
+ 174              		@ args = 0, pretend = 0, frame = 0
+ 175              		@ frame_needed = 0, uses_anonymous_args = 0
+ 176              		.loc 1 609 1 is_stmt 0 view .LVU32
+ 177 0000 08B5     		push	{r3, lr}
+ 178              	.LCFI3:
+ 179              		.cfi_def_cfa_offset 8
+ 180              		.cfi_offset 3, -8
+ 181              		.cfi_offset 14, -4
+ 610:Src/network.c ****   return ai_platform_network_get_error(network);
+ 182              		.loc 1 610 3 is_stmt 1 view .LVU33
+ 183              		.loc 1 610 10 is_stmt 0 view .LVU34
+ 184 0002 FFF7FEFF 		bl	ai_platform_network_get_error
+ 185              	.LVL17:
+ 611:Src/network.c **** }
+ 186              		.loc 1 611 1 view .LVU35
+ 187 0006 08BD     		pop	{r3, pc}
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 15
+
+
+ 188              		.cfi_endproc
+ 189              	.LFE11:
+ 191              		.section	.text.ai_network_create,"ax",%progbits
+ 192              		.align	1
+ 193              		.global	ai_network_create
+ 194              		.syntax unified
+ 195              		.thumb
+ 196              		.thumb_func
+ 197              		.fpu fpv4-sp-d16
+ 199              	ai_network_create:
+ 200              	.LVL18:
+ 201              	.LFB12:
+ 612:Src/network.c **** 
+ 613:Src/network.c **** AI_API_ENTRY
+ 614:Src/network.c **** ai_error ai_network_create(
+ 615:Src/network.c ****   ai_handle* network, const ai_buffer* network_config)
+ 616:Src/network.c **** {
+ 202              		.loc 1 616 1 is_stmt 1 view -0
+ 203              		.cfi_startproc
+ 204              		@ args = 0, pretend = 0, frame = 0
+ 205              		@ frame_needed = 0, uses_anonymous_args = 0
+ 206              		.loc 1 616 1 is_stmt 0 view .LVU37
+ 207 0000 00B5     		push	{lr}
+ 208              	.LCFI4:
+ 209              		.cfi_def_cfa_offset 4
+ 210              		.cfi_offset 14, -4
+ 211 0002 83B0     		sub	sp, sp, #12
+ 212              	.LCFI5:
+ 213              		.cfi_def_cfa_offset 16
+ 617:Src/network.c ****   return ai_platform_network_create(
+ 214              		.loc 1 617 3 is_stmt 1 view .LVU38
+ 215              		.loc 1 617 10 is_stmt 0 view .LVU39
+ 216 0004 0023     		movs	r3, #0
+ 217 0006 0193     		str	r3, [sp, #4]
+ 218 0008 0323     		movs	r3, #3
+ 219 000a 0093     		str	r3, [sp]
+ 220 000c 0123     		movs	r3, #1
+ 221 000e 034A     		ldr	r2, .L13
+ 222 0010 FFF7FEFF 		bl	ai_platform_network_create
+ 223              	.LVL19:
+ 618:Src/network.c ****     network, network_config, 
+ 619:Src/network.c ****     &AI_NET_OBJ_INSTANCE,
+ 620:Src/network.c ****     AI_TOOLS_API_VERSION_MAJOR, AI_TOOLS_API_VERSION_MINOR, AI_TOOLS_API_VERSION_MICRO);
+ 621:Src/network.c **** }
+ 224              		.loc 1 621 1 view .LVU40
+ 225 0014 03B0     		add	sp, sp, #12
+ 226              	.LCFI6:
+ 227              		.cfi_def_cfa_offset 4
+ 228              		@ sp needed
+ 229 0016 5DF804FB 		ldr	pc, [sp], #4
+ 230              	.L14:
+ 231 001a 00BF     		.align	2
+ 232              	.L13:
+ 233 001c 00000000 		.word	.LANCHOR0
+ 234              		.cfi_endproc
+ 235              	.LFE12:
+ 237              		.section	.text.ai_network_destroy,"ax",%progbits
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 16
+
+
+ 238              		.align	1
+ 239              		.global	ai_network_destroy
+ 240              		.syntax unified
+ 241              		.thumb
+ 242              		.thumb_func
+ 243              		.fpu fpv4-sp-d16
+ 245              	ai_network_destroy:
+ 246              	.LVL20:
+ 247              	.LFB13:
+ 622:Src/network.c **** 
+ 623:Src/network.c **** AI_API_ENTRY
+ 624:Src/network.c **** ai_handle ai_network_destroy(ai_handle network)
+ 625:Src/network.c **** {
+ 248              		.loc 1 625 1 is_stmt 1 view -0
+ 249              		.cfi_startproc
+ 250              		@ args = 0, pretend = 0, frame = 0
+ 251              		@ frame_needed = 0, uses_anonymous_args = 0
+ 252              		.loc 1 625 1 is_stmt 0 view .LVU42
+ 253 0000 08B5     		push	{r3, lr}
+ 254              	.LCFI7:
+ 255              		.cfi_def_cfa_offset 8
+ 256              		.cfi_offset 3, -8
+ 257              		.cfi_offset 14, -4
+ 626:Src/network.c ****   return ai_platform_network_destroy(network);
+ 258              		.loc 1 626 3 is_stmt 1 view .LVU43
+ 259              		.loc 1 626 10 is_stmt 0 view .LVU44
+ 260 0002 FFF7FEFF 		bl	ai_platform_network_destroy
+ 261              	.LVL21:
+ 627:Src/network.c **** }
+ 262              		.loc 1 627 1 view .LVU45
+ 263 0006 08BD     		pop	{r3, pc}
+ 264              		.cfi_endproc
+ 265              	.LFE13:
+ 267              		.section	.text.ai_network_init,"ax",%progbits
+ 268              		.align	1
+ 269              		.global	ai_network_init
+ 270              		.syntax unified
+ 271              		.thumb
+ 272              		.thumb_func
+ 273              		.fpu fpv4-sp-d16
+ 275              	ai_network_init:
+ 276              	.LVL22:
+ 277              	.LFB14:
+ 628:Src/network.c **** 
+ 629:Src/network.c **** AI_API_ENTRY
+ 630:Src/network.c **** ai_bool ai_network_init(
+ 631:Src/network.c ****   ai_handle network, const ai_network_params* params)
+ 632:Src/network.c **** {
+ 278              		.loc 1 632 1 is_stmt 1 view -0
+ 279              		.cfi_startproc
+ 280              		@ args = 0, pretend = 0, frame = 0
+ 281              		@ frame_needed = 0, uses_anonymous_args = 0
+ 282              		.loc 1 632 1 is_stmt 0 view .LVU47
+ 283 0000 10B5     		push	{r4, lr}
+ 284              	.LCFI8:
+ 285              		.cfi_def_cfa_offset 8
+ 286              		.cfi_offset 4, -8
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 17
+
+
+ 287              		.cfi_offset 14, -4
+ 288 0002 0C46     		mov	r4, r1
+ 633:Src/network.c ****   ai_network* net_ctx = ai_platform_network_init(network, params);
+ 289              		.loc 1 633 3 is_stmt 1 view .LVU48
+ 290              		.loc 1 633 25 is_stmt 0 view .LVU49
+ 291 0004 FFF7FEFF 		bl	ai_platform_network_init
+ 292              	.LVL23:
+ 634:Src/network.c ****   if ( !net_ctx ) return false;
+ 293              		.loc 1 634 3 is_stmt 1 view .LVU50
+ 294              		.loc 1 634 6 is_stmt 0 view .LVU51
+ 295 0008 0028     		cmp	r0, #0
+ 296 000a 00F09E80 		beq	.L19
+ 635:Src/network.c **** 
+ 636:Src/network.c ****   ai_bool ok = true;
+ 297              		.loc 1 636 3 is_stmt 1 view .LVU52
+ 298              	.LVL24:
+ 637:Src/network.c ****   ok &= network_configure_weights(net_ctx, &params->params);
+ 299              		.loc 1 637 3 view .LVU53
+ 300              	.LBB7:
+ 301              	.LBI7:
+ 504:Src/network.c ****   ai_network* net_ctx, const ai_buffer* weights_buffer)
+ 302              		.loc 1 504 9 view .LVU54
+ 303              	.LBB8:
+ 507:Src/network.c **** 
+ 304              		.loc 1 507 3 view .LVU55
+ 507:Src/network.c **** 
+ 305              		.loc 1 507 3 view .LVU56
+ 509:Src/network.c ****   AI_ASSERT(weights)
+ 306              		.loc 1 509 3 view .LVU57
+ 509:Src/network.c ****   AI_ASSERT(weights)
+ 307              		.loc 1 509 10 is_stmt 0 view .LVU58
+ 308 000e 2369     		ldr	r3, [r4, #16]
+ 309              	.LVL25:
+ 510:Src/network.c ****   AI_UNUSED(net_ctx)
+ 310              		.loc 1 510 3 is_stmt 1 view .LVU59
+ 510:Src/network.c ****   AI_UNUSED(net_ctx)
+ 311              		.loc 1 510 3 view .LVU60
+ 511:Src/network.c **** 
+ 312              		.loc 1 511 3 view .LVU61
+ 516:Src/network.c ****     FCN3_bias_array.data = AI_PTR(weights + 93152);
+ 313              		.loc 1 516 5 view .LVU62
+ 516:Src/network.c ****     FCN3_bias_array.data = AI_PTR(weights + 93152);
+ 314              		.loc 1 516 28 is_stmt 0 view .LVU63
+ 315 0010 4F4A     		ldr	r2, .L21
+ 316 0012 1168     		ldr	r1, [r2]
+ 317 0014 41F08041 		orr	r1, r1, #1073741824
+ 318 0018 1160     		str	r1, [r2]
+ 517:Src/network.c ****     FCN3_bias_array.data_start = AI_PTR(weights + 93152);
+ 319              		.loc 1 517 5 is_stmt 1 view .LVU64
+ 517:Src/network.c ****     FCN3_bias_array.data_start = AI_PTR(weights + 93152);
+ 320              		.loc 1 517 28 is_stmt 0 view .LVU65
+ 321 001a 03F5B531 		add	r1, r3, #92672
+ 322 001e 01F5F071 		add	r1, r1, #480
+ 517:Src/network.c ****     FCN3_bias_array.data_start = AI_PTR(weights + 93152);
+ 323              		.loc 1 517 26 view .LVU66
+ 324 0022 9160     		str	r1, [r2, #8]
+ 518:Src/network.c ****     FCN3_weights_array.format |= AI_FMT_FLAG_CONST;
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 18
+
+
+ 325              		.loc 1 518 5 is_stmt 1 view .LVU67
+ 518:Src/network.c ****     FCN3_weights_array.format |= AI_FMT_FLAG_CONST;
+ 326              		.loc 1 518 32 is_stmt 0 view .LVU68
+ 327 0024 D160     		str	r1, [r2, #12]
+ 519:Src/network.c ****     FCN3_weights_array.data = AI_PTR(weights + 92256);
+ 328              		.loc 1 519 5 is_stmt 1 view .LVU69
+ 519:Src/network.c ****     FCN3_weights_array.data = AI_PTR(weights + 92256);
+ 329              		.loc 1 519 31 is_stmt 0 view .LVU70
+ 330 0026 4B4A     		ldr	r2, .L21+4
+ 331 0028 1168     		ldr	r1, [r2]
+ 332 002a 41F08041 		orr	r1, r1, #1073741824
+ 333 002e 1160     		str	r1, [r2]
+ 520:Src/network.c ****     FCN3_weights_array.data_start = AI_PTR(weights + 92256);
+ 334              		.loc 1 520 5 is_stmt 1 view .LVU71
+ 520:Src/network.c ****     FCN3_weights_array.data_start = AI_PTR(weights + 92256);
+ 335              		.loc 1 520 31 is_stmt 0 view .LVU72
+ 336 0030 03F5B431 		add	r1, r3, #92160
+ 337 0034 6031     		adds	r1, r1, #96
+ 520:Src/network.c ****     FCN3_weights_array.data_start = AI_PTR(weights + 92256);
+ 338              		.loc 1 520 29 view .LVU73
+ 339 0036 9160     		str	r1, [r2, #8]
+ 521:Src/network.c ****     FCN2_bias_array.format |= AI_FMT_FLAG_CONST;
+ 340              		.loc 1 521 5 is_stmt 1 view .LVU74
+ 521:Src/network.c ****     FCN2_bias_array.format |= AI_FMT_FLAG_CONST;
+ 341              		.loc 1 521 35 is_stmt 0 view .LVU75
+ 342 0038 D160     		str	r1, [r2, #12]
+ 522:Src/network.c ****     FCN2_bias_array.data = AI_PTR(weights + 92128);
+ 343              		.loc 1 522 5 is_stmt 1 view .LVU76
+ 522:Src/network.c ****     FCN2_bias_array.data = AI_PTR(weights + 92128);
+ 344              		.loc 1 522 28 is_stmt 0 view .LVU77
+ 345 003a 474A     		ldr	r2, .L21+8
+ 346 003c 1168     		ldr	r1, [r2]
+ 347 003e 41F08041 		orr	r1, r1, #1073741824
+ 348 0042 1160     		str	r1, [r2]
+ 523:Src/network.c ****     FCN2_bias_array.data_start = AI_PTR(weights + 92128);
+ 349              		.loc 1 523 5 is_stmt 1 view .LVU78
+ 523:Src/network.c ****     FCN2_bias_array.data_start = AI_PTR(weights + 92128);
+ 350              		.loc 1 523 28 is_stmt 0 view .LVU79
+ 351 0044 03F5B331 		add	r1, r3, #91648
+ 352 0048 01F5F071 		add	r1, r1, #480
+ 523:Src/network.c ****     FCN2_bias_array.data_start = AI_PTR(weights + 92128);
+ 353              		.loc 1 523 26 view .LVU80
+ 354 004c 9160     		str	r1, [r2, #8]
+ 524:Src/network.c ****     FCN2_weights_array.format |= AI_FMT_FLAG_CONST;
+ 355              		.loc 1 524 5 is_stmt 1 view .LVU81
+ 524:Src/network.c ****     FCN2_weights_array.format |= AI_FMT_FLAG_CONST;
+ 356              		.loc 1 524 32 is_stmt 0 view .LVU82
+ 357 004e D160     		str	r1, [r2, #12]
+ 525:Src/network.c ****     FCN2_weights_array.data = AI_PTR(weights + 88032);
+ 358              		.loc 1 525 5 is_stmt 1 view .LVU83
+ 525:Src/network.c ****     FCN2_weights_array.data = AI_PTR(weights + 88032);
+ 359              		.loc 1 525 31 is_stmt 0 view .LVU84
+ 360 0050 4249     		ldr	r1, .L21+12
+ 361 0052 0A68     		ldr	r2, [r1]
+ 362 0054 42F08042 		orr	r2, r2, #1073741824
+ 363 0058 0A60     		str	r2, [r1]
+ 526:Src/network.c ****     FCN2_weights_array.data_start = AI_PTR(weights + 88032);
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 19
+
+
+ 364              		.loc 1 526 5 is_stmt 1 view .LVU85
+ 526:Src/network.c ****     FCN2_weights_array.data_start = AI_PTR(weights + 88032);
+ 365              		.loc 1 526 31 is_stmt 0 view .LVU86
+ 366 005a 03F5AB32 		add	r2, r3, #87552
+ 367 005e 02F5F070 		add	r0, r2, #480
+ 368              	.LVL26:
+ 526:Src/network.c ****     FCN2_weights_array.data_start = AI_PTR(weights + 88032);
+ 369              		.loc 1 526 29 view .LVU87
+ 370 0062 8860     		str	r0, [r1, #8]
+ 527:Src/network.c ****     FCN1_bias_array.format |= AI_FMT_FLAG_CONST;
+ 371              		.loc 1 527 5 is_stmt 1 view .LVU88
+ 527:Src/network.c ****     FCN1_bias_array.format |= AI_FMT_FLAG_CONST;
+ 372              		.loc 1 527 35 is_stmt 0 view .LVU89
+ 373 0064 C860     		str	r0, [r1, #12]
+ 528:Src/network.c ****     FCN1_bias_array.data = AI_PTR(weights + 87904);
+ 374              		.loc 1 528 5 is_stmt 1 view .LVU90
+ 528:Src/network.c ****     FCN1_bias_array.data = AI_PTR(weights + 87904);
+ 375              		.loc 1 528 28 is_stmt 0 view .LVU91
+ 376 0066 3E49     		ldr	r1, .L21+16
+ 377 0068 0868     		ldr	r0, [r1]
+ 378 006a 40F08040 		orr	r0, r0, #1073741824
+ 379 006e 0860     		str	r0, [r1]
+ 529:Src/network.c ****     FCN1_bias_array.data_start = AI_PTR(weights + 87904);
+ 380              		.loc 1 529 5 is_stmt 1 view .LVU92
+ 529:Src/network.c ****     FCN1_bias_array.data_start = AI_PTR(weights + 87904);
+ 381              		.loc 1 529 28 is_stmt 0 view .LVU93
+ 382 0070 02F5B072 		add	r2, r2, #352
+ 529:Src/network.c ****     FCN1_bias_array.data_start = AI_PTR(weights + 87904);
+ 383              		.loc 1 529 26 view .LVU94
+ 384 0074 8A60     		str	r2, [r1, #8]
+ 530:Src/network.c ****     FCN1_weights_array.format |= AI_FMT_FLAG_CONST;
+ 385              		.loc 1 530 5 is_stmt 1 view .LVU95
+ 530:Src/network.c ****     FCN1_weights_array.format |= AI_FMT_FLAG_CONST;
+ 386              		.loc 1 530 32 is_stmt 0 view .LVU96
+ 387 0076 CA60     		str	r2, [r1, #12]
+ 531:Src/network.c ****     FCN1_weights_array.data = AI_PTR(weights + 79712);
+ 388              		.loc 1 531 5 is_stmt 1 view .LVU97
+ 531:Src/network.c ****     FCN1_weights_array.data = AI_PTR(weights + 79712);
+ 389              		.loc 1 531 31 is_stmt 0 view .LVU98
+ 390 0078 3A4A     		ldr	r2, .L21+20
+ 391 007a 1168     		ldr	r1, [r2]
+ 392 007c 41F08041 		orr	r1, r1, #1073741824
+ 393 0080 1160     		str	r1, [r2]
+ 532:Src/network.c ****     FCN1_weights_array.data_start = AI_PTR(weights + 79712);
+ 394              		.loc 1 532 5 is_stmt 1 view .LVU99
+ 532:Src/network.c ****     FCN1_weights_array.data_start = AI_PTR(weights + 79712);
+ 395              		.loc 1 532 31 is_stmt 0 view .LVU100
+ 396 0082 03F59B31 		add	r1, r3, #79360
+ 397 0086 01F5B071 		add	r1, r1, #352
+ 532:Src/network.c ****     FCN1_weights_array.data_start = AI_PTR(weights + 79712);
+ 398              		.loc 1 532 29 view .LVU101
+ 399 008a 9160     		str	r1, [r2, #8]
+ 533:Src/network.c ****     LSTM1_bias_array.format |= AI_FMT_FLAG_CONST;
+ 400              		.loc 1 533 5 is_stmt 1 view .LVU102
+ 533:Src/network.c ****     LSTM1_bias_array.format |= AI_FMT_FLAG_CONST;
+ 401              		.loc 1 533 35 is_stmt 0 view .LVU103
+ 402 008c D160     		str	r1, [r2, #12]
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 20
+
+
+ 534:Src/network.c ****     LSTM1_bias_array.data = AI_PTR(weights + 78688);
+ 403              		.loc 1 534 5 is_stmt 1 view .LVU104
+ 534:Src/network.c ****     LSTM1_bias_array.data = AI_PTR(weights + 78688);
+ 404              		.loc 1 534 29 is_stmt 0 view .LVU105
+ 405 008e 364A     		ldr	r2, .L21+24
+ 406 0090 1168     		ldr	r1, [r2]
+ 407 0092 41F08041 		orr	r1, r1, #1073741824
+ 408 0096 1160     		str	r1, [r2]
+ 535:Src/network.c ****     LSTM1_bias_array.data_start = AI_PTR(weights + 78688);
+ 409              		.loc 1 535 5 is_stmt 1 view .LVU106
+ 535:Src/network.c ****     LSTM1_bias_array.data_start = AI_PTR(weights + 78688);
+ 410              		.loc 1 535 29 is_stmt 0 view .LVU107
+ 411 0098 03F59931 		add	r1, r3, #78336
+ 412 009c 01F5B071 		add	r1, r1, #352
+ 535:Src/network.c ****     LSTM1_bias_array.data_start = AI_PTR(weights + 78688);
+ 413              		.loc 1 535 27 view .LVU108
+ 414 00a0 9160     		str	r1, [r2, #8]
+ 536:Src/network.c ****     LSTM1_peephole_array.format |= AI_FMT_FLAG_CONST;
+ 415              		.loc 1 536 5 is_stmt 1 view .LVU109
+ 536:Src/network.c ****     LSTM1_peephole_array.format |= AI_FMT_FLAG_CONST;
+ 416              		.loc 1 536 33 is_stmt 0 view .LVU110
+ 417 00a2 D160     		str	r1, [r2, #12]
+ 537:Src/network.c ****     LSTM1_peephole_array.data = AI_PTR(weights + 77920);
+ 418              		.loc 1 537 5 is_stmt 1 view .LVU111
+ 537:Src/network.c ****     LSTM1_peephole_array.data = AI_PTR(weights + 77920);
+ 419              		.loc 1 537 33 is_stmt 0 view .LVU112
+ 420 00a4 314A     		ldr	r2, .L21+28
+ 421 00a6 1168     		ldr	r1, [r2]
+ 422 00a8 41F08041 		orr	r1, r1, #1073741824
+ 423 00ac 1160     		str	r1, [r2]
+ 538:Src/network.c ****     LSTM1_peephole_array.data_start = AI_PTR(weights + 77920);
+ 424              		.loc 1 538 5 is_stmt 1 view .LVU113
+ 538:Src/network.c ****     LSTM1_peephole_array.data_start = AI_PTR(weights + 77920);
+ 425              		.loc 1 538 33 is_stmt 0 view .LVU114
+ 426 00ae 03F59831 		add	r1, r3, #77824
+ 427 00b2 6031     		adds	r1, r1, #96
+ 538:Src/network.c ****     LSTM1_peephole_array.data_start = AI_PTR(weights + 77920);
+ 428              		.loc 1 538 31 view .LVU115
+ 429 00b4 9160     		str	r1, [r2, #8]
+ 539:Src/network.c ****     LSTM1_recurrent_array.format |= AI_FMT_FLAG_CONST;
+ 430              		.loc 1 539 5 is_stmt 1 view .LVU116
+ 539:Src/network.c ****     LSTM1_recurrent_array.format |= AI_FMT_FLAG_CONST;
+ 431              		.loc 1 539 37 is_stmt 0 view .LVU117
+ 432 00b6 D160     		str	r1, [r2, #12]
+ 540:Src/network.c ****     LSTM1_recurrent_array.data = AI_PTR(weights + 12384);
+ 433              		.loc 1 540 5 is_stmt 1 view .LVU118
+ 540:Src/network.c ****     LSTM1_recurrent_array.data = AI_PTR(weights + 12384);
+ 434              		.loc 1 540 34 is_stmt 0 view .LVU119
+ 435 00b8 2D4A     		ldr	r2, .L21+32
+ 436 00ba 1168     		ldr	r1, [r2]
+ 437 00bc 41F08041 		orr	r1, r1, #1073741824
+ 438 00c0 1160     		str	r1, [r2]
+ 541:Src/network.c ****     LSTM1_recurrent_array.data_start = AI_PTR(weights + 12384);
+ 439              		.loc 1 541 5 is_stmt 1 view .LVU120
+ 541:Src/network.c ****     LSTM1_recurrent_array.data_start = AI_PTR(weights + 12384);
+ 440              		.loc 1 541 34 is_stmt 0 view .LVU121
+ 441 00c2 03F54151 		add	r1, r3, #12352
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 21
+
+
+ 442 00c6 2031     		adds	r1, r1, #32
+ 541:Src/network.c ****     LSTM1_recurrent_array.data_start = AI_PTR(weights + 12384);
+ 443              		.loc 1 541 32 view .LVU122
+ 444 00c8 9160     		str	r1, [r2, #8]
+ 542:Src/network.c ****     LSTM1_kernel_array.format |= AI_FMT_FLAG_CONST;
+ 445              		.loc 1 542 5 is_stmt 1 view .LVU123
+ 542:Src/network.c ****     LSTM1_kernel_array.format |= AI_FMT_FLAG_CONST;
+ 446              		.loc 1 542 38 is_stmt 0 view .LVU124
+ 447 00ca D160     		str	r1, [r2, #12]
+ 543:Src/network.c ****     LSTM1_kernel_array.data = AI_PTR(weights + 96);
+ 448              		.loc 1 543 5 is_stmt 1 view .LVU125
+ 543:Src/network.c ****     LSTM1_kernel_array.data = AI_PTR(weights + 96);
+ 449              		.loc 1 543 31 is_stmt 0 view .LVU126
+ 450 00cc 294A     		ldr	r2, .L21+36
+ 451 00ce 1168     		ldr	r1, [r2]
+ 452 00d0 41F08041 		orr	r1, r1, #1073741824
+ 453 00d4 1160     		str	r1, [r2]
+ 544:Src/network.c ****     LSTM1_kernel_array.data_start = AI_PTR(weights + 96);
+ 454              		.loc 1 544 5 is_stmt 1 view .LVU127
+ 544:Src/network.c ****     LSTM1_kernel_array.data_start = AI_PTR(weights + 96);
+ 455              		.loc 1 544 31 is_stmt 0 view .LVU128
+ 456 00d6 03F16001 		add	r1, r3, #96
+ 544:Src/network.c ****     LSTM1_kernel_array.data_start = AI_PTR(weights + 96);
+ 457              		.loc 1 544 29 view .LVU129
+ 458 00da 9160     		str	r1, [r2, #8]
+ 545:Src/network.c ****     batch_normalization_1_bias_array.format |= AI_FMT_FLAG_CONST;
+ 459              		.loc 1 545 5 is_stmt 1 view .LVU130
+ 545:Src/network.c ****     batch_normalization_1_bias_array.format |= AI_FMT_FLAG_CONST;
+ 460              		.loc 1 545 35 is_stmt 0 view .LVU131
+ 461 00dc D160     		str	r1, [r2, #12]
+ 546:Src/network.c ****     batch_normalization_1_bias_array.data = AI_PTR(weights + 48);
+ 462              		.loc 1 546 5 is_stmt 1 view .LVU132
+ 546:Src/network.c ****     batch_normalization_1_bias_array.data = AI_PTR(weights + 48);
+ 463              		.loc 1 546 45 is_stmt 0 view .LVU133
+ 464 00de 264A     		ldr	r2, .L21+40
+ 465 00e0 1168     		ldr	r1, [r2]
+ 466 00e2 41F08041 		orr	r1, r1, #1073741824
+ 467 00e6 1160     		str	r1, [r2]
+ 547:Src/network.c ****     batch_normalization_1_bias_array.data_start = AI_PTR(weights + 48);
+ 468              		.loc 1 547 5 is_stmt 1 view .LVU134
+ 547:Src/network.c ****     batch_normalization_1_bias_array.data_start = AI_PTR(weights + 48);
+ 469              		.loc 1 547 45 is_stmt 0 view .LVU135
+ 470 00e8 03F13001 		add	r1, r3, #48
+ 547:Src/network.c ****     batch_normalization_1_bias_array.data_start = AI_PTR(weights + 48);
+ 471              		.loc 1 547 43 view .LVU136
+ 472 00ec 9160     		str	r1, [r2, #8]
+ 548:Src/network.c ****     batch_normalization_1_scale_array.format |= AI_FMT_FLAG_CONST;
+ 473              		.loc 1 548 5 is_stmt 1 view .LVU137
+ 548:Src/network.c ****     batch_normalization_1_scale_array.format |= AI_FMT_FLAG_CONST;
+ 474              		.loc 1 548 49 is_stmt 0 view .LVU138
+ 475 00ee D160     		str	r1, [r2, #12]
+ 549:Src/network.c ****     batch_normalization_1_scale_array.data = AI_PTR(weights + 0);
+ 476              		.loc 1 549 5 is_stmt 1 view .LVU139
+ 549:Src/network.c ****     batch_normalization_1_scale_array.data = AI_PTR(weights + 0);
+ 477              		.loc 1 549 46 is_stmt 0 view .LVU140
+ 478 00f0 224A     		ldr	r2, .L21+44
+ 479 00f2 1168     		ldr	r1, [r2]
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 22
+
+
+ 480 00f4 41F08041 		orr	r1, r1, #1073741824
+ 481 00f8 1160     		str	r1, [r2]
+ 550:Src/network.c ****     batch_normalization_1_scale_array.data_start = AI_PTR(weights + 0);
+ 482              		.loc 1 550 5 is_stmt 1 view .LVU141
+ 550:Src/network.c ****     batch_normalization_1_scale_array.data_start = AI_PTR(weights + 0);
+ 483              		.loc 1 550 44 is_stmt 0 view .LVU142
+ 484 00fa 9360     		str	r3, [r2, #8]
+ 551:Src/network.c ****   }
+ 485              		.loc 1 551 5 is_stmt 1 view .LVU143
+ 551:Src/network.c ****   }
+ 486              		.loc 1 551 50 is_stmt 0 view .LVU144
+ 487 00fc D360     		str	r3, [r2, #12]
+ 554:Src/network.c **** }
+ 488              		.loc 1 554 3 is_stmt 1 view .LVU145
+ 489              	.LVL27:
+ 554:Src/network.c **** }
+ 490              		.loc 1 554 3 is_stmt 0 view .LVU146
+ 491              	.LBE8:
+ 492              	.LBE7:
+ 638:Src/network.c ****   ok &= network_configure_activations(net_ctx, &params->activations);
+ 493              		.loc 1 638 3 is_stmt 1 view .LVU147
+ 494              	.LBB9:
+ 495              	.LBI9:
+ 467:Src/network.c ****   ai_network* net_ctx, const ai_buffer* activation_buffer)
+ 496              		.loc 1 467 9 view .LVU148
+ 497              	.LBB10:
+ 470:Src/network.c **** 
+ 498              		.loc 1 470 3 view .LVU149
+ 470:Src/network.c **** 
+ 499              		.loc 1 470 3 view .LVU150
+ 472:Src/network.c ****   AI_ASSERT(activations)
+ 500              		.loc 1 472 3 view .LVU151
+ 472:Src/network.c ****   AI_ASSERT(activations)
+ 501              		.loc 1 472 24 is_stmt 0 view .LVU152
+ 502 00fe A36A     		ldr	r3, [r4, #40]
+ 503 0100 0333     		adds	r3, r3, #3
+ 504 0102 23F00303 		bic	r3, r3, #3
+ 505              	.LVL28:
+ 473:Src/network.c ****   AI_UNUSED(net_ctx)
+ 506              		.loc 1 473 3 is_stmt 1 view .LVU153
+ 473:Src/network.c ****   AI_UNUSED(net_ctx)
+ 507              		.loc 1 473 3 view .LVU154
+ 474:Src/network.c **** 
+ 508              		.loc 1 474 3 view .LVU155
+ 478:Src/network.c ****     input_0_output_array.data_start = AI_PTR(NULL);
+ 509              		.loc 1 478 5 view .LVU156
+ 478:Src/network.c ****     input_0_output_array.data_start = AI_PTR(NULL);
+ 510              		.loc 1 478 31 is_stmt 0 view .LVU157
+ 511 0106 1E49     		ldr	r1, .L21+48
+ 512 0108 0022     		movs	r2, #0
+ 513 010a 8A60     		str	r2, [r1, #8]
+ 479:Src/network.c ****     batch_normalization_1_output_array.data = AI_PTR(activations + 0);
+ 514              		.loc 1 479 5 is_stmt 1 view .LVU158
+ 479:Src/network.c ****     batch_normalization_1_output_array.data = AI_PTR(activations + 0);
+ 515              		.loc 1 479 37 is_stmt 0 view .LVU159
+ 516 010c CA60     		str	r2, [r1, #12]
+ 480:Src/network.c ****     batch_normalization_1_output_array.data_start = AI_PTR(activations + 0);
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 23
+
+
+ 517              		.loc 1 480 5 is_stmt 1 view .LVU160
+ 480:Src/network.c ****     batch_normalization_1_output_array.data_start = AI_PTR(activations + 0);
+ 518              		.loc 1 480 45 is_stmt 0 view .LVU161
+ 519 010e 1D49     		ldr	r1, .L21+52
+ 520 0110 8B60     		str	r3, [r1, #8]
+ 481:Src/network.c ****     LSTM1_output_array.data = AI_PTR(activations + 1440);
+ 521              		.loc 1 481 5 is_stmt 1 view .LVU162
+ 481:Src/network.c ****     LSTM1_output_array.data = AI_PTR(activations + 1440);
+ 522              		.loc 1 481 51 is_stmt 0 view .LVU163
+ 523 0112 CB60     		str	r3, [r1, #12]
+ 482:Src/network.c ****     LSTM1_output_array.data_start = AI_PTR(activations + 1440);
+ 524              		.loc 1 482 5 is_stmt 1 view .LVU164
+ 482:Src/network.c ****     LSTM1_output_array.data_start = AI_PTR(activations + 1440);
+ 525              		.loc 1 482 31 is_stmt 0 view .LVU165
+ 526 0114 03F5B460 		add	r0, r3, #1440
+ 482:Src/network.c ****     LSTM1_output_array.data_start = AI_PTR(activations + 1440);
+ 527              		.loc 1 482 29 view .LVU166
+ 528 0118 1B49     		ldr	r1, .L21+56
+ 529 011a 8860     		str	r0, [r1, #8]
+ 483:Src/network.c ****     FCN1_output_array.data = AI_PTR(activations + 0);
+ 530              		.loc 1 483 5 is_stmt 1 view .LVU167
+ 483:Src/network.c ****     FCN1_output_array.data = AI_PTR(activations + 0);
+ 531              		.loc 1 483 35 is_stmt 0 view .LVU168
+ 532 011c C860     		str	r0, [r1, #12]
+ 484:Src/network.c ****     FCN1_output_array.data_start = AI_PTR(activations + 0);
+ 533              		.loc 1 484 5 is_stmt 1 view .LVU169
+ 484:Src/network.c ****     FCN1_output_array.data_start = AI_PTR(activations + 0);
+ 534              		.loc 1 484 28 is_stmt 0 view .LVU170
+ 535 011e 1B49     		ldr	r1, .L21+60
+ 536 0120 8B60     		str	r3, [r1, #8]
+ 485:Src/network.c ****     FCN1_nl_output_array.data = AI_PTR(activations + 0);
+ 537              		.loc 1 485 5 is_stmt 1 view .LVU171
+ 485:Src/network.c ****     FCN1_nl_output_array.data = AI_PTR(activations + 0);
+ 538              		.loc 1 485 34 is_stmt 0 view .LVU172
+ 539 0122 CB60     		str	r3, [r1, #12]
+ 486:Src/network.c ****     FCN1_nl_output_array.data_start = AI_PTR(activations + 0);
+ 540              		.loc 1 486 5 is_stmt 1 view .LVU173
+ 486:Src/network.c ****     FCN1_nl_output_array.data_start = AI_PTR(activations + 0);
+ 541              		.loc 1 486 31 is_stmt 0 view .LVU174
+ 542 0124 1A49     		ldr	r1, .L21+64
+ 543 0126 8B60     		str	r3, [r1, #8]
+ 487:Src/network.c ****     FCN2_output_array.data = AI_PTR(activations + 128);
+ 544              		.loc 1 487 5 is_stmt 1 view .LVU175
+ 487:Src/network.c ****     FCN2_output_array.data = AI_PTR(activations + 128);
+ 545              		.loc 1 487 37 is_stmt 0 view .LVU176
+ 546 0128 CB60     		str	r3, [r1, #12]
+ 488:Src/network.c ****     FCN2_output_array.data_start = AI_PTR(activations + 128);
+ 547              		.loc 1 488 5 is_stmt 1 view .LVU177
+ 488:Src/network.c ****     FCN2_output_array.data_start = AI_PTR(activations + 128);
+ 548              		.loc 1 488 30 is_stmt 0 view .LVU178
+ 549 012a 03F18001 		add	r1, r3, #128
+ 488:Src/network.c ****     FCN2_output_array.data_start = AI_PTR(activations + 128);
+ 550              		.loc 1 488 28 view .LVU179
+ 551 012e 1948     		ldr	r0, .L21+68
+ 552 0130 8160     		str	r1, [r0, #8]
+ 489:Src/network.c ****     FCN2_nl_output_array.data = AI_PTR(activations + 128);
+ 553              		.loc 1 489 5 is_stmt 1 view .LVU180
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 24
+
+
+ 489:Src/network.c ****     FCN2_nl_output_array.data = AI_PTR(activations + 128);
+ 554              		.loc 1 489 34 is_stmt 0 view .LVU181
+ 555 0132 C160     		str	r1, [r0, #12]
+ 490:Src/network.c ****     FCN2_nl_output_array.data_start = AI_PTR(activations + 128);
+ 556              		.loc 1 490 5 is_stmt 1 view .LVU182
+ 490:Src/network.c ****     FCN2_nl_output_array.data_start = AI_PTR(activations + 128);
+ 557              		.loc 1 490 31 is_stmt 0 view .LVU183
+ 558 0134 1848     		ldr	r0, .L21+72
+ 559 0136 8160     		str	r1, [r0, #8]
+ 491:Src/network.c ****     FCN3_output_array.data = AI_PTR(activations + 0);
+ 560              		.loc 1 491 5 is_stmt 1 view .LVU184
+ 491:Src/network.c ****     FCN3_output_array.data = AI_PTR(activations + 0);
+ 561              		.loc 1 491 37 is_stmt 0 view .LVU185
+ 562 0138 C160     		str	r1, [r0, #12]
+ 492:Src/network.c ****     FCN3_output_array.data_start = AI_PTR(activations + 0);
+ 563              		.loc 1 492 5 is_stmt 1 view .LVU186
+ 492:Src/network.c ****     FCN3_output_array.data_start = AI_PTR(activations + 0);
+ 564              		.loc 1 492 28 is_stmt 0 view .LVU187
+ 565 013a 1849     		ldr	r1, .L21+76
+ 566 013c 8B60     		str	r3, [r1, #8]
+ 493:Src/network.c ****     FCN3_nl_output_array.data = AI_PTR(NULL);
+ 567              		.loc 1 493 5 is_stmt 1 view .LVU188
+ 493:Src/network.c ****     FCN3_nl_output_array.data = AI_PTR(NULL);
+ 568              		.loc 1 493 34 is_stmt 0 view .LVU189
+ 569 013e CB60     		str	r3, [r1, #12]
+ 494:Src/network.c ****     FCN3_nl_output_array.data_start = AI_PTR(NULL);
+ 570              		.loc 1 494 5 is_stmt 1 view .LVU190
+ 494:Src/network.c ****     FCN3_nl_output_array.data_start = AI_PTR(NULL);
+ 571              		.loc 1 494 31 is_stmt 0 view .LVU191
+ 572 0140 174B     		ldr	r3, .L21+80
+ 573              	.LVL29:
+ 494:Src/network.c ****     FCN3_nl_output_array.data_start = AI_PTR(NULL);
+ 574              		.loc 1 494 31 view .LVU192
+ 575 0142 9A60     		str	r2, [r3, #8]
+ 495:Src/network.c ****     
+ 576              		.loc 1 495 5 is_stmt 1 view .LVU193
+ 495:Src/network.c ****     
+ 577              		.loc 1 495 37 is_stmt 0 view .LVU194
+ 578 0144 DA60     		str	r2, [r3, #12]
+ 498:Src/network.c **** }
+ 579              		.loc 1 498 3 is_stmt 1 view .LVU195
+ 580              	.LVL30:
+ 498:Src/network.c **** }
+ 581              		.loc 1 498 3 is_stmt 0 view .LVU196
+ 582              	.LBE10:
+ 583              	.LBE9:
+ 639:Src/network.c **** 
+ 640:Src/network.c ****   return ok;
+ 584              		.loc 1 640 3 is_stmt 1 view .LVU197
+ 585              		.loc 1 640 10 is_stmt 0 view .LVU198
+ 586 0146 0120     		movs	r0, #1
+ 587              	.LVL31:
+ 588              	.L18:
+ 641:Src/network.c **** }
+ 589              		.loc 1 641 1 view .LVU199
+ 590 0148 10BD     		pop	{r4, pc}
+ 591              	.LVL32:
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 25
+
+
+ 592              	.L19:
+ 634:Src/network.c **** 
+ 593              		.loc 1 634 26 view .LVU200
+ 594 014a 0020     		movs	r0, #0
+ 595              	.LVL33:
+ 634:Src/network.c **** 
+ 596              		.loc 1 634 26 view .LVU201
+ 597 014c FCE7     		b	.L18
+ 598              	.L22:
+ 599 014e 00BF     		.align	2
+ 600              	.L21:
+ 601 0150 00000000 		.word	.LANCHOR1
+ 602 0154 00000000 		.word	.LANCHOR2
+ 603 0158 00000000 		.word	.LANCHOR3
+ 604 015c 00000000 		.word	.LANCHOR4
+ 605 0160 00000000 		.word	.LANCHOR5
+ 606 0164 00000000 		.word	.LANCHOR6
+ 607 0168 00000000 		.word	.LANCHOR7
+ 608 016c 00000000 		.word	.LANCHOR8
+ 609 0170 00000000 		.word	.LANCHOR9
+ 610 0174 00000000 		.word	.LANCHOR10
+ 611 0178 00000000 		.word	.LANCHOR11
+ 612 017c 00000000 		.word	.LANCHOR12
+ 613 0180 00000000 		.word	.LANCHOR13
+ 614 0184 00000000 		.word	.LANCHOR14
+ 615 0188 00000000 		.word	.LANCHOR15
+ 616 018c 00000000 		.word	.LANCHOR16
+ 617 0190 00000000 		.word	.LANCHOR17
+ 618 0194 00000000 		.word	.LANCHOR18
+ 619 0198 00000000 		.word	.LANCHOR19
+ 620 019c 00000000 		.word	.LANCHOR20
+ 621 01a0 00000000 		.word	.LANCHOR21
+ 622              		.cfi_endproc
+ 623              	.LFE14:
+ 625              		.section	.text.ai_network_run,"ax",%progbits
+ 626              		.align	1
+ 627              		.global	ai_network_run
+ 628              		.syntax unified
+ 629              		.thumb
+ 630              		.thumb_func
+ 631              		.fpu fpv4-sp-d16
+ 633              	ai_network_run:
+ 634              	.LVL34:
+ 635              	.LFB15:
+ 642:Src/network.c **** 
+ 643:Src/network.c **** 
+ 644:Src/network.c **** AI_API_ENTRY
+ 645:Src/network.c **** ai_i32 ai_network_run(
+ 646:Src/network.c ****   ai_handle network, const ai_buffer* input, ai_buffer* output)
+ 647:Src/network.c **** {
+ 636              		.loc 1 647 1 is_stmt 1 view -0
+ 637              		.cfi_startproc
+ 638              		@ args = 0, pretend = 0, frame = 0
+ 639              		@ frame_needed = 0, uses_anonymous_args = 0
+ 640              		.loc 1 647 1 is_stmt 0 view .LVU203
+ 641 0000 08B5     		push	{r3, lr}
+ 642              	.LCFI9:
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 26
+
+
+ 643              		.cfi_def_cfa_offset 8
+ 644              		.cfi_offset 3, -8
+ 645              		.cfi_offset 14, -4
+ 648:Src/network.c ****   return ai_platform_network_process(network, input, output);
+ 646              		.loc 1 648 3 is_stmt 1 view .LVU204
+ 647              		.loc 1 648 10 is_stmt 0 view .LVU205
+ 648 0002 FFF7FEFF 		bl	ai_platform_network_process
+ 649              	.LVL35:
+ 649:Src/network.c **** }
+ 650              		.loc 1 649 1 view .LVU206
+ 651 0006 08BD     		pop	{r3, pc}
+ 652              		.cfi_endproc
+ 653              	.LFE15:
+ 655              		.section	.text.ai_network_forward,"ax",%progbits
+ 656              		.align	1
+ 657              		.global	ai_network_forward
+ 658              		.syntax unified
+ 659              		.thumb
+ 660              		.thumb_func
+ 661              		.fpu fpv4-sp-d16
+ 663              	ai_network_forward:
+ 664              	.LVL36:
+ 665              	.LFB16:
+ 650:Src/network.c **** 
+ 651:Src/network.c **** AI_API_ENTRY
+ 652:Src/network.c **** ai_i32 ai_network_forward(ai_handle network, const ai_buffer* input)
+ 653:Src/network.c **** {
+ 666              		.loc 1 653 1 is_stmt 1 view -0
+ 667              		.cfi_startproc
+ 668              		@ args = 0, pretend = 0, frame = 0
+ 669              		@ frame_needed = 0, uses_anonymous_args = 0
+ 670              		.loc 1 653 1 is_stmt 0 view .LVU208
+ 671 0000 08B5     		push	{r3, lr}
+ 672              	.LCFI10:
+ 673              		.cfi_def_cfa_offset 8
+ 674              		.cfi_offset 3, -8
+ 675              		.cfi_offset 14, -4
+ 654:Src/network.c ****   return ai_platform_network_process(network, input, NULL);
+ 676              		.loc 1 654 3 is_stmt 1 view .LVU209
+ 677              		.loc 1 654 10 is_stmt 0 view .LVU210
+ 678 0002 0022     		movs	r2, #0
+ 679 0004 FFF7FEFF 		bl	ai_platform_network_process
+ 680              	.LVL37:
+ 655:Src/network.c **** }
+ 681              		.loc 1 655 1 view .LVU211
+ 682 0008 08BD     		pop	{r3, pc}
+ 683              		.cfi_endproc
+ 684              	.LFE16:
+ 686              		.section	.bss.__compound_literal.45,"aw",%nobits
+ 687              		.align	2
+ 690              	__compound_literal.45:
+ 691 0000 00000000 		.space	4
+ 692              		.section	.bss.__compound_literal.50,"aw",%nobits
+ 693              		.align	2
+ 696              	__compound_literal.50:
+ 697 0000 00000000 		.space	4
+ 698              		.section	.bss.__compound_literal.55,"aw",%nobits
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 27
+
+
+ 699              		.align	2
+ 702              	__compound_literal.55:
+ 703 0000 00000000 		.space	4
+ 704              		.section	.bss.__compound_literal.59,"aw",%nobits
+ 705              		.align	2
+ 708              	__compound_literal.59:
+ 709 0000 00000000 		.space	4
+ 710              		.section	.bss.__compound_literal.60,"aw",%nobits
+ 711              		.align	2
+ 714              	__compound_literal.60:
+ 715 0000 00000000 		.space	4
+ 716              		.section	.bss.__compound_literal.65,"aw",%nobits
+ 717              		.align	2
+ 720              	__compound_literal.65:
+ 721 0000 00000000 		.space	4
+ 722              		.section	.bss.__compound_literal.69,"aw",%nobits
+ 723              		.align	2
+ 726              	__compound_literal.69:
+ 727 0000 00000000 		.space	4
+ 728              		.section	.bss.__compound_literal.70,"aw",%nobits
+ 729              		.align	2
+ 732              	__compound_literal.70:
+ 733 0000 00000000 		.space	4
+ 734              		.section	.bss.__compound_literal.75,"aw",%nobits
+ 735              		.align	2
+ 738              	__compound_literal.75:
+ 739 0000 00000000 		.space	4
+ 740              		.section	.bss.__compound_literal.79,"aw",%nobits
+ 741              		.align	2
+ 744              	__compound_literal.79:
+ 745 0000 00000000 		.space	4
+ 746              		.section	.bss.__compound_literal.80,"aw",%nobits
+ 747              		.align	2
+ 750              	__compound_literal.80:
+ 751 0000 00000000 		.space	4
+ 752              		.section	.bss.__compound_literal.83,"aw",%nobits
+ 753              		.align	2
+ 756              	__compound_literal.83:
+ 757 0000 00000000 		.space	24
+ 757      00000000 
+ 757      00000000 
+ 757      00000000 
+ 757      00000000 
+ 758              		.section	.bss.__compound_literal.84,"aw",%nobits
+ 759              		.align	2
+ 762              	__compound_literal.84:
+ 763 0000 00000000 		.space	16
+ 763      00000000 
+ 763      00000000 
+ 763      00000000 
+ 764              		.section	.bss.__compound_literal.85,"aw",%nobits
+ 765              		.align	2
+ 768              	__compound_literal.85:
+ 769 0000 00000000 		.space	8
+ 769      00000000 
+ 770              		.section	.bss.__compound_literal.88,"aw",%nobits
+ 771              		.align	2
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 28
+
+
+ 774              	__compound_literal.88:
+ 775 0000 00000000 		.space	24
+ 775      00000000 
+ 775      00000000 
+ 775      00000000 
+ 775      00000000 
+ 776              		.section	.bss.__compound_literal.89,"aw",%nobits
+ 777              		.align	2
+ 780              	__compound_literal.89:
+ 781 0000 00000000 		.space	16
+ 781      00000000 
+ 781      00000000 
+ 781      00000000 
+ 782              		.section	.bss.__compound_literal.90,"aw",%nobits
+ 783              		.align	2
+ 786              	__compound_literal.90:
+ 787 0000 00000000 		.space	8
+ 787      00000000 
+ 788              		.section	.data.FCN1_bias,"aw"
+ 789              		.align	2
+ 792              	FCN1_bias:
+ 793 0000 00000000 		.word	0
+ 794 0004 0000     		.short	0
+ 795 0006 00       		.byte	0
+ 796 0007 01       		.byte	1
+ 797 0008 00       		.byte	0
+ 798 0009 04       		.byte	4
+ 799 000a 00       		.byte	0
+ 800 000b 00       		.byte	0
+ 801 000c 00000000 		.word	__compound_literal.8
+ 802 0010 01       		.byte	1
+ 803 0011 04       		.byte	4
+ 804 0012 00       		.byte	0
+ 805 0013 00       		.byte	0
+ 806 0014 00000000 		.word	__compound_literal.9
+ 807 0018 00000000 		.word	FCN1_bias_array
+ 808              		.section	.data.FCN1_bias_array,"aw"
+ 809              		.align	2
+ 810              		.set	.LANCHOR5,. + 0
+ 813              	FCN1_bias_array:
+ 814 0000 40108201 		.word	25301056
+ 815 0004 20000000 		.word	32
+ 816 0008 00000000 		.word	0
+ 817 000c 00000000 		.word	0
+ 818              		.section	.data.FCN1_layer,"aw"
+ 819              		.align	2
+ 822              	FCN1_layer:
+ 823 0000 1527     		.short	10005
+ 824 0002 0300     		.short	3
+ 825 0004 00000000 		.word	0
+ 826 0008 00000000 		.word	g_network
+ 827 000c 00000000 		.word	FCN1_nl_layer
+ 828 0010 00000000 		.word	forward_dense
+ 829 0014 00000000 		.word	FCN1_chain
+ 830              		.section	.data.FCN1_nl_layer,"aw"
+ 831              		.align	2
+ 834              	FCN1_nl_layer:
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 29
+
+
+ 835 0000 1927     		.short	10009
+ 836 0002 0300     		.short	3
+ 837 0004 00000000 		.word	0
+ 838 0008 00000000 		.word	g_network
+ 839 000c 00000000 		.word	FCN2_layer
+ 840 0010 00000000 		.word	forward_relu
+ 841 0014 00000000 		.word	FCN1_nl_chain
+ 842 0018 00000000 		.space	4
+ 843              		.section	.data.FCN1_nl_output,"aw"
+ 844              		.align	2
+ 847              	FCN1_nl_output:
+ 848 0000 00000000 		.word	0
+ 849 0004 0000     		.short	0
+ 850 0006 00       		.byte	0
+ 851 0007 01       		.byte	1
+ 852 0008 00       		.byte	0
+ 853 0009 04       		.byte	4
+ 854 000a 00       		.byte	0
+ 855 000b 00       		.byte	0
+ 856 000c 00000000 		.word	__compound_literal.32
+ 857 0010 01       		.byte	1
+ 858 0011 04       		.byte	4
+ 859 0012 00       		.byte	0
+ 860 0013 00       		.byte	0
+ 861 0014 00000000 		.word	__compound_literal.33
+ 862 0018 00000000 		.word	FCN1_nl_output_array
+ 863              		.section	.data.FCN1_nl_output_array,"aw"
+ 864              		.align	2
+ 865              		.set	.LANCHOR17,. + 0
+ 868              	FCN1_nl_output_array:
+ 869 0000 40108201 		.word	25301056
+ 870 0004 20000000 		.word	32
+ 871 0008 00000000 		.word	0
+ 872 000c 00000000 		.word	0
+ 873              		.section	.data.FCN1_output,"aw"
+ 874              		.align	2
+ 877              	FCN1_output:
+ 878 0000 00000000 		.word	0
+ 879 0004 0000     		.short	0
+ 880 0006 00       		.byte	0
+ 881 0007 01       		.byte	1
+ 882 0008 00       		.byte	0
+ 883 0009 04       		.byte	4
+ 884 000a 00       		.byte	0
+ 885 000b 00       		.byte	0
+ 886 000c 00000000 		.word	__compound_literal.30
+ 887 0010 01       		.byte	1
+ 888 0011 04       		.byte	4
+ 889 0012 00       		.byte	0
+ 890 0013 00       		.byte	0
+ 891 0014 00000000 		.word	__compound_literal.31
+ 892 0018 00000000 		.word	FCN1_output_array
+ 893              		.section	.data.FCN1_output_array,"aw"
+ 894              		.align	2
+ 895              		.set	.LANCHOR16,. + 0
+ 898              	FCN1_output_array:
+ 899 0000 40108201 		.word	25301056
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 30
+
+
+ 900 0004 20000000 		.word	32
+ 901 0008 00000000 		.word	0
+ 902 000c 00000000 		.word	0
+ 903              		.section	.data.FCN1_weights,"aw"
+ 904              		.align	2
+ 907              	FCN1_weights:
+ 908 0000 00000000 		.word	0
+ 909 0004 0000     		.short	0
+ 910 0006 00       		.byte	0
+ 911 0007 01       		.byte	1
+ 912 0008 00       		.byte	0
+ 913 0009 04       		.byte	4
+ 914 000a 00       		.byte	0
+ 915 000b 00       		.byte	0
+ 916 000c 00000000 		.word	__compound_literal.10
+ 917 0010 01       		.byte	1
+ 918 0011 04       		.byte	4
+ 919 0012 00       		.byte	0
+ 920 0013 00       		.byte	0
+ 921 0014 00000000 		.word	__compound_literal.11
+ 922 0018 00000000 		.word	FCN1_weights_array
+ 923              		.section	.data.FCN1_weights_array,"aw"
+ 924              		.align	2
+ 925              		.set	.LANCHOR6,. + 0
+ 928              	FCN1_weights_array:
+ 929 0000 40108201 		.word	25301056
+ 930 0004 00080000 		.word	2048
+ 931 0008 00000000 		.word	0
+ 932 000c 00000000 		.word	0
+ 933              		.section	.data.FCN2_bias,"aw"
+ 934              		.align	2
+ 937              	FCN2_bias:
+ 938 0000 00000000 		.word	0
+ 939 0004 0000     		.short	0
+ 940 0006 00       		.byte	0
+ 941 0007 01       		.byte	1
+ 942 0008 00       		.byte	0
+ 943 0009 04       		.byte	4
+ 944 000a 00       		.byte	0
+ 945 000b 00       		.byte	0
+ 946 000c 00000000 		.word	__compound_literal.4
+ 947 0010 01       		.byte	1
+ 948 0011 04       		.byte	4
+ 949 0012 00       		.byte	0
+ 950 0013 00       		.byte	0
+ 951 0014 00000000 		.word	__compound_literal.5
+ 952 0018 00000000 		.word	FCN2_bias_array
+ 953              		.section	.data.FCN2_bias_array,"aw"
+ 954              		.align	2
+ 955              		.set	.LANCHOR3,. + 0
+ 958              	FCN2_bias_array:
+ 959 0000 40108201 		.word	25301056
+ 960 0004 20000000 		.word	32
+ 961 0008 00000000 		.word	0
+ 962 000c 00000000 		.word	0
+ 963              		.section	.data.FCN2_layer,"aw"
+ 964              		.align	2
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 31
+
+
+ 967              	FCN2_layer:
+ 968 0000 1527     		.short	10005
+ 969 0002 0500     		.short	5
+ 970 0004 00000000 		.word	0
+ 971 0008 00000000 		.word	g_network
+ 972 000c 00000000 		.word	FCN2_nl_layer
+ 973 0010 00000000 		.word	forward_dense
+ 974 0014 00000000 		.word	FCN2_chain
+ 975              		.section	.data.FCN2_nl_layer,"aw"
+ 976              		.align	2
+ 979              	FCN2_nl_layer:
+ 980 0000 1927     		.short	10009
+ 981 0002 0500     		.short	5
+ 982 0004 00000000 		.word	0
+ 983 0008 00000000 		.word	g_network
+ 984 000c 00000000 		.word	FCN3_layer
+ 985 0010 00000000 		.word	forward_relu
+ 986 0014 00000000 		.word	FCN2_nl_chain
+ 987 0018 00000000 		.space	4
+ 988              		.section	.data.FCN2_nl_output,"aw"
+ 989              		.align	2
+ 992              	FCN2_nl_output:
+ 993 0000 00000000 		.word	0
+ 994 0004 0000     		.short	0
+ 995 0006 00       		.byte	0
+ 996 0007 01       		.byte	1
+ 997 0008 00       		.byte	0
+ 998 0009 04       		.byte	4
+ 999 000a 00       		.byte	0
+ 1000 000b 00       		.byte	0
+ 1001 000c 00000000 		.word	__compound_literal.36
+ 1002 0010 01       		.byte	1
+ 1003 0011 04       		.byte	4
+ 1004 0012 00       		.byte	0
+ 1005 0013 00       		.byte	0
+ 1006 0014 00000000 		.word	__compound_literal.37
+ 1007 0018 00000000 		.word	FCN2_nl_output_array
+ 1008              		.section	.data.FCN2_nl_output_array,"aw"
+ 1009              		.align	2
+ 1010              		.set	.LANCHOR19,. + 0
+ 1013              	FCN2_nl_output_array:
+ 1014 0000 40108201 		.word	25301056
+ 1015 0004 20000000 		.word	32
+ 1016 0008 00000000 		.word	0
+ 1017 000c 00000000 		.word	0
+ 1018              		.section	.data.FCN2_output,"aw"
+ 1019              		.align	2
+ 1022              	FCN2_output:
+ 1023 0000 00000000 		.word	0
+ 1024 0004 0000     		.short	0
+ 1025 0006 00       		.byte	0
+ 1026 0007 01       		.byte	1
+ 1027 0008 00       		.byte	0
+ 1028 0009 04       		.byte	4
+ 1029 000a 00       		.byte	0
+ 1030 000b 00       		.byte	0
+ 1031 000c 00000000 		.word	__compound_literal.34
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 32
+
+
+ 1032 0010 01       		.byte	1
+ 1033 0011 04       		.byte	4
+ 1034 0012 00       		.byte	0
+ 1035 0013 00       		.byte	0
+ 1036 0014 00000000 		.word	__compound_literal.35
+ 1037 0018 00000000 		.word	FCN2_output_array
+ 1038              		.section	.data.FCN2_output_array,"aw"
+ 1039              		.align	2
+ 1040              		.set	.LANCHOR18,. + 0
+ 1043              	FCN2_output_array:
+ 1044 0000 40108201 		.word	25301056
+ 1045 0004 20000000 		.word	32
+ 1046 0008 00000000 		.word	0
+ 1047 000c 00000000 		.word	0
+ 1048              		.section	.data.FCN2_weights,"aw"
+ 1049              		.align	2
+ 1052              	FCN2_weights:
+ 1053 0000 00000000 		.word	0
+ 1054 0004 0000     		.short	0
+ 1055 0006 00       		.byte	0
+ 1056 0007 01       		.byte	1
+ 1057 0008 00       		.byte	0
+ 1058 0009 04       		.byte	4
+ 1059 000a 00       		.byte	0
+ 1060 000b 00       		.byte	0
+ 1061 000c 00000000 		.word	__compound_literal.6
+ 1062 0010 01       		.byte	1
+ 1063 0011 04       		.byte	4
+ 1064 0012 00       		.byte	0
+ 1065 0013 00       		.byte	0
+ 1066 0014 00000000 		.word	__compound_literal.7
+ 1067 0018 00000000 		.word	FCN2_weights_array
+ 1068              		.section	.data.FCN2_weights_array,"aw"
+ 1069              		.align	2
+ 1070              		.set	.LANCHOR4,. + 0
+ 1073              	FCN2_weights_array:
+ 1074 0000 40108201 		.word	25301056
+ 1075 0004 00040000 		.word	1024
+ 1076 0008 00000000 		.word	0
+ 1077 000c 00000000 		.word	0
+ 1078              		.section	.data.FCN3_bias,"aw"
+ 1079              		.align	2
+ 1082              	FCN3_bias:
+ 1083 0000 00000000 		.word	0
+ 1084 0004 0000     		.short	0
+ 1085 0006 00       		.byte	0
+ 1086 0007 01       		.byte	1
+ 1087 0008 00       		.byte	0
+ 1088 0009 04       		.byte	4
+ 1089 000a 00       		.byte	0
+ 1090 000b 00       		.byte	0
+ 1091 000c 00000000 		.word	__compound_literal.0
+ 1092 0010 01       		.byte	1
+ 1093 0011 04       		.byte	4
+ 1094 0012 00       		.byte	0
+ 1095 0013 00       		.byte	0
+ 1096 0014 00000000 		.word	__compound_literal.1
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 33
+
+
+ 1097 0018 00000000 		.word	FCN3_bias_array
+ 1098              		.section	.data.FCN3_bias_array,"aw"
+ 1099              		.align	2
+ 1100              		.set	.LANCHOR1,. + 0
+ 1103              	FCN3_bias_array:
+ 1104 0000 40108201 		.word	25301056
+ 1105 0004 07000000 		.word	7
+ 1106 0008 00000000 		.word	0
+ 1107 000c 00000000 		.word	0
+ 1108              		.section	.data.FCN3_layer,"aw"
+ 1109              		.align	2
+ 1112              	FCN3_layer:
+ 1113 0000 1527     		.short	10005
+ 1114 0002 0700     		.short	7
+ 1115 0004 00000000 		.word	0
+ 1116 0008 00000000 		.word	g_network
+ 1117 000c 00000000 		.word	FCN3_nl_layer
+ 1118 0010 00000000 		.word	forward_dense
+ 1119 0014 00000000 		.word	FCN3_chain
+ 1120              		.section	.data.FCN3_nl_layer,"aw"
+ 1121              		.align	2
+ 1124              	FCN3_nl_layer:
+ 1125 0000 1927     		.short	10009
+ 1126 0002 0700     		.short	7
+ 1127 0004 00000000 		.word	0
+ 1128 0008 00000000 		.word	g_network
+ 1129 000c 00000000 		.word	FCN3_nl_layer
+ 1130 0010 00000000 		.word	forward_sm
+ 1131 0014 00000000 		.word	FCN3_nl_chain
+ 1132 0018 00000000 		.space	4
+ 1133              		.section	.data.FCN3_nl_output,"aw"
+ 1134              		.align	2
+ 1137              	FCN3_nl_output:
+ 1138 0000 00000000 		.word	0
+ 1139 0004 0000     		.short	0
+ 1140 0006 00       		.byte	0
+ 1141 0007 01       		.byte	1
+ 1142 0008 00       		.byte	0
+ 1143 0009 04       		.byte	4
+ 1144 000a 00       		.byte	0
+ 1145 000b 00       		.byte	0
+ 1146 000c 00000000 		.word	__compound_literal.40
+ 1147 0010 01       		.byte	1
+ 1148 0011 04       		.byte	4
+ 1149 0012 00       		.byte	0
+ 1150 0013 00       		.byte	0
+ 1151 0014 00000000 		.word	__compound_literal.41
+ 1152 0018 00000000 		.word	FCN3_nl_output_array
+ 1153              		.section	.data.FCN3_nl_output_array,"aw"
+ 1154              		.align	2
+ 1155              		.set	.LANCHOR21,. + 0
+ 1158              	FCN3_nl_output_array:
+ 1159 0000 40108209 		.word	159518784
+ 1160 0004 07000000 		.word	7
+ 1161 0008 00000000 		.word	0
+ 1162 000c 00000000 		.word	0
+ 1163              		.section	.data.FCN3_output,"aw"
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 34
+
+
+ 1164              		.align	2
+ 1167              	FCN3_output:
+ 1168 0000 00000000 		.word	0
+ 1169 0004 0000     		.short	0
+ 1170 0006 00       		.byte	0
+ 1171 0007 01       		.byte	1
+ 1172 0008 00       		.byte	0
+ 1173 0009 04       		.byte	4
+ 1174 000a 00       		.byte	0
+ 1175 000b 00       		.byte	0
+ 1176 000c 00000000 		.word	__compound_literal.38
+ 1177 0010 01       		.byte	1
+ 1178 0011 04       		.byte	4
+ 1179 0012 00       		.byte	0
+ 1180 0013 00       		.byte	0
+ 1181 0014 00000000 		.word	__compound_literal.39
+ 1182 0018 00000000 		.word	FCN3_output_array
+ 1183              		.section	.data.FCN3_output_array,"aw"
+ 1184              		.align	2
+ 1185              		.set	.LANCHOR20,. + 0
+ 1188              	FCN3_output_array:
+ 1189 0000 40108201 		.word	25301056
+ 1190 0004 07000000 		.word	7
+ 1191 0008 00000000 		.word	0
+ 1192 000c 00000000 		.word	0
+ 1193              		.section	.data.FCN3_weights,"aw"
+ 1194              		.align	2
+ 1197              	FCN3_weights:
+ 1198 0000 00000000 		.word	0
+ 1199 0004 0000     		.short	0
+ 1200 0006 00       		.byte	0
+ 1201 0007 01       		.byte	1
+ 1202 0008 00       		.byte	0
+ 1203 0009 04       		.byte	4
+ 1204 000a 00       		.byte	0
+ 1205 000b 00       		.byte	0
+ 1206 000c 00000000 		.word	__compound_literal.2
+ 1207 0010 01       		.byte	1
+ 1208 0011 04       		.byte	4
+ 1209 0012 00       		.byte	0
+ 1210 0013 00       		.byte	0
+ 1211 0014 00000000 		.word	__compound_literal.3
+ 1212 0018 00000000 		.word	FCN3_weights_array
+ 1213              		.section	.data.FCN3_weights_array,"aw"
+ 1214              		.align	2
+ 1215              		.set	.LANCHOR2,. + 0
+ 1218              	FCN3_weights_array:
+ 1219 0000 40108201 		.word	25301056
+ 1220 0004 E0000000 		.word	224
+ 1221 0008 00000000 		.word	0
+ 1222 000c 00000000 		.word	0
+ 1223              		.section	.data.LSTM1_bias,"aw"
+ 1224              		.align	2
+ 1227              	LSTM1_bias:
+ 1228 0000 00000000 		.word	0
+ 1229 0004 0000     		.short	0
+ 1230 0006 00       		.byte	0
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 35
+
+
+ 1231 0007 01       		.byte	1
+ 1232 0008 00       		.byte	0
+ 1233 0009 04       		.byte	4
+ 1234 000a 00       		.byte	0
+ 1235 000b 00       		.byte	0
+ 1236 000c 00000000 		.word	__compound_literal.12
+ 1237 0010 01       		.byte	1
+ 1238 0011 04       		.byte	4
+ 1239 0012 00       		.byte	0
+ 1240 0013 00       		.byte	0
+ 1241 0014 00000000 		.word	__compound_literal.13
+ 1242 0018 00000000 		.word	LSTM1_bias_array
+ 1243              		.section	.data.LSTM1_bias_array,"aw"
+ 1244              		.align	2
+ 1245              		.set	.LANCHOR7,. + 0
+ 1248              	LSTM1_bias_array:
+ 1249 0000 40108201 		.word	25301056
+ 1250 0004 00010000 		.word	256
+ 1251 0008 00000000 		.word	0
+ 1252 000c 00000000 		.word	0
+ 1253              		.section	.data.LSTM1_kernel,"aw"
+ 1254              		.align	2
+ 1257              	LSTM1_kernel:
+ 1258 0000 00000000 		.word	0
+ 1259 0004 0000     		.short	0
+ 1260 0006 00       		.byte	0
+ 1261 0007 01       		.byte	1
+ 1262 0008 00       		.byte	0
+ 1263 0009 04       		.byte	4
+ 1264 000a 00       		.byte	0
+ 1265 000b 00       		.byte	0
+ 1266 000c 00000000 		.word	__compound_literal.18
+ 1267 0010 01       		.byte	1
+ 1268 0011 04       		.byte	4
+ 1269 0012 00       		.byte	0
+ 1270 0013 00       		.byte	0
+ 1271 0014 00000000 		.word	__compound_literal.19
+ 1272 0018 00000000 		.word	LSTM1_kernel_array
+ 1273              		.section	.data.LSTM1_kernel_array,"aw"
+ 1274              		.align	2
+ 1275              		.set	.LANCHOR10,. + 0
+ 1278              	LSTM1_kernel_array:
+ 1279 0000 40108201 		.word	25301056
+ 1280 0004 000C0000 		.word	3072
+ 1281 0008 00000000 		.word	0
+ 1282 000c 00000000 		.word	0
+ 1283              		.section	.data.LSTM1_layer,"aw"
+ 1284              		.align	2
+ 1287              	LSTM1_layer:
+ 1288 0000 1827     		.short	10008
+ 1289 0002 0100     		.short	1
+ 1290 0004 00000000 		.word	0
+ 1291 0008 00000000 		.word	g_network
+ 1292 000c 00000000 		.word	FCN1_layer
+ 1293 0010 00000000 		.word	forward_lstm
+ 1294 0014 00000000 		.word	LSTM1_chain
+ 1295 0018 40000000 		.word	64
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 36
+
+
+ 1296 001c 00000000 		.word	ai_math_tanh
+ 1297 0020 00000000 		.word	ai_math_sigmoid
+ 1298 0024 00000000 		.word	ai_math_tanh
+ 1299 0028 00       		.byte	0
+ 1300 0029 00       		.byte	0
+ 1301 002a 0000     		.space	2
+ 1302              		.section	.data.LSTM1_output,"aw"
+ 1303              		.align	2
+ 1306              	LSTM1_output:
+ 1307 0000 00000000 		.word	0
+ 1308 0004 0000     		.short	0
+ 1309 0006 00       		.byte	0
+ 1310 0007 01       		.byte	1
+ 1311 0008 00       		.byte	0
+ 1312 0009 04       		.byte	4
+ 1313 000a 00       		.byte	0
+ 1314 000b 00       		.byte	0
+ 1315 000c 00000000 		.word	__compound_literal.28
+ 1316 0010 01       		.byte	1
+ 1317 0011 04       		.byte	4
+ 1318 0012 00       		.byte	0
+ 1319 0013 00       		.byte	0
+ 1320 0014 00000000 		.word	__compound_literal.29
+ 1321 0018 00000000 		.word	LSTM1_output_array
+ 1322              		.section	.data.LSTM1_output_array,"aw"
+ 1323              		.align	2
+ 1324              		.set	.LANCHOR15,. + 0
+ 1327              	LSTM1_output_array:
+ 1328 0000 40108201 		.word	25301056
+ 1329 0004 40000000 		.word	64
+ 1330 0008 00000000 		.word	0
+ 1331 000c 00000000 		.word	0
+ 1332              		.section	.data.LSTM1_peephole,"aw"
+ 1333              		.align	2
+ 1336              	LSTM1_peephole:
+ 1337 0000 00000000 		.word	0
+ 1338 0004 0000     		.short	0
+ 1339 0006 00       		.byte	0
+ 1340 0007 01       		.byte	1
+ 1341 0008 00       		.byte	0
+ 1342 0009 04       		.byte	4
+ 1343 000a 00       		.byte	0
+ 1344 000b 00       		.byte	0
+ 1345 000c 00000000 		.word	__compound_literal.14
+ 1346 0010 01       		.byte	1
+ 1347 0011 04       		.byte	4
+ 1348 0012 00       		.byte	0
+ 1349 0013 00       		.byte	0
+ 1350 0014 00000000 		.word	__compound_literal.15
+ 1351 0018 00000000 		.word	LSTM1_peephole_array
+ 1352              		.section	.data.LSTM1_peephole_array,"aw"
+ 1353              		.align	2
+ 1354              		.set	.LANCHOR8,. + 0
+ 1357              	LSTM1_peephole_array:
+ 1358 0000 40108201 		.word	25301056
+ 1359 0004 C0000000 		.word	192
+ 1360 0008 00000000 		.word	0
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 37
+
+
+ 1361 000c 00000000 		.word	0
+ 1362              		.section	.data.LSTM1_recurrent,"aw"
+ 1363              		.align	2
+ 1366              	LSTM1_recurrent:
+ 1367 0000 00000000 		.word	0
+ 1368 0004 0000     		.short	0
+ 1369 0006 00       		.byte	0
+ 1370 0007 01       		.byte	1
+ 1371 0008 00       		.byte	0
+ 1372 0009 04       		.byte	4
+ 1373 000a 00       		.byte	0
+ 1374 000b 00       		.byte	0
+ 1375 000c 00000000 		.word	__compound_literal.16
+ 1376 0010 01       		.byte	1
+ 1377 0011 04       		.byte	4
+ 1378 0012 00       		.byte	0
+ 1379 0013 00       		.byte	0
+ 1380 0014 00000000 		.word	__compound_literal.17
+ 1381 0018 00000000 		.word	LSTM1_recurrent_array
+ 1382              		.section	.data.LSTM1_recurrent_array,"aw"
+ 1383              		.align	2
+ 1384              		.set	.LANCHOR9,. + 0
+ 1387              	LSTM1_recurrent_array:
+ 1388 0000 40108201 		.word	25301056
+ 1389 0004 00400000 		.word	16384
+ 1390 0008 00000000 		.word	0
+ 1391 000c 00000000 		.word	0
+ 1392              		.section	.data.__compound_literal.0,"aw"
+ 1393              		.align	2
+ 1396              	__compound_literal.0:
+ 1397 0000 01000000 		.word	1
+ 1398 0004 07000000 		.word	7
+ 1399 0008 01000000 		.word	1
+ 1400 000c 01000000 		.word	1
+ 1401              		.section	.data.__compound_literal.1,"aw"
+ 1402              		.align	2
+ 1405              	__compound_literal.1:
+ 1406 0000 04000000 		.word	4
+ 1407 0004 04000000 		.word	4
+ 1408 0008 1C000000 		.word	28
+ 1409 000c 1C000000 		.word	28
+ 1410              		.section	.data.__compound_literal.10,"aw"
+ 1411              		.align	2
+ 1414              	__compound_literal.10:
+ 1415 0000 40000000 		.word	64
+ 1416 0004 20000000 		.word	32
+ 1417 0008 01000000 		.word	1
+ 1418 000c 01000000 		.word	1
+ 1419              		.section	.data.__compound_literal.11,"aw"
+ 1420              		.align	2
+ 1423              	__compound_literal.11:
+ 1424 0000 04000000 		.word	4
+ 1425 0004 00010000 		.word	256
+ 1426 0008 00200000 		.word	8192
+ 1427 000c 00200000 		.word	8192
+ 1428              		.section	.data.__compound_literal.12,"aw"
+ 1429              		.align	2
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 38
+
+
+ 1432              	__compound_literal.12:
+ 1433 0000 01000000 		.word	1
+ 1434 0004 00010000 		.word	256
+ 1435 0008 01000000 		.word	1
+ 1436 000c 01000000 		.word	1
+ 1437              		.section	.data.__compound_literal.13,"aw"
+ 1438              		.align	2
+ 1441              	__compound_literal.13:
+ 1442 0000 04000000 		.word	4
+ 1443 0004 04000000 		.word	4
+ 1444 0008 00040000 		.word	1024
+ 1445 000c 00040000 		.word	1024
+ 1446              		.section	.data.__compound_literal.14,"aw"
+ 1447              		.align	2
+ 1450              	__compound_literal.14:
+ 1451 0000 01000000 		.word	1
+ 1452 0004 C0000000 		.word	192
+ 1453 0008 01000000 		.word	1
+ 1454 000c 01000000 		.word	1
+ 1455              		.section	.data.__compound_literal.15,"aw"
+ 1456              		.align	2
+ 1459              	__compound_literal.15:
+ 1460 0000 04000000 		.word	4
+ 1461 0004 04000000 		.word	4
+ 1462 0008 00030000 		.word	768
+ 1463 000c 00030000 		.word	768
+ 1464              		.section	.data.__compound_literal.16,"aw"
+ 1465              		.align	2
+ 1468              	__compound_literal.16:
+ 1469 0000 40000000 		.word	64
+ 1470 0004 01000000 		.word	1
+ 1471 0008 01000000 		.word	1
+ 1472 000c 00010000 		.word	256
+ 1473              		.section	.data.__compound_literal.17,"aw"
+ 1474              		.align	2
+ 1477              	__compound_literal.17:
+ 1478 0000 04000000 		.word	4
+ 1479 0004 00010000 		.word	256
+ 1480 0008 00010000 		.word	256
+ 1481 000c 00010000 		.word	256
+ 1482              		.section	.data.__compound_literal.18,"aw"
+ 1483              		.align	2
+ 1486              	__compound_literal.18:
+ 1487 0000 0C000000 		.word	12
+ 1488 0004 01000000 		.word	1
+ 1489 0008 01000000 		.word	1
+ 1490 000c 00010000 		.word	256
+ 1491              		.section	.data.__compound_literal.19,"aw"
+ 1492              		.align	2
+ 1495              	__compound_literal.19:
+ 1496 0000 04000000 		.word	4
+ 1497 0004 30000000 		.word	48
+ 1498 0008 30000000 		.word	48
+ 1499 000c 30000000 		.word	48
+ 1500              		.section	.data.__compound_literal.2,"aw"
+ 1501              		.align	2
+ 1504              	__compound_literal.2:
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 39
+
+
+ 1505 0000 20000000 		.word	32
+ 1506 0004 07000000 		.word	7
+ 1507 0008 01000000 		.word	1
+ 1508 000c 01000000 		.word	1
+ 1509              		.section	.data.__compound_literal.20,"aw"
+ 1510              		.align	2
+ 1513              	__compound_literal.20:
+ 1514 0000 01000000 		.word	1
+ 1515 0004 0C000000 		.word	12
+ 1516 0008 01000000 		.word	1
+ 1517 000c 01000000 		.word	1
+ 1518              		.section	.data.__compound_literal.21,"aw"
+ 1519              		.align	2
+ 1522              	__compound_literal.21:
+ 1523 0000 04000000 		.word	4
+ 1524 0004 04000000 		.word	4
+ 1525 0008 30000000 		.word	48
+ 1526 000c 30000000 		.word	48
+ 1527              		.section	.data.__compound_literal.22,"aw"
+ 1528              		.align	2
+ 1531              	__compound_literal.22:
+ 1532 0000 01000000 		.word	1
+ 1533 0004 0C000000 		.word	12
+ 1534 0008 01000000 		.word	1
+ 1535 000c 01000000 		.word	1
+ 1536              		.section	.data.__compound_literal.23,"aw"
+ 1537              		.align	2
+ 1540              	__compound_literal.23:
+ 1541 0000 04000000 		.word	4
+ 1542 0004 04000000 		.word	4
+ 1543 0008 30000000 		.word	48
+ 1544 000c 30000000 		.word	48
+ 1545              		.section	.data.__compound_literal.24,"aw"
+ 1546              		.align	2
+ 1549              	__compound_literal.24:
+ 1550 0000 01000000 		.word	1
+ 1551 0004 0C000000 		.word	12
+ 1552 0008 01000000 		.word	1
+ 1553 000c 1E000000 		.word	30
+ 1554              		.section	.data.__compound_literal.25,"aw"
+ 1555              		.align	2
+ 1558              	__compound_literal.25:
+ 1559 0000 04000000 		.word	4
+ 1560 0004 04000000 		.word	4
+ 1561 0008 30000000 		.word	48
+ 1562 000c 30000000 		.word	48
+ 1563              		.section	.data.__compound_literal.26,"aw"
+ 1564              		.align	2
+ 1567              	__compound_literal.26:
+ 1568 0000 01000000 		.word	1
+ 1569 0004 0C000000 		.word	12
+ 1570 0008 01000000 		.word	1
+ 1571 000c 1E000000 		.word	30
+ 1572              		.section	.data.__compound_literal.27,"aw"
+ 1573              		.align	2
+ 1576              	__compound_literal.27:
+ 1577 0000 04000000 		.word	4
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 40
+
+
+ 1578 0004 04000000 		.word	4
+ 1579 0008 30000000 		.word	48
+ 1580 000c 30000000 		.word	48
+ 1581              		.section	.data.__compound_literal.28,"aw"
+ 1582              		.align	2
+ 1585              	__compound_literal.28:
+ 1586 0000 01000000 		.word	1
+ 1587 0004 40000000 		.word	64
+ 1588 0008 01000000 		.word	1
+ 1589 000c 01000000 		.word	1
+ 1590              		.section	.data.__compound_literal.29,"aw"
+ 1591              		.align	2
+ 1594              	__compound_literal.29:
+ 1595 0000 04000000 		.word	4
+ 1596 0004 04000000 		.word	4
+ 1597 0008 00010000 		.word	256
+ 1598 000c 00010000 		.word	256
+ 1599              		.section	.data.__compound_literal.3,"aw"
+ 1600              		.align	2
+ 1603              	__compound_literal.3:
+ 1604 0000 04000000 		.word	4
+ 1605 0004 80000000 		.word	128
+ 1606 0008 80030000 		.word	896
+ 1607 000c 80030000 		.word	896
+ 1608              		.section	.data.__compound_literal.30,"aw"
+ 1609              		.align	2
+ 1612              	__compound_literal.30:
+ 1613 0000 01000000 		.word	1
+ 1614 0004 20000000 		.word	32
+ 1615 0008 01000000 		.word	1
+ 1616 000c 01000000 		.word	1
+ 1617              		.section	.data.__compound_literal.31,"aw"
+ 1618              		.align	2
+ 1621              	__compound_literal.31:
+ 1622 0000 04000000 		.word	4
+ 1623 0004 04000000 		.word	4
+ 1624 0008 80000000 		.word	128
+ 1625 000c 80000000 		.word	128
+ 1626              		.section	.data.__compound_literal.32,"aw"
+ 1627              		.align	2
+ 1630              	__compound_literal.32:
+ 1631 0000 01000000 		.word	1
+ 1632 0004 20000000 		.word	32
+ 1633 0008 01000000 		.word	1
+ 1634 000c 01000000 		.word	1
+ 1635              		.section	.data.__compound_literal.33,"aw"
+ 1636              		.align	2
+ 1639              	__compound_literal.33:
+ 1640 0000 04000000 		.word	4
+ 1641 0004 04000000 		.word	4
+ 1642 0008 80000000 		.word	128
+ 1643 000c 80000000 		.word	128
+ 1644              		.section	.data.__compound_literal.34,"aw"
+ 1645              		.align	2
+ 1648              	__compound_literal.34:
+ 1649 0000 01000000 		.word	1
+ 1650 0004 20000000 		.word	32
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 41
+
+
+ 1651 0008 01000000 		.word	1
+ 1652 000c 01000000 		.word	1
+ 1653              		.section	.data.__compound_literal.35,"aw"
+ 1654              		.align	2
+ 1657              	__compound_literal.35:
+ 1658 0000 04000000 		.word	4
+ 1659 0004 04000000 		.word	4
+ 1660 0008 80000000 		.word	128
+ 1661 000c 80000000 		.word	128
+ 1662              		.section	.data.__compound_literal.36,"aw"
+ 1663              		.align	2
+ 1666              	__compound_literal.36:
+ 1667 0000 01000000 		.word	1
+ 1668 0004 20000000 		.word	32
+ 1669 0008 01000000 		.word	1
+ 1670 000c 01000000 		.word	1
+ 1671              		.section	.data.__compound_literal.37,"aw"
+ 1672              		.align	2
+ 1675              	__compound_literal.37:
+ 1676 0000 04000000 		.word	4
+ 1677 0004 04000000 		.word	4
+ 1678 0008 80000000 		.word	128
+ 1679 000c 80000000 		.word	128
+ 1680              		.section	.data.__compound_literal.38,"aw"
+ 1681              		.align	2
+ 1684              	__compound_literal.38:
+ 1685 0000 01000000 		.word	1
+ 1686 0004 07000000 		.word	7
+ 1687 0008 01000000 		.word	1
+ 1688 000c 01000000 		.word	1
+ 1689              		.section	.data.__compound_literal.39,"aw"
+ 1690              		.align	2
+ 1693              	__compound_literal.39:
+ 1694 0000 04000000 		.word	4
+ 1695 0004 04000000 		.word	4
+ 1696 0008 1C000000 		.word	28
+ 1697 000c 1C000000 		.word	28
+ 1698              		.section	.data.__compound_literal.4,"aw"
+ 1699              		.align	2
+ 1702              	__compound_literal.4:
+ 1703 0000 01000000 		.word	1
+ 1704 0004 20000000 		.word	32
+ 1705 0008 01000000 		.word	1
+ 1706 000c 01000000 		.word	1
+ 1707              		.section	.data.__compound_literal.40,"aw"
+ 1708              		.align	2
+ 1711              	__compound_literal.40:
+ 1712 0000 01000000 		.word	1
+ 1713 0004 07000000 		.word	7
+ 1714 0008 01000000 		.word	1
+ 1715 000c 01000000 		.word	1
+ 1716              		.section	.data.__compound_literal.41,"aw"
+ 1717              		.align	2
+ 1720              	__compound_literal.41:
+ 1721 0000 04000000 		.word	4
+ 1722 0004 04000000 		.word	4
+ 1723 0008 1C000000 		.word	28
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 42
+
+
+ 1724 000c 1C000000 		.word	28
+ 1725              		.section	.data.__compound_literal.42,"aw"
+ 1726              		.align	2
+ 1729              	__compound_literal.42:
+ 1730 0000 00000000 		.word	input_0_output
+ 1731              		.section	.data.__compound_literal.43,"aw"
+ 1732              		.align	2
+ 1735              	__compound_literal.43:
+ 1736 0000 00000000 		.word	batch_normalization_1_output
+ 1737              		.section	.data.__compound_literal.44,"aw"
+ 1738              		.align	2
+ 1741              	__compound_literal.44:
+ 1742 0000 00000000 		.word	batch_normalization_1_scale
+ 1743 0004 00000000 		.word	batch_normalization_1_bias
+ 1744              		.section	.data.__compound_literal.46,"aw"
+ 1745              		.align	2
+ 1748              	__compound_literal.46:
+ 1749 0000 0100     		.short	1
+ 1750 0002 0000     		.short	0
+ 1751 0004 00000000 		.word	__compound_literal.42
+ 1752 0008 00000000 		.word	0
+ 1753 000c 0100     		.short	1
+ 1754 000e 0000     		.short	0
+ 1755 0010 00000000 		.word	__compound_literal.43
+ 1756 0014 00000000 		.word	0
+ 1757 0018 0200     		.short	2
+ 1758 001a 0000     		.short	0
+ 1759 001c 00000000 		.word	__compound_literal.44
+ 1760 0020 00000000 		.word	0
+ 1761 0024 0000     		.short	0
+ 1762 0026 0000     		.short	0
+ 1763 0028 00000000 		.word	__compound_literal.45
+ 1764 002c 00000000 		.word	0
+ 1765              		.section	.data.__compound_literal.47,"aw"
+ 1766              		.align	2
+ 1769              	__compound_literal.47:
+ 1770 0000 00000000 		.word	batch_normalization_1_output
+ 1771              		.section	.data.__compound_literal.48,"aw"
+ 1772              		.align	2
+ 1775              	__compound_literal.48:
+ 1776 0000 00000000 		.word	LSTM1_output
+ 1777              		.section	.data.__compound_literal.49,"aw"
+ 1778              		.align	2
+ 1781              	__compound_literal.49:
+ 1782 0000 00000000 		.word	LSTM1_kernel
+ 1783 0004 00000000 		.word	LSTM1_recurrent
+ 1784 0008 00000000 		.word	LSTM1_peephole
+ 1785 000c 00000000 		.word	LSTM1_bias
+ 1786              		.section	.data.__compound_literal.5,"aw"
+ 1787              		.align	2
+ 1790              	__compound_literal.5:
+ 1791 0000 04000000 		.word	4
+ 1792 0004 04000000 		.word	4
+ 1793 0008 80000000 		.word	128
+ 1794 000c 80000000 		.word	128
+ 1795              		.section	.data.__compound_literal.51,"aw"
+ 1796              		.align	2
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 43
+
+
+ 1799              	__compound_literal.51:
+ 1800 0000 0100     		.short	1
+ 1801 0002 0000     		.short	0
+ 1802 0004 00000000 		.word	__compound_literal.47
+ 1803 0008 00000000 		.word	0
+ 1804 000c 0100     		.short	1
+ 1805 000e 0000     		.short	0
+ 1806 0010 00000000 		.word	__compound_literal.48
+ 1807 0014 00000000 		.word	0
+ 1808 0018 0400     		.short	4
+ 1809 001a 0000     		.short	0
+ 1810 001c 00000000 		.word	__compound_literal.49
+ 1811 0020 00000000 		.word	0
+ 1812 0024 0000     		.short	0
+ 1813 0026 0000     		.short	0
+ 1814 0028 00000000 		.word	__compound_literal.50
+ 1815 002c 00000000 		.word	0
+ 1816              		.section	.data.__compound_literal.52,"aw"
+ 1817              		.align	2
+ 1820              	__compound_literal.52:
+ 1821 0000 00000000 		.word	LSTM1_output
+ 1822              		.section	.data.__compound_literal.53,"aw"
+ 1823              		.align	2
+ 1826              	__compound_literal.53:
+ 1827 0000 00000000 		.word	FCN1_output
+ 1828              		.section	.data.__compound_literal.54,"aw"
+ 1829              		.align	2
+ 1832              	__compound_literal.54:
+ 1833 0000 00000000 		.word	FCN1_weights
+ 1834 0004 00000000 		.word	FCN1_bias
+ 1835              		.section	.data.__compound_literal.56,"aw"
+ 1836              		.align	2
+ 1839              	__compound_literal.56:
+ 1840 0000 0100     		.short	1
+ 1841 0002 0000     		.short	0
+ 1842 0004 00000000 		.word	__compound_literal.52
+ 1843 0008 00000000 		.word	0
+ 1844 000c 0100     		.short	1
+ 1845 000e 0000     		.short	0
+ 1846 0010 00000000 		.word	__compound_literal.53
+ 1847 0014 00000000 		.word	0
+ 1848 0018 0200     		.short	2
+ 1849 001a 0000     		.short	0
+ 1850 001c 00000000 		.word	__compound_literal.54
+ 1851 0020 00000000 		.word	0
+ 1852 0024 0000     		.short	0
+ 1853 0026 0000     		.short	0
+ 1854 0028 00000000 		.word	__compound_literal.55
+ 1855 002c 00000000 		.word	0
+ 1856              		.section	.data.__compound_literal.57,"aw"
+ 1857              		.align	2
+ 1860              	__compound_literal.57:
+ 1861 0000 00000000 		.word	FCN1_output
+ 1862              		.section	.data.__compound_literal.58,"aw"
+ 1863              		.align	2
+ 1866              	__compound_literal.58:
+ 1867 0000 00000000 		.word	FCN1_nl_output
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 44
+
+
+ 1868              		.section	.data.__compound_literal.6,"aw"
+ 1869              		.align	2
+ 1872              	__compound_literal.6:
+ 1873 0000 20000000 		.word	32
+ 1874 0004 20000000 		.word	32
+ 1875 0008 01000000 		.word	1
+ 1876 000c 01000000 		.word	1
+ 1877              		.section	.data.__compound_literal.61,"aw"
+ 1878              		.align	2
+ 1881              	__compound_literal.61:
+ 1882 0000 0100     		.short	1
+ 1883 0002 0000     		.short	0
+ 1884 0004 00000000 		.word	__compound_literal.57
+ 1885 0008 00000000 		.word	0
+ 1886 000c 0100     		.short	1
+ 1887 000e 0000     		.short	0
+ 1888 0010 00000000 		.word	__compound_literal.58
+ 1889 0014 00000000 		.word	0
+ 1890 0018 0000     		.short	0
+ 1891 001a 0000     		.short	0
+ 1892 001c 00000000 		.word	__compound_literal.59
+ 1893 0020 00000000 		.word	0
+ 1894 0024 0000     		.short	0
+ 1895 0026 0000     		.short	0
+ 1896 0028 00000000 		.word	__compound_literal.60
+ 1897 002c 00000000 		.word	0
+ 1898              		.section	.data.__compound_literal.62,"aw"
+ 1899              		.align	2
+ 1902              	__compound_literal.62:
+ 1903 0000 00000000 		.word	FCN1_nl_output
+ 1904              		.section	.data.__compound_literal.63,"aw"
+ 1905              		.align	2
+ 1908              	__compound_literal.63:
+ 1909 0000 00000000 		.word	FCN2_output
+ 1910              		.section	.data.__compound_literal.64,"aw"
+ 1911              		.align	2
+ 1914              	__compound_literal.64:
+ 1915 0000 00000000 		.word	FCN2_weights
+ 1916 0004 00000000 		.word	FCN2_bias
+ 1917              		.section	.data.__compound_literal.66,"aw"
+ 1918              		.align	2
+ 1921              	__compound_literal.66:
+ 1922 0000 0100     		.short	1
+ 1923 0002 0000     		.short	0
+ 1924 0004 00000000 		.word	__compound_literal.62
+ 1925 0008 00000000 		.word	0
+ 1926 000c 0100     		.short	1
+ 1927 000e 0000     		.short	0
+ 1928 0010 00000000 		.word	__compound_literal.63
+ 1929 0014 00000000 		.word	0
+ 1930 0018 0200     		.short	2
+ 1931 001a 0000     		.short	0
+ 1932 001c 00000000 		.word	__compound_literal.64
+ 1933 0020 00000000 		.word	0
+ 1934 0024 0000     		.short	0
+ 1935 0026 0000     		.short	0
+ 1936 0028 00000000 		.word	__compound_literal.65
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 45
+
+
+ 1937 002c 00000000 		.word	0
+ 1938              		.section	.data.__compound_literal.67,"aw"
+ 1939              		.align	2
+ 1942              	__compound_literal.67:
+ 1943 0000 00000000 		.word	FCN2_output
+ 1944              		.section	.data.__compound_literal.68,"aw"
+ 1945              		.align	2
+ 1948              	__compound_literal.68:
+ 1949 0000 00000000 		.word	FCN2_nl_output
+ 1950              		.section	.data.__compound_literal.7,"aw"
+ 1951              		.align	2
+ 1954              	__compound_literal.7:
+ 1955 0000 04000000 		.word	4
+ 1956 0004 80000000 		.word	128
+ 1957 0008 00100000 		.word	4096
+ 1958 000c 00100000 		.word	4096
+ 1959              		.section	.data.__compound_literal.71,"aw"
+ 1960              		.align	2
+ 1963              	__compound_literal.71:
+ 1964 0000 0100     		.short	1
+ 1965 0002 0000     		.short	0
+ 1966 0004 00000000 		.word	__compound_literal.67
+ 1967 0008 00000000 		.word	0
+ 1968 000c 0100     		.short	1
+ 1969 000e 0000     		.short	0
+ 1970 0010 00000000 		.word	__compound_literal.68
+ 1971 0014 00000000 		.word	0
+ 1972 0018 0000     		.short	0
+ 1973 001a 0000     		.short	0
+ 1974 001c 00000000 		.word	__compound_literal.69
+ 1975 0020 00000000 		.word	0
+ 1976 0024 0000     		.short	0
+ 1977 0026 0000     		.short	0
+ 1978 0028 00000000 		.word	__compound_literal.70
+ 1979 002c 00000000 		.word	0
+ 1980              		.section	.data.__compound_literal.72,"aw"
+ 1981              		.align	2
+ 1984              	__compound_literal.72:
+ 1985 0000 00000000 		.word	FCN2_nl_output
+ 1986              		.section	.data.__compound_literal.73,"aw"
+ 1987              		.align	2
+ 1990              	__compound_literal.73:
+ 1991 0000 00000000 		.word	FCN3_output
+ 1992              		.section	.data.__compound_literal.74,"aw"
+ 1993              		.align	2
+ 1996              	__compound_literal.74:
+ 1997 0000 00000000 		.word	FCN3_weights
+ 1998 0004 00000000 		.word	FCN3_bias
+ 1999              		.section	.data.__compound_literal.76,"aw"
+ 2000              		.align	2
+ 2003              	__compound_literal.76:
+ 2004 0000 0100     		.short	1
+ 2005 0002 0000     		.short	0
+ 2006 0004 00000000 		.word	__compound_literal.72
+ 2007 0008 00000000 		.word	0
+ 2008 000c 0100     		.short	1
+ 2009 000e 0000     		.short	0
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 46
+
+
+ 2010 0010 00000000 		.word	__compound_literal.73
+ 2011 0014 00000000 		.word	0
+ 2012 0018 0200     		.short	2
+ 2013 001a 0000     		.short	0
+ 2014 001c 00000000 		.word	__compound_literal.74
+ 2015 0020 00000000 		.word	0
+ 2016 0024 0000     		.short	0
+ 2017 0026 0000     		.short	0
+ 2018 0028 00000000 		.word	__compound_literal.75
+ 2019 002c 00000000 		.word	0
+ 2020              		.section	.data.__compound_literal.77,"aw"
+ 2021              		.align	2
+ 2024              	__compound_literal.77:
+ 2025 0000 00000000 		.word	FCN3_output
+ 2026              		.section	.data.__compound_literal.78,"aw"
+ 2027              		.align	2
+ 2030              	__compound_literal.78:
+ 2031 0000 00000000 		.word	FCN3_nl_output
+ 2032              		.section	.data.__compound_literal.8,"aw"
+ 2033              		.align	2
+ 2036              	__compound_literal.8:
+ 2037 0000 01000000 		.word	1
+ 2038 0004 20000000 		.word	32
+ 2039 0008 01000000 		.word	1
+ 2040 000c 01000000 		.word	1
+ 2041              		.section	.data.__compound_literal.81,"aw"
+ 2042              		.align	2
+ 2045              	__compound_literal.81:
+ 2046 0000 0100     		.short	1
+ 2047 0002 0000     		.short	0
+ 2048 0004 00000000 		.word	__compound_literal.77
+ 2049 0008 00000000 		.word	0
+ 2050 000c 0100     		.short	1
+ 2051 000e 0000     		.short	0
+ 2052 0010 00000000 		.word	__compound_literal.78
+ 2053 0014 00000000 		.word	0
+ 2054 0018 0000     		.short	0
+ 2055 001a 0000     		.short	0
+ 2056 001c 00000000 		.word	__compound_literal.79
+ 2057 0020 00000000 		.word	0
+ 2058 0024 0000     		.short	0
+ 2059 0026 0000     		.short	0
+ 2060 0028 00000000 		.word	__compound_literal.80
+ 2061 002c 00000000 		.word	0
+ 2062              		.section	.data.__compound_literal.82,"aw"
+ 2063              		.align	2
+ 2066              	__compound_literal.82:
+ 2067 0000 00000000 		.word	input_0_output
+ 2068              		.section	.data.__compound_literal.86,"aw"
+ 2069              		.align	2
+ 2072              	__compound_literal.86:
+ 2073 0000 00000000 		.word	__compound_literal.84
+ 2074 0004 00000000 		.word	__compound_literal.83
+ 2075 0008 00000000 		.word	__compound_literal.85
+ 2076              		.section	.data.__compound_literal.87,"aw"
+ 2077              		.align	2
+ 2080              	__compound_literal.87:
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 47
+
+
+ 2081 0000 00000000 		.word	FCN3_nl_output
+ 2082              		.section	.data.__compound_literal.9,"aw"
+ 2083              		.align	2
+ 2086              	__compound_literal.9:
+ 2087 0000 04000000 		.word	4
+ 2088 0004 04000000 		.word	4
+ 2089 0008 80000000 		.word	128
+ 2090 000c 80000000 		.word	128
+ 2091              		.section	.data.__compound_literal.91,"aw"
+ 2092              		.align	2
+ 2095              	__compound_literal.91:
+ 2096 0000 00000000 		.word	__compound_literal.89
+ 2097 0004 00000000 		.word	__compound_literal.88
+ 2098 0008 00000000 		.word	__compound_literal.90
+ 2099              		.section	.data.__compound_literal.92,"aw"
+ 2100              		.align	2
+ 2103              	__compound_literal.92:
+ 2104 0000 0100     		.short	1
+ 2105 0002 0000     		.short	0
+ 2106 0004 00000000 		.word	__compound_literal.82
+ 2107 0008 00000000 		.word	__compound_literal.86
+ 2108 000c 0100     		.short	1
+ 2109 000e 0000     		.short	0
+ 2110 0010 00000000 		.word	__compound_literal.87
+ 2111 0014 00000000 		.word	__compound_literal.91
+ 2112              		.section	.data.batch_normalization_1_bias,"aw"
+ 2113              		.align	2
+ 2116              	batch_normalization_1_bias:
+ 2117 0000 00000000 		.word	0
+ 2118 0004 0000     		.short	0
+ 2119 0006 00       		.byte	0
+ 2120 0007 01       		.byte	1
+ 2121 0008 00       		.byte	0
+ 2122 0009 04       		.byte	4
+ 2123 000a 00       		.byte	0
+ 2124 000b 00       		.byte	0
+ 2125 000c 00000000 		.word	__compound_literal.20
+ 2126 0010 01       		.byte	1
+ 2127 0011 04       		.byte	4
+ 2128 0012 00       		.byte	0
+ 2129 0013 00       		.byte	0
+ 2130 0014 00000000 		.word	__compound_literal.21
+ 2131 0018 00000000 		.word	batch_normalization_1_bias_array
+ 2132              		.section	.data.batch_normalization_1_bias_array,"aw"
+ 2133              		.align	2
+ 2134              		.set	.LANCHOR11,. + 0
+ 2137              	batch_normalization_1_bias_array:
+ 2138 0000 40108201 		.word	25301056
+ 2139 0004 0C000000 		.word	12
+ 2140 0008 00000000 		.word	0
+ 2141 000c 00000000 		.word	0
+ 2142              		.section	.data.batch_normalization_1_layer,"aw"
+ 2143              		.align	2
+ 2146              	batch_normalization_1_layer:
+ 2147 0000 1227     		.short	10002
+ 2148 0002 0000     		.short	0
+ 2149 0004 00000000 		.word	0
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 48
+
+
+ 2150 0008 00000000 		.word	g_network
+ 2151 000c 00000000 		.word	LSTM1_layer
+ 2152 0010 00000000 		.word	forward_bn
+ 2153 0014 00000000 		.word	batch_normalization_1_chain
+ 2154              		.section	.data.batch_normalization_1_output,"aw"
+ 2155              		.align	2
+ 2158              	batch_normalization_1_output:
+ 2159 0000 00000000 		.word	0
+ 2160 0004 0000     		.short	0
+ 2161 0006 00       		.byte	0
+ 2162 0007 01       		.byte	1
+ 2163 0008 00       		.byte	0
+ 2164 0009 04       		.byte	4
+ 2165 000a 00       		.byte	0
+ 2166 000b 00       		.byte	0
+ 2167 000c 00000000 		.word	__compound_literal.26
+ 2168 0010 01       		.byte	1
+ 2169 0011 04       		.byte	4
+ 2170 0012 00       		.byte	0
+ 2171 0013 00       		.byte	0
+ 2172 0014 00000000 		.word	__compound_literal.27
+ 2173 0018 00000000 		.word	batch_normalization_1_output_array
+ 2174              		.section	.data.batch_normalization_1_output_array,"aw"
+ 2175              		.align	2
+ 2176              		.set	.LANCHOR14,. + 0
+ 2179              	batch_normalization_1_output_array:
+ 2180 0000 40108201 		.word	25301056
+ 2181 0004 68010000 		.word	360
+ 2182 0008 00000000 		.word	0
+ 2183 000c 00000000 		.word	0
+ 2184              		.section	.data.batch_normalization_1_scale,"aw"
+ 2185              		.align	2
+ 2188              	batch_normalization_1_scale:
+ 2189 0000 00000000 		.word	0
+ 2190 0004 0000     		.short	0
+ 2191 0006 00       		.byte	0
+ 2192 0007 01       		.byte	1
+ 2193 0008 00       		.byte	0
+ 2194 0009 04       		.byte	4
+ 2195 000a 00       		.byte	0
+ 2196 000b 00       		.byte	0
+ 2197 000c 00000000 		.word	__compound_literal.22
+ 2198 0010 01       		.byte	1
+ 2199 0011 04       		.byte	4
+ 2200 0012 00       		.byte	0
+ 2201 0013 00       		.byte	0
+ 2202 0014 00000000 		.word	__compound_literal.23
+ 2203 0018 00000000 		.word	batch_normalization_1_scale_array
+ 2204              		.section	.data.batch_normalization_1_scale_array,"aw"
+ 2205              		.align	2
+ 2206              		.set	.LANCHOR12,. + 0
+ 2209              	batch_normalization_1_scale_array:
+ 2210 0000 40108201 		.word	25301056
+ 2211 0004 0C000000 		.word	12
+ 2212 0008 00000000 		.word	0
+ 2213 000c 00000000 		.word	0
+ 2214              		.section	.data.g_network,"aw"
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 49
+
+
+ 2215              		.align	2
+ 2216              		.set	.LANCHOR0,. + 0
+ 2219              	g_network:
+ 2220 0000 00000000 		.word	0
+ 2221 0004 00000000 		.word	0
+ 2222 0008 00000000 		.word	0
+ 2223 000c 00000000 		.word	0
+ 2224 0010 00       		.byte	0
+ 2225 0011 00       		.byte	0
+ 2226 0012 00       		.byte	0
+ 2227 0013 00       		.byte	0
+ 2228 0014 0000     		.short	0
+ 2229 0016 0000     		.short	0
+ 2230 0018 40040400 		.word	263232
+ 2231 001c 0100     		.short	1
+ 2232 001e 0100     		.short	1
+ 2233 0020 0100     		.short	1
+ 2234 0022 0000     		.space	2
+ 2235 0024 FC6B0100 		.word	93180
+ 2236 0028 00000000 		.word	0
+ 2237 002c 00000000 		.word	0
+ 2238 0030 40040400 		.word	263232
+ 2239 0034 0100     		.short	1
+ 2240 0036 0100     		.short	1
+ 2241 0038 0100     		.short	1
+ 2242 003a 0000     		.space	2
+ 2243 003c A0060000 		.word	1696
+ 2244 0040 00000000 		.word	0
+ 2245 0044 00000000 		.word	0
+ 2246 0048 0200     		.short	2
+ 2247 004a 0000     		.short	0
+ 2248 004c 00000000 		.word	__compound_literal.92
+ 2249 0050 00000000 		.word	batch_normalization_1_layer
+ 2250 0054 00000000 		.word	0
+ 2251              		.section	.data.input_0_output,"aw"
+ 2252              		.align	2
+ 2255              	input_0_output:
+ 2256 0000 00000000 		.word	0
+ 2257 0004 0000     		.short	0
+ 2258 0006 00       		.byte	0
+ 2259 0007 01       		.byte	1
+ 2260 0008 00       		.byte	0
+ 2261 0009 04       		.byte	4
+ 2262 000a 00       		.byte	0
+ 2263 000b 00       		.byte	0
+ 2264 000c 00000000 		.word	__compound_literal.24
+ 2265 0010 01       		.byte	1
+ 2266 0011 04       		.byte	4
+ 2267 0012 00       		.byte	0
+ 2268 0013 00       		.byte	0
+ 2269 0014 00000000 		.word	__compound_literal.25
+ 2270 0018 00000000 		.word	input_0_output_array
+ 2271              		.section	.data.input_0_output_array,"aw"
+ 2272              		.align	2
+ 2273              		.set	.LANCHOR13,. + 0
+ 2276              	input_0_output_array:
+ 2277 0000 40108209 		.word	159518784
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 50
+
+
+ 2278 0004 68010000 		.word	360
+ 2279 0008 00000000 		.word	0
+ 2280 000c 00000000 		.word	0
+ 2281              		.section	.rodata.FCN1_chain,"a"
+ 2282              		.align	2
+ 2285              	FCN1_chain:
+ 2286 0000 0400     		.short	4
+ 2287 0002 0000     		.short	0
+ 2288 0004 00000000 		.word	__compound_literal.56
+ 2289              		.section	.rodata.FCN1_nl_chain,"a"
+ 2290              		.align	2
+ 2293              	FCN1_nl_chain:
+ 2294 0000 0400     		.short	4
+ 2295 0002 0000     		.short	0
+ 2296 0004 00000000 		.word	__compound_literal.61
+ 2297              		.section	.rodata.FCN2_chain,"a"
+ 2298              		.align	2
+ 2301              	FCN2_chain:
+ 2302 0000 0400     		.short	4
+ 2303 0002 0000     		.short	0
+ 2304 0004 00000000 		.word	__compound_literal.66
+ 2305              		.section	.rodata.FCN2_nl_chain,"a"
+ 2306              		.align	2
+ 2309              	FCN2_nl_chain:
+ 2310 0000 0400     		.short	4
+ 2311 0002 0000     		.short	0
+ 2312 0004 00000000 		.word	__compound_literal.71
+ 2313              		.section	.rodata.FCN3_chain,"a"
+ 2314              		.align	2
+ 2317              	FCN3_chain:
+ 2318 0000 0400     		.short	4
+ 2319 0002 0000     		.short	0
+ 2320 0004 00000000 		.word	__compound_literal.76
+ 2321              		.section	.rodata.FCN3_nl_chain,"a"
+ 2322              		.align	2
+ 2325              	FCN3_nl_chain:
+ 2326 0000 0400     		.short	4
+ 2327 0002 0000     		.short	0
+ 2328 0004 00000000 		.word	__compound_literal.81
+ 2329              		.section	.rodata.LSTM1_chain,"a"
+ 2330              		.align	2
+ 2333              	LSTM1_chain:
+ 2334 0000 0400     		.short	4
+ 2335 0002 0000     		.short	0
+ 2336 0004 00000000 		.word	__compound_literal.51
+ 2337              		.section	.rodata.ai_network_get_info.str1.4,"aMS",%progbits,1
+ 2338              		.align	2
+ 2339              	.LC0:
+ 2340 0000 6E657477 		.ascii	"network\000"
+ 2340      6F726B00 
+ 2341              	.LC1:
+ 2342 0008 66633866 		.ascii	"fc8f821a7f3a5c7c278e772d8331cb75\000"
+ 2342      38323161 
+ 2342      37663361 
+ 2342      35633763 
+ 2342      32373865 
+ 2343 0029 000000   		.space	3
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 51
+
+
+ 2344              	.LC2:
+ 2345 002c 53617420 		.ascii	"Sat Apr 18 17:04:59 2020\000"
+ 2345      41707220 
+ 2345      31382031 
+ 2345      373A3034 
+ 2345      3A353920 
+ 2346 0045 000000   		.space	3
+ 2347              	.LC3:
+ 2348 0048 41707220 		.ascii	"Apr 18 2020 17:05:14\000"
+ 2348      31382032 
+ 2348      30323020 
+ 2348      31373A30 
+ 2348      353A3134 
+ 2349 005d 000000   		.space	3
+ 2350              	.LC4:
+ 2351 0060 28726576 		.ascii	"(rev-5.0.0)\000"
+ 2351      2D352E30 
+ 2351      2E302900 
+ 2352              		.section	.rodata.batch_normalization_1_chain,"a"
+ 2353              		.align	2
+ 2356              	batch_normalization_1_chain:
+ 2357 0000 0400     		.short	4
+ 2358 0002 0000     		.short	0
+ 2359 0004 00000000 		.word	__compound_literal.46
+ 2360              		.text
+ 2361              	.Letext0:
+ 2362              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 2363              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 2364              		.file 4 "Middlewares/ST/AI/Inc/ai_platform.h"
+ 2365              		.file 5 "Middlewares/ST/AI/Inc/datatypes_network.h"
+ 2366              		.file 6 "Middlewares/ST/AI/Inc/core_datatypes.h"
+ 2367              		.file 7 "Middlewares/ST/AI/Inc/ai_datatypes_format.h"
+ 2368              		.file 8 "Middlewares/ST/AI/Inc/ai_platform_interface.h"
+ 2369              		.file 9 "Middlewares/ST/AI/Inc/core_common.h"
+ 2370              		.file 10 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\lib\\gcc\\arm-none-ea
+ 2371              		.file 11 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\includ
+ 2372              		.file 12 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\includ
+ 2373              		.file 13 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\includ
+ 2374              		.file 14 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\includ
+ 2375              		.file 15 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\includ
+ 2376              		.file 16 "Middlewares/ST/AI/Inc/layers_common.h"
+ 2377              		.file 17 "Middlewares/ST/AI/Inc/layers_nl.h"
+ 2378              		.file 18 "Middlewares/ST/AI/Inc/layers_conv2d.h"
+ 2379              		.file 19 "Middlewares/ST/AI/Inc/layers_norm.h"
+ 2380              		.file 20 "Middlewares/ST/AI/Inc/layers_rnn.h"
+ 2381              		.file 21 "<built-in>"
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 52
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 network.c
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:18     .text.ai_network_get_info:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:26     .text.ai_network_get_info:00000000 ai_network_get_info
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:152    .text.ai_network_get_info:00000084 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:162    .text.ai_network_get_error:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:169    .text.ai_network_get_error:00000000 ai_network_get_error
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:192    .text.ai_network_create:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:199    .text.ai_network_create:00000000 ai_network_create
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:233    .text.ai_network_create:0000001c $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:238    .text.ai_network_destroy:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:245    .text.ai_network_destroy:00000000 ai_network_destroy
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:268    .text.ai_network_init:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:275    .text.ai_network_init:00000000 ai_network_init
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:601    .text.ai_network_init:00000150 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:626    .text.ai_network_run:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:633    .text.ai_network_run:00000000 ai_network_run
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:656    .text.ai_network_forward:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:663    .text.ai_network_forward:00000000 ai_network_forward
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:687    .bss.__compound_literal.45:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:690    .bss.__compound_literal.45:00000000 __compound_literal.45
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:693    .bss.__compound_literal.50:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:696    .bss.__compound_literal.50:00000000 __compound_literal.50
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:699    .bss.__compound_literal.55:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:702    .bss.__compound_literal.55:00000000 __compound_literal.55
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:705    .bss.__compound_literal.59:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:708    .bss.__compound_literal.59:00000000 __compound_literal.59
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:711    .bss.__compound_literal.60:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:714    .bss.__compound_literal.60:00000000 __compound_literal.60
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:717    .bss.__compound_literal.65:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:720    .bss.__compound_literal.65:00000000 __compound_literal.65
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:723    .bss.__compound_literal.69:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:726    .bss.__compound_literal.69:00000000 __compound_literal.69
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:729    .bss.__compound_literal.70:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:732    .bss.__compound_literal.70:00000000 __compound_literal.70
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:735    .bss.__compound_literal.75:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:738    .bss.__compound_literal.75:00000000 __compound_literal.75
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:741    .bss.__compound_literal.79:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:744    .bss.__compound_literal.79:00000000 __compound_literal.79
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:747    .bss.__compound_literal.80:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:750    .bss.__compound_literal.80:00000000 __compound_literal.80
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:753    .bss.__compound_literal.83:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:756    .bss.__compound_literal.83:00000000 __compound_literal.83
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:759    .bss.__compound_literal.84:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:762    .bss.__compound_literal.84:00000000 __compound_literal.84
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:765    .bss.__compound_literal.85:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:768    .bss.__compound_literal.85:00000000 __compound_literal.85
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:771    .bss.__compound_literal.88:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:774    .bss.__compound_literal.88:00000000 __compound_literal.88
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:777    .bss.__compound_literal.89:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:780    .bss.__compound_literal.89:00000000 __compound_literal.89
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:783    .bss.__compound_literal.90:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:786    .bss.__compound_literal.90:00000000 __compound_literal.90
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:789    .data.FCN1_bias:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:792    .data.FCN1_bias:00000000 FCN1_bias
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2036   .data.__compound_literal.8:00000000 __compound_literal.8
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2086   .data.__compound_literal.9:00000000 __compound_literal.9
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 53
+
+
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:813    .data.FCN1_bias_array:00000000 FCN1_bias_array
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:809    .data.FCN1_bias_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:819    .data.FCN1_layer:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:822    .data.FCN1_layer:00000000 FCN1_layer
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2219   .data.g_network:00000000 g_network
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:834    .data.FCN1_nl_layer:00000000 FCN1_nl_layer
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2285   .rodata.FCN1_chain:00000000 FCN1_chain
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:831    .data.FCN1_nl_layer:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:967    .data.FCN2_layer:00000000 FCN2_layer
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2293   .rodata.FCN1_nl_chain:00000000 FCN1_nl_chain
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:844    .data.FCN1_nl_output:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:847    .data.FCN1_nl_output:00000000 FCN1_nl_output
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1630   .data.__compound_literal.32:00000000 __compound_literal.32
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1639   .data.__compound_literal.33:00000000 __compound_literal.33
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:868    .data.FCN1_nl_output_array:00000000 FCN1_nl_output_array
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:864    .data.FCN1_nl_output_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:874    .data.FCN1_output:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:877    .data.FCN1_output:00000000 FCN1_output
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1612   .data.__compound_literal.30:00000000 __compound_literal.30
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1621   .data.__compound_literal.31:00000000 __compound_literal.31
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:898    .data.FCN1_output_array:00000000 FCN1_output_array
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:894    .data.FCN1_output_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:904    .data.FCN1_weights:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:907    .data.FCN1_weights:00000000 FCN1_weights
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1414   .data.__compound_literal.10:00000000 __compound_literal.10
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1423   .data.__compound_literal.11:00000000 __compound_literal.11
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:928    .data.FCN1_weights_array:00000000 FCN1_weights_array
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:924    .data.FCN1_weights_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:934    .data.FCN2_bias:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:937    .data.FCN2_bias:00000000 FCN2_bias
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1702   .data.__compound_literal.4:00000000 __compound_literal.4
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1790   .data.__compound_literal.5:00000000 __compound_literal.5
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:958    .data.FCN2_bias_array:00000000 FCN2_bias_array
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:954    .data.FCN2_bias_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:964    .data.FCN2_layer:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:979    .data.FCN2_nl_layer:00000000 FCN2_nl_layer
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2301   .rodata.FCN2_chain:00000000 FCN2_chain
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:976    .data.FCN2_nl_layer:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1112   .data.FCN3_layer:00000000 FCN3_layer
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2309   .rodata.FCN2_nl_chain:00000000 FCN2_nl_chain
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:989    .data.FCN2_nl_output:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:992    .data.FCN2_nl_output:00000000 FCN2_nl_output
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1666   .data.__compound_literal.36:00000000 __compound_literal.36
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1675   .data.__compound_literal.37:00000000 __compound_literal.37
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1013   .data.FCN2_nl_output_array:00000000 FCN2_nl_output_array
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1009   .data.FCN2_nl_output_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1019   .data.FCN2_output:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1022   .data.FCN2_output:00000000 FCN2_output
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1648   .data.__compound_literal.34:00000000 __compound_literal.34
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1657   .data.__compound_literal.35:00000000 __compound_literal.35
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1043   .data.FCN2_output_array:00000000 FCN2_output_array
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1039   .data.FCN2_output_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1049   .data.FCN2_weights:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1052   .data.FCN2_weights:00000000 FCN2_weights
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1872   .data.__compound_literal.6:00000000 __compound_literal.6
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1954   .data.__compound_literal.7:00000000 __compound_literal.7
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1073   .data.FCN2_weights_array:00000000 FCN2_weights_array
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 54
+
+
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1069   .data.FCN2_weights_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1079   .data.FCN3_bias:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1082   .data.FCN3_bias:00000000 FCN3_bias
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1396   .data.__compound_literal.0:00000000 __compound_literal.0
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1405   .data.__compound_literal.1:00000000 __compound_literal.1
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1103   .data.FCN3_bias_array:00000000 FCN3_bias_array
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1099   .data.FCN3_bias_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1109   .data.FCN3_layer:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1124   .data.FCN3_nl_layer:00000000 FCN3_nl_layer
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2317   .rodata.FCN3_chain:00000000 FCN3_chain
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1121   .data.FCN3_nl_layer:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2325   .rodata.FCN3_nl_chain:00000000 FCN3_nl_chain
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1134   .data.FCN3_nl_output:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1137   .data.FCN3_nl_output:00000000 FCN3_nl_output
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1711   .data.__compound_literal.40:00000000 __compound_literal.40
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1720   .data.__compound_literal.41:00000000 __compound_literal.41
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1158   .data.FCN3_nl_output_array:00000000 FCN3_nl_output_array
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1154   .data.FCN3_nl_output_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1164   .data.FCN3_output:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1167   .data.FCN3_output:00000000 FCN3_output
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1684   .data.__compound_literal.38:00000000 __compound_literal.38
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1693   .data.__compound_literal.39:00000000 __compound_literal.39
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1188   .data.FCN3_output_array:00000000 FCN3_output_array
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1184   .data.FCN3_output_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1194   .data.FCN3_weights:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1197   .data.FCN3_weights:00000000 FCN3_weights
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1504   .data.__compound_literal.2:00000000 __compound_literal.2
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1603   .data.__compound_literal.3:00000000 __compound_literal.3
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1218   .data.FCN3_weights_array:00000000 FCN3_weights_array
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1214   .data.FCN3_weights_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1224   .data.LSTM1_bias:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1227   .data.LSTM1_bias:00000000 LSTM1_bias
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1432   .data.__compound_literal.12:00000000 __compound_literal.12
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1441   .data.__compound_literal.13:00000000 __compound_literal.13
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1248   .data.LSTM1_bias_array:00000000 LSTM1_bias_array
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1244   .data.LSTM1_bias_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1254   .data.LSTM1_kernel:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1257   .data.LSTM1_kernel:00000000 LSTM1_kernel
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1486   .data.__compound_literal.18:00000000 __compound_literal.18
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1495   .data.__compound_literal.19:00000000 __compound_literal.19
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1278   .data.LSTM1_kernel_array:00000000 LSTM1_kernel_array
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1274   .data.LSTM1_kernel_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1284   .data.LSTM1_layer:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1287   .data.LSTM1_layer:00000000 LSTM1_layer
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2333   .rodata.LSTM1_chain:00000000 LSTM1_chain
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1303   .data.LSTM1_output:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1306   .data.LSTM1_output:00000000 LSTM1_output
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1585   .data.__compound_literal.28:00000000 __compound_literal.28
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1594   .data.__compound_literal.29:00000000 __compound_literal.29
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1327   .data.LSTM1_output_array:00000000 LSTM1_output_array
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1323   .data.LSTM1_output_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1333   .data.LSTM1_peephole:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1336   .data.LSTM1_peephole:00000000 LSTM1_peephole
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1450   .data.__compound_literal.14:00000000 __compound_literal.14
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1459   .data.__compound_literal.15:00000000 __compound_literal.15
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1357   .data.LSTM1_peephole_array:00000000 LSTM1_peephole_array
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1353   .data.LSTM1_peephole_array:00000000 $d
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 55
+
+
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1363   .data.LSTM1_recurrent:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1366   .data.LSTM1_recurrent:00000000 LSTM1_recurrent
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1468   .data.__compound_literal.16:00000000 __compound_literal.16
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1477   .data.__compound_literal.17:00000000 __compound_literal.17
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1387   .data.LSTM1_recurrent_array:00000000 LSTM1_recurrent_array
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1383   .data.LSTM1_recurrent_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1393   .data.__compound_literal.0:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1402   .data.__compound_literal.1:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1411   .data.__compound_literal.10:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1420   .data.__compound_literal.11:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1429   .data.__compound_literal.12:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1438   .data.__compound_literal.13:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1447   .data.__compound_literal.14:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1456   .data.__compound_literal.15:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1465   .data.__compound_literal.16:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1474   .data.__compound_literal.17:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1483   .data.__compound_literal.18:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1492   .data.__compound_literal.19:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1501   .data.__compound_literal.2:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1510   .data.__compound_literal.20:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1513   .data.__compound_literal.20:00000000 __compound_literal.20
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1519   .data.__compound_literal.21:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1522   .data.__compound_literal.21:00000000 __compound_literal.21
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1528   .data.__compound_literal.22:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1531   .data.__compound_literal.22:00000000 __compound_literal.22
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1537   .data.__compound_literal.23:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1540   .data.__compound_literal.23:00000000 __compound_literal.23
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1546   .data.__compound_literal.24:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1549   .data.__compound_literal.24:00000000 __compound_literal.24
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1555   .data.__compound_literal.25:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1558   .data.__compound_literal.25:00000000 __compound_literal.25
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1564   .data.__compound_literal.26:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1567   .data.__compound_literal.26:00000000 __compound_literal.26
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1573   .data.__compound_literal.27:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1576   .data.__compound_literal.27:00000000 __compound_literal.27
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1582   .data.__compound_literal.28:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1591   .data.__compound_literal.29:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1600   .data.__compound_literal.3:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1609   .data.__compound_literal.30:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1618   .data.__compound_literal.31:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1627   .data.__compound_literal.32:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1636   .data.__compound_literal.33:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1645   .data.__compound_literal.34:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1654   .data.__compound_literal.35:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1663   .data.__compound_literal.36:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1672   .data.__compound_literal.37:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1681   .data.__compound_literal.38:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1690   .data.__compound_literal.39:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1699   .data.__compound_literal.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1708   .data.__compound_literal.40:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1717   .data.__compound_literal.41:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1726   .data.__compound_literal.42:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1729   .data.__compound_literal.42:00000000 __compound_literal.42
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2255   .data.input_0_output:00000000 input_0_output
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1732   .data.__compound_literal.43:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1735   .data.__compound_literal.43:00000000 __compound_literal.43
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2158   .data.batch_normalization_1_output:00000000 batch_normalization_1_output
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 56
+
+
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1738   .data.__compound_literal.44:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1741   .data.__compound_literal.44:00000000 __compound_literal.44
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2188   .data.batch_normalization_1_scale:00000000 batch_normalization_1_scale
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2116   .data.batch_normalization_1_bias:00000000 batch_normalization_1_bias
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1745   .data.__compound_literal.46:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1748   .data.__compound_literal.46:00000000 __compound_literal.46
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1766   .data.__compound_literal.47:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1769   .data.__compound_literal.47:00000000 __compound_literal.47
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1772   .data.__compound_literal.48:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1775   .data.__compound_literal.48:00000000 __compound_literal.48
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1778   .data.__compound_literal.49:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1781   .data.__compound_literal.49:00000000 __compound_literal.49
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1787   .data.__compound_literal.5:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1796   .data.__compound_literal.51:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1799   .data.__compound_literal.51:00000000 __compound_literal.51
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1817   .data.__compound_literal.52:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1820   .data.__compound_literal.52:00000000 __compound_literal.52
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1823   .data.__compound_literal.53:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1826   .data.__compound_literal.53:00000000 __compound_literal.53
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1829   .data.__compound_literal.54:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1832   .data.__compound_literal.54:00000000 __compound_literal.54
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1836   .data.__compound_literal.56:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1839   .data.__compound_literal.56:00000000 __compound_literal.56
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1857   .data.__compound_literal.57:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1860   .data.__compound_literal.57:00000000 __compound_literal.57
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1863   .data.__compound_literal.58:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1866   .data.__compound_literal.58:00000000 __compound_literal.58
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1869   .data.__compound_literal.6:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1878   .data.__compound_literal.61:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1881   .data.__compound_literal.61:00000000 __compound_literal.61
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1899   .data.__compound_literal.62:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1902   .data.__compound_literal.62:00000000 __compound_literal.62
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1905   .data.__compound_literal.63:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1908   .data.__compound_literal.63:00000000 __compound_literal.63
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1911   .data.__compound_literal.64:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1914   .data.__compound_literal.64:00000000 __compound_literal.64
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1918   .data.__compound_literal.66:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1921   .data.__compound_literal.66:00000000 __compound_literal.66
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1939   .data.__compound_literal.67:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1942   .data.__compound_literal.67:00000000 __compound_literal.67
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1945   .data.__compound_literal.68:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1948   .data.__compound_literal.68:00000000 __compound_literal.68
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1951   .data.__compound_literal.7:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1960   .data.__compound_literal.71:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1963   .data.__compound_literal.71:00000000 __compound_literal.71
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1981   .data.__compound_literal.72:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1984   .data.__compound_literal.72:00000000 __compound_literal.72
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1987   .data.__compound_literal.73:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1990   .data.__compound_literal.73:00000000 __compound_literal.73
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1993   .data.__compound_literal.74:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1996   .data.__compound_literal.74:00000000 __compound_literal.74
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2000   .data.__compound_literal.76:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2003   .data.__compound_literal.76:00000000 __compound_literal.76
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2021   .data.__compound_literal.77:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2024   .data.__compound_literal.77:00000000 __compound_literal.77
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2027   .data.__compound_literal.78:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2030   .data.__compound_literal.78:00000000 __compound_literal.78
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 57
+
+
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2033   .data.__compound_literal.8:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2042   .data.__compound_literal.81:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2045   .data.__compound_literal.81:00000000 __compound_literal.81
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2063   .data.__compound_literal.82:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2066   .data.__compound_literal.82:00000000 __compound_literal.82
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2069   .data.__compound_literal.86:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2072   .data.__compound_literal.86:00000000 __compound_literal.86
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2077   .data.__compound_literal.87:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2080   .data.__compound_literal.87:00000000 __compound_literal.87
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2083   .data.__compound_literal.9:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2092   .data.__compound_literal.91:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2095   .data.__compound_literal.91:00000000 __compound_literal.91
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2100   .data.__compound_literal.92:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2103   .data.__compound_literal.92:00000000 __compound_literal.92
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2113   .data.batch_normalization_1_bias:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2137   .data.batch_normalization_1_bias_array:00000000 batch_normalization_1_bias_array
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2133   .data.batch_normalization_1_bias_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2143   .data.batch_normalization_1_layer:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2146   .data.batch_normalization_1_layer:00000000 batch_normalization_1_layer
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2356   .rodata.batch_normalization_1_chain:00000000 batch_normalization_1_chain
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2155   .data.batch_normalization_1_output:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2179   .data.batch_normalization_1_output_array:00000000 batch_normalization_1_output_array
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2175   .data.batch_normalization_1_output_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2185   .data.batch_normalization_1_scale:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2209   .data.batch_normalization_1_scale_array:00000000 batch_normalization_1_scale_array
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2205   .data.batch_normalization_1_scale_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2215   .data.g_network:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2252   .data.input_0_output:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2276   .data.input_0_output_array:00000000 input_0_output_array
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2272   .data.input_0_output_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2282   .rodata.FCN1_chain:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2290   .rodata.FCN1_nl_chain:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2298   .rodata.FCN2_chain:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2306   .rodata.FCN2_nl_chain:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2314   .rodata.FCN3_chain:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2322   .rodata.FCN3_nl_chain:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2330   .rodata.LSTM1_chain:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2338   .rodata.ai_network_get_info.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2353   .rodata.batch_normalization_1_chain:00000000 $d
+
+UNDEFINED SYMBOLS
+ai_platform_context_acquire
+memset
+ai_platform_runtime_get_revision
+ai_platform_runtime_get_version
+ai_platform_api_get_version
+ai_platform_interface_api_get_version
+ai_platform_api_get_network_report
+memcpy
+ai_platform_network_get_error
+ai_platform_network_create
+ai_platform_network_destroy
+ai_platform_network_init
+ai_platform_network_process
+forward_dense
+forward_relu
+forward_sm
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 58
+
+
+forward_lstm
+ai_math_tanh
+ai_math_sigmoid
+forward_bn

@@ -1,0 +1,478 @@
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccNUIRrJ.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"pb_common.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.pb_field_iter_begin,"ax",%progbits
+  18              		.align	1
+  19              		.global	pb_field_iter_begin
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	pb_field_iter_begin:
+  27              	.LVL0:
+  28              	.LFB0:
+  29              		.file 1 "Src/pb_common.c"
+   1:Src/pb_common.c **** /* pb_common.c: Common support functions for pb_encode.c and pb_decode.c.
+   2:Src/pb_common.c ****  *
+   3:Src/pb_common.c ****  * 2014 Petteri Aimonen <jpa@kapsi.fi>
+   4:Src/pb_common.c ****  */
+   5:Src/pb_common.c **** 
+   6:Src/pb_common.c **** #include "pb_common.h"
+   7:Src/pb_common.c **** 
+   8:Src/pb_common.c **** bool pb_field_iter_begin(pb_field_iter_t *iter, const pb_field_t *fields, void *dest_struct)
+   9:Src/pb_common.c **** {
+  30              		.loc 1 9 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+  10:Src/pb_common.c ****     iter->start = fields;
+  35              		.loc 1 10 5 view .LVU1
+  36              		.loc 1 10 17 is_stmt 0 view .LVU2
+  37 0000 0160     		str	r1, [r0]
+  11:Src/pb_common.c ****     iter->pos = fields;
+  38              		.loc 1 11 5 is_stmt 1 view .LVU3
+  39              		.loc 1 11 15 is_stmt 0 view .LVU4
+  40 0002 4160     		str	r1, [r0, #4]
+  12:Src/pb_common.c ****     iter->required_field_index = 0;
+  41              		.loc 1 12 5 is_stmt 1 view .LVU5
+  42              		.loc 1 12 32 is_stmt 0 view .LVU6
+  43 0004 0023     		movs	r3, #0
+  44 0006 8360     		str	r3, [r0, #8]
+  13:Src/pb_common.c ****     iter->dest_struct = dest_struct;
+  45              		.loc 1 13 5 is_stmt 1 view .LVU7
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccNUIRrJ.s 			page 2
+
+
+  46              		.loc 1 13 23 is_stmt 0 view .LVU8
+  47 0008 C260     		str	r2, [r0, #12]
+  14:Src/pb_common.c ****     iter->pData = (char*)dest_struct + iter->pos->data_offset;
+  48              		.loc 1 14 5 is_stmt 1 view .LVU9
+  49              		.loc 1 14 49 is_stmt 0 view .LVU10
+  50 000a B1F80330 		ldrh	r3, [r1, #3]	@ unaligned
+  51              		.loc 1 14 38 view .LVU11
+  52 000e 1A44     		add	r2, r2, r3
+  53              	.LVL1:
+  54              		.loc 1 14 17 view .LVU12
+  55 0010 0261     		str	r2, [r0, #16]
+  15:Src/pb_common.c ****     iter->pSize = (char*)iter->pData + iter->pos->size_offset;
+  56              		.loc 1 15 5 is_stmt 1 view .LVU13
+  57              		.loc 1 15 49 is_stmt 0 view .LVU14
+  58 0012 B1F90530 		ldrsh	r3, [r1, #5]	@ unaligned
+  59              		.loc 1 15 38 view .LVU15
+  60 0016 1A44     		add	r2, r2, r3
+  61              		.loc 1 15 17 view .LVU16
+  62 0018 4261     		str	r2, [r0, #20]
+  16:Src/pb_common.c ****     
+  17:Src/pb_common.c ****     return (iter->pos->tag != 0);
+  63              		.loc 1 17 5 is_stmt 1 view .LVU17
+  64              		.loc 1 17 22 is_stmt 0 view .LVU18
+  65 001a 0888     		ldrh	r0, [r1]	@ unaligned
+  66              	.LVL2:
+  18:Src/pb_common.c **** }
+  67              		.loc 1 18 1 view .LVU19
+  68 001c 0030     		adds	r0, r0, #0
+  69 001e 18BF     		it	ne
+  70 0020 0120     		movne	r0, #1
+  71 0022 7047     		bx	lr
+  72              		.cfi_endproc
+  73              	.LFE0:
+  75              		.section	.text.pb_field_iter_next,"ax",%progbits
+  76              		.align	1
+  77              		.global	pb_field_iter_next
+  78              		.syntax unified
+  79              		.thumb
+  80              		.thumb_func
+  81              		.fpu fpv4-sp-d16
+  83              	pb_field_iter_next:
+  84              	.LVL3:
+  85              	.LFB1:
+  19:Src/pb_common.c **** 
+  20:Src/pb_common.c **** bool pb_field_iter_next(pb_field_iter_t *iter)
+  21:Src/pb_common.c **** {
+  86              		.loc 1 21 1 is_stmt 1 view -0
+  87              		.cfi_startproc
+  88              		@ args = 0, pretend = 0, frame = 0
+  89              		@ frame_needed = 0, uses_anonymous_args = 0
+  90              		.loc 1 21 1 is_stmt 0 view .LVU21
+  91 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  92              	.LCFI0:
+  93              		.cfi_def_cfa_offset 24
+  94              		.cfi_offset 3, -24
+  95              		.cfi_offset 4, -20
+  96              		.cfi_offset 5, -16
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccNUIRrJ.s 			page 3
+
+
+  97              		.cfi_offset 6, -12
+  98              		.cfi_offset 7, -8
+  99              		.cfi_offset 14, -4
+  22:Src/pb_common.c ****     const pb_field_t *prev_field = iter->pos;
+ 100              		.loc 1 22 5 is_stmt 1 view .LVU22
+ 101              		.loc 1 22 23 is_stmt 0 view .LVU23
+ 102 0002 4368     		ldr	r3, [r0, #4]
+ 103              	.LVL4:
+  23:Src/pb_common.c **** 
+  24:Src/pb_common.c ****     if (prev_field->tag == 0)
+ 104              		.loc 1 24 5 is_stmt 1 view .LVU24
+ 105              		.loc 1 24 19 is_stmt 0 view .LVU25
+ 106 0004 1A88     		ldrh	r2, [r3]	@ unaligned
+ 107              		.loc 1 24 8 view .LVU26
+ 108 0006 002A     		cmp	r2, #0
+ 109 0008 3BD0     		beq	.L9
+  25:Src/pb_common.c ****     {
+  26:Src/pb_common.c ****         /* Handle empty message types, where the first field is already the terminator.
+  27:Src/pb_common.c ****          * In other cases, the iter->pos never points to the terminator. */
+  28:Src/pb_common.c ****         return false;
+  29:Src/pb_common.c ****     }
+  30:Src/pb_common.c ****     
+  31:Src/pb_common.c ****     iter->pos++;
+ 110              		.loc 1 31 5 is_stmt 1 view .LVU27
+ 111              		.loc 1 31 14 is_stmt 0 view .LVU28
+ 112 000a 03F10F02 		add	r2, r3, #15
+ 113 000e 4260     		str	r2, [r0, #4]
+  32:Src/pb_common.c ****     
+  33:Src/pb_common.c ****     if (iter->pos->tag == 0)
+ 114              		.loc 1 33 5 is_stmt 1 view .LVU29
+ 115              		.loc 1 33 18 is_stmt 0 view .LVU30
+ 116 0010 1188     		ldrh	r1, [r2]	@ unaligned
+ 117              		.loc 1 33 8 view .LVU31
+ 118 0012 49B3     		cbz	r1, .L13
+ 119              	.LBB2:
+  34:Src/pb_common.c ****     {
+  35:Src/pb_common.c ****         /* Wrapped back to beginning, reinitialize */
+  36:Src/pb_common.c ****         (void)pb_field_iter_begin(iter, iter->start, iter->dest_struct);
+  37:Src/pb_common.c ****         return false;
+  38:Src/pb_common.c ****     }
+  39:Src/pb_common.c ****     else
+  40:Src/pb_common.c ****     {
+  41:Src/pb_common.c ****         /* Increment the pointers based on previous field size */
+  42:Src/pb_common.c ****         size_t prev_size = prev_field->data_size;
+ 120              		.loc 1 42 9 is_stmt 1 view .LVU32
+ 121              		.loc 1 42 38 is_stmt 0 view .LVU33
+ 122 0014 B3F80750 		ldrh	r5, [r3, #7]	@ unaligned
+ 123              	.LVL5:
+  43:Src/pb_common.c ****     
+  44:Src/pb_common.c ****         if (PB_HTYPE(prev_field->type) == PB_HTYPE_ONEOF &&
+ 124              		.loc 1 44 9 is_stmt 1 view .LVU34
+ 125              		.loc 1 44 13 is_stmt 0 view .LVU35
+ 126 0018 9978     		ldrb	r1, [r3, #2]	@ zero_extendqisi2
+ 127 001a 01F03004 		and	r4, r1, #48
+ 128              		.loc 1 44 12 view .LVU36
+ 129 001e 302C     		cmp	r4, #48
+ 130 0020 0AD1     		bne	.L5
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccNUIRrJ.s 			page 4
+
+
+  45:Src/pb_common.c ****             PB_HTYPE(iter->pos->type) == PB_HTYPE_ONEOF &&
+ 131              		.loc 1 45 13 discriminator 1 view .LVU37
+ 132 0022 9678     		ldrb	r6, [r2, #2]	@ zero_extendqisi2
+  44:Src/pb_common.c ****             PB_HTYPE(iter->pos->type) == PB_HTYPE_ONEOF &&
+ 133              		.loc 1 44 58 discriminator 1 view .LVU38
+ 134 0024 06F03006 		and	r6, r6, #48
+ 135 0028 302E     		cmp	r6, #48
+ 136 002a 05D1     		bne	.L5
+  46:Src/pb_common.c ****             iter->pos->data_offset == PB_SIZE_MAX)
+ 137              		.loc 1 46 22 view .LVU39
+ 138 002c B2F80370 		ldrh	r7, [r2, #3]	@ unaligned
+  45:Src/pb_common.c ****             PB_HTYPE(iter->pos->type) == PB_HTYPE_ONEOF &&
+ 139              		.loc 1 45 57 view .LVU40
+ 140 0030 4FF6FF76 		movw	r6, #65535
+ 141 0034 B742     		cmp	r7, r6
+ 142 0036 26D0     		beq	.L10
+ 143              	.L5:
+  47:Src/pb_common.c ****         {
+  48:Src/pb_common.c ****             /* Don't advance pointers inside unions */
+  49:Src/pb_common.c ****             return true;
+  50:Src/pb_common.c ****         }
+  51:Src/pb_common.c ****         else if (PB_ATYPE(prev_field->type) == PB_ATYPE_STATIC &&
+ 144              		.loc 1 51 14 is_stmt 1 view .LVU41
+ 145              		.loc 1 51 17 is_stmt 0 view .LVU42
+ 146 0038 01F0F006 		and	r6, r1, #240
+ 147 003c 202E     		cmp	r6, #32
+ 148 003e 19D0     		beq	.L14
+  52:Src/pb_common.c ****                  PB_HTYPE(prev_field->type) == PB_HTYPE_REPEATED)
+  53:Src/pb_common.c ****         {
+  54:Src/pb_common.c ****             /* In static arrays, the data_size tells the size of a single entry and
+  55:Src/pb_common.c ****              * array_size is the number of entries */
+  56:Src/pb_common.c ****             prev_size *= prev_field->array_size;
+  57:Src/pb_common.c ****         }
+  58:Src/pb_common.c ****         else if (PB_ATYPE(prev_field->type) == PB_ATYPE_POINTER)
+ 149              		.loc 1 58 14 is_stmt 1 view .LVU43
+ 150              		.loc 1 58 17 is_stmt 0 view .LVU44
+ 151 0040 01F0C001 		and	r1, r1, #192
+ 152 0044 8029     		cmp	r1, #128
+ 153 0046 1AD0     		beq	.L15
+ 154              	.LVL6:
+ 155              	.L7:
+  59:Src/pb_common.c ****         {
+  60:Src/pb_common.c ****             /* Pointer fields always have a constant size in the main structure.
+  61:Src/pb_common.c ****              * The data_size only applies to the dynamically allocated area. */
+  62:Src/pb_common.c ****             prev_size = sizeof(void*);
+  63:Src/pb_common.c ****         }
+  64:Src/pb_common.c **** 
+  65:Src/pb_common.c ****         if (PB_HTYPE(prev_field->type) == PB_HTYPE_REQUIRED)
+ 156              		.loc 1 65 9 is_stmt 1 view .LVU45
+ 157              		.loc 1 65 12 is_stmt 0 view .LVU46
+ 158 0048 14B9     		cbnz	r4, .L8
+  66:Src/pb_common.c ****         {
+  67:Src/pb_common.c ****             /* Count the required fields, in order to check their presence in the
+  68:Src/pb_common.c ****              * decoder. */
+  69:Src/pb_common.c ****             iter->required_field_index++;
+ 159              		.loc 1 69 13 is_stmt 1 view .LVU47
+ 160              		.loc 1 69 17 is_stmt 0 view .LVU48
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccNUIRrJ.s 			page 5
+
+
+ 161 004a 8368     		ldr	r3, [r0, #8]
+ 162              		.loc 1 69 39 view .LVU49
+ 163 004c 0133     		adds	r3, r3, #1
+ 164 004e 8360     		str	r3, [r0, #8]
+ 165              	.L8:
+  70:Src/pb_common.c ****         }
+  71:Src/pb_common.c ****     
+  72:Src/pb_common.c ****         iter->pData = (char*)iter->pData + prev_size + iter->pos->data_offset;
+ 166              		.loc 1 72 9 is_stmt 1 view .LVU50
+ 167              		.loc 1 72 34 is_stmt 0 view .LVU51
+ 168 0050 0369     		ldr	r3, [r0, #16]
+ 169              		.loc 1 72 65 view .LVU52
+ 170 0052 B2F80310 		ldrh	r1, [r2, #3]	@ unaligned
+ 171              		.loc 1 72 54 view .LVU53
+ 172 0056 2944     		add	r1, r1, r5
+ 173 0058 0B44     		add	r3, r3, r1
+ 174              		.loc 1 72 21 view .LVU54
+ 175 005a 0361     		str	r3, [r0, #16]
+  73:Src/pb_common.c ****         iter->pSize = (char*)iter->pData + iter->pos->size_offset;
+ 176              		.loc 1 73 9 is_stmt 1 view .LVU55
+ 177              		.loc 1 73 53 is_stmt 0 view .LVU56
+ 178 005c B2F90520 		ldrsh	r2, [r2, #5]	@ unaligned
+ 179              	.LVL7:
+ 180              		.loc 1 73 42 view .LVU57
+ 181 0060 1344     		add	r3, r3, r2
+ 182              		.loc 1 73 21 view .LVU58
+ 183 0062 4361     		str	r3, [r0, #20]
+  74:Src/pb_common.c ****         return true;
+ 184              		.loc 1 74 9 is_stmt 1 view .LVU59
+ 185              		.loc 1 74 16 is_stmt 0 view .LVU60
+ 186 0064 0120     		movs	r0, #1
+ 187              	.LVL8:
+ 188              	.L3:
+ 189              		.loc 1 74 16 view .LVU61
+ 190              	.LBE2:
+  75:Src/pb_common.c ****     }
+  76:Src/pb_common.c **** }
+ 191              		.loc 1 76 1 view .LVU62
+ 192 0066 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 193              	.LVL9:
+ 194              	.L13:
+  36:Src/pb_common.c ****         return false;
+ 195              		.loc 1 36 9 is_stmt 1 view .LVU63
+  36:Src/pb_common.c ****         return false;
+ 196              		.loc 1 36 15 is_stmt 0 view .LVU64
+ 197 0068 C268     		ldr	r2, [r0, #12]
+ 198 006a 0168     		ldr	r1, [r0]
+ 199 006c FFF7FEFF 		bl	pb_field_iter_begin
+ 200              	.LVL10:
+  37:Src/pb_common.c ****     }
+ 201              		.loc 1 37 9 is_stmt 1 view .LVU65
+  37:Src/pb_common.c ****     }
+ 202              		.loc 1 37 16 is_stmt 0 view .LVU66
+ 203 0070 0020     		movs	r0, #0
+ 204 0072 F8E7     		b	.L3
+ 205              	.LVL11:
+ 206              	.L14:
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccNUIRrJ.s 			page 6
+
+
+ 207              	.LBB3:
+  56:Src/pb_common.c ****         }
+ 208              		.loc 1 56 13 is_stmt 1 view .LVU67
+  56:Src/pb_common.c ****         }
+ 209              		.loc 1 56 36 is_stmt 0 view .LVU68
+ 210 0074 B3F80930 		ldrh	r3, [r3, #9]	@ unaligned
+ 211              	.LVL12:
+  56:Src/pb_common.c ****         }
+ 212              		.loc 1 56 23 view .LVU69
+ 213 0078 03FB05F5 		mul	r5, r3, r5
+ 214              	.LVL13:
+  56:Src/pb_common.c ****         }
+ 215              		.loc 1 56 23 view .LVU70
+ 216 007c E4E7     		b	.L7
+ 217              	.LVL14:
+ 218              	.L15:
+  62:Src/pb_common.c ****         }
+ 219              		.loc 1 62 23 view .LVU71
+ 220 007e 0425     		movs	r5, #4
+ 221              	.LVL15:
+  62:Src/pb_common.c ****         }
+ 222              		.loc 1 62 23 view .LVU72
+ 223 0080 E2E7     		b	.L7
+ 224              	.LVL16:
+ 225              	.L9:
+  62:Src/pb_common.c ****         }
+ 226              		.loc 1 62 23 view .LVU73
+ 227              	.LBE3:
+  28:Src/pb_common.c ****     }
+ 228              		.loc 1 28 16 view .LVU74
+ 229 0082 0020     		movs	r0, #0
+ 230              	.LVL17:
+  28:Src/pb_common.c ****     }
+ 231              		.loc 1 28 16 view .LVU75
+ 232 0084 EFE7     		b	.L3
+ 233              	.LVL18:
+ 234              	.L10:
+ 235              	.LBB4:
+  49:Src/pb_common.c ****         }
+ 236              		.loc 1 49 20 view .LVU76
+ 237 0086 0120     		movs	r0, #1
+ 238              	.LVL19:
+  49:Src/pb_common.c ****         }
+ 239              		.loc 1 49 20 view .LVU77
+ 240 0088 EDE7     		b	.L3
+ 241              	.LBE4:
+ 242              		.cfi_endproc
+ 243              	.LFE1:
+ 245              		.section	.text.pb_field_iter_find,"ax",%progbits
+ 246              		.align	1
+ 247              		.global	pb_field_iter_find
+ 248              		.syntax unified
+ 249              		.thumb
+ 250              		.thumb_func
+ 251              		.fpu fpv4-sp-d16
+ 253              	pb_field_iter_find:
+ 254              	.LVL20:
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccNUIRrJ.s 			page 7
+
+
+ 255              	.LFB2:
+  77:Src/pb_common.c **** 
+  78:Src/pb_common.c **** bool pb_field_iter_find(pb_field_iter_t *iter, uint32_t tag)
+  79:Src/pb_common.c **** {
+ 256              		.loc 1 79 1 is_stmt 1 view -0
+ 257              		.cfi_startproc
+ 258              		@ args = 0, pretend = 0, frame = 0
+ 259              		@ frame_needed = 0, uses_anonymous_args = 0
+ 260              		.loc 1 79 1 is_stmt 0 view .LVU79
+ 261 0000 70B5     		push	{r4, r5, r6, lr}
+ 262              	.LCFI1:
+ 263              		.cfi_def_cfa_offset 16
+ 264              		.cfi_offset 4, -16
+ 265              		.cfi_offset 5, -12
+ 266              		.cfi_offset 6, -8
+ 267              		.cfi_offset 14, -4
+ 268 0002 0446     		mov	r4, r0
+ 269 0004 0D46     		mov	r5, r1
+  80:Src/pb_common.c ****     const pb_field_t *start = iter->pos;
+ 270              		.loc 1 80 5 is_stmt 1 view .LVU80
+ 271              		.loc 1 80 23 is_stmt 0 view .LVU81
+ 272 0006 4668     		ldr	r6, [r0, #4]
+ 273              	.LVL21:
+ 274              		.loc 1 80 23 view .LVU82
+ 275 0008 05E0     		b	.L19
+ 276              	.LVL22:
+ 277              	.L17:
+  81:Src/pb_common.c ****     
+  82:Src/pb_common.c ****     do {
+  83:Src/pb_common.c ****         if (iter->pos->tag == tag &&
+  84:Src/pb_common.c ****             PB_LTYPE(iter->pos->type) != PB_LTYPE_EXTENSION)
+  85:Src/pb_common.c ****         {
+  86:Src/pb_common.c ****             /* Found the wanted field */
+  87:Src/pb_common.c ****             return true;
+  88:Src/pb_common.c ****         }
+  89:Src/pb_common.c ****         
+  90:Src/pb_common.c ****         (void)pb_field_iter_next(iter);
+ 278              		.loc 1 90 9 is_stmt 1 view .LVU83
+ 279              		.loc 1 90 15 is_stmt 0 view .LVU84
+ 280 000a 2046     		mov	r0, r4
+ 281 000c FFF7FEFF 		bl	pb_field_iter_next
+ 282              	.LVL23:
+  91:Src/pb_common.c ****     } while (iter->pos != start);
+ 283              		.loc 1 91 18 view .LVU85
+ 284 0010 6368     		ldr	r3, [r4, #4]
+ 285              		.loc 1 91 5 view .LVU86
+ 286 0012 B342     		cmp	r3, r6
+ 287 0014 0AD0     		beq	.L22
+ 288              	.L19:
+  82:Src/pb_common.c ****         if (iter->pos->tag == tag &&
+ 289              		.loc 1 82 5 is_stmt 1 view .LVU87
+  83:Src/pb_common.c ****             PB_LTYPE(iter->pos->type) != PB_LTYPE_EXTENSION)
+ 290              		.loc 1 83 9 view .LVU88
+  83:Src/pb_common.c ****             PB_LTYPE(iter->pos->type) != PB_LTYPE_EXTENSION)
+ 291              		.loc 1 83 17 is_stmt 0 view .LVU89
+ 292 0016 6368     		ldr	r3, [r4, #4]
+  83:Src/pb_common.c ****             PB_LTYPE(iter->pos->type) != PB_LTYPE_EXTENSION)
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccNUIRrJ.s 			page 8
+
+
+ 293              		.loc 1 83 22 view .LVU90
+ 294 0018 1A88     		ldrh	r2, [r3]	@ unaligned
+  83:Src/pb_common.c ****             PB_LTYPE(iter->pos->type) != PB_LTYPE_EXTENSION)
+ 295              		.loc 1 83 12 view .LVU91
+ 296 001a AA42     		cmp	r2, r5
+ 297 001c F5D1     		bne	.L17
+  84:Src/pb_common.c ****         {
+ 298              		.loc 1 84 13 discriminator 1 view .LVU92
+ 299 001e 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+  83:Src/pb_common.c ****             PB_LTYPE(iter->pos->type) != PB_LTYPE_EXTENSION)
+ 300              		.loc 1 83 35 discriminator 1 view .LVU93
+ 301 0020 03F00F03 		and	r3, r3, #15
+ 302 0024 082B     		cmp	r3, #8
+ 303 0026 F0D0     		beq	.L17
+  87:Src/pb_common.c ****         }
+ 304              		.loc 1 87 20 view .LVU94
+ 305 0028 0120     		movs	r0, #1
+ 306 002a 00E0     		b	.L18
+ 307              	.L22:
+  92:Src/pb_common.c ****     
+  93:Src/pb_common.c ****     /* Searched all the way back to start, and found nothing. */
+  94:Src/pb_common.c ****     return false;
+ 308              		.loc 1 94 12 view .LVU95
+ 309 002c 0020     		movs	r0, #0
+ 310              	.L18:
+  95:Src/pb_common.c **** }
+ 311              		.loc 1 95 1 view .LVU96
+ 312 002e 70BD     		pop	{r4, r5, r6, pc}
+ 313              		.loc 1 95 1 view .LVU97
+ 314              		.cfi_endproc
+ 315              	.LFE2:
+ 317              		.text
+ 318              	.Letext0:
+ 319              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 320              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 321              		.file 4 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 322              		.file 5 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\lib\\gcc\\arm-none-eab
+ 323              		.file 6 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 324              		.file 7 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 325              		.file 8 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 326              		.file 9 "Inc/pb.h"
+ 327              		.file 10 "Inc/pb_common.h"
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccNUIRrJ.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 pb_common.c
+C:\Users\grgcz\AppData\Local\Temp\ccNUIRrJ.s:18     .text.pb_field_iter_begin:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccNUIRrJ.s:26     .text.pb_field_iter_begin:00000000 pb_field_iter_begin
+C:\Users\grgcz\AppData\Local\Temp\ccNUIRrJ.s:76     .text.pb_field_iter_next:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccNUIRrJ.s:83     .text.pb_field_iter_next:00000000 pb_field_iter_next
+C:\Users\grgcz\AppData\Local\Temp\ccNUIRrJ.s:246    .text.pb_field_iter_find:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccNUIRrJ.s:253    .text.pb_field_iter_find:00000000 pb_field_iter_find
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,2616 @@
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"app_x-cube-ai.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.MX_X_CUBE_AI_Init,"ax",%progbits
+  18              		.align	1
+  19              		.global	MX_X_CUBE_AI_Init
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	MX_X_CUBE_AI_Init:
+  27              	.LFB130:
+  28              		.file 1 "Src/app_x-cube-ai.c"
+   1:Src/app_x-cube-ai.c **** 
+   2:Src/app_x-cube-ai.c **** #ifdef __cplusplus
+   3:Src/app_x-cube-ai.c ****  extern "C" {
+   4:Src/app_x-cube-ai.c **** #endif
+   5:Src/app_x-cube-ai.c **** /**
+   6:Src/app_x-cube-ai.c ****   ******************************************************************************
+   7:Src/app_x-cube-ai.c ****   * @file           : app_x-cube-ai.c
+   8:Src/app_x-cube-ai.c ****   * @brief          : AI program body
+   9:Src/app_x-cube-ai.c ****   ******************************************************************************
+  10:Src/app_x-cube-ai.c ****   * This notice applies to any and all portions of this file
+  11:Src/app_x-cube-ai.c ****   * that are not between comment pairs USER CODE BEGIN and
+  12:Src/app_x-cube-ai.c ****   * USER CODE END. Other portions of this file, whether
+  13:Src/app_x-cube-ai.c ****   * inserted by the user or by software development tools
+  14:Src/app_x-cube-ai.c ****   * are owned by their respective copyright owners.
+  15:Src/app_x-cube-ai.c ****   *
+  16:Src/app_x-cube-ai.c ****   * Copyright (c) 2018 STMicroelectronics International N.V.
+  17:Src/app_x-cube-ai.c ****   * All rights reserved.
+  18:Src/app_x-cube-ai.c ****   *
+  19:Src/app_x-cube-ai.c ****   * Redistribution and use in source and binary forms, with or without
+  20:Src/app_x-cube-ai.c ****   * modification, are permitted, provided that the following conditions are met:
+  21:Src/app_x-cube-ai.c ****   *
+  22:Src/app_x-cube-ai.c ****   * 1. Redistribution of source code must retain the above copyright notice,
+  23:Src/app_x-cube-ai.c ****   *    this list of conditions and the following disclaimer.
+  24:Src/app_x-cube-ai.c ****   * 2. Redistributions in binary form must reproduce the above copyright notice,
+  25:Src/app_x-cube-ai.c ****   *    this list of conditions and the following disclaimer in the documentation
+  26:Src/app_x-cube-ai.c ****   *    and/or other materials provided with the distribution.
+  27:Src/app_x-cube-ai.c ****   * 3. Neither the name of STMicroelectronics nor the names of other
+  28:Src/app_x-cube-ai.c ****   *    contributors to this software may be used to endorse or promote products
+  29:Src/app_x-cube-ai.c ****   *    derived from this software without specific written permission.
+  30:Src/app_x-cube-ai.c ****   * 4. This software, including modifications and/or derivative works of this
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 2
+
+
+  31:Src/app_x-cube-ai.c ****   *    software, must execute solely and exclusively on microcontroller or
+  32:Src/app_x-cube-ai.c ****   *    microprocessor devices manufactured by or for STMicroelectronics.
+  33:Src/app_x-cube-ai.c ****   * 5. Redistribution and use of this software other than as permitted under
+  34:Src/app_x-cube-ai.c ****   *    this license is void and will automatically terminate your rights under
+  35:Src/app_x-cube-ai.c ****   *    this license.
+  36:Src/app_x-cube-ai.c ****   *
+  37:Src/app_x-cube-ai.c ****   * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
+  38:Src/app_x-cube-ai.c ****   * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
+  39:Src/app_x-cube-ai.c ****   * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  40:Src/app_x-cube-ai.c ****   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
+  41:Src/app_x-cube-ai.c ****   * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  42:Src/app_x-cube-ai.c ****   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+  43:Src/app_x-cube-ai.c ****   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  44:Src/app_x-cube-ai.c ****   * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+  45:Src/app_x-cube-ai.c ****   * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+  46:Src/app_x-cube-ai.c ****   * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  47:Src/app_x-cube-ai.c ****   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+  48:Src/app_x-cube-ai.c ****   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  49:Src/app_x-cube-ai.c ****   *
+  50:Src/app_x-cube-ai.c ****   ******************************************************************************
+  51:Src/app_x-cube-ai.c ****   */
+  52:Src/app_x-cube-ai.c **** /* Includes ------------------------------------------------------------------*/
+  53:Src/app_x-cube-ai.c **** #include <string.h>
+  54:Src/app_x-cube-ai.c **** #include "app_x-cube-ai.h"
+  55:Src/app_x-cube-ai.c **** #include "bsp_ai.h"
+  56:Src/app_x-cube-ai.c **** #include "aiValidation.h"
+  57:Src/app_x-cube-ai.c **** #include "ai_datatypes_defines.h"
+  58:Src/app_x-cube-ai.c **** 
+  59:Src/app_x-cube-ai.c **** /* USER CODE BEGIN includes */
+  60:Src/app_x-cube-ai.c **** /* USER CODE END includes */
+  61:Src/app_x-cube-ai.c **** 
+  62:Src/app_x-cube-ai.c **** /*************************************************************************
+  63:Src/app_x-cube-ai.c ****   *
+  64:Src/app_x-cube-ai.c ****   */
+  65:Src/app_x-cube-ai.c **** void MX_X_CUBE_AI_Init(void)
+  66:Src/app_x-cube-ai.c **** {
+  29              		.loc 1 66 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 08B5     		push	{r3, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 3, -8
+  37              		.cfi_offset 14, -4
+  67:Src/app_x-cube-ai.c ****     MX_UARTx_Init();
+  38              		.loc 1 67 5 view .LVU1
+  39 0002 FFF7FEFF 		bl	MX_USART2_UART_Init
+  40              	.LVL0:
+  68:Src/app_x-cube-ai.c ****     aiValidationInit();
+  41              		.loc 1 68 5 view .LVU2
+  42 0006 FFF7FEFF 		bl	aiValidationInit
+  43              	.LVL1:
+  69:Src/app_x-cube-ai.c ****     /* USER CODE BEGIN 0 */
+  70:Src/app_x-cube-ai.c ****     /* USER CODE END 0 */
+  71:Src/app_x-cube-ai.c **** }
+  44              		.loc 1 71 1 is_stmt 0 view .LVU3
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 3
+
+
+  45 000a 08BD     		pop	{r3, pc}
+  46              		.cfi_endproc
+  47              	.LFE130:
+  49              		.section	.text.MX_X_CUBE_AI_Process,"ax",%progbits
+  50              		.align	1
+  51              		.global	MX_X_CUBE_AI_Process
+  52              		.syntax unified
+  53              		.thumb
+  54              		.thumb_func
+  55              		.fpu fpv4-sp-d16
+  57              	MX_X_CUBE_AI_Process:
+  58              	.LFB131:
+  72:Src/app_x-cube-ai.c **** 
+  73:Src/app_x-cube-ai.c **** void MX_X_CUBE_AI_Process(void)
+  74:Src/app_x-cube-ai.c **** {
+  59              		.loc 1 74 1 is_stmt 1 view -0
+  60              		.cfi_startproc
+  61              		@ args = 0, pretend = 0, frame = 0
+  62              		@ frame_needed = 0, uses_anonymous_args = 0
+  63 0000 08B5     		push	{r3, lr}
+  64              	.LCFI1:
+  65              		.cfi_def_cfa_offset 8
+  66              		.cfi_offset 3, -8
+  67              		.cfi_offset 14, -4
+  75:Src/app_x-cube-ai.c ****     aiValidationProcess();
+  68              		.loc 1 75 5 view .LVU5
+  69 0002 FFF7FEFF 		bl	aiValidationProcess
+  70              	.LVL2:
+  76:Src/app_x-cube-ai.c ****     /* USER CODE BEGIN 1 */
+  77:Src/app_x-cube-ai.c ****     /* USER CODE END 1 */
+  78:Src/app_x-cube-ai.c **** }
+  71              		.loc 1 78 1 is_stmt 0 view .LVU6
+  72 0006 08BD     		pop	{r3, pc}
+  73              		.cfi_endproc
+  74              	.LFE131:
+  76              		.section	.text.ai_mnetwork_find,"ax",%progbits
+  77              		.align	1
+  78              		.global	ai_mnetwork_find
+  79              		.syntax unified
+  80              		.thumb
+  81              		.thumb_func
+  82              		.fpu fpv4-sp-d16
+  84              	ai_mnetwork_find:
+  85              	.LVL3:
+  86              	.LFB135:
+  79:Src/app_x-cube-ai.c **** /* Multiple network support --------------------------------------------------*/
+  80:Src/app_x-cube-ai.c **** 
+  81:Src/app_x-cube-ai.c **** #include <string.h>
+  82:Src/app_x-cube-ai.c **** #include "ai_datatypes_defines.h"
+  83:Src/app_x-cube-ai.c **** 
+  84:Src/app_x-cube-ai.c **** static const ai_network_entry_t networks[AI_MNETWORK_NUMBER] = {
+  85:Src/app_x-cube-ai.c ****     {
+  86:Src/app_x-cube-ai.c ****         .name = (const char *)AI_NETWORK_MODEL_NAME,
+  87:Src/app_x-cube-ai.c ****         .config = AI_NETWORK_DATA_CONFIG,
+  88:Src/app_x-cube-ai.c ****         .ai_get_info = ai_network_get_info,
+  89:Src/app_x-cube-ai.c ****         .ai_create = ai_network_create,
+  90:Src/app_x-cube-ai.c ****         .ai_destroy = ai_network_destroy,
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 4
+
+
+  91:Src/app_x-cube-ai.c ****         .ai_get_error = ai_network_get_error,
+  92:Src/app_x-cube-ai.c ****         .ai_init = ai_network_init,
+  93:Src/app_x-cube-ai.c ****         .ai_run = ai_network_run,
+  94:Src/app_x-cube-ai.c ****         .ai_forward = ai_network_forward,
+  95:Src/app_x-cube-ai.c ****         .ai_data_weights_get_default = ai_network_data_weights_get,
+  96:Src/app_x-cube-ai.c ****         .params = { AI_NETWORK_DATA_WEIGHTS(0),
+  97:Src/app_x-cube-ai.c ****                 AI_NETWORK_DATA_ACTIVATIONS(0)},
+  98:Src/app_x-cube-ai.c ****         .extActBufferStartAddr = AI_NETWORK_DATA_ACTIVATIONS_START_ADDR,
+  99:Src/app_x-cube-ai.c ****         .actBufferSize = AI_NETWORK_DATA_ACTIVATIONS_SIZE
+ 100:Src/app_x-cube-ai.c ****     },
+ 101:Src/app_x-cube-ai.c **** };
+ 102:Src/app_x-cube-ai.c **** 
+ 103:Src/app_x-cube-ai.c **** struct network_instance {
+ 104:Src/app_x-cube-ai.c ****      const ai_network_entry_t *entry;
+ 105:Src/app_x-cube-ai.c ****      ai_handle handle;
+ 106:Src/app_x-cube-ai.c ****      ai_network_params params;
+ 107:Src/app_x-cube-ai.c **** };
+ 108:Src/app_x-cube-ai.c **** 
+ 109:Src/app_x-cube-ai.c **** /* Number of instance is aligned on the number of network */
+ 110:Src/app_x-cube-ai.c **** AI_STATIC struct network_instance gnetworks[AI_MNETWORK_NUMBER] = {0};
+ 111:Src/app_x-cube-ai.c **** 
+ 112:Src/app_x-cube-ai.c **** AI_DECLARE_STATIC
+ 113:Src/app_x-cube-ai.c **** ai_bool ai_mnetwork_is_valid(const char* name,
+ 114:Src/app_x-cube-ai.c ****         const ai_network_entry_t *entry)
+ 115:Src/app_x-cube-ai.c **** {
+ 116:Src/app_x-cube-ai.c ****     if (name && (strlen(entry->name) == strlen(name)) &&
+ 117:Src/app_x-cube-ai.c ****             (strncmp(entry->name, name, strlen(entry->name)) == 0))
+ 118:Src/app_x-cube-ai.c ****         return true;
+ 119:Src/app_x-cube-ai.c ****     return false;
+ 120:Src/app_x-cube-ai.c **** }
+ 121:Src/app_x-cube-ai.c **** 
+ 122:Src/app_x-cube-ai.c **** AI_DECLARE_STATIC
+ 123:Src/app_x-cube-ai.c **** struct network_instance *ai_mnetwork_handle(struct network_instance *inst)
+ 124:Src/app_x-cube-ai.c **** {
+ 125:Src/app_x-cube-ai.c ****     for (int i=0; i<AI_MNETWORK_NUMBER; i++) {
+ 126:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 127:Src/app_x-cube-ai.c ****             return inst;
+ 128:Src/app_x-cube-ai.c ****         else if ((!inst) && (gnetworks[i].entry == NULL))
+ 129:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 130:Src/app_x-cube-ai.c ****     }
+ 131:Src/app_x-cube-ai.c ****     return NULL;
+ 132:Src/app_x-cube-ai.c **** }
+ 133:Src/app_x-cube-ai.c **** 
+ 134:Src/app_x-cube-ai.c **** AI_DECLARE_STATIC
+ 135:Src/app_x-cube-ai.c **** void ai_mnetwork_release_handle(struct network_instance *inst)
+ 136:Src/app_x-cube-ai.c **** {
+ 137:Src/app_x-cube-ai.c ****     for (int i=0; i<AI_MNETWORK_NUMBER; i++) {
+ 138:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst)) {
+ 139:Src/app_x-cube-ai.c ****             gnetworks[i].entry = NULL;
+ 140:Src/app_x-cube-ai.c ****             return;
+ 141:Src/app_x-cube-ai.c ****         }
+ 142:Src/app_x-cube-ai.c ****     }
+ 143:Src/app_x-cube-ai.c **** }
+ 144:Src/app_x-cube-ai.c **** 
+ 145:Src/app_x-cube-ai.c **** AI_API_ENTRY
+ 146:Src/app_x-cube-ai.c **** const char* ai_mnetwork_find(const char *name, ai_int idx)
+ 147:Src/app_x-cube-ai.c **** {
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 5
+
+
+  87              		.loc 1 147 1 is_stmt 1 view -0
+  88              		.cfi_startproc
+  89              		@ args = 0, pretend = 0, frame = 0
+  90              		@ frame_needed = 0, uses_anonymous_args = 0
+  91              		.loc 1 147 1 is_stmt 0 view .LVU8
+  92 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+  93              	.LCFI2:
+  94              		.cfi_def_cfa_offset 24
+  95              		.cfi_offset 4, -24
+  96              		.cfi_offset 5, -20
+  97              		.cfi_offset 6, -16
+  98              		.cfi_offset 7, -12
+  99              		.cfi_offset 8, -8
+ 100              		.cfi_offset 14, -4
+ 101 0004 0646     		mov	r6, r0
+ 102 0006 0D46     		mov	r5, r1
+ 148:Src/app_x-cube-ai.c ****     const ai_network_entry_t *entry;
+ 103              		.loc 1 148 5 is_stmt 1 view .LVU9
+ 149:Src/app_x-cube-ai.c **** 
+ 150:Src/app_x-cube-ai.c ****     for (int i=0; i<AI_MNETWORK_NUMBER; i++) {
+ 104              		.loc 1 150 5 view .LVU10
+ 105              	.LBB37:
+ 106              		.loc 1 150 10 view .LVU11
+ 107              	.LVL4:
+ 108              		.loc 1 150 14 is_stmt 0 view .LVU12
+ 109 0008 0024     		movs	r4, #0
+ 110              	.LVL5:
+ 111              	.L6:
+ 112              		.loc 1 150 5 discriminator 1 view .LVU13
+ 113 000a 002C     		cmp	r4, #0
+ 114 000c 02DD     		ble	.L11
+ 115              		.loc 1 150 5 discriminator 1 view .LVU14
+ 116              	.LBE37:
+ 151:Src/app_x-cube-ai.c ****         entry = &networks[i];
+ 152:Src/app_x-cube-ai.c ****         if (ai_mnetwork_is_valid(name, entry))
+ 153:Src/app_x-cube-ai.c ****             return entry->name;
+ 154:Src/app_x-cube-ai.c ****         else {
+ 155:Src/app_x-cube-ai.c ****             if (!idx--)
+ 156:Src/app_x-cube-ai.c ****                 return entry->name;
+ 157:Src/app_x-cube-ai.c ****         }
+ 158:Src/app_x-cube-ai.c ****     }
+ 159:Src/app_x-cube-ai.c ****     return NULL;
+ 117              		.loc 1 159 12 view .LVU15
+ 118 000e 0020     		movs	r0, #0
+ 119              	.LVL6:
+ 120              	.L5:
+ 160:Src/app_x-cube-ai.c **** }
+ 121              		.loc 1 160 1 view .LVU16
+ 122 0010 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 123              	.LVL7:
+ 124              	.L11:
+ 125              	.LBB42:
+ 151:Src/app_x-cube-ai.c ****         entry = &networks[i];
+ 126              		.loc 1 151 9 is_stmt 1 view .LVU17
+ 151:Src/app_x-cube-ai.c ****         entry = &networks[i];
+ 127              		.loc 1 151 15 is_stmt 0 view .LVU18
+ 128 0014 04EB4403 		add	r3, r4, r4, lsl #1
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 6
+
+
+ 129 0018 5A01     		lsls	r2, r3, #5
+ 130              	.LVL8:
+ 152:Src/app_x-cube-ai.c ****             return entry->name;
+ 131              		.loc 1 152 9 is_stmt 1 view .LVU19
+ 132              	.LBB38:
+ 133              	.LBI38:
+ 113:Src/app_x-cube-ai.c ****         const ai_network_entry_t *entry)
+ 134              		.loc 1 113 9 view .LVU20
+ 135              	.LBB39:
+ 116:Src/app_x-cube-ai.c ****             (strncmp(entry->name, name, strlen(entry->name)) == 0))
+ 136              		.loc 1 116 5 view .LVU21
+ 116:Src/app_x-cube-ai.c ****             (strncmp(entry->name, name, strlen(entry->name)) == 0))
+ 137              		.loc 1 116 8 is_stmt 0 view .LVU22
+ 138 001a CEB1     		cbz	r6, .L12
+ 116:Src/app_x-cube-ai.c ****             (strncmp(entry->name, name, strlen(entry->name)) == 0))
+ 139              		.loc 1 116 18 view .LVU23
+ 140 001c 144B     		ldr	r3, .L19
+ 141 001e 9F58     		ldr	r7, [r3, r2]
+ 142 0020 3846     		mov	r0, r7
+ 143 0022 FFF7FEFF 		bl	strlen
+ 144              	.LVL9:
+ 116:Src/app_x-cube-ai.c ****             (strncmp(entry->name, name, strlen(entry->name)) == 0))
+ 145              		.loc 1 116 18 view .LVU24
+ 146 0026 8046     		mov	r8, r0
+ 116:Src/app_x-cube-ai.c ****             (strncmp(entry->name, name, strlen(entry->name)) == 0))
+ 147              		.loc 1 116 41 view .LVU25
+ 148 0028 3046     		mov	r0, r6
+ 149 002a FFF7FEFF 		bl	strlen
+ 150              	.LVL10:
+ 116:Src/app_x-cube-ai.c ****             (strncmp(entry->name, name, strlen(entry->name)) == 0))
+ 151              		.loc 1 116 14 view .LVU26
+ 152 002e 8045     		cmp	r8, r0
+ 153 0030 06D0     		beq	.L16
+ 119:Src/app_x-cube-ai.c **** }
+ 154              		.loc 1 119 12 view .LVU27
+ 155 0032 0023     		movs	r3, #0
+ 156              	.L7:
+ 157              	.LVL11:
+ 119:Src/app_x-cube-ai.c **** }
+ 158              		.loc 1 119 12 view .LVU28
+ 159              	.LBE39:
+ 160              	.LBE38:
+ 152:Src/app_x-cube-ai.c ****             return entry->name;
+ 161              		.loc 1 152 12 view .LVU29
+ 162 0034 83B9     		cbnz	r3, .L17
+ 155:Src/app_x-cube-ai.c ****                 return entry->name;
+ 163              		.loc 1 155 13 is_stmt 1 view .LVU30
+ 155:Src/app_x-cube-ai.c ****                 return entry->name;
+ 164              		.loc 1 155 21 is_stmt 0 view .LVU31
+ 165 0036 6B1E     		subs	r3, r5, #1
+ 166              	.LVL12:
+ 155:Src/app_x-cube-ai.c ****                 return entry->name;
+ 167              		.loc 1 155 16 view .LVU32
+ 168 0038 A5B1     		cbz	r5, .L18
+ 150:Src/app_x-cube-ai.c ****         entry = &networks[i];
+ 169              		.loc 1 150 42 discriminator 2 view .LVU33
+ 170 003a 0134     		adds	r4, r4, #1
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 7
+
+
+ 171              	.LVL13:
+ 155:Src/app_x-cube-ai.c ****                 return entry->name;
+ 172              		.loc 1 155 21 discriminator 2 view .LVU34
+ 173 003c 1D46     		mov	r5, r3
+ 174 003e E4E7     		b	.L6
+ 175              	.LVL14:
+ 176              	.L16:
+ 177              	.LBB41:
+ 178              	.LBB40:
+ 117:Src/app_x-cube-ai.c ****         return true;
+ 179              		.loc 1 117 14 view .LVU35
+ 180 0040 4246     		mov	r2, r8
+ 181 0042 3146     		mov	r1, r6
+ 182 0044 3846     		mov	r0, r7
+ 183 0046 FFF7FEFF 		bl	strncmp
+ 184              	.LVL15:
+ 116:Src/app_x-cube-ai.c ****             (strncmp(entry->name, name, strlen(entry->name)) == 0))
+ 185              		.loc 1 116 55 view .LVU36
+ 186 004a 18B1     		cbz	r0, .L14
+ 119:Src/app_x-cube-ai.c **** }
+ 187              		.loc 1 119 12 view .LVU37
+ 188 004c 0023     		movs	r3, #0
+ 189 004e F1E7     		b	.L7
+ 190              	.LVL16:
+ 191              	.L12:
+ 119:Src/app_x-cube-ai.c **** }
+ 192              		.loc 1 119 12 view .LVU38
+ 193 0050 0023     		movs	r3, #0
+ 194 0052 EFE7     		b	.L7
+ 195              	.LVL17:
+ 196              	.L14:
+ 118:Src/app_x-cube-ai.c ****     return false;
+ 197              		.loc 1 118 16 view .LVU39
+ 198 0054 0123     		movs	r3, #1
+ 199 0056 EDE7     		b	.L7
+ 200              	.LVL18:
+ 201              	.L17:
+ 118:Src/app_x-cube-ai.c ****     return false;
+ 202              		.loc 1 118 16 view .LVU40
+ 203              	.LBE40:
+ 204              	.LBE41:
+ 153:Src/app_x-cube-ai.c ****         else {
+ 205              		.loc 1 153 13 is_stmt 1 view .LVU41
+ 153:Src/app_x-cube-ai.c ****         else {
+ 206              		.loc 1 153 25 is_stmt 0 view .LVU42
+ 207 0058 04EB4404 		add	r4, r4, r4, lsl #1
+ 208              	.LVL19:
+ 153:Src/app_x-cube-ai.c ****         else {
+ 209              		.loc 1 153 25 view .LVU43
+ 210 005c 6301     		lsls	r3, r4, #5
+ 211 005e 044A     		ldr	r2, .L19
+ 212 0060 D058     		ldr	r0, [r2, r3]
+ 213 0062 D5E7     		b	.L5
+ 214              	.LVL20:
+ 215              	.L18:
+ 156:Src/app_x-cube-ai.c ****         }
+ 216              		.loc 1 156 17 is_stmt 1 view .LVU44
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 8
+
+
+ 156:Src/app_x-cube-ai.c ****         }
+ 217              		.loc 1 156 29 is_stmt 0 view .LVU45
+ 218 0064 04EB4404 		add	r4, r4, r4, lsl #1
+ 219              	.LVL21:
+ 156:Src/app_x-cube-ai.c ****         }
+ 220              		.loc 1 156 29 view .LVU46
+ 221 0068 6301     		lsls	r3, r4, #5
+ 222              	.LVL22:
+ 156:Src/app_x-cube-ai.c ****         }
+ 223              		.loc 1 156 29 view .LVU47
+ 224 006a 014A     		ldr	r2, .L19
+ 225 006c D058     		ldr	r0, [r2, r3]
+ 226 006e CFE7     		b	.L5
+ 227              	.L20:
+ 228              		.align	2
+ 229              	.L19:
+ 230 0070 00000000 		.word	.LANCHOR0
+ 231              	.LBE42:
+ 232              		.cfi_endproc
+ 233              	.LFE135:
+ 235              		.section	.text.ai_mnetwork_create,"ax",%progbits
+ 236              		.align	1
+ 237              		.global	ai_mnetwork_create
+ 238              		.syntax unified
+ 239              		.thumb
+ 240              		.thumb_func
+ 241              		.fpu fpv4-sp-d16
+ 243              	ai_mnetwork_create:
+ 244              	.LVL23:
+ 245              	.LFB136:
+ 161:Src/app_x-cube-ai.c **** 
+ 162:Src/app_x-cube-ai.c **** AI_API_ENTRY
+ 163:Src/app_x-cube-ai.c **** ai_error ai_mnetwork_create(const char *name, ai_handle* network,
+ 164:Src/app_x-cube-ai.c ****         const ai_buffer* network_config)
+ 165:Src/app_x-cube-ai.c **** {
+ 246              		.loc 1 165 1 is_stmt 1 view -0
+ 247              		.cfi_startproc
+ 248              		@ args = 0, pretend = 0, frame = 0
+ 249              		@ frame_needed = 0, uses_anonymous_args = 0
+ 250              		.loc 1 165 1 is_stmt 0 view .LVU49
+ 251 0000 2DE9F84F 		push	{r3, r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 252              	.LCFI3:
+ 253              		.cfi_def_cfa_offset 40
+ 254              		.cfi_offset 3, -40
+ 255              		.cfi_offset 4, -36
+ 256              		.cfi_offset 5, -32
+ 257              		.cfi_offset 6, -28
+ 258              		.cfi_offset 7, -24
+ 259              		.cfi_offset 8, -20
+ 260              		.cfi_offset 9, -16
+ 261              		.cfi_offset 10, -12
+ 262              		.cfi_offset 11, -8
+ 263              		.cfi_offset 14, -4
+ 166:Src/app_x-cube-ai.c ****     const ai_network_entry_t *entry;
+ 264              		.loc 1 166 5 is_stmt 1 view .LVU50
+ 167:Src/app_x-cube-ai.c ****     const ai_network_entry_t *found = NULL;
+ 265              		.loc 1 167 5 view .LVU51
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 9
+
+
+ 266              	.LVL24:
+ 168:Src/app_x-cube-ai.c ****     ai_error err;
+ 267              		.loc 1 168 5 view .LVU52
+ 169:Src/app_x-cube-ai.c ****     struct network_instance *inst = ai_mnetwork_handle(NULL);
+ 268              		.loc 1 169 5 view .LVU53
+ 269              	.LBB49:
+ 270              	.LBI49:
+ 123:Src/app_x-cube-ai.c **** {
+ 271              		.loc 1 123 26 view .LVU54
+ 272              	.LBB50:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 273              		.loc 1 125 5 view .LVU55
+ 274              	.LBB51:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 275              		.loc 1 125 10 view .LVU56
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 276              		.loc 1 125 14 is_stmt 0 view .LVU57
+ 277 0004 0023     		movs	r3, #0
+ 278              	.LVL25:
+ 279              	.L22:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 280              		.loc 1 125 5 view .LVU58
+ 281 0006 002B     		cmp	r3, #0
+ 282 0008 0ADD     		ble	.L25
+ 283              	.LBE51:
+ 131:Src/app_x-cube-ai.c **** }
+ 284              		.loc 1 131 12 view .LVU59
+ 285 000a 0024     		movs	r4, #0
+ 286              	.LVL26:
+ 287              	.L24:
+ 131:Src/app_x-cube-ai.c **** }
+ 288              		.loc 1 131 12 view .LVU60
+ 289              	.LBE50:
+ 290              	.LBE49:
+ 170:Src/app_x-cube-ai.c **** 
+ 171:Src/app_x-cube-ai.c ****     if (!inst) {
+ 291              		.loc 1 171 5 is_stmt 1 view .LVU61
+ 292              		.loc 1 171 8 is_stmt 0 view .LVU62
+ 293 000c C4BB     		cbnz	r4, .L35
+ 172:Src/app_x-cube-ai.c ****         err.type = AI_ERROR_ALLOCATION_FAILED;
+ 294              		.loc 1 172 9 is_stmt 1 view .LVU63
+ 295              		.loc 1 172 18 is_stmt 0 view .LVU64
+ 296 000e 0020     		movs	r0, #0
+ 297              	.LVL27:
+ 298              		.loc 1 172 18 view .LVU65
+ 299 0010 3123     		movs	r3, #49
+ 300 0012 63F30700 		bfi	r0, r3, #0, #8
+ 301              	.LVL28:
+ 173:Src/app_x-cube-ai.c ****         err.code = AI_ERROR_CODE_NETWORK;
+ 302              		.loc 1 173 9 is_stmt 1 view .LVU66
+ 303              		.loc 1 173 18 is_stmt 0 view .LVU67
+ 304 0016 1023     		movs	r3, #16
+ 305 0018 63F31F20 		bfi	r0, r3, #8, #24
+ 174:Src/app_x-cube-ai.c ****         return err;
+ 306              		.loc 1 174 9 is_stmt 1 view .LVU68
+ 307              	.LVL29:
+ 308              	.L27:
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 10
+
+
+ 309              	.LVL30:
+ 175:Src/app_x-cube-ai.c ****     }
+ 176:Src/app_x-cube-ai.c **** 
+ 177:Src/app_x-cube-ai.c ****     for (int i=0; i<AI_MNETWORK_NUMBER; i++) {
+ 178:Src/app_x-cube-ai.c ****         entry = &networks[i];
+ 179:Src/app_x-cube-ai.c ****         if (ai_mnetwork_is_valid(name, entry)) {
+ 180:Src/app_x-cube-ai.c ****             found = entry;
+ 181:Src/app_x-cube-ai.c ****             break;
+ 182:Src/app_x-cube-ai.c ****         }
+ 183:Src/app_x-cube-ai.c ****     }
+ 184:Src/app_x-cube-ai.c **** 
+ 185:Src/app_x-cube-ai.c ****     if (!found) {
+ 186:Src/app_x-cube-ai.c ****         err.type = AI_ERROR_INVALID_PARAM;
+ 187:Src/app_x-cube-ai.c ****         err.code = AI_ERROR_CODE_NETWORK;
+ 188:Src/app_x-cube-ai.c ****         return err;
+ 189:Src/app_x-cube-ai.c ****     }
+ 190:Src/app_x-cube-ai.c **** 
+ 191:Src/app_x-cube-ai.c ****     if (network_config == NULL)
+ 192:Src/app_x-cube-ai.c ****         err = found->ai_create(network, found->config);
+ 193:Src/app_x-cube-ai.c ****     else
+ 194:Src/app_x-cube-ai.c ****         err = found->ai_create(network, network_config);
+ 195:Src/app_x-cube-ai.c ****     if ((err.code == AI_ERROR_CODE_NONE) && (err.type == AI_ERROR_NONE)) {
+ 196:Src/app_x-cube-ai.c ****         inst->entry = found;
+ 197:Src/app_x-cube-ai.c ****         inst->handle = *network;
+ 198:Src/app_x-cube-ai.c ****         *network = (ai_handle*)inst;
+ 199:Src/app_x-cube-ai.c ****     }
+ 200:Src/app_x-cube-ai.c **** 
+ 201:Src/app_x-cube-ai.c ****     return err;
+ 202:Src/app_x-cube-ai.c **** }
+ 310              		.loc 1 202 1 is_stmt 0 view .LVU69
+ 311 001c BDE8F88F 		pop	{r3, r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 312              	.LVL31:
+ 313              	.L25:
+ 314              	.LBB54:
+ 315              	.LBB53:
+ 316              	.LBB52:
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 317              		.loc 1 126 9 is_stmt 1 view .LVU70
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 318              		.loc 1 128 14 view .LVU71
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 319              		.loc 1 128 42 is_stmt 0 view .LVU72
+ 320 0020 C3EBC304 		rsb	r4, r3, r3, lsl #3
+ 321 0024 284D     		ldr	r5, .L44
+ 322 0026 55F83440 		ldr	r4, [r5, r4, lsl #3]
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 323              		.loc 1 128 26 view .LVU73
+ 324 002a 0CB1     		cbz	r4, .L40
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 325              		.loc 1 125 42 view .LVU74
+ 326 002c 0133     		adds	r3, r3, #1
+ 327              	.LVL32:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 328              		.loc 1 125 42 view .LVU75
+ 329 002e EAE7     		b	.L22
+ 330              	.L40:
+ 129:Src/app_x-cube-ai.c ****     }
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 11
+
+
+ 331              		.loc 1 129 13 is_stmt 1 view .LVU76
+ 129:Src/app_x-cube-ai.c ****     }
+ 332              		.loc 1 129 20 is_stmt 0 view .LVU77
+ 333 0030 C3EBC303 		rsb	r3, r3, r3, lsl #3
+ 334              	.LVL33:
+ 129:Src/app_x-cube-ai.c ****     }
+ 335              		.loc 1 129 20 view .LVU78
+ 336 0034 05EBC304 		add	r4, r5, r3, lsl #3
+ 337 0038 E8E7     		b	.L24
+ 338              	.LVL34:
+ 339              	.L30:
+ 129:Src/app_x-cube-ai.c ****     }
+ 340              		.loc 1 129 20 view .LVU79
+ 341              	.LBE52:
+ 342              	.LBE53:
+ 343              	.LBE54:
+ 344              	.LBB55:
+ 178:Src/app_x-cube-ai.c ****         if (ai_mnetwork_is_valid(name, entry)) {
+ 345              		.loc 1 178 9 is_stmt 1 view .LVU80
+ 178:Src/app_x-cube-ai.c ****         if (ai_mnetwork_is_valid(name, entry)) {
+ 346              		.loc 1 178 15 is_stmt 0 view .LVU81
+ 347 003a 244A     		ldr	r2, .L44+4
+ 348 003c 05EB4503 		add	r3, r5, r5, lsl #1
+ 349 0040 5B01     		lsls	r3, r3, #5
+ 350 0042 D618     		adds	r6, r2, r3
+ 351              	.LVL35:
+ 179:Src/app_x-cube-ai.c ****             found = entry;
+ 352              		.loc 1 179 9 is_stmt 1 view .LVU82
+ 353              	.LBB56:
+ 354              	.LBI56:
+ 113:Src/app_x-cube-ai.c ****         const ai_network_entry_t *entry)
+ 355              		.loc 1 113 9 view .LVU83
+ 356              	.LBB57:
+ 116:Src/app_x-cube-ai.c ****             (strncmp(entry->name, name, strlen(entry->name)) == 0))
+ 357              		.loc 1 116 5 view .LVU84
+ 116:Src/app_x-cube-ai.c ****             (strncmp(entry->name, name, strlen(entry->name)) == 0))
+ 358              		.loc 1 116 8 is_stmt 0 view .LVU85
+ 359 0044 B9F1000F 		cmp	r9, #0
+ 360 0048 16D0     		beq	.L36
+ 116:Src/app_x-cube-ai.c ****             (strncmp(entry->name, name, strlen(entry->name)) == 0))
+ 361              		.loc 1 116 18 view .LVU86
+ 362 004a 52F803A0 		ldr	r10, [r2, r3]
+ 363 004e 5046     		mov	r0, r10
+ 364 0050 FFF7FEFF 		bl	strlen
+ 365              	.LVL36:
+ 366 0054 8346     		mov	fp, r0
+ 116:Src/app_x-cube-ai.c ****             (strncmp(entry->name, name, strlen(entry->name)) == 0))
+ 367              		.loc 1 116 41 view .LVU87
+ 368 0056 4846     		mov	r0, r9
+ 369 0058 FFF7FEFF 		bl	strlen
+ 370              	.LVL37:
+ 116:Src/app_x-cube-ai.c ****             (strncmp(entry->name, name, strlen(entry->name)) == 0))
+ 371              		.loc 1 116 14 view .LVU88
+ 372 005c 8345     		cmp	fp, r0
+ 373 005e 03D0     		beq	.L41
+ 119:Src/app_x-cube-ai.c **** }
+ 374              		.loc 1 119 12 view .LVU89
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 12
+
+
+ 375 0060 0023     		movs	r3, #0
+ 376              	.L28:
+ 377              	.LVL38:
+ 119:Src/app_x-cube-ai.c **** }
+ 378              		.loc 1 119 12 view .LVU90
+ 379              	.LBE57:
+ 380              	.LBE56:
+ 179:Src/app_x-cube-ai.c ****             found = entry;
+ 381              		.loc 1 179 12 view .LVU91
+ 382 0062 A3B9     		cbnz	r3, .L29
+ 177:Src/app_x-cube-ai.c ****         entry = &networks[i];
+ 383              		.loc 1 177 42 discriminator 2 view .LVU92
+ 384 0064 0135     		adds	r5, r5, #1
+ 385              	.LVL39:
+ 177:Src/app_x-cube-ai.c ****         entry = &networks[i];
+ 386              		.loc 1 177 42 discriminator 2 view .LVU93
+ 387 0066 0FE0     		b	.L26
+ 388              	.LVL40:
+ 389              	.L41:
+ 390              	.LBB59:
+ 391              	.LBB58:
+ 117:Src/app_x-cube-ai.c ****         return true;
+ 392              		.loc 1 117 14 view .LVU94
+ 393 0068 5A46     		mov	r2, fp
+ 394 006a 4946     		mov	r1, r9
+ 395 006c 5046     		mov	r0, r10
+ 396 006e FFF7FEFF 		bl	strncmp
+ 397              	.LVL41:
+ 116:Src/app_x-cube-ai.c ****             (strncmp(entry->name, name, strlen(entry->name)) == 0))
+ 398              		.loc 1 116 55 view .LVU95
+ 399 0072 18B1     		cbz	r0, .L38
+ 119:Src/app_x-cube-ai.c **** }
+ 400              		.loc 1 119 12 view .LVU96
+ 401 0074 0023     		movs	r3, #0
+ 402 0076 F4E7     		b	.L28
+ 403              	.L36:
+ 119:Src/app_x-cube-ai.c **** }
+ 404              		.loc 1 119 12 view .LVU97
+ 405 0078 0023     		movs	r3, #0
+ 406 007a F2E7     		b	.L28
+ 407              	.L38:
+ 118:Src/app_x-cube-ai.c ****     return false;
+ 408              		.loc 1 118 16 view .LVU98
+ 409 007c 0123     		movs	r3, #1
+ 410 007e F0E7     		b	.L28
+ 411              	.LVL42:
+ 412              	.L35:
+ 118:Src/app_x-cube-ai.c ****     return false;
+ 413              		.loc 1 118 16 view .LVU99
+ 414 0080 9046     		mov	r8, r2
+ 415 0082 0F46     		mov	r7, r1
+ 416 0084 8146     		mov	r9, r0
+ 417              	.LBE58:
+ 418              	.LBE59:
+ 177:Src/app_x-cube-ai.c ****         entry = &networks[i];
+ 419              		.loc 1 177 14 view .LVU100
+ 420 0086 0025     		movs	r5, #0
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 13
+
+
+ 421              	.LVL43:
+ 422              	.L26:
+ 177:Src/app_x-cube-ai.c ****         entry = &networks[i];
+ 423              		.loc 1 177 5 discriminator 1 view .LVU101
+ 424 0088 002D     		cmp	r5, #0
+ 425 008a D6DD     		ble	.L30
+ 426              	.LBE55:
+ 167:Src/app_x-cube-ai.c ****     ai_error err;
+ 427              		.loc 1 167 31 view .LVU102
+ 428 008c 0026     		movs	r6, #0
+ 429              	.L29:
+ 430              	.LVL44:
+ 185:Src/app_x-cube-ai.c ****         err.type = AI_ERROR_INVALID_PARAM;
+ 431              		.loc 1 185 5 is_stmt 1 view .LVU103
+ 185:Src/app_x-cube-ai.c ****         err.type = AI_ERROR_INVALID_PARAM;
+ 432              		.loc 1 185 8 is_stmt 0 view .LVU104
+ 433 008e 6EB1     		cbz	r6, .L42
+ 191:Src/app_x-cube-ai.c ****         err = found->ai_create(network, found->config);
+ 434              		.loc 1 191 5 is_stmt 1 view .LVU105
+ 191:Src/app_x-cube-ai.c ****         err = found->ai_create(network, found->config);
+ 435              		.loc 1 191 8 is_stmt 0 view .LVU106
+ 436 0090 B8F1000F 		cmp	r8, #0
+ 437 0094 12D0     		beq	.L43
+ 194:Src/app_x-cube-ai.c ****     if ((err.code == AI_ERROR_CODE_NONE) && (err.type == AI_ERROR_NONE)) {
+ 438              		.loc 1 194 9 is_stmt 1 view .LVU107
+ 194:Src/app_x-cube-ai.c ****     if ((err.code == AI_ERROR_CODE_NONE) && (err.type == AI_ERROR_NONE)) {
+ 439              		.loc 1 194 20 is_stmt 0 view .LVU108
+ 440 0096 336C     		ldr	r3, [r6, #64]
+ 194:Src/app_x-cube-ai.c ****     if ((err.code == AI_ERROR_CODE_NONE) && (err.type == AI_ERROR_NONE)) {
+ 441              		.loc 1 194 15 view .LVU109
+ 442 0098 4146     		mov	r1, r8
+ 443 009a 3846     		mov	r0, r7
+ 444 009c 9847     		blx	r3
+ 445              	.LVL45:
+ 446              	.L33:
+ 195:Src/app_x-cube-ai.c ****         inst->entry = found;
+ 447              		.loc 1 195 5 is_stmt 1 view .LVU110
+ 195:Src/app_x-cube-ai.c ****         inst->entry = found;
+ 448              		.loc 1 195 8 is_stmt 0 view .LVU111
+ 449 009e 0028     		cmp	r0, #0
+ 450 00a0 BCD1     		bne	.L27
+ 196:Src/app_x-cube-ai.c ****         inst->handle = *network;
+ 451              		.loc 1 196 9 is_stmt 1 view .LVU112
+ 196:Src/app_x-cube-ai.c ****         inst->handle = *network;
+ 452              		.loc 1 196 21 is_stmt 0 view .LVU113
+ 453 00a2 2660     		str	r6, [r4]
+ 197:Src/app_x-cube-ai.c ****         *network = (ai_handle*)inst;
+ 454              		.loc 1 197 9 is_stmt 1 view .LVU114
+ 197:Src/app_x-cube-ai.c ****         *network = (ai_handle*)inst;
+ 455              		.loc 1 197 24 is_stmt 0 view .LVU115
+ 456 00a4 3B68     		ldr	r3, [r7]
+ 197:Src/app_x-cube-ai.c ****         *network = (ai_handle*)inst;
+ 457              		.loc 1 197 22 view .LVU116
+ 458 00a6 6360     		str	r3, [r4, #4]
+ 198:Src/app_x-cube-ai.c ****     }
+ 459              		.loc 1 198 9 is_stmt 1 view .LVU117
+ 198:Src/app_x-cube-ai.c ****     }
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 14
+
+
+ 460              		.loc 1 198 18 is_stmt 0 view .LVU118
+ 461 00a8 3C60     		str	r4, [r7]
+ 201:Src/app_x-cube-ai.c **** }
+ 462              		.loc 1 201 5 is_stmt 1 view .LVU119
+ 201:Src/app_x-cube-ai.c **** }
+ 463              		.loc 1 201 12 is_stmt 0 view .LVU120
+ 464 00aa B7E7     		b	.L27
+ 465              	.LVL46:
+ 466              	.L42:
+ 186:Src/app_x-cube-ai.c ****         err.code = AI_ERROR_CODE_NETWORK;
+ 467              		.loc 1 186 9 is_stmt 1 view .LVU121
+ 186:Src/app_x-cube-ai.c ****         err.code = AI_ERROR_CODE_NETWORK;
+ 468              		.loc 1 186 18 is_stmt 0 view .LVU122
+ 469 00ac 0020     		movs	r0, #0
+ 186:Src/app_x-cube-ai.c ****         err.code = AI_ERROR_CODE_NETWORK;
+ 470              		.loc 1 186 18 view .LVU123
+ 471 00ae 1423     		movs	r3, #20
+ 472 00b0 63F30700 		bfi	r0, r3, #0, #8
+ 473              	.LVL47:
+ 187:Src/app_x-cube-ai.c ****         return err;
+ 474              		.loc 1 187 9 is_stmt 1 view .LVU124
+ 187:Src/app_x-cube-ai.c ****         return err;
+ 475              		.loc 1 187 18 is_stmt 0 view .LVU125
+ 476 00b4 1023     		movs	r3, #16
+ 477 00b6 63F31F20 		bfi	r0, r3, #8, #24
+ 188:Src/app_x-cube-ai.c ****     }
+ 478              		.loc 1 188 9 is_stmt 1 view .LVU126
+ 188:Src/app_x-cube-ai.c ****     }
+ 479              		.loc 1 188 16 is_stmt 0 view .LVU127
+ 480 00ba AFE7     		b	.L27
+ 481              	.LVL48:
+ 482              	.L43:
+ 192:Src/app_x-cube-ai.c ****     else
+ 483              		.loc 1 192 9 is_stmt 1 view .LVU128
+ 192:Src/app_x-cube-ai.c ****     else
+ 484              		.loc 1 192 20 is_stmt 0 view .LVU129
+ 485 00bc 336C     		ldr	r3, [r6, #64]
+ 192:Src/app_x-cube-ai.c ****     else
+ 486              		.loc 1 192 15 view .LVU130
+ 487 00be 716B     		ldr	r1, [r6, #52]
+ 488 00c0 3846     		mov	r0, r7
+ 489 00c2 9847     		blx	r3
+ 490              	.LVL49:
+ 491 00c4 EBE7     		b	.L33
+ 492              	.L45:
+ 493 00c6 00BF     		.align	2
+ 494              	.L44:
+ 495 00c8 00000000 		.word	.LANCHOR1
+ 496 00cc 00000000 		.word	.LANCHOR0
+ 497              		.cfi_endproc
+ 498              	.LFE136:
+ 500              		.section	.text.ai_mnetwork_destroy,"ax",%progbits
+ 501              		.align	1
+ 502              		.global	ai_mnetwork_destroy
+ 503              		.syntax unified
+ 504              		.thumb
+ 505              		.thumb_func
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 15
+
+
+ 506              		.fpu fpv4-sp-d16
+ 508              	ai_mnetwork_destroy:
+ 509              	.LVL50:
+ 510              	.LFB137:
+ 203:Src/app_x-cube-ai.c **** 
+ 204:Src/app_x-cube-ai.c **** AI_API_ENTRY
+ 205:Src/app_x-cube-ai.c **** ai_handle ai_mnetwork_destroy(ai_handle network)
+ 206:Src/app_x-cube-ai.c **** {
+ 511              		.loc 1 206 1 is_stmt 1 view -0
+ 512              		.cfi_startproc
+ 513              		@ args = 0, pretend = 0, frame = 0
+ 514              		@ frame_needed = 0, uses_anonymous_args = 0
+ 515              		.loc 1 206 1 is_stmt 0 view .LVU132
+ 516 0000 38B5     		push	{r3, r4, r5, lr}
+ 517              	.LCFI4:
+ 518              		.cfi_def_cfa_offset 16
+ 519              		.cfi_offset 3, -16
+ 520              		.cfi_offset 4, -12
+ 521              		.cfi_offset 5, -8
+ 522              		.cfi_offset 14, -4
+ 523 0002 0446     		mov	r4, r0
+ 207:Src/app_x-cube-ai.c ****     struct network_instance *inn;
+ 524              		.loc 1 207 5 is_stmt 1 view .LVU133
+ 208:Src/app_x-cube-ai.c ****     inn =  ai_mnetwork_handle((struct network_instance *)network);
+ 525              		.loc 1 208 5 view .LVU134
+ 526              	.LVL51:
+ 527              	.LBB60:
+ 528              	.LBI60:
+ 123:Src/app_x-cube-ai.c **** {
+ 529              		.loc 1 123 26 view .LVU135
+ 530              	.LBB61:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 531              		.loc 1 125 5 view .LVU136
+ 532              	.LBB62:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 533              		.loc 1 125 10 view .LVU137
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 534              		.loc 1 125 14 is_stmt 0 view .LVU138
+ 535 0004 0023     		movs	r3, #0
+ 536              	.LVL52:
+ 537              	.L47:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 538              		.loc 1 125 5 view .LVU139
+ 539 0006 002B     		cmp	r3, #0
+ 540 0008 03DD     		ble	.L51
+ 541              	.LBE62:
+ 131:Src/app_x-cube-ai.c **** }
+ 542              		.loc 1 131 12 view .LVU140
+ 543 000a 0025     		movs	r5, #0
+ 544              	.LVL53:
+ 545              	.L49:
+ 131:Src/app_x-cube-ai.c **** }
+ 546              		.loc 1 131 12 view .LVU141
+ 547              	.LBE61:
+ 548              	.LBE60:
+ 209:Src/app_x-cube-ai.c ****     if (inn) {
+ 549              		.loc 1 209 5 is_stmt 1 view .LVU142
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 16
+
+
+ 550              		.loc 1 209 8 is_stmt 0 view .LVU143
+ 551 000c DDB9     		cbnz	r5, .L59
+ 552              	.LVL54:
+ 553              	.L52:
+ 210:Src/app_x-cube-ai.c ****         ai_handle hdl = inn->entry->ai_destroy(inn->handle);
+ 211:Src/app_x-cube-ai.c ****         if (hdl != inn->handle) {
+ 212:Src/app_x-cube-ai.c ****             ai_mnetwork_release_handle(inn);
+ 213:Src/app_x-cube-ai.c ****             network = AI_HANDLE_NULL;
+ 214:Src/app_x-cube-ai.c ****         }
+ 215:Src/app_x-cube-ai.c ****     }
+ 216:Src/app_x-cube-ai.c ****     return network;
+ 554              		.loc 1 216 5 is_stmt 1 view .LVU144
+ 217:Src/app_x-cube-ai.c **** }
+ 555              		.loc 1 217 1 is_stmt 0 view .LVU145
+ 556 000e 2046     		mov	r0, r4
+ 557 0010 38BD     		pop	{r3, r4, r5, pc}
+ 558              	.LVL55:
+ 559              	.L51:
+ 560              	.LBB65:
+ 561              	.LBB64:
+ 562              	.LBB63:
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 563              		.loc 1 126 9 is_stmt 1 view .LVU146
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 564              		.loc 1 126 12 is_stmt 0 view .LVU147
+ 565 0012 34B1     		cbz	r4, .L48
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 566              		.loc 1 126 24 view .LVU148
+ 567 0014 C3EBC302 		rsb	r2, r3, r3, lsl #3
+ 568 0018 D100     		lsls	r1, r2, #3
+ 569 001a 174A     		ldr	r2, .L62
+ 570 001c 0A44     		add	r2, r2, r1
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 571              		.loc 1 126 20 view .LVU149
+ 572 001e 9442     		cmp	r4, r2
+ 573 0020 0FD0     		beq	.L56
+ 574              	.L48:
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 575              		.loc 1 128 14 is_stmt 1 view .LVU150
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 576              		.loc 1 128 17 is_stmt 0 view .LVU151
+ 577 0022 0CB1     		cbz	r4, .L60
+ 578              	.L50:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 579              		.loc 1 125 42 view .LVU152
+ 580 0024 0133     		adds	r3, r3, #1
+ 581              	.LVL56:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 582              		.loc 1 125 42 view .LVU153
+ 583 0026 EEE7     		b	.L47
+ 584              	.L60:
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 585              		.loc 1 128 42 view .LVU154
+ 586 0028 C3EBC301 		rsb	r1, r3, r3, lsl #3
+ 587 002c CA00     		lsls	r2, r1, #3
+ 588 002e 1249     		ldr	r1, .L62
+ 589 0030 8A58     		ldr	r2, [r1, r2]
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 17
+
+
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 590              		.loc 1 128 26 view .LVU155
+ 591 0032 002A     		cmp	r2, #0
+ 592 0034 F6D1     		bne	.L50
+ 129:Src/app_x-cube-ai.c ****     }
+ 593              		.loc 1 129 13 is_stmt 1 view .LVU156
+ 129:Src/app_x-cube-ai.c ****     }
+ 594              		.loc 1 129 20 is_stmt 0 view .LVU157
+ 595 0036 C3EBC303 		rsb	r3, r3, r3, lsl #3
+ 596              	.LVL57:
+ 129:Src/app_x-cube-ai.c ****     }
+ 597              		.loc 1 129 20 view .LVU158
+ 598 003a DA00     		lsls	r2, r3, #3
+ 599 003c 0D46     		mov	r5, r1
+ 600 003e 1544     		add	r5, r5, r2
+ 601 0040 E4E7     		b	.L49
+ 602              	.LVL58:
+ 603              	.L56:
+ 127:Src/app_x-cube-ai.c ****         else if ((!inst) && (gnetworks[i].entry == NULL))
+ 604              		.loc 1 127 20 view .LVU159
+ 605 0042 2546     		mov	r5, r4
+ 606 0044 E2E7     		b	.L49
+ 607              	.LVL59:
+ 608              	.L59:
+ 127:Src/app_x-cube-ai.c ****         else if ((!inst) && (gnetworks[i].entry == NULL))
+ 609              		.loc 1 127 20 view .LVU160
+ 610              	.LBE63:
+ 611              	.LBE64:
+ 612              	.LBE65:
+ 613              	.LBB66:
+ 210:Src/app_x-cube-ai.c ****         if (hdl != inn->handle) {
+ 614              		.loc 1 210 9 is_stmt 1 view .LVU161
+ 210:Src/app_x-cube-ai.c ****         if (hdl != inn->handle) {
+ 615              		.loc 1 210 28 is_stmt 0 view .LVU162
+ 616 0046 2B68     		ldr	r3, [r5]
+ 210:Src/app_x-cube-ai.c ****         if (hdl != inn->handle) {
+ 617              		.loc 1 210 35 view .LVU163
+ 618 0048 9B6C     		ldr	r3, [r3, #72]
+ 210:Src/app_x-cube-ai.c ****         if (hdl != inn->handle) {
+ 619              		.loc 1 210 25 view .LVU164
+ 620 004a 6868     		ldr	r0, [r5, #4]
+ 621              	.LVL60:
+ 210:Src/app_x-cube-ai.c ****         if (hdl != inn->handle) {
+ 622              		.loc 1 210 25 view .LVU165
+ 623 004c 9847     		blx	r3
+ 624              	.LVL61:
+ 211:Src/app_x-cube-ai.c ****             ai_mnetwork_release_handle(inn);
+ 625              		.loc 1 211 9 is_stmt 1 view .LVU166
+ 211:Src/app_x-cube-ai.c ****             ai_mnetwork_release_handle(inn);
+ 626              		.loc 1 211 23 is_stmt 0 view .LVU167
+ 627 004e 6B68     		ldr	r3, [r5, #4]
+ 211:Src/app_x-cube-ai.c ****             ai_mnetwork_release_handle(inn);
+ 628              		.loc 1 211 12 view .LVU168
+ 629 0050 8342     		cmp	r3, r0
+ 630 0052 DCD0     		beq	.L52
+ 631              	.LBB67:
+ 632              	.LBB68:
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 18
+
+
+ 137:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst)) {
+ 633              		.loc 1 137 14 view .LVU169
+ 634 0054 0023     		movs	r3, #0
+ 635              	.L53:
+ 636              	.LVL62:
+ 137:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst)) {
+ 637              		.loc 1 137 5 view .LVU170
+ 638 0056 002B     		cmp	r3, #0
+ 639 0058 01DD     		ble	.L55
+ 640              	.LBE68:
+ 641              	.LBE67:
+ 213:Src/app_x-cube-ai.c ****         }
+ 642              		.loc 1 213 21 view .LVU171
+ 643 005a 0024     		movs	r4, #0
+ 644              	.LVL63:
+ 213:Src/app_x-cube-ai.c ****         }
+ 645              		.loc 1 213 21 view .LVU172
+ 646 005c D7E7     		b	.L52
+ 647              	.LVL64:
+ 648              	.L55:
+ 649              	.LBB70:
+ 650              	.LBB69:
+ 138:Src/app_x-cube-ai.c ****             gnetworks[i].entry = NULL;
+ 651              		.loc 1 138 9 is_stmt 1 view .LVU173
+ 138:Src/app_x-cube-ai.c ****             gnetworks[i].entry = NULL;
+ 652              		.loc 1 138 24 is_stmt 0 view .LVU174
+ 653 005e C3EBC302 		rsb	r2, r3, r3, lsl #3
+ 654 0062 D100     		lsls	r1, r2, #3
+ 655 0064 044A     		ldr	r2, .L62
+ 656 0066 0A44     		add	r2, r2, r1
+ 138:Src/app_x-cube-ai.c ****             gnetworks[i].entry = NULL;
+ 657              		.loc 1 138 20 view .LVU175
+ 658 0068 9542     		cmp	r5, r2
+ 659 006a 01D0     		beq	.L61
+ 137:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst)) {
+ 660              		.loc 1 137 42 view .LVU176
+ 661 006c 0133     		adds	r3, r3, #1
+ 662              	.LVL65:
+ 137:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst)) {
+ 663              		.loc 1 137 42 view .LVU177
+ 664 006e F2E7     		b	.L53
+ 665              	.L61:
+ 139:Src/app_x-cube-ai.c ****             return;
+ 666              		.loc 1 139 13 is_stmt 1 view .LVU178
+ 139:Src/app_x-cube-ai.c ****             return;
+ 667              		.loc 1 139 32 is_stmt 0 view .LVU179
+ 668 0070 0024     		movs	r4, #0
+ 669              	.LVL66:
+ 139:Src/app_x-cube-ai.c ****             return;
+ 670              		.loc 1 139 32 view .LVU180
+ 671 0072 014B     		ldr	r3, .L62
+ 672              	.LVL67:
+ 139:Src/app_x-cube-ai.c ****             return;
+ 673              		.loc 1 139 32 view .LVU181
+ 674 0074 5C50     		str	r4, [r3, r1]
+ 140:Src/app_x-cube-ai.c ****         }
+ 675              		.loc 1 140 13 is_stmt 1 view .LVU182
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 19
+
+
+ 676 0076 CAE7     		b	.L52
+ 677              	.L63:
+ 678              		.align	2
+ 679              	.L62:
+ 680 0078 00000000 		.word	.LANCHOR1
+ 681              	.LBE69:
+ 682              	.LBE70:
+ 683              	.LBE66:
+ 684              		.cfi_endproc
+ 685              	.LFE137:
+ 687              		.section	.text.ai_mnetwork_get_info,"ax",%progbits
+ 688              		.align	1
+ 689              		.global	ai_mnetwork_get_info
+ 690              		.syntax unified
+ 691              		.thumb
+ 692              		.thumb_func
+ 693              		.fpu fpv4-sp-d16
+ 695              	ai_mnetwork_get_info:
+ 696              	.LVL68:
+ 697              	.LFB138:
+ 218:Src/app_x-cube-ai.c **** 
+ 219:Src/app_x-cube-ai.c **** AI_API_ENTRY
+ 220:Src/app_x-cube-ai.c **** ai_bool ai_mnetwork_get_info(ai_handle network, ai_network_report* report)
+ 221:Src/app_x-cube-ai.c **** {
+ 698              		.loc 1 221 1 view -0
+ 699              		.cfi_startproc
+ 700              		@ args = 0, pretend = 0, frame = 0
+ 701              		@ frame_needed = 0, uses_anonymous_args = 0
+ 702              		.loc 1 221 1 is_stmt 0 view .LVU184
+ 703 0000 10B5     		push	{r4, lr}
+ 704              	.LCFI5:
+ 705              		.cfi_def_cfa_offset 8
+ 706              		.cfi_offset 4, -8
+ 707              		.cfi_offset 14, -4
+ 222:Src/app_x-cube-ai.c ****     struct network_instance *inn;
+ 708              		.loc 1 222 5 is_stmt 1 view .LVU185
+ 223:Src/app_x-cube-ai.c ****     inn =  ai_mnetwork_handle((struct network_instance *)network);
+ 709              		.loc 1 223 5 view .LVU186
+ 710              	.LVL69:
+ 711              	.LBB71:
+ 712              	.LBI71:
+ 123:Src/app_x-cube-ai.c **** {
+ 713              		.loc 1 123 26 view .LVU187
+ 714              	.LBB72:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 715              		.loc 1 125 5 view .LVU188
+ 716              	.LBB73:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 717              		.loc 1 125 10 view .LVU189
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 718              		.loc 1 125 14 is_stmt 0 view .LVU190
+ 719 0002 0023     		movs	r3, #0
+ 720              	.LVL70:
+ 721              	.L65:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 722              		.loc 1 125 5 view .LVU191
+ 723 0004 002B     		cmp	r3, #0
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 20
+
+
+ 724 0006 06DD     		ble	.L69
+ 725              	.LBE73:
+ 131:Src/app_x-cube-ai.c **** }
+ 726              		.loc 1 131 12 view .LVU192
+ 727 0008 0020     		movs	r0, #0
+ 728              	.LVL71:
+ 729              	.L67:
+ 131:Src/app_x-cube-ai.c **** }
+ 730              		.loc 1 131 12 view .LVU193
+ 731              	.LBE72:
+ 732              	.LBE71:
+ 224:Src/app_x-cube-ai.c ****     if (inn)
+ 733              		.loc 1 224 5 is_stmt 1 view .LVU194
+ 734              		.loc 1 224 8 is_stmt 0 view .LVU195
+ 735 000a E0B1     		cbz	r0, .L71
+ 225:Src/app_x-cube-ai.c ****         return inn->entry->ai_get_info(inn->handle, report);
+ 736              		.loc 1 225 9 is_stmt 1 view .LVU196
+ 737              		.loc 1 225 19 is_stmt 0 view .LVU197
+ 738 000c 0368     		ldr	r3, [r0]
+ 739              		.loc 1 225 26 view .LVU198
+ 740 000e DB6B     		ldr	r3, [r3, #60]
+ 741              		.loc 1 225 16 view .LVU199
+ 742 0010 4068     		ldr	r0, [r0, #4]
+ 743              	.LVL72:
+ 744              		.loc 1 225 16 view .LVU200
+ 745 0012 9847     		blx	r3
+ 746              	.LVL73:
+ 747              	.L70:
+ 226:Src/app_x-cube-ai.c ****     else
+ 227:Src/app_x-cube-ai.c ****         return false;
+ 228:Src/app_x-cube-ai.c **** }
+ 748              		.loc 1 228 1 view .LVU201
+ 749 0014 10BD     		pop	{r4, pc}
+ 750              	.LVL74:
+ 751              	.L69:
+ 752              	.LBB76:
+ 753              	.LBB75:
+ 754              	.LBB74:
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 755              		.loc 1 126 9 is_stmt 1 view .LVU202
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 756              		.loc 1 126 12 is_stmt 0 view .LVU203
+ 757 0016 30B1     		cbz	r0, .L66
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 758              		.loc 1 126 24 view .LVU204
+ 759 0018 C3EBC302 		rsb	r2, r3, r3, lsl #3
+ 760 001c D400     		lsls	r4, r2, #3
+ 761 001e 0B4A     		ldr	r2, .L74
+ 762 0020 2244     		add	r2, r2, r4
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 763              		.loc 1 126 20 view .LVU205
+ 764 0022 9042     		cmp	r0, r2
+ 765 0024 F1D0     		beq	.L67
+ 766              	.L66:
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 767              		.loc 1 128 14 is_stmt 1 view .LVU206
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 21
+
+
+ 768              		.loc 1 128 17 is_stmt 0 view .LVU207
+ 769 0026 08B1     		cbz	r0, .L73
+ 770              	.L68:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 771              		.loc 1 125 42 view .LVU208
+ 772 0028 0133     		adds	r3, r3, #1
+ 773              	.LVL75:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 774              		.loc 1 125 42 view .LVU209
+ 775 002a EBE7     		b	.L65
+ 776              	.L73:
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 777              		.loc 1 128 42 view .LVU210
+ 778 002c C3EBC304 		rsb	r4, r3, r3, lsl #3
+ 779 0030 E200     		lsls	r2, r4, #3
+ 780 0032 064C     		ldr	r4, .L74
+ 781 0034 A258     		ldr	r2, [r4, r2]
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 782              		.loc 1 128 26 view .LVU211
+ 783 0036 002A     		cmp	r2, #0
+ 784 0038 F6D1     		bne	.L68
+ 129:Src/app_x-cube-ai.c ****     }
+ 785              		.loc 1 129 13 is_stmt 1 view .LVU212
+ 129:Src/app_x-cube-ai.c ****     }
+ 786              		.loc 1 129 20 is_stmt 0 view .LVU213
+ 787 003a C3EBC303 		rsb	r3, r3, r3, lsl #3
+ 788              	.LVL76:
+ 129:Src/app_x-cube-ai.c ****     }
+ 789              		.loc 1 129 20 view .LVU214
+ 790 003e DA00     		lsls	r2, r3, #3
+ 791 0040 2046     		mov	r0, r4
+ 792              	.LVL77:
+ 129:Src/app_x-cube-ai.c ****     }
+ 793              		.loc 1 129 20 view .LVU215
+ 794 0042 1044     		add	r0, r0, r2
+ 795 0044 E1E7     		b	.L67
+ 796              	.LVL78:
+ 797              	.L71:
+ 129:Src/app_x-cube-ai.c ****     }
+ 798              		.loc 1 129 20 view .LVU216
+ 799              	.LBE74:
+ 800              	.LBE75:
+ 801              	.LBE76:
+ 227:Src/app_x-cube-ai.c **** }
+ 802              		.loc 1 227 16 view .LVU217
+ 803 0046 0020     		movs	r0, #0
+ 804              	.LVL79:
+ 227:Src/app_x-cube-ai.c **** }
+ 805              		.loc 1 227 16 view .LVU218
+ 806 0048 E4E7     		b	.L70
+ 807              	.L75:
+ 808 004a 00BF     		.align	2
+ 809              	.L74:
+ 810 004c 00000000 		.word	.LANCHOR1
+ 811              		.cfi_endproc
+ 812              	.LFE138:
+ 814              		.section	.text.ai_mnetwork_get_error,"ax",%progbits
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 22
+
+
+ 815              		.align	1
+ 816              		.global	ai_mnetwork_get_error
+ 817              		.syntax unified
+ 818              		.thumb
+ 819              		.thumb_func
+ 820              		.fpu fpv4-sp-d16
+ 822              	ai_mnetwork_get_error:
+ 823              	.LVL80:
+ 824              	.LFB139:
+ 229:Src/app_x-cube-ai.c **** 
+ 230:Src/app_x-cube-ai.c **** AI_API_ENTRY
+ 231:Src/app_x-cube-ai.c **** ai_error ai_mnetwork_get_error(ai_handle network)
+ 232:Src/app_x-cube-ai.c **** {
+ 825              		.loc 1 232 1 is_stmt 1 view -0
+ 826              		.cfi_startproc
+ 827              		@ args = 0, pretend = 0, frame = 0
+ 828              		@ frame_needed = 0, uses_anonymous_args = 0
+ 829              		.loc 1 232 1 is_stmt 0 view .LVU220
+ 830 0000 10B5     		push	{r4, lr}
+ 831              	.LCFI6:
+ 832              		.cfi_def_cfa_offset 8
+ 833              		.cfi_offset 4, -8
+ 834              		.cfi_offset 14, -4
+ 233:Src/app_x-cube-ai.c ****     struct network_instance *inn;
+ 835              		.loc 1 233 5 is_stmt 1 view .LVU221
+ 234:Src/app_x-cube-ai.c ****     ai_error err;
+ 836              		.loc 1 234 5 view .LVU222
+ 235:Src/app_x-cube-ai.c ****     err.type = AI_ERROR_INVALID_PARAM;
+ 837              		.loc 1 235 5 view .LVU223
+ 838              		.loc 1 235 14 is_stmt 0 view .LVU224
+ 839 0002 0022     		movs	r2, #0
+ 840              	.LVL81:
+ 841              		.loc 1 235 14 view .LVU225
+ 842 0004 1423     		movs	r3, #20
+ 843 0006 63F30702 		bfi	r2, r3, #0, #8
+ 844              	.LVL82:
+ 236:Src/app_x-cube-ai.c ****     err.code = AI_ERROR_CODE_NETWORK;
+ 845              		.loc 1 236 5 is_stmt 1 view .LVU226
+ 846              		.loc 1 236 14 is_stmt 0 view .LVU227
+ 847 000a 1023     		movs	r3, #16
+ 848 000c 63F31F22 		bfi	r2, r3, #8, #24
+ 237:Src/app_x-cube-ai.c **** 
+ 238:Src/app_x-cube-ai.c ****     inn =  ai_mnetwork_handle((struct network_instance *)network);
+ 849              		.loc 1 238 5 is_stmt 1 view .LVU228
+ 850              	.LVL83:
+ 851              	.LBB77:
+ 852              	.LBI77:
+ 123:Src/app_x-cube-ai.c **** {
+ 853              		.loc 1 123 26 view .LVU229
+ 854              	.LBB78:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 855              		.loc 1 125 5 view .LVU230
+ 856              	.LBB79:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 857              		.loc 1 125 10 view .LVU231
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 858              		.loc 1 125 14 is_stmt 0 view .LVU232
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 23
+
+
+ 859 0010 0023     		movs	r3, #0
+ 860              	.LVL84:
+ 861              	.L77:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 862              		.loc 1 125 5 view .LVU233
+ 863 0012 002B     		cmp	r3, #0
+ 864 0014 06DD     		ble	.L81
+ 865              	.LBE79:
+ 131:Src/app_x-cube-ai.c **** }
+ 866              		.loc 1 131 12 view .LVU234
+ 867 0016 0020     		movs	r0, #0
+ 868              	.LVL85:
+ 869              	.L79:
+ 131:Src/app_x-cube-ai.c **** }
+ 870              		.loc 1 131 12 view .LVU235
+ 871              	.LBE78:
+ 872              	.LBE77:
+ 239:Src/app_x-cube-ai.c ****     if (inn)
+ 873              		.loc 1 239 5 is_stmt 1 view .LVU236
+ 874              		.loc 1 239 8 is_stmt 0 view .LVU237
+ 875 0018 D8B1     		cbz	r0, .L82
+ 240:Src/app_x-cube-ai.c ****         return inn->entry->ai_get_error(inn->handle);
+ 876              		.loc 1 240 9 is_stmt 1 view .LVU238
+ 877              		.loc 1 240 19 is_stmt 0 view .LVU239
+ 878 001a 0368     		ldr	r3, [r0]
+ 879              		.loc 1 240 26 view .LVU240
+ 880 001c 5B6C     		ldr	r3, [r3, #68]
+ 881              		.loc 1 240 16 view .LVU241
+ 882 001e 4068     		ldr	r0, [r0, #4]
+ 883              	.LVL86:
+ 884              		.loc 1 240 16 view .LVU242
+ 885 0020 9847     		blx	r3
+ 886              	.LVL87:
+ 887              	.L83:
+ 241:Src/app_x-cube-ai.c ****     else
+ 242:Src/app_x-cube-ai.c ****         return err;
+ 243:Src/app_x-cube-ai.c **** }
+ 888              		.loc 1 243 1 view .LVU243
+ 889 0022 10BD     		pop	{r4, pc}
+ 890              	.LVL88:
+ 891              	.L81:
+ 892              	.LBB82:
+ 893              	.LBB81:
+ 894              	.LBB80:
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 895              		.loc 1 126 9 is_stmt 1 view .LVU244
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 896              		.loc 1 126 12 is_stmt 0 view .LVU245
+ 897 0024 30B1     		cbz	r0, .L78
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 898              		.loc 1 126 24 view .LVU246
+ 899 0026 C3EBC301 		rsb	r1, r3, r3, lsl #3
+ 900 002a 0B4C     		ldr	r4, .L86
+ 901 002c 04EBC101 		add	r1, r4, r1, lsl #3
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 902              		.loc 1 126 20 view .LVU247
+ 903 0030 8842     		cmp	r0, r1
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 24
+
+
+ 904 0032 F1D0     		beq	.L79
+ 905              	.L78:
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 906              		.loc 1 128 14 is_stmt 1 view .LVU248
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 907              		.loc 1 128 17 is_stmt 0 view .LVU249
+ 908 0034 08B1     		cbz	r0, .L85
+ 909              	.L80:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 910              		.loc 1 125 42 view .LVU250
+ 911 0036 0133     		adds	r3, r3, #1
+ 912              	.LVL89:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 913              		.loc 1 125 42 view .LVU251
+ 914 0038 EBE7     		b	.L77
+ 915              	.L85:
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 916              		.loc 1 128 42 view .LVU252
+ 917 003a C3EBC301 		rsb	r1, r3, r3, lsl #3
+ 918 003e 064C     		ldr	r4, .L86
+ 919 0040 54F83110 		ldr	r1, [r4, r1, lsl #3]
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 920              		.loc 1 128 26 view .LVU253
+ 921 0044 0029     		cmp	r1, #0
+ 922 0046 F6D1     		bne	.L80
+ 129:Src/app_x-cube-ai.c ****     }
+ 923              		.loc 1 129 13 is_stmt 1 view .LVU254
+ 129:Src/app_x-cube-ai.c ****     }
+ 924              		.loc 1 129 20 is_stmt 0 view .LVU255
+ 925 0048 C3EBC303 		rsb	r3, r3, r3, lsl #3
+ 926              	.LVL90:
+ 129:Src/app_x-cube-ai.c ****     }
+ 927              		.loc 1 129 20 view .LVU256
+ 928 004c 04EBC300 		add	r0, r4, r3, lsl #3
+ 929              	.LVL91:
+ 129:Src/app_x-cube-ai.c ****     }
+ 930              		.loc 1 129 20 view .LVU257
+ 931 0050 E2E7     		b	.L79
+ 932              	.LVL92:
+ 933              	.L82:
+ 129:Src/app_x-cube-ai.c ****     }
+ 934              		.loc 1 129 20 view .LVU258
+ 935              	.LBE80:
+ 936              	.LBE81:
+ 937              	.LBE82:
+ 242:Src/app_x-cube-ai.c **** }
+ 938              		.loc 1 242 9 is_stmt 1 view .LVU259
+ 242:Src/app_x-cube-ai.c **** }
+ 939              		.loc 1 242 16 is_stmt 0 view .LVU260
+ 940 0052 1046     		mov	r0, r2
+ 941              	.LVL93:
+ 242:Src/app_x-cube-ai.c **** }
+ 942              		.loc 1 242 16 view .LVU261
+ 943 0054 E5E7     		b	.L83
+ 944              	.L87:
+ 945 0056 00BF     		.align	2
+ 946              	.L86:
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 25
+
+
+ 947 0058 00000000 		.word	.LANCHOR1
+ 948              		.cfi_endproc
+ 949              	.LFE139:
+ 951              		.section	.text.ai_mnetwork_init,"ax",%progbits
+ 952              		.align	1
+ 953              		.global	ai_mnetwork_init
+ 954              		.syntax unified
+ 955              		.thumb
+ 956              		.thumb_func
+ 957              		.fpu fpv4-sp-d16
+ 959              	ai_mnetwork_init:
+ 960              	.LVL94:
+ 961              	.LFB140:
+ 244:Src/app_x-cube-ai.c **** 
+ 245:Src/app_x-cube-ai.c **** AI_API_ENTRY
+ 246:Src/app_x-cube-ai.c **** ai_bool ai_mnetwork_init(ai_handle network, const ai_network_params* params)
+ 247:Src/app_x-cube-ai.c **** {
+ 962              		.loc 1 247 1 is_stmt 1 view -0
+ 963              		.cfi_startproc
+ 964              		@ args = 0, pretend = 0, frame = 48
+ 965              		@ frame_needed = 0, uses_anonymous_args = 0
+ 966              		.loc 1 247 1 is_stmt 0 view .LVU263
+ 967 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 968              	.LCFI7:
+ 969              		.cfi_def_cfa_offset 20
+ 970              		.cfi_offset 4, -20
+ 971              		.cfi_offset 5, -16
+ 972              		.cfi_offset 6, -12
+ 973              		.cfi_offset 7, -8
+ 974              		.cfi_offset 14, -4
+ 975 0002 8DB0     		sub	sp, sp, #52
+ 976              	.LCFI8:
+ 977              		.cfi_def_cfa_offset 72
+ 978 0004 0646     		mov	r6, r0
+ 979 0006 0F46     		mov	r7, r1
+ 248:Src/app_x-cube-ai.c ****     struct network_instance *inn;
+ 980              		.loc 1 248 5 is_stmt 1 view .LVU264
+ 249:Src/app_x-cube-ai.c ****     ai_network_params par;
+ 981              		.loc 1 249 5 view .LVU265
+ 250:Src/app_x-cube-ai.c **** 
+ 251:Src/app_x-cube-ai.c ****     /* TODO: adding check ai_buffer activations/weights shape coherence */
+ 252:Src/app_x-cube-ai.c **** 
+ 253:Src/app_x-cube-ai.c ****     inn =  ai_mnetwork_handle((struct network_instance *)network);
+ 982              		.loc 1 253 5 view .LVU266
+ 983              	.LVL95:
+ 984              	.LBB83:
+ 985              	.LBI83:
+ 123:Src/app_x-cube-ai.c **** {
+ 986              		.loc 1 123 26 view .LVU267
+ 987              	.LBB84:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 988              		.loc 1 125 5 view .LVU268
+ 989              	.LBB85:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 990              		.loc 1 125 10 view .LVU269
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 991              		.loc 1 125 14 is_stmt 0 view .LVU270
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 26
+
+
+ 992 0008 0023     		movs	r3, #0
+ 993              	.LVL96:
+ 994              	.L89:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 995              		.loc 1 125 5 view .LVU271
+ 996 000a 002B     		cmp	r3, #0
+ 997 000c 29DD     		ble	.L93
+ 998              	.LBE85:
+ 131:Src/app_x-cube-ai.c **** }
+ 999              		.loc 1 131 12 view .LVU272
+ 1000 000e 0026     		movs	r6, #0
+ 1001              	.LVL97:
+ 1002              	.L91:
+ 131:Src/app_x-cube-ai.c **** }
+ 1003              		.loc 1 131 12 view .LVU273
+ 1004              	.LBE84:
+ 1005              	.LBE83:
+ 254:Src/app_x-cube-ai.c ****     if (inn) {
+ 1006              		.loc 1 254 5 is_stmt 1 view .LVU274
+ 1007              		.loc 1 254 8 is_stmt 0 view .LVU275
+ 1008 0010 002E     		cmp	r6, #0
+ 1009 0012 46D0     		beq	.L99
+ 255:Src/app_x-cube-ai.c ****         par = inn->entry->params;
+ 1010              		.loc 1 255 9 is_stmt 1 view .LVU276
+ 1011              		.loc 1 255 18 is_stmt 0 view .LVU277
+ 1012 0014 3468     		ldr	r4, [r6]
+ 1013              		.loc 1 255 13 view .LVU278
+ 1014 0016 6D46     		mov	r5, sp
+ 1015 0018 0434     		adds	r4, r4, #4
+ 1016 001a 0FCC     		ldmia	r4!, {r0, r1, r2, r3}
+ 1017              	.LVL98:
+ 1018              		.loc 1 255 13 view .LVU279
+ 1019 001c 0FC5     		stmia	r5!, {r0, r1, r2, r3}
+ 1020 001e 0FCC     		ldmia	r4!, {r0, r1, r2, r3}
+ 1021 0020 0FC5     		stmia	r5!, {r0, r1, r2, r3}
+ 1022 0022 94E80F00 		ldm	r4, {r0, r1, r2, r3}
+ 1023 0026 85E80F00 		stm	r5, {r0, r1, r2, r3}
+ 256:Src/app_x-cube-ai.c ****         if (params->activations.n_batches)
+ 1024              		.loc 1 256 9 is_stmt 1 view .LVU280
+ 1025              		.loc 1 256 32 is_stmt 0 view .LVU281
+ 1026 002a BB8B     		ldrh	r3, [r7, #28]
+ 1027              		.loc 1 256 12 view .LVU282
+ 1028 002c 002B     		cmp	r3, #0
+ 1029 002e 30D0     		beq	.L95
+ 257:Src/app_x-cube-ai.c ****             par.activations = params->activations;
+ 1030              		.loc 1 257 13 is_stmt 1 view .LVU283
+ 1031              		.loc 1 257 29 is_stmt 0 view .LVU284
+ 1032 0030 06AC     		add	r4, sp, #24
+ 1033 0032 07F11805 		add	r5, r7, #24
+ 1034 0036 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 1035 0038 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 1036 003a 95E80300 		ldm	r5, {r0, r1}
+ 1037 003e 84E80300 		stm	r4, {r0, r1}
+ 1038              	.L96:
+ 258:Src/app_x-cube-ai.c ****         else
+ 259:Src/app_x-cube-ai.c ****             par.activations.data = params->activations.data;
+ 260:Src/app_x-cube-ai.c ****         if (params->params.n_batches)
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 27
+
+
+ 1039              		.loc 1 260 9 is_stmt 1 view .LVU285
+ 1040              		.loc 1 260 27 is_stmt 0 view .LVU286
+ 1041 0042 BB88     		ldrh	r3, [r7, #4]
+ 1042              		.loc 1 260 12 view .LVU287
+ 1043 0044 43B3     		cbz	r3, .L97
+ 261:Src/app_x-cube-ai.c ****             par.params = params->params;
+ 1044              		.loc 1 261 13 is_stmt 1 view .LVU288
+ 1045              		.loc 1 261 24 is_stmt 0 view .LVU289
+ 1046 0046 6C46     		mov	r4, sp
+ 1047 0048 0FCF     		ldmia	r7!, {r0, r1, r2, r3}
+ 1048              	.LVL99:
+ 1049              		.loc 1 261 24 view .LVU290
+ 1050 004a 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 1051 004c 97E80300 		ldm	r7, {r0, r1}
+ 1052 0050 84E80300 		stm	r4, {r0, r1}
+ 1053              	.LVL100:
+ 1054              	.L98:
+ 262:Src/app_x-cube-ai.c ****         else
+ 263:Src/app_x-cube-ai.c ****             par.params.data = inn->entry->ai_data_weights_get_default();
+ 264:Src/app_x-cube-ai.c ****         return inn->entry->ai_init(inn->handle, &par);
+ 1055              		.loc 1 264 9 is_stmt 1 view .LVU291
+ 1056              		.loc 1 264 19 is_stmt 0 view .LVU292
+ 1057 0054 3368     		ldr	r3, [r6]
+ 1058              		.loc 1 264 26 view .LVU293
+ 1059 0056 DB6C     		ldr	r3, [r3, #76]
+ 1060              		.loc 1 264 16 view .LVU294
+ 1061 0058 6946     		mov	r1, sp
+ 1062 005a 7068     		ldr	r0, [r6, #4]
+ 1063 005c 9847     		blx	r3
+ 1064              	.LVL101:
+ 1065              	.L94:
+ 265:Src/app_x-cube-ai.c ****     }
+ 266:Src/app_x-cube-ai.c ****     else
+ 267:Src/app_x-cube-ai.c ****         return false;
+ 268:Src/app_x-cube-ai.c **** }
+ 1066              		.loc 1 268 1 view .LVU295
+ 1067 005e 0DB0     		add	sp, sp, #52
+ 1068              	.LCFI9:
+ 1069              		.cfi_remember_state
+ 1070              		.cfi_def_cfa_offset 20
+ 1071              		@ sp needed
+ 1072 0060 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1073              	.LVL102:
+ 1074              	.L93:
+ 1075              	.LCFI10:
+ 1076              		.cfi_restore_state
+ 1077              	.LBB88:
+ 1078              	.LBB87:
+ 1079              	.LBB86:
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 1080              		.loc 1 126 9 is_stmt 1 view .LVU296
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 1081              		.loc 1 126 12 is_stmt 0 view .LVU297
+ 1082 0062 36B1     		cbz	r6, .L90
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 1083              		.loc 1 126 24 view .LVU298
+ 1084 0064 C3EBC302 		rsb	r2, r3, r3, lsl #3
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 28
+
+
+ 1085 0068 D100     		lsls	r1, r2, #3
+ 1086 006a 0F4A     		ldr	r2, .L102
+ 1087 006c 0A44     		add	r2, r2, r1
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 1088              		.loc 1 126 20 view .LVU299
+ 1089 006e 9642     		cmp	r6, r2
+ 1090 0070 CED0     		beq	.L91
+ 1091              	.L90:
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 1092              		.loc 1 128 14 is_stmt 1 view .LVU300
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 1093              		.loc 1 128 17 is_stmt 0 view .LVU301
+ 1094 0072 0EB1     		cbz	r6, .L101
+ 1095              	.L92:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 1096              		.loc 1 125 42 view .LVU302
+ 1097 0074 0133     		adds	r3, r3, #1
+ 1098              	.LVL103:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 1099              		.loc 1 125 42 view .LVU303
+ 1100 0076 C8E7     		b	.L89
+ 1101              	.L101:
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 1102              		.loc 1 128 42 view .LVU304
+ 1103 0078 C3EBC301 		rsb	r1, r3, r3, lsl #3
+ 1104 007c CA00     		lsls	r2, r1, #3
+ 1105 007e 0A49     		ldr	r1, .L102
+ 1106 0080 8A58     		ldr	r2, [r1, r2]
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 1107              		.loc 1 128 26 view .LVU305
+ 1108 0082 002A     		cmp	r2, #0
+ 1109 0084 F6D1     		bne	.L92
+ 129:Src/app_x-cube-ai.c ****     }
+ 1110              		.loc 1 129 13 is_stmt 1 view .LVU306
+ 129:Src/app_x-cube-ai.c ****     }
+ 1111              		.loc 1 129 20 is_stmt 0 view .LVU307
+ 1112 0086 C3EBC303 		rsb	r3, r3, r3, lsl #3
+ 1113              	.LVL104:
+ 129:Src/app_x-cube-ai.c ****     }
+ 1114              		.loc 1 129 20 view .LVU308
+ 1115 008a DA00     		lsls	r2, r3, #3
+ 1116 008c 0E46     		mov	r6, r1
+ 1117 008e 1644     		add	r6, r6, r2
+ 1118 0090 BEE7     		b	.L91
+ 1119              	.LVL105:
+ 1120              	.L95:
+ 129:Src/app_x-cube-ai.c ****     }
+ 1121              		.loc 1 129 20 view .LVU309
+ 1122              	.LBE86:
+ 1123              	.LBE87:
+ 1124              	.LBE88:
+ 259:Src/app_x-cube-ai.c ****         if (params->params.n_batches)
+ 1125              		.loc 1 259 13 is_stmt 1 view .LVU310
+ 259:Src/app_x-cube-ai.c ****         if (params->params.n_batches)
+ 1126              		.loc 1 259 55 is_stmt 0 view .LVU311
+ 1127 0092 BB6A     		ldr	r3, [r7, #40]
+ 259:Src/app_x-cube-ai.c ****         if (params->params.n_batches)
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 29
+
+
+ 1128              		.loc 1 259 34 view .LVU312
+ 1129 0094 0A93     		str	r3, [sp, #40]
+ 1130 0096 D4E7     		b	.L96
+ 1131              	.L97:
+ 263:Src/app_x-cube-ai.c ****         return inn->entry->ai_init(inn->handle, &par);
+ 1132              		.loc 1 263 13 is_stmt 1 view .LVU313
+ 263:Src/app_x-cube-ai.c ****         return inn->entry->ai_init(inn->handle, &par);
+ 1133              		.loc 1 263 34 is_stmt 0 view .LVU314
+ 1134 0098 3368     		ldr	r3, [r6]
+ 263:Src/app_x-cube-ai.c ****         return inn->entry->ai_init(inn->handle, &par);
+ 1135              		.loc 1 263 41 view .LVU315
+ 1136 009a 9B6B     		ldr	r3, [r3, #56]
+ 263:Src/app_x-cube-ai.c ****         return inn->entry->ai_init(inn->handle, &par);
+ 1137              		.loc 1 263 31 view .LVU316
+ 1138 009c 9847     		blx	r3
+ 1139              	.LVL106:
+ 263:Src/app_x-cube-ai.c ****         return inn->entry->ai_init(inn->handle, &par);
+ 1140              		.loc 1 263 29 view .LVU317
+ 1141 009e 0490     		str	r0, [sp, #16]
+ 1142 00a0 D8E7     		b	.L98
+ 1143              	.LVL107:
+ 1144              	.L99:
+ 267:Src/app_x-cube-ai.c **** }
+ 1145              		.loc 1 267 16 view .LVU318
+ 1146 00a2 0020     		movs	r0, #0
+ 1147              	.LVL108:
+ 267:Src/app_x-cube-ai.c **** }
+ 1148              		.loc 1 267 16 view .LVU319
+ 1149 00a4 DBE7     		b	.L94
+ 1150              	.L103:
+ 1151 00a6 00BF     		.align	2
+ 1152              	.L102:
+ 1153 00a8 00000000 		.word	.LANCHOR1
+ 1154              		.cfi_endproc
+ 1155              	.LFE140:
+ 1157              		.section	.text.ai_mnetwork_run,"ax",%progbits
+ 1158              		.align	1
+ 1159              		.global	ai_mnetwork_run
+ 1160              		.syntax unified
+ 1161              		.thumb
+ 1162              		.thumb_func
+ 1163              		.fpu fpv4-sp-d16
+ 1165              	ai_mnetwork_run:
+ 1166              	.LVL109:
+ 1167              	.LFB141:
+ 269:Src/app_x-cube-ai.c **** 
+ 270:Src/app_x-cube-ai.c **** AI_API_ENTRY
+ 271:Src/app_x-cube-ai.c **** ai_i32 ai_mnetwork_run(ai_handle network, const ai_buffer* input,
+ 272:Src/app_x-cube-ai.c ****         ai_buffer* output)
+ 273:Src/app_x-cube-ai.c **** {
+ 1168              		.loc 1 273 1 is_stmt 1 view -0
+ 1169              		.cfi_startproc
+ 1170              		@ args = 0, pretend = 0, frame = 0
+ 1171              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1172              		.loc 1 273 1 is_stmt 0 view .LVU321
+ 1173 0000 38B5     		push	{r3, r4, r5, lr}
+ 1174              	.LCFI11:
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 30
+
+
+ 1175              		.cfi_def_cfa_offset 16
+ 1176              		.cfi_offset 3, -16
+ 1177              		.cfi_offset 4, -12
+ 1178              		.cfi_offset 5, -8
+ 1179              		.cfi_offset 14, -4
+ 274:Src/app_x-cube-ai.c ****     struct network_instance* inn;
+ 1180              		.loc 1 274 5 is_stmt 1 view .LVU322
+ 275:Src/app_x-cube-ai.c ****     inn =  ai_mnetwork_handle((struct network_instance *)network);
+ 1181              		.loc 1 275 5 view .LVU323
+ 1182              	.LVL110:
+ 1183              	.LBB89:
+ 1184              	.LBI89:
+ 123:Src/app_x-cube-ai.c **** {
+ 1185              		.loc 1 123 26 view .LVU324
+ 1186              	.LBB90:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 1187              		.loc 1 125 5 view .LVU325
+ 1188              	.LBB91:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 1189              		.loc 1 125 10 view .LVU326
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 1190              		.loc 1 125 14 is_stmt 0 view .LVU327
+ 1191 0002 0023     		movs	r3, #0
+ 1192              	.LVL111:
+ 1193              	.L105:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 1194              		.loc 1 125 5 view .LVU328
+ 1195 0004 002B     		cmp	r3, #0
+ 1196 0006 06DD     		ble	.L109
+ 1197              	.LBE91:
+ 131:Src/app_x-cube-ai.c **** }
+ 1198              		.loc 1 131 12 view .LVU329
+ 1199 0008 0020     		movs	r0, #0
+ 1200              	.LVL112:
+ 1201              	.L107:
+ 131:Src/app_x-cube-ai.c **** }
+ 1202              		.loc 1 131 12 view .LVU330
+ 1203              	.LBE90:
+ 1204              	.LBE89:
+ 276:Src/app_x-cube-ai.c ****     if (inn)
+ 1205              		.loc 1 276 5 is_stmt 1 view .LVU331
+ 1206              		.loc 1 276 8 is_stmt 0 view .LVU332
+ 1207 000a D8B1     		cbz	r0, .L111
+ 277:Src/app_x-cube-ai.c ****         return inn->entry->ai_run(inn->handle, input, output);
+ 1208              		.loc 1 277 9 is_stmt 1 view .LVU333
+ 1209              		.loc 1 277 19 is_stmt 0 view .LVU334
+ 1210 000c 0368     		ldr	r3, [r0]
+ 1211              		.loc 1 277 26 view .LVU335
+ 1212 000e 1B6D     		ldr	r3, [r3, #80]
+ 1213              		.loc 1 277 16 view .LVU336
+ 1214 0010 4068     		ldr	r0, [r0, #4]
+ 1215              	.LVL113:
+ 1216              		.loc 1 277 16 view .LVU337
+ 1217 0012 9847     		blx	r3
+ 1218              	.LVL114:
+ 1219              	.L104:
+ 278:Src/app_x-cube-ai.c ****     else
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 31
+
+
+ 279:Src/app_x-cube-ai.c ****         return 0;
+ 280:Src/app_x-cube-ai.c **** }
+ 1220              		.loc 1 280 1 view .LVU338
+ 1221 0014 38BD     		pop	{r3, r4, r5, pc}
+ 1222              	.LVL115:
+ 1223              	.L109:
+ 1224              	.LBB94:
+ 1225              	.LBB93:
+ 1226              	.LBB92:
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 1227              		.loc 1 126 9 is_stmt 1 view .LVU339
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 1228              		.loc 1 126 12 is_stmt 0 view .LVU340
+ 1229 0016 30B1     		cbz	r0, .L106
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 1230              		.loc 1 126 24 view .LVU341
+ 1231 0018 C3EBC304 		rsb	r4, r3, r3, lsl #3
+ 1232 001c E500     		lsls	r5, r4, #3
+ 1233 001e 0A4C     		ldr	r4, .L114
+ 1234 0020 2C44     		add	r4, r4, r5
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 1235              		.loc 1 126 20 view .LVU342
+ 1236 0022 A042     		cmp	r0, r4
+ 1237 0024 F1D0     		beq	.L107
+ 1238              	.L106:
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 1239              		.loc 1 128 14 is_stmt 1 view .LVU343
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 1240              		.loc 1 128 17 is_stmt 0 view .LVU344
+ 1241 0026 08B1     		cbz	r0, .L113
+ 1242              	.L108:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 1243              		.loc 1 125 42 view .LVU345
+ 1244 0028 0133     		adds	r3, r3, #1
+ 1245              	.LVL116:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 1246              		.loc 1 125 42 view .LVU346
+ 1247 002a EBE7     		b	.L105
+ 1248              	.L113:
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 1249              		.loc 1 128 42 view .LVU347
+ 1250 002c C3EBC305 		rsb	r5, r3, r3, lsl #3
+ 1251 0030 EC00     		lsls	r4, r5, #3
+ 1252 0032 054D     		ldr	r5, .L114
+ 1253 0034 2C59     		ldr	r4, [r5, r4]
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 1254              		.loc 1 128 26 view .LVU348
+ 1255 0036 002C     		cmp	r4, #0
+ 1256 0038 F6D1     		bne	.L108
+ 129:Src/app_x-cube-ai.c ****     }
+ 1257              		.loc 1 129 13 is_stmt 1 view .LVU349
+ 129:Src/app_x-cube-ai.c ****     }
+ 1258              		.loc 1 129 20 is_stmt 0 view .LVU350
+ 1259 003a C3EBC303 		rsb	r3, r3, r3, lsl #3
+ 1260              	.LVL117:
+ 129:Src/app_x-cube-ai.c ****     }
+ 1261              		.loc 1 129 20 view .LVU351
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 32
+
+
+ 1262 003e D800     		lsls	r0, r3, #3
+ 1263              	.LVL118:
+ 129:Src/app_x-cube-ai.c ****     }
+ 1264              		.loc 1 129 20 view .LVU352
+ 1265 0040 2844     		add	r0, r0, r5
+ 1266 0042 E2E7     		b	.L107
+ 1267              	.LVL119:
+ 1268              	.L111:
+ 129:Src/app_x-cube-ai.c ****     }
+ 1269              		.loc 1 129 20 view .LVU353
+ 1270              	.LBE92:
+ 1271              	.LBE93:
+ 1272              	.LBE94:
+ 279:Src/app_x-cube-ai.c **** }
+ 1273              		.loc 1 279 16 view .LVU354
+ 1274 0044 0020     		movs	r0, #0
+ 1275              	.LVL120:
+ 279:Src/app_x-cube-ai.c **** }
+ 1276              		.loc 1 279 16 view .LVU355
+ 1277 0046 E5E7     		b	.L104
+ 1278              	.L115:
+ 1279              		.align	2
+ 1280              	.L114:
+ 1281 0048 00000000 		.word	.LANCHOR1
+ 1282              		.cfi_endproc
+ 1283              	.LFE141:
+ 1285              		.section	.text.ai_mnetwork_forward,"ax",%progbits
+ 1286              		.align	1
+ 1287              		.global	ai_mnetwork_forward
+ 1288              		.syntax unified
+ 1289              		.thumb
+ 1290              		.thumb_func
+ 1291              		.fpu fpv4-sp-d16
+ 1293              	ai_mnetwork_forward:
+ 1294              	.LVL121:
+ 1295              	.LFB142:
+ 281:Src/app_x-cube-ai.c **** 
+ 282:Src/app_x-cube-ai.c **** AI_API_ENTRY
+ 283:Src/app_x-cube-ai.c **** ai_i32 ai_mnetwork_forward(ai_handle network, const ai_buffer* input)
+ 284:Src/app_x-cube-ai.c **** {
+ 1296              		.loc 1 284 1 is_stmt 1 view -0
+ 1297              		.cfi_startproc
+ 1298              		@ args = 0, pretend = 0, frame = 0
+ 1299              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1300              		.loc 1 284 1 is_stmt 0 view .LVU357
+ 1301 0000 10B5     		push	{r4, lr}
+ 1302              	.LCFI12:
+ 1303              		.cfi_def_cfa_offset 8
+ 1304              		.cfi_offset 4, -8
+ 1305              		.cfi_offset 14, -4
+ 285:Src/app_x-cube-ai.c ****     struct network_instance *inn;
+ 1306              		.loc 1 285 5 is_stmt 1 view .LVU358
+ 286:Src/app_x-cube-ai.c ****     inn =  ai_mnetwork_handle((struct network_instance *)network);
+ 1307              		.loc 1 286 5 view .LVU359
+ 1308              	.LVL122:
+ 1309              	.LBB95:
+ 1310              	.LBI95:
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 33
+
+
+ 123:Src/app_x-cube-ai.c **** {
+ 1311              		.loc 1 123 26 view .LVU360
+ 1312              	.LBB96:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 1313              		.loc 1 125 5 view .LVU361
+ 1314              	.LBB97:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 1315              		.loc 1 125 10 view .LVU362
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 1316              		.loc 1 125 14 is_stmt 0 view .LVU363
+ 1317 0002 0023     		movs	r3, #0
+ 1318              	.LVL123:
+ 1319              	.L117:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 1320              		.loc 1 125 5 view .LVU364
+ 1321 0004 002B     		cmp	r3, #0
+ 1322 0006 06DD     		ble	.L121
+ 1323              	.LBE97:
+ 131:Src/app_x-cube-ai.c **** }
+ 1324              		.loc 1 131 12 view .LVU365
+ 1325 0008 0020     		movs	r0, #0
+ 1326              	.LVL124:
+ 1327              	.L119:
+ 131:Src/app_x-cube-ai.c **** }
+ 1328              		.loc 1 131 12 view .LVU366
+ 1329              	.LBE96:
+ 1330              	.LBE95:
+ 287:Src/app_x-cube-ai.c ****     if (inn)
+ 1331              		.loc 1 287 5 is_stmt 1 view .LVU367
+ 1332              		.loc 1 287 8 is_stmt 0 view .LVU368
+ 1333 000a E0B1     		cbz	r0, .L123
+ 288:Src/app_x-cube-ai.c ****         return inn->entry->ai_forward(inn->handle, input);
+ 1334              		.loc 1 288 9 is_stmt 1 view .LVU369
+ 1335              		.loc 1 288 19 is_stmt 0 view .LVU370
+ 1336 000c 0368     		ldr	r3, [r0]
+ 1337              		.loc 1 288 26 view .LVU371
+ 1338 000e 5B6D     		ldr	r3, [r3, #84]
+ 1339              		.loc 1 288 16 view .LVU372
+ 1340 0010 4068     		ldr	r0, [r0, #4]
+ 1341              	.LVL125:
+ 1342              		.loc 1 288 16 view .LVU373
+ 1343 0012 9847     		blx	r3
+ 1344              	.LVL126:
+ 1345              	.L116:
+ 289:Src/app_x-cube-ai.c ****     else
+ 290:Src/app_x-cube-ai.c ****         return 0;
+ 291:Src/app_x-cube-ai.c **** }
+ 1346              		.loc 1 291 1 view .LVU374
+ 1347 0014 10BD     		pop	{r4, pc}
+ 1348              	.LVL127:
+ 1349              	.L121:
+ 1350              	.LBB100:
+ 1351              	.LBB99:
+ 1352              	.LBB98:
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 1353              		.loc 1 126 9 is_stmt 1 view .LVU375
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 34
+
+
+ 1354              		.loc 1 126 12 is_stmt 0 view .LVU376
+ 1355 0016 30B1     		cbz	r0, .L118
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 1356              		.loc 1 126 24 view .LVU377
+ 1357 0018 C3EBC302 		rsb	r2, r3, r3, lsl #3
+ 1358 001c D400     		lsls	r4, r2, #3
+ 1359 001e 0B4A     		ldr	r2, .L126
+ 1360 0020 2244     		add	r2, r2, r4
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 1361              		.loc 1 126 20 view .LVU378
+ 1362 0022 9042     		cmp	r0, r2
+ 1363 0024 F1D0     		beq	.L119
+ 1364              	.L118:
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 1365              		.loc 1 128 14 is_stmt 1 view .LVU379
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 1366              		.loc 1 128 17 is_stmt 0 view .LVU380
+ 1367 0026 08B1     		cbz	r0, .L125
+ 1368              	.L120:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 1369              		.loc 1 125 42 view .LVU381
+ 1370 0028 0133     		adds	r3, r3, #1
+ 1371              	.LVL128:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 1372              		.loc 1 125 42 view .LVU382
+ 1373 002a EBE7     		b	.L117
+ 1374              	.L125:
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 1375              		.loc 1 128 42 view .LVU383
+ 1376 002c C3EBC304 		rsb	r4, r3, r3, lsl #3
+ 1377 0030 E200     		lsls	r2, r4, #3
+ 1378 0032 064C     		ldr	r4, .L126
+ 1379 0034 A258     		ldr	r2, [r4, r2]
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 1380              		.loc 1 128 26 view .LVU384
+ 1381 0036 002A     		cmp	r2, #0
+ 1382 0038 F6D1     		bne	.L120
+ 129:Src/app_x-cube-ai.c ****     }
+ 1383              		.loc 1 129 13 is_stmt 1 view .LVU385
+ 129:Src/app_x-cube-ai.c ****     }
+ 1384              		.loc 1 129 20 is_stmt 0 view .LVU386
+ 1385 003a C3EBC303 		rsb	r3, r3, r3, lsl #3
+ 1386              	.LVL129:
+ 129:Src/app_x-cube-ai.c ****     }
+ 1387              		.loc 1 129 20 view .LVU387
+ 1388 003e DA00     		lsls	r2, r3, #3
+ 1389 0040 2046     		mov	r0, r4
+ 1390              	.LVL130:
+ 129:Src/app_x-cube-ai.c ****     }
+ 1391              		.loc 1 129 20 view .LVU388
+ 1392 0042 1044     		add	r0, r0, r2
+ 1393 0044 E1E7     		b	.L119
+ 1394              	.LVL131:
+ 1395              	.L123:
+ 129:Src/app_x-cube-ai.c ****     }
+ 1396              		.loc 1 129 20 view .LVU389
+ 1397              	.LBE98:
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 35
+
+
+ 1398              	.LBE99:
+ 1399              	.LBE100:
+ 290:Src/app_x-cube-ai.c **** }
+ 1400              		.loc 1 290 16 view .LVU390
+ 1401 0046 0020     		movs	r0, #0
+ 1402              	.LVL132:
+ 290:Src/app_x-cube-ai.c **** }
+ 1403              		.loc 1 290 16 view .LVU391
+ 1404 0048 E4E7     		b	.L116
+ 1405              	.L127:
+ 1406 004a 00BF     		.align	2
+ 1407              	.L126:
+ 1408 004c 00000000 		.word	.LANCHOR1
+ 1409              		.cfi_endproc
+ 1410              	.LFE142:
+ 1412              		.section	.text.ai_mnetwork_get_private_handle,"ax",%progbits
+ 1413              		.align	1
+ 1414              		.global	ai_mnetwork_get_private_handle
+ 1415              		.syntax unified
+ 1416              		.thumb
+ 1417              		.thumb_func
+ 1418              		.fpu fpv4-sp-d16
+ 1420              	ai_mnetwork_get_private_handle:
+ 1421              	.LVL133:
+ 1422              	.LFB143:
+ 292:Src/app_x-cube-ai.c **** 
+ 293:Src/app_x-cube-ai.c **** AI_API_ENTRY
+ 294:Src/app_x-cube-ai.c ****  int ai_mnetwork_get_private_handle(ai_handle network,
+ 295:Src/app_x-cube-ai.c ****          ai_handle *phandle,
+ 296:Src/app_x-cube-ai.c ****          ai_network_params *pparams)
+ 297:Src/app_x-cube-ai.c ****  {
+ 1423              		.loc 1 297 2 is_stmt 1 view -0
+ 1424              		.cfi_startproc
+ 1425              		@ args = 0, pretend = 0, frame = 0
+ 1426              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1427              		@ link register save eliminated.
+ 1428              		.loc 1 297 2 is_stmt 0 view .LVU393
+ 1429 0000 30B4     		push	{r4, r5}
+ 1430              	.LCFI13:
+ 1431              		.cfi_def_cfa_offset 8
+ 1432              		.cfi_offset 4, -8
+ 1433              		.cfi_offset 5, -4
+ 298:Src/app_x-cube-ai.c ****      struct network_instance* inn;
+ 1434              		.loc 1 298 6 is_stmt 1 view .LVU394
+ 299:Src/app_x-cube-ai.c ****      inn =  ai_mnetwork_handle((struct network_instance *)network);
+ 1435              		.loc 1 299 6 view .LVU395
+ 1436              	.LVL134:
+ 1437              	.LBB101:
+ 1438              	.LBI101:
+ 123:Src/app_x-cube-ai.c **** {
+ 1439              		.loc 1 123 26 view .LVU396
+ 1440              	.LBB102:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 1441              		.loc 1 125 5 view .LVU397
+ 1442              	.LBB103:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 1443              		.loc 1 125 10 view .LVU398
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 36
+
+
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 1444              		.loc 1 125 14 is_stmt 0 view .LVU399
+ 1445 0002 0023     		movs	r3, #0
+ 1446              	.LVL135:
+ 1447              	.L129:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 1448              		.loc 1 125 5 view .LVU400
+ 1449 0004 002B     		cmp	r3, #0
+ 1450 0006 13DD     		ble	.L133
+ 1451              	.LBE103:
+ 131:Src/app_x-cube-ai.c **** }
+ 1452              		.loc 1 131 12 view .LVU401
+ 1453 0008 0020     		movs	r0, #0
+ 1454              	.LVL136:
+ 1455              	.L131:
+ 131:Src/app_x-cube-ai.c **** }
+ 1456              		.loc 1 131 12 view .LVU402
+ 1457              	.LBE102:
+ 1458              	.LBE101:
+ 300:Src/app_x-cube-ai.c ****      if (inn && phandle && pparams) {
+ 1459              		.loc 1 300 6 is_stmt 1 view .LVU403
+ 1460              		.loc 1 300 9 is_stmt 0 view .LVU404
+ 1461 000a 40B3     		cbz	r0, .L135
+ 1462              		.loc 1 300 14 discriminator 1 view .LVU405
+ 1463 000c 51B3     		cbz	r1, .L136
+ 1464              		.loc 1 300 25 discriminator 2 view .LVU406
+ 1465 000e 62B3     		cbz	r2, .L137
+ 301:Src/app_x-cube-ai.c ****          *phandle = inn->handle;
+ 1466              		.loc 1 301 10 is_stmt 1 view .LVU407
+ 1467              		.loc 1 301 24 is_stmt 0 view .LVU408
+ 1468 0010 4368     		ldr	r3, [r0, #4]
+ 1469              		.loc 1 301 19 view .LVU409
+ 1470 0012 0B60     		str	r3, [r1]
+ 302:Src/app_x-cube-ai.c ****          *pparams = inn->params;
+ 1471              		.loc 1 302 10 is_stmt 1 view .LVU410
+ 1472              		.loc 1 302 19 is_stmt 0 view .LVU411
+ 1473 0014 1546     		mov	r5, r2
+ 1474 0016 00F10804 		add	r4, r0, #8
+ 1475 001a 0FCC     		ldmia	r4!, {r0, r1, r2, r3}
+ 1476              	.LVL137:
+ 1477              		.loc 1 302 19 view .LVU412
+ 1478 001c 0FC5     		stmia	r5!, {r0, r1, r2, r3}
+ 1479              	.LVL138:
+ 1480              		.loc 1 302 19 view .LVU413
+ 1481 001e 0FCC     		ldmia	r4!, {r0, r1, r2, r3}
+ 1482              	.LVL139:
+ 1483              		.loc 1 302 19 view .LVU414
+ 1484 0020 0FC5     		stmia	r5!, {r0, r1, r2, r3}
+ 1485              	.LVL140:
+ 1486              		.loc 1 302 19 view .LVU415
+ 1487 0022 94E80F00 		ldm	r4, {r0, r1, r2, r3}
+ 1488 0026 85E80F00 		stm	r5, {r0, r1, r2, r3}
+ 303:Src/app_x-cube-ai.c ****          return 0;
+ 1489              		.loc 1 303 10 is_stmt 1 view .LVU416
+ 1490              		.loc 1 303 17 is_stmt 0 view .LVU417
+ 1491 002a 0020     		movs	r0, #0
+ 1492              	.LVL141:
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 37
+
+
+ 1493              	.L128:
+ 304:Src/app_x-cube-ai.c ****      }
+ 305:Src/app_x-cube-ai.c ****      else
+ 306:Src/app_x-cube-ai.c ****          return -1;
+ 307:Src/app_x-cube-ai.c ****  }
+ 1494              		.loc 1 307 2 view .LVU418
+ 1495 002c 30BC     		pop	{r4, r5}
+ 1496              	.LCFI14:
+ 1497              		.cfi_remember_state
+ 1498              		.cfi_restore 5
+ 1499              		.cfi_restore 4
+ 1500              		.cfi_def_cfa_offset 0
+ 1501 002e 7047     		bx	lr
+ 1502              	.LVL142:
+ 1503              	.L133:
+ 1504              	.LCFI15:
+ 1505              		.cfi_restore_state
+ 1506              	.LBB106:
+ 1507              	.LBB105:
+ 1508              	.LBB104:
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 1509              		.loc 1 126 9 is_stmt 1 view .LVU419
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 1510              		.loc 1 126 12 is_stmt 0 view .LVU420
+ 1511 0030 30B1     		cbz	r0, .L130
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 1512              		.loc 1 126 24 view .LVU421
+ 1513 0032 C3EBC304 		rsb	r4, r3, r3, lsl #3
+ 1514 0036 E500     		lsls	r5, r4, #3
+ 1515 0038 0D4C     		ldr	r4, .L140
+ 1516 003a 2C44     		add	r4, r4, r5
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 1517              		.loc 1 126 20 view .LVU422
+ 1518 003c A042     		cmp	r0, r4
+ 1519 003e E4D0     		beq	.L131
+ 1520              	.L130:
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 1521              		.loc 1 128 14 is_stmt 1 view .LVU423
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 1522              		.loc 1 128 17 is_stmt 0 view .LVU424
+ 1523 0040 08B1     		cbz	r0, .L139
+ 1524              	.L132:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 1525              		.loc 1 125 42 view .LVU425
+ 1526 0042 0133     		adds	r3, r3, #1
+ 1527              	.LVL143:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 1528              		.loc 1 125 42 view .LVU426
+ 1529 0044 DEE7     		b	.L129
+ 1530              	.L139:
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 1531              		.loc 1 128 42 view .LVU427
+ 1532 0046 C3EBC305 		rsb	r5, r3, r3, lsl #3
+ 1533 004a EC00     		lsls	r4, r5, #3
+ 1534 004c 084D     		ldr	r5, .L140
+ 1535 004e 2C59     		ldr	r4, [r5, r4]
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 38
+
+
+ 1536              		.loc 1 128 26 view .LVU428
+ 1537 0050 002C     		cmp	r4, #0
+ 1538 0052 F6D1     		bne	.L132
+ 129:Src/app_x-cube-ai.c ****     }
+ 1539              		.loc 1 129 13 is_stmt 1 view .LVU429
+ 129:Src/app_x-cube-ai.c ****     }
+ 1540              		.loc 1 129 20 is_stmt 0 view .LVU430
+ 1541 0054 C3EBC303 		rsb	r3, r3, r3, lsl #3
+ 1542              	.LVL144:
+ 129:Src/app_x-cube-ai.c ****     }
+ 1543              		.loc 1 129 20 view .LVU431
+ 1544 0058 D800     		lsls	r0, r3, #3
+ 1545              	.LVL145:
+ 129:Src/app_x-cube-ai.c ****     }
+ 1546              		.loc 1 129 20 view .LVU432
+ 1547 005a 2844     		add	r0, r0, r5
+ 1548 005c D5E7     		b	.L131
+ 1549              	.LVL146:
+ 1550              	.L135:
+ 129:Src/app_x-cube-ai.c ****     }
+ 1551              		.loc 1 129 20 view .LVU433
+ 1552              	.LBE104:
+ 1553              	.LBE105:
+ 1554              	.LBE106:
+ 306:Src/app_x-cube-ai.c ****  }
+ 1555              		.loc 1 306 17 view .LVU434
+ 1556 005e 4FF0FF30 		mov	r0, #-1
+ 1557              	.LVL147:
+ 306:Src/app_x-cube-ai.c ****  }
+ 1558              		.loc 1 306 17 view .LVU435
+ 1559 0062 E3E7     		b	.L128
+ 1560              	.LVL148:
+ 1561              	.L136:
+ 306:Src/app_x-cube-ai.c ****  }
+ 1562              		.loc 1 306 17 view .LVU436
+ 1563 0064 4FF0FF30 		mov	r0, #-1
+ 1564              	.LVL149:
+ 306:Src/app_x-cube-ai.c ****  }
+ 1565              		.loc 1 306 17 view .LVU437
+ 1566 0068 E0E7     		b	.L128
+ 1567              	.LVL150:
+ 1568              	.L137:
+ 306:Src/app_x-cube-ai.c ****  }
+ 1569              		.loc 1 306 17 view .LVU438
+ 1570 006a 4FF0FF30 		mov	r0, #-1
+ 1571              	.LVL151:
+ 306:Src/app_x-cube-ai.c ****  }
+ 1572              		.loc 1 306 17 view .LVU439
+ 1573 006e DDE7     		b	.L128
+ 1574              	.L141:
+ 1575              		.align	2
+ 1576              	.L140:
+ 1577 0070 00000000 		.word	.LANCHOR1
+ 1578              		.cfi_endproc
+ 1579              	.LFE143:
+ 1581              		.section	.text.ai_mnetwork_get_ext_data_activations,"ax",%progbits
+ 1582              		.align	1
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 39
+
+
+ 1583              		.global	ai_mnetwork_get_ext_data_activations
+ 1584              		.syntax unified
+ 1585              		.thumb
+ 1586              		.thumb_func
+ 1587              		.fpu fpv4-sp-d16
+ 1589              	ai_mnetwork_get_ext_data_activations:
+ 1590              	.LVL152:
+ 1591              	.LFB144:
+ 308:Src/app_x-cube-ai.c **** 
+ 309:Src/app_x-cube-ai.c ****  AI_API_ENTRY
+ 310:Src/app_x-cube-ai.c **** int ai_mnetwork_get_ext_data_activations(ai_handle network,
+ 311:Src/app_x-cube-ai.c ****          ai_u32 *add,
+ 312:Src/app_x-cube-ai.c ****          ai_u32 *size)
+ 313:Src/app_x-cube-ai.c ****  {
+ 1592              		.loc 1 313 2 is_stmt 1 view -0
+ 1593              		.cfi_startproc
+ 1594              		@ args = 0, pretend = 0, frame = 0
+ 1595              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1596              		@ link register save eliminated.
+ 1597              		.loc 1 313 2 is_stmt 0 view .LVU441
+ 1598 0000 30B4     		push	{r4, r5}
+ 1599              	.LCFI16:
+ 1600              		.cfi_def_cfa_offset 8
+ 1601              		.cfi_offset 4, -8
+ 1602              		.cfi_offset 5, -4
+ 314:Src/app_x-cube-ai.c ****      struct network_instance* inn;
+ 1603              		.loc 1 314 6 is_stmt 1 view .LVU442
+ 315:Src/app_x-cube-ai.c ****      inn =  ai_mnetwork_handle((struct network_instance *)network);
+ 1604              		.loc 1 315 6 view .LVU443
+ 1605              	.LVL153:
+ 1606              	.LBB107:
+ 1607              	.LBI107:
+ 123:Src/app_x-cube-ai.c **** {
+ 1608              		.loc 1 123 26 view .LVU444
+ 1609              	.LBB108:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 1610              		.loc 1 125 5 view .LVU445
+ 1611              	.LBB109:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 1612              		.loc 1 125 10 view .LVU446
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 1613              		.loc 1 125 14 is_stmt 0 view .LVU447
+ 1614 0002 0023     		movs	r3, #0
+ 1615              	.LVL154:
+ 1616              	.L143:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 1617              		.loc 1 125 5 view .LVU448
+ 1618 0004 002B     		cmp	r3, #0
+ 1619 0006 0CDD     		ble	.L147
+ 1620              	.LBE109:
+ 131:Src/app_x-cube-ai.c **** }
+ 1621              		.loc 1 131 12 view .LVU449
+ 1622 0008 0020     		movs	r0, #0
+ 1623              	.LVL155:
+ 1624              	.L145:
+ 131:Src/app_x-cube-ai.c **** }
+ 1625              		.loc 1 131 12 view .LVU450
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 40
+
+
+ 1626              	.LBE108:
+ 1627              	.LBE107:
+ 316:Src/app_x-cube-ai.c ****      if (inn && add && size) {
+ 1628              		.loc 1 316 6 is_stmt 1 view .LVU451
+ 1629              		.loc 1 316 9 is_stmt 0 view .LVU452
+ 1630 000a 08B3     		cbz	r0, .L149
+ 1631              		.loc 1 316 14 discriminator 1 view .LVU453
+ 1632 000c 19B3     		cbz	r1, .L150
+ 1633              		.loc 1 316 21 discriminator 2 view .LVU454
+ 1634 000e 2AB3     		cbz	r2, .L151
+ 317:Src/app_x-cube-ai.c ****          *add = inn->entry->extActBufferStartAddr;
+ 1635              		.loc 1 317 10 is_stmt 1 view .LVU455
+ 1636              		.loc 1 317 20 is_stmt 0 view .LVU456
+ 1637 0010 0368     		ldr	r3, [r0]
+ 1638              		.loc 1 317 27 view .LVU457
+ 1639 0012 9B6D     		ldr	r3, [r3, #88]
+ 1640              		.loc 1 317 15 view .LVU458
+ 1641 0014 0B60     		str	r3, [r1]
+ 318:Src/app_x-cube-ai.c ****          *size = inn->entry->actBufferSize;
+ 1642              		.loc 1 318 10 is_stmt 1 view .LVU459
+ 1643              		.loc 1 318 21 is_stmt 0 view .LVU460
+ 1644 0016 0368     		ldr	r3, [r0]
+ 1645              		.loc 1 318 28 view .LVU461
+ 1646 0018 DB6D     		ldr	r3, [r3, #92]
+ 1647              		.loc 1 318 16 view .LVU462
+ 1648 001a 1360     		str	r3, [r2]
+ 319:Src/app_x-cube-ai.c ****          return 0;
+ 1649              		.loc 1 319 10 is_stmt 1 view .LVU463
+ 1650              		.loc 1 319 17 is_stmt 0 view .LVU464
+ 1651 001c 0020     		movs	r0, #0
+ 1652              	.LVL156:
+ 1653              	.L142:
+ 320:Src/app_x-cube-ai.c ****      }
+ 321:Src/app_x-cube-ai.c ****      else
+ 322:Src/app_x-cube-ai.c ****          return -1;
+ 323:Src/app_x-cube-ai.c ****  }
+ 1654              		.loc 1 323 2 view .LVU465
+ 1655 001e 30BC     		pop	{r4, r5}
+ 1656              	.LCFI17:
+ 1657              		.cfi_remember_state
+ 1658              		.cfi_restore 5
+ 1659              		.cfi_restore 4
+ 1660              		.cfi_def_cfa_offset 0
+ 1661 0020 7047     		bx	lr
+ 1662              	.LVL157:
+ 1663              	.L147:
+ 1664              	.LCFI18:
+ 1665              		.cfi_restore_state
+ 1666              	.LBB112:
+ 1667              	.LBB111:
+ 1668              	.LBB110:
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 1669              		.loc 1 126 9 is_stmt 1 view .LVU466
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 1670              		.loc 1 126 12 is_stmt 0 view .LVU467
+ 1671 0022 30B1     		cbz	r0, .L144
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 41
+
+
+ 1672              		.loc 1 126 24 view .LVU468
+ 1673 0024 C3EBC304 		rsb	r4, r3, r3, lsl #3
+ 1674 0028 E500     		lsls	r5, r4, #3
+ 1675 002a 0E4C     		ldr	r4, .L154
+ 1676 002c 2C44     		add	r4, r4, r5
+ 126:Src/app_x-cube-ai.c ****             return inst;
+ 1677              		.loc 1 126 20 view .LVU469
+ 1678 002e A042     		cmp	r0, r4
+ 1679 0030 EBD0     		beq	.L145
+ 1680              	.L144:
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 1681              		.loc 1 128 14 is_stmt 1 view .LVU470
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 1682              		.loc 1 128 17 is_stmt 0 view .LVU471
+ 1683 0032 08B1     		cbz	r0, .L153
+ 1684              	.L146:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 1685              		.loc 1 125 42 view .LVU472
+ 1686 0034 0133     		adds	r3, r3, #1
+ 1687              	.LVL158:
+ 125:Src/app_x-cube-ai.c ****         if ((inst) && (&gnetworks[i] == inst))
+ 1688              		.loc 1 125 42 view .LVU473
+ 1689 0036 E5E7     		b	.L143
+ 1690              	.L153:
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 1691              		.loc 1 128 42 view .LVU474
+ 1692 0038 C3EBC305 		rsb	r5, r3, r3, lsl #3
+ 1693 003c EC00     		lsls	r4, r5, #3
+ 1694 003e 094D     		ldr	r5, .L154
+ 1695 0040 2C59     		ldr	r4, [r5, r4]
+ 128:Src/app_x-cube-ai.c ****             return &gnetworks[i];
+ 1696              		.loc 1 128 26 view .LVU475
+ 1697 0042 002C     		cmp	r4, #0
+ 1698 0044 F6D1     		bne	.L146
+ 129:Src/app_x-cube-ai.c ****     }
+ 1699              		.loc 1 129 13 is_stmt 1 view .LVU476
+ 129:Src/app_x-cube-ai.c ****     }
+ 1700              		.loc 1 129 20 is_stmt 0 view .LVU477
+ 1701 0046 C3EBC303 		rsb	r3, r3, r3, lsl #3
+ 1702              	.LVL159:
+ 129:Src/app_x-cube-ai.c ****     }
+ 1703              		.loc 1 129 20 view .LVU478
+ 1704 004a D800     		lsls	r0, r3, #3
+ 1705              	.LVL160:
+ 129:Src/app_x-cube-ai.c ****     }
+ 1706              		.loc 1 129 20 view .LVU479
+ 1707 004c 2844     		add	r0, r0, r5
+ 1708 004e DCE7     		b	.L145
+ 1709              	.LVL161:
+ 1710              	.L149:
+ 129:Src/app_x-cube-ai.c ****     }
+ 1711              		.loc 1 129 20 view .LVU480
+ 1712              	.LBE110:
+ 1713              	.LBE111:
+ 1714              	.LBE112:
+ 322:Src/app_x-cube-ai.c ****  }
+ 1715              		.loc 1 322 17 view .LVU481
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 42
+
+
+ 1716 0050 4FF0FF30 		mov	r0, #-1
+ 1717              	.LVL162:
+ 322:Src/app_x-cube-ai.c ****  }
+ 1718              		.loc 1 322 17 view .LVU482
+ 1719 0054 E3E7     		b	.L142
+ 1720              	.LVL163:
+ 1721              	.L150:
+ 322:Src/app_x-cube-ai.c ****  }
+ 1722              		.loc 1 322 17 view .LVU483
+ 1723 0056 4FF0FF30 		mov	r0, #-1
+ 1724              	.LVL164:
+ 322:Src/app_x-cube-ai.c ****  }
+ 1725              		.loc 1 322 17 view .LVU484
+ 1726 005a E0E7     		b	.L142
+ 1727              	.LVL165:
+ 1728              	.L151:
+ 322:Src/app_x-cube-ai.c ****  }
+ 1729              		.loc 1 322 17 view .LVU485
+ 1730 005c 4FF0FF30 		mov	r0, #-1
+ 1731              	.LVL166:
+ 322:Src/app_x-cube-ai.c ****  }
+ 1732              		.loc 1 322 17 view .LVU486
+ 1733 0060 DDE7     		b	.L142
+ 1734              	.L155:
+ 1735 0062 00BF     		.align	2
+ 1736              	.L154:
+ 1737 0064 00000000 		.word	.LANCHOR1
+ 1738              		.cfi_endproc
+ 1739              	.LFE144:
+ 1741              		.section	.bss.gnetworks,"aw",%nobits
+ 1742              		.align	2
+ 1743              		.set	.LANCHOR1,. + 0
+ 1746              	gnetworks:
+ 1747 0000 00000000 		.space	56
+ 1747      00000000 
+ 1747      00000000 
+ 1747      00000000 
+ 1747      00000000 
+ 1748              		.section	.rodata.networks,"a"
+ 1749              		.align	2
+ 1750              		.set	.LANCHOR0,. + 0
+ 1753              	networks:
+ 1754 0000 00000000 		.word	.LC0
+ 1755 0004 40040440 		.word	1074005056
+ 1756 0008 0100     		.short	1
+ 1757 000a 0100     		.short	1
+ 1758 000c 0100     		.short	1
+ 1759 000e 0000     		.space	2
+ 1760 0010 FC6B0100 		.word	93180
+ 1761 0014 00000000 		.word	0
+ 1762 0018 00000000 		.word	0
+ 1763 001c 40040400 		.word	263232
+ 1764 0020 0100     		.short	1
+ 1765 0022 0100     		.short	1
+ 1766 0024 0100     		.short	1
+ 1767 0026 0000     		.space	2
+ 1768 0028 A0060000 		.word	1696
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 43
+
+
+ 1769 002c 00000000 		.word	0
+ 1770 0030 00000000 		.word	0
+ 1771 0034 00000000 		.word	0
+ 1772 0038 00000000 		.word	ai_network_data_weights_get
+ 1773 003c 00000000 		.word	ai_network_get_info
+ 1774 0040 00000000 		.word	ai_network_create
+ 1775 0044 00000000 		.word	ai_network_get_error
+ 1776 0048 00000000 		.word	ai_network_destroy
+ 1777 004c 00000000 		.word	ai_network_init
+ 1778 0050 00000000 		.word	ai_network_run
+ 1779 0054 00000000 		.word	ai_network_forward
+ 1780 0058 FFFFFFFF 		.word	-1
+ 1781 005c A0060000 		.word	1696
+ 1782              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 1783              		.align	2
+ 1784              	.LC0:
+ 1785 0000 6E657477 		.ascii	"network\000"
+ 1785      6F726B00 
+ 1786              		.text
+ 1787              	.Letext0:
+ 1788              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\lib\\gcc\\arm-none-eab
+ 1789              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 1790              		.file 4 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 1791              		.file 5 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 1792              		.file 6 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 1793              		.file 7 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 1794              		.file 8 "Middlewares/ST/AI/Inc/ai_platform.h"
+ 1795              		.file 9 "Inc/app_x-cube-ai.h"
+ 1796              		.file 10 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include/core_c
+ 1797              		.file 11 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Device/ST/STM3
+ 1798              		.file 12 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver
+ 1799              		.file 13 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\includ
+ 1800              		.file 14 "Inc/aiValidation.h"
+ 1801              		.file 15 "Inc/bsp_ai.h"
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s 			page 44
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 app_x-cube-ai.c
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:18     .text.MX_X_CUBE_AI_Init:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:26     .text.MX_X_CUBE_AI_Init:00000000 MX_X_CUBE_AI_Init
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:50     .text.MX_X_CUBE_AI_Process:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:57     .text.MX_X_CUBE_AI_Process:00000000 MX_X_CUBE_AI_Process
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:77     .text.ai_mnetwork_find:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:84     .text.ai_mnetwork_find:00000000 ai_mnetwork_find
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:230    .text.ai_mnetwork_find:00000070 $d
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:236    .text.ai_mnetwork_create:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:243    .text.ai_mnetwork_create:00000000 ai_mnetwork_create
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:495    .text.ai_mnetwork_create:000000c8 $d
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:501    .text.ai_mnetwork_destroy:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:508    .text.ai_mnetwork_destroy:00000000 ai_mnetwork_destroy
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:680    .text.ai_mnetwork_destroy:00000078 $d
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:688    .text.ai_mnetwork_get_info:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:695    .text.ai_mnetwork_get_info:00000000 ai_mnetwork_get_info
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:810    .text.ai_mnetwork_get_info:0000004c $d
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:815    .text.ai_mnetwork_get_error:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:822    .text.ai_mnetwork_get_error:00000000 ai_mnetwork_get_error
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:947    .text.ai_mnetwork_get_error:00000058 $d
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:952    .text.ai_mnetwork_init:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:959    .text.ai_mnetwork_init:00000000 ai_mnetwork_init
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:1153   .text.ai_mnetwork_init:000000a8 $d
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:1158   .text.ai_mnetwork_run:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:1165   .text.ai_mnetwork_run:00000000 ai_mnetwork_run
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:1281   .text.ai_mnetwork_run:00000048 $d
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:1286   .text.ai_mnetwork_forward:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:1293   .text.ai_mnetwork_forward:00000000 ai_mnetwork_forward
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:1408   .text.ai_mnetwork_forward:0000004c $d
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:1413   .text.ai_mnetwork_get_private_handle:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:1420   .text.ai_mnetwork_get_private_handle:00000000 ai_mnetwork_get_private_handle
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:1577   .text.ai_mnetwork_get_private_handle:00000070 $d
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:1582   .text.ai_mnetwork_get_ext_data_activations:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:1589   .text.ai_mnetwork_get_ext_data_activations:00000000 ai_mnetwork_get_ext_data_activations
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:1737   .text.ai_mnetwork_get_ext_data_activations:00000064 $d
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:1742   .bss.gnetworks:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:1746   .bss.gnetworks:00000000 gnetworks
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:1749   .rodata.networks:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:1753   .rodata.networks:00000000 networks
+C:\Users\grgcz\AppData\Local\Temp\cceUf7ZS.s:1783   .rodata.str1.4:00000000 $d
+
+UNDEFINED SYMBOLS
+MX_USART2_UART_Init
+aiValidationInit
+aiValidationProcess
+strlen
+strncmp
+ai_network_data_weights_get
+ai_network_get_info
+ai_network_create
+ai_network_get_error
+ai_network_destroy
+ai_network_init
+ai_network_run
+ai_network_forward
