@@ -1,0 +1,840 @@
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"stm32f4xx_hal_crc.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.HAL_CRC_MspInit,"ax",%progbits
+  18              		.align	1
+  19              		.weak	HAL_CRC_MspInit
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	HAL_CRC_MspInit:
+  27              	.LVL0:
+  28              	.LFB132:
+  29              		.file 1 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/
+   1:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** /**
+   2:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   ******************************************************************************
+   3:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @file    stm32f4xx_hal_crc.c
+   4:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @author  MCD Application Team
+   5:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @brief   CRC HAL module driver.
+   6:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   *          This file provides firmware functions to manage the following
+   7:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   *          functionalities of the Cyclic Redundancy Check (CRC) peripheral:
+   8:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   *           + Initialization and de-initialization functions
+   9:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   *           + Peripheral Control functions
+  10:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   *           + Peripheral State functions
+  11:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   *
+  12:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   @verbatim
+  13:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****  ===============================================================================
+  14:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****                      ##### How to use this driver #####
+  15:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****  ===============================================================================
+  16:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****     [..]
+  17:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****          (+) Enable CRC AHB clock using __HAL_RCC_CRC_CLK_ENABLE();
+  18:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****          (+) Initialize CRC calculator
+  19:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****              (++) specify generating polynomial (peripheral default or non-default one)
+  20:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****              (++) specify initialization value (peripheral default or non-default one)
+  21:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****              (++) specify input data format
+  22:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****              (++) specify input or output data inversion mode if any
+  23:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****          (+) Use HAL_CRC_Accumulate() function to compute the CRC value of the
+  24:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****              input data buffer starting with the previously computed CRC as
+  25:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****              initialization value
+  26:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****          (+) Use HAL_CRC_Calculate() function to compute the CRC value of the
+  27:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****              input data buffer starting with the defined initialization value
+  28:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****              (default or non-default) to initiate CRC calculation
+  29:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s 			page 2
+
+
+  30:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   @endverbatim
+  31:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   ******************************************************************************
+  32:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @attention
+  33:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   *
+  34:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
+  35:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * All rights reserved.</center></h2>
+  36:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   *
+  37:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * This software component is licensed by ST under BSD 3-Clause license,
+  38:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * the "License"; You may not use this file except in compliance with the
+  39:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * License. You may obtain a copy of the License at:
+  40:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   *                        opensource.org/licenses/BSD-3-Clause
+  41:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   *
+  42:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   ******************************************************************************
+  43:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   */
+  44:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+  45:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** /* Includes ------------------------------------------------------------------*/
+  46:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** #include "stm32f4xx_hal.h"
+  47:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+  48:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** /** @addtogroup STM32F4xx_HAL_Driver
+  49:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @{
+  50:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   */
+  51:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+  52:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** /** @defgroup CRC CRC
+  53:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @brief CRC HAL module driver.
+  54:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @{
+  55:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   */
+  56:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+  57:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** #ifdef HAL_CRC_MODULE_ENABLED
+  58:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+  59:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** /* Private typedef -----------------------------------------------------------*/
+  60:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** /* Private define ------------------------------------------------------------*/
+  61:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** /* Private macro -------------------------------------------------------------*/
+  62:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** /* Private variables ---------------------------------------------------------*/
+  63:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** /* Private function prototypes -----------------------------------------------*/
+  64:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+  65:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** /* Exported functions --------------------------------------------------------*/
+  66:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+  67:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** /** @defgroup CRC_Exported_Functions CRC Exported Functions
+  68:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @{
+  69:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   */
+  70:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+  71:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** /** @defgroup CRC_Exported_Functions_Group1 Initialization and de-initialization functions
+  72:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****  *  @brief    Initialization and Configuration functions.
+  73:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****  *
+  74:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** @verbatim
+  75:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****  ===============================================================================
+  76:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****             ##### Initialization and de-initialization functions #####
+  77:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****  ===============================================================================
+  78:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****     [..]  This section provides functions allowing to:
+  79:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****       (+) Initialize the CRC according to the specified parameters
+  80:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****           in the CRC_InitTypeDef and create the associated handle
+  81:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****       (+) DeInitialize the CRC peripheral
+  82:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****       (+) Initialize the CRC MSP (MCU Specific Package)
+  83:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****       (+) DeInitialize the CRC MSP
+  84:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+  85:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** @endverbatim
+  86:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @{
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s 			page 3
+
+
+  87:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   */
+  88:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+  89:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** /**
+  90:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @brief  Initialize the CRC according to the specified
+  91:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   *         parameters in the CRC_InitTypeDef and create the associated handle.
+  92:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @param  hcrc CRC handle
+  93:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @retval HAL status
+  94:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   */
+  95:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** HAL_StatusTypeDef HAL_CRC_Init(CRC_HandleTypeDef *hcrc)
+  96:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** {
+  97:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Check the CRC handle allocation */
+  98:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   if (hcrc == NULL)
+  99:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   {
+ 100:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****     return HAL_ERROR;
+ 101:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   }
+ 102:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 103:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Check the parameters */
+ 104:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   assert_param(IS_CRC_ALL_INSTANCE(hcrc->Instance));
+ 105:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 106:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   if (hcrc->State == HAL_CRC_STATE_RESET)
+ 107:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   {
+ 108:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****     /* Allocate lock resource and initialize it */
+ 109:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****     hcrc->Lock = HAL_UNLOCKED;
+ 110:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****     /* Init the low level hardware */
+ 111:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****     HAL_CRC_MspInit(hcrc);
+ 112:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   }
+ 113:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 114:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Change CRC peripheral state */
+ 115:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   hcrc->State = HAL_CRC_STATE_READY;
+ 116:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 117:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Return function status */
+ 118:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   return HAL_OK;
+ 119:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** }
+ 120:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 121:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** /**
+ 122:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @brief  DeInitialize the CRC peripheral.
+ 123:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @param  hcrc CRC handle
+ 124:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @retval HAL status
+ 125:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   */
+ 126:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** HAL_StatusTypeDef HAL_CRC_DeInit(CRC_HandleTypeDef *hcrc)
+ 127:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** {
+ 128:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Check the CRC handle allocation */
+ 129:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   if (hcrc == NULL)
+ 130:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   {
+ 131:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****     return HAL_ERROR;
+ 132:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   }
+ 133:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 134:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Check the parameters */
+ 135:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   assert_param(IS_CRC_ALL_INSTANCE(hcrc->Instance));
+ 136:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 137:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Check the CRC peripheral state */
+ 138:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   if (hcrc->State == HAL_CRC_STATE_BUSY)
+ 139:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   {
+ 140:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****     return HAL_BUSY;
+ 141:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   }
+ 142:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 143:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Change CRC peripheral state */
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s 			page 4
+
+
+ 144:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   hcrc->State = HAL_CRC_STATE_BUSY;
+ 145:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 146:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Reset CRC calculation unit */
+ 147:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   __HAL_CRC_DR_RESET(hcrc);
+ 148:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 149:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Reset IDR register content */
+ 150:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   CLEAR_BIT(hcrc->Instance->IDR, CRC_IDR_IDR);
+ 151:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 152:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* DeInit the low level hardware */
+ 153:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   HAL_CRC_MspDeInit(hcrc);
+ 154:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 155:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Change CRC peripheral state */
+ 156:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   hcrc->State = HAL_CRC_STATE_RESET;
+ 157:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 158:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Process unlocked */
+ 159:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   __HAL_UNLOCK(hcrc);
+ 160:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 161:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Return function status */
+ 162:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   return HAL_OK;
+ 163:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** }
+ 164:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 165:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** /**
+ 166:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @brief  Initializes the CRC MSP.
+ 167:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @param  hcrc CRC handle
+ 168:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @retval None
+ 169:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   */
+ 170:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** __weak void HAL_CRC_MspInit(CRC_HandleTypeDef *hcrc)
+ 171:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** {
+  30              		.loc 1 171 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+ 172:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Prevent unused argument(s) compilation warning */
+ 173:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   UNUSED(hcrc);
+  35              		.loc 1 173 3 view .LVU1
+ 174:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 175:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* NOTE : This function should not be modified, when the callback is needed,
+ 176:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****             the HAL_CRC_MspInit can be implemented in the user file
+ 177:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****    */
+ 178:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** }
+  36              		.loc 1 178 1 is_stmt 0 view .LVU2
+  37 0000 7047     		bx	lr
+  38              		.cfi_endproc
+  39              	.LFE132:
+  41              		.section	.text.HAL_CRC_Init,"ax",%progbits
+  42              		.align	1
+  43              		.global	HAL_CRC_Init
+  44              		.syntax unified
+  45              		.thumb
+  46              		.thumb_func
+  47              		.fpu fpv4-sp-d16
+  49              	HAL_CRC_Init:
+  50              	.LVL1:
+  51              	.LFB130:
+  96:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Check the CRC handle allocation */
+  52              		.loc 1 96 1 is_stmt 1 view -0
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s 			page 5
+
+
+  53              		.cfi_startproc
+  54              		@ args = 0, pretend = 0, frame = 0
+  55              		@ frame_needed = 0, uses_anonymous_args = 0
+  98:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   {
+  56              		.loc 1 98 3 view .LVU4
+  98:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   {
+  57              		.loc 1 98 6 is_stmt 0 view .LVU5
+  58 0000 58B1     		cbz	r0, .L5
+  96:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Check the CRC handle allocation */
+  59              		.loc 1 96 1 view .LVU6
+  60 0002 10B5     		push	{r4, lr}
+  61              	.LCFI0:
+  62              		.cfi_def_cfa_offset 8
+  63              		.cfi_offset 4, -8
+  64              		.cfi_offset 14, -4
+  65 0004 0446     		mov	r4, r0
+ 104:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+  66              		.loc 1 104 3 is_stmt 1 view .LVU7
+ 106:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   {
+  67              		.loc 1 106 3 view .LVU8
+ 106:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   {
+  68              		.loc 1 106 11 is_stmt 0 view .LVU9
+  69 0006 4379     		ldrb	r3, [r0, #5]	@ zero_extendqisi2
+ 106:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   {
+  70              		.loc 1 106 6 view .LVU10
+  71 0008 1BB1     		cbz	r3, .L10
+  72              	.LVL2:
+  73              	.L4:
+ 115:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+  74              		.loc 1 115 3 is_stmt 1 view .LVU11
+ 115:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+  75              		.loc 1 115 15 is_stmt 0 view .LVU12
+  76 000a 0123     		movs	r3, #1
+  77 000c 6371     		strb	r3, [r4, #5]
+ 118:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** }
+  78              		.loc 1 118 3 is_stmt 1 view .LVU13
+ 118:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** }
+  79              		.loc 1 118 10 is_stmt 0 view .LVU14
+  80 000e 0020     		movs	r0, #0
+ 119:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+  81              		.loc 1 119 1 view .LVU15
+  82 0010 10BD     		pop	{r4, pc}
+  83              	.LVL3:
+  84              	.L10:
+ 109:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****     /* Init the low level hardware */
+  85              		.loc 1 109 5 is_stmt 1 view .LVU16
+ 109:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****     /* Init the low level hardware */
+  86              		.loc 1 109 16 is_stmt 0 view .LVU17
+  87 0012 0371     		strb	r3, [r0, #4]
+ 111:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   }
+  88              		.loc 1 111 5 is_stmt 1 view .LVU18
+  89 0014 FFF7FEFF 		bl	HAL_CRC_MspInit
+  90              	.LVL4:
+ 111:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   }
+  91              		.loc 1 111 5 is_stmt 0 view .LVU19
+  92 0018 F7E7     		b	.L4
+  93              	.LVL5:
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s 			page 6
+
+
+  94              	.L5:
+  95              	.LCFI1:
+  96              		.cfi_def_cfa_offset 0
+  97              		.cfi_restore 4
+  98              		.cfi_restore 14
+ 100:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   }
+  99              		.loc 1 100 12 view .LVU20
+ 100 001a 0120     		movs	r0, #1
+ 101              	.LVL6:
+ 119:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 102              		.loc 1 119 1 view .LVU21
+ 103 001c 7047     		bx	lr
+ 104              		.cfi_endproc
+ 105              	.LFE130:
+ 107              		.section	.text.HAL_CRC_MspDeInit,"ax",%progbits
+ 108              		.align	1
+ 109              		.weak	HAL_CRC_MspDeInit
+ 110              		.syntax unified
+ 111              		.thumb
+ 112              		.thumb_func
+ 113              		.fpu fpv4-sp-d16
+ 115              	HAL_CRC_MspDeInit:
+ 116              	.LVL7:
+ 117              	.LFB133:
+ 179:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 180:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** /**
+ 181:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @brief  DeInitialize the CRC MSP.
+ 182:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @param  hcrc CRC handle
+ 183:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @retval None
+ 184:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   */
+ 185:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** __weak void HAL_CRC_MspDeInit(CRC_HandleTypeDef *hcrc)
+ 186:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** {
+ 118              		.loc 1 186 1 is_stmt 1 view -0
+ 119              		.cfi_startproc
+ 120              		@ args = 0, pretend = 0, frame = 0
+ 121              		@ frame_needed = 0, uses_anonymous_args = 0
+ 122              		@ link register save eliminated.
+ 187:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Prevent unused argument(s) compilation warning */
+ 188:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   UNUSED(hcrc);
+ 123              		.loc 1 188 3 view .LVU23
+ 189:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 190:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* NOTE : This function should not be modified, when the callback is needed,
+ 191:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****             the HAL_CRC_MspDeInit can be implemented in the user file
+ 192:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****    */
+ 193:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** }
+ 124              		.loc 1 193 1 is_stmt 0 view .LVU24
+ 125 0000 7047     		bx	lr
+ 126              		.cfi_endproc
+ 127              	.LFE133:
+ 129              		.section	.text.HAL_CRC_DeInit,"ax",%progbits
+ 130              		.align	1
+ 131              		.global	HAL_CRC_DeInit
+ 132              		.syntax unified
+ 133              		.thumb
+ 134              		.thumb_func
+ 135              		.fpu fpv4-sp-d16
+ 137              	HAL_CRC_DeInit:
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s 			page 7
+
+
+ 138              	.LVL8:
+ 139              	.LFB131:
+ 127:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Check the CRC handle allocation */
+ 140              		.loc 1 127 1 is_stmt 1 view -0
+ 141              		.cfi_startproc
+ 142              		@ args = 0, pretend = 0, frame = 0
+ 143              		@ frame_needed = 0, uses_anonymous_args = 0
+ 129:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   {
+ 144              		.loc 1 129 3 view .LVU26
+ 129:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   {
+ 145              		.loc 1 129 6 is_stmt 0 view .LVU27
+ 146 0000 B8B1     		cbz	r0, .L14
+ 127:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Check the CRC handle allocation */
+ 147              		.loc 1 127 1 view .LVU28
+ 148 0002 38B5     		push	{r3, r4, r5, lr}
+ 149              	.LCFI2:
+ 150              		.cfi_def_cfa_offset 16
+ 151              		.cfi_offset 3, -16
+ 152              		.cfi_offset 4, -12
+ 153              		.cfi_offset 5, -8
+ 154              		.cfi_offset 14, -4
+ 155 0004 0546     		mov	r5, r0
+ 135:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 156              		.loc 1 135 3 is_stmt 1 view .LVU29
+ 138:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   {
+ 157              		.loc 1 138 3 view .LVU30
+ 138:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   {
+ 158              		.loc 1 138 11 is_stmt 0 view .LVU31
+ 159 0006 4079     		ldrb	r0, [r0, #5]	@ zero_extendqisi2
+ 160              	.LVL9:
+ 138:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   {
+ 161              		.loc 1 138 11 view .LVU32
+ 162 0008 C0B2     		uxtb	r0, r0
+ 138:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   {
+ 163              		.loc 1 138 6 view .LVU33
+ 164 000a 0228     		cmp	r0, #2
+ 165 000c 10D0     		beq	.L13
+ 144:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 166              		.loc 1 144 3 is_stmt 1 view .LVU34
+ 144:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 167              		.loc 1 144 15 is_stmt 0 view .LVU35
+ 168 000e 0223     		movs	r3, #2
+ 169 0010 6B71     		strb	r3, [r5, #5]
+ 147:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 170              		.loc 1 147 3 is_stmt 1 view .LVU36
+ 171 0012 2A68     		ldr	r2, [r5]
+ 172 0014 9368     		ldr	r3, [r2, #8]
+ 173 0016 43F00103 		orr	r3, r3, #1
+ 174 001a 9360     		str	r3, [r2, #8]
+ 150:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 175              		.loc 1 150 3 view .LVU37
+ 176 001c 2B68     		ldr	r3, [r5]
+ 177 001e 1A79     		ldrb	r2, [r3, #4]	@ zero_extendqisi2
+ 178 0020 0024     		movs	r4, #0
+ 179 0022 1C71     		strb	r4, [r3, #4]
+ 153:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 180              		.loc 1 153 3 view .LVU38
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s 			page 8
+
+
+ 181 0024 2846     		mov	r0, r5
+ 182 0026 FFF7FEFF 		bl	HAL_CRC_MspDeInit
+ 183              	.LVL10:
+ 156:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 184              		.loc 1 156 3 view .LVU39
+ 156:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 185              		.loc 1 156 15 is_stmt 0 view .LVU40
+ 186 002a 6C71     		strb	r4, [r5, #5]
+ 159:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 187              		.loc 1 159 3 is_stmt 1 view .LVU41
+ 159:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 188              		.loc 1 159 3 view .LVU42
+ 189 002c 2C71     		strb	r4, [r5, #4]
+ 162:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** }
+ 190              		.loc 1 162 3 view .LVU43
+ 162:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** }
+ 191              		.loc 1 162 10 is_stmt 0 view .LVU44
+ 192 002e 2046     		mov	r0, r4
+ 193              	.L13:
+ 163:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 194              		.loc 1 163 1 view .LVU45
+ 195 0030 38BD     		pop	{r3, r4, r5, pc}
+ 196              	.LVL11:
+ 197              	.L14:
+ 198              	.LCFI3:
+ 199              		.cfi_def_cfa_offset 0
+ 200              		.cfi_restore 3
+ 201              		.cfi_restore 4
+ 202              		.cfi_restore 5
+ 203              		.cfi_restore 14
+ 131:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   }
+ 204              		.loc 1 131 12 view .LVU46
+ 205 0032 0120     		movs	r0, #1
+ 206              	.LVL12:
+ 163:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 207              		.loc 1 163 1 view .LVU47
+ 208 0034 7047     		bx	lr
+ 209              		.cfi_endproc
+ 210              	.LFE131:
+ 212              		.section	.text.HAL_CRC_Accumulate,"ax",%progbits
+ 213              		.align	1
+ 214              		.global	HAL_CRC_Accumulate
+ 215              		.syntax unified
+ 216              		.thumb
+ 217              		.thumb_func
+ 218              		.fpu fpv4-sp-d16
+ 220              	HAL_CRC_Accumulate:
+ 221              	.LVL13:
+ 222              	.LFB134:
+ 194:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 195:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** /**
+ 196:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @}
+ 197:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   */
+ 198:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 199:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** /** @defgroup CRC_Exported_Functions_Group2 Peripheral Control functions
+ 200:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****  *  @brief    management functions.
+ 201:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****  *
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s 			page 9
+
+
+ 202:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** @verbatim
+ 203:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****  ===============================================================================
+ 204:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****                       ##### Peripheral Control functions #####
+ 205:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****  ===============================================================================
+ 206:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****     [..]  This section provides functions allowing to:
+ 207:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****       (+) compute the 32-bit CRC value of a 32-bit data buffer
+ 208:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****           using combination of the previous CRC value and the new one.
+ 209:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 210:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****        [..]  or
+ 211:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 212:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****       (+) compute the 32-bit CRC value of a 32-bit data buffer
+ 213:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****           independently of the previous CRC value.
+ 214:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 215:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** @endverbatim
+ 216:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @{
+ 217:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   */
+ 218:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 219:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** /**
+ 220:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @brief  Compute the 32-bit CRC value of a 32-bit data buffer
+ 221:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   *         starting with the previously computed CRC as initialization value.
+ 222:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @param  hcrc CRC handle
+ 223:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @param  pBuffer pointer to the input data buffer.
+ 224:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @param  BufferLength input data buffer length (number of uint32_t words).
+ 225:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @retval uint32_t CRC (returned value LSBs for CRC shorter than 32 bits)
+ 226:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   */
+ 227:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** uint32_t HAL_CRC_Accumulate(CRC_HandleTypeDef *hcrc, uint32_t pBuffer[], uint32_t BufferLength)
+ 228:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** {
+ 223              		.loc 1 228 1 is_stmt 1 view -0
+ 224              		.cfi_startproc
+ 225              		@ args = 0, pretend = 0, frame = 0
+ 226              		@ frame_needed = 0, uses_anonymous_args = 0
+ 227              		@ link register save eliminated.
+ 229:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   uint32_t index;      /* CRC input data buffer index */
+ 228              		.loc 1 229 3 view .LVU49
+ 230:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   uint32_t temp = 0U;  /* CRC output (read from hcrc->Instance->DR register) */
+ 229              		.loc 1 230 3 view .LVU50
+ 231:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 232:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Change CRC peripheral state */
+ 233:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   hcrc->State = HAL_CRC_STATE_BUSY;
+ 230              		.loc 1 233 3 view .LVU51
+ 231              		.loc 1 233 15 is_stmt 0 view .LVU52
+ 232 0000 0223     		movs	r3, #2
+ 233 0002 4371     		strb	r3, [r0, #5]
+ 234:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 235:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Enter Data to the CRC calculator */
+ 236:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   for (index = 0U; index < BufferLength; index++)
+ 234              		.loc 1 236 3 is_stmt 1 view .LVU53
+ 235              	.LVL14:
+ 236              		.loc 1 236 14 is_stmt 0 view .LVU54
+ 237 0004 0023     		movs	r3, #0
+ 238              	.LVL15:
+ 239              		.loc 1 236 3 view .LVU55
+ 240 0006 9342     		cmp	r3, r2
+ 241 0008 0ED2     		bcs	.L26
+ 228:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   uint32_t index;      /* CRC input data buffer index */
+ 242              		.loc 1 228 1 view .LVU56
+ 243 000a 30B4     		push	{r4, r5}
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s 			page 10
+
+
+ 244              	.LCFI4:
+ 245              		.cfi_def_cfa_offset 8
+ 246              		.cfi_offset 4, -8
+ 247              		.cfi_offset 5, -4
+ 248              	.L21:
+ 237:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   {
+ 238:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****     hcrc->Instance->DR = pBuffer[index];
+ 249              		.loc 1 238 5 is_stmt 1 discriminator 3 view .LVU57
+ 250              		.loc 1 238 9 is_stmt 0 discriminator 3 view .LVU58
+ 251 000c 0468     		ldr	r4, [r0]
+ 252              		.loc 1 238 33 discriminator 3 view .LVU59
+ 253 000e 51F82350 		ldr	r5, [r1, r3, lsl #2]
+ 254              		.loc 1 238 24 discriminator 3 view .LVU60
+ 255 0012 2560     		str	r5, [r4]
+ 236:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   {
+ 256              		.loc 1 236 47 discriminator 3 view .LVU61
+ 257 0014 0133     		adds	r3, r3, #1
+ 258              	.LVL16:
+ 236:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   {
+ 259              		.loc 1 236 3 discriminator 3 view .LVU62
+ 260 0016 9342     		cmp	r3, r2
+ 261 0018 F8D3     		bcc	.L21
+ 239:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   }
+ 240:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   temp = hcrc->Instance->DR;
+ 262              		.loc 1 240 3 is_stmt 1 view .LVU63
+ 263              		.loc 1 240 14 is_stmt 0 view .LVU64
+ 264 001a 0368     		ldr	r3, [r0]
+ 265              	.LVL17:
+ 266              		.loc 1 240 8 view .LVU65
+ 267 001c 1B68     		ldr	r3, [r3]
+ 268              	.LVL18:
+ 241:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 242:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Change CRC peripheral state */
+ 243:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   hcrc->State = HAL_CRC_STATE_READY;
+ 269              		.loc 1 243 3 is_stmt 1 view .LVU66
+ 270              		.loc 1 243 15 is_stmt 0 view .LVU67
+ 271 001e 0122     		movs	r2, #1
+ 272              	.LVL19:
+ 273              		.loc 1 243 15 view .LVU68
+ 274 0020 4271     		strb	r2, [r0, #5]
+ 244:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 245:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Return the CRC computed value */
+ 246:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   return temp;
+ 275              		.loc 1 246 3 is_stmt 1 view .LVU69
+ 247:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** }
+ 276              		.loc 1 247 1 is_stmt 0 view .LVU70
+ 277 0022 1846     		mov	r0, r3
+ 278              	.LVL20:
+ 279              		.loc 1 247 1 view .LVU71
+ 280 0024 30BC     		pop	{r4, r5}
+ 281              	.LCFI5:
+ 282              		.cfi_restore 5
+ 283              		.cfi_restore 4
+ 284              		.cfi_def_cfa_offset 0
+ 285 0026 7047     		bx	lr
+ 286              	.LVL21:
+ 287              	.L26:
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s 			page 11
+
+
+ 240:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 288              		.loc 1 240 3 is_stmt 1 view .LVU72
+ 240:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 289              		.loc 1 240 14 is_stmt 0 view .LVU73
+ 290 0028 0368     		ldr	r3, [r0]
+ 291              	.LVL22:
+ 240:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 292              		.loc 1 240 8 view .LVU74
+ 293 002a 1B68     		ldr	r3, [r3]
+ 294              	.LVL23:
+ 243:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 295              		.loc 1 243 3 is_stmt 1 view .LVU75
+ 243:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 296              		.loc 1 243 15 is_stmt 0 view .LVU76
+ 297 002c 0122     		movs	r2, #1
+ 298              	.LVL24:
+ 243:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 299              		.loc 1 243 15 view .LVU77
+ 300 002e 4271     		strb	r2, [r0, #5]
+ 246:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** }
+ 301              		.loc 1 246 3 is_stmt 1 view .LVU78
+ 302              		.loc 1 247 1 is_stmt 0 view .LVU79
+ 303 0030 1846     		mov	r0, r3
+ 304              	.LVL25:
+ 305              		.loc 1 247 1 view .LVU80
+ 306 0032 7047     		bx	lr
+ 307              		.cfi_endproc
+ 308              	.LFE134:
+ 310              		.section	.text.HAL_CRC_Calculate,"ax",%progbits
+ 311              		.align	1
+ 312              		.global	HAL_CRC_Calculate
+ 313              		.syntax unified
+ 314              		.thumb
+ 315              		.thumb_func
+ 316              		.fpu fpv4-sp-d16
+ 318              	HAL_CRC_Calculate:
+ 319              	.LVL26:
+ 320              	.LFB135:
+ 248:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 249:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** /**
+ 250:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @brief  Compute the 32-bit CRC value of a 32-bit data buffer
+ 251:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   *         starting with hcrc->Instance->INIT as initialization value.
+ 252:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @param  hcrc CRC handle
+ 253:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @param  pBuffer pointer to the input data buffer.
+ 254:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @param  BufferLength input data buffer length (number of uint32_t words).
+ 255:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @retval uint32_t CRC (returned value LSBs for CRC shorter than 32 bits)
+ 256:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   */
+ 257:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** uint32_t HAL_CRC_Calculate(CRC_HandleTypeDef *hcrc, uint32_t pBuffer[], uint32_t BufferLength)
+ 258:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** {
+ 321              		.loc 1 258 1 is_stmt 1 view -0
+ 322              		.cfi_startproc
+ 323              		@ args = 0, pretend = 0, frame = 0
+ 324              		@ frame_needed = 0, uses_anonymous_args = 0
+ 325              		@ link register save eliminated.
+ 326              		.loc 1 258 1 is_stmt 0 view .LVU82
+ 327 0000 30B4     		push	{r4, r5}
+ 328              	.LCFI6:
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s 			page 12
+
+
+ 329              		.cfi_def_cfa_offset 8
+ 330              		.cfi_offset 4, -8
+ 331              		.cfi_offset 5, -4
+ 259:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   uint32_t index;      /* CRC input data buffer index */
+ 332              		.loc 1 259 3 is_stmt 1 view .LVU83
+ 260:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   uint32_t temp = 0U;  /* CRC output (read from hcrc->Instance->DR register) */
+ 333              		.loc 1 260 3 view .LVU84
+ 334              	.LVL27:
+ 261:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 262:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Change CRC peripheral state */
+ 263:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   hcrc->State = HAL_CRC_STATE_BUSY;
+ 335              		.loc 1 263 3 view .LVU85
+ 336              		.loc 1 263 15 is_stmt 0 view .LVU86
+ 337 0002 0223     		movs	r3, #2
+ 338 0004 4371     		strb	r3, [r0, #5]
+ 264:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 265:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Reset CRC Calculation Unit (hcrc->Instance->INIT is
+ 266:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   *  written in hcrc->Instance->DR) */
+ 267:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   __HAL_CRC_DR_RESET(hcrc);
+ 339              		.loc 1 267 3 is_stmt 1 view .LVU87
+ 340 0006 0468     		ldr	r4, [r0]
+ 341 0008 A368     		ldr	r3, [r4, #8]
+ 342 000a 43F00103 		orr	r3, r3, #1
+ 343 000e A360     		str	r3, [r4, #8]
+ 268:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 269:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Enter 32-bit input data to the CRC calculator */
+ 270:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   for (index = 0U; index < BufferLength; index++)
+ 344              		.loc 1 270 3 view .LVU88
+ 345              	.LVL28:
+ 346              		.loc 1 270 14 is_stmt 0 view .LVU89
+ 347 0010 0023     		movs	r3, #0
+ 348              	.LVL29:
+ 349              	.L28:
+ 350              		.loc 1 270 3 discriminator 1 view .LVU90
+ 351 0012 9342     		cmp	r3, r2
+ 352 0014 05D2     		bcs	.L31
+ 271:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   {
+ 272:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****     hcrc->Instance->DR = pBuffer[index];
+ 353              		.loc 1 272 5 is_stmt 1 discriminator 3 view .LVU91
+ 354              		.loc 1 272 9 is_stmt 0 discriminator 3 view .LVU92
+ 355 0016 0468     		ldr	r4, [r0]
+ 356              		.loc 1 272 33 discriminator 3 view .LVU93
+ 357 0018 51F82350 		ldr	r5, [r1, r3, lsl #2]
+ 358              		.loc 1 272 24 discriminator 3 view .LVU94
+ 359 001c 2560     		str	r5, [r4]
+ 270:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   {
+ 360              		.loc 1 270 47 discriminator 3 view .LVU95
+ 361 001e 0133     		adds	r3, r3, #1
+ 362              	.LVL30:
+ 270:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   {
+ 363              		.loc 1 270 47 discriminator 3 view .LVU96
+ 364 0020 F7E7     		b	.L28
+ 365              	.L31:
+ 273:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   }
+ 274:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   temp = hcrc->Instance->DR;
+ 366              		.loc 1 274 3 is_stmt 1 view .LVU97
+ 367              		.loc 1 274 14 is_stmt 0 view .LVU98
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s 			page 13
+
+
+ 368 0022 0368     		ldr	r3, [r0]
+ 369              	.LVL31:
+ 370              		.loc 1 274 8 view .LVU99
+ 371 0024 1B68     		ldr	r3, [r3]
+ 372              	.LVL32:
+ 275:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 276:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Change CRC peripheral state */
+ 277:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   hcrc->State = HAL_CRC_STATE_READY;
+ 373              		.loc 1 277 3 is_stmt 1 view .LVU100
+ 374              		.loc 1 277 15 is_stmt 0 view .LVU101
+ 375 0026 0122     		movs	r2, #1
+ 376              	.LVL33:
+ 377              		.loc 1 277 15 view .LVU102
+ 378 0028 4271     		strb	r2, [r0, #5]
+ 278:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 279:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Return the CRC computed value */
+ 280:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   return temp;
+ 379              		.loc 1 280 3 is_stmt 1 view .LVU103
+ 281:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** }
+ 380              		.loc 1 281 1 is_stmt 0 view .LVU104
+ 381 002a 1846     		mov	r0, r3
+ 382              	.LVL34:
+ 383              		.loc 1 281 1 view .LVU105
+ 384 002c 30BC     		pop	{r4, r5}
+ 385              	.LCFI7:
+ 386              		.cfi_restore 5
+ 387              		.cfi_restore 4
+ 388              		.cfi_def_cfa_offset 0
+ 389 002e 7047     		bx	lr
+ 390              		.cfi_endproc
+ 391              	.LFE135:
+ 393              		.section	.text.HAL_CRC_GetState,"ax",%progbits
+ 394              		.align	1
+ 395              		.global	HAL_CRC_GetState
+ 396              		.syntax unified
+ 397              		.thumb
+ 398              		.thumb_func
+ 399              		.fpu fpv4-sp-d16
+ 401              	HAL_CRC_GetState:
+ 402              	.LVL35:
+ 403              	.LFB136:
+ 282:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 283:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** /**
+ 284:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @}
+ 285:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   */
+ 286:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 287:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** /** @defgroup CRC_Exported_Functions_Group3 Peripheral State functions
+ 288:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****  *  @brief    Peripheral State functions.
+ 289:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****  *
+ 290:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** @verbatim
+ 291:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****  ===============================================================================
+ 292:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****                       ##### Peripheral State functions #####
+ 293:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****  ===============================================================================
+ 294:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****     [..]
+ 295:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****     This subsection permits to get in run-time the status of the peripheral.
+ 296:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 297:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** @endverbatim
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s 			page 14
+
+
+ 298:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @{
+ 299:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   */
+ 300:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** 
+ 301:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** /**
+ 302:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @brief  Return the CRC handle state.
+ 303:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @param  hcrc CRC handle
+ 304:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   * @retval HAL state
+ 305:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   */
+ 306:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** HAL_CRC_StateTypeDef HAL_CRC_GetState(CRC_HandleTypeDef *hcrc)
+ 307:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** {
+ 404              		.loc 1 307 1 is_stmt 1 view -0
+ 405              		.cfi_startproc
+ 406              		@ args = 0, pretend = 0, frame = 0
+ 407              		@ frame_needed = 0, uses_anonymous_args = 0
+ 408              		@ link register save eliminated.
+ 308:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   /* Return CRC handle state */
+ 309:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c ****   return hcrc->State;
+ 409              		.loc 1 309 3 view .LVU107
+ 410              		.loc 1 309 14 is_stmt 0 view .LVU108
+ 411 0000 4079     		ldrb	r0, [r0, #5]	@ zero_extendqisi2
+ 412              	.LVL36:
+ 310:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_crc.c **** }
+ 413              		.loc 1 310 1 view .LVU109
+ 414 0002 7047     		bx	lr
+ 415              		.cfi_endproc
+ 416              	.LFE136:
+ 418              		.text
+ 419              	.Letext0:
+ 420              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 421              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 422              		.file 4 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include/core_cm
+ 423              		.file 5 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Device/ST/STM32
+ 424              		.file 6 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Device/ST/STM32
+ 425              		.file 7 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/
+ 426              		.file 8 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/
+ 427              		.file 9 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f4xx_hal_crc.c
+C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s:18     .text.HAL_CRC_MspInit:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s:26     .text.HAL_CRC_MspInit:00000000 HAL_CRC_MspInit
+C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s:42     .text.HAL_CRC_Init:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s:49     .text.HAL_CRC_Init:00000000 HAL_CRC_Init
+C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s:108    .text.HAL_CRC_MspDeInit:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s:115    .text.HAL_CRC_MspDeInit:00000000 HAL_CRC_MspDeInit
+C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s:130    .text.HAL_CRC_DeInit:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s:137    .text.HAL_CRC_DeInit:00000000 HAL_CRC_DeInit
+C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s:213    .text.HAL_CRC_Accumulate:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s:220    .text.HAL_CRC_Accumulate:00000000 HAL_CRC_Accumulate
+C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s:311    .text.HAL_CRC_Calculate:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s:318    .text.HAL_CRC_Calculate:00000000 HAL_CRC_Calculate
+C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s:394    .text.HAL_CRC_GetState:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cci0KHsQ.s:401    .text.HAL_CRC_GetState:00000000 HAL_CRC_GetState
+
+NO UNDEFINED SYMBOLS

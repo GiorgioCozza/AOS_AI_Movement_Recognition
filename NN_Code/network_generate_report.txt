@@ -1,0 +1,64 @@
+Neural Network Tools for STM32 v1.2.0 (AI tools v5.0.0)
+Created date       : 2020-04-19 20:29:51
+
+Exec/report summary (generate dur=0.971s err=0)
+------------------------------------------------------------------------------------------------------------------------
+model file         : C:\Users\grgcz\Desktop\dev_space_win\AOS_Project\AOS_MovementRecognition\neural_net-py\best_models\best_acc_model_RNN_fold1_09-04-2020_221243.h5
+type               : keras (keras_dump)
+c_name             : network
+compression        : None
+quantize           : None
+L2r error          : NOT EVALUATED
+workspace dir      : C:\Users\grgcz\Desktop\dev_space_win\AOS_Project\AOS_MovementRecognition\stm32ai_ws
+output dir         : C:\Users\grgcz\Desktop\dev_space_win\AOS_Project\AOS_MovementRecognition\NN_Code
+
+model_name         : best_acc_model_RNN_fold1_09042020_221243
+model_hash         : fc8f821a7f3a5c7c278e772d8331cb75
+input              : input_0 [360 items, 1.41 KiB, ai_float, FLOAT32, (30, 1, 12)]
+input (total)      : 1.41 KiB
+output             : FCN3_nl [7 items, 28 B, ai_float, FLOAT32, (7,)]
+output (total)     : 28 B
+params #           : 23,103 items (90.25 KiB)
+macc               : 597,465
+weights (ro)       : 93,180 (91.00 KiB) (0.83%) 
+activations (rw)   : 1,696 (1.66 KiB) 
+ram (total)        : 3,164 (3.09 KiB) = 1,696 + 1,440 + 28
+
+------------------------------------------------------------------------------------------------------------------------
+id  layer (type)                      output shape      param #     connected to             macc           rom                
+------------------------------------------------------------------------------------------------------------------------
+0   input_0 (Input)                   (30, 1, 12)                                                                              
+    batch_normalization_1 (ScaleBias) (30, 1, 12)       24          input_0                  720            96                 
+------------------------------------------------------------------------------------------------------------------------
+1   LSTM1 (LSTM)                      (1, 1, 64)        19,712      batch_normalization_1    593,280        79,616             
+------------------------------------------------------------------------------------------------------------------------
+3   FCN1 (Dense)                      (1, 1, 32)        2,080       LSTM1                    2,048          8,320              
+    FCN1_nl (Nonlinearity)            (1, 1, 32)                    FCN1                     32                                
+------------------------------------------------------------------------------------------------------------------------
+5   FCN2 (Dense)                      (1, 1, 32)        1,056       FCN1_nl                  1,024          4,224              
+    FCN2_nl (Nonlinearity)            (1, 1, 32)                    FCN2                     32                                
+------------------------------------------------------------------------------------------------------------------------
+7   FCN3 (Dense)                      (1, 1, 7)         231         FCN2_nl                  224            924                
+    FCN3_nl (Nonlinearity)            (1, 1, 7)                     FCN3                     105                               
+------------------------------------------------------------------------------------------------------------------------
+best_acc_model_RNN_fold1_09042020_221243 p=23103(90.25 KBytes) macc=597465 rom=91.00 KBytes (0.83%) ram=1.66 KiB io_ram=1.43 KiB
+
+ 
+Complexity per-layer - macc=597,465 rom=93,180
+------------------------------------------------------------------------------------------------------------------------
+id      layer (type)                      macc                                    rom                                    
+------------------------------------------------------------------------------------------------------------------------
+0       batch_normalization_1 (ScaleBias) |                                 0.1%  |                                 0.1% 
+1       LSTM1 (LSTM)                      |||||||||||||||||||||||||||||||  99.3%  |||||||||||||||||||||||||||||||  85.4% 
+3       FCN1 (Dense)                      |                                 0.3%  ||||                              8.9% 
+3       FCN1_nl (Nonlinearity)            |                                 0.0%  |                                 0.0% 
+5       FCN2 (Dense)                      |                                 0.2%  ||                                4.5% 
+5       FCN2_nl (Nonlinearity)            |                                 0.0%  |                                 0.0% 
+7       FCN3 (Dense)                      |                                 0.0%  |                                 1.0% 
+7       FCN3_nl (Nonlinearity)            |                                 0.0%  |                                 0.0% 
+------------------------------------------------------------------------------------------------------------------------
+
+
+Evaluation report (summary)
+--------------------------------------------------
+NOT EVALUATED

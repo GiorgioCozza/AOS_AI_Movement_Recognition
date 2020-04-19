@@ -1,0 +1,699 @@
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"stm32msg.pb.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.global	respMsg_fields
+  18              		.global	nodeMsg_fields
+  19              		.global	logMsg_fields
+  20              		.global	ackMsg_fields
+  21              		.global	sysinfoMsg_fields
+  22              		.global	syncMsg_fields
+  23              		.global	aiBufferByteMsg_fields
+  24              		.global	aiNetworkInfoMsg_fields
+  25              		.global	aiBufferShapeMsg_fields
+  26              		.global	aiRunReportMsg_fields
+  27              		.global	reqMsg_fields
+  28              		.global	aiBufferShapeMsg_zeropoint_default
+  29              		.global	aiBufferShapeMsg_scale_default
+  30              		.global	aiBufferShapeMsg_channels_default
+  31              		.global	aiBufferShapeMsg_width_default
+  32              		.global	aiBufferShapeMsg_height_default
+  33              		.global	aiBufferShapeMsg_n_batches_default
+  34              		.global	aiBufferShapeMsg_format_default
+  35              		.global	reqMsg_cmd_default
+  36              		.section	.rodata.ackMsg_fields,"a"
+  37              		.align	2
+  40              	ackMsg_fields:
+  41 0000 0100     		.short	1
+  42 0002 01       		.byte	1
+  43 0003 0000     		.2byte	0
+  44 0005 0000     		.2byte	0
+  45 0007 0400     		.2byte	4
+  46 0009 0000     		.2byte	0
+  47 000b 00000000 		.4byte	0
+  48 000f 0200     		.2byte	2
+  49 0011 01       		.byte	1
+  50 0012 0000     		.2byte	0
+  51 0014 0000     		.2byte	0
+  52 0016 0100     		.2byte	1
+  53 0018 0000     		.2byte	0
+  54 001a 00000000 		.4byte	0
+  55 001e 0000     		.short	0
+  56 0020 00       		.byte	0
+  57 0021 0000     		.2byte	0
+  58 0023 0000     		.2byte	0
+  59 0025 0000     		.2byte	0
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s 			page 2
+
+
+  60 0027 0000     		.2byte	0
+  61 0029 00000000 		.4byte	0
+  62              		.section	.rodata.aiBufferByteMsg_fields,"a"
+  63              		.align	2
+  66              	aiBufferByteMsg_fields:
+  67 0000 0100     		.short	1
+  68 0002 07       		.byte	7
+  69 0003 0000     		.2byte	0
+  70 0005 0000     		.2byte	0
+  71 0007 1C00     		.2byte	28
+  72 0009 0000     		.2byte	0
+  73 000b 00000000 		.4byte	aiBufferShapeMsg_fields
+  74 000f 0200     		.2byte	2
+  75 0011 45       		.byte	69
+  76 0012 0000     		.2byte	0
+  77 0014 0000     		.2byte	0
+  78 0016 0800     		.2byte	8
+  79 0018 0000     		.2byte	0
+  80 001a 00000000 		.4byte	0
+  81 001e 0000     		.short	0
+  82 0020 00       		.byte	0
+  83 0021 0000     		.2byte	0
+  84 0023 0000     		.2byte	0
+  85 0025 0000     		.2byte	0
+  86 0027 0000     		.2byte	0
+  87 0029 00000000 		.4byte	0
+  88              		.section	.rodata.aiBufferShapeMsg_channels_default,"a"
+  89              		.align	2
+  92              	aiBufferShapeMsg_channels_default:
+  93 0000 01000000 		.word	1
+  94              		.section	.rodata.aiBufferShapeMsg_fields,"a"
+  95              		.align	2
+  98              	aiBufferShapeMsg_fields:
+  99 0000 0100     		.short	1
+ 100 0002 01       		.byte	1
+ 101 0003 0000     		.2byte	0
+ 102 0005 0000     		.2byte	0
+ 103 0007 0400     		.2byte	4
+ 104 0009 0000     		.2byte	0
+ 105 000b 00000000 		.4byte	aiBufferShapeMsg_format_default
+ 106 000f 0200     		.2byte	2
+ 107 0011 01       		.byte	1
+ 108 0012 0000     		.2byte	0
+ 109 0014 0000     		.2byte	0
+ 110 0016 0400     		.2byte	4
+ 111 0018 0000     		.2byte	0
+ 112 001a 00000000 		.4byte	aiBufferShapeMsg_n_batches_default
+ 113 001e 0300     		.short	3
+ 114 0020 01       		.byte	1
+ 115 0021 0000     		.2byte	0
+ 116 0023 0000     		.2byte	0
+ 117 0025 0400     		.2byte	4
+ 118 0027 0000     		.2byte	0
+ 119 0029 00000000 		.4byte	aiBufferShapeMsg_height_default
+ 120 002d 0400     		.2byte	4
+ 121 002f 01       		.byte	1
+ 122 0030 0000     		.2byte	0
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s 			page 3
+
+
+ 123 0032 0000     		.2byte	0
+ 124 0034 0400     		.2byte	4
+ 125 0036 0000     		.2byte	0
+ 126 0038 00000000 		.4byte	aiBufferShapeMsg_width_default
+ 127 003c 0500     		.short	5
+ 128 003e 01       		.byte	1
+ 129 003f 0000     		.2byte	0
+ 130 0041 0000     		.2byte	0
+ 131 0043 0400     		.2byte	4
+ 132 0045 0000     		.2byte	0
+ 133 0047 00000000 		.4byte	aiBufferShapeMsg_channels_default
+ 134 004b 0600     		.2byte	6
+ 135 004d 03       		.byte	3
+ 136 004e 0000     		.2byte	0
+ 137 0050 0000     		.2byte	0
+ 138 0052 0400     		.2byte	4
+ 139 0054 0000     		.2byte	0
+ 140 0056 00000000 		.4byte	aiBufferShapeMsg_scale_default
+ 141 005a 0700     		.short	7
+ 142 005c 00       		.byte	0
+ 143 005d 0000     		.2byte	0
+ 144 005f 0000     		.2byte	0
+ 145 0061 0400     		.2byte	4
+ 146 0063 0000     		.2byte	0
+ 147 0065 00000000 		.4byte	aiBufferShapeMsg_zeropoint_default
+ 148 0069 0000     		.2byte	0
+ 149 006b 00       		.byte	0
+ 150 006c 0000     		.2byte	0
+ 151 006e 0000     		.2byte	0
+ 152 0070 0000     		.2byte	0
+ 153 0072 0000     		.2byte	0
+ 154 0074 00000000 		.4byte	0
+ 155              		.section	.rodata.aiBufferShapeMsg_format_default,"a"
+ 156              		.align	2
+ 159              	aiBufferShapeMsg_format_default:
+ 160 0000 00000000 		.space	4
+ 161              		.section	.rodata.aiBufferShapeMsg_height_default,"a"
+ 162              		.align	2
+ 165              	aiBufferShapeMsg_height_default:
+ 166 0000 01000000 		.word	1
+ 167              		.section	.rodata.aiBufferShapeMsg_n_batches_default,"a"
+ 168              		.align	2
+ 171              	aiBufferShapeMsg_n_batches_default:
+ 172 0000 01000000 		.word	1
+ 173              		.section	.rodata.aiBufferShapeMsg_scale_default,"a"
+ 174              		.align	2
+ 177              	aiBufferShapeMsg_scale_default:
+ 178 0000 00000000 		.space	4
+ 179              		.section	.rodata.aiBufferShapeMsg_width_default,"a"
+ 180              		.align	2
+ 183              	aiBufferShapeMsg_width_default:
+ 184 0000 01000000 		.word	1
+ 185              		.section	.rodata.aiBufferShapeMsg_zeropoint_default,"a"
+ 186              		.align	2
+ 189              	aiBufferShapeMsg_zeropoint_default:
+ 190 0000 00000000 		.space	4
+ 191              		.section	.rodata.aiNetworkInfoMsg_fields,"a"
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s 			page 4
+
+
+ 192              		.align	2
+ 195              	aiNetworkInfoMsg_fields:
+ 196 0000 0100     		.short	1
+ 197 0002 06       		.byte	6
+ 198 0003 0000     		.2byte	0
+ 199 0005 0000     		.2byte	0
+ 200 0007 4000     		.2byte	64
+ 201 0009 0000     		.2byte	0
+ 202 000b 00000000 		.4byte	0
+ 203 000f 0200     		.2byte	2
+ 204 0011 06       		.byte	6
+ 205 0012 0000     		.2byte	0
+ 206 0014 0000     		.2byte	0
+ 207 0016 4000     		.2byte	64
+ 208 0018 0000     		.2byte	0
+ 209 001a 00000000 		.4byte	0
+ 210 001e 0300     		.short	3
+ 211 0020 06       		.byte	6
+ 212 0021 0000     		.2byte	0
+ 213 0023 0000     		.2byte	0
+ 214 0025 4000     		.2byte	64
+ 215 0027 0000     		.2byte	0
+ 216 0029 00000000 		.4byte	0
+ 217 002d 0400     		.2byte	4
+ 218 002f 06       		.byte	6
+ 219 0030 0000     		.2byte	0
+ 220 0032 0000     		.2byte	0
+ 221 0034 4000     		.2byte	64
+ 222 0036 0000     		.2byte	0
+ 223 0038 00000000 		.4byte	0
+ 224 003c 0500     		.short	5
+ 225 003e 06       		.byte	6
+ 226 003f 0000     		.2byte	0
+ 227 0041 0000     		.2byte	0
+ 228 0043 4000     		.2byte	64
+ 229 0045 0000     		.2byte	0
+ 230 0047 00000000 		.4byte	0
+ 231 004b 0600     		.2byte	6
+ 232 004d 01       		.byte	1
+ 233 004e 0000     		.2byte	0
+ 234 0050 0000     		.2byte	0
+ 235 0052 0400     		.2byte	4
+ 236 0054 0000     		.2byte	0
+ 237 0056 00000000 		.4byte	0
+ 238 005a 0700     		.short	7
+ 239 005c 06       		.byte	6
+ 240 005d 0000     		.2byte	0
+ 241 005f 0000     		.2byte	0
+ 242 0061 4000     		.2byte	64
+ 243 0063 0000     		.2byte	0
+ 244 0065 00000000 		.4byte	0
+ 245 0069 0800     		.2byte	8
+ 246 006b 01       		.byte	1
+ 247 006c 0000     		.2byte	0
+ 248 006e 0000     		.2byte	0
+ 249 0070 0400     		.2byte	4
+ 250 0072 0000     		.2byte	0
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s 			page 5
+
+
+ 251 0074 00000000 		.4byte	0
+ 252 0078 0900     		.short	9
+ 253 007a 01       		.byte	1
+ 254 007b 0000     		.2byte	0
+ 255 007d 0000     		.2byte	0
+ 256 007f 0400     		.2byte	4
+ 257 0081 0000     		.2byte	0
+ 258 0083 00000000 		.4byte	0
+ 259 0087 0A00     		.2byte	10
+ 260 0089 01       		.byte	1
+ 261 008a 0000     		.2byte	0
+ 262 008c 0000     		.2byte	0
+ 263 008e 0400     		.2byte	4
+ 264 0090 0000     		.2byte	0
+ 265 0092 00000000 		.4byte	0
+ 266 0096 0B00     		.short	11
+ 267 0098 01       		.byte	1
+ 268 0099 0000     		.2byte	0
+ 269 009b 0000     		.2byte	0
+ 270 009d 0400     		.2byte	4
+ 271 009f 0000     		.2byte	0
+ 272 00a1 00000000 		.4byte	0
+ 273 00a5 0C00     		.2byte	12
+ 274 00a7 01       		.byte	1
+ 275 00a8 0000     		.2byte	0
+ 276 00aa 0000     		.2byte	0
+ 277 00ac 0400     		.2byte	4
+ 278 00ae 0000     		.2byte	0
+ 279 00b0 00000000 		.4byte	0
+ 280 00b4 0D00     		.short	13
+ 281 00b6 01       		.byte	1
+ 282 00b7 0000     		.2byte	0
+ 283 00b9 0000     		.2byte	0
+ 284 00bb 0400     		.2byte	4
+ 285 00bd 0000     		.2byte	0
+ 286 00bf 00000000 		.4byte	0
+ 287 00c3 0E00     		.2byte	14
+ 288 00c5 01       		.byte	1
+ 289 00c6 0000     		.2byte	0
+ 290 00c8 0000     		.2byte	0
+ 291 00ca 0400     		.2byte	4
+ 292 00cc 0000     		.2byte	0
+ 293 00ce 00000000 		.4byte	0
+ 294 00d2 0F00     		.short	15
+ 295 00d4 01       		.byte	1
+ 296 00d5 0000     		.2byte	0
+ 297 00d7 0000     		.2byte	0
+ 298 00d9 0400     		.2byte	4
+ 299 00db 0000     		.2byte	0
+ 300 00dd 00000000 		.4byte	0
+ 301 00e1 1000     		.2byte	16
+ 302 00e3 67       		.byte	103
+ 303 00e4 0000     		.2byte	0
+ 304 00e6 0000     		.2byte	0
+ 305 00e8 0800     		.2byte	8
+ 306 00ea 0000     		.2byte	0
+ 307 00ec 00000000 		.4byte	aiBufferShapeMsg_fields
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s 			page 6
+
+
+ 308 00f0 1100     		.short	17
+ 309 00f2 67       		.byte	103
+ 310 00f3 0000     		.2byte	0
+ 311 00f5 0000     		.2byte	0
+ 312 00f7 0800     		.2byte	8
+ 313 00f9 0000     		.2byte	0
+ 314 00fb 00000000 		.4byte	aiBufferShapeMsg_fields
+ 315 00ff 1200     		.2byte	18
+ 316 0101 07       		.byte	7
+ 317 0102 0000     		.2byte	0
+ 318 0104 0000     		.2byte	0
+ 319 0106 1C00     		.2byte	28
+ 320 0108 0000     		.2byte	0
+ 321 010a 00000000 		.4byte	aiBufferShapeMsg_fields
+ 322 010e 1300     		.short	19
+ 323 0110 07       		.byte	7
+ 324 0111 0000     		.2byte	0
+ 325 0113 0000     		.2byte	0
+ 326 0115 1C00     		.2byte	28
+ 327 0117 0000     		.2byte	0
+ 328 0119 00000000 		.4byte	aiBufferShapeMsg_fields
+ 329 011d 1400     		.2byte	20
+ 330 011f 01       		.byte	1
+ 331 0120 0000     		.2byte	0
+ 332 0122 0000     		.2byte	0
+ 333 0124 0400     		.2byte	4
+ 334 0126 0000     		.2byte	0
+ 335 0128 00000000 		.4byte	0
+ 336 012c 0000     		.short	0
+ 337 012e 00       		.byte	0
+ 338 012f 0000     		.2byte	0
+ 339 0131 0000     		.2byte	0
+ 340 0133 0000     		.2byte	0
+ 341 0135 0000     		.2byte	0
+ 342 0137 00000000 		.4byte	0
+ 343              		.section	.rodata.aiRunReportMsg_fields,"a"
+ 344              		.align	2
+ 347              	aiRunReportMsg_fields:
+ 348 0000 0100     		.short	1
+ 349 0002 01       		.byte	1
+ 350 0003 0000     		.2byte	0
+ 351 0005 0000     		.2byte	0
+ 352 0007 0400     		.2byte	4
+ 353 0009 0000     		.2byte	0
+ 354 000b 00000000 		.4byte	0
+ 355 000f 0200     		.2byte	2
+ 356 0011 01       		.byte	1
+ 357 0012 0000     		.2byte	0
+ 358 0014 0000     		.2byte	0
+ 359 0016 0400     		.2byte	4
+ 360 0018 0000     		.2byte	0
+ 361 001a 00000000 		.4byte	0
+ 362 001e 0300     		.short	3
+ 363 0020 01       		.byte	1
+ 364 0021 0000     		.2byte	0
+ 365 0023 0000     		.2byte	0
+ 366 0025 0400     		.2byte	4
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s 			page 7
+
+
+ 367 0027 0000     		.2byte	0
+ 368 0029 00000000 		.4byte	0
+ 369 002d 0400     		.2byte	4
+ 370 002f 01       		.byte	1
+ 371 0030 0000     		.2byte	0
+ 372 0032 0000     		.2byte	0
+ 373 0034 0400     		.2byte	4
+ 374 0036 0000     		.2byte	0
+ 375 0038 00000000 		.4byte	0
+ 376 003c 0500     		.short	5
+ 377 003e 03       		.byte	3
+ 378 003f 0000     		.2byte	0
+ 379 0041 0000     		.2byte	0
+ 380 0043 0400     		.2byte	4
+ 381 0045 0000     		.2byte	0
+ 382 0047 00000000 		.4byte	0
+ 383 004b 0000     		.2byte	0
+ 384 004d 00       		.byte	0
+ 385 004e 0000     		.2byte	0
+ 386 0050 0000     		.2byte	0
+ 387 0052 0000     		.2byte	0
+ 388 0054 0000     		.2byte	0
+ 389 0056 00000000 		.4byte	0
+ 390              		.section	.rodata.logMsg_fields,"a"
+ 391              		.align	2
+ 394              	logMsg_fields:
+ 395 0000 0100     		.short	1
+ 396 0002 01       		.byte	1
+ 397 0003 0000     		.2byte	0
+ 398 0005 0000     		.2byte	0
+ 399 0007 0400     		.2byte	4
+ 400 0009 0000     		.2byte	0
+ 401 000b 00000000 		.4byte	0
+ 402 000f 0200     		.2byte	2
+ 403 0011 06       		.byte	6
+ 404 0012 0000     		.2byte	0
+ 405 0014 0000     		.2byte	0
+ 406 0016 8000     		.2byte	128
+ 407 0018 0000     		.2byte	0
+ 408 001a 00000000 		.4byte	0
+ 409 001e 0000     		.short	0
+ 410 0020 00       		.byte	0
+ 411 0021 0000     		.2byte	0
+ 412 0023 0000     		.2byte	0
+ 413 0025 0000     		.2byte	0
+ 414 0027 0000     		.2byte	0
+ 415 0029 00000000 		.4byte	0
+ 416              		.section	.rodata.nodeMsg_fields,"a"
+ 417              		.align	2
+ 420              	nodeMsg_fields:
+ 421 0000 0100     		.short	1
+ 422 0002 01       		.byte	1
+ 423 0003 0000     		.2byte	0
+ 424 0005 0000     		.2byte	0
+ 425 0007 0400     		.2byte	4
+ 426 0009 0000     		.2byte	0
+ 427 000b 00000000 		.4byte	0
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s 			page 8
+
+
+ 428 000f 0200     		.2byte	2
+ 429 0011 01       		.byte	1
+ 430 0012 0000     		.2byte	0
+ 431 0014 0000     		.2byte	0
+ 432 0016 0400     		.2byte	4
+ 433 0018 0000     		.2byte	0
+ 434 001a 00000000 		.4byte	0
+ 435 001e 0300     		.short	3
+ 436 0020 03       		.byte	3
+ 437 0021 0000     		.2byte	0
+ 438 0023 0000     		.2byte	0
+ 439 0025 0400     		.2byte	4
+ 440 0027 0000     		.2byte	0
+ 441 0029 00000000 		.4byte	0
+ 442 002d 0400     		.2byte	4
+ 443 002f 07       		.byte	7
+ 444 0030 0000     		.2byte	0
+ 445 0032 0000     		.2byte	0
+ 446 0034 2400     		.2byte	36
+ 447 0036 0000     		.2byte	0
+ 448 0038 00000000 		.4byte	aiBufferByteMsg_fields
+ 449 003c 0000     		.short	0
+ 450 003e 00       		.byte	0
+ 451 003f 0000     		.2byte	0
+ 452 0041 0000     		.2byte	0
+ 453 0043 0000     		.2byte	0
+ 454 0045 0000     		.2byte	0
+ 455 0047 00000000 		.4byte	0
+ 456              		.section	.rodata.reqMsg_cmd_default,"a"
+ 459              	reqMsg_cmd_default:
+ 460 0000 01       		.byte	1
+ 461              		.section	.rodata.reqMsg_fields,"a"
+ 462              		.align	2
+ 465              	reqMsg_fields:
+ 466 0000 0100     		.short	1
+ 467 0002 01       		.byte	1
+ 468 0003 0000     		.2byte	0
+ 469 0005 0000     		.2byte	0
+ 470 0007 0400     		.2byte	4
+ 471 0009 0000     		.2byte	0
+ 472 000b 00000000 		.4byte	0
+ 473 000f 0200     		.2byte	2
+ 474 0011 01       		.byte	1
+ 475 0012 0000     		.2byte	0
+ 476 0014 0000     		.2byte	0
+ 477 0016 0100     		.2byte	1
+ 478 0018 0000     		.2byte	0
+ 479 001a 00000000 		.4byte	reqMsg_cmd_default
+ 480 001e 0300     		.short	3
+ 481 0020 01       		.byte	1
+ 482 0021 0300     		.2byte	3
+ 483 0023 0000     		.2byte	0
+ 484 0025 0400     		.2byte	4
+ 485 0027 0000     		.2byte	0
+ 486 0029 00000000 		.4byte	0
+ 487 002d 0400     		.2byte	4
+ 488 002f 06       		.byte	6
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s 			page 9
+
+
+ 489 0030 0000     		.2byte	0
+ 490 0032 0000     		.2byte	0
+ 491 0034 4000     		.2byte	64
+ 492 0036 0000     		.2byte	0
+ 493 0038 00000000 		.4byte	0
+ 494 003c 0500     		.short	5
+ 495 003e 01       		.byte	1
+ 496 003f 0000     		.2byte	0
+ 497 0041 0000     		.2byte	0
+ 498 0043 0400     		.2byte	4
+ 499 0045 0000     		.2byte	0
+ 500 0047 00000000 		.4byte	0
+ 501 004b 0000     		.2byte	0
+ 502 004d 00       		.byte	0
+ 503 004e 0000     		.2byte	0
+ 504 0050 0000     		.2byte	0
+ 505 0052 0000     		.2byte	0
+ 506 0054 0000     		.2byte	0
+ 507 0056 00000000 		.4byte	0
+ 508              		.section	.rodata.respMsg_fields,"a"
+ 509              		.align	2
+ 512              	respMsg_fields:
+ 513 0000 0100     		.short	1
+ 514 0002 01       		.byte	1
+ 515 0003 0000     		.2byte	0
+ 516 0005 0000     		.2byte	0
+ 517 0007 0400     		.2byte	4
+ 518 0009 0000     		.2byte	0
+ 519 000b 00000000 		.4byte	0
+ 520 000f 0200     		.2byte	2
+ 521 0011 01       		.byte	1
+ 522 0012 0000     		.2byte	0
+ 523 0014 0000     		.2byte	0
+ 524 0016 0100     		.2byte	1
+ 525 0018 0000     		.2byte	0
+ 526 001a 00000000 		.4byte	0
+ 527 001e 0A00     		.short	10
+ 528 0020 37       		.byte	55
+ 529 0021 0300     		.2byte	3
+ 530 0023 FEFF     		.2byte	-2
+ 531 0025 0800     		.2byte	8
+ 532 0027 0000     		.2byte	0
+ 533 0029 00000000 		.4byte	syncMsg_fields
+ 534 002d 0B00     		.2byte	11
+ 535 002f 37       		.byte	55
+ 536 0030 FFFF     		.2byte	-1
+ 537 0032 FEFF     		.2byte	-2
+ 538 0034 1000     		.2byte	16
+ 539 0036 0000     		.2byte	0
+ 540 0038 00000000 		.4byte	sysinfoMsg_fields
+ 541 003c 0C00     		.short	12
+ 542 003e 37       		.byte	55
+ 543 003f FFFF     		.2byte	-1
+ 544 0041 FEFF     		.2byte	-2
+ 545 0043 0800     		.2byte	8
+ 546 0045 0000     		.2byte	0
+ 547 0047 00000000 		.4byte	ackMsg_fields
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s 			page 10
+
+
+ 548 004b 0D00     		.2byte	13
+ 549 004d 37       		.byte	55
+ 550 004e FFFF     		.2byte	-1
+ 551 0050 FEFF     		.2byte	-2
+ 552 0052 8400     		.2byte	132
+ 553 0054 0000     		.2byte	0
+ 554 0056 00000000 		.4byte	logMsg_fields
+ 555 005a 0E00     		.short	14
+ 556 005c 37       		.byte	55
+ 557 005d FFFF     		.2byte	-1
+ 558 005f FEFF     		.2byte	-2
+ 559 0061 3000     		.2byte	48
+ 560 0063 0000     		.2byte	0
+ 561 0065 00000000 		.4byte	nodeMsg_fields
+ 562 0069 1400     		.2byte	20
+ 563 006b 37       		.byte	55
+ 564 006c FFFF     		.2byte	-1
+ 565 006e FEFF     		.2byte	-2
+ 566 0070 F001     		.2byte	496
+ 567 0072 0000     		.2byte	0
+ 568 0074 00000000 		.4byte	aiNetworkInfoMsg_fields
+ 569 0078 1500     		.short	21
+ 570 007a 37       		.byte	55
+ 571 007b FFFF     		.2byte	-1
+ 572 007d FEFF     		.2byte	-2
+ 573 007f 1400     		.2byte	20
+ 574 0081 0000     		.2byte	0
+ 575 0083 00000000 		.4byte	aiRunReportMsg_fields
+ 576 0087 0000     		.2byte	0
+ 577 0089 00       		.byte	0
+ 578 008a 0000     		.2byte	0
+ 579 008c 0000     		.2byte	0
+ 580 008e 0000     		.2byte	0
+ 581 0090 0000     		.2byte	0
+ 582 0092 00000000 		.4byte	0
+ 583              		.section	.rodata.syncMsg_fields,"a"
+ 584              		.align	2
+ 587              	syncMsg_fields:
+ 588 0000 0100     		.short	1
+ 589 0002 01       		.byte	1
+ 590 0003 0000     		.2byte	0
+ 591 0005 0000     		.2byte	0
+ 592 0007 0400     		.2byte	4
+ 593 0009 0000     		.2byte	0
+ 594 000b 00000000 		.4byte	0
+ 595 000f 0400     		.2byte	4
+ 596 0011 01       		.byte	1
+ 597 0012 0000     		.2byte	0
+ 598 0014 0000     		.2byte	0
+ 599 0016 0400     		.2byte	4
+ 600 0018 0000     		.2byte	0
+ 601 001a 00000000 		.4byte	0
+ 602 001e 0000     		.short	0
+ 603 0020 00       		.byte	0
+ 604 0021 0000     		.2byte	0
+ 605 0023 0000     		.2byte	0
+ 606 0025 0000     		.2byte	0
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s 			page 11
+
+
+ 607 0027 0000     		.2byte	0
+ 608 0029 00000000 		.4byte	0
+ 609              		.section	.rodata.sysinfoMsg_fields,"a"
+ 610              		.align	2
+ 613              	sysinfoMsg_fields:
+ 614 0000 0100     		.short	1
+ 615 0002 01       		.byte	1
+ 616 0003 0000     		.2byte	0
+ 617 0005 0000     		.2byte	0
+ 618 0007 0400     		.2byte	4
+ 619 0009 0000     		.2byte	0
+ 620 000b 00000000 		.4byte	0
+ 621 000f 0200     		.2byte	2
+ 622 0011 01       		.byte	1
+ 623 0012 0000     		.2byte	0
+ 624 0014 0000     		.2byte	0
+ 625 0016 0400     		.2byte	4
+ 626 0018 0000     		.2byte	0
+ 627 001a 00000000 		.4byte	0
+ 628 001e 0300     		.short	3
+ 629 0020 01       		.byte	1
+ 630 0021 0000     		.2byte	0
+ 631 0023 0000     		.2byte	0
+ 632 0025 0400     		.2byte	4
+ 633 0027 0000     		.2byte	0
+ 634 0029 00000000 		.4byte	0
+ 635 002d 0400     		.2byte	4
+ 636 002f 01       		.byte	1
+ 637 0030 0000     		.2byte	0
+ 638 0032 0000     		.2byte	0
+ 639 0034 0400     		.2byte	4
+ 640 0036 0000     		.2byte	0
+ 641 0038 00000000 		.4byte	0
+ 642 003c 0000     		.short	0
+ 643 003e 00       		.byte	0
+ 644 003f 0000     		.2byte	0
+ 645 0041 0000     		.2byte	0
+ 646 0043 0000     		.2byte	0
+ 647 0045 0000     		.2byte	0
+ 648 0047 00000000 		.4byte	0
+ 649              		.text
+ 650              	.Letext0:
+ 651              		.file 1 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 652              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 653              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 654              		.file 4 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\lib\\gcc\\arm-none-eab
+ 655              		.file 5 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 656              		.file 6 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 657              		.file 7 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 658              		.file 8 "Inc/pb.h"
+ 659              		.file 9 "Inc/stm32msg.pb.h"
+ 660              		.file 10 "Src/stm32msg.pb.c"
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s 			page 12
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32msg.pb.c
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:512    .rodata.respMsg_fields:00000000 respMsg_fields
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:420    .rodata.nodeMsg_fields:00000000 nodeMsg_fields
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:394    .rodata.logMsg_fields:00000000 logMsg_fields
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:40     .rodata.ackMsg_fields:00000000 ackMsg_fields
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:613    .rodata.sysinfoMsg_fields:00000000 sysinfoMsg_fields
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:587    .rodata.syncMsg_fields:00000000 syncMsg_fields
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:66     .rodata.aiBufferByteMsg_fields:00000000 aiBufferByteMsg_fields
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:195    .rodata.aiNetworkInfoMsg_fields:00000000 aiNetworkInfoMsg_fields
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:98     .rodata.aiBufferShapeMsg_fields:00000000 aiBufferShapeMsg_fields
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:347    .rodata.aiRunReportMsg_fields:00000000 aiRunReportMsg_fields
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:465    .rodata.reqMsg_fields:00000000 reqMsg_fields
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:189    .rodata.aiBufferShapeMsg_zeropoint_default:00000000 aiBufferShapeMsg_zeropoint_default
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:177    .rodata.aiBufferShapeMsg_scale_default:00000000 aiBufferShapeMsg_scale_default
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:92     .rodata.aiBufferShapeMsg_channels_default:00000000 aiBufferShapeMsg_channels_default
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:183    .rodata.aiBufferShapeMsg_width_default:00000000 aiBufferShapeMsg_width_default
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:165    .rodata.aiBufferShapeMsg_height_default:00000000 aiBufferShapeMsg_height_default
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:171    .rodata.aiBufferShapeMsg_n_batches_default:00000000 aiBufferShapeMsg_n_batches_default
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:159    .rodata.aiBufferShapeMsg_format_default:00000000 aiBufferShapeMsg_format_default
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:459    .rodata.reqMsg_cmd_default:00000000 reqMsg_cmd_default
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:37     .rodata.ackMsg_fields:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:63     .rodata.aiBufferByteMsg_fields:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:89     .rodata.aiBufferShapeMsg_channels_default:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:95     .rodata.aiBufferShapeMsg_fields:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:156    .rodata.aiBufferShapeMsg_format_default:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:162    .rodata.aiBufferShapeMsg_height_default:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:168    .rodata.aiBufferShapeMsg_n_batches_default:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:174    .rodata.aiBufferShapeMsg_scale_default:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:180    .rodata.aiBufferShapeMsg_width_default:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:186    .rodata.aiBufferShapeMsg_zeropoint_default:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:192    .rodata.aiNetworkInfoMsg_fields:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:344    .rodata.aiRunReportMsg_fields:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:391    .rodata.logMsg_fields:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:417    .rodata.nodeMsg_fields:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:462    .rodata.reqMsg_fields:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:509    .rodata.respMsg_fields:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:584    .rodata.syncMsg_fields:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:610    .rodata.sysinfoMsg_fields:00000000 $d
+
+NO UNDEFINED SYMBOLS

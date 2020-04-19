@@ -1,0 +1,3663 @@
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"aiValidation.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.aiExecCtx,"ax",%progbits
+  18              		.align	1
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv4-sp-d16
+  25              	aiExecCtx:
+  26              	.LVL0:
+  27              	.LFB141:
+  28              		.file 1 "Src/aiValidation.c"
+   1:Src/aiValidation.c **** /**
+   2:Src/aiValidation.c ****   ******************************************************************************
+   3:Src/aiValidation.c ****   * @file    aiValidation.c
+   4:Src/aiValidation.c ****   * @author  MCD Vertical Application Team
+   5:Src/aiValidation.c ****   * @brief   AI Validation application
+   6:Src/aiValidation.c ****   ******************************************************************************
+   7:Src/aiValidation.c ****   * @attention
+   8:Src/aiValidation.c ****   *
+   9:Src/aiValidation.c ****   * <h2><center>&copy; Copyright (c) YYYY STMicroelectronics.
+  10:Src/aiValidation.c ****   * All rights reserved.</center></h2>
+  11:Src/aiValidation.c ****   *
+  12:Src/aiValidation.c ****   * This software component is licensed by ST under Ultimate Liberty license
+  13:Src/aiValidation.c ****   * SLA0044, the "License"; You may not use this file except in compliance with
+  14:Src/aiValidation.c ****   * the License. You may obtain a copy of the License at:
+  15:Src/aiValidation.c ****   *                             www.st.com/SLA0044
+  16:Src/aiValidation.c ****   *
+  17:Src/aiValidation.c ****   ******************************************************************************
+  18:Src/aiValidation.c ****   */
+  19:Src/aiValidation.c **** 
+  20:Src/aiValidation.c **** /* Description:
+  21:Src/aiValidation.c ****  *
+  22:Src/aiValidation.c ****  * Main entry points for AI validation on-target process.
+  23:Src/aiValidation.c ****  *
+  24:Src/aiValidation.c ****  * History:
+  25:Src/aiValidation.c ****  *  - v1.0 - Initial version
+  26:Src/aiValidation.c ****  *  - v2.0 - Add FXP support
+  27:Src/aiValidation.c ****  *           Adding initial multiple IO support (legacy mode)
+  28:Src/aiValidation.c ****  *           Removing compile-time STM32 family checking
+  29:Src/aiValidation.c ****  *  - v2.1 - Adding integer (scale/zero-point) support
+  30:Src/aiValidation.c ****  *           Add support for external memory for data activations
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 2
+
+
+  31:Src/aiValidation.c ****  *  - v3.0 - Adding multiple IO support
+  32:Src/aiValidation.c ****  *  - v3.1 - Adding L5 support
+  33:Src/aiValidation.c ****  *  - v3.2 - Adding support for inputs in activations buffer
+  34:Src/aiValidation.c ****  */
+  35:Src/aiValidation.c **** 
+  36:Src/aiValidation.c **** #ifndef HAS_INSPECTOR
+  37:Src/aiValidation.c **** #define HAS_INSPECTOR
+  38:Src/aiValidation.c **** #endif
+  39:Src/aiValidation.c **** 
+  40:Src/aiValidation.c **** /* System headers */
+  41:Src/aiValidation.c **** #include <stdint.h>
+  42:Src/aiValidation.c **** #include <stdlib.h>
+  43:Src/aiValidation.c **** #include <stdio.h>
+  44:Src/aiValidation.c **** #include <inttypes.h>
+  45:Src/aiValidation.c **** #include <string.h>
+  46:Src/aiValidation.c **** 
+  47:Src/aiValidation.c **** #include <aiValidation.h>
+  48:Src/aiValidation.c **** #include <aiTestUtility.h>
+  49:Src/aiValidation.c **** #include <bsp_ai.h>
+  50:Src/aiValidation.c **** 
+  51:Src/aiValidation.c **** /* AI header files */
+  52:Src/aiValidation.c **** #include "ai_platform.h"
+  53:Src/aiValidation.c **** #include "core_datatypes.h"   /* AI_PLATFORM_RUNTIME_xxx definition */
+  54:Src/aiValidation.c **** 
+  55:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+  56:Src/aiValidation.c **** #include "ai_network_inspector.h"
+  57:Src/aiValidation.c **** #include "core_net_inspect.h"
+  58:Src/aiValidation.c **** #include "ai_log.h"
+  59:Src/aiValidation.c **** #endif
+  60:Src/aiValidation.c **** 
+  61:Src/aiValidation.c **** #ifndef AI_MNETWORK_NUMBER
+  62:Src/aiValidation.c **** #define AI_MNETWORK_NUMBER (1)
+  63:Src/aiValidation.c **** #include "network.h"
+  64:Src/aiValidation.c **** #include "network_data.h"
+  65:Src/aiValidation.c **** #endif
+  66:Src/aiValidation.c **** 
+  67:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+  68:Src/aiValidation.c **** #if MIN_HEAP_SIZE < 0x800
+  69:Src/aiValidation.c **** #error Minimum HEAP size is expected (>=2KiB). Conf. should be modified in CubeMX.
+  70:Src/aiValidation.c **** #endif
+  71:Src/aiValidation.c **** #endif
+  72:Src/aiValidation.c **** 
+  73:Src/aiValidation.c **** /* */
+  74:Src/aiValidation.c **** #include "aiPbMgr.h"
+  75:Src/aiValidation.c **** 
+  76:Src/aiValidation.c **** 
+  77:Src/aiValidation.c **** /* -----------------------------------------------------------------------------
+  78:Src/aiValidation.c ****  * TEST-related definitions
+  79:Src/aiValidation.c ****  * -----------------------------------------------------------------------------
+  80:Src/aiValidation.c ****  */
+  81:Src/aiValidation.c **** 
+  82:Src/aiValidation.c **** /* APP configuration 0: disabled 1: enabled */
+  83:Src/aiValidation.c **** #define _APP_DEBUG_         			0
+  84:Src/aiValidation.c **** 
+  85:Src/aiValidation.c **** #define _APP_VERSION_MAJOR_     (0x03)
+  86:Src/aiValidation.c **** #define _APP_VERSION_MINOR_     (0x02)
+  87:Src/aiValidation.c **** #define _APP_VERSION_   ((_APP_VERSION_MAJOR_ << 8) | _APP_VERSION_MINOR_)
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 3
+
+
+  88:Src/aiValidation.c **** 
+  89:Src/aiValidation.c **** #define _APP_NAME_   "AI Validation"
+  90:Src/aiValidation.c **** 
+  91:Src/aiValidation.c **** 
+  92:Src/aiValidation.c **** 
+  93:Src/aiValidation.c **** /* -----------------------------------------------------------------------------
+  94:Src/aiValidation.c ****  * AI-related functions
+  95:Src/aiValidation.c ****  * -----------------------------------------------------------------------------
+  96:Src/aiValidation.c ****  */
+  97:Src/aiValidation.c **** 
+  98:Src/aiValidation.c **** static struct ai_network_exec_ctx {
+  99:Src/aiValidation.c ****     ai_handle network;
+ 100:Src/aiValidation.c ****     ai_network_report report;
+ 101:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+ 102:Src/aiValidation.c ****     ai_handle inspector;
+ 103:Src/aiValidation.c ****     ai_inspector_entry_id net_id;
+ 104:Src/aiValidation.c ****     ai_inspector_net_report inspector_report;
+ 105:Src/aiValidation.c ****     ai_inspector_net_entry entry;
+ 106:Src/aiValidation.c ****     ai_u32 n_cb_in;
+ 107:Src/aiValidation.c ****     ai_u32 n_cb_out;
+ 108:Src/aiValidation.c ****     const reqMsg *creq;
+ 109:Src/aiValidation.c ****     respMsg *cresp;
+ 110:Src/aiValidation.c ****     bool no_data;
+ 111:Src/aiValidation.c ****     uint64_t tcom;
+ 112:Src/aiValidation.c ****     uint64_t tnodes;
+ 113:Src/aiValidation.c **** #endif
+ 114:Src/aiValidation.c **** } net_exec_ctx[AI_MNETWORK_NUMBER] = {0};
+ 115:Src/aiValidation.c **** 
+ 116:Src/aiValidation.c **** 
+ 117:Src/aiValidation.c **** #define AI_BUFFER_NULL(ptr_)  \
+ 118:Src/aiValidation.c ****   AI_BUFFER_OBJ_INIT( \
+ 119:Src/aiValidation.c ****     AI_BUFFER_FORMAT_NONE|AI_BUFFER_FMT_FLAG_CONST, \
+ 120:Src/aiValidation.c ****     0, 0, 0, 0, \
+ 121:Src/aiValidation.c ****     AI_HANDLE_PTR(ptr_))
+ 122:Src/aiValidation.c **** 
+ 123:Src/aiValidation.c **** 
+ 124:Src/aiValidation.c **** #if defined(AI_MNETWORK_DATA_ACTIVATIONS_INT_SIZE)
+ 125:Src/aiValidation.c **** #if AI_MNETWORK_DATA_ACTIVATIONS_INT_SIZE != 0
+ 126:Src/aiValidation.c **** AI_ALIGNED(4)
+ 127:Src/aiValidation.c **** static ai_u8 activations[AI_MNETWORK_DATA_ACTIVATIONS_INT_SIZE];
+ 128:Src/aiValidation.c **** #else
+ 129:Src/aiValidation.c **** AI_ALIGNED(4)
+ 130:Src/aiValidation.c **** static ai_u8 activations[1];
+ 131:Src/aiValidation.c **** #endif
+ 132:Src/aiValidation.c **** #else
+ 133:Src/aiValidation.c **** AI_ALIGNED(4)
+ 134:Src/aiValidation.c **** static ai_u8 activations[AI_MNETWORK_DATA_ACTIVATIONS_SIZE];
+ 135:Src/aiValidation.c **** #endif
+ 136:Src/aiValidation.c **** 
+ 137:Src/aiValidation.c **** DEF_DATA_IN;
+ 138:Src/aiValidation.c **** 
+ 139:Src/aiValidation.c **** DEF_DATA_OUT;
+ 140:Src/aiValidation.c **** 
+ 141:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+ 142:Src/aiValidation.c **** static void aiOnExecNode_cb(const ai_handle cookie,
+ 143:Src/aiValidation.c ****         const ai_inspect_node_info* node_info,
+ 144:Src/aiValidation.c ****         ai_node_exec_stage stage) {
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 4
+
+
+ 145:Src/aiValidation.c **** 
+ 146:Src/aiValidation.c ****     struct ai_network_exec_ctx *ctx = (struct ai_network_exec_ctx*)cookie;
+ 147:Src/aiValidation.c **** 
+ 148:Src/aiValidation.c ****     if (stage == AI_NODE_EXEC_PRE_FORWARD_STAGE) {
+ 149:Src/aiValidation.c ****         ctx->n_cb_in++;
+ 150:Src/aiValidation.c ****         ctx->tcom += dwtGetCycles();
+ 151:Src/aiValidation.c ****         dwtReset();
+ 152:Src/aiValidation.c ****     } else if (stage == AI_NODE_EXEC_POST_FORWARD_STAGE) {
+ 153:Src/aiValidation.c ****         uint32_t type;
+ 154:Src/aiValidation.c ****         uint32_t dur = dwtGetCycles();
+ 155:Src/aiValidation.c ****         dwtReset();
+ 156:Src/aiValidation.c ****         ctx->tnodes += dur;
+ 157:Src/aiValidation.c ****         ctx->n_cb_out++;
+ 158:Src/aiValidation.c ****         if (ctx->n_cb_out == ctx->report.n_nodes)
+ 159:Src/aiValidation.c ****             type = EnumLayerType_LAYER_TYPE_INTERNAL_LAST;
+ 160:Src/aiValidation.c ****         else
+ 161:Src/aiValidation.c ****             type = EnumLayerType_LAYER_TYPE_INTERNAL;
+ 162:Src/aiValidation.c ****         type = type << 16;
+ 163:Src/aiValidation.c ****         if (ctx->no_data)
+ 164:Src/aiValidation.c ****             type |= PB_BUFFER_TYPE_SEND_WITHOUT_DATA;
+ 165:Src/aiValidation.c **** 
+ 166:Src/aiValidation.c ****         aiPbMgrSendAiBuffer3(ctx->creq, ctx->cresp, EnumState_S_PROCESSING,
+ 167:Src/aiValidation.c ****                 type | node_info->type,
+ 168:Src/aiValidation.c ****                 node_info->id,
+ 169:Src/aiValidation.c ****                 dwtCyclesToFloatMs(dur),
+ 170:Src/aiValidation.c ****                 &node_info->out[0]);
+ 171:Src/aiValidation.c ****     }
+ 172:Src/aiValidation.c **** }
+ 173:Src/aiValidation.c **** #endif
+ 174:Src/aiValidation.c **** 
+ 175:Src/aiValidation.c **** 
+ 176:Src/aiValidation.c **** static struct ai_network_exec_ctx *aiExecCtx(const char *nn_name, int pos)
+ 177:Src/aiValidation.c **** {
+  29              		.loc 1 177 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		.loc 1 177 1 is_stmt 0 view .LVU1
+  34 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 24
+  37              		.cfi_offset 4, -24
+  38              		.cfi_offset 5, -20
+  39              		.cfi_offset 6, -16
+  40              		.cfi_offset 7, -12
+  41              		.cfi_offset 8, -8
+  42              		.cfi_offset 14, -4
+ 178:Src/aiValidation.c ****     struct ai_network_exec_ctx *cur = NULL;
+  43              		.loc 1 178 5 is_stmt 1 view .LVU2
+  44              	.LVL1:
+ 179:Src/aiValidation.c **** 
+ 180:Src/aiValidation.c ****     if (!nn_name)
+  45              		.loc 1 180 5 view .LVU3
+  46              		.loc 1 180 8 is_stmt 0 view .LVU4
+  47 0004 0546     		mov	r5, r0
+  48 0006 50B3     		cbz	r0, .L6
+ 181:Src/aiValidation.c ****         return NULL;
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 5
+
+
+ 182:Src/aiValidation.c **** 
+ 183:Src/aiValidation.c ****     if (!nn_name[0]) {
+  49              		.loc 1 183 5 is_stmt 1 view .LVU5
+  50              		.loc 1 183 17 is_stmt 0 view .LVU6
+  51 0008 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+  52              		.loc 1 183 8 view .LVU7
+  53 000a 1BBB     		cbnz	r3, .L7
+ 184:Src/aiValidation.c ****         if ((pos >= 0) && (pos < AI_MNETWORK_NUMBER))
+  54              		.loc 1 184 9 is_stmt 1 view .LVU8
+  55              		.loc 1 184 12 is_stmt 0 view .LVU9
+  56 000c 49BB     		cbnz	r1, .L8
+ 185:Src/aiValidation.c ****             cur = &net_exec_ctx[pos];
+  57              		.loc 1 185 13 is_stmt 1 view .LVU10
+  58              		.loc 1 185 17 is_stmt 0 view .LVU11
+  59 000e C1EB4111 		rsb	r1, r1, r1, lsl #5
+  60              	.LVL2:
+  61              		.loc 1 185 17 view .LVU12
+  62 0012 CB00     		lsls	r3, r1, #3
+  63 0014 144C     		ldr	r4, .L11
+  64 0016 1C44     		add	r4, r4, r3
+  65              	.LVL3:
+  66              	.L1:
+ 186:Src/aiValidation.c ****     } else {
+ 187:Src/aiValidation.c ****         int idx;
+ 188:Src/aiValidation.c ****         for (idx=0; idx < AI_MNETWORK_NUMBER; idx++) {
+ 189:Src/aiValidation.c ****             cur = &net_exec_ctx[idx];
+ 190:Src/aiValidation.c ****             if (cur->network &&
+ 191:Src/aiValidation.c ****                     (strlen(cur->report.model_name) == strlen(nn_name)) &&
+ 192:Src/aiValidation.c ****                     (strncmp(cur->report.model_name, nn_name,
+ 193:Src/aiValidation.c ****                             strlen(cur->report.model_name)) == 0)) {
+ 194:Src/aiValidation.c ****                 break;
+ 195:Src/aiValidation.c ****             }
+ 196:Src/aiValidation.c ****             cur = NULL;
+ 197:Src/aiValidation.c ****         }
+ 198:Src/aiValidation.c ****     }
+ 199:Src/aiValidation.c ****     return cur;
+ 200:Src/aiValidation.c **** }
+  67              		.loc 1 200 1 view .LVU13
+  68 0018 2046     		mov	r0, r4
+  69 001a BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+  70              	.LVL4:
+  71              	.L5:
+  72              	.LBB10:
+ 189:Src/aiValidation.c ****             if (cur->network &&
+  73              		.loc 1 189 13 is_stmt 1 view .LVU14
+ 189:Src/aiValidation.c ****             if (cur->network &&
+  74              		.loc 1 189 17 is_stmt 0 view .LVU15
+  75 001e 1249     		ldr	r1, .L11
+  76 0020 7301     		lsls	r3, r6, #5
+  77 0022 9B1B     		subs	r3, r3, r6
+  78 0024 DA00     		lsls	r2, r3, #3
+  79 0026 8C18     		adds	r4, r1, r2
+  80              	.LVL5:
+ 190:Src/aiValidation.c ****                     (strlen(cur->report.model_name) == strlen(nn_name)) &&
+  81              		.loc 1 190 13 is_stmt 1 view .LVU16
+ 190:Src/aiValidation.c ****                     (strlen(cur->report.model_name) == strlen(nn_name)) &&
+  82              		.loc 1 190 20 is_stmt 0 view .LVU17
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 6
+
+
+  83 0028 8B58     		ldr	r3, [r1, r2]
+ 190:Src/aiValidation.c ****                     (strlen(cur->report.model_name) == strlen(nn_name)) &&
+  84              		.loc 1 190 16 view .LVU18
+  85 002a 4BB1     		cbz	r3, .L4
+ 191:Src/aiValidation.c ****                     (strncmp(cur->report.model_name, nn_name,
+  86              		.loc 1 191 22 discriminator 1 view .LVU19
+  87 002c 6768     		ldr	r7, [r4, #4]
+  88 002e 3846     		mov	r0, r7
+  89 0030 FFF7FEFF 		bl	strlen
+  90              	.LVL6:
+  91 0034 8046     		mov	r8, r0
+ 191:Src/aiValidation.c ****                     (strncmp(cur->report.model_name, nn_name,
+  92              		.loc 1 191 56 discriminator 1 view .LVU20
+  93 0036 2846     		mov	r0, r5
+  94 0038 FFF7FEFF 		bl	strlen
+  95              	.LVL7:
+ 190:Src/aiValidation.c ****                     (strlen(cur->report.model_name) == strlen(nn_name)) &&
+  96              		.loc 1 190 30 discriminator 1 view .LVU21
+  97 003c 8045     		cmp	r8, r0
+  98 003e 01D0     		beq	.L10
+  99              	.L4:
+ 196:Src/aiValidation.c ****         }
+ 100              		.loc 1 196 13 is_stmt 1 discriminator 2 view .LVU22
+ 101              	.LVL8:
+ 188:Src/aiValidation.c ****             cur = &net_exec_ctx[idx];
+ 102              		.loc 1 188 50 is_stmt 0 discriminator 2 view .LVU23
+ 103 0040 0136     		adds	r6, r6, #1
+ 104              	.LVL9:
+ 188:Src/aiValidation.c ****             cur = &net_exec_ctx[idx];
+ 105              		.loc 1 188 50 discriminator 2 view .LVU24
+ 106 0042 08E0     		b	.L3
+ 107              	.LVL10:
+ 108              	.L10:
+ 192:Src/aiValidation.c ****                             strlen(cur->report.model_name)) == 0)) {
+ 109              		.loc 1 192 22 view .LVU25
+ 110 0044 4246     		mov	r2, r8
+ 111 0046 2946     		mov	r1, r5
+ 112 0048 3846     		mov	r0, r7
+ 113 004a FFF7FEFF 		bl	strncmp
+ 114              	.LVL11:
+ 191:Src/aiValidation.c ****                     (strncmp(cur->report.model_name, nn_name,
+ 115              		.loc 1 191 73 view .LVU26
+ 116 004e 0028     		cmp	r0, #0
+ 117 0050 F6D1     		bne	.L4
+ 118 0052 E1E7     		b	.L1
+ 119              	.LVL12:
+ 120              	.L7:
+ 188:Src/aiValidation.c ****             cur = &net_exec_ctx[idx];
+ 121              		.loc 1 188 17 view .LVU27
+ 122 0054 0026     		movs	r6, #0
+ 123              	.LVL13:
+ 124              	.L3:
+ 188:Src/aiValidation.c ****             cur = &net_exec_ctx[idx];
+ 125              		.loc 1 188 9 discriminator 1 view .LVU28
+ 126 0056 002E     		cmp	r6, #0
+ 127 0058 E1DD     		ble	.L5
+ 128 005a 0024     		movs	r4, #0
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 7
+
+
+ 129 005c DCE7     		b	.L1
+ 130              	.LVL14:
+ 131              	.L6:
+ 188:Src/aiValidation.c ****             cur = &net_exec_ctx[idx];
+ 132              		.loc 1 188 9 discriminator 1 view .LVU29
+ 133              	.LBE10:
+ 181:Src/aiValidation.c **** 
+ 134              		.loc 1 181 16 view .LVU30
+ 135 005e 0446     		mov	r4, r0
+ 136 0060 DAE7     		b	.L1
+ 137              	.L8:
+ 178:Src/aiValidation.c **** 
+ 138              		.loc 1 178 33 view .LVU31
+ 139 0062 0024     		movs	r4, #0
+ 140 0064 D8E7     		b	.L1
+ 141              	.L12:
+ 142 0066 00BF     		.align	2
+ 143              	.L11:
+ 144 0068 00000000 		.word	.LANCHOR0
+ 145              		.cfi_endproc
+ 146              	.LFE141:
+ 148              		.section	.text.aiPbCmdNNInfo,"ax",%progbits
+ 149              		.align	1
+ 150              		.global	aiPbCmdNNInfo
+ 151              		.syntax unified
+ 152              		.thumb
+ 153              		.thumb_func
+ 154              		.fpu fpv4-sp-d16
+ 156              	aiPbCmdNNInfo:
+ 157              	.LVL15:
+ 158              	.LFB152:
+ 201:Src/aiValidation.c **** 
+ 202:Src/aiValidation.c **** __STATIC_INLINE
+ 203:Src/aiValidation.c **** void aiSetPbContext(struct ai_network_exec_ctx *ctx,
+ 204:Src/aiValidation.c ****         const reqMsg *creq, respMsg *cresp)
+ 205:Src/aiValidation.c **** {
+ 206:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+ 207:Src/aiValidation.c ****     if (!ctx)
+ 208:Src/aiValidation.c ****         return;
+ 209:Src/aiValidation.c **** 
+ 210:Src/aiValidation.c ****     ctx->creq = creq;
+ 211:Src/aiValidation.c ****     ctx->cresp = cresp;
+ 212:Src/aiValidation.c **** #endif
+ 213:Src/aiValidation.c **** }
+ 214:Src/aiValidation.c **** 
+ 215:Src/aiValidation.c **** static int aiBootstrap(const char *nn_name, const int idx)
+ 216:Src/aiValidation.c **** {
+ 217:Src/aiValidation.c ****     ai_error err;
+ 218:Src/aiValidation.c ****     ai_u32 ext_addr, sz;
+ 219:Src/aiValidation.c **** 
+ 220:Src/aiValidation.c ****     /* Creating the network */
+ 221:Src/aiValidation.c ****     printf("Creating the network \"%s\"..\r\n", nn_name);
+ 222:Src/aiValidation.c ****     err = ai_mnetwork_create(nn_name, &net_exec_ctx[idx].network, NULL);
+ 223:Src/aiValidation.c ****     if (err.type) {
+ 224:Src/aiValidation.c ****         aiLogErr(err, "ai_mnetwork_create");
+ 225:Src/aiValidation.c ****         return -1;
+ 226:Src/aiValidation.c ****     }
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 8
+
+
+ 227:Src/aiValidation.c **** 
+ 228:Src/aiValidation.c ****     /* Initialize the instance */
+ 229:Src/aiValidation.c ****     printf("Initializing the network\r\n");
+ 230:Src/aiValidation.c ****     /* build params structure to provide the reference of the
+ 231:Src/aiValidation.c ****      * activation and weight buffers */
+ 232:Src/aiValidation.c **** #if !defined(AI_MNETWORK_DATA_ACTIVATIONS_INT_SIZE)
+ 233:Src/aiValidation.c ****     const ai_network_params params = {
+ 234:Src/aiValidation.c ****             AI_BUFFER_NULL(NULL),
+ 235:Src/aiValidation.c ****             AI_BUFFER_NULL(activations) };
+ 236:Src/aiValidation.c **** #else
+ 237:Src/aiValidation.c ****     ai_network_params params = {
+ 238:Src/aiValidation.c ****                 AI_BUFFER_NULL(NULL),
+ 239:Src/aiValidation.c ****                 AI_BUFFER_NULL(NULL) };
+ 240:Src/aiValidation.c **** 
+ 241:Src/aiValidation.c ****     if (ai_mnetwork_get_ext_data_activations(net_exec_ctx[idx].network, &ext_addr, &sz) == 0) {
+ 242:Src/aiValidation.c ****     	if (ext_addr == 0xFFFFFFFF) {
+ 243:Src/aiValidation.c ****     		params.activations.data = (ai_handle)activations;
+ 244:Src/aiValidation.c ****     		ext_addr = (ai_u32)activations;
+ 245:Src/aiValidation.c ****     		sz = (ai_u32)AI_BUFFER_SIZE(&net_exec_ctx[idx].report.activations);
+ 246:Src/aiValidation.c ****     	}
+ 247:Src/aiValidation.c ****     	else {
+ 248:Src/aiValidation.c ****     		params.activations.data = (ai_handle)ext_addr;
+ 249:Src/aiValidation.c ****     	}
+ 250:Src/aiValidation.c ****     }
+ 251:Src/aiValidation.c **** #endif
+ 252:Src/aiValidation.c **** 
+ 253:Src/aiValidation.c ****     if (!ai_mnetwork_init(net_exec_ctx[idx].network, &params)) {
+ 254:Src/aiValidation.c ****         err = ai_mnetwork_get_error(net_exec_ctx[idx].network);
+ 255:Src/aiValidation.c ****         aiLogErr(err, "ai_mnetwork_init");
+ 256:Src/aiValidation.c ****         ai_mnetwork_destroy(net_exec_ctx[idx].network);
+ 257:Src/aiValidation.c ****         net_exec_ctx[idx].network = AI_HANDLE_NULL;
+ 258:Src/aiValidation.c ****         return -4;
+ 259:Src/aiValidation.c ****     }
+ 260:Src/aiValidation.c **** 
+ 261:Src/aiValidation.c ****     /* Query the created network to get relevant info from it */
+ 262:Src/aiValidation.c ****     if (ai_mnetwork_get_info(net_exec_ctx[idx].network,
+ 263:Src/aiValidation.c ****             &net_exec_ctx[idx].report)) {
+ 264:Src/aiValidation.c ****         aiPrintNetworkInfo(&net_exec_ctx[idx].report);
+ 265:Src/aiValidation.c ****     } else {
+ 266:Src/aiValidation.c ****         err = ai_mnetwork_get_error(net_exec_ctx[idx].network);
+ 267:Src/aiValidation.c ****         aiLogErr(err, "ai_mnetwork_get_info");
+ 268:Src/aiValidation.c ****         ai_mnetwork_destroy(net_exec_ctx[idx].network);
+ 269:Src/aiValidation.c ****         net_exec_ctx[idx].network = AI_HANDLE_NULL;
+ 270:Src/aiValidation.c ****         return -2;
+ 271:Src/aiValidation.c ****     }
+ 272:Src/aiValidation.c **** 
+ 273:Src/aiValidation.c ****     return 0;
+ 274:Src/aiValidation.c **** }
+ 275:Src/aiValidation.c **** 
+ 276:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+ 277:Src/aiValidation.c **** static int aiInspectorGetReport(struct ai_network_exec_ctx *ctx)
+ 278:Src/aiValidation.c **** {
+ 279:Src/aiValidation.c ****     int res = 0;
+ 280:Src/aiValidation.c ****     if (!ctx)
+ 281:Src/aiValidation.c ****         return -1;
+ 282:Src/aiValidation.c **** 
+ 283:Src/aiValidation.c ****     if ((ctx->inspector != AI_HANDLE_NULL) &&
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 9
+
+
+ 284:Src/aiValidation.c ****             (ctx->net_id != AI_INSPECTOR_NETWORK_BIND_FAILED))
+ 285:Src/aiValidation.c ****     {
+ 286:Src/aiValidation.c ****         if (ai_inspector_get_report(ctx->inspector,
+ 287:Src/aiValidation.c ****                 ctx->net_id, &ctx->inspector_report) != true)
+ 288:Src/aiValidation.c ****             res = -2;
+ 289:Src/aiValidation.c ****     }
+ 290:Src/aiValidation.c ****     return res;
+ 291:Src/aiValidation.c **** }
+ 292:Src/aiValidation.c **** #endif
+ 293:Src/aiValidation.c **** 
+ 294:Src/aiValidation.c **** 
+ 295:Src/aiValidation.c **** static void aiInspectorSendReport(const reqMsg *req, respMsg *resp,
+ 296:Src/aiValidation.c ****         EnumState state, struct ai_network_exec_ctx *ctx,
+ 297:Src/aiValidation.c ****         const ai_float dur_ms)
+ 298:Src/aiValidation.c **** {
+ 299:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+ 300:Src/aiValidation.c ****     if (aiInspectorGetReport(ctx) == 0) {
+ 301:Src/aiValidation.c ****         resp->which_payload = respMsg_report_tag;
+ 302:Src/aiValidation.c ****         resp->payload.report.id = ctx->inspector_report.id;
+ 303:Src/aiValidation.c ****         resp->payload.report.elapsed_ms = dur_ms;
+ 304:Src/aiValidation.c ****         resp->payload.report.n_nodes = ctx->inspector_report.n_nodes;
+ 305:Src/aiValidation.c ****         resp->payload.report.signature = ctx->inspector_report.signature;
+ 306:Src/aiValidation.c ****         resp->payload.report.num_inferences = ctx->inspector_report.num_inferences;
+ 307:Src/aiValidation.c ****         aiPbMgrSendResp(req, resp, state);
+ 308:Src/aiValidation.c ****         aiPbMgrWaitAck();
+ 309:Src/aiValidation.c ****     } else {
+ 310:Src/aiValidation.c ****         aiPbMgrSendAck(req, resp, EnumState_S_ERROR,
+ 311:Src/aiValidation.c ****                 EnumError_E_GENERIC, EnumError_E_GENERIC);
+ 312:Src/aiValidation.c ****     }
+ 313:Src/aiValidation.c **** #endif
+ 314:Src/aiValidation.c **** }
+ 315:Src/aiValidation.c **** 
+ 316:Src/aiValidation.c **** 
+ 317:Src/aiValidation.c **** static void aiInspectorUnBind(struct ai_network_exec_ctx *ctx)
+ 318:Src/aiValidation.c **** {
+ 319:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+ 320:Src/aiValidation.c ****     if (!ctx)
+ 321:Src/aiValidation.c ****         return;
+ 322:Src/aiValidation.c **** 
+ 323:Src/aiValidation.c ****     if ((ctx->inspector != AI_HANDLE_NULL) &&
+ 324:Src/aiValidation.c ****             (ctx->net_id != AI_INSPECTOR_NETWORK_BIND_FAILED))
+ 325:Src/aiValidation.c ****         ai_inspector_unbind_network(ctx->inspector,
+ 326:Src/aiValidation.c ****                 ctx->net_id);
+ 327:Src/aiValidation.c **** 
+ 328:Src/aiValidation.c ****     ctx->net_id = AI_INSPECTOR_NETWORK_BIND_FAILED;
+ 329:Src/aiValidation.c **** #endif
+ 330:Src/aiValidation.c **** }
+ 331:Src/aiValidation.c **** 
+ 332:Src/aiValidation.c **** static int aiInspectorBind(struct ai_network_exec_ctx *ctx)
+ 333:Src/aiValidation.c **** {
+ 334:Src/aiValidation.c ****     int res = 0;
+ 335:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+ 336:Src/aiValidation.c ****     if (!ctx)
+ 337:Src/aiValidation.c ****         return 0;
+ 338:Src/aiValidation.c **** 
+ 339:Src/aiValidation.c ****     aiInspectorUnBind(ctx);
+ 340:Src/aiValidation.c **** 
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 10
+
+
+ 341:Src/aiValidation.c ****     ctx->n_cb_in  = 0;
+ 342:Src/aiValidation.c ****     ctx->n_cb_out = 0;
+ 343:Src/aiValidation.c **** 
+ 344:Src/aiValidation.c ****     if (ctx->inspector) {
+ 345:Src/aiValidation.c ****         ctx->net_id = ai_inspector_bind_network(
+ 346:Src/aiValidation.c ****                 ctx->inspector,
+ 347:Src/aiValidation.c ****                 &ctx->entry);
+ 348:Src/aiValidation.c **** 
+ 349:Src/aiValidation.c ****         if (ctx->net_id == AI_INSPECTOR_NETWORK_BIND_FAILED)
+ 350:Src/aiValidation.c ****             res = -1;
+ 351:Src/aiValidation.c ****     }
+ 352:Src/aiValidation.c **** 
+ 353:Src/aiValidation.c **** #endif
+ 354:Src/aiValidation.c ****     return res;
+ 355:Src/aiValidation.c **** }
+ 356:Src/aiValidation.c **** 
+ 357:Src/aiValidation.c **** static int aiInspectorInitAndBind(struct ai_network_exec_ctx *ctx)
+ 358:Src/aiValidation.c **** {
+ 359:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+ 360:Src/aiValidation.c ****     ctx->n_cb_in  = 0;
+ 361:Src/aiValidation.c ****     ctx->n_cb_out = 0;
+ 362:Src/aiValidation.c **** 
+ 363:Src/aiValidation.c ****     ai_inspector_config cfg = ai_inspector_default_config();
+ 364:Src/aiValidation.c **** 
+ 365:Src/aiValidation.c ****     cfg.log_level = LOG_SUDO;
+ 366:Src/aiValidation.c ****     cfg.log_quiet = false;
+ 367:Src/aiValidation.c ****     cfg.on_report_destroy = NULL;
+ 368:Src/aiValidation.c ****     cfg.on_exec_node = &aiOnExecNode_cb;
+ 369:Src/aiValidation.c ****     cfg.cookie = NULL;
+ 370:Src/aiValidation.c **** 
+ 371:Src/aiValidation.c **** #if 0
+ 372:Src/aiValidation.c ****     ai_inspector_config cfg = {
+ 373:Src/aiValidation.c ****       .validation_mode = VALIDATION_INSPECT,
+ 374:Src/aiValidation.c ****       .log_level = LOG_SUDO,
+ 375:Src/aiValidation.c ****       .log_quiet = false,
+ 376:Src/aiValidation.c ****       .on_report_destroy = NULL,
+ 377:Src/aiValidation.c ****       .on_exec_node = &aiOnExecNode_cb,
+ 378:Src/aiValidation.c ****       .cookie = NULL,
+ 379:Src/aiValidation.c ****     };
+ 380:Src/aiValidation.c **** #endif
+ 381:Src/aiValidation.c **** 
+ 382:Src/aiValidation.c ****     ai_handle phandle;
+ 383:Src/aiValidation.c ****     ai_network_params pparams;
+ 384:Src/aiValidation.c **** 
+ 385:Src/aiValidation.c ****     if (ctx->network == AI_HANDLE_NULL)
+ 386:Src/aiValidation.c ****         return -1;
+ 387:Src/aiValidation.c **** 
+ 388:Src/aiValidation.c ****     ai_mnetwork_get_private_handle(ctx->network,
+ 389:Src/aiValidation.c ****             &phandle,
+ 390:Src/aiValidation.c ****             &pparams);
+ 391:Src/aiValidation.c **** 
+ 392:Src/aiValidation.c ****     cfg.cookie = (ai_handle)ctx;
+ 393:Src/aiValidation.c **** 
+ 394:Src/aiValidation.c ****     if (ai_inspector_create(&ctx->inspector, &cfg) )
+ 395:Src/aiValidation.c ****     {
+ 396:Src/aiValidation.c ****         ctx->entry.handle = phandle;
+ 397:Src/aiValidation.c ****         ctx->entry.params = pparams;
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 11
+
+
+ 398:Src/aiValidation.c ****         aiInspectorBind(ctx);
+ 399:Src/aiValidation.c ****     }
+ 400:Src/aiValidation.c **** 
+ 401:Src/aiValidation.c **** 
+ 402:Src/aiValidation.c **** #endif
+ 403:Src/aiValidation.c ****     return 0;
+ 404:Src/aiValidation.c **** }
+ 405:Src/aiValidation.c **** 
+ 406:Src/aiValidation.c **** static int aiInspectorUnbindAndDestroy(struct ai_network_exec_ctx *ctx)
+ 407:Src/aiValidation.c **** {
+ 408:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+ 409:Src/aiValidation.c ****     aiInspectorUnBind(ctx);
+ 410:Src/aiValidation.c ****     if (ctx->inspector != AI_HANDLE_NULL)
+ 411:Src/aiValidation.c ****         ai_inspector_destroy(ctx->inspector);
+ 412:Src/aiValidation.c ****     ctx->inspector = AI_HANDLE_NULL;
+ 413:Src/aiValidation.c **** #endif
+ 414:Src/aiValidation.c ****     return 0;
+ 415:Src/aiValidation.c **** }
+ 416:Src/aiValidation.c **** 
+ 417:Src/aiValidation.c **** 
+ 418:Src/aiValidation.c **** static int aiInit(void)
+ 419:Src/aiValidation.c **** {
+ 420:Src/aiValidation.c ****     int res = -1;
+ 421:Src/aiValidation.c ****     const char *nn_name;
+ 422:Src/aiValidation.c ****     int idx;
+ 423:Src/aiValidation.c **** 
+ 424:Src/aiValidation.c ****     printf("\r\nAI platform (API %d.%d.%d - RUNTIME %d.%d.%d)\r\n",
+ 425:Src/aiValidation.c ****             AI_PLATFORM_API_MAJOR,
+ 426:Src/aiValidation.c ****             AI_PLATFORM_API_MINOR,
+ 427:Src/aiValidation.c ****             AI_PLATFORM_API_MICRO,
+ 428:Src/aiValidation.c ****             AI_PLATFORM_RUNTIME_MAJOR,
+ 429:Src/aiValidation.c ****             AI_PLATFORM_RUNTIME_MINOR,
+ 430:Src/aiValidation.c ****             AI_PLATFORM_RUNTIME_MICRO);
+ 431:Src/aiValidation.c **** 
+ 432:Src/aiValidation.c ****     /* Clean all network exec context */
+ 433:Src/aiValidation.c ****     for (idx=0; idx < AI_MNETWORK_NUMBER; idx++) {
+ 434:Src/aiValidation.c ****         net_exec_ctx[idx].network = AI_HANDLE_NULL;
+ 435:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+ 436:Src/aiValidation.c ****         net_exec_ctx[idx].inspector = AI_HANDLE_NULL;
+ 437:Src/aiValidation.c ****         net_exec_ctx[idx].net_id = AI_INSPECTOR_NETWORK_BIND_FAILED;
+ 438:Src/aiValidation.c **** #endif
+ 439:Src/aiValidation.c ****     }
+ 440:Src/aiValidation.c **** 
+ 441:Src/aiValidation.c ****     /* Discover and init the embedded network */
+ 442:Src/aiValidation.c ****     idx = 0;
+ 443:Src/aiValidation.c ****     do {
+ 444:Src/aiValidation.c ****         nn_name = ai_mnetwork_find(NULL, idx);
+ 445:Src/aiValidation.c ****         if (nn_name) {
+ 446:Src/aiValidation.c ****             printf("\r\nFound network \"%s\"\r\n", nn_name);
+ 447:Src/aiValidation.c ****             res = aiBootstrap(nn_name, idx);
+ 448:Src/aiValidation.c ****             if (res)
+ 449:Src/aiValidation.c ****                 nn_name = NULL;
+ 450:Src/aiValidation.c ****         }
+ 451:Src/aiValidation.c ****         idx++;
+ 452:Src/aiValidation.c ****     } while (nn_name);
+ 453:Src/aiValidation.c **** 
+ 454:Src/aiValidation.c ****     return res;
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 12
+
+
+ 455:Src/aiValidation.c **** }
+ 456:Src/aiValidation.c **** 
+ 457:Src/aiValidation.c **** static void aiDeInit(void)
+ 458:Src/aiValidation.c **** {
+ 459:Src/aiValidation.c ****     ai_error err;
+ 460:Src/aiValidation.c ****     int idx;
+ 461:Src/aiValidation.c **** 
+ 462:Src/aiValidation.c ****     printf("Releasing the network(s)...\r\n");
+ 463:Src/aiValidation.c **** 
+ 464:Src/aiValidation.c ****     for (idx=0; idx<AI_MNETWORK_NUMBER; idx++) {
+ 465:Src/aiValidation.c ****         if (net_exec_ctx[idx].network != AI_HANDLE_NULL) {
+ 466:Src/aiValidation.c ****             if (ai_mnetwork_destroy(net_exec_ctx[idx].network)
+ 467:Src/aiValidation.c ****                     != AI_HANDLE_NULL) {
+ 468:Src/aiValidation.c ****                 err = ai_mnetwork_get_error(net_exec_ctx[idx].network);
+ 469:Src/aiValidation.c ****                 aiLogErr(err, "ai_mnetwork_destroy");
+ 470:Src/aiValidation.c ****             }
+ 471:Src/aiValidation.c ****             net_exec_ctx[idx].network = AI_HANDLE_NULL;
+ 472:Src/aiValidation.c ****         }
+ 473:Src/aiValidation.c ****     }
+ 474:Src/aiValidation.c **** }
+ 475:Src/aiValidation.c **** 
+ 476:Src/aiValidation.c **** /* -----------------------------------------------------------------------------
+ 477:Src/aiValidation.c ****  * Specific APP/test functions
+ 478:Src/aiValidation.c ****  * -----------------------------------------------------------------------------
+ 479:Src/aiValidation.c ****  */
+ 480:Src/aiValidation.c **** 
+ 481:Src/aiValidation.c **** void aiPbCmdNNInfo(const reqMsg *req, respMsg *resp, void *param)
+ 482:Src/aiValidation.c **** {
+ 159              		.loc 1 482 1 is_stmt 1 view -0
+ 160              		.cfi_startproc
+ 161              		@ args = 0, pretend = 0, frame = 0
+ 162              		@ frame_needed = 0, uses_anonymous_args = 0
+ 163              		.loc 1 482 1 is_stmt 0 view .LVU33
+ 164 0000 30B5     		push	{r4, r5, lr}
+ 165              	.LCFI1:
+ 166              		.cfi_def_cfa_offset 12
+ 167              		.cfi_offset 4, -12
+ 168              		.cfi_offset 5, -8
+ 169              		.cfi_offset 14, -4
+ 170 0002 83B0     		sub	sp, sp, #12
+ 171              	.LCFI2:
+ 172              		.cfi_def_cfa_offset 24
+ 173 0004 0446     		mov	r4, r0
+ 174 0006 0D46     		mov	r5, r1
+ 483:Src/aiValidation.c ****     struct ai_network_exec_ctx *ctx;
+ 175              		.loc 1 483 5 is_stmt 1 view .LVU34
+ 484:Src/aiValidation.c **** 
+ 485:Src/aiValidation.c ****     UNUSED(param);
+ 176              		.loc 1 485 5 view .LVU35
+ 486:Src/aiValidation.c **** 
+ 487:Src/aiValidation.c ****     ctx = aiExecCtx(req->name, req->param);
+ 177              		.loc 1 487 5 view .LVU36
+ 178              		.loc 1 487 11 is_stmt 0 view .LVU37
+ 179 0008 8168     		ldr	r1, [r0, #8]
+ 180              	.LVL16:
+ 181              		.loc 1 487 11 view .LVU38
+ 182 000a 0C30     		adds	r0, r0, #12
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 13
+
+
+ 183              	.LVL17:
+ 184              		.loc 1 487 11 view .LVU39
+ 185 000c FFF7FEFF 		bl	aiExecCtx
+ 186              	.LVL18:
+ 488:Src/aiValidation.c ****     if (ctx)
+ 187              		.loc 1 488 5 is_stmt 1 view .LVU40
+ 188              		.loc 1 488 8 is_stmt 0 view .LVU41
+ 189 0010 40B1     		cbz	r0, .L14
+ 190 0012 0346     		mov	r3, r0
+ 489:Src/aiValidation.c ****         aiPbMgrSendNNInfo(req, resp, EnumState_S_IDLE,
+ 191              		.loc 1 489 9 is_stmt 1 view .LVU42
+ 192 0014 0433     		adds	r3, r3, #4
+ 193 0016 0022     		movs	r2, #0
+ 194 0018 2946     		mov	r1, r5
+ 195 001a 2046     		mov	r0, r4
+ 196              	.LVL19:
+ 197              		.loc 1 489 9 is_stmt 0 view .LVU43
+ 198 001c FFF7FEFF 		bl	aiPbMgrSendNNInfo
+ 199              	.LVL20:
+ 200              	.L13:
+ 490:Src/aiValidation.c ****                 &ctx->report);
+ 491:Src/aiValidation.c ****     else
+ 492:Src/aiValidation.c ****         aiPbMgrSendAck(req, resp, EnumState_S_ERROR,
+ 493:Src/aiValidation.c ****                 EnumError_E_INVALID_PARAM, EnumError_E_INVALID_PARAM);
+ 494:Src/aiValidation.c **** }
+ 201              		.loc 1 494 1 view .LVU44
+ 202 0020 03B0     		add	sp, sp, #12
+ 203              	.LCFI3:
+ 204              		.cfi_remember_state
+ 205              		.cfi_def_cfa_offset 12
+ 206              		@ sp needed
+ 207 0022 30BD     		pop	{r4, r5, pc}
+ 208              	.LVL21:
+ 209              	.L14:
+ 210              	.LCFI4:
+ 211              		.cfi_restore_state
+ 492:Src/aiValidation.c ****                 EnumError_E_INVALID_PARAM, EnumError_E_INVALID_PARAM);
+ 212              		.loc 1 492 9 is_stmt 1 view .LVU45
+ 213 0024 0422     		movs	r2, #4
+ 214 0026 0092     		str	r2, [sp]
+ 215 0028 1346     		mov	r3, r2
+ 216 002a 2946     		mov	r1, r5
+ 217 002c 2046     		mov	r0, r4
+ 218              	.LVL22:
+ 492:Src/aiValidation.c ****                 EnumError_E_INVALID_PARAM, EnumError_E_INVALID_PARAM);
+ 219              		.loc 1 492 9 is_stmt 0 view .LVU46
+ 220 002e FFF7FEFF 		bl	aiPbMgrSendAck
+ 221              	.LVL23:
+ 222              		.loc 1 494 1 view .LVU47
+ 223 0032 F5E7     		b	.L13
+ 224              		.cfi_endproc
+ 225              	.LFE152:
+ 227              		.section	.text.aiOnExecNode_cb,"ax",%progbits
+ 228              		.align	1
+ 229              		.syntax unified
+ 230              		.thumb
+ 231              		.thumb_func
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 14
+
+
+ 232              		.fpu fpv4-sp-d16
+ 234              	aiOnExecNode_cb:
+ 235              	.LVL24:
+ 236              	.LFB140:
+ 144:Src/aiValidation.c **** 
+ 237              		.loc 1 144 35 is_stmt 1 view -0
+ 238              		.cfi_startproc
+ 239              		@ args = 0, pretend = 0, frame = 0
+ 240              		@ frame_needed = 0, uses_anonymous_args = 0
+ 144:Src/aiValidation.c **** 
+ 241              		.loc 1 144 35 is_stmt 0 view .LVU49
+ 242 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 243              	.LCFI5:
+ 244              		.cfi_def_cfa_offset 24
+ 245              		.cfi_offset 4, -24
+ 246              		.cfi_offset 5, -20
+ 247              		.cfi_offset 6, -16
+ 248              		.cfi_offset 7, -12
+ 249              		.cfi_offset 8, -8
+ 250              		.cfi_offset 14, -4
+ 251 0004 82B0     		sub	sp, sp, #8
+ 252              	.LCFI6:
+ 253              		.cfi_def_cfa_offset 32
+ 254 0006 0446     		mov	r4, r0
+ 146:Src/aiValidation.c **** 
+ 255              		.loc 1 146 5 is_stmt 1 view .LVU50
+ 256              	.LVL25:
+ 148:Src/aiValidation.c ****         ctx->n_cb_in++;
+ 257              		.loc 1 148 5 view .LVU51
+ 148:Src/aiValidation.c ****         ctx->n_cb_in++;
+ 258              		.loc 1 148 8 is_stmt 0 view .LVU52
+ 259 0008 2AB1     		cbz	r2, .L24
+ 260 000a 0D46     		mov	r5, r1
+ 152:Src/aiValidation.c ****         uint32_t type;
+ 261              		.loc 1 152 12 is_stmt 1 view .LVU53
+ 152:Src/aiValidation.c ****         uint32_t type;
+ 262              		.loc 1 152 15 is_stmt 0 view .LVU54
+ 263 000c 012A     		cmp	r2, #1
+ 264 000e 15D0     		beq	.L25
+ 265              	.LVL26:
+ 266              	.L17:
+ 172:Src/aiValidation.c **** #endif
+ 267              		.loc 1 172 1 view .LVU55
+ 268 0010 02B0     		add	sp, sp, #8
+ 269              	.LCFI7:
+ 270              		.cfi_remember_state
+ 271              		.cfi_def_cfa_offset 24
+ 272              		@ sp needed
+ 273 0012 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 274              	.LVL27:
+ 275              	.L24:
+ 276              	.LCFI8:
+ 277              		.cfi_restore_state
+ 149:Src/aiValidation.c ****         ctx->tcom += dwtGetCycles();
+ 278              		.loc 1 149 9 is_stmt 1 view .LVU56
+ 149:Src/aiValidation.c ****         ctx->tcom += dwtGetCycles();
+ 279              		.loc 1 149 12 is_stmt 0 view .LVU57
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 15
+
+
+ 280 0016 D0F8D030 		ldr	r3, [r0, #208]
+ 149:Src/aiValidation.c ****         ctx->tcom += dwtGetCycles();
+ 281              		.loc 1 149 21 view .LVU58
+ 282 001a 0133     		adds	r3, r3, #1
+ 283 001c C0F8D030 		str	r3, [r0, #208]
+ 150:Src/aiValidation.c ****         dwtReset();
+ 284              		.loc 1 150 9 is_stmt 1 view .LVU59
+ 150:Src/aiValidation.c ****         dwtReset();
+ 285              		.loc 1 150 22 is_stmt 0 view .LVU60
+ 286 0020 FFF7FEFF 		bl	dwtGetCycles
+ 287              	.LVL28:
+ 150:Src/aiValidation.c ****         dwtReset();
+ 288              		.loc 1 150 19 view .LVU61
+ 289 0024 D4E93A23 		ldrd	r2, [r4, #232]
+ 290 0028 1518     		adds	r5, r2, r0
+ 291 002a 43F10006 		adc	r6, r3, #0
+ 292 002e 2846     		mov	r0, r5
+ 293 0030 3146     		mov	r1, r6
+ 294 0032 C4E93A01 		strd	r0, [r4, #232]
+ 151:Src/aiValidation.c ****     } else if (stage == AI_NODE_EXEC_POST_FORWARD_STAGE) {
+ 295              		.loc 1 151 9 is_stmt 1 view .LVU62
+ 296 0036 FFF7FEFF 		bl	dwtReset
+ 297              	.LVL29:
+ 298 003a E9E7     		b	.L17
+ 299              	.LVL30:
+ 300              	.L25:
+ 301              	.LBB11:
+ 153:Src/aiValidation.c ****         uint32_t dur = dwtGetCycles();
+ 302              		.loc 1 153 9 view .LVU63
+ 154:Src/aiValidation.c ****         dwtReset();
+ 303              		.loc 1 154 9 view .LVU64
+ 154:Src/aiValidation.c ****         dwtReset();
+ 304              		.loc 1 154 24 is_stmt 0 view .LVU65
+ 305 003c FFF7FEFF 		bl	dwtGetCycles
+ 306              	.LVL31:
+ 154:Src/aiValidation.c ****         dwtReset();
+ 307              		.loc 1 154 24 view .LVU66
+ 308 0040 0646     		mov	r6, r0
+ 309              	.LVL32:
+ 155:Src/aiValidation.c ****         ctx->tnodes += dur;
+ 310              		.loc 1 155 9 is_stmt 1 view .LVU67
+ 311 0042 FFF7FEFF 		bl	dwtReset
+ 312              	.LVL33:
+ 156:Src/aiValidation.c ****         ctx->n_cb_out++;
+ 313              		.loc 1 156 9 view .LVU68
+ 156:Src/aiValidation.c ****         ctx->n_cb_out++;
+ 314              		.loc 1 156 21 is_stmt 0 view .LVU69
+ 315 0046 3046     		mov	r0, r6
+ 316 0048 0021     		movs	r1, #0
+ 317 004a D4F8F030 		ldr	r3, [r4, #240]
+ 318 004e D4F8F420 		ldr	r2, [r4, #244]
+ 319 0052 9B19     		adds	r3, r3, r6
+ 320 0054 41EB0202 		adc	r2, r1, r2
+ 321 0058 C4F8F030 		str	r3, [r4, #240]
+ 322 005c C4F8F420 		str	r2, [r4, #244]
+ 157:Src/aiValidation.c ****         if (ctx->n_cb_out == ctx->report.n_nodes)
+ 323              		.loc 1 157 9 is_stmt 1 view .LVU70
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 16
+
+
+ 157:Src/aiValidation.c ****         if (ctx->n_cb_out == ctx->report.n_nodes)
+ 324              		.loc 1 157 12 is_stmt 0 view .LVU71
+ 325 0060 D4F8D430 		ldr	r3, [r4, #212]
+ 157:Src/aiValidation.c ****         if (ctx->n_cb_out == ctx->report.n_nodes)
+ 326              		.loc 1 157 22 view .LVU72
+ 327 0064 0133     		adds	r3, r3, #1
+ 328 0066 C4F8D430 		str	r3, [r4, #212]
+ 158:Src/aiValidation.c ****             type = EnumLayerType_LAYER_TYPE_INTERNAL_LAST;
+ 329              		.loc 1 158 9 is_stmt 1 view .LVU73
+ 158:Src/aiValidation.c ****             type = EnumLayerType_LAYER_TYPE_INTERNAL_LAST;
+ 330              		.loc 1 158 41 is_stmt 0 view .LVU74
+ 331 006a 226F     		ldr	r2, [r4, #112]
+ 158:Src/aiValidation.c ****             type = EnumLayerType_LAYER_TYPE_INTERNAL_LAST;
+ 332              		.loc 1 158 12 view .LVU75
+ 333 006c 9342     		cmp	r3, r2
+ 334 006e 1BD0     		beq	.L26
+ 161:Src/aiValidation.c ****         type = type << 16;
+ 335              		.loc 1 161 18 view .LVU76
+ 336 0070 0123     		movs	r3, #1
+ 337              	.L20:
+ 338              	.LVL34:
+ 162:Src/aiValidation.c ****         if (ctx->no_data)
+ 339              		.loc 1 162 9 is_stmt 1 view .LVU77
+ 162:Src/aiValidation.c ****         if (ctx->no_data)
+ 340              		.loc 1 162 14 is_stmt 0 view .LVU78
+ 341 0072 1B04     		lsls	r3, r3, #16
+ 342              	.LVL35:
+ 163:Src/aiValidation.c ****             type |= PB_BUFFER_TYPE_SEND_WITHOUT_DATA;
+ 343              		.loc 1 163 9 is_stmt 1 view .LVU79
+ 163:Src/aiValidation.c ****             type |= PB_BUFFER_TYPE_SEND_WITHOUT_DATA;
+ 344              		.loc 1 163 16 is_stmt 0 view .LVU80
+ 345 0074 94F8E020 		ldrb	r2, [r4, #224]	@ zero_extendqisi2
+ 163:Src/aiValidation.c ****             type |= PB_BUFFER_TYPE_SEND_WITHOUT_DATA;
+ 346              		.loc 1 163 12 view .LVU81
+ 347 0078 0AB1     		cbz	r2, .L21
+ 164:Src/aiValidation.c **** 
+ 348              		.loc 1 164 13 is_stmt 1 view .LVU82
+ 164:Src/aiValidation.c **** 
+ 349              		.loc 1 164 18 is_stmt 0 view .LVU83
+ 350 007a 43F00043 		orr	r3, r3, #-2147483648
+ 351              	.LVL36:
+ 352              	.L21:
+ 166:Src/aiValidation.c ****                 type | node_info->type,
+ 353              		.loc 1 166 9 is_stmt 1 view .LVU84
+ 354 007e D4F8D860 		ldr	r6, [r4, #216]
+ 355              	.LVL37:
+ 166:Src/aiValidation.c ****                 type | node_info->type,
+ 356              		.loc 1 166 9 is_stmt 0 view .LVU85
+ 357 0082 D4F8DC70 		ldr	r7, [r4, #220]
+ 167:Src/aiValidation.c ****                 node_info->id,
+ 358              		.loc 1 167 33 view .LVU86
+ 359 0086 2C88     		ldrh	r4, [r5]
+ 360              	.LVL38:
+ 166:Src/aiValidation.c ****                 type | node_info->type,
+ 361              		.loc 1 166 9 view .LVU87
+ 362 0088 1C43     		orrs	r4, r4, r3
+ 168:Src/aiValidation.c ****                 dwtCyclesToFloatMs(dur),
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 17
+
+
+ 363              		.loc 1 168 26 view .LVU88
+ 364 008a B5F80280 		ldrh	r8, [r5, #2]
+ 166:Src/aiValidation.c ****                 type | node_info->type,
+ 365              		.loc 1 166 9 view .LVU89
+ 366 008e FFF7FEFF 		bl	dwtCyclesToFloatMs
+ 367              	.LVL39:
+ 170:Src/aiValidation.c ****     }
+ 368              		.loc 1 170 17 view .LVU90
+ 369 0092 6B69     		ldr	r3, [r5, #20]
+ 166:Src/aiValidation.c ****                 type | node_info->type,
+ 370              		.loc 1 166 9 view .LVU91
+ 371 0094 0193     		str	r3, [sp, #4]
+ 372 0096 CDF80080 		str	r8, [sp]
+ 373 009a 2346     		mov	r3, r4
+ 374 009c 0222     		movs	r2, #2
+ 375 009e 3946     		mov	r1, r7
+ 376 00a0 3046     		mov	r0, r6
+ 377 00a2 FFF7FEFF 		bl	aiPbMgrSendAiBuffer3
+ 378              	.LVL40:
+ 379              	.LBE11:
+ 172:Src/aiValidation.c **** #endif
+ 380              		.loc 1 172 1 view .LVU92
+ 381 00a6 B3E7     		b	.L17
+ 382              	.LVL41:
+ 383              	.L26:
+ 384              	.LBB12:
+ 159:Src/aiValidation.c ****         else
+ 385              		.loc 1 159 18 view .LVU93
+ 386 00a8 0223     		movs	r3, #2
+ 387 00aa E2E7     		b	.L20
+ 388              	.LBE12:
+ 389              		.cfi_endproc
+ 390              	.LFE140:
+ 392              		.section	.text.aiInspectorUnBind,"ax",%progbits
+ 393              		.align	1
+ 394              		.syntax unified
+ 395              		.thumb
+ 396              		.thumb_func
+ 397              		.fpu fpv4-sp-d16
+ 399              	aiInspectorUnBind:
+ 400              	.LVL42:
+ 401              	.LFB146:
+ 318:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+ 402              		.loc 1 318 1 is_stmt 1 view -0
+ 403              		.cfi_startproc
+ 404              		@ args = 0, pretend = 0, frame = 0
+ 405              		@ frame_needed = 0, uses_anonymous_args = 0
+ 320:Src/aiValidation.c ****         return;
+ 406              		.loc 1 320 5 view .LVU95
+ 320:Src/aiValidation.c ****         return;
+ 407              		.loc 1 320 8 is_stmt 0 view .LVU96
+ 408 0000 68B1     		cbz	r0, .L31
+ 318:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+ 409              		.loc 1 318 1 view .LVU97
+ 410 0002 10B5     		push	{r4, lr}
+ 411              	.LCFI9:
+ 412              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 18
+
+
+ 413              		.cfi_offset 4, -8
+ 414              		.cfi_offset 14, -4
+ 415 0004 0446     		mov	r4, r0
+ 323:Src/aiValidation.c ****             (ctx->net_id != AI_INSPECTOR_NETWORK_BIND_FAILED))
+ 416              		.loc 1 323 5 is_stmt 1 view .LVU98
+ 323:Src/aiValidation.c ****             (ctx->net_id != AI_INSPECTOR_NETWORK_BIND_FAILED))
+ 417              		.loc 1 323 13 is_stmt 0 view .LVU99
+ 418 0006 806F     		ldr	r0, [r0, #120]
+ 419              	.LVL43:
+ 323:Src/aiValidation.c ****             (ctx->net_id != AI_INSPECTOR_NETWORK_BIND_FAILED))
+ 420              		.loc 1 323 8 view .LVU100
+ 421 0008 10B1     		cbz	r0, .L29
+ 324:Src/aiValidation.c ****         ai_inspector_unbind_network(ctx->inspector,
+ 422              		.loc 1 324 17 discriminator 1 view .LVU101
+ 423 000a B4F87C10 		ldrh	r1, [r4, #124]
+ 323:Src/aiValidation.c ****             (ctx->net_id != AI_INSPECTOR_NETWORK_BIND_FAILED))
+ 424              		.loc 1 323 44 discriminator 1 view .LVU102
+ 425 000e 19B9     		cbnz	r1, .L34
+ 426              	.L29:
+ 328:Src/aiValidation.c **** #endif
+ 427              		.loc 1 328 5 is_stmt 1 view .LVU103
+ 328:Src/aiValidation.c **** #endif
+ 428              		.loc 1 328 17 is_stmt 0 view .LVU104
+ 429 0010 0023     		movs	r3, #0
+ 430 0012 A4F87C30 		strh	r3, [r4, #124]	@ movhi
+ 330:Src/aiValidation.c **** 
+ 431              		.loc 1 330 1 view .LVU105
+ 432 0016 10BD     		pop	{r4, pc}
+ 433              	.LVL44:
+ 434              	.L34:
+ 325:Src/aiValidation.c ****                 ctx->net_id);
+ 435              		.loc 1 325 9 is_stmt 1 view .LVU106
+ 436 0018 FFF7FEFF 		bl	ai_inspector_unbind_network
+ 437              	.LVL45:
+ 438 001c F8E7     		b	.L29
+ 439              	.LVL46:
+ 440              	.L31:
+ 441              	.LCFI10:
+ 442              		.cfi_def_cfa_offset 0
+ 443              		.cfi_restore 4
+ 444              		.cfi_restore 14
+ 325:Src/aiValidation.c ****                 ctx->net_id);
+ 445              		.loc 1 325 9 is_stmt 0 view .LVU107
+ 446 001e 7047     		bx	lr
+ 447              		.cfi_endproc
+ 448              	.LFE146:
+ 450              		.section	.text.aiInspectorBind,"ax",%progbits
+ 451              		.align	1
+ 452              		.syntax unified
+ 453              		.thumb
+ 454              		.thumb_func
+ 455              		.fpu fpv4-sp-d16
+ 457              	aiInspectorBind:
+ 458              	.LVL47:
+ 459              	.LFB147:
+ 333:Src/aiValidation.c ****     int res = 0;
+ 460              		.loc 1 333 1 is_stmt 1 view -0
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 19
+
+
+ 461              		.cfi_startproc
+ 462              		@ args = 0, pretend = 0, frame = 0
+ 463              		@ frame_needed = 0, uses_anonymous_args = 0
+ 334:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+ 464              		.loc 1 334 5 view .LVU109
+ 336:Src/aiValidation.c ****         return 0;
+ 465              		.loc 1 336 5 view .LVU110
+ 336:Src/aiValidation.c ****         return 0;
+ 466              		.loc 1 336 8 is_stmt 0 view .LVU111
+ 467 0000 98B1     		cbz	r0, .L37
+ 333:Src/aiValidation.c ****     int res = 0;
+ 468              		.loc 1 333 1 view .LVU112
+ 469 0002 10B5     		push	{r4, lr}
+ 470              	.LCFI11:
+ 471              		.cfi_def_cfa_offset 8
+ 472              		.cfi_offset 4, -8
+ 473              		.cfi_offset 14, -4
+ 474 0004 0446     		mov	r4, r0
+ 339:Src/aiValidation.c **** 
+ 475              		.loc 1 339 5 is_stmt 1 view .LVU113
+ 476 0006 FFF7FEFF 		bl	aiInspectorUnBind
+ 477              	.LVL48:
+ 341:Src/aiValidation.c ****     ctx->n_cb_out = 0;
+ 478              		.loc 1 341 5 view .LVU114
+ 341:Src/aiValidation.c ****     ctx->n_cb_out = 0;
+ 479              		.loc 1 341 19 is_stmt 0 view .LVU115
+ 480 000a 0023     		movs	r3, #0
+ 481 000c C4F8D030 		str	r3, [r4, #208]
+ 342:Src/aiValidation.c **** 
+ 482              		.loc 1 342 5 is_stmt 1 view .LVU116
+ 342:Src/aiValidation.c **** 
+ 483              		.loc 1 342 19 is_stmt 0 view .LVU117
+ 484 0010 C4F8D430 		str	r3, [r4, #212]
+ 344:Src/aiValidation.c ****         ctx->net_id = ai_inspector_bind_network(
+ 485              		.loc 1 344 5 is_stmt 1 view .LVU118
+ 344:Src/aiValidation.c ****         ctx->net_id = ai_inspector_bind_network(
+ 486              		.loc 1 344 12 is_stmt 0 view .LVU119
+ 487 0014 A06F     		ldr	r0, [r4, #120]
+ 344:Src/aiValidation.c ****         ctx->net_id = ai_inspector_bind_network(
+ 488              		.loc 1 344 8 view .LVU120
+ 489 0016 50B1     		cbz	r0, .L38
+ 345:Src/aiValidation.c ****                 ctx->inspector,
+ 490              		.loc 1 345 9 is_stmt 1 view .LVU121
+ 345:Src/aiValidation.c ****                 ctx->inspector,
+ 491              		.loc 1 345 23 is_stmt 0 view .LVU122
+ 492 0018 04F19801 		add	r1, r4, #152
+ 493 001c FFF7FEFF 		bl	ai_inspector_bind_network
+ 494              	.LVL49:
+ 345:Src/aiValidation.c ****                 ctx->inspector,
+ 495              		.loc 1 345 21 view .LVU123
+ 496 0020 A4F87C00 		strh	r0, [r4, #124]	@ movhi
+ 349:Src/aiValidation.c ****             res = -1;
+ 497              		.loc 1 349 9 is_stmt 1 view .LVU124
+ 349:Src/aiValidation.c ****             res = -1;
+ 498              		.loc 1 349 12 is_stmt 0 view .LVU125
+ 499 0024 28B1     		cbz	r0, .L39
+ 334:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 20
+
+
+ 500              		.loc 1 334 9 view .LVU126
+ 501 0026 0020     		movs	r0, #0
+ 502              	.L35:
+ 355:Src/aiValidation.c **** 
+ 503              		.loc 1 355 1 view .LVU127
+ 504 0028 10BD     		pop	{r4, pc}
+ 505              	.LVL50:
+ 506              	.L37:
+ 507              	.LCFI12:
+ 508              		.cfi_def_cfa_offset 0
+ 509              		.cfi_restore 4
+ 510              		.cfi_restore 14
+ 337:Src/aiValidation.c **** 
+ 511              		.loc 1 337 16 view .LVU128
+ 512 002a 0020     		movs	r0, #0
+ 513              	.LVL51:
+ 355:Src/aiValidation.c **** 
+ 514              		.loc 1 355 1 view .LVU129
+ 515 002c 7047     		bx	lr
+ 516              	.LVL52:
+ 517              	.L38:
+ 518              	.LCFI13:
+ 519              		.cfi_def_cfa_offset 8
+ 520              		.cfi_offset 4, -8
+ 521              		.cfi_offset 14, -4
+ 334:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+ 522              		.loc 1 334 9 view .LVU130
+ 523 002e 0020     		movs	r0, #0
+ 524 0030 FAE7     		b	.L35
+ 525              	.L39:
+ 350:Src/aiValidation.c ****     }
+ 526              		.loc 1 350 17 view .LVU131
+ 527 0032 4FF0FF30 		mov	r0, #-1
+ 528 0036 F7E7     		b	.L35
+ 529              		.cfi_endproc
+ 530              	.LFE147:
+ 532              		.section	.text.aiInspectorInitAndBind,"ax",%progbits
+ 533              		.align	1
+ 534              		.syntax unified
+ 535              		.thumb
+ 536              		.thumb_func
+ 537              		.fpu fpv4-sp-d16
+ 539              	aiInspectorInitAndBind:
+ 540              	.LVL53:
+ 541              	.LFB148:
+ 358:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+ 542              		.loc 1 358 1 is_stmt 1 view -0
+ 543              		.cfi_startproc
+ 544              		@ args = 0, pretend = 0, frame = 72
+ 545              		@ frame_needed = 0, uses_anonymous_args = 0
+ 358:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+ 546              		.loc 1 358 1 is_stmt 0 view .LVU133
+ 547 0000 70B5     		push	{r4, r5, r6, lr}
+ 548              	.LCFI14:
+ 549              		.cfi_def_cfa_offset 16
+ 550              		.cfi_offset 4, -16
+ 551              		.cfi_offset 5, -12
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 21
+
+
+ 552              		.cfi_offset 6, -8
+ 553              		.cfi_offset 14, -4
+ 554 0002 92B0     		sub	sp, sp, #72
+ 555              	.LCFI15:
+ 556              		.cfi_def_cfa_offset 88
+ 557 0004 0546     		mov	r5, r0
+ 360:Src/aiValidation.c ****     ctx->n_cb_out = 0;
+ 558              		.loc 1 360 5 is_stmt 1 view .LVU134
+ 360:Src/aiValidation.c ****     ctx->n_cb_out = 0;
+ 559              		.loc 1 360 19 is_stmt 0 view .LVU135
+ 560 0006 0024     		movs	r4, #0
+ 561 0008 C0F8D040 		str	r4, [r0, #208]
+ 361:Src/aiValidation.c **** 
+ 562              		.loc 1 361 5 is_stmt 1 view .LVU136
+ 361:Src/aiValidation.c **** 
+ 563              		.loc 1 361 19 is_stmt 0 view .LVU137
+ 564 000c C0F8D440 		str	r4, [r0, #212]
+ 363:Src/aiValidation.c **** 
+ 565              		.loc 1 363 5 is_stmt 1 view .LVU138
+ 363:Src/aiValidation.c **** 
+ 566              		.loc 1 363 31 is_stmt 0 view .LVU139
+ 567 0010 0EA8     		add	r0, sp, #56
+ 568              	.LVL54:
+ 363:Src/aiValidation.c **** 
+ 569              		.loc 1 363 31 view .LVU140
+ 570 0012 FFF7FEFF 		bl	ai_inspector_default_config
+ 571              	.LVL55:
+ 365:Src/aiValidation.c ****     cfg.log_quiet = false;
+ 572              		.loc 1 365 5 is_stmt 1 view .LVU141
+ 365:Src/aiValidation.c ****     cfg.log_quiet = false;
+ 573              		.loc 1 365 19 is_stmt 0 view .LVU142
+ 574 0016 8DF83940 		strb	r4, [sp, #57]
+ 366:Src/aiValidation.c ****     cfg.on_report_destroy = NULL;
+ 575              		.loc 1 366 5 is_stmt 1 view .LVU143
+ 366:Src/aiValidation.c ****     cfg.on_report_destroy = NULL;
+ 576              		.loc 1 366 19 is_stmt 0 view .LVU144
+ 577 001a 8DF83A40 		strb	r4, [sp, #58]
+ 367:Src/aiValidation.c ****     cfg.on_exec_node = &aiOnExecNode_cb;
+ 578              		.loc 1 367 5 is_stmt 1 view .LVU145
+ 367:Src/aiValidation.c ****     cfg.on_exec_node = &aiOnExecNode_cb;
+ 579              		.loc 1 367 27 is_stmt 0 view .LVU146
+ 580 001e 0F94     		str	r4, [sp, #60]
+ 368:Src/aiValidation.c ****     cfg.cookie = NULL;
+ 581              		.loc 1 368 5 is_stmt 1 view .LVU147
+ 368:Src/aiValidation.c ****     cfg.cookie = NULL;
+ 582              		.loc 1 368 22 is_stmt 0 view .LVU148
+ 583 0020 144B     		ldr	r3, .L50
+ 584 0022 1093     		str	r3, [sp, #64]
+ 369:Src/aiValidation.c **** 
+ 585              		.loc 1 369 5 is_stmt 1 view .LVU149
+ 369:Src/aiValidation.c **** 
+ 586              		.loc 1 369 16 is_stmt 0 view .LVU150
+ 587 0024 1194     		str	r4, [sp, #68]
+ 382:Src/aiValidation.c ****     ai_network_params pparams;
+ 588              		.loc 1 382 5 is_stmt 1 view .LVU151
+ 383:Src/aiValidation.c **** 
+ 589              		.loc 1 383 5 view .LVU152
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 22
+
+
+ 385:Src/aiValidation.c ****         return -1;
+ 590              		.loc 1 385 5 view .LVU153
+ 385:Src/aiValidation.c ****         return -1;
+ 591              		.loc 1 385 12 is_stmt 0 view .LVU154
+ 592 0026 2868     		ldr	r0, [r5]
+ 385:Src/aiValidation.c ****         return -1;
+ 593              		.loc 1 385 8 view .LVU155
+ 594 0028 00B3     		cbz	r0, .L46
+ 388:Src/aiValidation.c ****             &phandle,
+ 595              		.loc 1 388 5 is_stmt 1 view .LVU156
+ 596 002a 01AA     		add	r2, sp, #4
+ 597 002c 0DA9     		add	r1, sp, #52
+ 598 002e FFF7FEFF 		bl	ai_mnetwork_get_private_handle
+ 599              	.LVL56:
+ 392:Src/aiValidation.c **** 
+ 600              		.loc 1 392 5 view .LVU157
+ 392:Src/aiValidation.c **** 
+ 601              		.loc 1 392 16 is_stmt 0 view .LVU158
+ 602 0032 1195     		str	r5, [sp, #68]
+ 394:Src/aiValidation.c ****     {
+ 603              		.loc 1 394 5 is_stmt 1 view .LVU159
+ 394:Src/aiValidation.c ****     {
+ 604              		.loc 1 394 9 is_stmt 0 view .LVU160
+ 605 0034 0EA9     		add	r1, sp, #56
+ 606 0036 05F17800 		add	r0, r5, #120
+ 607 003a FFF7FEFF 		bl	ai_inspector_create
+ 608              	.LVL57:
+ 394:Src/aiValidation.c ****     {
+ 609              		.loc 1 394 8 view .LVU161
+ 610 003e 10B9     		cbnz	r0, .L49
+ 403:Src/aiValidation.c **** }
+ 611              		.loc 1 403 12 view .LVU162
+ 612 0040 0020     		movs	r0, #0
+ 613              	.L44:
+ 404:Src/aiValidation.c **** 
+ 614              		.loc 1 404 1 view .LVU163
+ 615 0042 12B0     		add	sp, sp, #72
+ 616              	.LCFI16:
+ 617              		.cfi_remember_state
+ 618              		.cfi_def_cfa_offset 16
+ 619              		@ sp needed
+ 620 0044 70BD     		pop	{r4, r5, r6, pc}
+ 621              	.LVL58:
+ 622              	.L49:
+ 623              	.LCFI17:
+ 624              		.cfi_restore_state
+ 396:Src/aiValidation.c ****         ctx->entry.params = pparams;
+ 625              		.loc 1 396 9 is_stmt 1 view .LVU164
+ 396:Src/aiValidation.c ****         ctx->entry.params = pparams;
+ 626              		.loc 1 396 27 is_stmt 0 view .LVU165
+ 627 0046 0D9B     		ldr	r3, [sp, #52]
+ 628 0048 C5F89830 		str	r3, [r5, #152]
+ 397:Src/aiValidation.c ****         aiInspectorBind(ctx);
+ 629              		.loc 1 397 9 is_stmt 1 view .LVU166
+ 397:Src/aiValidation.c ****         aiInspectorBind(ctx);
+ 630              		.loc 1 397 27 is_stmt 0 view .LVU167
+ 631 004c 05F19C04 		add	r4, r5, #156
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 23
+
+
+ 632 0050 01AE     		add	r6, sp, #4
+ 633 0052 0FCE     		ldmia	r6!, {r0, r1, r2, r3}
+ 634 0054 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 635 0056 0FCE     		ldmia	r6!, {r0, r1, r2, r3}
+ 636 0058 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 637 005a 96E80F00 		ldm	r6, {r0, r1, r2, r3}
+ 638 005e 84E80F00 		stm	r4, {r0, r1, r2, r3}
+ 398:Src/aiValidation.c ****     }
+ 639              		.loc 1 398 9 is_stmt 1 view .LVU168
+ 640 0062 2846     		mov	r0, r5
+ 641 0064 FFF7FEFF 		bl	aiInspectorBind
+ 642              	.LVL59:
+ 403:Src/aiValidation.c **** }
+ 643              		.loc 1 403 12 is_stmt 0 view .LVU169
+ 644 0068 0020     		movs	r0, #0
+ 645 006a EAE7     		b	.L44
+ 646              	.L46:
+ 386:Src/aiValidation.c **** 
+ 647              		.loc 1 386 16 view .LVU170
+ 648 006c 4FF0FF30 		mov	r0, #-1
+ 649 0070 E7E7     		b	.L44
+ 650              	.L51:
+ 651 0072 00BF     		.align	2
+ 652              	.L50:
+ 653 0074 00000000 		.word	aiOnExecNode_cb
+ 654              		.cfi_endproc
+ 655              	.LFE148:
+ 657              		.section	.text.aiInspectorGetReport,"ax",%progbits
+ 658              		.align	1
+ 659              		.syntax unified
+ 660              		.thumb
+ 661              		.thumb_func
+ 662              		.fpu fpv4-sp-d16
+ 664              	aiInspectorGetReport:
+ 665              	.LVL60:
+ 666              	.LFB144:
+ 278:Src/aiValidation.c ****     int res = 0;
+ 667              		.loc 1 278 1 is_stmt 1 view -0
+ 668              		.cfi_startproc
+ 669              		@ args = 0, pretend = 0, frame = 0
+ 670              		@ frame_needed = 0, uses_anonymous_args = 0
+ 279:Src/aiValidation.c ****     if (!ctx)
+ 671              		.loc 1 279 5 view .LVU172
+ 280:Src/aiValidation.c ****         return -1;
+ 672              		.loc 1 280 5 view .LVU173
+ 280:Src/aiValidation.c ****         return -1;
+ 673              		.loc 1 280 8 is_stmt 0 view .LVU174
+ 674 0000 70B1     		cbz	r0, .L54
+ 675 0002 0246     		mov	r2, r0
+ 283:Src/aiValidation.c ****             (ctx->net_id != AI_INSPECTOR_NETWORK_BIND_FAILED))
+ 676              		.loc 1 283 5 is_stmt 1 view .LVU175
+ 283:Src/aiValidation.c ****             (ctx->net_id != AI_INSPECTOR_NETWORK_BIND_FAILED))
+ 677              		.loc 1 283 13 is_stmt 0 view .LVU176
+ 678 0004 806F     		ldr	r0, [r0, #120]
+ 679              	.LVL61:
+ 283:Src/aiValidation.c ****             (ctx->net_id != AI_INSPECTOR_NETWORK_BIND_FAILED))
+ 680              		.loc 1 283 8 view .LVU177
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 24
+
+
+ 681 0006 70B1     		cbz	r0, .L55
+ 284:Src/aiValidation.c ****     {
+ 682              		.loc 1 284 17 discriminator 1 view .LVU178
+ 683 0008 B2F87C10 		ldrh	r1, [r2, #124]
+ 283:Src/aiValidation.c ****             (ctx->net_id != AI_INSPECTOR_NETWORK_BIND_FAILED))
+ 684              		.loc 1 283 44 discriminator 1 view .LVU179
+ 685 000c 09B9     		cbnz	r1, .L62
+ 279:Src/aiValidation.c ****     if (!ctx)
+ 686              		.loc 1 279 9 view .LVU180
+ 687 000e 0020     		movs	r0, #0
+ 291:Src/aiValidation.c **** #endif
+ 688              		.loc 1 291 1 view .LVU181
+ 689 0010 7047     		bx	lr
+ 690              	.L62:
+ 278:Src/aiValidation.c ****     int res = 0;
+ 691              		.loc 1 278 1 view .LVU182
+ 692 0012 08B5     		push	{r3, lr}
+ 693              	.LCFI18:
+ 694              		.cfi_def_cfa_offset 8
+ 695              		.cfi_offset 3, -8
+ 696              		.cfi_offset 14, -4
+ 286:Src/aiValidation.c ****                 ctx->net_id, &ctx->inspector_report) != true)
+ 697              		.loc 1 286 9 is_stmt 1 view .LVU183
+ 286:Src/aiValidation.c ****                 ctx->net_id, &ctx->inspector_report) != true)
+ 698              		.loc 1 286 13 is_stmt 0 view .LVU184
+ 699 0014 8032     		adds	r2, r2, #128
+ 700              	.LVL62:
+ 286:Src/aiValidation.c ****                 ctx->net_id, &ctx->inspector_report) != true)
+ 701              		.loc 1 286 13 view .LVU185
+ 702 0016 FFF7FEFF 		bl	ai_inspector_get_report
+ 703              	.LVL63:
+ 286:Src/aiValidation.c ****                 ctx->net_id, &ctx->inspector_report) != true)
+ 704              		.loc 1 286 12 view .LVU186
+ 705 001a 30B1     		cbz	r0, .L57
+ 279:Src/aiValidation.c ****     if (!ctx)
+ 706              		.loc 1 279 9 view .LVU187
+ 707 001c 0020     		movs	r0, #0
+ 708              	.L52:
+ 291:Src/aiValidation.c **** #endif
+ 709              		.loc 1 291 1 view .LVU188
+ 710 001e 08BD     		pop	{r3, pc}
+ 711              	.LVL64:
+ 712              	.L54:
+ 713              	.LCFI19:
+ 714              		.cfi_def_cfa_offset 0
+ 715              		.cfi_restore 3
+ 716              		.cfi_restore 14
+ 281:Src/aiValidation.c **** 
+ 717              		.loc 1 281 16 view .LVU189
+ 718 0020 4FF0FF30 		mov	r0, #-1
+ 719              	.LVL65:
+ 281:Src/aiValidation.c **** 
+ 720              		.loc 1 281 16 view .LVU190
+ 721 0024 7047     		bx	lr
+ 722              	.LVL66:
+ 723              	.L55:
+ 279:Src/aiValidation.c ****     if (!ctx)
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 25
+
+
+ 724              		.loc 1 279 9 view .LVU191
+ 725 0026 0020     		movs	r0, #0
+ 726 0028 7047     		bx	lr
+ 727              	.LVL67:
+ 728              	.L57:
+ 729              	.LCFI20:
+ 730              		.cfi_def_cfa_offset 8
+ 731              		.cfi_offset 3, -8
+ 732              		.cfi_offset 14, -4
+ 288:Src/aiValidation.c ****     }
+ 733              		.loc 1 288 17 view .LVU192
+ 734 002a 6FF00100 		mvn	r0, #1
+ 735 002e F6E7     		b	.L52
+ 736              		.cfi_endproc
+ 737              	.LFE144:
+ 739              		.section	.text.aiInspectorSendReport,"ax",%progbits
+ 740              		.align	1
+ 741              		.syntax unified
+ 742              		.thumb
+ 743              		.thumb_func
+ 744              		.fpu fpv4-sp-d16
+ 746              	aiInspectorSendReport:
+ 747              	.LVL68:
+ 748              	.LFB145:
+ 298:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+ 749              		.loc 1 298 1 is_stmt 1 view -0
+ 750              		.cfi_startproc
+ 751              		@ args = 0, pretend = 0, frame = 0
+ 752              		@ frame_needed = 0, uses_anonymous_args = 0
+ 298:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+ 753              		.loc 1 298 1 is_stmt 0 view .LVU194
+ 754 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 755              	.LCFI21:
+ 756              		.cfi_def_cfa_offset 20
+ 757              		.cfi_offset 4, -20
+ 758              		.cfi_offset 5, -16
+ 759              		.cfi_offset 6, -12
+ 760              		.cfi_offset 7, -8
+ 761              		.cfi_offset 14, -4
+ 762 0002 2DED028B 		vpush.64	{d8}
+ 763              	.LCFI22:
+ 764              		.cfi_def_cfa_offset 28
+ 765              		.cfi_offset 80, -28
+ 766              		.cfi_offset 81, -24
+ 767 0006 83B0     		sub	sp, sp, #12
+ 768              	.LCFI23:
+ 769              		.cfi_def_cfa_offset 40
+ 770 0008 0646     		mov	r6, r0
+ 771 000a 0C46     		mov	r4, r1
+ 772 000c 1746     		mov	r7, r2
+ 773 000e 1D46     		mov	r5, r3
+ 774 0010 B0EE408A 		vmov.f32	s16, s0
+ 300:Src/aiValidation.c ****         resp->which_payload = respMsg_report_tag;
+ 775              		.loc 1 300 5 is_stmt 1 view .LVU195
+ 300:Src/aiValidation.c ****         resp->which_payload = respMsg_report_tag;
+ 776              		.loc 1 300 9 is_stmt 0 view .LVU196
+ 777 0014 1846     		mov	r0, r3
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 26
+
+
+ 778              	.LVL69:
+ 300:Src/aiValidation.c ****         resp->which_payload = respMsg_report_tag;
+ 779              		.loc 1 300 9 view .LVU197
+ 780 0016 FFF7FEFF 		bl	aiInspectorGetReport
+ 781              	.LVL70:
+ 300:Src/aiValidation.c ****         resp->which_payload = respMsg_report_tag;
+ 782              		.loc 1 300 8 view .LVU198
+ 783 001a D0B9     		cbnz	r0, .L64
+ 301:Src/aiValidation.c ****         resp->payload.report.id = ctx->inspector_report.id;
+ 784              		.loc 1 301 9 is_stmt 1 view .LVU199
+ 301:Src/aiValidation.c ****         resp->payload.report.id = ctx->inspector_report.id;
+ 785              		.loc 1 301 29 is_stmt 0 view .LVU200
+ 786 001c 1523     		movs	r3, #21
+ 787 001e E380     		strh	r3, [r4, #6]	@ movhi
+ 302:Src/aiValidation.c ****         resp->payload.report.elapsed_ms = dur_ms;
+ 788              		.loc 1 302 9 is_stmt 1 view .LVU201
+ 302:Src/aiValidation.c ****         resp->payload.report.elapsed_ms = dur_ms;
+ 789              		.loc 1 302 56 is_stmt 0 view .LVU202
+ 790 0020 D5F88030 		ldr	r3, [r5, #128]
+ 302:Src/aiValidation.c ****         resp->payload.report.elapsed_ms = dur_ms;
+ 791              		.loc 1 302 33 view .LVU203
+ 792 0024 A360     		str	r3, [r4, #8]
+ 303:Src/aiValidation.c ****         resp->payload.report.n_nodes = ctx->inspector_report.n_nodes;
+ 793              		.loc 1 303 9 is_stmt 1 view .LVU204
+ 303:Src/aiValidation.c ****         resp->payload.report.n_nodes = ctx->inspector_report.n_nodes;
+ 794              		.loc 1 303 41 is_stmt 0 view .LVU205
+ 795 0026 84ED068A 		vstr.32	s16, [r4, #24]
+ 304:Src/aiValidation.c ****         resp->payload.report.signature = ctx->inspector_report.signature;
+ 796              		.loc 1 304 9 is_stmt 1 view .LVU206
+ 304:Src/aiValidation.c ****         resp->payload.report.signature = ctx->inspector_report.signature;
+ 797              		.loc 1 304 61 is_stmt 0 view .LVU207
+ 798 002a D5F88C30 		ldr	r3, [r5, #140]
+ 304:Src/aiValidation.c ****         resp->payload.report.signature = ctx->inspector_report.signature;
+ 799              		.loc 1 304 38 view .LVU208
+ 800 002e 6361     		str	r3, [r4, #20]
+ 305:Src/aiValidation.c ****         resp->payload.report.num_inferences = ctx->inspector_report.num_inferences;
+ 801              		.loc 1 305 9 is_stmt 1 view .LVU209
+ 305:Src/aiValidation.c ****         resp->payload.report.num_inferences = ctx->inspector_report.num_inferences;
+ 802              		.loc 1 305 63 is_stmt 0 view .LVU210
+ 803 0030 D5F88430 		ldr	r3, [r5, #132]
+ 305:Src/aiValidation.c ****         resp->payload.report.num_inferences = ctx->inspector_report.num_inferences;
+ 804              		.loc 1 305 40 view .LVU211
+ 805 0034 E360     		str	r3, [r4, #12]
+ 306:Src/aiValidation.c ****         aiPbMgrSendResp(req, resp, state);
+ 806              		.loc 1 306 9 is_stmt 1 view .LVU212
+ 306:Src/aiValidation.c ****         aiPbMgrSendResp(req, resp, state);
+ 807              		.loc 1 306 68 is_stmt 0 view .LVU213
+ 808 0036 D5F88830 		ldr	r3, [r5, #136]
+ 306:Src/aiValidation.c ****         aiPbMgrSendResp(req, resp, state);
+ 809              		.loc 1 306 45 view .LVU214
+ 810 003a 2361     		str	r3, [r4, #16]
+ 307:Src/aiValidation.c ****         aiPbMgrWaitAck();
+ 811              		.loc 1 307 9 is_stmt 1 view .LVU215
+ 812 003c 3A46     		mov	r2, r7
+ 813 003e 2146     		mov	r1, r4
+ 814 0040 3046     		mov	r0, r6
+ 815 0042 FFF7FEFF 		bl	aiPbMgrSendResp
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 27
+
+
+ 816              	.LVL71:
+ 308:Src/aiValidation.c ****     } else {
+ 817              		.loc 1 308 9 view .LVU216
+ 818 0046 FFF7FEFF 		bl	aiPbMgrWaitAck
+ 819              	.LVL72:
+ 820              	.L63:
+ 314:Src/aiValidation.c **** 
+ 821              		.loc 1 314 1 is_stmt 0 view .LVU217
+ 822 004a 03B0     		add	sp, sp, #12
+ 823              	.LCFI24:
+ 824              		.cfi_remember_state
+ 825              		.cfi_def_cfa_offset 28
+ 826              		@ sp needed
+ 827 004c BDEC028B 		vldm	sp!, {d8}
+ 828              	.LCFI25:
+ 829              		.cfi_restore 80
+ 830              		.cfi_restore 81
+ 831              		.cfi_def_cfa_offset 20
+ 832              	.LVL73:
+ 314:Src/aiValidation.c **** 
+ 833              		.loc 1 314 1 view .LVU218
+ 834 0050 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 835              	.LVL74:
+ 836              	.L64:
+ 837              	.LCFI26:
+ 838              		.cfi_restore_state
+ 310:Src/aiValidation.c ****                 EnumError_E_GENERIC, EnumError_E_GENERIC);
+ 839              		.loc 1 310 9 is_stmt 1 view .LVU219
+ 840 0052 0A23     		movs	r3, #10
+ 841 0054 0093     		str	r3, [sp]
+ 842 0056 0422     		movs	r2, #4
+ 843 0058 2146     		mov	r1, r4
+ 844 005a 3046     		mov	r0, r6
+ 845 005c FFF7FEFF 		bl	aiPbMgrSendAck
+ 846              	.LVL75:
+ 314:Src/aiValidation.c **** 
+ 847              		.loc 1 314 1 is_stmt 0 view .LVU220
+ 848 0060 F3E7     		b	.L63
+ 849              		.cfi_endproc
+ 850              	.LFE145:
+ 852              		.section	.text.aiInspectorUnbindAndDestroy,"ax",%progbits
+ 853              		.align	1
+ 854              		.syntax unified
+ 855              		.thumb
+ 856              		.thumb_func
+ 857              		.fpu fpv4-sp-d16
+ 859              	aiInspectorUnbindAndDestroy:
+ 860              	.LVL76:
+ 861              	.LFB149:
+ 407:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+ 862              		.loc 1 407 1 is_stmt 1 view -0
+ 863              		.cfi_startproc
+ 864              		@ args = 0, pretend = 0, frame = 0
+ 865              		@ frame_needed = 0, uses_anonymous_args = 0
+ 407:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+ 866              		.loc 1 407 1 is_stmt 0 view .LVU222
+ 867 0000 10B5     		push	{r4, lr}
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 28
+
+
+ 868              	.LCFI27:
+ 869              		.cfi_def_cfa_offset 8
+ 870              		.cfi_offset 4, -8
+ 871              		.cfi_offset 14, -4
+ 872 0002 0446     		mov	r4, r0
+ 409:Src/aiValidation.c ****     if (ctx->inspector != AI_HANDLE_NULL)
+ 873              		.loc 1 409 5 is_stmt 1 view .LVU223
+ 874 0004 FFF7FEFF 		bl	aiInspectorUnBind
+ 875              	.LVL77:
+ 410:Src/aiValidation.c ****         ai_inspector_destroy(ctx->inspector);
+ 876              		.loc 1 410 5 view .LVU224
+ 410:Src/aiValidation.c ****         ai_inspector_destroy(ctx->inspector);
+ 877              		.loc 1 410 12 is_stmt 0 view .LVU225
+ 878 0008 A06F     		ldr	r0, [r4, #120]
+ 410:Src/aiValidation.c ****         ai_inspector_destroy(ctx->inspector);
+ 879              		.loc 1 410 8 view .LVU226
+ 880 000a 08B1     		cbz	r0, .L68
+ 411:Src/aiValidation.c ****     ctx->inspector = AI_HANDLE_NULL;
+ 881              		.loc 1 411 9 is_stmt 1 view .LVU227
+ 882 000c FFF7FEFF 		bl	ai_inspector_destroy
+ 883              	.LVL78:
+ 884              	.L68:
+ 412:Src/aiValidation.c **** #endif
+ 885              		.loc 1 412 5 view .LVU228
+ 412:Src/aiValidation.c **** #endif
+ 886              		.loc 1 412 20 is_stmt 0 view .LVU229
+ 887 0010 0020     		movs	r0, #0
+ 888 0012 A067     		str	r0, [r4, #120]
+ 414:Src/aiValidation.c **** }
+ 889              		.loc 1 414 5 is_stmt 1 view .LVU230
+ 415:Src/aiValidation.c **** 
+ 890              		.loc 1 415 1 is_stmt 0 view .LVU231
+ 891 0014 10BD     		pop	{r4, pc}
+ 415:Src/aiValidation.c **** 
+ 892              		.loc 1 415 1 view .LVU232
+ 893              		.cfi_endproc
+ 894              	.LFE149:
+ 896              		.section	.text.aiPbCmdNNRun,"ax",%progbits
+ 897              		.align	1
+ 898              		.global	aiPbCmdNNRun
+ 899              		.syntax unified
+ 900              		.thumb
+ 901              		.thumb_func
+ 902              		.fpu fpv4-sp-d16
+ 904              	aiPbCmdNNRun:
+ 905              	.LVL79:
+ 906              	.LFB153:
+ 495:Src/aiValidation.c **** 
+ 496:Src/aiValidation.c **** void aiPbCmdNNRun(const reqMsg *req, respMsg *resp, void *param)
+ 497:Src/aiValidation.c **** {
+ 907              		.loc 1 497 1 is_stmt 1 view -0
+ 908              		.cfi_startproc
+ 909              		@ args = 0, pretend = 0, frame = 56
+ 910              		@ frame_needed = 0, uses_anonymous_args = 0
+ 911              		.loc 1 497 1 is_stmt 0 view .LVU234
+ 912 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 913              	.LCFI28:
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 29
+
+
+ 914              		.cfi_def_cfa_offset 36
+ 915              		.cfi_offset 4, -36
+ 916              		.cfi_offset 5, -32
+ 917              		.cfi_offset 6, -28
+ 918              		.cfi_offset 7, -24
+ 919              		.cfi_offset 8, -20
+ 920              		.cfi_offset 9, -16
+ 921              		.cfi_offset 10, -12
+ 922              		.cfi_offset 11, -8
+ 923              		.cfi_offset 14, -4
+ 924 0004 91B0     		sub	sp, sp, #68
+ 925              	.LCFI29:
+ 926              		.cfi_def_cfa_offset 104
+ 927 0006 0646     		mov	r6, r0
+ 928 0008 0F46     		mov	r7, r1
+ 498:Src/aiValidation.c ****     ai_i32 batch;
+ 929              		.loc 1 498 5 is_stmt 1 view .LVU235
+ 499:Src/aiValidation.c ****     uint32_t tend;
+ 930              		.loc 1 499 5 view .LVU236
+ 500:Src/aiValidation.c ****     bool res;
+ 931              		.loc 1 500 5 view .LVU237
+ 501:Src/aiValidation.c ****     struct ai_network_exec_ctx *ctx;
+ 932              		.loc 1 501 5 view .LVU238
+ 502:Src/aiValidation.c ****     bool inspector_mode = false;
+ 933              		.loc 1 502 5 view .LVU239
+ 934              	.LVL80:
+ 503:Src/aiValidation.c ****     uint32_t ints;
+ 935              		.loc 1 503 5 view .LVU240
+ 504:Src/aiValidation.c **** 
+ 505:Src/aiValidation.c ****     ai_buffer ai_input[AI_MNETWORK_IN_NUM];
+ 936              		.loc 1 505 5 view .LVU241
+ 506:Src/aiValidation.c ****     ai_buffer ai_output[AI_MNETWORK_OUT_NUM];
+ 937              		.loc 1 506 5 view .LVU242
+ 507:Src/aiValidation.c **** 
+ 508:Src/aiValidation.c ****     UNUSED(param);
+ 938              		.loc 1 508 5 view .LVU243
+ 509:Src/aiValidation.c **** 
+ 510:Src/aiValidation.c ****     ctx = aiExecCtx(req->name, -1);
+ 939              		.loc 1 510 5 view .LVU244
+ 940              		.loc 1 510 11 is_stmt 0 view .LVU245
+ 941 000a 4FF0FF31 		mov	r1, #-1
+ 942              	.LVL81:
+ 943              		.loc 1 510 11 view .LVU246
+ 944 000e 0C30     		adds	r0, r0, #12
+ 945              	.LVL82:
+ 946              		.loc 1 510 11 view .LVU247
+ 947 0010 FFF7FEFF 		bl	aiExecCtx
+ 948              	.LVL83:
+ 511:Src/aiValidation.c ****     if (!ctx) {
+ 949              		.loc 1 511 5 is_stmt 1 view .LVU248
+ 950              		.loc 1 511 8 is_stmt 0 view .LVU249
+ 951 0014 60B3     		cbz	r0, .L96
+ 952 0016 0446     		mov	r4, r0
+ 512:Src/aiValidation.c ****         aiPbMgrSendAck(req, resp, EnumState_S_ERROR,
+ 513:Src/aiValidation.c ****                 EnumError_E_INVALID_PARAM, EnumError_E_INVALID_PARAM);
+ 514:Src/aiValidation.c ****         return;
+ 515:Src/aiValidation.c ****     }
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 30
+
+
+ 516:Src/aiValidation.c **** 
+ 517:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+ 518:Src/aiValidation.c ****     ctx->no_data = false;
+ 953              		.loc 1 518 5 is_stmt 1 view .LVU250
+ 954              		.loc 1 518 18 is_stmt 0 view .LVU251
+ 955 0018 0023     		movs	r3, #0
+ 956 001a 80F8E030 		strb	r3, [r0, #224]
+ 519:Src/aiValidation.c ****     if ((req->param & EnumRunParam_P_RUN_MODE_INSPECTOR) ==
+ 957              		.loc 1 519 5 is_stmt 1 view .LVU252
+ 958              		.loc 1 519 13 is_stmt 0 view .LVU253
+ 959 001e B368     		ldr	r3, [r6, #8]
+ 960              		.loc 1 519 8 view .LVU254
+ 961 0020 13F0010F 		tst	r3, #1
+ 962 0024 2CD1     		bne	.L92
+ 502:Src/aiValidation.c ****     uint32_t ints;
+ 963              		.loc 1 502 10 view .LVU255
+ 964 0026 4FF0000B 		mov	fp, #0
+ 965              	.L73:
+ 966              	.LVL84:
+ 520:Src/aiValidation.c ****             EnumRunParam_P_RUN_MODE_INSPECTOR)
+ 521:Src/aiValidation.c ****         inspector_mode = true;
+ 522:Src/aiValidation.c **** 
+ 523:Src/aiValidation.c ****     if ((req->param & EnumRunParam_P_RUN_MODE_INSPECTOR_WITHOUT_DATA) ==
+ 967              		.loc 1 523 5 is_stmt 1 view .LVU256
+ 968              		.loc 1 523 8 is_stmt 0 view .LVU257
+ 969 002a 13F0020F 		tst	r3, #2
+ 970 002e 03D0     		beq	.L74
+ 524:Src/aiValidation.c ****             EnumRunParam_P_RUN_MODE_INSPECTOR_WITHOUT_DATA) {
+ 525:Src/aiValidation.c ****         inspector_mode = true;
+ 971              		.loc 1 525 9 is_stmt 1 view .LVU258
+ 972              	.LVL85:
+ 526:Src/aiValidation.c ****         ctx->no_data = true;
+ 973              		.loc 1 526 9 view .LVU259
+ 974              		.loc 1 526 22 is_stmt 0 view .LVU260
+ 975 0030 4FF0010B 		mov	fp, #1
+ 976 0034 84F8E0B0 		strb	fp, [r4, #224]
+ 977              	.LVL86:
+ 978              	.L74:
+ 527:Src/aiValidation.c ****     }
+ 528:Src/aiValidation.c **** 
+ 529:Src/aiValidation.c ****     ctx->tcom = 0ULL;
+ 979              		.loc 1 529 5 is_stmt 1 view .LVU261
+ 980              		.loc 1 529 15 is_stmt 0 view .LVU262
+ 981 0038 0022     		movs	r2, #0
+ 982 003a 0023     		movs	r3, #0
+ 983 003c C4E93A23 		strd	r2, [r4, #232]
+ 530:Src/aiValidation.c ****     ctx->tnodes = 0ULL;
+ 984              		.loc 1 530 5 is_stmt 1 view .LVU263
+ 985              		.loc 1 530 17 is_stmt 0 view .LVU264
+ 986 0040 C4E93C23 		strd	r2, [r4, #240]
+ 531:Src/aiValidation.c **** #endif
+ 532:Src/aiValidation.c **** 
+ 533:Src/aiValidation.c ****     /* Fill the input tensor descriptors */
+ 534:Src/aiValidation.c ****     for (int i = 0; i < ctx->report.n_inputs; i++) {
+ 987              		.loc 1 534 5 is_stmt 1 view .LVU265
+ 988              	.LBB13:
+ 989              		.loc 1 534 10 view .LVU266
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 31
+
+
+ 990              	.LVL87:
+ 991              		.loc 1 534 14 is_stmt 0 view .LVU267
+ 992 0044 0025     		movs	r5, #0
+ 993              	.LVL88:
+ 994              	.L75:
+ 995              		.loc 1 534 36 discriminator 1 view .LVU268
+ 996 0046 A38E     		ldrh	r3, [r4, #52]
+ 997              		.loc 1 534 5 discriminator 1 view .LVU269
+ 998 0048 AB42     		cmp	r3, r5
+ 999 004a 1CDC     		bgt	.L78
+ 1000              	.LBE13:
+ 1001              	.LBB14:
+ 535:Src/aiValidation.c ****         ai_input[i] = ctx->report.inputs[i];
+ 536:Src/aiValidation.c ****         ai_input[i].n_batches  = 1;
+ 537:Src/aiValidation.c ****         if (ctx->report.inputs[i].data)
+ 538:Src/aiValidation.c ****         	ai_input[i].data = AI_HANDLE_PTR(ctx->report.inputs[i].data);
+ 539:Src/aiValidation.c ****         else
+ 540:Src/aiValidation.c ****         	ai_input[i].data = AI_HANDLE_PTR(data_ins[i]);
+ 541:Src/aiValidation.c ****     }
+ 542:Src/aiValidation.c **** 
+ 543:Src/aiValidation.c ****     /* Fill the output tensor descriptors */
+ 544:Src/aiValidation.c ****     for (int i = 0; i < ctx->report.n_outputs; i++) {
+ 1002              		.loc 1 544 14 view .LVU270
+ 1003 004c 4FF0000E 		mov	lr, #0
+ 1004              	.LVL89:
+ 1005              	.L79:
+ 1006              		.loc 1 544 36 discriminator 1 view .LVU271
+ 1007 0050 E38E     		ldrh	r3, [r4, #54]
+ 1008              		.loc 1 544 5 discriminator 1 view .LVU272
+ 1009 0052 7345     		cmp	r3, lr
+ 1010 0054 3FDC     		bgt	.L80
+ 1011              	.LBE14:
+ 545:Src/aiValidation.c ****     	ai_output[i] = ctx->report.outputs[i];
+ 546:Src/aiValidation.c ****         ai_output[i].n_batches = 1;
+ 547:Src/aiValidation.c ****         ai_output[i].data = AI_HANDLE_PTR(data_outs[i]);
+ 548:Src/aiValidation.c ****     }
+ 549:Src/aiValidation.c **** 
+ 550:Src/aiValidation.c ****     /* 1 - Send a ACK (ready to receive a buffer) */
+ 551:Src/aiValidation.c ****     aiPbMgrSendAck(req, resp, EnumState_S_WAITING,
+ 1012              		.loc 1 551 5 is_stmt 1 view .LVU273
+ 1013 0056 0AA8     		add	r0, sp, #40
+ 1014 0058 FFF7FEFF 		bl	aiPbAiBufferSize
+ 1015              	.LVL90:
+ 1016              		.loc 1 551 5 is_stmt 0 view .LVU274
+ 1017 005c 0025     		movs	r5, #0
+ 1018 005e 0095     		str	r5, [sp]
+ 1019 0060 0346     		mov	r3, r0
+ 1020 0062 0122     		movs	r2, #1
+ 1021 0064 3946     		mov	r1, r7
+ 1022 0066 3046     		mov	r0, r6
+ 1023 0068 FFF7FEFF 		bl	aiPbMgrSendAck
+ 1024              	.LVL91:
+ 552:Src/aiValidation.c ****             aiPbAiBufferSize(&ai_input[0]), EnumError_E_NONE);
+ 553:Src/aiValidation.c **** 
+ 554:Src/aiValidation.c ****     /* 2 - Receive all input tensors */
+ 555:Src/aiValidation.c ****     for (int i = 0; i < ctx->report.n_inputs; i++) {
+ 1025              		.loc 1 555 5 is_stmt 1 view .LVU275
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 32
+
+
+ 1026              	.LBB15:
+ 1027              		.loc 1 555 10 view .LVU276
+ 1028              		.loc 1 555 14 is_stmt 0 view .LVU277
+ 1029 006c 2B46     		mov	r3, r5
+ 1030              		.loc 1 555 5 view .LVU278
+ 1031 006e 5AE0     		b	.L81
+ 1032              	.LVL92:
+ 1033              	.L96:
+ 1034              		.loc 1 555 5 view .LVU279
+ 1035              	.LBE15:
+ 512:Src/aiValidation.c ****                 EnumError_E_INVALID_PARAM, EnumError_E_INVALID_PARAM);
+ 1036              		.loc 1 512 9 is_stmt 1 view .LVU280
+ 1037 0070 0422     		movs	r2, #4
+ 1038 0072 0092     		str	r2, [sp]
+ 1039 0074 1346     		mov	r3, r2
+ 1040 0076 3946     		mov	r1, r7
+ 1041 0078 3046     		mov	r0, r6
+ 1042              	.LVL93:
+ 512:Src/aiValidation.c ****                 EnumError_E_INVALID_PARAM, EnumError_E_INVALID_PARAM);
+ 1043              		.loc 1 512 9 is_stmt 0 view .LVU281
+ 1044 007a FFF7FEFF 		bl	aiPbMgrSendAck
+ 1045              	.LVL94:
+ 514:Src/aiValidation.c ****     }
+ 1046              		.loc 1 514 9 is_stmt 1 view .LVU282
+ 1047 007e 7AE0     		b	.L70
+ 1048              	.LVL95:
+ 1049              	.L92:
+ 521:Src/aiValidation.c **** 
+ 1050              		.loc 1 521 24 is_stmt 0 view .LVU283
+ 1051 0080 4FF0010B 		mov	fp, #1
+ 1052 0084 D1E7     		b	.L73
+ 1053              	.LVL96:
+ 1054              	.L78:
+ 1055              	.LBB19:
+ 535:Src/aiValidation.c ****         ai_input[i].n_batches  = 1;
+ 1056              		.loc 1 535 9 is_stmt 1 view .LVU284
+ 535:Src/aiValidation.c ****         ai_input[i].n_batches  = 1;
+ 1057              		.loc 1 535 34 is_stmt 0 view .LVU285
+ 1058 0086 A16B     		ldr	r1, [r4, #56]
+ 535:Src/aiValidation.c ****         ai_input[i].n_batches  = 1;
+ 1059              		.loc 1 535 41 view .LVU286
+ 1060 0088 6B00     		lsls	r3, r5, #1
+ 1061 008a 5A19     		adds	r2, r3, r5
+ 1062 008c 4FEAC209 		lsl	r9, r2, #3
+ 1063 0090 4A46     		mov	r2, r9
+ 1064 0092 8944     		add	r9, r9, r1
+ 535:Src/aiValidation.c ****         ai_input[i].n_batches  = 1;
+ 1065              		.loc 1 535 21 view .LVU287
+ 1066 0094 9046     		mov	r8, r2
+ 1067 0096 10AB     		add	r3, sp, #64
+ 1068 0098 9844     		add	r8, r8, r3
+ 1069 009a A8F1180C 		sub	ip, r8, #24
+ 1070 009e CE46     		mov	lr, r9
+ 1071 00a0 BEE80F00 		ldmia	lr!, {r0, r1, r2, r3}
+ 1072 00a4 ACE80F00 		stmia	ip!, {r0, r1, r2, r3}
+ 1073 00a8 9EE80300 		ldm	lr, {r0, r1}
+ 1074 00ac 8CE80300 		stm	ip, {r0, r1}
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 33
+
+
+ 536:Src/aiValidation.c ****         if (ctx->report.inputs[i].data)
+ 1075              		.loc 1 536 9 is_stmt 1 view .LVU288
+ 536:Src/aiValidation.c ****         if (ctx->report.inputs[i].data)
+ 1076              		.loc 1 536 32 is_stmt 0 view .LVU289
+ 1077 00b0 0123     		movs	r3, #1
+ 1078 00b2 28F8143C 		strh	r3, [r8, #-20]	@ movhi
+ 537:Src/aiValidation.c ****         	ai_input[i].data = AI_HANDLE_PTR(ctx->report.inputs[i].data);
+ 1079              		.loc 1 537 9 is_stmt 1 view .LVU290
+ 537:Src/aiValidation.c ****         	ai_input[i].data = AI_HANDLE_PTR(ctx->report.inputs[i].data);
+ 1080              		.loc 1 537 34 is_stmt 0 view .LVU291
+ 1081 00b6 D9F81020 		ldr	r2, [r9, #16]
+ 537:Src/aiValidation.c ****         	ai_input[i].data = AI_HANDLE_PTR(ctx->report.inputs[i].data);
+ 1082              		.loc 1 537 12 view .LVU292
+ 1083 00ba 1AB1     		cbz	r2, .L76
+ 538:Src/aiValidation.c ****         else
+ 1084              		.loc 1 538 10 is_stmt 1 view .LVU293
+ 538:Src/aiValidation.c ****         else
+ 1085              		.loc 1 538 27 is_stmt 0 view .LVU294
+ 1086 00bc 48F8082C 		str	r2, [r8, #-8]
+ 1087              	.L77:
+ 534:Src/aiValidation.c ****         ai_input[i] = ctx->report.inputs[i];
+ 1088              		.loc 1 534 48 discriminator 2 view .LVU295
+ 1089 00c0 0135     		adds	r5, r5, #1
+ 1090              	.LVL97:
+ 534:Src/aiValidation.c ****         ai_input[i] = ctx->report.inputs[i];
+ 1091              		.loc 1 534 48 discriminator 2 view .LVU296
+ 1092 00c2 C0E7     		b	.L75
+ 1093              	.L76:
+ 540:Src/aiValidation.c ****     }
+ 1094              		.loc 1 540 10 is_stmt 1 view .LVU297
+ 540:Src/aiValidation.c ****     }
+ 1095              		.loc 1 540 27 is_stmt 0 view .LVU298
+ 1096 00c4 05EB4502 		add	r2, r5, r5, lsl #1
+ 1097 00c8 D300     		lsls	r3, r2, #3
+ 1098 00ca 10AA     		add	r2, sp, #64
+ 1099 00cc 1344     		add	r3, r3, r2
+ 1100 00ce 504A     		ldr	r2, .L102
+ 1101 00d0 43F8082C 		str	r2, [r3, #-8]
+ 1102 00d4 F4E7     		b	.L77
+ 1103              	.LVL98:
+ 1104              	.L80:
+ 540:Src/aiValidation.c ****     }
+ 1105              		.loc 1 540 27 view .LVU299
+ 1106              	.LBE19:
+ 1107              	.LBB20:
+ 545:Src/aiValidation.c ****         ai_output[i].n_batches = 1;
+ 1108              		.loc 1 545 6 is_stmt 1 discriminator 3 view .LVU300
+ 545:Src/aiValidation.c ****         ai_output[i].n_batches = 1;
+ 1109              		.loc 1 545 32 is_stmt 0 discriminator 3 view .LVU301
+ 1110 00d6 E56B     		ldr	r5, [r4, #60]
+ 545:Src/aiValidation.c ****         ai_output[i].n_batches = 1;
+ 1111              		.loc 1 545 40 discriminator 3 view .LVU302
+ 1112 00d8 4FEA4E03 		lsl	r3, lr, #1
+ 1113 00dc 03EB0E01 		add	r1, r3, lr
+ 1114 00e0 CA00     		lsls	r2, r1, #3
+ 545:Src/aiValidation.c ****         ai_output[i].n_batches = 1;
+ 1115              		.loc 1 545 19 discriminator 3 view .LVU303
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 34
+
+
+ 1116 00e2 9046     		mov	r8, r2
+ 1117 00e4 10AB     		add	r3, sp, #64
+ 1118 00e6 9844     		add	r8, r8, r3
+ 1119 00e8 A8F1300C 		sub	ip, r8, #48
+ 1120 00ec 1544     		add	r5, r5, r2
+ 1121 00ee 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 1122 00f0 ACE80F00 		stmia	ip!, {r0, r1, r2, r3}
+ 1123 00f4 95E80300 		ldm	r5, {r0, r1}
+ 1124 00f8 8CE80300 		stm	ip, {r0, r1}
+ 546:Src/aiValidation.c ****         ai_output[i].data = AI_HANDLE_PTR(data_outs[i]);
+ 1125              		.loc 1 546 9 is_stmt 1 discriminator 3 view .LVU304
+ 546:Src/aiValidation.c ****         ai_output[i].data = AI_HANDLE_PTR(data_outs[i]);
+ 1126              		.loc 1 546 32 is_stmt 0 discriminator 3 view .LVU305
+ 1127 00fc 0123     		movs	r3, #1
+ 1128 00fe 28F82C3C 		strh	r3, [r8, #-44]	@ movhi
+ 547:Src/aiValidation.c ****     }
+ 1129              		.loc 1 547 9 is_stmt 1 discriminator 3 view .LVU306
+ 547:Src/aiValidation.c ****     }
+ 1130              		.loc 1 547 27 is_stmt 0 discriminator 3 view .LVU307
+ 1131 0102 444B     		ldr	r3, .L102+4
+ 1132 0104 48F8203C 		str	r3, [r8, #-32]
+ 544:Src/aiValidation.c ****     	ai_output[i] = ctx->report.outputs[i];
+ 1133              		.loc 1 544 49 discriminator 3 view .LVU308
+ 1134 0108 0EF1010E 		add	lr, lr, #1
+ 1135              	.LVL99:
+ 544:Src/aiValidation.c ****     	ai_output[i] = ctx->report.outputs[i];
+ 1136              		.loc 1 544 49 discriminator 3 view .LVU309
+ 1137 010c A0E7     		b	.L79
+ 1138              	.LVL100:
+ 1139              	.L93:
+ 544:Src/aiValidation.c ****     	ai_output[i] = ctx->report.outputs[i];
+ 1140              		.loc 1 544 49 discriminator 3 view .LVU310
+ 1141              	.LBE20:
+ 1142              	.LBB21:
+ 1143              	.LBB16:
+ 556:Src/aiValidation.c ****     	/* upload a buffer */
+ 557:Src/aiValidation.c ****     	EnumState state = EnumState_S_WAITING;
+ 558:Src/aiValidation.c ****     	if ((i + 1) == ctx->report.n_inputs)
+ 559:Src/aiValidation.c ****     		state = EnumState_S_PROCESSING;
+ 1144              		.loc 1 559 13 view .LVU311
+ 1145 010e 0222     		movs	r2, #2
+ 1146              	.L82:
+ 1147              	.LVL101:
+ 560:Src/aiValidation.c ****         res = aiPbMgrReceiveAiBuffer3(req, resp, state, &ai_input[i]);
+ 1148              		.loc 1 560 9 is_stmt 1 view .LVU312
+ 1149              		.loc 1 560 15 is_stmt 0 view .LVU313
+ 1150 0110 03EB4303 		add	r3, r3, r3, lsl #1
+ 1151              	.LVL102:
+ 1152              		.loc 1 560 15 view .LVU314
+ 1153 0114 D900     		lsls	r1, r3, #3
+ 1154 0116 0AAB     		add	r3, sp, #40
+ 1155 0118 0B44     		add	r3, r3, r1
+ 1156 011a 3946     		mov	r1, r7
+ 1157 011c 3046     		mov	r0, r6
+ 1158 011e FFF7FEFF 		bl	aiPbMgrReceiveAiBuffer3
+ 1159              	.LVL103:
+ 561:Src/aiValidation.c ****         if (res != true)
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 35
+
+
+ 1160              		.loc 1 561 9 is_stmt 1 view .LVU315
+ 1161              	.LBE16:
+ 555:Src/aiValidation.c ****     	/* upload a buffer */
+ 1162              		.loc 1 555 48 is_stmt 0 view .LVU316
+ 1163 0122 2B46     		mov	r3, r5
+ 1164              	.LBB17:
+ 1165              		.loc 1 561 12 view .LVU317
+ 1166 0124 38B3     		cbz	r0, .L70
+ 1167              	.LVL104:
+ 1168              	.L81:
+ 1169              		.loc 1 561 12 view .LVU318
+ 1170              	.LBE17:
+ 555:Src/aiValidation.c ****     	/* upload a buffer */
+ 1171              		.loc 1 555 36 discriminator 1 view .LVU319
+ 1172 0126 A28E     		ldrh	r2, [r4, #52]
+ 555:Src/aiValidation.c ****     	/* upload a buffer */
+ 1173              		.loc 1 555 5 discriminator 1 view .LVU320
+ 1174 0128 9A42     		cmp	r2, r3
+ 1175 012a 04DD     		ble	.L97
+ 1176              	.LBB18:
+ 557:Src/aiValidation.c ****     	if ((i + 1) == ctx->report.n_inputs)
+ 1177              		.loc 1 557 6 is_stmt 1 view .LVU321
+ 1178              	.LVL105:
+ 558:Src/aiValidation.c ****     		state = EnumState_S_PROCESSING;
+ 1179              		.loc 1 558 6 view .LVU322
+ 558:Src/aiValidation.c ****     		state = EnumState_S_PROCESSING;
+ 1180              		.loc 1 558 13 is_stmt 0 view .LVU323
+ 1181 012c 5D1C     		adds	r5, r3, #1
+ 558:Src/aiValidation.c ****     		state = EnumState_S_PROCESSING;
+ 1182              		.loc 1 558 9 view .LVU324
+ 1183 012e 9542     		cmp	r5, r2
+ 1184 0130 EDD0     		beq	.L93
+ 557:Src/aiValidation.c ****     	if ((i + 1) == ctx->report.n_inputs)
+ 1185              		.loc 1 557 16 view .LVU325
+ 1186 0132 0122     		movs	r2, #1
+ 1187 0134 ECE7     		b	.L82
+ 1188              	.LVL106:
+ 1189              	.L97:
+ 557:Src/aiValidation.c ****     	if ((i + 1) == ctx->report.n_inputs)
+ 1190              		.loc 1 557 16 view .LVU326
+ 1191              	.LBE18:
+ 1192              	.LBE21:
+ 562:Src/aiValidation.c ****             return;
+ 563:Src/aiValidation.c ****     }
+ 564:Src/aiValidation.c **** 
+ 565:Src/aiValidation.c ****     ints = disableInts();
+ 1193              		.loc 1 565 5 is_stmt 1 view .LVU327
+ 1194              		.loc 1 565 12 is_stmt 0 view .LVU328
+ 1195 0136 FFF7FEFF 		bl	disableInts
+ 1196              	.LVL107:
+ 1197              		.loc 1 565 12 view .LVU329
+ 1198 013a 0390     		str	r0, [sp, #12]
+ 1199              	.LVL108:
+ 566:Src/aiValidation.c **** 
+ 567:Src/aiValidation.c ****     /* Update the PN context for inspector callbacks */
+ 568:Src/aiValidation.c ****     aiSetPbContext(ctx, req, resp);
+ 1200              		.loc 1 568 5 is_stmt 1 view .LVU330
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 36
+
+
+ 1201              	.LBB22:
+ 1202              	.LBI22:
+ 203:Src/aiValidation.c ****         const reqMsg *creq, respMsg *cresp)
+ 1203              		.loc 1 203 6 view .LVU331
+ 1204              	.LBB23:
+ 207:Src/aiValidation.c ****         return;
+ 1205              		.loc 1 207 5 view .LVU332
+ 210:Src/aiValidation.c ****     ctx->cresp = cresp;
+ 1206              		.loc 1 210 5 view .LVU333
+ 210:Src/aiValidation.c ****     ctx->cresp = cresp;
+ 1207              		.loc 1 210 15 is_stmt 0 view .LVU334
+ 1208 013c C4F8D860 		str	r6, [r4, #216]
+ 211:Src/aiValidation.c **** #endif
+ 1209              		.loc 1 211 5 is_stmt 1 view .LVU335
+ 211:Src/aiValidation.c **** #endif
+ 1210              		.loc 1 211 16 is_stmt 0 view .LVU336
+ 1211 0140 C4F8DC70 		str	r7, [r4, #220]
+ 1212              	.LVL109:
+ 211:Src/aiValidation.c **** #endif
+ 1213              		.loc 1 211 16 view .LVU337
+ 1214              	.LBE23:
+ 1215              	.LBE22:
+ 569:Src/aiValidation.c **** 
+ 570:Src/aiValidation.c ****     if (inspector_mode)
+ 1216              		.loc 1 570 5 is_stmt 1 view .LVU338
+ 1217              		.loc 1 570 8 is_stmt 0 view .LVU339
+ 1218 0144 BBF1000F 		cmp	fp, #0
+ 1219 0148 18D1     		bne	.L98
+ 1220              	.LVL110:
+ 1221              	.L84:
+ 571:Src/aiValidation.c ****         aiInspectorInitAndBind(ctx);
+ 572:Src/aiValidation.c **** 
+ 573:Src/aiValidation.c ****     /* Processing */
+ 574:Src/aiValidation.c ****     dwtReset();
+ 1222              		.loc 1 574 5 is_stmt 1 view .LVU340
+ 1223 014a FFF7FEFF 		bl	dwtReset
+ 1224              	.LVL111:
+ 575:Src/aiValidation.c **** 
+ 576:Src/aiValidation.c ****     batch = ai_mnetwork_run(ctx->network, ai_input, ai_output);
+ 1225              		.loc 1 576 5 view .LVU341
+ 1226              		.loc 1 576 13 is_stmt 0 view .LVU342
+ 1227 014e 04AA     		add	r2, sp, #16
+ 1228 0150 0AA9     		add	r1, sp, #40
+ 1229 0152 2068     		ldr	r0, [r4]
+ 1230 0154 FFF7FEFF 		bl	ai_mnetwork_run
+ 1231              	.LVL112:
+ 577:Src/aiValidation.c ****     if (batch != 1) {
+ 1232              		.loc 1 577 5 is_stmt 1 view .LVU343
+ 1233              		.loc 1 577 8 is_stmt 0 view .LVU344
+ 1234 0158 0128     		cmp	r0, #1
+ 1235 015a 13D0     		beq	.L85
+ 578:Src/aiValidation.c ****         aiLogErr(ai_mnetwork_get_error(ctx->network),
+ 1236              		.loc 1 578 9 is_stmt 1 view .LVU345
+ 1237 015c 2068     		ldr	r0, [r4]
+ 1238              	.LVL113:
+ 1239              		.loc 1 578 9 is_stmt 0 view .LVU346
+ 1240 015e FFF7FEFF 		bl	ai_mnetwork_get_error
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 37
+
+
+ 1241              	.LVL114:
+ 1242 0162 2D49     		ldr	r1, .L102+8
+ 1243 0164 FFF7FEFF 		bl	aiLogErr
+ 1244              	.LVL115:
+ 579:Src/aiValidation.c ****                 "ai_mnetwork_run");
+ 580:Src/aiValidation.c ****         aiPbMgrSendAck(req, resp, EnumState_S_ERROR,
+ 1245              		.loc 1 580 9 is_stmt 1 view .LVU347
+ 1246 0168 0A23     		movs	r3, #10
+ 1247 016a 0093     		str	r3, [sp]
+ 1248 016c 0422     		movs	r2, #4
+ 1249 016e 3946     		mov	r1, r7
+ 1250 0170 3046     		mov	r0, r6
+ 1251 0172 FFF7FEFF 		bl	aiPbMgrSendAck
+ 1252              	.LVL116:
+ 581:Src/aiValidation.c ****                 EnumError_E_GENERIC, EnumError_E_GENERIC);
+ 582:Src/aiValidation.c ****         return;
+ 1253              		.loc 1 582 9 view .LVU348
+ 1254              	.L70:
+ 583:Src/aiValidation.c ****     }
+ 584:Src/aiValidation.c ****     tend = dwtGetCycles();
+ 585:Src/aiValidation.c **** 
+ 586:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+ 587:Src/aiValidation.c ****     tend = ctx->tcom + ctx->tnodes + tend;
+ 588:Src/aiValidation.c **** #endif
+ 589:Src/aiValidation.c **** 
+ 590:Src/aiValidation.c ****     if (inspector_mode)
+ 591:Src/aiValidation.c ****         aiInspectorSendReport(req, resp, EnumState_S_PROCESSING, ctx,
+ 592:Src/aiValidation.c ****                 dwtCyclesToFloatMs(tend));
+ 593:Src/aiValidation.c **** 
+ 594:Src/aiValidation.c ****     /* 3 - Send all output tensors */
+ 595:Src/aiValidation.c ****     for (int i = 0; i < ctx->report.n_outputs; i++) {
+ 596:Src/aiValidation.c ****     	/* download a buffer */
+ 597:Src/aiValidation.c ****     	EnumState state = EnumState_S_PROCESSING;
+ 598:Src/aiValidation.c ****     	if ((i + 1) == ctx->report.n_outputs)
+ 599:Src/aiValidation.c ****     		state = EnumState_S_DONE;
+ 600:Src/aiValidation.c ****         aiPbMgrSendAiBuffer3(req, resp, state,
+ 601:Src/aiValidation.c ****                 EnumLayerType_LAYER_TYPE_OUTPUT << 16 | 0,
+ 602:Src/aiValidation.c ****                 0, dwtCyclesToFloatMs(tend),
+ 603:Src/aiValidation.c ****                 &ai_output[i]);
+ 604:Src/aiValidation.c ****     }
+ 605:Src/aiValidation.c **** 
+ 606:Src/aiValidation.c ****     if (inspector_mode)
+ 607:Src/aiValidation.c ****         aiInspectorUnbindAndDestroy(ctx);
+ 608:Src/aiValidation.c **** 
+ 609:Src/aiValidation.c ****     restoreInts(ints);
+ 610:Src/aiValidation.c **** }
+ 1255              		.loc 1 610 1 is_stmt 0 view .LVU349
+ 1256 0176 11B0     		add	sp, sp, #68
+ 1257              	.LCFI30:
+ 1258              		.cfi_remember_state
+ 1259              		.cfi_def_cfa_offset 36
+ 1260              		@ sp needed
+ 1261 0178 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 1262              	.LVL117:
+ 1263              	.L98:
+ 1264              	.LCFI31:
+ 1265              		.cfi_restore_state
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 38
+
+
+ 571:Src/aiValidation.c **** 
+ 1266              		.loc 1 571 9 is_stmt 1 view .LVU350
+ 1267 017c 2046     		mov	r0, r4
+ 1268              	.LVL118:
+ 571:Src/aiValidation.c **** 
+ 1269              		.loc 1 571 9 is_stmt 0 view .LVU351
+ 1270 017e FFF7FEFF 		bl	aiInspectorInitAndBind
+ 1271              	.LVL119:
+ 1272 0182 E2E7     		b	.L84
+ 1273              	.LVL120:
+ 1274              	.L85:
+ 584:Src/aiValidation.c **** 
+ 1275              		.loc 1 584 5 is_stmt 1 view .LVU352
+ 584:Src/aiValidation.c **** 
+ 1276              		.loc 1 584 12 is_stmt 0 view .LVU353
+ 1277 0184 FFF7FEFF 		bl	dwtGetCycles
+ 1278              	.LVL121:
+ 587:Src/aiValidation.c **** #endif
+ 1279              		.loc 1 587 5 is_stmt 1 view .LVU354
+ 587:Src/aiValidation.c **** #endif
+ 1280              		.loc 1 587 15 is_stmt 0 view .LVU355
+ 1281 0188 D4F8E830 		ldr	r3, [r4, #232]
+ 587:Src/aiValidation.c **** #endif
+ 1282              		.loc 1 587 27 view .LVU356
+ 1283 018c D4F8F020 		ldr	r2, [r4, #240]
+ 587:Src/aiValidation.c **** #endif
+ 1284              		.loc 1 587 22 view .LVU357
+ 1285 0190 1344     		add	r3, r3, r2
+ 587:Src/aiValidation.c **** #endif
+ 1286              		.loc 1 587 10 view .LVU358
+ 1287 0192 0344     		add	r3, r3, r0
+ 1288 0194 0293     		str	r3, [sp, #8]
+ 1289              	.LVL122:
+ 590:Src/aiValidation.c ****         aiInspectorSendReport(req, resp, EnumState_S_PROCESSING, ctx,
+ 1290              		.loc 1 590 5 is_stmt 1 view .LVU359
+ 590:Src/aiValidation.c ****         aiInspectorSendReport(req, resp, EnumState_S_PROCESSING, ctx,
+ 1291              		.loc 1 590 8 is_stmt 0 view .LVU360
+ 1292 0196 BBF1000F 		cmp	fp, #0
+ 1293 019a 01D1     		bne	.L99
+ 1294              	.LVL123:
+ 1295              	.L86:
+ 1296              	.LBB24:
+ 1297              	.LBB25:
+ 597:Src/aiValidation.c ****     	if ((i + 1) == ctx->report.n_outputs)
+ 1298              		.loc 1 597 16 discriminator 1 view .LVU361
+ 1299 019c 0025     		movs	r5, #0
+ 1300 019e 21E0     		b	.L88
+ 1301              	.LVL124:
+ 1302              	.L99:
+ 597:Src/aiValidation.c ****     	if ((i + 1) == ctx->report.n_outputs)
+ 1303              		.loc 1 597 16 discriminator 1 view .LVU362
+ 1304              	.LBE25:
+ 1305              	.LBE24:
+ 591:Src/aiValidation.c ****                 dwtCyclesToFloatMs(tend));
+ 1306              		.loc 1 591 9 is_stmt 1 view .LVU363
+ 1307 01a0 1846     		mov	r0, r3
+ 1308 01a2 0021     		movs	r1, #0
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 39
+
+
+ 1309 01a4 FFF7FEFF 		bl	dwtCyclesToFloatMs
+ 1310              	.LVL125:
+ 591:Src/aiValidation.c ****                 dwtCyclesToFloatMs(tend));
+ 1311              		.loc 1 591 9 is_stmt 0 view .LVU364
+ 1312 01a8 2346     		mov	r3, r4
+ 1313 01aa 0222     		movs	r2, #2
+ 1314 01ac 3946     		mov	r1, r7
+ 1315 01ae 3046     		mov	r0, r6
+ 1316 01b0 FFF7FEFF 		bl	aiInspectorSendReport
+ 1317              	.LVL126:
+ 1318 01b4 F2E7     		b	.L86
+ 1319              	.LVL127:
+ 1320              	.L94:
+ 1321              	.LBB28:
+ 1322              	.LBB26:
+ 599:Src/aiValidation.c ****         aiPbMgrSendAiBuffer3(req, resp, state,
+ 1323              		.loc 1 599 13 view .LVU365
+ 1324 01b6 4FF0030A 		mov	r10, #3
+ 1325              	.L87:
+ 1326              	.LVL128:
+ 600:Src/aiValidation.c ****                 EnumLayerType_LAYER_TYPE_OUTPUT << 16 | 0,
+ 1327              		.loc 1 600 9 is_stmt 1 discriminator 2 view .LVU366
+ 1328 01ba 4FF00008 		mov	r8, #0
+ 1329 01be 0298     		ldr	r0, [sp, #8]
+ 1330 01c0 4146     		mov	r1, r8
+ 1331 01c2 FFF7FEFF 		bl	dwtCyclesToFloatMs
+ 1332              	.LVL129:
+ 603:Src/aiValidation.c ****     }
+ 1333              		.loc 1 603 17 is_stmt 0 discriminator 2 view .LVU367
+ 1334 01c6 05EB4505 		add	r5, r5, r5, lsl #1
+ 1335              	.LVL130:
+ 603:Src/aiValidation.c ****     }
+ 1336              		.loc 1 603 17 discriminator 2 view .LVU368
+ 1337 01ca EB00     		lsls	r3, r5, #3
+ 1338 01cc 04AA     		add	r2, sp, #16
+ 1339 01ce 1344     		add	r3, r3, r2
+ 600:Src/aiValidation.c ****                 EnumLayerType_LAYER_TYPE_OUTPUT << 16 | 0,
+ 1340              		.loc 1 600 9 discriminator 2 view .LVU369
+ 1341 01d0 0193     		str	r3, [sp, #4]
+ 1342 01d2 CDF80080 		str	r8, [sp]
+ 1343 01d6 4346     		mov	r3, r8
+ 1344 01d8 5246     		mov	r2, r10
+ 1345 01da 3946     		mov	r1, r7
+ 1346 01dc 3046     		mov	r0, r6
+ 1347 01de FFF7FEFF 		bl	aiPbMgrSendAiBuffer3
+ 1348              	.LVL131:
+ 600:Src/aiValidation.c ****                 EnumLayerType_LAYER_TYPE_OUTPUT << 16 | 0,
+ 1349              		.loc 1 600 9 discriminator 2 view .LVU370
+ 1350              	.LBE26:
+ 595:Src/aiValidation.c ****     	/* download a buffer */
+ 1351              		.loc 1 595 49 discriminator 2 view .LVU371
+ 1352 01e2 4D46     		mov	r5, r9
+ 1353              	.LVL132:
+ 1354              	.L88:
+ 595:Src/aiValidation.c ****     	/* download a buffer */
+ 1355              		.loc 1 595 36 discriminator 1 view .LVU372
+ 1356 01e4 E38E     		ldrh	r3, [r4, #54]
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 40
+
+
+ 595:Src/aiValidation.c ****     	/* download a buffer */
+ 1357              		.loc 1 595 5 discriminator 1 view .LVU373
+ 1358 01e6 AB42     		cmp	r3, r5
+ 1359 01e8 06DD     		ble	.L100
+ 1360              	.LBB27:
+ 597:Src/aiValidation.c ****     	if ((i + 1) == ctx->report.n_outputs)
+ 1361              		.loc 1 597 6 is_stmt 1 view .LVU374
+ 1362              	.LVL133:
+ 598:Src/aiValidation.c ****     		state = EnumState_S_DONE;
+ 1363              		.loc 1 598 6 view .LVU375
+ 598:Src/aiValidation.c ****     		state = EnumState_S_DONE;
+ 1364              		.loc 1 598 13 is_stmt 0 view .LVU376
+ 1365 01ea 05F10109 		add	r9, r5, #1
+ 598:Src/aiValidation.c ****     		state = EnumState_S_DONE;
+ 1366              		.loc 1 598 9 view .LVU377
+ 1367 01ee 9945     		cmp	r9, r3
+ 1368 01f0 E1D0     		beq	.L94
+ 597:Src/aiValidation.c ****     	if ((i + 1) == ctx->report.n_outputs)
+ 1369              		.loc 1 597 16 view .LVU378
+ 1370 01f2 4FF0020A 		mov	r10, #2
+ 1371 01f6 E0E7     		b	.L87
+ 1372              	.LVL134:
+ 1373              	.L100:
+ 597:Src/aiValidation.c ****     	if ((i + 1) == ctx->report.n_outputs)
+ 1374              		.loc 1 597 16 view .LVU379
+ 1375              	.LBE27:
+ 1376              	.LBE28:
+ 606:Src/aiValidation.c ****         aiInspectorUnbindAndDestroy(ctx);
+ 1377              		.loc 1 606 5 is_stmt 1 view .LVU380
+ 606:Src/aiValidation.c ****         aiInspectorUnbindAndDestroy(ctx);
+ 1378              		.loc 1 606 8 is_stmt 0 view .LVU381
+ 1379 01f8 BBF1000F 		cmp	fp, #0
+ 1380 01fc 03D1     		bne	.L101
+ 1381              	.L90:
+ 609:Src/aiValidation.c **** }
+ 1382              		.loc 1 609 5 is_stmt 1 view .LVU382
+ 1383 01fe 0398     		ldr	r0, [sp, #12]
+ 1384 0200 FFF7FEFF 		bl	restoreInts
+ 1385              	.LVL135:
+ 1386 0204 B7E7     		b	.L70
+ 1387              	.L101:
+ 607:Src/aiValidation.c **** 
+ 1388              		.loc 1 607 9 view .LVU383
+ 1389 0206 2046     		mov	r0, r4
+ 1390 0208 FFF7FEFF 		bl	aiInspectorUnbindAndDestroy
+ 1391              	.LVL136:
+ 1392 020c F7E7     		b	.L90
+ 1393              	.L103:
+ 1394 020e 00BF     		.align	2
+ 1395              	.L102:
+ 1396 0210 00000000 		.word	data_in_1
+ 1397 0214 00000000 		.word	data_out_1
+ 1398 0218 00000000 		.word	.LC0
+ 1399              		.cfi_endproc
+ 1400              	.LFE153:
+ 1402              		.section	.text.aiDeInit,"ax",%progbits
+ 1403              		.align	1
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 41
+
+
+ 1404              		.syntax unified
+ 1405              		.thumb
+ 1406              		.thumb_func
+ 1407              		.fpu fpv4-sp-d16
+ 1409              	aiDeInit:
+ 1410              	.LFB151:
+ 458:Src/aiValidation.c ****     ai_error err;
+ 1411              		.loc 1 458 1 view -0
+ 1412              		.cfi_startproc
+ 1413              		@ args = 0, pretend = 0, frame = 0
+ 1414              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1415 0000 10B5     		push	{r4, lr}
+ 1416              	.LCFI32:
+ 1417              		.cfi_def_cfa_offset 8
+ 1418              		.cfi_offset 4, -8
+ 1419              		.cfi_offset 14, -4
+ 459:Src/aiValidation.c ****     int idx;
+ 1420              		.loc 1 459 5 view .LVU385
+ 460:Src/aiValidation.c **** 
+ 1421              		.loc 1 460 5 view .LVU386
+ 462:Src/aiValidation.c **** 
+ 1422              		.loc 1 462 5 view .LVU387
+ 1423 0002 1148     		ldr	r0, .L110
+ 1424 0004 FFF7FEFF 		bl	puts
+ 1425              	.LVL137:
+ 464:Src/aiValidation.c ****         if (net_exec_ctx[idx].network != AI_HANDLE_NULL) {
+ 1426              		.loc 1 464 5 view .LVU388
+ 464:Src/aiValidation.c ****         if (net_exec_ctx[idx].network != AI_HANDLE_NULL) {
+ 1427              		.loc 1 464 13 is_stmt 0 view .LVU389
+ 1428 0008 0024     		movs	r4, #0
+ 1429              	.LVL138:
+ 1430              	.L105:
+ 464:Src/aiValidation.c ****         if (net_exec_ctx[idx].network != AI_HANDLE_NULL) {
+ 1431              		.loc 1 464 5 discriminator 1 view .LVU390
+ 1432 000a 002C     		cmp	r4, #0
+ 1433 000c 00DD     		ble	.L108
+ 474:Src/aiValidation.c **** 
+ 1434              		.loc 1 474 1 view .LVU391
+ 1435 000e 10BD     		pop	{r4, pc}
+ 1436              	.LVL139:
+ 1437              	.L108:
+ 465:Src/aiValidation.c ****             if (ai_mnetwork_destroy(net_exec_ctx[idx].network)
+ 1438              		.loc 1 465 9 is_stmt 1 view .LVU392
+ 465:Src/aiValidation.c ****             if (ai_mnetwork_destroy(net_exec_ctx[idx].network)
+ 1439              		.loc 1 465 30 is_stmt 0 view .LVU393
+ 1440 0010 C4EB4412 		rsb	r2, r4, r4, lsl #5
+ 1441 0014 D300     		lsls	r3, r2, #3
+ 1442 0016 0D4A     		ldr	r2, .L110+4
+ 1443 0018 D058     		ldr	r0, [r2, r3]
+ 465:Src/aiValidation.c ****             if (ai_mnetwork_destroy(net_exec_ctx[idx].network)
+ 1444              		.loc 1 465 12 view .LVU394
+ 1445 001a 90B1     		cbz	r0, .L106
+ 466:Src/aiValidation.c ****                     != AI_HANDLE_NULL) {
+ 1446              		.loc 1 466 13 is_stmt 1 view .LVU395
+ 466:Src/aiValidation.c ****                     != AI_HANDLE_NULL) {
+ 1447              		.loc 1 466 17 is_stmt 0 view .LVU396
+ 1448 001c FFF7FEFF 		bl	ai_mnetwork_destroy
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 42
+
+
+ 1449              	.LVL140:
+ 466:Src/aiValidation.c ****                     != AI_HANDLE_NULL) {
+ 1450              		.loc 1 466 16 view .LVU397
+ 1451 0020 48B1     		cbz	r0, .L107
+ 468:Src/aiValidation.c ****                 aiLogErr(err, "ai_mnetwork_destroy");
+ 1452              		.loc 1 468 17 is_stmt 1 view .LVU398
+ 468:Src/aiValidation.c ****                 aiLogErr(err, "ai_mnetwork_destroy");
+ 1453              		.loc 1 468 23 is_stmt 0 view .LVU399
+ 1454 0022 C4EB4412 		rsb	r2, r4, r4, lsl #5
+ 1455 0026 D300     		lsls	r3, r2, #3
+ 1456 0028 084A     		ldr	r2, .L110+4
+ 1457 002a D058     		ldr	r0, [r2, r3]
+ 1458 002c FFF7FEFF 		bl	ai_mnetwork_get_error
+ 1459              	.LVL141:
+ 469:Src/aiValidation.c ****             }
+ 1460              		.loc 1 469 17 is_stmt 1 view .LVU400
+ 1461 0030 0749     		ldr	r1, .L110+8
+ 1462 0032 FFF7FEFF 		bl	aiLogErr
+ 1463              	.LVL142:
+ 1464              	.L107:
+ 471:Src/aiValidation.c ****         }
+ 1465              		.loc 1 471 13 view .LVU401
+ 471:Src/aiValidation.c ****         }
+ 1466              		.loc 1 471 39 is_stmt 0 view .LVU402
+ 1467 0036 C4EB4412 		rsb	r2, r4, r4, lsl #5
+ 1468 003a D300     		lsls	r3, r2, #3
+ 1469 003c 034A     		ldr	r2, .L110+4
+ 1470 003e 0021     		movs	r1, #0
+ 1471 0040 D150     		str	r1, [r2, r3]
+ 1472              	.L106:
+ 464:Src/aiValidation.c ****         if (net_exec_ctx[idx].network != AI_HANDLE_NULL) {
+ 1473              		.loc 1 464 44 discriminator 2 view .LVU403
+ 1474 0042 0134     		adds	r4, r4, #1
+ 1475              	.LVL143:
+ 464:Src/aiValidation.c ****         if (net_exec_ctx[idx].network != AI_HANDLE_NULL) {
+ 1476              		.loc 1 464 44 discriminator 2 view .LVU404
+ 1477 0044 E1E7     		b	.L105
+ 1478              	.L111:
+ 1479 0046 00BF     		.align	2
+ 1480              	.L110:
+ 1481 0048 00000000 		.word	.LC1
+ 1482 004c 00000000 		.word	.LANCHOR0
+ 1483 0050 20000000 		.word	.LC2
+ 1484              		.cfi_endproc
+ 1485              	.LFE151:
+ 1487              		.section	.text.aiBootstrap,"ax",%progbits
+ 1488              		.align	1
+ 1489              		.syntax unified
+ 1490              		.thumb
+ 1491              		.thumb_func
+ 1492              		.fpu fpv4-sp-d16
+ 1494              	aiBootstrap:
+ 1495              	.LVL144:
+ 1496              	.LFB143:
+ 216:Src/aiValidation.c ****     ai_error err;
+ 1497              		.loc 1 216 1 is_stmt 1 view -0
+ 1498              		.cfi_startproc
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 43
+
+
+ 1499              		@ args = 0, pretend = 0, frame = 56
+ 1500              		@ frame_needed = 0, uses_anonymous_args = 0
+ 216:Src/aiValidation.c ****     ai_error err;
+ 1501              		.loc 1 216 1 is_stmt 0 view .LVU406
+ 1502 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 1503              	.LCFI33:
+ 1504              		.cfi_def_cfa_offset 20
+ 1505              		.cfi_offset 4, -20
+ 1506              		.cfi_offset 5, -16
+ 1507              		.cfi_offset 6, -12
+ 1508              		.cfi_offset 7, -8
+ 1509              		.cfi_offset 14, -4
+ 1510 0002 8FB0     		sub	sp, sp, #60
+ 1511              	.LCFI34:
+ 1512              		.cfi_def_cfa_offset 80
+ 1513 0004 0546     		mov	r5, r0
+ 1514 0006 0C46     		mov	r4, r1
+ 217:Src/aiValidation.c ****     ai_u32 ext_addr, sz;
+ 1515              		.loc 1 217 5 is_stmt 1 view .LVU407
+ 218:Src/aiValidation.c **** 
+ 1516              		.loc 1 218 5 view .LVU408
+ 221:Src/aiValidation.c ****     err = ai_mnetwork_create(nn_name, &net_exec_ctx[idx].network, NULL);
+ 1517              		.loc 1 221 5 view .LVU409
+ 1518 0008 0146     		mov	r1, r0
+ 1519              	.LVL145:
+ 221:Src/aiValidation.c ****     err = ai_mnetwork_create(nn_name, &net_exec_ctx[idx].network, NULL);
+ 1520              		.loc 1 221 5 is_stmt 0 view .LVU410
+ 1521 000a 4048     		ldr	r0, .L123
+ 1522              	.LVL146:
+ 221:Src/aiValidation.c ****     err = ai_mnetwork_create(nn_name, &net_exec_ctx[idx].network, NULL);
+ 1523              		.loc 1 221 5 view .LVU411
+ 1524 000c FFF7FEFF 		bl	printf
+ 1525              	.LVL147:
+ 222:Src/aiValidation.c ****     if (err.type) {
+ 1526              		.loc 1 222 5 is_stmt 1 view .LVU412
+ 222:Src/aiValidation.c ****     if (err.type) {
+ 1527              		.loc 1 222 11 is_stmt 0 view .LVU413
+ 1528 0010 C4EB4412 		rsb	r2, r4, r4, lsl #5
+ 1529 0014 D300     		lsls	r3, r2, #3
+ 1530 0016 0022     		movs	r2, #0
+ 1531 0018 3D49     		ldr	r1, .L123+4
+ 1532 001a 1944     		add	r1, r1, r3
+ 1533 001c 2846     		mov	r0, r5
+ 1534 001e FFF7FEFF 		bl	ai_mnetwork_create
+ 1535              	.LVL148:
+ 223:Src/aiValidation.c ****         aiLogErr(err, "ai_mnetwork_create");
+ 1536              		.loc 1 223 5 is_stmt 1 view .LVU414
+ 223:Src/aiValidation.c ****         aiLogErr(err, "ai_mnetwork_create");
+ 1537              		.loc 1 223 8 is_stmt 0 view .LVU415
+ 1538 0022 10F0FF0F 		tst	r0, #255
+ 1539 0026 33D1     		bne	.L120
+ 229:Src/aiValidation.c ****     /* build params structure to provide the reference of the
+ 1540              		.loc 1 229 5 is_stmt 1 view .LVU416
+ 1541 0028 3A48     		ldr	r0, .L123+8
+ 1542              	.LVL149:
+ 229:Src/aiValidation.c ****     /* build params structure to provide the reference of the
+ 1543              		.loc 1 229 5 is_stmt 0 view .LVU417
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 44
+
+
+ 1544 002a FFF7FEFF 		bl	puts
+ 1545              	.LVL150:
+ 237:Src/aiValidation.c ****                 AI_BUFFER_NULL(NULL),
+ 1546              		.loc 1 237 5 is_stmt 1 view .LVU418
+ 237:Src/aiValidation.c ****                 AI_BUFFER_NULL(NULL),
+ 1547              		.loc 1 237 23 is_stmt 0 view .LVU419
+ 1548 002e 2C22     		movs	r2, #44
+ 1549 0030 0021     		movs	r1, #0
+ 1550 0032 01A8     		add	r0, sp, #4
+ 1551 0034 FFF7FEFF 		bl	memset
+ 1552              	.LVL151:
+ 1553 0038 374B     		ldr	r3, .L123+12
+ 1554 003a 0093     		str	r3, [sp]
+ 1555 003c 0693     		str	r3, [sp, #24]
+ 241:Src/aiValidation.c ****     	if (ext_addr == 0xFFFFFFFF) {
+ 1556              		.loc 1 241 5 is_stmt 1 view .LVU420
+ 241:Src/aiValidation.c ****     	if (ext_addr == 0xFFFFFFFF) {
+ 1557              		.loc 1 241 9 is_stmt 0 view .LVU421
+ 1558 003e C4EB4412 		rsb	r2, r4, r4, lsl #5
+ 1559 0042 D300     		lsls	r3, r2, #3
+ 1560 0044 0CAA     		add	r2, sp, #48
+ 1561 0046 0DA9     		add	r1, sp, #52
+ 1562 0048 3148     		ldr	r0, .L123+4
+ 1563 004a C058     		ldr	r0, [r0, r3]
+ 1564 004c FFF7FEFF 		bl	ai_mnetwork_get_ext_data_activations
+ 1565              	.LVL152:
+ 241:Src/aiValidation.c ****     	if (ext_addr == 0xFFFFFFFF) {
+ 1566              		.loc 1 241 8 view .LVU422
+ 1567 0050 20B9     		cbnz	r0, .L115
+ 242:Src/aiValidation.c ****     		params.activations.data = (ai_handle)activations;
+ 1568              		.loc 1 242 6 is_stmt 1 view .LVU423
+ 242:Src/aiValidation.c ****     		params.activations.data = (ai_handle)activations;
+ 1569              		.loc 1 242 19 is_stmt 0 view .LVU424
+ 1570 0052 0D9B     		ldr	r3, [sp, #52]
+ 242:Src/aiValidation.c ****     		params.activations.data = (ai_handle)activations;
+ 1571              		.loc 1 242 9 view .LVU425
+ 1572 0054 B3F1FF3F 		cmp	r3, #-1
+ 1573 0058 20D0     		beq	.L121
+ 248:Src/aiValidation.c ****     	}
+ 1574              		.loc 1 248 7 is_stmt 1 view .LVU426
+ 248:Src/aiValidation.c ****     	}
+ 1575              		.loc 1 248 31 is_stmt 0 view .LVU427
+ 1576 005a 0A93     		str	r3, [sp, #40]
+ 1577              	.L115:
+ 253:Src/aiValidation.c ****         err = ai_mnetwork_get_error(net_exec_ctx[idx].network);
+ 1578              		.loc 1 253 5 is_stmt 1 view .LVU428
+ 253:Src/aiValidation.c ****         err = ai_mnetwork_get_error(net_exec_ctx[idx].network);
+ 1579              		.loc 1 253 10 is_stmt 0 view .LVU429
+ 1580 005c C4EB4412 		rsb	r2, r4, r4, lsl #5
+ 1581 0060 D300     		lsls	r3, r2, #3
+ 1582 0062 6946     		mov	r1, sp
+ 1583 0064 2A4A     		ldr	r2, .L123+4
+ 1584 0066 D058     		ldr	r0, [r2, r3]
+ 1585 0068 FFF7FEFF 		bl	ai_mnetwork_init
+ 1586              	.LVL153:
+ 253:Src/aiValidation.c ****         err = ai_mnetwork_get_error(net_exec_ctx[idx].network);
+ 1587              		.loc 1 253 8 view .LVU430
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 45
+
+
+ 1588 006c 48B3     		cbz	r0, .L122
+ 262:Src/aiValidation.c ****             &net_exec_ctx[idx].report)) {
+ 1589              		.loc 1 262 5 is_stmt 1 view .LVU431
+ 262:Src/aiValidation.c ****             &net_exec_ctx[idx].report)) {
+ 1590              		.loc 1 262 9 is_stmt 0 view .LVU432
+ 1591 006e 2848     		ldr	r0, .L123+4
+ 1592 0070 6301     		lsls	r3, r4, #5
+ 1593 0072 1B1B     		subs	r3, r3, r4
+ 1594 0074 DA00     		lsls	r2, r3, #3
+ 1595 0076 8518     		adds	r5, r0, r2
+ 1596              	.LVL154:
+ 262:Src/aiValidation.c ****             &net_exec_ctx[idx].report)) {
+ 1597              		.loc 1 262 9 view .LVU433
+ 1598 0078 0435     		adds	r5, r5, #4
+ 1599 007a 2946     		mov	r1, r5
+ 1600 007c 8058     		ldr	r0, [r0, r2]
+ 1601 007e FFF7FEFF 		bl	ai_mnetwork_get_info
+ 1602              	.LVL155:
+ 262:Src/aiValidation.c ****             &net_exec_ctx[idx].report)) {
+ 1603              		.loc 1 262 8 view .LVU434
+ 1604 0082 80B3     		cbz	r0, .L118
+ 264:Src/aiValidation.c ****     } else {
+ 1605              		.loc 1 264 9 is_stmt 1 view .LVU435
+ 1606 0084 2846     		mov	r0, r5
+ 1607 0086 FFF7FEFF 		bl	aiPrintNetworkInfo
+ 1608              	.LVL156:
+ 273:Src/aiValidation.c **** }
+ 1609              		.loc 1 273 5 view .LVU436
+ 273:Src/aiValidation.c **** }
+ 1610              		.loc 1 273 12 is_stmt 0 view .LVU437
+ 1611 008a 0020     		movs	r0, #0
+ 1612              	.L112:
+ 274:Src/aiValidation.c **** 
+ 1613              		.loc 1 274 1 view .LVU438
+ 1614 008c 0FB0     		add	sp, sp, #60
+ 1615              	.LCFI35:
+ 1616              		.cfi_remember_state
+ 1617              		.cfi_def_cfa_offset 20
+ 1618              		@ sp needed
+ 1619 008e F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1620              	.LVL157:
+ 1621              	.L120:
+ 1622              	.LCFI36:
+ 1623              		.cfi_restore_state
+ 224:Src/aiValidation.c ****         return -1;
+ 1624              		.loc 1 224 9 is_stmt 1 view .LVU439
+ 1625 0090 2249     		ldr	r1, .L123+16
+ 1626 0092 FFF7FEFF 		bl	aiLogErr
+ 1627              	.LVL158:
+ 225:Src/aiValidation.c ****     }
+ 1628              		.loc 1 225 9 view .LVU440
+ 225:Src/aiValidation.c ****     }
+ 1629              		.loc 1 225 16 is_stmt 0 view .LVU441
+ 1630 0096 4FF0FF30 		mov	r0, #-1
+ 1631 009a F7E7     		b	.L112
+ 1632              	.L121:
+ 243:Src/aiValidation.c ****     		ext_addr = (ai_u32)activations;
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 46
+
+
+ 1633              		.loc 1 243 7 is_stmt 1 view .LVU442
+ 243:Src/aiValidation.c ****     		ext_addr = (ai_u32)activations;
+ 1634              		.loc 1 243 31 is_stmt 0 view .LVU443
+ 1635 009c 204B     		ldr	r3, .L123+20
+ 1636 009e 0A93     		str	r3, [sp, #40]
+ 244:Src/aiValidation.c ****     		sz = (ai_u32)AI_BUFFER_SIZE(&net_exec_ctx[idx].report.activations);
+ 1637              		.loc 1 244 7 is_stmt 1 view .LVU444
+ 244:Src/aiValidation.c ****     		sz = (ai_u32)AI_BUFFER_SIZE(&net_exec_ctx[idx].report.activations);
+ 1638              		.loc 1 244 16 is_stmt 0 view .LVU445
+ 1639 00a0 0D93     		str	r3, [sp, #52]
+ 245:Src/aiValidation.c ****     	}
+ 1640              		.loc 1 245 7 is_stmt 1 view .LVU446
+ 245:Src/aiValidation.c ****     	}
+ 1641              		.loc 1 245 20 is_stmt 0 view .LVU447
+ 1642 00a2 6201     		lsls	r2, r4, #5
+ 1643 00a4 121B     		subs	r2, r2, r4
+ 1644 00a6 D100     		lsls	r1, r2, #3
+ 1645 00a8 194B     		ldr	r3, .L123+4
+ 1646 00aa 0B44     		add	r3, r3, r1
+ 1647 00ac B3F84810 		ldrh	r1, [r3, #72]
+ 1648 00b0 B3F84620 		ldrh	r2, [r3, #70]
+ 1649 00b4 02FB01F2 		mul	r2, r2, r1
+ 1650 00b8 DB6C     		ldr	r3, [r3, #76]
+ 245:Src/aiValidation.c ****     	}
+ 1651              		.loc 1 245 12 view .LVU448
+ 1652 00ba 03FB02F3 		mul	r3, r3, r2
+ 245:Src/aiValidation.c ****     	}
+ 1653              		.loc 1 245 10 view .LVU449
+ 1654 00be 0C93     		str	r3, [sp, #48]
+ 1655 00c0 CCE7     		b	.L115
+ 1656              	.L122:
+ 254:Src/aiValidation.c ****         aiLogErr(err, "ai_mnetwork_init");
+ 1657              		.loc 1 254 9 is_stmt 1 view .LVU450
+ 254:Src/aiValidation.c ****         aiLogErr(err, "ai_mnetwork_init");
+ 1658              		.loc 1 254 15 is_stmt 0 view .LVU451
+ 1659 00c2 134E     		ldr	r6, .L123+4
+ 1660 00c4 6501     		lsls	r5, r4, #5
+ 1661              	.LVL159:
+ 254:Src/aiValidation.c ****         aiLogErr(err, "ai_mnetwork_init");
+ 1662              		.loc 1 254 15 view .LVU452
+ 1663 00c6 2B1B     		subs	r3, r5, r4
+ 1664 00c8 DF00     		lsls	r7, r3, #3
+ 1665 00ca F059     		ldr	r0, [r6, r7]
+ 1666 00cc FFF7FEFF 		bl	ai_mnetwork_get_error
+ 1667              	.LVL160:
+ 255:Src/aiValidation.c ****         ai_mnetwork_destroy(net_exec_ctx[idx].network);
+ 1668              		.loc 1 255 9 is_stmt 1 view .LVU453
+ 1669 00d0 1449     		ldr	r1, .L123+24
+ 1670 00d2 FFF7FEFF 		bl	aiLogErr
+ 1671              	.LVL161:
+ 256:Src/aiValidation.c ****         net_exec_ctx[idx].network = AI_HANDLE_NULL;
+ 1672              		.loc 1 256 9 view .LVU454
+ 1673 00d6 F059     		ldr	r0, [r6, r7]
+ 1674 00d8 FFF7FEFF 		bl	ai_mnetwork_destroy
+ 1675              	.LVL162:
+ 257:Src/aiValidation.c ****         return -4;
+ 1676              		.loc 1 257 9 view .LVU455
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 47
+
+
+ 257:Src/aiValidation.c ****         return -4;
+ 1677              		.loc 1 257 35 is_stmt 0 view .LVU456
+ 1678 00dc 0022     		movs	r2, #0
+ 1679 00de F251     		str	r2, [r6, r7]
+ 258:Src/aiValidation.c ****     }
+ 1680              		.loc 1 258 9 is_stmt 1 view .LVU457
+ 258:Src/aiValidation.c ****     }
+ 1681              		.loc 1 258 16 is_stmt 0 view .LVU458
+ 1682 00e0 6FF00300 		mvn	r0, #3
+ 1683 00e4 D2E7     		b	.L112
+ 1684              	.L118:
+ 266:Src/aiValidation.c ****         aiLogErr(err, "ai_mnetwork_get_info");
+ 1685              		.loc 1 266 9 is_stmt 1 view .LVU459
+ 266:Src/aiValidation.c ****         aiLogErr(err, "ai_mnetwork_get_info");
+ 1686              		.loc 1 266 15 is_stmt 0 view .LVU460
+ 1687 00e6 0A4E     		ldr	r6, .L123+4
+ 1688 00e8 6501     		lsls	r5, r4, #5
+ 1689 00ea 2B1B     		subs	r3, r5, r4
+ 1690 00ec DF00     		lsls	r7, r3, #3
+ 1691 00ee F059     		ldr	r0, [r6, r7]
+ 1692 00f0 FFF7FEFF 		bl	ai_mnetwork_get_error
+ 1693              	.LVL163:
+ 267:Src/aiValidation.c ****         ai_mnetwork_destroy(net_exec_ctx[idx].network);
+ 1694              		.loc 1 267 9 is_stmt 1 view .LVU461
+ 1695 00f4 0C49     		ldr	r1, .L123+28
+ 1696 00f6 FFF7FEFF 		bl	aiLogErr
+ 1697              	.LVL164:
+ 268:Src/aiValidation.c ****         net_exec_ctx[idx].network = AI_HANDLE_NULL;
+ 1698              		.loc 1 268 9 view .LVU462
+ 1699 00fa F059     		ldr	r0, [r6, r7]
+ 1700 00fc FFF7FEFF 		bl	ai_mnetwork_destroy
+ 1701              	.LVL165:
+ 269:Src/aiValidation.c ****         return -2;
+ 1702              		.loc 1 269 9 view .LVU463
+ 269:Src/aiValidation.c ****         return -2;
+ 1703              		.loc 1 269 35 is_stmt 0 view .LVU464
+ 1704 0100 0022     		movs	r2, #0
+ 1705 0102 F251     		str	r2, [r6, r7]
+ 270:Src/aiValidation.c ****     }
+ 1706              		.loc 1 270 9 is_stmt 1 view .LVU465
+ 270:Src/aiValidation.c ****     }
+ 1707              		.loc 1 270 16 is_stmt 0 view .LVU466
+ 1708 0104 6FF00100 		mvn	r0, #1
+ 1709 0108 C0E7     		b	.L112
+ 1710              	.L124:
+ 1711 010a 00BF     		.align	2
+ 1712              	.L123:
+ 1713 010c 00000000 		.word	.LC3
+ 1714 0110 00000000 		.word	.LANCHOR0
+ 1715 0114 34000000 		.word	.LC5
+ 1716 0118 40000040 		.word	1073741888
+ 1717 011c 20000000 		.word	.LC4
+ 1718 0120 00000000 		.word	.LANCHOR1
+ 1719 0124 50000000 		.word	.LC6
+ 1720 0128 64000000 		.word	.LC7
+ 1721              		.cfi_endproc
+ 1722              	.LFE143:
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 48
+
+
+ 1724              		.section	.text.aiInit,"ax",%progbits
+ 1725              		.align	1
+ 1726              		.syntax unified
+ 1727              		.thumb
+ 1728              		.thumb_func
+ 1729              		.fpu fpv4-sp-d16
+ 1731              	aiInit:
+ 1732              	.LFB150:
+ 419:Src/aiValidation.c ****     int res = -1;
+ 1733              		.loc 1 419 1 is_stmt 1 view -0
+ 1734              		.cfi_startproc
+ 1735              		@ args = 0, pretend = 0, frame = 0
+ 1736              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1737 0000 70B5     		push	{r4, r5, r6, lr}
+ 1738              	.LCFI37:
+ 1739              		.cfi_def_cfa_offset 16
+ 1740              		.cfi_offset 4, -16
+ 1741              		.cfi_offset 5, -12
+ 1742              		.cfi_offset 6, -8
+ 1743              		.cfi_offset 14, -4
+ 1744 0002 84B0     		sub	sp, sp, #16
+ 1745              	.LCFI38:
+ 1746              		.cfi_def_cfa_offset 32
+ 420:Src/aiValidation.c ****     const char *nn_name;
+ 1747              		.loc 1 420 5 view .LVU468
+ 1748              	.LVL166:
+ 421:Src/aiValidation.c ****     int idx;
+ 1749              		.loc 1 421 5 view .LVU469
+ 422:Src/aiValidation.c **** 
+ 1750              		.loc 1 422 5 view .LVU470
+ 424:Src/aiValidation.c ****             AI_PLATFORM_API_MAJOR,
+ 1751              		.loc 1 424 5 view .LVU471
+ 1752 0004 0024     		movs	r4, #0
+ 1753 0006 0294     		str	r4, [sp, #8]
+ 1754 0008 0121     		movs	r1, #1
+ 1755 000a 0191     		str	r1, [sp, #4]
+ 1756 000c 0423     		movs	r3, #4
+ 1757 000e 0093     		str	r3, [sp]
+ 1758 0010 2346     		mov	r3, r4
+ 1759 0012 0A46     		mov	r2, r1
+ 1760 0014 1748     		ldr	r0, .L133
+ 1761 0016 FFF7FEFF 		bl	printf
+ 1762              	.LVL167:
+ 433:Src/aiValidation.c ****         net_exec_ctx[idx].network = AI_HANDLE_NULL;
+ 1763              		.loc 1 433 5 view .LVU472
+ 433:Src/aiValidation.c ****         net_exec_ctx[idx].network = AI_HANDLE_NULL;
+ 1764              		.loc 1 433 13 is_stmt 0 view .LVU473
+ 1765 001a 2346     		mov	r3, r4
+ 1766              	.LVL168:
+ 1767              	.L126:
+ 433:Src/aiValidation.c ****         net_exec_ctx[idx].network = AI_HANDLE_NULL;
+ 1768              		.loc 1 433 5 discriminator 1 view .LVU474
+ 1769 001c 002B     		cmp	r3, #0
+ 1770 001e 03DD     		ble	.L127
+ 442:Src/aiValidation.c ****     do {
+ 1771              		.loc 1 442 9 view .LVU475
+ 1772 0020 0024     		movs	r4, #0
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 49
+
+
+ 420:Src/aiValidation.c ****     const char *nn_name;
+ 1773              		.loc 1 420 9 view .LVU476
+ 1774 0022 4FF0FF36 		mov	r6, #-1
+ 1775 0026 0DE0     		b	.L129
+ 1776              	.L127:
+ 434:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+ 1777              		.loc 1 434 9 is_stmt 1 discriminator 3 view .LVU477
+ 434:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+ 1778              		.loc 1 434 35 is_stmt 0 discriminator 3 view .LVU478
+ 1779 0028 134C     		ldr	r4, .L133+4
+ 1780 002a 5A01     		lsls	r2, r3, #5
+ 1781 002c D21A     		subs	r2, r2, r3
+ 1782 002e D100     		lsls	r1, r2, #3
+ 1783 0030 6018     		adds	r0, r4, r1
+ 1784 0032 0022     		movs	r2, #0
+ 1785 0034 6250     		str	r2, [r4, r1]
+ 436:Src/aiValidation.c ****         net_exec_ctx[idx].net_id = AI_INSPECTOR_NETWORK_BIND_FAILED;
+ 1786              		.loc 1 436 9 is_stmt 1 discriminator 3 view .LVU479
+ 436:Src/aiValidation.c ****         net_exec_ctx[idx].net_id = AI_INSPECTOR_NETWORK_BIND_FAILED;
+ 1787              		.loc 1 436 37 is_stmt 0 discriminator 3 view .LVU480
+ 1788 0036 8267     		str	r2, [r0, #120]
+ 437:Src/aiValidation.c **** #endif
+ 1789              		.loc 1 437 9 is_stmt 1 discriminator 3 view .LVU481
+ 437:Src/aiValidation.c **** #endif
+ 1790              		.loc 1 437 34 is_stmt 0 discriminator 3 view .LVU482
+ 1791 0038 A0F87C20 		strh	r2, [r0, #124]	@ movhi
+ 433:Src/aiValidation.c ****         net_exec_ctx[idx].network = AI_HANDLE_NULL;
+ 1792              		.loc 1 433 46 discriminator 3 view .LVU483
+ 1793 003c 0133     		adds	r3, r3, #1
+ 1794              	.LVL169:
+ 433:Src/aiValidation.c ****         net_exec_ctx[idx].network = AI_HANDLE_NULL;
+ 1795              		.loc 1 433 46 discriminator 3 view .LVU484
+ 1796 003e EDE7     		b	.L126
+ 1797              	.LVL170:
+ 1798              	.L128:
+ 451:Src/aiValidation.c ****     } while (nn_name);
+ 1799              		.loc 1 451 9 is_stmt 1 view .LVU485
+ 451:Src/aiValidation.c ****     } while (nn_name);
+ 1800              		.loc 1 451 12 is_stmt 0 view .LVU486
+ 1801 0040 0134     		adds	r4, r4, #1
+ 1802              	.LVL171:
+ 452:Src/aiValidation.c **** 
+ 1803              		.loc 1 452 5 view .LVU487
+ 1804 0042 9DB1     		cbz	r5, .L132
+ 1805              	.LVL172:
+ 1806              	.L129:
+ 443:Src/aiValidation.c ****         nn_name = ai_mnetwork_find(NULL, idx);
+ 1807              		.loc 1 443 5 is_stmt 1 view .LVU488
+ 444:Src/aiValidation.c ****         if (nn_name) {
+ 1808              		.loc 1 444 9 view .LVU489
+ 444:Src/aiValidation.c ****         if (nn_name) {
+ 1809              		.loc 1 444 19 is_stmt 0 view .LVU490
+ 1810 0044 2146     		mov	r1, r4
+ 1811 0046 0020     		movs	r0, #0
+ 1812 0048 FFF7FEFF 		bl	ai_mnetwork_find
+ 1813              	.LVL173:
+ 445:Src/aiValidation.c ****             printf("\r\nFound network \"%s\"\r\n", nn_name);
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 50
+
+
+ 1814              		.loc 1 445 9 is_stmt 1 view .LVU491
+ 445:Src/aiValidation.c ****             printf("\r\nFound network \"%s\"\r\n", nn_name);
+ 1815              		.loc 1 445 12 is_stmt 0 view .LVU492
+ 1816 004c 0546     		mov	r5, r0
+ 1817 004e 0028     		cmp	r0, #0
+ 1818 0050 F6D0     		beq	.L128
+ 446:Src/aiValidation.c ****             res = aiBootstrap(nn_name, idx);
+ 1819              		.loc 1 446 13 is_stmt 1 view .LVU493
+ 1820 0052 0146     		mov	r1, r0
+ 1821 0054 0948     		ldr	r0, .L133+8
+ 1822              	.LVL174:
+ 446:Src/aiValidation.c ****             res = aiBootstrap(nn_name, idx);
+ 1823              		.loc 1 446 13 is_stmt 0 view .LVU494
+ 1824 0056 FFF7FEFF 		bl	printf
+ 1825              	.LVL175:
+ 447:Src/aiValidation.c ****             if (res)
+ 1826              		.loc 1 447 13 is_stmt 1 view .LVU495
+ 447:Src/aiValidation.c ****             if (res)
+ 1827              		.loc 1 447 19 is_stmt 0 view .LVU496
+ 1828 005a 2146     		mov	r1, r4
+ 1829 005c 2846     		mov	r0, r5
+ 1830 005e FFF7FEFF 		bl	aiBootstrap
+ 1831              	.LVL176:
+ 448:Src/aiValidation.c ****                 nn_name = NULL;
+ 1832              		.loc 1 448 13 is_stmt 1 view .LVU497
+ 448:Src/aiValidation.c ****                 nn_name = NULL;
+ 1833              		.loc 1 448 16 is_stmt 0 view .LVU498
+ 1834 0062 0646     		mov	r6, r0
+ 1835 0064 0028     		cmp	r0, #0
+ 1836 0066 EBD0     		beq	.L128
+ 449:Src/aiValidation.c ****         }
+ 1837              		.loc 1 449 25 view .LVU499
+ 1838 0068 0025     		movs	r5, #0
+ 1839              	.LVL177:
+ 449:Src/aiValidation.c ****         }
+ 1840              		.loc 1 449 25 view .LVU500
+ 1841 006a E9E7     		b	.L128
+ 1842              	.LVL178:
+ 1843              	.L132:
+ 454:Src/aiValidation.c **** }
+ 1844              		.loc 1 454 5 is_stmt 1 view .LVU501
+ 455:Src/aiValidation.c **** 
+ 1845              		.loc 1 455 1 is_stmt 0 view .LVU502
+ 1846 006c 3046     		mov	r0, r6
+ 1847 006e 04B0     		add	sp, sp, #16
+ 1848              	.LCFI39:
+ 1849              		.cfi_def_cfa_offset 16
+ 1850              		@ sp needed
+ 1851 0070 70BD     		pop	{r4, r5, r6, pc}
+ 1852              	.LVL179:
+ 1853              	.L134:
+ 455:Src/aiValidation.c **** 
+ 1854              		.loc 1 455 1 view .LVU503
+ 1855 0072 00BF     		.align	2
+ 1856              	.L133:
+ 1857 0074 00000000 		.word	.LC8
+ 1858 0078 00000000 		.word	.LANCHOR0
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 51
+
+
+ 1859 007c 34000000 		.word	.LC9
+ 1860              		.cfi_endproc
+ 1861              	.LFE150:
+ 1863              		.section	.text.aiValidationCore,"ax",%progbits
+ 1864              		.align	1
+ 1865              		.syntax unified
+ 1866              		.thumb
+ 1867              		.thumb_func
+ 1868              		.fpu fpv4-sp-d16
+ 1870              	aiValidationCore:
+ 1871              	.LFB154:
+ 611:Src/aiValidation.c **** 
+ 612:Src/aiValidation.c **** static int aiValidationCore(void)
+ 613:Src/aiValidation.c **** {
+ 1872              		.loc 1 613 1 is_stmt 1 view -0
+ 1873              		.cfi_startproc
+ 1874              		@ args = 0, pretend = 0, frame = 0
+ 1875              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1876 0000 08B5     		push	{r3, lr}
+ 1877              	.LCFI40:
+ 1878              		.cfi_def_cfa_offset 8
+ 1879              		.cfi_offset 3, -8
+ 1880              		.cfi_offset 14, -4
+ 614:Src/aiValidation.c ****     return aiPbMgrWaitAndProcess();
+ 1881              		.loc 1 614 5 view .LVU505
+ 1882              		.loc 1 614 12 is_stmt 0 view .LVU506
+ 1883 0002 FFF7FEFF 		bl	aiPbMgrWaitAndProcess
+ 1884              	.LVL180:
+ 615:Src/aiValidation.c **** }
+ 1885              		.loc 1 615 1 view .LVU507
+ 1886 0006 08BD     		pop	{r3, pc}
+ 1887              		.cfi_endproc
+ 1888              	.LFE154:
+ 1890              		.section	.text.aiValidationInit,"ax",%progbits
+ 1891              		.align	1
+ 1892              		.global	aiValidationInit
+ 1893              		.syntax unified
+ 1894              		.thumb
+ 1895              		.thumb_func
+ 1896              		.fpu fpv4-sp-d16
+ 1898              	aiValidationInit:
+ 1899              	.LFB155:
+ 616:Src/aiValidation.c **** 
+ 617:Src/aiValidation.c **** /* -----------------------------------------------------------------------------
+ 618:Src/aiValidation.c ****  * Exported/Public functions
+ 619:Src/aiValidation.c ****  * -----------------------------------------------------------------------------
+ 620:Src/aiValidation.c ****  */
+ 621:Src/aiValidation.c **** 
+ 622:Src/aiValidation.c **** static aiPbCmdFunc pbCmdFuncTab[] = {
+ 623:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
+ 624:Src/aiValidation.c ****         AI_PB_CMD_SYNC((void *)EnumCapability_CAP_INSPECTOR),
+ 625:Src/aiValidation.c **** #else
+ 626:Src/aiValidation.c ****         AI_PB_CMD_SYNC(NULL),
+ 627:Src/aiValidation.c **** #endif
+ 628:Src/aiValidation.c ****         AI_PB_CMD_SYS_INFO(NULL),
+ 629:Src/aiValidation.c ****         { EnumCmd_CMD_NETWORK_INFO, &aiPbCmdNNInfo, NULL },
+ 630:Src/aiValidation.c ****         { EnumCmd_CMD_NETWORK_RUN, &aiPbCmdNNRun, NULL },
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 52
+
+
+ 631:Src/aiValidation.c **** #if defined(AI_PB_TEST) && AI_PB_TEST == 1
+ 632:Src/aiValidation.c ****         AI_PB_CMD_TEST(NULL),
+ 633:Src/aiValidation.c **** #endif
+ 634:Src/aiValidation.c ****         AI_PB_CMD_END,
+ 635:Src/aiValidation.c **** };
+ 636:Src/aiValidation.c **** 
+ 637:Src/aiValidation.c **** int aiValidationInit(void)
+ 638:Src/aiValidation.c **** {
+ 1900              		.loc 1 638 1 is_stmt 1 view -0
+ 1901              		.cfi_startproc
+ 1902              		@ args = 0, pretend = 0, frame = 0
+ 1903              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1904 0000 08B5     		push	{r3, lr}
+ 1905              	.LCFI41:
+ 1906              		.cfi_def_cfa_offset 8
+ 1907              		.cfi_offset 3, -8
+ 1908              		.cfi_offset 14, -4
+ 639:Src/aiValidation.c ****     aiPbMgrInit(pbCmdFuncTab);
+ 1909              		.loc 1 639 5 view .LVU509
+ 1910 0002 0848     		ldr	r0, .L139
+ 1911 0004 FFF7FEFF 		bl	aiPbMgrInit
+ 1912              	.LVL181:
+ 640:Src/aiValidation.c **** 
+ 641:Src/aiValidation.c ****     aiTestHeader(_APP_NAME_, _APP_VERSION_MAJOR_, _APP_VERSION_MINOR_);
+ 1913              		.loc 1 641 5 view .LVU510
+ 1914 0008 0222     		movs	r2, #2
+ 1915 000a 0321     		movs	r1, #3
+ 1916 000c 0648     		ldr	r0, .L139+4
+ 1917 000e FFF7FEFF 		bl	aiTestHeader
+ 1918              	.LVL182:
+ 642:Src/aiValidation.c **** 
+ 643:Src/aiValidation.c ****     dwtIpInit();
+ 1919              		.loc 1 643 5 view .LVU511
+ 1920 0012 FFF7FEFF 		bl	dwtIpInit
+ 1921              	.LVL183:
+ 644:Src/aiValidation.c ****     crcIpInit();
+ 1922              		.loc 1 644 5 view .LVU512
+ 1923 0016 FFF7FEFF 		bl	crcIpInit
+ 1924              	.LVL184:
+ 645:Src/aiValidation.c ****     logDeviceConf();
+ 1925              		.loc 1 645 5 view .LVU513
+ 1926 001a FFF7FEFF 		bl	logDeviceConf
+ 1927              	.LVL185:
+ 646:Src/aiValidation.c **** 
+ 647:Src/aiValidation.c ****     return 0;
+ 1928              		.loc 1 647 5 view .LVU514
+ 648:Src/aiValidation.c **** }
+ 1929              		.loc 1 648 1 is_stmt 0 view .LVU515
+ 1930 001e 0020     		movs	r0, #0
+ 1931 0020 08BD     		pop	{r3, pc}
+ 1932              	.L140:
+ 1933 0022 00BF     		.align	2
+ 1934              	.L139:
+ 1935 0024 00000000 		.word	.LANCHOR2
+ 1936 0028 00000000 		.word	.LC10
+ 1937              		.cfi_endproc
+ 1938              	.LFE155:
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 53
+
+
+ 1940              		.section	.text.aiValidationProcess,"ax",%progbits
+ 1941              		.align	1
+ 1942              		.global	aiValidationProcess
+ 1943              		.syntax unified
+ 1944              		.thumb
+ 1945              		.thumb_func
+ 1946              		.fpu fpv4-sp-d16
+ 1948              	aiValidationProcess:
+ 1949              	.LFB156:
+ 649:Src/aiValidation.c **** 
+ 650:Src/aiValidation.c **** int aiValidationProcess(void)
+ 651:Src/aiValidation.c **** {
+ 1950              		.loc 1 651 1 is_stmt 1 view -0
+ 1951              		.cfi_startproc
+ 1952              		@ args = 0, pretend = 0, frame = 0
+ 1953              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1954 0000 38B5     		push	{r3, r4, r5, lr}
+ 1955              	.LCFI42:
+ 1956              		.cfi_def_cfa_offset 16
+ 1957              		.cfi_offset 3, -16
+ 1958              		.cfi_offset 4, -12
+ 1959              		.cfi_offset 5, -8
+ 1960              		.cfi_offset 14, -4
+ 652:Src/aiValidation.c ****     int r;
+ 1961              		.loc 1 652 5 view .LVU517
+ 653:Src/aiValidation.c **** 
+ 654:Src/aiValidation.c ****     r = aiInit();
+ 1962              		.loc 1 654 5 view .LVU518
+ 1963              		.loc 1 654 9 is_stmt 0 view .LVU519
+ 1964 0002 FFF7FEFF 		bl	aiInit
+ 1965              	.LVL186:
+ 655:Src/aiValidation.c ****     if (r) {
+ 1966              		.loc 1 655 5 is_stmt 1 view .LVU520
+ 1967              		.loc 1 655 8 is_stmt 0 view .LVU521
+ 1968 0006 20BB     		cbnz	r0, .L146
+ 656:Src/aiValidation.c ****         printf("\r\nE:  aiInit() r=%d\r\n", r);
+ 657:Src/aiValidation.c ****         HAL_Delay(2000);
+ 658:Src/aiValidation.c ****         return r;
+ 659:Src/aiValidation.c ****     } else {
+ 660:Src/aiValidation.c ****         printf("\r\n");
+ 1969              		.loc 1 660 9 is_stmt 1 view .LVU522
+ 1970 0008 174C     		ldr	r4, .L147
+ 1971 000a 2046     		mov	r0, r4
+ 1972              	.LVL187:
+ 1973              		.loc 1 660 9 is_stmt 0 view .LVU523
+ 1974 000c FFF7FEFF 		bl	puts
+ 1975              	.LVL188:
+ 661:Src/aiValidation.c ****         printf("-------------------------------------------\r\n");
+ 1976              		.loc 1 661 9 is_stmt 1 view .LVU524
+ 1977 0010 164D     		ldr	r5, .L147+4
+ 1978 0012 2846     		mov	r0, r5
+ 1979 0014 FFF7FEFF 		bl	puts
+ 1980              	.LVL189:
+ 662:Src/aiValidation.c ****         printf("| READY to receive a CMD from the HOST... |\r\n");
+ 1981              		.loc 1 662 9 view .LVU525
+ 1982 0018 1548     		ldr	r0, .L147+8
+ 1983 001a FFF7FEFF 		bl	puts
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 54
+
+
+ 1984              	.LVL190:
+ 663:Src/aiValidation.c ****         printf("-------------------------------------------\r\n");
+ 1985              		.loc 1 663 9 view .LVU526
+ 1986 001e 2846     		mov	r0, r5
+ 1987 0020 FFF7FEFF 		bl	puts
+ 1988              	.LVL191:
+ 664:Src/aiValidation.c ****         printf("\r\n");
+ 1989              		.loc 1 664 9 view .LVU527
+ 1990 0024 2046     		mov	r0, r4
+ 1991 0026 FFF7FEFF 		bl	puts
+ 1992              	.LVL192:
+ 665:Src/aiValidation.c ****         printf("# Note: At this point, default ASCII-base terminal should be closed\r\n");
+ 1993              		.loc 1 665 9 view .LVU528
+ 1994 002a 1248     		ldr	r0, .L147+12
+ 1995 002c FFF7FEFF 		bl	puts
+ 1996              	.LVL193:
+ 666:Src/aiValidation.c ****         printf("# and a stm32com-base interface should be used\r\n");
+ 1997              		.loc 1 666 9 view .LVU529
+ 1998 0030 1148     		ldr	r0, .L147+16
+ 1999 0032 FFF7FEFF 		bl	puts
+ 2000              	.LVL194:
+ 667:Src/aiValidation.c ****         printf("# (i.e. Python stm32com module). Protocol version = %d.%d\r\n",
+ 2001              		.loc 1 667 9 view .LVU530
+ 2002 0036 0122     		movs	r2, #1
+ 2003 0038 0221     		movs	r1, #2
+ 2004 003a 1048     		ldr	r0, .L147+20
+ 2005 003c FFF7FEFF 		bl	printf
+ 2006              	.LVL195:
+ 668:Src/aiValidation.c ****                 EnumVersion_P_VERSION_MAJOR,
+ 669:Src/aiValidation.c ****                 EnumVersion_P_VERSION_MINOR);
+ 670:Src/aiValidation.c ****     }
+ 671:Src/aiValidation.c **** 
+ 672:Src/aiValidation.c ****     ioDisableWrite();
+ 2007              		.loc 1 672 5 view .LVU531
+ 2008 0040 FFF7FEFF 		bl	ioDisableWrite
+ 2009              	.LVL196:
+ 2010              	.L144:
+ 673:Src/aiValidation.c **** 
+ 674:Src/aiValidation.c ****     do {
+ 2011              		.loc 1 674 5 discriminator 1 view .LVU532
+ 675:Src/aiValidation.c ****         r = aiValidationCore();
+ 2012              		.loc 1 675 9 discriminator 1 view .LVU533
+ 2013              		.loc 1 675 13 is_stmt 0 discriminator 1 view .LVU534
+ 2014 0044 FFF7FEFF 		bl	aiValidationCore
+ 2015              	.LVL197:
+ 676:Src/aiValidation.c ****     } while (r==0);
+ 2016              		.loc 1 676 5 discriminator 1 view .LVU535
+ 2017 0048 0446     		mov	r4, r0
+ 2018 004a 0028     		cmp	r0, #0
+ 2019 004c FAD0     		beq	.L144
+ 2020              	.LVL198:
+ 2021              	.L141:
+ 677:Src/aiValidation.c **** 
+ 678:Src/aiValidation.c ****     return r;
+ 679:Src/aiValidation.c **** }
+ 2022              		.loc 1 679 1 view .LVU536
+ 2023 004e 2046     		mov	r0, r4
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 55
+
+
+ 2024 0050 38BD     		pop	{r3, r4, r5, pc}
+ 2025              	.LVL199:
+ 2026              	.L146:
+ 2027              		.loc 1 679 1 view .LVU537
+ 2028 0052 0446     		mov	r4, r0
+ 656:Src/aiValidation.c ****         HAL_Delay(2000);
+ 2029              		.loc 1 656 9 is_stmt 1 view .LVU538
+ 2030 0054 0146     		mov	r1, r0
+ 2031 0056 0A48     		ldr	r0, .L147+24
+ 2032              	.LVL200:
+ 656:Src/aiValidation.c ****         HAL_Delay(2000);
+ 2033              		.loc 1 656 9 is_stmt 0 view .LVU539
+ 2034 0058 FFF7FEFF 		bl	printf
+ 2035              	.LVL201:
+ 657:Src/aiValidation.c ****         return r;
+ 2036              		.loc 1 657 9 is_stmt 1 view .LVU540
+ 2037 005c 4FF4FA60 		mov	r0, #2000
+ 2038 0060 FFF7FEFF 		bl	HAL_Delay
+ 2039              	.LVL202:
+ 658:Src/aiValidation.c ****     } else {
+ 2040              		.loc 1 658 9 view .LVU541
+ 658:Src/aiValidation.c ****     } else {
+ 2041              		.loc 1 658 16 is_stmt 0 view .LVU542
+ 2042 0064 F3E7     		b	.L141
+ 2043              	.L148:
+ 2044 0066 00BF     		.align	2
+ 2045              	.L147:
+ 2046 0068 18000000 		.word	.LC12
+ 2047 006c 1C000000 		.word	.LC13
+ 2048 0070 4C000000 		.word	.LC14
+ 2049 0074 7C000000 		.word	.LC15
+ 2050 0078 C4000000 		.word	.LC16
+ 2051 007c F4000000 		.word	.LC17
+ 2052 0080 00000000 		.word	.LC11
+ 2053              		.cfi_endproc
+ 2054              	.LFE156:
+ 2056              		.section	.text.aiValidationDeInit,"ax",%progbits
+ 2057              		.align	1
+ 2058              		.global	aiValidationDeInit
+ 2059              		.syntax unified
+ 2060              		.thumb
+ 2061              		.thumb_func
+ 2062              		.fpu fpv4-sp-d16
+ 2064              	aiValidationDeInit:
+ 2065              	.LFB157:
+ 680:Src/aiValidation.c **** 
+ 681:Src/aiValidation.c **** void aiValidationDeInit(void)
+ 682:Src/aiValidation.c **** {
+ 2066              		.loc 1 682 1 is_stmt 1 view -0
+ 2067              		.cfi_startproc
+ 2068              		@ args = 0, pretend = 0, frame = 0
+ 2069              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2070 0000 08B5     		push	{r3, lr}
+ 2071              	.LCFI43:
+ 2072              		.cfi_def_cfa_offset 8
+ 2073              		.cfi_offset 3, -8
+ 2074              		.cfi_offset 14, -4
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 56
+
+
+ 683:Src/aiValidation.c ****     printf("\r\n");
+ 2075              		.loc 1 683 5 view .LVU544
+ 2076 0002 0448     		ldr	r0, .L151
+ 2077 0004 FFF7FEFF 		bl	puts
+ 2078              	.LVL203:
+ 684:Src/aiValidation.c ****     aiDeInit();
+ 2079              		.loc 1 684 5 view .LVU545
+ 2080 0008 FFF7FEFF 		bl	aiDeInit
+ 2081              	.LVL204:
+ 685:Src/aiValidation.c ****     printf("bye bye ...\r\n");
+ 2082              		.loc 1 685 5 view .LVU546
+ 2083 000c 0248     		ldr	r0, .L151+4
+ 2084 000e FFF7FEFF 		bl	puts
+ 2085              	.LVL205:
+ 686:Src/aiValidation.c **** }
+ 2086              		.loc 1 686 1 is_stmt 0 view .LVU547
+ 2087 0012 08BD     		pop	{r3, pc}
+ 2088              	.L152:
+ 2089              		.align	2
+ 2090              	.L151:
+ 2091 0014 18000000 		.word	.LC12
+ 2092 0018 00000000 		.word	.LC18
+ 2093              		.cfi_endproc
+ 2094              	.LFE157:
+ 2096              		.comm	data_out_1,28,4
+ 2097              		.comm	data_in_1,1440,4
+ 2098              		.section	.bss.activations,"aw",%nobits
+ 2099              		.align	2
+ 2100              		.set	.LANCHOR1,. + 0
+ 2103              	activations:
+ 2104 0000 00000000 		.space	1696
+ 2104      00000000 
+ 2104      00000000 
+ 2104      00000000 
+ 2104      00000000 
+ 2105              		.section	.bss.net_exec_ctx,"aw",%nobits
+ 2106              		.align	3
+ 2107              		.set	.LANCHOR0,. + 0
+ 2110              	net_exec_ctx:
+ 2111 0000 00000000 		.space	248
+ 2111      00000000 
+ 2111      00000000 
+ 2111      00000000 
+ 2111      00000000 
+ 2112              		.section	.data.pbCmdFuncTab,"aw"
+ 2113              		.align	2
+ 2114              		.set	.LANCHOR2,. + 0
+ 2117              	pbCmdFuncTab:
+ 2118 0000 00       		.byte	0
+ 2119 0001 000000   		.space	3
+ 2120 0004 00000000 		.word	aiPbCmdSync
+ 2121 0008 01000000 		.word	1
+ 2122 000c 01       		.byte	1
+ 2123 000d 000000   		.space	3
+ 2124 0010 00000000 		.word	aiPbCmdSysInfo
+ 2125 0014 00000000 		.word	0
+ 2126 0018 0A       		.byte	10
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 57
+
+
+ 2127 0019 000000   		.space	3
+ 2128 001c 00000000 		.word	aiPbCmdNNInfo
+ 2129 0020 00000000 		.word	0
+ 2130 0024 0B       		.byte	11
+ 2131 0025 000000   		.space	3
+ 2132 0028 00000000 		.word	aiPbCmdNNRun
+ 2133 002c 00000000 		.word	0
+ 2134 0030 00       		.byte	0
+ 2135 0031 000000   		.space	3
+ 2136 0034 00000000 		.word	0
+ 2137 0038 00000000 		.word	0
+ 2138              		.section	.rodata.aiBootstrap.str1.4,"aMS",%progbits,1
+ 2139              		.align	2
+ 2140              	.LC3:
+ 2141 0000 43726561 		.ascii	"Creating the network \"%s\"..\015\012\000"
+ 2141      74696E67 
+ 2141      20746865 
+ 2141      206E6574 
+ 2141      776F726B 
+ 2142 001e 0000     		.space	2
+ 2143              	.LC4:
+ 2144 0020 61695F6D 		.ascii	"ai_mnetwork_create\000"
+ 2144      6E657477 
+ 2144      6F726B5F 
+ 2144      63726561 
+ 2144      746500
+ 2145 0033 00       		.space	1
+ 2146              	.LC5:
+ 2147 0034 496E6974 		.ascii	"Initializing the network\015\000"
+ 2147      69616C69 
+ 2147      7A696E67 
+ 2147      20746865 
+ 2147      206E6574 
+ 2148 004e 0000     		.space	2
+ 2149              	.LC6:
+ 2150 0050 61695F6D 		.ascii	"ai_mnetwork_init\000"
+ 2150      6E657477 
+ 2150      6F726B5F 
+ 2150      696E6974 
+ 2150      00
+ 2151 0061 000000   		.space	3
+ 2152              	.LC7:
+ 2153 0064 61695F6D 		.ascii	"ai_mnetwork_get_info\000"
+ 2153      6E657477 
+ 2153      6F726B5F 
+ 2153      6765745F 
+ 2153      696E666F 
+ 2154              		.section	.rodata.aiDeInit.str1.4,"aMS",%progbits,1
+ 2155              		.align	2
+ 2156              	.LC1:
+ 2157 0000 52656C65 		.ascii	"Releasing the network(s)...\015\000"
+ 2157      6173696E 
+ 2157      67207468 
+ 2157      65206E65 
+ 2157      74776F72 
+ 2158 001d 000000   		.space	3
+ 2159              	.LC2:
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 58
+
+
+ 2160 0020 61695F6D 		.ascii	"ai_mnetwork_destroy\000"
+ 2160      6E657477 
+ 2160      6F726B5F 
+ 2160      64657374 
+ 2160      726F7900 
+ 2161              		.section	.rodata.aiInit.str1.4,"aMS",%progbits,1
+ 2162              		.align	2
+ 2163              	.LC8:
+ 2164 0000 0D0A4149 		.ascii	"\015\012AI platform (API %d.%d.%d - RUNTIME %d.%d.%"
+ 2164      20706C61 
+ 2164      74666F72 
+ 2164      6D202841 
+ 2164      50492025 
+ 2165 002d 64290D0A 		.ascii	"d)\015\012\000"
+ 2165      00
+ 2166 0032 0000     		.space	2
+ 2167              	.LC9:
+ 2168 0034 0D0A466F 		.ascii	"\015\012Found network \"%s\"\015\012\000"
+ 2168      756E6420 
+ 2168      6E657477 
+ 2168      6F726B20 
+ 2168      22257322 
+ 2169              		.section	.rodata.aiPbCmdNNRun.str1.4,"aMS",%progbits,1
+ 2170              		.align	2
+ 2171              	.LC0:
+ 2172 0000 61695F6D 		.ascii	"ai_mnetwork_run\000"
+ 2172      6E657477 
+ 2172      6F726B5F 
+ 2172      72756E00 
+ 2173              		.section	.rodata.aiValidationDeInit.str1.4,"aMS",%progbits,1
+ 2174              		.align	2
+ 2175              	.LC18:
+ 2176 0000 62796520 		.ascii	"bye bye ...\015\000"
+ 2176      62796520 
+ 2176      2E2E2E0D 
+ 2176      00
+ 2177              		.section	.rodata.aiValidationInit.str1.4,"aMS",%progbits,1
+ 2178              		.align	2
+ 2179              	.LC10:
+ 2180 0000 41492056 		.ascii	"AI Validation\000"
+ 2180      616C6964 
+ 2180      6174696F 
+ 2180      6E00
+ 2181              		.section	.rodata.aiValidationProcess.str1.4,"aMS",%progbits,1
+ 2182              		.align	2
+ 2183              	.LC11:
+ 2184 0000 0D0A453A 		.ascii	"\015\012E:  aiInit() r=%d\015\012\000"
+ 2184      20206169 
+ 2184      496E6974 
+ 2184      28292072 
+ 2184      3D25640D 
+ 2185 0016 0000     		.space	2
+ 2186              	.LC12:
+ 2187 0018 0D00     		.ascii	"\015\000"
+ 2188 001a 0000     		.space	2
+ 2189              	.LC13:
+ 2190 001c 2D2D2D2D 		.ascii	"-------------------------------------------\015\000"
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 59
+
+
+ 2190      2D2D2D2D 
+ 2190      2D2D2D2D 
+ 2190      2D2D2D2D 
+ 2190      2D2D2D2D 
+ 2191 0049 000000   		.space	3
+ 2192              	.LC14:
+ 2193 004c 7C205245 		.ascii	"| READY to receive a CMD from the HOST... |\015\000"
+ 2193      41445920 
+ 2193      746F2072 
+ 2193      65636569 
+ 2193      76652061 
+ 2194 0079 000000   		.space	3
+ 2195              	.LC15:
+ 2196 007c 23204E6F 		.ascii	"# Note: At this point, default ASCII-base terminal "
+ 2196      74653A20 
+ 2196      41742074 
+ 2196      68697320 
+ 2196      706F696E 
+ 2197 00af 73686F75 		.ascii	"should be closed\015\000"
+ 2197      6C642062 
+ 2197      6520636C 
+ 2197      6F736564 
+ 2197      0D00
+ 2198 00c1 000000   		.space	3
+ 2199              	.LC16:
+ 2200 00c4 2320616E 		.ascii	"# and a stm32com-base interface should be used\015\000"
+ 2200      64206120 
+ 2200      73746D33 
+ 2200      32636F6D 
+ 2200      2D626173 
+ 2201              	.LC17:
+ 2202 00f4 23202869 		.ascii	"# (i.e. Python stm32com module). Protocol version ="
+ 2202      2E652E20 
+ 2202      50797468 
+ 2202      6F6E2073 
+ 2202      746D3332 
+ 2203 0127 2025642E 		.ascii	" %d.%d\015\012\000"
+ 2203      25640D0A 
+ 2203      00
+ 2204              		.text
+ 2205              	.Letext0:
+ 2206              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 2207              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 2208              		.file 4 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 2209              		.file 5 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\lib\\gcc\\arm-none-eab
+ 2210              		.file 6 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 2211              		.file 7 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 2212              		.file 8 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 2213              		.file 9 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\include
+ 2214              		.file 10 "Middlewares/ST/AI/Inc/ai_platform.h"
+ 2215              		.file 11 "Inc/pb.h"
+ 2216              		.file 12 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include/core_c
+ 2217              		.file 13 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Device/ST/STM3
+ 2218              		.file 14 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver
+ 2219              		.file 15 "Middlewares/ST/AI/Inc/ai_datatypes_format.h"
+ 2220              		.file 16 "Middlewares/ST/AI/Inc/ai_platform_interface.h"
+ 2221              		.file 17 "Middlewares/ST/AI/Inc/core_net_inspect_interface.h"
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 60
+
+
+ 2222              		.file 18 "Middlewares/ST/AI/Inc/ai_network_inspector.h"
+ 2223              		.file 19 "Inc/stm32msg.pb.h"
+ 2224              		.file 20 "Inc/aiPbMgr.h"
+ 2225              		.file 21 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\includ
+ 2226              		.file 22 "Inc/aiTestUtility.h"
+ 2227              		.file 23 "Inc/app_x-cube-ai.h"
+ 2228              		.file 24 "<built-in>"
+ 2229              		.file 25 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\includ
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 61
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 aiValidation.c
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:18     .text.aiExecCtx:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:25     .text.aiExecCtx:00000000 aiExecCtx
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:144    .text.aiExecCtx:00000068 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:149    .text.aiPbCmdNNInfo:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:156    .text.aiPbCmdNNInfo:00000000 aiPbCmdNNInfo
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:228    .text.aiOnExecNode_cb:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:234    .text.aiOnExecNode_cb:00000000 aiOnExecNode_cb
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:393    .text.aiInspectorUnBind:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:399    .text.aiInspectorUnBind:00000000 aiInspectorUnBind
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:451    .text.aiInspectorBind:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:457    .text.aiInspectorBind:00000000 aiInspectorBind
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:533    .text.aiInspectorInitAndBind:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:539    .text.aiInspectorInitAndBind:00000000 aiInspectorInitAndBind
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:653    .text.aiInspectorInitAndBind:00000074 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:658    .text.aiInspectorGetReport:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:664    .text.aiInspectorGetReport:00000000 aiInspectorGetReport
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:740    .text.aiInspectorSendReport:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:746    .text.aiInspectorSendReport:00000000 aiInspectorSendReport
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:853    .text.aiInspectorUnbindAndDestroy:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:859    .text.aiInspectorUnbindAndDestroy:00000000 aiInspectorUnbindAndDestroy
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:897    .text.aiPbCmdNNRun:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:904    .text.aiPbCmdNNRun:00000000 aiPbCmdNNRun
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1396   .text.aiPbCmdNNRun:00000210 $d
+                            *COM*:000005a0 data_in_1
+                            *COM*:0000001c data_out_1
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1403   .text.aiDeInit:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1409   .text.aiDeInit:00000000 aiDeInit
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1481   .text.aiDeInit:00000048 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1488   .text.aiBootstrap:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1494   .text.aiBootstrap:00000000 aiBootstrap
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1713   .text.aiBootstrap:0000010c $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1725   .text.aiInit:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1731   .text.aiInit:00000000 aiInit
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1857   .text.aiInit:00000074 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1864   .text.aiValidationCore:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1870   .text.aiValidationCore:00000000 aiValidationCore
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1891   .text.aiValidationInit:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1898   .text.aiValidationInit:00000000 aiValidationInit
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1935   .text.aiValidationInit:00000024 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1941   .text.aiValidationProcess:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1948   .text.aiValidationProcess:00000000 aiValidationProcess
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2046   .text.aiValidationProcess:00000068 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2057   .text.aiValidationDeInit:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2064   .text.aiValidationDeInit:00000000 aiValidationDeInit
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2091   .text.aiValidationDeInit:00000014 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2099   .bss.activations:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2103   .bss.activations:00000000 activations
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2106   .bss.net_exec_ctx:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2110   .bss.net_exec_ctx:00000000 net_exec_ctx
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2113   .data.pbCmdFuncTab:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2117   .data.pbCmdFuncTab:00000000 pbCmdFuncTab
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2139   .rodata.aiBootstrap.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2155   .rodata.aiDeInit.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2162   .rodata.aiInit.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2170   .rodata.aiPbCmdNNRun.str1.4:00000000 $d
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 62
+
+
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2174   .rodata.aiValidationDeInit.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2178   .rodata.aiValidationInit.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2182   .rodata.aiValidationProcess.str1.4:00000000 $d
+
+UNDEFINED SYMBOLS
+strlen
+strncmp
+aiPbMgrSendNNInfo
+aiPbMgrSendAck
+dwtGetCycles
+dwtReset
+dwtCyclesToFloatMs
+aiPbMgrSendAiBuffer3
+ai_inspector_unbind_network
+ai_inspector_bind_network
+ai_inspector_default_config
+ai_mnetwork_get_private_handle
+ai_inspector_create
+ai_inspector_get_report
+aiPbMgrSendResp
+aiPbMgrWaitAck
+ai_inspector_destroy
+aiPbAiBufferSize
+aiPbMgrReceiveAiBuffer3
+disableInts
+ai_mnetwork_run
+ai_mnetwork_get_error
+aiLogErr
+restoreInts
+puts
+ai_mnetwork_destroy
+printf
+ai_mnetwork_create
+memset
+ai_mnetwork_get_ext_data_activations
+ai_mnetwork_init
+ai_mnetwork_get_info
+aiPrintNetworkInfo
+ai_mnetwork_find
+aiPbMgrWaitAndProcess
+aiPbMgrInit
+aiTestHeader
+dwtIpInit
+crcIpInit
+logDeviceConf
+ioDisableWrite
+HAL_Delay
+aiPbCmdSync
+aiPbCmdSysInfo
