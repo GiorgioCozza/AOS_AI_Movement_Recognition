@@ -3,7 +3,7 @@
 /**
  *******************************************************************************
   *   @file I2C_helper.cpp
-  *   @author Cozza Giorgio, Liu Qiaqi
+  *   @author Cozza Giorgio, Liu Jiaqi
   *   @date 08/04/19
   *   @version 1.0
   *   @brief I2C communication manager, mediates data transfer from the sensors

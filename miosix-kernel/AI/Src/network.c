@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    network.c
   * @author  AST Embedded Analytics Research Platform
-  * @date    Thu Apr 16 15:59:45 2020
+  * @date    Sun Apr 19 20:03:34 2020
   * @brief   AI Tool Automatic Code Generator for Embedded NN computing
   ******************************************************************************
   * @attention
@@ -53,7 +53,7 @@
 #endif
 
 #undef AI_TOOLS_DATE_TIME
-#define AI_TOOLS_DATE_TIME   "Thu Apr 16 15:59:45 2020"
+#define AI_TOOLS_DATE_TIME   "Sun Apr 19 20:03:34 2020"
 
 #undef AI_TOOLS_COMPILE_TIME
 #define AI_TOOLS_COMPILE_TIME    __DATE__ " " __TIME__
@@ -601,7 +601,7 @@ ai_bool ai_network_get_info(
     return true;
   }
 
-    return false;
+  return false;
 }
 
 AI_API_ENTRY

@@ -98,7 +98,7 @@ int main() {
         CRC->CR = CRC_CR_RESET;
     }
 
-
+    // data buffering
     float *in_data = nullptr;
     float *out_data = (float *) malloc(NUM_CLASSES * sizeof(float));
     float *int_vec = new float[VECTOR_SIZE];
@@ -110,8 +110,10 @@ int main() {
     LSM6DSLAccGyr *acc_gyr = new LSM6DSLAccGyr();
     LSM303AGRAccMag *acc_mag = new LSM303AGRAccMag();  //++
 
-    // circular buffering vars
+    // circular buffering
     circularQueue<float> data_queue(VECTOR_SIZE * WINDOW_SIZE);
+
+    // data processing
     data_proc dt_proc;
 
     // neural network vars
@@ -190,7 +192,7 @@ int main() {
                         int_vec[11] = (float) buf_reader[2];
                     }
 
-
+                    // insert data vector in circular buffer
                     data_queue.insert(int_vec, VECTOR_SIZE);
 
                     count++;
@@ -223,7 +225,9 @@ int main() {
                                 printf("\n[RESULT] You are %s\n\n", movements[pred_mode]);
 
                                 pred_cnt = 0;
-                                startflag = false;
+
+                                // uncomment if you want to stop after each prediction
+                                //startflag = false;
 
                             }
                             pred_cnt++;
