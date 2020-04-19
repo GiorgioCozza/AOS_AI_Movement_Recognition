@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s 			page 1
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s 			page 1
   57 0021 0000     		.2byte	0
   58 0023 0000     		.2byte	0
   59 0025 0000     		.2byte	0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s 			page 2
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s 			page 2
 
 
   60 0027 0000     		.2byte	0
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s 			page 1
  120 002d 0400     		.2byte	4
  121 002f 01       		.byte	1
  122 0030 0000     		.2byte	0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s 			page 3
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s 			page 3
 
 
  123 0032 0000     		.2byte	0
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s 			page 1
  189              	aiBufferShapeMsg_zeropoint_default:
  190 0000 00000000 		.space	4
  191              		.section	.rodata.aiNetworkInfoMsg_fields,"a"
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s 			page 4
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s 			page 4
 
 
  192              		.align	2
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s 			page 1
  248 006e 0000     		.2byte	0
  249 0070 0400     		.2byte	4
  250 0072 0000     		.2byte	0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s 			page 5
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s 			page 5
 
 
  251 0074 00000000 		.4byte	0
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s 			page 1
  305 00e8 0800     		.2byte	8
  306 00ea 0000     		.2byte	0
  307 00ec 00000000 		.4byte	aiBufferShapeMsg_fields
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s 			page 6
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s 			page 6
 
 
  308 00f0 1100     		.short	17
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s 			page 1
  364 0021 0000     		.2byte	0
  365 0023 0000     		.2byte	0
  366 0025 0400     		.2byte	4
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s 			page 7
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s 			page 7
 
 
  367 0027 0000     		.2byte	0
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s 			page 1
  425 0007 0400     		.2byte	4
  426 0009 0000     		.2byte	0
  427 000b 00000000 		.4byte	0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s 			page 8
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s 			page 8
 
 
  428 000f 0200     		.2byte	2
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s 			page 1
  486 0029 00000000 		.4byte	0
  487 002d 0400     		.2byte	4
  488 002f 06       		.byte	6
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s 			page 9
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s 			page 9
 
 
  489 0030 0000     		.2byte	0
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s 			page 1
  545 0043 0800     		.2byte	8
  546 0045 0000     		.2byte	0
  547 0047 00000000 		.4byte	ackMsg_fields
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s 			page 10
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s 			page 10
 
 
  548 004b 0D00     		.2byte	13
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s 			page 1
  604 0021 0000     		.2byte	0
  605 0023 0000     		.2byte	0
  606 0025 0000     		.2byte	0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s 			page 11
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s 			page 11
 
 
  607 0027 0000     		.2byte	0
@@ -653,47 +653,47 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s 			page 1
  658              		.file 8 "Inc/pb.h"
  659              		.file 9 "Inc/stm32msg.pb.h"
  660              		.file 10 "Src/stm32msg.pb.c"
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s 			page 12
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s 			page 12
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32msg.pb.c
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:512    .rodata.respMsg_fields:00000000 respMsg_fields
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:420    .rodata.nodeMsg_fields:00000000 nodeMsg_fields
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:394    .rodata.logMsg_fields:00000000 logMsg_fields
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:40     .rodata.ackMsg_fields:00000000 ackMsg_fields
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:613    .rodata.sysinfoMsg_fields:00000000 sysinfoMsg_fields
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:587    .rodata.syncMsg_fields:00000000 syncMsg_fields
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:66     .rodata.aiBufferByteMsg_fields:00000000 aiBufferByteMsg_fields
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:195    .rodata.aiNetworkInfoMsg_fields:00000000 aiNetworkInfoMsg_fields
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:98     .rodata.aiBufferShapeMsg_fields:00000000 aiBufferShapeMsg_fields
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:347    .rodata.aiRunReportMsg_fields:00000000 aiRunReportMsg_fields
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:465    .rodata.reqMsg_fields:00000000 reqMsg_fields
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:189    .rodata.aiBufferShapeMsg_zeropoint_default:00000000 aiBufferShapeMsg_zeropoint_default
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:177    .rodata.aiBufferShapeMsg_scale_default:00000000 aiBufferShapeMsg_scale_default
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:92     .rodata.aiBufferShapeMsg_channels_default:00000000 aiBufferShapeMsg_channels_default
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:183    .rodata.aiBufferShapeMsg_width_default:00000000 aiBufferShapeMsg_width_default
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:165    .rodata.aiBufferShapeMsg_height_default:00000000 aiBufferShapeMsg_height_default
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:171    .rodata.aiBufferShapeMsg_n_batches_default:00000000 aiBufferShapeMsg_n_batches_default
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:159    .rodata.aiBufferShapeMsg_format_default:00000000 aiBufferShapeMsg_format_default
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:459    .rodata.reqMsg_cmd_default:00000000 reqMsg_cmd_default
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:37     .rodata.ackMsg_fields:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:63     .rodata.aiBufferByteMsg_fields:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:89     .rodata.aiBufferShapeMsg_channels_default:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:95     .rodata.aiBufferShapeMsg_fields:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:156    .rodata.aiBufferShapeMsg_format_default:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:162    .rodata.aiBufferShapeMsg_height_default:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:168    .rodata.aiBufferShapeMsg_n_batches_default:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:174    .rodata.aiBufferShapeMsg_scale_default:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:180    .rodata.aiBufferShapeMsg_width_default:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:186    .rodata.aiBufferShapeMsg_zeropoint_default:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:192    .rodata.aiNetworkInfoMsg_fields:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:344    .rodata.aiRunReportMsg_fields:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:391    .rodata.logMsg_fields:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:417    .rodata.nodeMsg_fields:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:462    .rodata.reqMsg_fields:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:509    .rodata.respMsg_fields:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:584    .rodata.syncMsg_fields:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQqkdpT.s:610    .rodata.sysinfoMsg_fields:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:512    .rodata.respMsg_fields:00000000 respMsg_fields
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:420    .rodata.nodeMsg_fields:00000000 nodeMsg_fields
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:394    .rodata.logMsg_fields:00000000 logMsg_fields
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:40     .rodata.ackMsg_fields:00000000 ackMsg_fields
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:613    .rodata.sysinfoMsg_fields:00000000 sysinfoMsg_fields
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:587    .rodata.syncMsg_fields:00000000 syncMsg_fields
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:66     .rodata.aiBufferByteMsg_fields:00000000 aiBufferByteMsg_fields
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:195    .rodata.aiNetworkInfoMsg_fields:00000000 aiNetworkInfoMsg_fields
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:98     .rodata.aiBufferShapeMsg_fields:00000000 aiBufferShapeMsg_fields
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:347    .rodata.aiRunReportMsg_fields:00000000 aiRunReportMsg_fields
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:465    .rodata.reqMsg_fields:00000000 reqMsg_fields
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:189    .rodata.aiBufferShapeMsg_zeropoint_default:00000000 aiBufferShapeMsg_zeropoint_default
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:177    .rodata.aiBufferShapeMsg_scale_default:00000000 aiBufferShapeMsg_scale_default
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:92     .rodata.aiBufferShapeMsg_channels_default:00000000 aiBufferShapeMsg_channels_default
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:183    .rodata.aiBufferShapeMsg_width_default:00000000 aiBufferShapeMsg_width_default
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:165    .rodata.aiBufferShapeMsg_height_default:00000000 aiBufferShapeMsg_height_default
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:171    .rodata.aiBufferShapeMsg_n_batches_default:00000000 aiBufferShapeMsg_n_batches_default
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:159    .rodata.aiBufferShapeMsg_format_default:00000000 aiBufferShapeMsg_format_default
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:459    .rodata.reqMsg_cmd_default:00000000 reqMsg_cmd_default
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:37     .rodata.ackMsg_fields:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:63     .rodata.aiBufferByteMsg_fields:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:89     .rodata.aiBufferShapeMsg_channels_default:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:95     .rodata.aiBufferShapeMsg_fields:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:156    .rodata.aiBufferShapeMsg_format_default:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:162    .rodata.aiBufferShapeMsg_height_default:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:168    .rodata.aiBufferShapeMsg_n_batches_default:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:174    .rodata.aiBufferShapeMsg_scale_default:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:180    .rodata.aiBufferShapeMsg_width_default:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:186    .rodata.aiBufferShapeMsg_zeropoint_default:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:192    .rodata.aiNetworkInfoMsg_fields:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:344    .rodata.aiRunReportMsg_fields:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:391    .rodata.logMsg_fields:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:417    .rodata.nodeMsg_fields:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:462    .rodata.reqMsg_fields:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:509    .rodata.respMsg_fields:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:584    .rodata.syncMsg_fields:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccsvD6Qs.s:610    .rodata.sysinfoMsg_fields:00000000 $d
 
 NO UNDEFINED SYMBOLS

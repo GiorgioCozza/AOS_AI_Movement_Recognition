@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
   27:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****   lines are not active and the I/O ports are configured in input floating mode.
   28:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****   
   29:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****   [..]   
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 2
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 2
 
 
   30:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****   All GPIO pins have weak internal pull-up and pull-down resistors, which can be 
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
   84:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****     (#) The LSE oscillator pins OSC32_IN and OSC32_OUT can be used as general purpose 
   85:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****         (PC14 and PC15, respectively) when the LSE oscillator is off. The LSE has 
   86:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****         priority over the GPIO function.
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 3
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 3
 
 
   87:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****   
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
  141:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c **** /* Private functions ---------------------------------------------------------*/
  142:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c **** /* Exported functions --------------------------------------------------------*/
  143:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c **** /** @defgroup GPIO_Exported_Functions GPIO Exported Functions
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 4
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 4
 
 
  144:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****   * @{
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
   42              		.loc 1 185 3 view .LVU9
   43              		.loc 1 185 16 is_stmt 0 view .LVU10
   44 0000 0023     		movs	r3, #0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 5
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 5
 
 
   45              	.LVL1:
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
  220:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****       /* In case of Alternate function mode selection */
  221:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****       if((GPIO_Init->Mode == GPIO_MODE_AF_PP) || (GPIO_Init->Mode == GPIO_MODE_AF_OD))
  222:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****       {
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 6
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 6
 
 
  223:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****         /* Check the Alternate function parameter */
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
   88              		.loc 1 252 9 is_stmt 1 discriminator 20 view .LVU22
   89              		.loc 1 252 17 is_stmt 0 discriminator 20 view .LVU23
   90 0024 E243     		mvns	r2, r4
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 7
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 7
 
 
   91              		.loc 1 252 14 discriminator 20 view .LVU24
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
  266:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c **** 
  267:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****         /* Clear Rising Falling edge configuration */
  268:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****         temp = EXTI->RTSR;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 8
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 8
 
 
  132              		.loc 1 268 9 is_stmt 1 view .LVU43
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
  281:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****         }
  282:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****         EXTI->FTSR = temp;
  174              		.loc 1 282 9 is_stmt 1 view .LVU63
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 9
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 9
 
 
  175              		.loc 1 282 20 is_stmt 0 view .LVU64
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
  215 0098 01D0     		beq	.L4
  197:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****       {
  216              		.loc 1 197 51 view .LVU80
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 10
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 10
 
 
  217 009a 122D     		cmp	r5, #18
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
  253              		.loc 1 210 9 is_stmt 1 view .LVU98
  210:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****         GPIOx->OTYPER = temp;
  254              		.loc 1 210 29 is_stmt 0 view .LVU99
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 11
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 11
 
 
  255 00b8 4D68     		ldr	r5, [r1, #4]
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
  292              		.loc 1 218 7 is_stmt 1 view .LVU116
  218:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c **** 
  293              		.loc 1 218 20 is_stmt 0 view .LVU117
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 12
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 12
 
 
  294 00d6 C660     		str	r6, [r0, #12]
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
  331 0102 45EA0E05 		orr	r5, r5, lr
  332              	.LVL37:
  229:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****       }
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 13
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 13
 
 
  333              		.loc 1 229 9 is_stmt 1 view .LVU135
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
  370 0124 0192     		str	r2, [sp, #4]
  371              	.LVL43:
  243:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c **** 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 14
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 14
 
 
  372              		.loc 1 243 9 view .LVU153
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
  412              		.loc 1 247 29 discriminator 3 view .LVU167
  413 0162 02F58062 		add	r2, r2, #1024
  414 0166 9042     		cmp	r0, r2
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 15
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 15
 
 
  415 0168 0CD0     		beq	.L16
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
  460 0192 00BF     		.align	2
  461              	.L25:
  462 0194 00380140 		.word	1073821696
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 16
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 16
 
 
  463 0198 003C0140 		.word	1073822720
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
  497 0006 F0B5     		push	{r4, r5, r6, r7, lr}
  498              	.LCFI4:
  499              		.cfi_def_cfa_offset 20
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 17
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 17
 
 
  500              		.cfi_offset 4, -20
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
  525              		.loc 1 336 56 view .LVU191
  526 001a 5E00     		lsls	r6, r3, #1
  527              		.loc 1 336 43 view .LVU192
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 18
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 18
 
 
  528 001c 0324     		movs	r4, #3
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
  569 0058 0133     		adds	r3, r3, #1
  570              	.LVL55:
  307:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****   {
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 19
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 19
 
 
  571              		.loc 1 307 3 discriminator 2 view .LVU209
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
  609              		.loc 1 319 18 is_stmt 0 view .LVU225
  610 008a 1B4F     		ldr	r7, .L45+4
  611 008c B842     		cmp	r0, r7
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 20
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 20
 
 
  612 008e BED0     		beq	.L33
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
  655 00ca 6E68     		ldr	r6, [r5, #4]
  656 00cc 2640     		ands	r6, r6, r4
  657 00ce 6E60     		str	r6, [r5, #4]
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 21
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 21
 
 
  326:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****         EXTI->FTSR &= ~((uint32_t)iocurrent);
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
  701              		.cfi_endproc
  702              	.LFE131:
  704              		.section	.text.HAL_GPIO_ReadPin,"ax",%progbits
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 22
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 22
 
 
  705              		.align	1
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
  727 0004 01D0     		beq	.L49
  385:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****   {
  386:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****     bitstatus = GPIO_PIN_SET;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 23
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 23
 
 
  728              		.loc 1 386 15 view .LVU253
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
  757              		@ args = 0, pretend = 0, frame = 0
  758              		@ frame_needed = 0, uses_anonymous_args = 0
  759              		@ link register save eliminated.
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 24
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 24
 
 
  414:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****   /* Check the parameters */
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
  793              		.cfi_startproc
  794              		@ args = 0, pretend = 0, frame = 0
  795              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 25
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 25
 
 
  796              		@ link register save eliminated.
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
  455:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****   *         until the next reset.
  456:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****   * @param  GPIOx where x can be (A..F) to select the GPIO peripheral for STM32F4 family
  457:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****   * @param  GPIO_Pin specifies the port bit to be locked.
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 26
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 26
 
 
  458:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****   *         This parameter can be any combination of GPIO_PIN_x where x can be (0..15).
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
  865 001a 0193     		str	r3, [sp, #4]
  478:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c **** 
  479:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****   /* Read again in order to confirm lock is active */
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 27
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 27
 
 
  480:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****  if((GPIOx->LCKR & GPIO_LCKR_LCKK) != RESET)
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
  494:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****   */
  495:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c **** void HAL_GPIO_EXTI_IRQHandler(uint16_t GPIO_Pin)
  496:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c **** {
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 28
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 28
 
 
  497:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****   /* EXTI line interrupt detected */
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
  938              		.loc 1 498 3 is_stmt 1 view .LVU308
  498:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_gpio.c ****   {
  939              		.loc 1 498 6 is_stmt 0 view .LVU309
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 29
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 29
 
 
  940 0002 054B     		ldr	r3, .L66
@@ -1722,29 +1722,29 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 1
  974              		.file 8 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/
  975              		.file 9 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/
  976              		.file 10 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s 			page 30
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s 			page 30
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_hal_gpio.c
-C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s:18     .text.HAL_GPIO_Init:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s:26     .text.HAL_GPIO_Init:00000000 HAL_GPIO_Init
-C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s:462    .text.HAL_GPIO_Init:00000194 $d
-C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s:470    .text.HAL_GPIO_DeInit:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s:477    .text.HAL_GPIO_DeInit:00000000 HAL_GPIO_DeInit
-C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s:698    .text.HAL_GPIO_DeInit:000000f4 $d
-C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s:705    .text.HAL_GPIO_ReadPin:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s:712    .text.HAL_GPIO_ReadPin:00000000 HAL_GPIO_ReadPin
-C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s:745    .text.HAL_GPIO_WritePin:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s:752    .text.HAL_GPIO_WritePin:00000000 HAL_GPIO_WritePin
-C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s:782    .text.HAL_GPIO_TogglePin:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s:789    .text.HAL_GPIO_TogglePin:00000000 HAL_GPIO_TogglePin
-C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s:821    .text.HAL_GPIO_LockPin:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s:828    .text.HAL_GPIO_LockPin:00000000 HAL_GPIO_LockPin
-C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s:896    .text.HAL_GPIO_EXTI_Callback:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s:903    .text.HAL_GPIO_EXTI_Callback:00000000 HAL_GPIO_EXTI_Callback
-C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s:918    .text.HAL_GPIO_EXTI_IRQHandler:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s:925    .text.HAL_GPIO_EXTI_IRQHandler:00000000 HAL_GPIO_EXTI_IRQHandler
-C:\Users\grgcz\AppData\Local\Temp\ccr1zFNi.s:962    .text.HAL_GPIO_EXTI_IRQHandler:00000018 $d
+C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s:18     .text.HAL_GPIO_Init:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s:26     .text.HAL_GPIO_Init:00000000 HAL_GPIO_Init
+C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s:462    .text.HAL_GPIO_Init:00000194 $d
+C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s:470    .text.HAL_GPIO_DeInit:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s:477    .text.HAL_GPIO_DeInit:00000000 HAL_GPIO_DeInit
+C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s:698    .text.HAL_GPIO_DeInit:000000f4 $d
+C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s:705    .text.HAL_GPIO_ReadPin:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s:712    .text.HAL_GPIO_ReadPin:00000000 HAL_GPIO_ReadPin
+C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s:745    .text.HAL_GPIO_WritePin:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s:752    .text.HAL_GPIO_WritePin:00000000 HAL_GPIO_WritePin
+C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s:782    .text.HAL_GPIO_TogglePin:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s:789    .text.HAL_GPIO_TogglePin:00000000 HAL_GPIO_TogglePin
+C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s:821    .text.HAL_GPIO_LockPin:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s:828    .text.HAL_GPIO_LockPin:00000000 HAL_GPIO_LockPin
+C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s:896    .text.HAL_GPIO_EXTI_Callback:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s:903    .text.HAL_GPIO_EXTI_Callback:00000000 HAL_GPIO_EXTI_Callback
+C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s:918    .text.HAL_GPIO_EXTI_IRQHandler:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s:925    .text.HAL_GPIO_EXTI_IRQHandler:00000000 HAL_GPIO_EXTI_IRQHandler
+C:\Users\grgcz\AppData\Local\Temp\cci9o3qQ.s:962    .text.HAL_GPIO_EXTI_IRQHandler:00000018 $d
 
 NO UNDEFINED SYMBOLS

@@ -87,6 +87,7 @@ ECHO.
 :: is not possible by the CLI.
 
 cd %CUBEAI_PROJ_PATH%
+make clean
 make
 cd ..
 FOR %%u IN (A: B: C: D: E: F: G:) DO (

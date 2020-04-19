@@ -65,7 +65,7 @@ ECHO "[LOG] Clean Miosix Installation..."
 ECHO.
 make clean
 ECHO "[LOG] Compiling Miosix OS..."
-make
+make -j8
 cd %PROJ_DIR%
 
 FOR %%u IN (A: B: C: D: E: F: G:) DO (

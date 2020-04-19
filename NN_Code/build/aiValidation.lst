@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
   28:Src/aiValidation.c ****  *           Removing compile-time STM32 family checking
   29:Src/aiValidation.c ****  *  - v2.1 - Adding integer (scale/zero-point) support
   30:Src/aiValidation.c ****  *           Add support for external memory for data activations
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 2
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 2
 
 
   31:Src/aiValidation.c ****  *  - v3.0 - Adding multiple IO support
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
   85:Src/aiValidation.c **** #define _APP_VERSION_MAJOR_     (0x03)
   86:Src/aiValidation.c **** #define _APP_VERSION_MINOR_     (0x02)
   87:Src/aiValidation.c **** #define _APP_VERSION_   ((_APP_VERSION_MAJOR_ << 8) | _APP_VERSION_MINOR_)
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 3
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 3
 
 
   88:Src/aiValidation.c **** 
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  142:Src/aiValidation.c **** static void aiOnExecNode_cb(const ai_handle cookie,
  143:Src/aiValidation.c ****         const ai_inspect_node_info* node_info,
  144:Src/aiValidation.c ****         ai_node_exec_stage stage) {
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 4
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 4
 
 
  145:Src/aiValidation.c **** 
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
   47 0004 0546     		mov	r5, r0
   48 0006 50B3     		cbz	r0, .L6
  181:Src/aiValidation.c ****         return NULL;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 5
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 5
 
 
  182:Src/aiValidation.c **** 
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
   81              		.loc 1 190 13 is_stmt 1 view .LVU16
  190:Src/aiValidation.c ****                     (strlen(cur->report.model_name) == strlen(nn_name)) &&
   82              		.loc 1 190 20 is_stmt 0 view .LVU17
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 6
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 6
 
 
   83 0028 8B58     		ldr	r3, [r1, r2]
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  126 0056 002E     		cmp	r6, #0
  127 0058 E1DD     		ble	.L5
  128 005a 0024     		movs	r4, #0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 7
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 7
 
 
  129 005c DCE7     		b	.L1
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  224:Src/aiValidation.c ****         aiLogErr(err, "ai_mnetwork_create");
  225:Src/aiValidation.c ****         return -1;
  226:Src/aiValidation.c ****     }
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 8
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 8
 
 
  227:Src/aiValidation.c **** 
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  281:Src/aiValidation.c ****         return -1;
  282:Src/aiValidation.c **** 
  283:Src/aiValidation.c ****     if ((ctx->inspector != AI_HANDLE_NULL) &&
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 9
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 9
 
 
  284:Src/aiValidation.c ****             (ctx->net_id != AI_INSPECTOR_NETWORK_BIND_FAILED))
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  338:Src/aiValidation.c **** 
  339:Src/aiValidation.c ****     aiInspectorUnBind(ctx);
  340:Src/aiValidation.c **** 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 10
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 10
 
 
  341:Src/aiValidation.c ****     ctx->n_cb_in  = 0;
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  395:Src/aiValidation.c ****     {
  396:Src/aiValidation.c ****         ctx->entry.handle = phandle;
  397:Src/aiValidation.c ****         ctx->entry.params = pparams;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 11
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 11
 
 
  398:Src/aiValidation.c ****         aiInspectorBind(ctx);
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  452:Src/aiValidation.c ****     } while (nn_name);
  453:Src/aiValidation.c **** 
  454:Src/aiValidation.c ****     return res;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 12
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 12
 
 
  455:Src/aiValidation.c **** }
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  180              	.LVL16:
  181              		.loc 1 487 11 view .LVU38
  182 000a 0C30     		adds	r0, r0, #12
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 13
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 13
 
 
  183              	.LVL17:
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  229              		.syntax unified
  230              		.thumb
  231              		.thumb_func
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 14
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 14
 
 
  232              		.fpu fpv4-sp-d16
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  278              		.loc 1 149 9 is_stmt 1 view .LVU56
  149:Src/aiValidation.c ****         ctx->tcom += dwtGetCycles();
  279              		.loc 1 149 12 is_stmt 0 view .LVU57
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 15
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 15
 
 
  280 0016 D0F8D030 		ldr	r3, [r0, #208]
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  322 005c C4F8F420 		str	r2, [r4, #244]
  157:Src/aiValidation.c ****         if (ctx->n_cb_out == ctx->report.n_nodes)
  323              		.loc 1 157 9 is_stmt 1 view .LVU70
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 16
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 16
 
 
  157:Src/aiValidation.c ****         if (ctx->n_cb_out == ctx->report.n_nodes)
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  361              		.loc 1 166 9 view .LVU87
  362 0088 1C43     		orrs	r4, r4, r3
  168:Src/aiValidation.c ****                 dwtCyclesToFloatMs(dur),
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 17
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 17
 
 
  363              		.loc 1 168 26 view .LVU88
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  410 0002 10B5     		push	{r4, lr}
  411              	.LCFI9:
  412              		.cfi_def_cfa_offset 8
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 18
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 18
 
 
  413              		.cfi_offset 4, -8
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  459              	.LFB147:
  333:Src/aiValidation.c ****     int res = 0;
  460              		.loc 1 333 1 is_stmt 1 view -0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 19
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 19
 
 
  461              		.cfi_startproc
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  498              		.loc 1 349 12 is_stmt 0 view .LVU125
  499 0024 28B1     		cbz	r0, .L39
  334:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 20
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 20
 
 
  500              		.loc 1 334 9 view .LVU126
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  549              		.cfi_def_cfa_offset 16
  550              		.cfi_offset 4, -16
  551              		.cfi_offset 5, -12
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 21
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 21
 
 
  552              		.cfi_offset 6, -8
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  588              		.loc 1 382 5 is_stmt 1 view .LVU151
  383:Src/aiValidation.c **** 
  589              		.loc 1 383 5 view .LVU152
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 22
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 22
 
 
  385:Src/aiValidation.c ****         return -1;
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  397:Src/aiValidation.c ****         aiInspectorBind(ctx);
  630              		.loc 1 397 27 is_stmt 0 view .LVU167
  631 004c 05F19C04 		add	r4, r5, #156
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 23
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 23
 
 
  632 0050 01AE     		add	r6, sp, #4
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  679              	.LVL61:
  283:Src/aiValidation.c ****             (ctx->net_id != AI_INSPECTOR_NETWORK_BIND_FAILED))
  680              		.loc 1 283 8 view .LVU177
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 24
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 24
 
 
  681 0006 70B1     		cbz	r0, .L55
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  722              	.LVL66:
  723              	.L55:
  279:Src/aiValidation.c ****     if (!ctx)
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 25
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 25
 
 
  724              		.loc 1 279 9 view .LVU191
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  300:Src/aiValidation.c ****         resp->which_payload = respMsg_report_tag;
  776              		.loc 1 300 9 is_stmt 0 view .LVU196
  777 0014 1846     		mov	r0, r3
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 26
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 26
 
 
  778              	.LVL69:
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  813 003e 2146     		mov	r1, r4
  814 0040 3046     		mov	r0, r6
  815 0042 FFF7FEFF 		bl	aiPbMgrSendResp
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 27
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 27
 
 
  816              	.LVL71:
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  407:Src/aiValidation.c **** #ifdef HAS_INSPECTOR
  866              		.loc 1 407 1 is_stmt 0 view .LVU222
  867 0000 10B5     		push	{r4, lr}
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 28
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 28
 
 
  868              	.LCFI27:
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  911              		.loc 1 497 1 is_stmt 0 view .LVU234
  912 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
  913              	.LCFI28:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 29
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 29
 
 
  914              		.cfi_def_cfa_offset 36
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  513:Src/aiValidation.c ****                 EnumError_E_INVALID_PARAM, EnumError_E_INVALID_PARAM);
  514:Src/aiValidation.c ****         return;
  515:Src/aiValidation.c ****     }
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 30
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 30
 
 
  516:Src/aiValidation.c **** 
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  987              		.loc 1 534 5 is_stmt 1 view .LVU265
  988              	.LBB13:
  989              		.loc 1 534 10 view .LVU266
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 31
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 31
 
 
  990              	.LVL87:
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  554:Src/aiValidation.c ****     /* 2 - Receive all input tensors */
  555:Src/aiValidation.c ****     for (int i = 0; i < ctx->report.n_inputs; i++) {
  1025              		.loc 1 555 5 is_stmt 1 view .LVU275
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 32
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 32
 
 
  1026              	.LBB15:
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  1072 00a4 ACE80F00 		stmia	ip!, {r0, r1, r2, r3}
  1073 00a8 9EE80300 		ldm	lr, {r0, r1}
  1074 00ac 8CE80300 		stm	ip, {r0, r1}
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 33
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 33
 
 
  536:Src/aiValidation.c ****         if (ctx->report.inputs[i].data)
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  1114 00e0 CA00     		lsls	r2, r1, #3
  545:Src/aiValidation.c ****         ai_output[i].n_batches = 1;
  1115              		.loc 1 545 19 discriminator 3 view .LVU303
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 34
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 34
 
 
  1116 00e2 9046     		mov	r8, r2
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  1158 011e FFF7FEFF 		bl	aiPbMgrReceiveAiBuffer3
  1159              	.LVL103:
  561:Src/aiValidation.c ****         if (res != true)
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 35
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 35
 
 
  1160              		.loc 1 561 9 is_stmt 1 view .LVU315
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  567:Src/aiValidation.c ****     /* Update the PN context for inspector callbacks */
  568:Src/aiValidation.c ****     aiSetPbContext(ctx, req, resp);
  1200              		.loc 1 568 5 is_stmt 1 view .LVU330
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 36
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 36
 
 
  1201              	.LBB22:
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  1238              	.LVL113:
  1239              		.loc 1 578 9 is_stmt 0 view .LVU346
  1240 015e FFF7FEFF 		bl	ai_mnetwork_get_error
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 37
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 37
 
 
  1241              	.LVL114:
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  1263              	.L98:
  1264              	.LCFI31:
  1265              		.cfi_restore_state
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 38
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 38
 
 
  571:Src/aiValidation.c **** 
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  1306              		.loc 1 591 9 is_stmt 1 view .LVU363
  1307 01a0 1846     		mov	r0, r3
  1308 01a2 0021     		movs	r1, #0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 39
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 39
 
 
  1309 01a4 FFF7FEFF 		bl	dwtCyclesToFloatMs
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  595:Src/aiValidation.c ****     	/* download a buffer */
  1355              		.loc 1 595 36 discriminator 1 view .LVU372
  1356 01e4 E38E     		ldrh	r3, [r4, #54]
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 40
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 40
 
 
  595:Src/aiValidation.c ****     	/* download a buffer */
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  1400              	.LFE153:
  1402              		.section	.text.aiDeInit,"ax",%progbits
  1403              		.align	1
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 41
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 41
 
 
  1404              		.syntax unified
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  466:Src/aiValidation.c ****                     != AI_HANDLE_NULL) {
  1447              		.loc 1 466 17 is_stmt 0 view .LVU396
  1448 001c FFF7FEFF 		bl	ai_mnetwork_destroy
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 42
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 42
 
 
  1449              	.LVL140:
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  216:Src/aiValidation.c ****     ai_error err;
  1497              		.loc 1 216 1 is_stmt 1 view -0
  1498              		.cfi_startproc
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 43
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 43
 
 
  1499              		@ args = 0, pretend = 0, frame = 56
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  1542              	.LVL149:
  229:Src/aiValidation.c ****     /* build params structure to provide the reference of the
  1543              		.loc 1 229 5 is_stmt 0 view .LVU417
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 44
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 44
 
 
  1544 002a FFF7FEFF 		bl	puts
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  1586              	.LVL153:
  253:Src/aiValidation.c ****         err = ai_mnetwork_get_error(net_exec_ctx[idx].network);
  1587              		.loc 1 253 8 view .LVU430
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 45
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 45
 
 
  1588 006c 48B3     		cbz	r0, .L122
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  1631 009a F7E7     		b	.L112
  1632              	.L121:
  243:Src/aiValidation.c ****     		ext_addr = (ai_u32)activations;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 46
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 46
 
 
  1633              		.loc 1 243 7 is_stmt 1 view .LVU442
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  1675              	.LVL162:
  257:Src/aiValidation.c ****         return -4;
  1676              		.loc 1 257 9 view .LVU455
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 47
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 47
 
 
  257:Src/aiValidation.c ****         return -4;
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  1720 0128 64000000 		.word	.LC7
  1721              		.cfi_endproc
  1722              	.LFE143:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 48
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 48
 
 
  1724              		.section	.text.aiInit,"ax",%progbits
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  442:Src/aiValidation.c ****     do {
  1771              		.loc 1 442 9 view .LVU475
  1772 0020 0024     		movs	r4, #0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 49
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 49
 
 
  420:Src/aiValidation.c ****     const char *nn_name;
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  1812 0048 FFF7FEFF 		bl	ai_mnetwork_find
  1813              	.LVL173:
  445:Src/aiValidation.c ****             printf("\r\nFound network \"%s\"\r\n", nn_name);
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 50
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 50
 
 
  1814              		.loc 1 445 9 is_stmt 1 view .LVU491
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  1856              	.L133:
  1857 0074 00000000 		.word	.LC8
  1858 0078 00000000 		.word	.LANCHOR0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 51
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 51
 
 
  1859 007c 34000000 		.word	.LC9
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  628:Src/aiValidation.c ****         AI_PB_CMD_SYS_INFO(NULL),
  629:Src/aiValidation.c ****         { EnumCmd_CMD_NETWORK_INFO, &aiPbCmdNNInfo, NULL },
  630:Src/aiValidation.c ****         { EnumCmd_CMD_NETWORK_RUN, &aiPbCmdNNRun, NULL },
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 52
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 52
 
 
  631:Src/aiValidation.c **** #if defined(AI_PB_TEST) && AI_PB_TEST == 1
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  1936 0028 00000000 		.word	.LC10
  1937              		.cfi_endproc
  1938              	.LFE155:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 53
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 53
 
 
  1940              		.section	.text.aiValidationProcess,"ax",%progbits
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  1981              		.loc 1 662 9 view .LVU525
  1982 0018 1548     		ldr	r0, .L147+8
  1983 001a FFF7FEFF 		bl	puts
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 54
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 54
 
 
  1984              	.LVL190:
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  679:Src/aiValidation.c **** }
  2022              		.loc 1 679 1 view .LVU536
  2023 004e 2046     		mov	r0, r4
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 55
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 55
 
 
  2024 0050 38BD     		pop	{r3, r4, r5, pc}
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  2072              		.cfi_def_cfa_offset 8
  2073              		.cfi_offset 3, -8
  2074              		.cfi_offset 14, -4
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 56
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 56
 
 
  683:Src/aiValidation.c ****     printf("\r\n");
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  2124 0010 00000000 		.word	aiPbCmdSysInfo
  2125 0014 00000000 		.word	0
  2126 0018 0A       		.byte	10
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 57
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 57
 
 
  2127 0019 000000   		.space	3
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  2157      74776F72 
  2158 001d 000000   		.space	3
  2159              	.LC2:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 58
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 58
 
 
  2160 0020 61695F6D 		.ascii	"ai_mnetwork_destroy\000"
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  2188 001a 0000     		.space	2
  2189              	.LC13:
  2190 001c 2D2D2D2D 		.ascii	"-------------------------------------------\015\000"
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 59
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 59
 
 
  2190      2D2D2D2D 
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  2219              		.file 15 "Middlewares/ST/AI/Inc/ai_datatypes_format.h"
  2220              		.file 16 "Middlewares/ST/AI/Inc/ai_platform_interface.h"
  2221              		.file 17 "Middlewares/ST/AI/Inc/core_net_inspect_interface.h"
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 60
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 60
 
 
  2222              		.file 18 "Middlewares/ST/AI/Inc/ai_network_inspector.h"
@@ -3549,72 +3549,72 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 1
  2227              		.file 23 "Inc/app_x-cube-ai.h"
  2228              		.file 24 "<built-in>"
  2229              		.file 25 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\includ
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 61
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 61
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 aiValidation.c
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:18     .text.aiExecCtx:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:25     .text.aiExecCtx:00000000 aiExecCtx
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:144    .text.aiExecCtx:00000068 $d
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:149    .text.aiPbCmdNNInfo:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:156    .text.aiPbCmdNNInfo:00000000 aiPbCmdNNInfo
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:228    .text.aiOnExecNode_cb:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:234    .text.aiOnExecNode_cb:00000000 aiOnExecNode_cb
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:393    .text.aiInspectorUnBind:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:399    .text.aiInspectorUnBind:00000000 aiInspectorUnBind
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:451    .text.aiInspectorBind:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:457    .text.aiInspectorBind:00000000 aiInspectorBind
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:533    .text.aiInspectorInitAndBind:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:539    .text.aiInspectorInitAndBind:00000000 aiInspectorInitAndBind
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:653    .text.aiInspectorInitAndBind:00000074 $d
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:658    .text.aiInspectorGetReport:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:664    .text.aiInspectorGetReport:00000000 aiInspectorGetReport
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:740    .text.aiInspectorSendReport:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:746    .text.aiInspectorSendReport:00000000 aiInspectorSendReport
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:853    .text.aiInspectorUnbindAndDestroy:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:859    .text.aiInspectorUnbindAndDestroy:00000000 aiInspectorUnbindAndDestroy
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:897    .text.aiPbCmdNNRun:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:904    .text.aiPbCmdNNRun:00000000 aiPbCmdNNRun
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:1396   .text.aiPbCmdNNRun:00000210 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:18     .text.aiExecCtx:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:25     .text.aiExecCtx:00000000 aiExecCtx
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:144    .text.aiExecCtx:00000068 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:149    .text.aiPbCmdNNInfo:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:156    .text.aiPbCmdNNInfo:00000000 aiPbCmdNNInfo
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:228    .text.aiOnExecNode_cb:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:234    .text.aiOnExecNode_cb:00000000 aiOnExecNode_cb
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:393    .text.aiInspectorUnBind:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:399    .text.aiInspectorUnBind:00000000 aiInspectorUnBind
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:451    .text.aiInspectorBind:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:457    .text.aiInspectorBind:00000000 aiInspectorBind
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:533    .text.aiInspectorInitAndBind:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:539    .text.aiInspectorInitAndBind:00000000 aiInspectorInitAndBind
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:653    .text.aiInspectorInitAndBind:00000074 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:658    .text.aiInspectorGetReport:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:664    .text.aiInspectorGetReport:00000000 aiInspectorGetReport
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:740    .text.aiInspectorSendReport:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:746    .text.aiInspectorSendReport:00000000 aiInspectorSendReport
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:853    .text.aiInspectorUnbindAndDestroy:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:859    .text.aiInspectorUnbindAndDestroy:00000000 aiInspectorUnbindAndDestroy
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:897    .text.aiPbCmdNNRun:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:904    .text.aiPbCmdNNRun:00000000 aiPbCmdNNRun
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1396   .text.aiPbCmdNNRun:00000210 $d
                             *COM*:000005a0 data_in_1
                             *COM*:0000001c data_out_1
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:1403   .text.aiDeInit:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:1409   .text.aiDeInit:00000000 aiDeInit
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:1481   .text.aiDeInit:00000048 $d
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:1488   .text.aiBootstrap:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:1494   .text.aiBootstrap:00000000 aiBootstrap
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:1713   .text.aiBootstrap:0000010c $d
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:1725   .text.aiInit:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:1731   .text.aiInit:00000000 aiInit
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:1857   .text.aiInit:00000074 $d
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:1864   .text.aiValidationCore:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:1870   .text.aiValidationCore:00000000 aiValidationCore
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:1891   .text.aiValidationInit:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:1898   .text.aiValidationInit:00000000 aiValidationInit
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:1935   .text.aiValidationInit:00000024 $d
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:1941   .text.aiValidationProcess:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:1948   .text.aiValidationProcess:00000000 aiValidationProcess
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:2046   .text.aiValidationProcess:00000068 $d
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:2057   .text.aiValidationDeInit:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:2064   .text.aiValidationDeInit:00000000 aiValidationDeInit
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:2091   .text.aiValidationDeInit:00000014 $d
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:2099   .bss.activations:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:2103   .bss.activations:00000000 activations
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:2106   .bss.net_exec_ctx:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:2110   .bss.net_exec_ctx:00000000 net_exec_ctx
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:2113   .data.pbCmdFuncTab:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:2117   .data.pbCmdFuncTab:00000000 pbCmdFuncTab
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:2139   .rodata.aiBootstrap.str1.4:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:2155   .rodata.aiDeInit.str1.4:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:2162   .rodata.aiInit.str1.4:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:2170   .rodata.aiPbCmdNNRun.str1.4:00000000 $d
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s 			page 62
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1403   .text.aiDeInit:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1409   .text.aiDeInit:00000000 aiDeInit
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1481   .text.aiDeInit:00000048 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1488   .text.aiBootstrap:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1494   .text.aiBootstrap:00000000 aiBootstrap
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1713   .text.aiBootstrap:0000010c $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1725   .text.aiInit:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1731   .text.aiInit:00000000 aiInit
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1857   .text.aiInit:00000074 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1864   .text.aiValidationCore:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1870   .text.aiValidationCore:00000000 aiValidationCore
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1891   .text.aiValidationInit:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1898   .text.aiValidationInit:00000000 aiValidationInit
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1935   .text.aiValidationInit:00000024 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1941   .text.aiValidationProcess:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:1948   .text.aiValidationProcess:00000000 aiValidationProcess
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2046   .text.aiValidationProcess:00000068 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2057   .text.aiValidationDeInit:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2064   .text.aiValidationDeInit:00000000 aiValidationDeInit
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2091   .text.aiValidationDeInit:00000014 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2099   .bss.activations:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2103   .bss.activations:00000000 activations
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2106   .bss.net_exec_ctx:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2110   .bss.net_exec_ctx:00000000 net_exec_ctx
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2113   .data.pbCmdFuncTab:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2117   .data.pbCmdFuncTab:00000000 pbCmdFuncTab
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2139   .rodata.aiBootstrap.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2155   .rodata.aiDeInit.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2162   .rodata.aiInit.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2170   .rodata.aiPbCmdNNRun.str1.4:00000000 $d
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s 			page 62
 
 
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:2174   .rodata.aiValidationDeInit.str1.4:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:2178   .rodata.aiValidationInit.str1.4:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\cceIDVfc.s:2182   .rodata.aiValidationProcess.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2174   .rodata.aiValidationDeInit.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2178   .rodata.aiValidationInit.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccHp22TP.s:2182   .rodata.aiValidationProcess.str1.4:00000000 $d
 
 UNDEFINED SYMBOLS
 strlen

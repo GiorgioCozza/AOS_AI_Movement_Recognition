@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
   27:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c **** 
   28:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****     (+) When set in interrupt mode, configurable Exti lines have two different
   29:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****         interrupts pending registers which allow to distinguish which transition
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 2
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 2
 
 
   30:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****         occurs:
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
   84:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****   */
   85:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c **** 
   86:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c **** /* Includes ------------------------------------------------------------------*/
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 3
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 3
 
 
   87:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c **** #include "stm32f4xx_hal.h"
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
  141:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****   * @retval HAL Status.
  142:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****   */
  143:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c **** HAL_StatusTypeDef HAL_EXTI_SetConfigLine(EXTI_HandleTypeDef *hexti, EXTI_ConfigTypeDef *pExtiConfig
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 4
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 4
 
 
  144:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c **** {
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
  164:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****   maskline = (1uL << linepos);
   63              		.loc 1 164 3 is_stmt 1 view .LVU15
   64              		.loc 1 164 12 is_stmt 0 view .LVU16
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 5
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 5
 
 
   65 0012 0123     		movs	r3, #1
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
   97 003a EC60     		str	r4, [r5, #12]
   98              	.L7:
  187:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****     }
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 6
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 6
 
 
  188:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****     else
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
  219:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****   /* Mask or set line */
  220:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****   if ((pExtiConfig->Mode & EXTI_MODE_EVENT) != 0x00u)
  122              		.loc 1 220 3 is_stmt 1 view .LVU39
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 7
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 7
 
 
  123              		.loc 1 220 19 is_stmt 0 view .LVU40
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
  163              		.loc 1 190 18 is_stmt 0 view .LVU51
  164 007a 154D     		ldr	r5, .L18
  165 007c EC68     		ldr	r4, [r5, #12]
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 8
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 8
 
 
  166 007e 24EA0304 		bic	r4, r4, r3
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
  204 00aa CDE7     		b	.L3
  205              	.LVL12:
  206              	.L8:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 9
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 9
 
 
  215:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****   }
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
  251 00d4 00380140 		.word	1073821696
  252              		.cfi_endproc
  253              	.LFE130:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 10
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 10
 
 
  255              		.section	.text.HAL_EXTI_GetConfigLine,"ax",%progbits
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
  253:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****   /* Store handle line number to configuration structure */
  254:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****   pExtiConfig->Line = hexti->Line;
  287              		.loc 1 254 3 view .LVU88
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 11
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 11
 
 
  288              		.loc 1 254 28 is_stmt 0 view .LVU89
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
  275:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****   {
  276:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****     pExtiConfig->Mode |= EXTI_MODE_EVENT;
  322              		.loc 1 276 5 is_stmt 1 view .LVU104
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 12
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 12
 
 
  323              		.loc 1 276 23 is_stmt 0 view .LVU105
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
  357 0052 8B60     		str	r3, [r1, #8]
  358              	.L28:
  297:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****     }
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 13
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 13
 
 
  298:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c **** 
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
  393 0076 0C4A     		ldr	r2, .L37+4
  394 0078 52F82320 		ldr	r2, [r2, r3, lsl #2]
  395              	.LVL26:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 14
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 14
 
 
  305:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****     }
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
  429 009a 7047     		bx	lr
  430              	.LVL30:
  431              	.L30:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 15
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 15
 
 
  247:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****   }
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
  471              		.loc 1 334 3 view .LVU154
  472              		.loc 1 334 6 is_stmt 0 view .LVU155
  473 0000 0028     		cmp	r0, #0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 16
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 16
 
 
  474 0002 32D0     		beq	.L41
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
  511 0020 5160     		str	r1, [r2, #4]
  351:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c **** 
  352:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****   /* 3] Clear triggers in case of configurable lines */
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 17
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 17
 
 
  353:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****   if ((hexti->Line & EXTI_CONFIG) != 0x00u)
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
  361:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c **** 
  549              		.loc 1 361 7 is_stmt 1 view .LVU189
  363:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****       regval &= ~(SYSCFG_EXTICR1_EXTI0 << (SYSCFG_EXTICR1_EXTI1_Pos * (linepos & 0x03u)));
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 18
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 18
 
 
  550              		.loc 1 363 7 view .LVU190
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
  593              		.cfi_offset 5, -4
  369:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c **** }
  594              		.loc 1 369 10 view .LVU203
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 19
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 19
 
 
  595 006e 0020     		movs	r0, #0
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
  634              		.loc 1 387 7 view .LVU209
  635              		.loc 1 387 30 is_stmt 0 view .LVU210
  636 0002 4260     		str	r2, [r0, #4]
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 20
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 20
 
 
  388:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****       break;
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
  409:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c **** 
  410:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****   /* Check null pointer */
  411:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****   if (hexti == NULL)
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 21
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 21
 
 
  671              		.loc 1 411 3 view .LVU219
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
  434:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****  ===============================================================================
  435:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c **** 
  436:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c **** @endverbatim
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 22
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 22
 
 
  437:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****   * @{
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
  736 0014 024A     		ldr	r2, .L60
  737              	.LVL61:
  738              		.loc 1 458 14 view .LVU242
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 23
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 23
 
 
  739 0016 5361     		str	r3, [r2, #20]
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
  479:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****   uint32_t regval;
  775              		.loc 1 479 3 view .LVU249
  480:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c ****   uint32_t linepos;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 24
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 24
 
 
  776              		.loc 1 480 3 view .LVU250
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
  816              		.section	.text.HAL_EXTI_ClearPending,"ax",%progbits
  817              		.align	1
  818              		.global	HAL_EXTI_ClearPending
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 25
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 25
 
 
  819              		.syntax unified
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
  849              		.loc 1 520 1 view .LVU279
  850 000e 7047     		bx	lr
  851              	.L67:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 26
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 26
 
 
  852              		.align	2
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
  889 000c 1361     		str	r3, [r2, #16]
  540:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_exti.c **** }
  890              		.loc 1 540 1 view .LVU290
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 27
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 27
 
 
  891 000e 7047     		bx	lr
@@ -1578,35 +1578,35 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 1
  906              		.file 7 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/
  907              		.file 8 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/
  908              		.file 9 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s 			page 28
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s 			page 28
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_hal_exti.c
-C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s:18     .text.HAL_EXTI_SetConfigLine:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s:26     .text.HAL_EXTI_SetConfigLine:00000000 HAL_EXTI_SetConfigLine
-C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s:250    .text.HAL_EXTI_SetConfigLine:000000d0 $d
-C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s:256    .text.HAL_EXTI_GetConfigLine:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s:263    .text.HAL_EXTI_GetConfigLine:00000000 HAL_EXTI_GetConfigLine
-C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s:447    .text.HAL_EXTI_GetConfigLine:000000a4 $d
-C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s:453    .text.HAL_EXTI_ClearConfigLine:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s:460    .text.HAL_EXTI_ClearConfigLine:00000000 HAL_EXTI_ClearConfigLine
-C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s:610    .text.HAL_EXTI_ClearConfigLine:00000074 $d
-C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s:616    .text.HAL_EXTI_RegisterCallback:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s:623    .text.HAL_EXTI_RegisterCallback:00000000 HAL_EXTI_RegisterCallback
-C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s:655    .text.HAL_EXTI_GetHandle:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s:662    .text.HAL_EXTI_GetHandle:00000000 HAL_EXTI_GetHandle
-C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s:694    .text.HAL_EXTI_IRQHandler:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s:701    .text.HAL_EXTI_IRQHandler:00000000 HAL_EXTI_IRQHandler
-C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s:755    .text.HAL_EXTI_IRQHandler:00000020 $d
-C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s:760    .text.HAL_EXTI_GetPending:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s:767    .text.HAL_EXTI_GetPending:00000000 HAL_EXTI_GetPending
-C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s:812    .text.HAL_EXTI_GetPending:00000018 $d
-C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s:817    .text.HAL_EXTI_ClearPending:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s:824    .text.HAL_EXTI_ClearPending:00000000 HAL_EXTI_ClearPending
-C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s:854    .text.HAL_EXTI_ClearPending:00000010 $d
-C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s:859    .text.HAL_EXTI_GenerateSWI:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s:866    .text.HAL_EXTI_GenerateSWI:00000000 HAL_EXTI_GenerateSWI
-C:\Users\grgcz\AppData\Local\Temp\cccO0EGL.s:895    .text.HAL_EXTI_GenerateSWI:00000010 $d
+C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s:18     .text.HAL_EXTI_SetConfigLine:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s:26     .text.HAL_EXTI_SetConfigLine:00000000 HAL_EXTI_SetConfigLine
+C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s:250    .text.HAL_EXTI_SetConfigLine:000000d0 $d
+C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s:256    .text.HAL_EXTI_GetConfigLine:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s:263    .text.HAL_EXTI_GetConfigLine:00000000 HAL_EXTI_GetConfigLine
+C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s:447    .text.HAL_EXTI_GetConfigLine:000000a4 $d
+C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s:453    .text.HAL_EXTI_ClearConfigLine:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s:460    .text.HAL_EXTI_ClearConfigLine:00000000 HAL_EXTI_ClearConfigLine
+C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s:610    .text.HAL_EXTI_ClearConfigLine:00000074 $d
+C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s:616    .text.HAL_EXTI_RegisterCallback:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s:623    .text.HAL_EXTI_RegisterCallback:00000000 HAL_EXTI_RegisterCallback
+C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s:655    .text.HAL_EXTI_GetHandle:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s:662    .text.HAL_EXTI_GetHandle:00000000 HAL_EXTI_GetHandle
+C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s:694    .text.HAL_EXTI_IRQHandler:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s:701    .text.HAL_EXTI_IRQHandler:00000000 HAL_EXTI_IRQHandler
+C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s:755    .text.HAL_EXTI_IRQHandler:00000020 $d
+C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s:760    .text.HAL_EXTI_GetPending:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s:767    .text.HAL_EXTI_GetPending:00000000 HAL_EXTI_GetPending
+C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s:812    .text.HAL_EXTI_GetPending:00000018 $d
+C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s:817    .text.HAL_EXTI_ClearPending:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s:824    .text.HAL_EXTI_ClearPending:00000000 HAL_EXTI_ClearPending
+C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s:854    .text.HAL_EXTI_ClearPending:00000010 $d
+C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s:859    .text.HAL_EXTI_GenerateSWI:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s:866    .text.HAL_EXTI_GenerateSWI:00000000 HAL_EXTI_GenerateSWI
+C:\Users\grgcz\AppData\Local\Temp\cch7Tv2D.s:895    .text.HAL_EXTI_GenerateSWI:00000010 $d
 
 NO UNDEFINED SYMBOLS

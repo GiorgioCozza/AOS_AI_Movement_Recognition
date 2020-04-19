@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 1
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 1
   28:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c **** /** @addtogroup STM32F4xx_HAL_Driver
   29:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****   * @{
   30:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****   */
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 2
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s 			page 2
 
 
   31:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c **** 
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 1
   85:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****   * @{
   86:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****   */
   87:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c **** 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 3
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s 			page 3
 
 
   88:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c **** /**
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 1
   66              		@ link register save eliminated.
  107:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****   *(__IO uint32_t *) CR_DBP_BB = (uint32_t)ENABLE;
   67              		.loc 1 107 3 view .LVU5
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 4
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s 			page 4
 
 
   68              		.loc 1 107 32 is_stmt 0 view .LVU6
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 1
  112              		.global	HAL_PWR_ConfigPVD
  113              		.syntax unified
  114              		.thumb
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 5
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s 			page 5
 
 
  115              		.thumb_func
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 1
  170:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****           (++) PWR_SLEEPENTRY_WFI: enter SLEEP mode with WFI instruction
  171:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****           (++) PWR_SLEEPENTRY_WFE: enter SLEEP mode with WFE instruction
  172:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****       
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 6
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s 			page 6
 
 
  173:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****       -@@- The Regulator parameter is not used for the STM32F4 family 
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 1
  227:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****       (+) RTC auto-wake-up (AWU) from the Stop and Standby modes
  228:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****        
  229:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****         (++) To wake up from the Stop mode with an RTC alarm event, it is necessary to 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 7
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s 			page 7
 
 
  230:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****               configure the RTC to generate the RTC alarm using the HAL_RTC_SetAlarm_IT() function.
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 1
  141 0018 1A68     		ldr	r2, [r3]
  142 001a 22F48032 		bic	r2, r2, #65536
  143 001e 1A60     		str	r2, [r3]
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 8
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s 			page 8
 
 
  264:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****   __HAL_PWR_PVD_EXTI_DISABLE_RISING_EDGE();
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 1
  181 005a 04D0     		beq	.L13
  281:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****   {
  282:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****     __HAL_PWR_PVD_EXTI_ENABLE_RISING_EDGE();
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 9
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s 			page 9
 
 
  182              		.loc 1 282 5 is_stmt 1 view .LVU31
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 1
  224              		@ link register save eliminated.
  297:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****   *(__IO uint32_t *) CR_PVDE_BB = (uint32_t)ENABLE;
  225              		.loc 1 297 3 view .LVU38
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 10
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s 			page 10
 
 
  226              		.loc 1 297 33 is_stmt 0 view .LVU39
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 1
  273              		.thumb_func
  274              		.fpu fpv4-sp-d16
  276              	HAL_PWR_EnableWakeUpPin:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 11
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s 			page 11
 
 
  277              	.LVL1:
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 1
  329:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****   * @param WakeUpPinx Specifies the Power Wake-Up pin to disable.
  330:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****   *         This parameter can be one of the following values:
  331:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****   *           @arg PWR_WAKEUP_PIN1
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 12
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s 			page 12
 
 
  332:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****   *           @arg PWR_WAKEUP_PIN2 available only on STM32F410xx/STM32F446xx/STM32F412xx/STM32F413x
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 1
  355:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****   *            @arg PWR_MAINREGULATOR_ON: SLEEP mode with regulator ON
  356:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****   *            @arg PWR_LOWPOWERREGULATOR_ON: SLEEP mode with low power regulator ON
  357:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****   * @note This parameter is not used for the STM32F4 family and is kept as parameter
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 13
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s 			page 13
 
 
  358:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****   *       just to maintain compatibility with the lower power families.
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 1
  371              	@ 385 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src
  372 0012 20BF     		wfe
  373              	@ 0 "" 2
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 14
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s 			page 14
 
 
  386:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****   }
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 1
  405              		.loc 1 409 1 view -0
  406              		.cfi_startproc
  407              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 15
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s 			page 15
 
 
  408              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 1
  440 001e 20BF     		wfe
  441              	@ 0 "" 2
  442              		.thumb
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 16
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s 			page 16
 
 
  443              		.syntax unified
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 1
  481              		@ args = 0, pretend = 0, frame = 0
  482              		@ frame_needed = 0, uses_anonymous_args = 0
  483              		@ link register save eliminated.
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 17
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s 			page 17
 
 
  449:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****   /* Select Standby mode */
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 1
  468:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c **** void HAL_PWR_PVD_IRQHandler(void)
  469:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c **** {
  470:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****   /* Check PWR Exti flag */
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 18
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s 			page 18
 
 
  471:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****   if(__HAL_PWR_PVD_EXTI_GET_FLAG() != RESET)
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 1
  471:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c ****   {
  554              		.loc 1 471 5 view .LVU90
  555 0006 13F4803F 		tst	r3, #65536
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 19
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s 			page 19
 
 
  556 000a 00D1     		bne	.L48
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 1
  595 0004 43F00203 		orr	r3, r3, #2
  596 0008 1361     		str	r3, [r2, #16]
  504:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c **** }
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 20
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s 			page 20
 
 
  597              		.loc 1 504 1 is_stmt 0 view .LVU97
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 1
  643              	HAL_PWR_EnableSEVOnPend:
  644              	.LFB145:
  517:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c **** 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 21
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s 			page 21
 
 
  518:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pwr.c **** /**
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 1
  679              		.loc 1 539 3 view .LVU105
  680 0000 024A     		ldr	r2, .L61
  681 0002 1369     		ldr	r3, [r2, #16]
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 22
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s 			page 22
 
 
  682 0004 23F01003 		bic	r3, r3, #16
@@ -1282,60 +1282,60 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 1
  700              		.file 7 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Device/ST/STM32
  701              		.file 8 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/
  702              		.file 9 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s 			page 23
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s 			page 23
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_hal_pwr.c
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:18     .text.HAL_PWR_DeInit:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:26     .text.HAL_PWR_DeInit:00000000 HAL_PWR_DeInit
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:48     .text.HAL_PWR_DeInit:00000014 $d
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:53     .text.HAL_PWR_EnableBkUpAccess:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:60     .text.HAL_PWR_EnableBkUpAccess:00000000 HAL_PWR_EnableBkUpAccess
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:77     .text.HAL_PWR_EnableBkUpAccess:00000008 $d
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:82     .text.HAL_PWR_DisableBkUpAccess:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:89     .text.HAL_PWR_DisableBkUpAccess:00000000 HAL_PWR_DisableBkUpAccess
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:106    .text.HAL_PWR_DisableBkUpAccess:00000008 $d
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:111    .text.HAL_PWR_ConfigPVD:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:118    .text.HAL_PWR_ConfigPVD:00000000 HAL_PWR_ConfigPVD
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:205    .text.HAL_PWR_ConfigPVD:0000007c $d
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:211    .text.HAL_PWR_EnablePVD:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:218    .text.HAL_PWR_EnablePVD:00000000 HAL_PWR_EnablePVD
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:235    .text.HAL_PWR_EnablePVD:00000008 $d
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:240    .text.HAL_PWR_DisablePVD:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:247    .text.HAL_PWR_DisablePVD:00000000 HAL_PWR_DisablePVD
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:264    .text.HAL_PWR_DisablePVD:00000008 $d
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:269    .text.HAL_PWR_EnableWakeUpPin:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:276    .text.HAL_PWR_EnableWakeUpPin:00000000 HAL_PWR_EnableWakeUpPin
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:297    .text.HAL_PWR_EnableWakeUpPin:0000000c $d
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:302    .text.HAL_PWR_DisableWakeUpPin:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:309    .text.HAL_PWR_DisableWakeUpPin:00000000 HAL_PWR_DisableWakeUpPin
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:330    .text.HAL_PWR_DisableWakeUpPin:0000000c $d
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:335    .text.HAL_PWR_EnterSLEEPMode:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:342    .text.HAL_PWR_EnterSLEEPMode:00000000 HAL_PWR_EnterSLEEPMode
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:390    .text.HAL_PWR_EnterSLEEPMode:0000001c $d
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:395    .text.HAL_PWR_EnterSTOPMode:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:402    .text.HAL_PWR_EnterSTOPMode:00000000 HAL_PWR_EnterSTOPMode
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:464    .text.HAL_PWR_EnterSTOPMode:00000030 $d
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:470    .text.HAL_PWR_EnterSTANDBYMode:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:477    .text.HAL_PWR_EnterSTANDBYMode:00000000 HAL_PWR_EnterSTANDBYMode
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:506    .text.HAL_PWR_EnterSTANDBYMode:00000018 $d
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:512    .text.HAL_PWR_PVDCallback:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:519    .text.HAL_PWR_PVDCallback:00000000 HAL_PWR_PVDCallback
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:532    .text.HAL_PWR_PVD_IRQHandler:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:539    .text.HAL_PWR_PVD_IRQHandler:00000000 HAL_PWR_PVD_IRQHandler
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:573    .text.HAL_PWR_PVD_IRQHandler:0000001c $d
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:578    .text.HAL_PWR_EnableSleepOnExit:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:585    .text.HAL_PWR_EnableSleepOnExit:00000000 HAL_PWR_EnableSleepOnExit
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:602    .text.HAL_PWR_EnableSleepOnExit:0000000c $d
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:607    .text.HAL_PWR_DisableSleepOnExit:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:614    .text.HAL_PWR_DisableSleepOnExit:00000000 HAL_PWR_DisableSleepOnExit
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:631    .text.HAL_PWR_DisableSleepOnExit:0000000c $d
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:636    .text.HAL_PWR_EnableSEVOnPend:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:643    .text.HAL_PWR_EnableSEVOnPend:00000000 HAL_PWR_EnableSEVOnPend
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:660    .text.HAL_PWR_EnableSEVOnPend:0000000c $d
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:665    .text.HAL_PWR_DisableSEVOnPend:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:672    .text.HAL_PWR_DisableSEVOnPend:00000000 HAL_PWR_DisableSEVOnPend
-C:\Users\grgcz\AppData\Local\Temp\ccbChjid.s:689    .text.HAL_PWR_DisableSEVOnPend:0000000c $d
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:18     .text.HAL_PWR_DeInit:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:26     .text.HAL_PWR_DeInit:00000000 HAL_PWR_DeInit
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:48     .text.HAL_PWR_DeInit:00000014 $d
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:53     .text.HAL_PWR_EnableBkUpAccess:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:60     .text.HAL_PWR_EnableBkUpAccess:00000000 HAL_PWR_EnableBkUpAccess
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:77     .text.HAL_PWR_EnableBkUpAccess:00000008 $d
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:82     .text.HAL_PWR_DisableBkUpAccess:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:89     .text.HAL_PWR_DisableBkUpAccess:00000000 HAL_PWR_DisableBkUpAccess
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:106    .text.HAL_PWR_DisableBkUpAccess:00000008 $d
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:111    .text.HAL_PWR_ConfigPVD:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:118    .text.HAL_PWR_ConfigPVD:00000000 HAL_PWR_ConfigPVD
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:205    .text.HAL_PWR_ConfigPVD:0000007c $d
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:211    .text.HAL_PWR_EnablePVD:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:218    .text.HAL_PWR_EnablePVD:00000000 HAL_PWR_EnablePVD
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:235    .text.HAL_PWR_EnablePVD:00000008 $d
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:240    .text.HAL_PWR_DisablePVD:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:247    .text.HAL_PWR_DisablePVD:00000000 HAL_PWR_DisablePVD
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:264    .text.HAL_PWR_DisablePVD:00000008 $d
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:269    .text.HAL_PWR_EnableWakeUpPin:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:276    .text.HAL_PWR_EnableWakeUpPin:00000000 HAL_PWR_EnableWakeUpPin
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:297    .text.HAL_PWR_EnableWakeUpPin:0000000c $d
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:302    .text.HAL_PWR_DisableWakeUpPin:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:309    .text.HAL_PWR_DisableWakeUpPin:00000000 HAL_PWR_DisableWakeUpPin
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:330    .text.HAL_PWR_DisableWakeUpPin:0000000c $d
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:335    .text.HAL_PWR_EnterSLEEPMode:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:342    .text.HAL_PWR_EnterSLEEPMode:00000000 HAL_PWR_EnterSLEEPMode
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:390    .text.HAL_PWR_EnterSLEEPMode:0000001c $d
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:395    .text.HAL_PWR_EnterSTOPMode:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:402    .text.HAL_PWR_EnterSTOPMode:00000000 HAL_PWR_EnterSTOPMode
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:464    .text.HAL_PWR_EnterSTOPMode:00000030 $d
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:470    .text.HAL_PWR_EnterSTANDBYMode:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:477    .text.HAL_PWR_EnterSTANDBYMode:00000000 HAL_PWR_EnterSTANDBYMode
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:506    .text.HAL_PWR_EnterSTANDBYMode:00000018 $d
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:512    .text.HAL_PWR_PVDCallback:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:519    .text.HAL_PWR_PVDCallback:00000000 HAL_PWR_PVDCallback
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:532    .text.HAL_PWR_PVD_IRQHandler:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:539    .text.HAL_PWR_PVD_IRQHandler:00000000 HAL_PWR_PVD_IRQHandler
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:573    .text.HAL_PWR_PVD_IRQHandler:0000001c $d
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:578    .text.HAL_PWR_EnableSleepOnExit:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:585    .text.HAL_PWR_EnableSleepOnExit:00000000 HAL_PWR_EnableSleepOnExit
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:602    .text.HAL_PWR_EnableSleepOnExit:0000000c $d
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:607    .text.HAL_PWR_DisableSleepOnExit:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:614    .text.HAL_PWR_DisableSleepOnExit:00000000 HAL_PWR_DisableSleepOnExit
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:631    .text.HAL_PWR_DisableSleepOnExit:0000000c $d
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:636    .text.HAL_PWR_EnableSEVOnPend:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:643    .text.HAL_PWR_EnableSEVOnPend:00000000 HAL_PWR_EnableSEVOnPend
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:660    .text.HAL_PWR_EnableSEVOnPend:0000000c $d
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:665    .text.HAL_PWR_DisableSEVOnPend:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:672    .text.HAL_PWR_DisableSEVOnPend:00000000 HAL_PWR_DisableSEVOnPend
+C:\Users\grgcz\AppData\Local\Temp\ccYNRMrB.s:689    .text.HAL_PWR_DisableSEVOnPend:0000000c $d
 
 NO UNDEFINED SYMBOLS

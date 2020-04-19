@@ -1,7 +1,7 @@
 Neural Network Tools for STM32 v1.2.0 (AI tools v5.0.0)
-Created date       : 2020-04-18 19:10:01
+Created date       : 2020-04-19 20:29:51
 
-Exec/report summary (generate dur=1.308s err=0)
+Exec/report summary (generate dur=0.971s err=0)
 ------------------------------------------------------------------------------------------------------------------------
 model file         : C:\Users\grgcz\Desktop\dev_space_win\AOS_Project\AOS_MovementRecognition\neural_net-py\best_models\best_acc_model_RNN_fold1_09-04-2020_221243.h5
 type               : keras (keras_dump)
@@ -9,8 +9,8 @@ c_name             : network
 compression        : None
 quantize           : None
 L2r error          : NOT EVALUATED
-workspace dir      : C:\Users\grgcz\AppData\Local\Temp\mxAI_workspace124801907409200838802617803287380
-output dir         : C:\Users\grgcz\.stm32cubemx\stm32ai_output
+workspace dir      : C:\Users\grgcz\Desktop\dev_space_win\AOS_Project\AOS_MovementRecognition\stm32ai_ws
+output dir         : C:\Users\grgcz\Desktop\dev_space_win\AOS_Project\AOS_MovementRecognition\NN_Code
 
 model_name         : best_acc_model_RNN_fold1_09042020_221243
 model_hash         : fc8f821a7f3a5c7c278e772d8331cb75

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
   28:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****    -@-   Prior to HAL_DMA_Init() the clock must be enabled for DMA through the following macros:
   29:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****          __HAL_RCC_DMA1_CLK_ENABLE() or __HAL_RCC_DMA2_CLK_ENABLE().
   30:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c **** 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 2
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 2
 
 
   31:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****      *** Polling mode IO operation ***
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
   85:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   *
   86:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
   87:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   * All rights reserved.</center></h2>
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 3
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 3
 
 
   88:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   *
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  142:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c **** /** @addtogroup DMA_Exported_Functions
  143:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   * @{
  144:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   */
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 4
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 4
 
 
  145:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c **** 
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  199:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     assert_param(IS_DMA_MEMORY_BURST(hdma->Init.MemBurst));
  200:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     assert_param(IS_DMA_PERIPHERAL_BURST(hdma->Init.PeriphBurst));
  201:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   }
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 5
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 5
 
 
  202:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  256:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   /* Clear Direct mode and FIFO threshold bits */
  257:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   tmp &= (uint32_t)~(DMA_SxFCR_DMDIS | DMA_SxFCR_FTH);
  258:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c **** 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 6
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 6
 
 
  259:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   /* Prepare the DMA Stream FIFO configuration */
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  313:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c **** 
  314:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   /* Check the DMA peripheral state */
  315:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   if(hdma == NULL)
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 7
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 7
 
 
  316:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   {
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  370:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c **** 
  371:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   /* Release Lock */
  372:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   __HAL_UNLOCK(hdma);
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 8
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 8
 
 
  373:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c **** 
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  427:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     DMA_SetConfig(hdma, SrcAddress, DstAddress, DataLength);
  428:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c **** 
  429:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     /* Enable the Peripheral */
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 9
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 9
 
 
  430:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     __HAL_DMA_ENABLE(hdma);
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  484:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****       hdma->Instance->CR  |= DMA_IT_HT;
  485:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     }
  486:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 10
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 10
 
 
  487:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     /* Enable the Peripheral */
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  541:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     /* Disable the stream */
  542:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     __HAL_DMA_DISABLE(hdma);
  543:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 11
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 11
 
 
  544:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     /* Check if the DMA Stream is effectively disabled */
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  598:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c **** }
  599:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c **** 
  600:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c **** /**
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 12
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 12
 
 
  601:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   * @brief  Polling for transfer complete.
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  655:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     {
  656:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****       if((Timeout == 0U)||((HAL_GetTick() - tickstart ) > Timeout))
  657:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****       {
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 13
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 13
 
 
  658:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****         /* Update error code */
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  712:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****       __HAL_UNLOCK(hdma);
  713:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c **** 
  714:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****       /* Change the DMA state */
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 14
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 14
 
 
  715:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****       hdma->State= HAL_DMA_STATE_READY;
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  769:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****       /* Update error code */
  770:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****       hdma->ErrorCode |= HAL_DMA_ERROR_TE;
  771:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     }
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 15
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 15
 
 
  772:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   }
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  826:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****       }
  827:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****       else
  828:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****       {
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 16
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 16
 
 
  829:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****         /* Disable the half transfer interrupt if the DMA mode is not CIRCULAR */
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  883:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****         {
  884:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****           if(hdma->XferM1CpltCallback != NULL)
  885:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****           {
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 17
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 17
 
 
  886:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****             /* Transfer complete Callback for memory1 */
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  940:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****       }
  941:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****       while((hdma->Instance->CR & DMA_SxCR_EN) != RESET);
  942:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c **** 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 18
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 18
 
 
  943:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****       /* Process Unlocked */
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  997:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****       hdma->XferErrorCallback = pCallback;
  998:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****       break;
  999:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c **** 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 19
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 19
 
 
 1000:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     case  HAL_DMA_XFER_ABORT_CB_ID:
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
 1054:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****       
 1055:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     case  HAL_DMA_XFER_ERROR_CB_ID:
 1056:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****       hdma->XferErrorCallback = NULL;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 20
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 20
 
 
 1057:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****       break;
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
 1111:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   * @retval HAL state
 1112:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   */
 1113:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c **** HAL_DMA_StateTypeDef HAL_DMA_GetState(DMA_HandleTypeDef *hdma)
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 21
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 21
 
 
 1114:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c **** {
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
   43              		.loc 1 1153 22 view .LVU4
   44 0004 2C68     		ldr	r4, [r5]
   45 0006 24F48024 		bic	r4, r4, #262144
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 22
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 22
 
 
   46 000a 2C60     		str	r4, [r5]
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
   77              		.cfi_def_cfa_offset 0
   78 0020 7047     		bx	lr
   79              	.LVL3:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 23
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 23
 
 
   80              	.L5:
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  120 0002 0368     		ldr	r3, [r0]
  121              		.loc 1 1186 55 view .LVU28
  122 0004 D9B2     		uxtb	r1, r3
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 24
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 24
 
 
  123              		.loc 1 1186 64 view .LVU29
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  159              		.cfi_restore 4
  160              		.cfi_def_cfa_offset 0
  161 002c 7047     		bx	lr
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 25
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 25
 
 
  162              	.LVL9:
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  201              		.loc 1 1218 3 is_stmt 1 view .LVU51
  202              		.loc 1 1218 16 is_stmt 0 view .LVU52
  203 0002 8269     		ldr	r2, [r0, #24]
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 26
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 26
 
 
  204              		.loc 1 1218 5 view .LVU53
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  241 0028 0020     		movs	r0, #0
  242              	.LVL18:
 1214:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   uint32_t tmp = hdma->Init.FIFOThreshold;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 27
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 27
 
 
  243              		.loc 1 1214 21 view .LVU66
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
 1272:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     {
 1273:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     case DMA_FIFO_THRESHOLD_1QUARTERFULL:
 1274:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     case DMA_FIFO_THRESHOLD_HALFFULL:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 28
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 28
 
 
 1275:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     case DMA_FIFO_THRESHOLD_3QUARTERSFULL:
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  296 005e 0020     		movs	r0, #0
  297              	.LVL26:
 1214:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   uint32_t tmp = hdma->Init.FIFOThreshold;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 29
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 29
 
 
  298              		.loc 1 1214 21 view .LVU82
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
 1254:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****       }
  340              		.loc 1 1254 16 view .LVU95
  341 007c 7047     		bx	lr
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 30
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 30
 
 
  342              	.LVL38:
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  380              		.fpu fpv4-sp-d16
  382              	HAL_DMA_Init:
  383              	.LVL46:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 31
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 31
 
 
  384              	.LFB130:
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  196:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   {
  420              		.loc 1 196 3 view .LVU123
  198:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     assert_param(IS_DMA_MEMORY_BURST(hdma->Init.MemBurst));
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 32
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 32
 
 
  421              		.loc 1 198 5 view .LVU124
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  458 0038 2023     		movs	r3, #32
  459 003a 6365     		str	r3, [r4, #84]
  222:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****       
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 33
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 33
 
 
  460              		.loc 1 222 7 is_stmt 1 view .LVU142
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  497              		.loc 1 239 72 view .LVU159
  498 005a 0A43     		orrs	r2, r2, r1
  240:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****           hdma->Init.Mode                | hdma->Init.Priority;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 34
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 34
 
 
  499              		.loc 1 240 54 view .LVU160
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  535              		.loc 1 260 20 is_stmt 0 view .LVU178
  536 007a 636A     		ldr	r3, [r4, #36]
  260:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c **** 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 35
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 35
 
 
  537              		.loc 1 260 7 view .LVU179
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  293:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c **** 
  574              		.loc 1 293 22 view .LVU197
  575 009c 3F23     		movs	r3, #63
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 36
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 36
 
 
  576 009e 9340     		lsls	r3, r3, r2
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  278:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****         
  613              		.loc 1 278 21 is_stmt 0 view .LVU215
  614 00bc 0120     		movs	r0, #1
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 37
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 37
 
 
  615 00be 84F83500 		strb	r0, [r4, #53]
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  321:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   {
  662              		.loc 1 321 3 is_stmt 1 view .LVU225
  321:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   {
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 38
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 38
 
 
  663              		.loc 1 321 10 is_stmt 0 view .LVU226
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  346:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   
  700              		.loc 1 346 24 view .LVU244
  701 0030 1C61     		str	r4, [r3, #16]
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 39
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 39
 
 
  349:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  736 004e 9340     		lsls	r3, r3, r2
  363:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c **** 
  737              		.loc 1 363 14 view .LVU265
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 40
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 40
 
 
  738 0050 8360     		str	r3, [r0, #8]
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  782              		.loc 1 409 1 is_stmt 1 view -0
  783              		.cfi_startproc
  784              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 41
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 41
 
 
  785              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  824              		.loc 1 441 1 view .LVU292
  825 0022 38BD     		pop	{r3, r4, r5, pc}
  826              	.LVL79:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 42
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 42
 
 
  827              	.L57:
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  872              	.LFB133:
  453:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   HAL_StatusTypeDef status = HAL_OK;
  873              		.loc 1 453 1 is_stmt 1 view -0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 43
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 43
 
 
  874              		.cfi_startproc
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  913              		.loc 1 496 5 is_stmt 1 view .LVU319
  914              	.LVL88:
  496:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   }
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 44
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 44
 
 
  915              		.loc 1 496 12 is_stmt 0 view .LVU320
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  482:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     {
  954              		.loc 1 482 5 is_stmt 1 view .LVU336
  482:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     {
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 45
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 45
 
 
  955              		.loc 1 482 12 is_stmt 0 view .LVU337
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  1001 0000 70B5     		push	{r4, r5, r6, lr}
  1002              	.LCFI11:
  1003              		.cfi_def_cfa_offset 16
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 46
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 46
 
 
  1004              		.cfi_offset 4, -16
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  533:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     hdma->Instance->FCR &= ~(DMA_IT_FE);
  1043              		.loc 1 533 5 is_stmt 1 view .LVU363
  533:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     hdma->Instance->FCR &= ~(DMA_IT_FE);
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 47
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 47
 
 
  1044              		.loc 1 533 9 is_stmt 0 view .LVU364
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  1083              		.loc 1 545 10 view .LVU379
  1084 0054 13F0010F 		tst	r3, #1
  1085 0058 11D0     		beq	.L74
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 48
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 48
 
 
  548:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****       {
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  1123              		.loc 1 564 24 view .LVU396
  1124 0080 3F23     		movs	r3, #63
  1125 0082 9340     		lsls	r3, r3, r2
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 49
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 49
 
 
  564:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  586:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   }
  1169              		.loc 1 586 5 is_stmt 1 view .LVU410
  586:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   }
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 50
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 50
 
 
  1170              		.loc 1 586 12 is_stmt 0 view .LVU411
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  1217              		.cfi_offset 6, -20
  1218              		.cfi_offset 7, -16
  1219              		.cfi_offset 8, -12
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 51
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 51
 
 
  1220              		.cfi_offset 9, -8
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  739:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c **** 
  1258              		.loc 1 739 1 view .LVU437
  1259 0028 8146     		mov	r9, r0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 52
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 52
 
 
  630:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   {
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  1297 004a 13F0010F 		tst	r3, #1
  1298 004e 3DD1     		bne	.L90
  654:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     {
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 53
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 53
 
 
  1299              		.loc 1 654 5 is_stmt 1 view .LVU455
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  1337              	.L87:
  683:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     {
  1338              		.loc 1 683 5 is_stmt 1 view .LVU472
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 54
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 54
 
 
  683:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     {
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  632:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     return HAL_ERROR;
  1377              		.loc 1 632 21 is_stmt 0 view .LVU489
  1378 00a6 4FF48073 		mov	r3, #256
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 55
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 55
 
 
  1379 00aa 6365     		str	r3, [r4, #84]
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  702:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   {
  1417              		.loc 1 702 10 is_stmt 0 view .LVU506
  1418 00cc 636D     		ldr	r3, [r4, #84]
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 56
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 56
 
 
  702:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   {
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  1456              		.loc 1 709 7 view .LVU523
  709:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     
  1457              		.loc 1 709 65 is_stmt 0 view .LVU524
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 57
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 57
 
 
  1458 00fc E26D     		ldr	r2, [r4, #92]
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  748:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   uint32_t tmpisr;
  1501              		.loc 1 748 1 is_stmt 1 view -0
  1502              		.cfi_startproc
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 58
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 58
 
 
  1503              		@ args = 0, pretend = 0, frame = 8
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  1543              		.loc 1 759 35 view .LVU552
  1544 001c 0823     		movs	r3, #8
  1545 001e 9340     		lsls	r3, r3, r2
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 59
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 59
 
 
  759:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   {
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  776:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     {
  1584              		.loc 1 776 5 is_stmt 1 view .LVU569
  776:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     {
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 60
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 60
 
 
  1585              		.loc 1 776 8 is_stmt 0 view .LVU570
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  1623 0080 6365     		str	r3, [r4, #84]
  1624              	.L100:
  798:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   {
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 61
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 61
 
 
  1625              		.loc 1 798 3 is_stmt 1 view .LVU587
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  1661              		.loc 1 811 13 view .LVU605
  1662 00ac 9BB1     		cbz	r3, .L101
  814:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****           }
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 62
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 62
 
 
  1663              		.loc 1 814 13 is_stmt 1 view .LVU606
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  839:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****         }
  1703              		.loc 1 839 11 is_stmt 1 view .LVU621
  1704 00d2 2046     		mov	r0, r4
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 63
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 63
 
 
  1705              	.LVL135:
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  1742 00fa 12F4802F 		tst	r2, #262144
  1743 00fe 33D0     		beq	.L111
  882:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****         {
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 64
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 64
 
 
  1744              		.loc 1 882 9 is_stmt 1 view .LVU639
@@ -3838,7 +3838,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  1782              		.loc 1 860 11 is_stmt 1 view .LVU655
  860:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****         }
  1783              		.loc 1 860 15 is_stmt 0 view .LVU656
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 65
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 65
 
 
  1784 012c 2268     		ldr	r2, [r4]
@@ -3898,7 +3898,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  1822 0158 002B     		cmp	r3, #0
  1823 015a E7D1     		bne	.L107
  1824 015c EBE7     		b	.L108
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 66
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 66
 
 
  1825              	.L112:
@@ -3958,7 +3958,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  1862              		.loc 1 918 11 is_stmt 1 view .LVU689
  1863 0188 2046     		mov	r0, r4
  1864 018a 9847     		blx	r3
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 67
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 67
 
 
  1865              	.LVL140:
@@ -4018,7 +4018,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  1903 01ba F5D1     		bne	.L116
  1904              	.L115:
  944:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c **** 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 68
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 68
 
 
  1905              		.loc 1 944 7 is_stmt 1 view .LVU706
@@ -4078,7 +4078,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  1951              		.loc 1 969 1 is_stmt 1 view -0
  1952              		.cfi_startproc
  1953              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 69
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 69
 
 
  1954              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -4138,7 +4138,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  1992              		.loc 1 978 5 is_stmt 1 view .LVU732
  1993 0024 0529     		cmp	r1, #5
  1994 0026 16D8     		bhi	.L134
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 70
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 70
 
 
  1995 0028 DFE801F0 		tbb	[pc, r1]
@@ -4198,7 +4198,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  993:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****       break;
  2033              		.loc 1 993 36 is_stmt 0 view .LVU749
  2034 0044 9A64     		str	r2, [r3, #72]
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 71
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 71
 
 
  994:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c **** 
@@ -4258,7 +4258,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  2074              		.thumb
  2075              		.thumb_func
  2076              		.fpu fpv4-sp-d16
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 72
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 72
 
 
  2078              	HAL_DMA_UnRegisterCallback:
@@ -4318,7 +4318,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  2118              	.LVL153:
  2119              	.L149:
 1037:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****     {
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 73
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 73
 
 
  2120              		.loc 1 1037 5 is_stmt 1 view .LVU780
@@ -4378,7 +4378,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  2161 004a 8364     		str	r3, [r0, #72]
 1053:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****       
  2162              		.loc 1 1053 7 is_stmt 1 view .LVU794
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 74
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 74
 
 
  2163 004c E5E7     		b	.L138
@@ -4438,7 +4438,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  2198              		.loc 1 1070 7 is_stmt 1 view .LVU813
  2199 0068 D7E7     		b	.L138
  2200              	.L147:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 75
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 75
 
 
 1033:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c ****   
@@ -4498,7 +4498,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  2251              	.LVL157:
 1127:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_dma.c **** 
  2252              		.loc 1 1127 1 view .LVU822
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 76
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 76
 
 
  2253 0002 7047     		bx	lr
@@ -4527,53 +4527,53 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 1
  2279              		.file 8 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/
  2280              		.file 9 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/
  2281              		.file 10 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s 			page 77
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s 			page 77
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_hal_dma.c
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:18     .text.DMA_SetConfig:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:25     .text.DMA_SetConfig:00000000 DMA_SetConfig
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:99     .text.DMA_CalcBaseAndBitshift:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:105    .text.DMA_CalcBaseAndBitshift:00000000 DMA_CalcBaseAndBitshift
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:176    .text.DMA_CalcBaseAndBitshift:0000003c $d
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:182    .text.DMA_CheckFifoParam:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:188    .text.DMA_CheckFifoParam:00000000 DMA_CheckFifoParam
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:275    .text.DMA_CheckFifoParam:0000004e $d
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:279    .text.DMA_CheckFifoParam:00000052 $t
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:375    .text.HAL_DMA_Init:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:382    .text.HAL_DMA_Init:00000000 HAL_DMA_Init
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:629    .text.HAL_DMA_Init:000000c8 $d
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:634    .text.HAL_DMA_DeInit:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:641    .text.HAL_DMA_DeInit:00000000 HAL_DMA_DeInit
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:772    .text.HAL_DMA_Start:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:779    .text.HAL_DMA_Start:00000000 HAL_DMA_Start
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:863    .text.HAL_DMA_Start_IT:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:870    .text.HAL_DMA_Start_IT:00000000 HAL_DMA_Start_IT
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:986    .text.HAL_DMA_Abort:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:993    .text.HAL_DMA_Abort:00000000 HAL_DMA_Abort
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:1143   .text.HAL_DMA_Abort_IT:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:1150   .text.HAL_DMA_Abort_IT:00000000 HAL_DMA_Abort_IT
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:1196   .text.HAL_DMA_PollForTransfer:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:1203   .text.HAL_DMA_PollForTransfer:00000000 HAL_DMA_PollForTransfer
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:1491   .text.HAL_DMA_IRQHandler:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:1498   .text.HAL_DMA_IRQHandler:00000000 HAL_DMA_IRQHandler
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:1935   .text.HAL_DMA_IRQHandler:000001d4 $d
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:1941   .text.HAL_DMA_RegisterCallback:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:1948   .text.HAL_DMA_RegisterCallback:00000000 HAL_DMA_RegisterCallback
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:1997   .text.HAL_DMA_RegisterCallback:0000002c $d
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:2003   .text.HAL_DMA_RegisterCallback:00000032 $t
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:2071   .text.HAL_DMA_UnRegisterCallback:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:2078   .text.HAL_DMA_UnRegisterCallback:00000000 HAL_DMA_UnRegisterCallback
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:2125   .text.HAL_DMA_UnRegisterCallback:0000002c $d
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:2208   .text.HAL_DMA_GetState:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:2215   .text.HAL_DMA_GetState:00000000 HAL_DMA_GetState
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:2233   .text.HAL_DMA_GetError:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:2240   .text.HAL_DMA_GetError:00000000 HAL_DMA_GetError
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:2258   .rodata.flagBitshiftOffset.7608:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:2262   .rodata.flagBitshiftOffset.7608:00000000 flagBitshiftOffset.7608
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:2132   .text.HAL_DMA_UnRegisterCallback:00000033 $d
-C:\Users\grgcz\AppData\Local\Temp\cc42Hrhz.s:2132   .text.HAL_DMA_UnRegisterCallback:00000034 $t
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:18     .text.DMA_SetConfig:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:25     .text.DMA_SetConfig:00000000 DMA_SetConfig
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:99     .text.DMA_CalcBaseAndBitshift:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:105    .text.DMA_CalcBaseAndBitshift:00000000 DMA_CalcBaseAndBitshift
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:176    .text.DMA_CalcBaseAndBitshift:0000003c $d
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:182    .text.DMA_CheckFifoParam:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:188    .text.DMA_CheckFifoParam:00000000 DMA_CheckFifoParam
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:275    .text.DMA_CheckFifoParam:0000004e $d
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:279    .text.DMA_CheckFifoParam:00000052 $t
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:375    .text.HAL_DMA_Init:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:382    .text.HAL_DMA_Init:00000000 HAL_DMA_Init
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:629    .text.HAL_DMA_Init:000000c8 $d
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:634    .text.HAL_DMA_DeInit:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:641    .text.HAL_DMA_DeInit:00000000 HAL_DMA_DeInit
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:772    .text.HAL_DMA_Start:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:779    .text.HAL_DMA_Start:00000000 HAL_DMA_Start
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:863    .text.HAL_DMA_Start_IT:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:870    .text.HAL_DMA_Start_IT:00000000 HAL_DMA_Start_IT
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:986    .text.HAL_DMA_Abort:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:993    .text.HAL_DMA_Abort:00000000 HAL_DMA_Abort
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:1143   .text.HAL_DMA_Abort_IT:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:1150   .text.HAL_DMA_Abort_IT:00000000 HAL_DMA_Abort_IT
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:1196   .text.HAL_DMA_PollForTransfer:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:1203   .text.HAL_DMA_PollForTransfer:00000000 HAL_DMA_PollForTransfer
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:1491   .text.HAL_DMA_IRQHandler:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:1498   .text.HAL_DMA_IRQHandler:00000000 HAL_DMA_IRQHandler
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:1935   .text.HAL_DMA_IRQHandler:000001d4 $d
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:1941   .text.HAL_DMA_RegisterCallback:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:1948   .text.HAL_DMA_RegisterCallback:00000000 HAL_DMA_RegisterCallback
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:1997   .text.HAL_DMA_RegisterCallback:0000002c $d
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:2003   .text.HAL_DMA_RegisterCallback:00000032 $t
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:2071   .text.HAL_DMA_UnRegisterCallback:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:2078   .text.HAL_DMA_UnRegisterCallback:00000000 HAL_DMA_UnRegisterCallback
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:2125   .text.HAL_DMA_UnRegisterCallback:0000002c $d
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:2208   .text.HAL_DMA_GetState:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:2215   .text.HAL_DMA_GetState:00000000 HAL_DMA_GetState
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:2233   .text.HAL_DMA_GetError:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:2240   .text.HAL_DMA_GetError:00000000 HAL_DMA_GetError
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:2258   .rodata.flagBitshiftOffset.7608:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:2262   .rodata.flagBitshiftOffset.7608:00000000 flagBitshiftOffset.7608
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:2132   .text.HAL_DMA_UnRegisterCallback:00000033 $d
+C:\Users\grgcz\AppData\Local\Temp\ccjZDDWZ.s:2132   .text.HAL_DMA_UnRegisterCallback:00000034 $t
 
 UNDEFINED SYMBOLS
 HAL_GetTick

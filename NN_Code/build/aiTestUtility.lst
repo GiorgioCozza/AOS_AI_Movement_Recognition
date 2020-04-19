@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
   29:Src/aiTestUtility.c ****  *  - v1.3 - Adding STM32F3 str description + IO PB packet mode
   30:Src/aiTestUtility.c ****  */
   31:Src/aiTestUtility.c **** 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 2
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 2
 
 
   32:Src/aiTestUtility.c **** /* System headers */
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
   86:Src/aiTestUtility.c ****     /* By default the CRC IP clock is enabled */
   87:Src/aiTestUtility.c ****     __HAL_RCC_CRC_CLK_ENABLE();
   88:Src/aiTestUtility.c **** #endif
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 3
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 3
 
 
   89:Src/aiTestUtility.c **** }
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  143:Src/aiTestUtility.c ****     float fcpu = (float)systemCoreClock();
  144:Src/aiTestUtility.c ****     res = ((float)clks * (float)1000.0) / fcpu;
  145:Src/aiTestUtility.c ****     return res;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 4
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 4
 
 
  146:Src/aiTestUtility.c **** }
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  200:Src/aiTestUtility.c ****             (int)HAL_GetREVID()
  201:Src/aiTestUtility.c ****     );
  202:Src/aiTestUtility.c **** 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 5
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 5
 
 
  203:Src/aiTestUtility.c ****     printf(" Core Arch.   : M%d - %s %s\r\n",
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  257:Src/aiTestUtility.c ****             bitToStr(val & SCB_CCR_DC_Msk));
  258:Src/aiTestUtility.c **** #endif
  259:Src/aiTestUtility.c **** #else
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 6
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 6
 
 
  260:Src/aiTestUtility.c **** #if !defined(STM32F3) && !defined(STM32L5)
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  314:Src/aiTestUtility.c **** 
  315:Src/aiTestUtility.c ****     if ((!buff) || (count <= 0))
  316:Src/aiTestUtility.c ****         return -1;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 7
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 7
 
 
  317:Src/aiTestUtility.c **** 
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  371:Src/aiTestUtility.c ****     if ((handle != _LLIO_STDOUT) && (handle != _LLIO_STDERR))
  372:Src/aiTestUtility.c ****         return _LLIO_ERROR;
  373:Src/aiTestUtility.c **** 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 8
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 8
 
 
  374:Src/aiTestUtility.c ****     if (_ioWriteAllowed)
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  428:Src/aiTestUtility.c ****         if (malloc_track.aidx >= MALLOC_TRACK_DEPTH_SIZE)
  429:Src/aiTestUtility.c ****             malloc_track.aidx = 0;
  430:Src/aiTestUtility.c ****     }
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 9
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 9
 
 
  431:Src/aiTestUtility.c **** 
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  485:Src/aiTestUtility.c ****     				(int)AI_BUFFER_FMT_GET_BITS(buffer->format)
  486:Src/aiTestUtility.c **** 					- ((int)AI_BUFFER_FMT_GET_FBITS(buffer->format) +
  487:Src/aiTestUtility.c **** 					(int)AI_BUFFER_FMT_GET_SIGN(buffer->format)),
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 10
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 10
 
 
  488:Src/aiTestUtility.c **** 					AI_BUFFER_FMT_GET_FBITS(buffer->format));
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  542:Src/aiTestUtility.c **** void aiTestHeader(const char* tname, int major, int minor)
  543:Src/aiTestUtility.c **** {
  544:Src/aiTestUtility.c ****     printf("\r\n#\r\n");
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 11
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 11
 
 
  545:Src/aiTestUtility.c ****     printf("# %s %d.%d\r\n", tname , major, minor);
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
   40 0002 4FF0FF33 		mov	r3, #-1
   41 0006 2122     		movs	r2, #33
   42 0008 0349     		ldr	r1, .L3
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 12
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 12
 
 
   43 000a 0448     		ldr	r0, .L3+4
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
   83 0002 0D46     		mov	r5, r1
   84 0004 1446     		mov	r4, r2
  603:Src/aiTestUtility.c ****     bool res = true;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 13
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 13
 
 
   85              		.loc 1 603 5 is_stmt 1 view .LVU9
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  613:Src/aiTestUtility.c ****         }
  614:Src/aiTestUtility.c ****         if (o_packet.pw == _PACKET_PAYLOAD_IN_SIZE) {
  125              		.loc 1 614 9 is_stmt 1 view .LVU25
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 14
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 14
 
 
  126              		.loc 1 614 12 is_stmt 0 view .LVU26
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  628:Src/aiTestUtility.c **** } i_packet;
  629:Src/aiTestUtility.c **** 
  630:Src/aiTestUtility.c **** static int i_ridx = 0;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 15
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 15
 
 
  631:Src/aiTestUtility.c **** 
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  207              		.thumb_func
  208              		.fpu fpv4-sp-d16
  210              	read_callback:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 16
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 16
 
 
  211              	.LVL14:
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  246 0014 0126     		movs	r6, #1
  247 0016 06E0     		b	.L25
  248              	.L30:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 17
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 17
 
 
  661:Src/aiTestUtility.c ****         res = read_packet();
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  284 003a D018     		adds	r0, r2, r3
  285 003c 4078     		ldrb	r0, [r0, #1]	@ zero_extendqisi2
  668:Src/aiTestUtility.c ****             pw++;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 18
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 18
 
 
  286              		.loc 1 668 17 discriminator 3 view .LVU66
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  328              	.L20:
  678:Src/aiTestUtility.c ****         }
  679:Src/aiTestUtility.c ****     }
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 19
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 19
 
 
  680:Src/aiTestUtility.c **** 
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  376              		.loc 1 87 5 view .LVU86
  377 000e 0023     		movs	r3, #0
  378 0010 0193     		str	r3, [sp, #4]
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 20
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 20
 
 
   87:Src/aiTestUtility.c **** #endif
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
   93:Src/aiTestUtility.c **** 
  429              		.loc 1 93 5 view .LVU93
   93:Src/aiTestUtility.c **** 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 21
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 21
 
 
  430              		.loc 1 93 22 is_stmt 0 view .LVU94
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  477 0006 7047     		bx	lr
  478              	.L45:
  479              		.align	2
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 22
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 22
 
 
  480              	.L44:
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  532              		.loc 1 116 5 view .LVU109
  116:Src/aiTestUtility.c **** #else
  533              		.loc 1 116 12 is_stmt 0 view .LVU110
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 23
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 23
 
 
  534 0002 FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  583              	.LVL28:
  126:Src/aiTestUtility.c ****     uint64_t s  = clks / fcpu;
  584              		.loc 1 126 21 view .LVU118
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 24
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 24
 
 
  585 0014 8146     		mov	r9, r0
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  129:Src/aiTestUtility.c ****     ms -= (s * 1000);
  629              		.loc 1 129 32 is_stmt 0 view .LVU129
  630 005c 7301     		lsls	r3, r6, #5
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 25
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 25
 
 
  631 005e 43EAD461 		orr	r1, r3, r4, lsr #27
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  676 00b4 7219     		adds	r2, r6, r5
  677 00b6 9101     		lsls	r1, r2, #6
  131:Src/aiTestUtility.c ****     t->fcpu = fcpu;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 26
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 26
 
 
  678              		.loc 1 131 26 view .LVU139
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  125:Src/aiTestUtility.c ****     uint32_t fcpu = systemCoreClock();
  719              		.loc 1 125 16 view .LVU153
  720 00d2 4FF0FF30 		mov	r0, #-1
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 27
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 27
 
 
  721              	.LVL39:
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  768              		.loc 1 144 12 is_stmt 0 view .LVU162
  769 0016 2046     		mov	r0, r4
  770 0018 2946     		mov	r1, r5
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 28
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 28
 
 
  771 001a FFF7FEFF 		bl	__aeabi_ul2f
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  819 0006 00BF     		.align	2
  820              	.L63:
  821 0008 00000000 		.word	.LANCHOR3
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 29
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 29
 
 
  822              		.cfi_endproc
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  869              	.LVL51:
  870              	.LBB24:
  871              	.LBI24:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 30
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 30
 
 
  149:Src/aiTestUtility.c **** {
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  922 004d 43       		.byte	(.L66-.L68)/2
  923 004e 43       		.byte	(.L66-.L68)/2
  924 004f 43       		.byte	(.L66-.L68)/2
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 31
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 31
 
 
  925 0050 43       		.byte	(.L66-.L68)/2
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  154:Src/aiTestUtility.c ****     case 0x438: str = "STM32F303x6/8"; break;
  979              		.loc 1 154 21 view .LVU184
  980 0084 3A4E     		ldr	r6, .L90+8
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 32
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 32
 
 
  981 0086 14E0     		b	.L74
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  1019              		.loc 1 161 17 is_stmt 1 view .LVU200
  161:Src/aiTestUtility.c ****     case 0x472: str = "STM32L5[5,6]2xx"; break;
  1020              		.loc 1 161 38 view .LVU201
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 33
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 33
 
 
  161:Src/aiTestUtility.c ****     case 0x472: str = "STM32L5[5,6]2xx"; break;
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  1060              	.LBE24:
  200:Src/aiTestUtility.c ****     );
  1061              		.loc 1 200 18 view .LVU217
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 34
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 34
 
 
  1062 00b2 FFF7FEFF 		bl	HAL_GetREVID
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  1104 00ee 3348     		ldr	r0, .L90+84
  1105 00f0 FFF7FEFF 		bl	printf
  1106              	.LVL73:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 35
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 35
 
 
  261:Src/aiTestUtility.c ****     mconf |= ((acr & FLASH_ACR_LATENCY_Msk) >> FLASH_ACR_LATENCY_Pos);
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  1144 0126 1368     		ldr	r3, [r2]
  1145 0128 43F48063 		orr	r3, r3, #1024
  1146 012c 1360     		str	r3, [r2]
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 36
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 36
 
 
  1147              	.L81:
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  1187 0142 0ED0     		beq	.L88
  174:Src/aiTestUtility.c ****     else
  1188              		.loc 1 174 16 view .LVU261
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 37
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 37
 
 
  1189 0144 1E48     		ldr	r0, .L90+88
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  1237              	.L91:
  1238 0166 00BF     		.align	2
  1239              	.L90:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 38
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 38
 
 
  1240 0168 003C0240 		.word	1073888256
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
    4:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h ****  * @version  V5.0.4
    5:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h ****  * @date     09. April 2018
    6:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h ****  ******************************************************************************/
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 39
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 39
 
 
    7:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h **** /*
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
   61:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h **** #ifndef   __PACKED
   62:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h ****   #define __PACKED                               __attribute__((packed, aligned(1)))
   63:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h **** #endif
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 40
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 40
 
 
   64:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h **** #ifndef   __PACKED_STRUCT
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  118:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h **** /* ###########################  Core Function Access  ########################### */
  119:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h **** /** \ingroup  CMSIS_Core_FunctionInterface
  120:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h ****     \defgroup CMSIS_Core_RegAccFunctions CMSIS Core Register Access Functions
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 41
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 41
 
 
  121:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h ****   @{
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  175:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h **** 
  176:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h **** /**
  177:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h ****   \brief   Set Control Register
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 42
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 42
 
 
  178:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h ****   \details Writes the given value to the Control Register.
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  232:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h ****  */
  233:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_xPSR(void)
  234:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h **** {
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 43
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 43
 
 
  235:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h ****   uint32_t result;
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  289:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_PSP_NS(uint32_t topOfProcStack)
  290:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h **** {
  291:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h ****   __ASM volatile ("MSR psp_ns, %0" : : "r" (topOfProcStack) : );
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 44
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 44
 
 
  292:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h **** }
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  346:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h **** }
  347:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h **** #endif
  348:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h **** 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 45
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 45
 
 
  349:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h **** 
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  287:Src/aiTestUtility.c **** 
  1305              		.loc 1 287 5 is_stmt 1 view .LVU276
  1306              	.LBB40:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 46
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 46
 
 
  1307              	.LBI40:
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  401:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h ****   __ASM volatile ("MRS %0, primask_ns" : "=r" (result) :: "memory");
  402:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h ****   return(result);
  403:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h **** }
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 47
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 47
 
 
  404:C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include\cmsis_gcc.h **** #endif
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  1384              	.L96:
  1385              		.align	2
  1386              	.L95:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 48
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 48
 
 
  1387 0008 00000000 		.word	.LANCHOR4
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  1433 0012 F8D0     		beq	.L98
  336:Src/aiTestUtility.c ****         errno = EBADF;
  1434              		.loc 1 336 46 discriminator 2 view .LVU301
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 49
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 49
 
 
  1435 0014 0228     		cmp	r0, #2
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  1478              		.section	.text.__wrap_malloc,"ax",%progbits
  1479              		.align	1
  1480              		.global	__wrap_malloc
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 50
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 50
 
 
  1481              		.syntax unified
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  1522              		.loc 1 424 9 is_stmt 1 view .LVU327
  424:Src/aiTestUtility.c ****         malloc_track.a[malloc_track.aidx] = bytes;
  1523              		.loc 1 424 39 is_stmt 0 view .LVU328
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 51
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 51
 
 
  1524 0022 D3F88020 		ldr	r2, [r3, #128]
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  1567              	__wrap_free:
  1568              	.LVL99:
  1569              	.LFB149:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 52
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 52
 
 
  436:Src/aiTestUtility.c ****     if (ptr) {
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  442:Src/aiTestUtility.c ****             malloc_track.fidx = 0;
  1608              		.loc 1 442 12 is_stmt 0 view .LVU358
  1609 002e 0F2A     		cmp	r2, #15
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 53
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 53
 
 
  1610 0030 02DD     		ble	.L112
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  1656 0002 29B1     		cbz	r1, .L117
  459:Src/aiTestUtility.c ****                 err.type, err.code);
  1657              		.loc 1 459 9 is_stmt 1 view .LVU369
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 54
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 54
 
 
  1658 0004 030A     		lsrs	r3, r0, #8
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  1706              		.loc 1 467 5 view .LVU377
  467:Src/aiTestUtility.c **** }
  1707              		.loc 1 467 18 is_stmt 0 view .LVU378
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 55
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 55
 
 
  1708 0000 C288     		ldrh	r2, [r0, #6]
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  1756              	.LVL113:
  508:Src/aiTestUtility.c ****     printf(" Model name         : %s\r\n", report->model_name);
  1757              		.loc 1 508 5 is_stmt 0 view .LVU387
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 56
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 56
 
 
  1758 000a FFF7FEFF 		bl	puts
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  521:Src/aiTestUtility.c ****     printf("  nodes             : %ld\r\n", report->n_nodes);
  1802              		.loc 1 521 5 is_stmt 1 view .LVU398
  1803 004e 9448     		ldr	r0, .L167+28
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 57
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 57
 
 
  1804 0050 FFF7FEFF 		bl	puts
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  1848              		.loc 1 477 11 is_stmt 0 view .LVU408
  1849 0092 58F80620 		ldr	r2, [r8, r6]
  476:Src/aiTestUtility.c ****         		AI_BUFFER_FMT_GET_SIGN(buffer->format)?"s":"u",
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 58
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 58
 
 
  1850              		.loc 1 476 9 view .LVU409
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  1895              	.L128:
  1896              	.LVL131:
  481:Src/aiTestUtility.c ****     		printf(" scale=%f, zero=%d,", (float)scale, (int)zero_point);
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 59
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 59
 
 
  1897              		.loc 1 481 7 is_stmt 1 view .LVU419
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  1943 0114 4FF00009 		mov	r9, #0
  1944              	.LVL140:
  481:Src/aiTestUtility.c ****     		printf(" scale=%f, zero=%d,", (float)scale, (int)zero_point);
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 60
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 60
 
 
  1945              		.loc 1 481 24 view .LVU428
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  1985              		.loc 1 495 9 is_stmt 1 view .LVU442
  1986 0144 6148     		ldr	r0, .L167+72
  1987 0146 FFF7FEFF 		bl	printf
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 61
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 61
 
 
  1988              	.LVL147:
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  531:Src/aiTestUtility.c ****     for (i=0; i<report->n_outputs; i++)
  2030              		.loc 1 531 47 is_stmt 0 discriminator 3 view .LVU455
  2031 0186 D4F83480 		ldr	r8, [r4, #52]
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 62
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 62
 
 
  531:Src/aiTestUtility.c ****     for (i=0; i<report->n_outputs; i++)
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  2072              	.L133:
  502:Src/aiTestUtility.c **** }
  2073              		.loc 1 502 6 is_stmt 1 view .LVU470
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 63
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 63
 
 
  2074 01c4 4748     		ldr	r0, .L167+96
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  480:Src/aiTestUtility.c ****     		int zero_point = AI_BUFFER_META_INFO_INTQ_GET_ZEROPOINT(buffer->meta_info, 0);
  2118              		.loc 1 480 7 is_stmt 1 view .LVU481
  480:Src/aiTestUtility.c ****     		int zero_point = AI_BUFFER_META_INFO_INTQ_GET_ZEROPOINT(buffer->meta_info, 0);
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 64
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 64
 
 
  2119              		.loc 1 480 24 is_stmt 0 view .LVU482
@@ -3838,7 +3838,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  2166              	.LVL165:
  2167              	.L141:
  481:Src/aiTestUtility.c ****     		printf(" scale=%f, zero=%d,", (float)scale, (int)zero_point);
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 65
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 65
 
 
  2168              		.loc 1 481 24 view .LVU490
@@ -3898,7 +3898,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  485:Src/aiTestUtility.c **** 					- ((int)AI_BUFFER_FMT_GET_FBITS(buffer->format) +
  2211              		.loc 1 485 14 is_stmt 0 view .LVU502
  2212 0264 58F80630 		ldr	r3, [r8, r6]
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 66
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 66
 
 
  485:Src/aiTestUtility.c **** 					- ((int)AI_BUFFER_FMT_GET_FBITS(buffer->format) +
@@ -3958,7 +3958,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  2260 02ea FFF7FEFF 		bl	printf
  2261              	.LVL177:
  2262              	.L143:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 67
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 67
 
 
  496:Src/aiTestUtility.c ****     		AI_BUFFER_BYTE_SIZE(AI_BUFFER_SIZE(buffer), buffer->format),
@@ -4018,7 +4018,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  2304 032a D4F83880 		ldr	r8, [r4, #56]
  533:Src/aiTestUtility.c **** }
  2305              		.loc 1 533 56 discriminator 3 view .LVU523
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 68
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 68
 
 
  2306 032e 05EB4503 		add	r3, r5, r5, lsl #1
@@ -4078,7 +4078,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  2346              		.loc 1 502 6 is_stmt 1 view .LVU537
  2347 0368 0948     		ldr	r0, .L169+24
  2348 036a FFF7FEFF 		bl	puts
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 69
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 69
 
 
  2349              	.LVL186:
@@ -4138,7 +4138,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  2400 0002 0446     		mov	r4, r0
  2401 0004 0D46     		mov	r5, r1
  2402 0006 1646     		mov	r6, r2
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 70
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 70
 
 
  544:Src/aiTestUtility.c ****     printf("# %s %d.%d\r\n", tname , major, minor);
@@ -4198,7 +4198,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  2451              		.loc 1 594 1 is_stmt 1 view -0
  2452              		.cfi_startproc
  2453              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 71
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 71
 
 
  2454              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -4258,7 +4258,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  2501 0004 1A70     		strb	r2, [r3]
  647:Src/aiTestUtility.c **** }
  2502              		.loc 1 647 5 is_stmt 1 view .LVU560
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 72
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 72
 
 
  647:Src/aiTestUtility.c **** }
@@ -4318,7 +4318,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  712:Src/aiTestUtility.c ****         return true;
  713:Src/aiTestUtility.c **** 
  714:Src/aiTestUtility.c ****     if (buf == NULL) {
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 73
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 73
 
 
  715:Src/aiTestUtility.c ****         uint8_t tmp;
@@ -4378,7 +4378,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  2564              		.global	pb_istream_from_uart
  2565              		.syntax unified
  2566              		.thumb
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 74
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 74
 
 
  2567              		.thumb_func
@@ -4438,7 +4438,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  2619 0000 00000000 		.space	4
  2620              		.section	.bss.o_packet,"aw",%nobits
  2621              		.align	2
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 75
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 75
 
 
  2622              		.set	.LANCHOR0,. + 0
@@ -4498,7 +4498,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  2656 005b 00       		.space	1
  2657              	.LC30:
  2658 005c 204D6F64 		.ascii	" Model datetime     : %s\015\012\000"
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 76
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 76
 
 
  2658      656C2064 
@@ -4558,7 +4558,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  2681 015c 20207061 		.ascii	"  params            : %ld bytes\015\012\000"
  2681      72616D73 
  2681      20202020 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 77
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 77
 
 
  2681      20202020 
@@ -4618,7 +4618,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  2712 021a 0000     		.space	2
  2713              	.LC50:
  2714 021c 2020204F 		.ascii	"   O\000"
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 78
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 78
 
 
  2714      00
@@ -4678,7 +4678,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  2746 0038 53544D33 		.ascii	"STM32L43xxx\000"
  2746      324C3433 
  2746      78787800 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 79
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 79
 
 
  2747              	.LC6:
@@ -4738,7 +4738,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  2773 0111 000000   		.space	3
  2774              	.LC17:
  2775 0114 616E6420 		.ascii	"and used\000"
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 80
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 80
 
 
  2775      75736564 
@@ -4798,7 +4798,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  2806              		.file 16 "Inc/pb_decode.h"
  2807              		.file 17 "Inc/pb_encode.h"
  2808              		.file 18 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Include/core_c
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 81
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 81
 
 
  2809              		.file 19 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/CMSIS/Device/ST/STM3
@@ -4812,109 +4812,109 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 1
  2817              		.file 27 "c:\\program files (x86)\\gnu tools arm embedded\\8 2019-q3-update\\arm-none-eabi\\includ
  2818              		.file 28 "C:/Users/grgcz/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver
  2819              		.file 29 "<built-in>"
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 82
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 82
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 aiTestUtility.c
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:18     .text.write_packet:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:25     .text.write_packet:00000000 write_packet
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:56     .text.write_packet:00000018 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:62     .text.write_callback:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:68     .text.write_callback:00000000 write_callback
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:151    .text.write_callback:0000003c $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:156    .text.read_packet:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:162    .text.read_packet:00000000 read_packet
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:197    .text.read_packet:00000020 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:204    .text.read_callback:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:210    .text.read_callback:00000000 read_callback
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:339    .text.read_callback:00000074 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:346    .text.crcIpInit:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:353    .text.crcIpInit:00000000 crcIpInit
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:409    .text.crcIpInit:00000034 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:415    .text.dwtIpInit:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:422    .text.dwtIpInit:00000000 dwtIpInit
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:451    .text.dwtIpInit:00000020 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:457    .text.dwtReset:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:464    .text.dwtReset:00000000 dwtReset
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:481    .text.dwtReset:00000008 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:486    .text.dwtGetCycles:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:493    .text.dwtGetCycles:00000000 dwtGetCycles
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:509    .text.dwtGetCycles:00000008 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:514    .text.systemCoreClock:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:521    .text.systemCoreClock:00000000 systemCoreClock
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:543    .text.dwtCyclesToTime:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:550    .text.dwtCyclesToTime:00000000 dwtCyclesToTime
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:729    .text.dwtCyclesToFloatMs:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:736    .text.dwtCyclesToFloatMs:00000000 dwtCyclesToFloatMs
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:794    .text.dwtCyclesToFloatMs:00000034 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:799    .text.getFlashCacheConf:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:806    .text.getFlashCacheConf:00000000 getFlashCacheConf
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:821    .text.getFlashCacheConf:00000008 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:826    .text.logDeviceConf:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:833    .text.logDeviceConf:00000000 logDeviceConf
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:883    .text.logDeviceConf:00000026 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:977    .text.logDeviceConf:00000084 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:1240   .text.logDeviceConf:00000168 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:1271   .text.disableInts:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:1278   .text.disableInts:00000000 disableInts
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:1326   .text.restoreInts:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:1333   .text.restoreInts:00000000 restoreInts
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:1363   .text.ioDisableWrite:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:1370   .text.ioDisableWrite:00000000 ioDisableWrite
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:1387   .text.ioDisableWrite:00000008 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:1392   .text._write:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:1399   .text._write:00000000 _write
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:1473   .text._write:0000003c $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:1479   .text.__wrap_malloc:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:1486   .text.__wrap_malloc:00000000 __wrap_malloc
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:1555   .text.__wrap_malloc:00000048 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:18     .text.write_packet:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:25     .text.write_packet:00000000 write_packet
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:56     .text.write_packet:00000018 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:62     .text.write_callback:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:68     .text.write_callback:00000000 write_callback
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:151    .text.write_callback:0000003c $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:156    .text.read_packet:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:162    .text.read_packet:00000000 read_packet
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:197    .text.read_packet:00000020 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:204    .text.read_callback:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:210    .text.read_callback:00000000 read_callback
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:339    .text.read_callback:00000074 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:346    .text.crcIpInit:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:353    .text.crcIpInit:00000000 crcIpInit
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:409    .text.crcIpInit:00000034 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:415    .text.dwtIpInit:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:422    .text.dwtIpInit:00000000 dwtIpInit
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:451    .text.dwtIpInit:00000020 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:457    .text.dwtReset:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:464    .text.dwtReset:00000000 dwtReset
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:481    .text.dwtReset:00000008 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:486    .text.dwtGetCycles:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:493    .text.dwtGetCycles:00000000 dwtGetCycles
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:509    .text.dwtGetCycles:00000008 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:514    .text.systemCoreClock:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:521    .text.systemCoreClock:00000000 systemCoreClock
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:543    .text.dwtCyclesToTime:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:550    .text.dwtCyclesToTime:00000000 dwtCyclesToTime
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:729    .text.dwtCyclesToFloatMs:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:736    .text.dwtCyclesToFloatMs:00000000 dwtCyclesToFloatMs
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:794    .text.dwtCyclesToFloatMs:00000034 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:799    .text.getFlashCacheConf:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:806    .text.getFlashCacheConf:00000000 getFlashCacheConf
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:821    .text.getFlashCacheConf:00000008 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:826    .text.logDeviceConf:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:833    .text.logDeviceConf:00000000 logDeviceConf
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:883    .text.logDeviceConf:00000026 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:977    .text.logDeviceConf:00000084 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:1240   .text.logDeviceConf:00000168 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:1271   .text.disableInts:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:1278   .text.disableInts:00000000 disableInts
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:1326   .text.restoreInts:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:1333   .text.restoreInts:00000000 restoreInts
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:1363   .text.ioDisableWrite:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:1370   .text.ioDisableWrite:00000000 ioDisableWrite
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:1387   .text.ioDisableWrite:00000008 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:1392   .text._write:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:1399   .text._write:00000000 _write
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:1473   .text._write:0000003c $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:1479   .text.__wrap_malloc:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:1486   .text.__wrap_malloc:00000000 __wrap_malloc
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:1555   .text.__wrap_malloc:00000048 $d
                             *COM*:000000d4 malloc_track
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:1560   .text.__wrap_free:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:1567   .text.__wrap_free:00000000 __wrap_free
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 83
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:1560   .text.__wrap_free:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:1567   .text.__wrap_free:00000000 __wrap_free
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 83
 
 
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:1629   .text.__wrap_free:00000040 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:1634   .text.aiLogErr:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:1641   .text.aiLogErr:00000000 aiLogErr
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:1685   .text.aiLogErr:0000001c $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:1691   .text.aiBufferSize:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:1698   .text.aiBufferSize:00000000 aiBufferSize
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:1724   .text.aiPrintNetworkInfo:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:1731   .text.aiPrintNetworkInfo:00000000 aiPrintNetworkInfo
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2232   .text.aiPrintNetworkInfo:00000284 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2259   .text.aiPrintNetworkInfo:000002e8 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2367   .text.aiPrintNetworkInfo:00000378 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2378   .text.aiTestHeader:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2385   .text.aiTestHeader:00000000 aiTestHeader
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2434   .text.aiTestHeader:00000030 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2442   .text.ioFlushWrite:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2449   .text.ioFlushWrite:00000000 ioFlushWrite
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2478   .text.ioFlushWrite:00000018 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2483   .text.ioFlushRead:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2490   .text.ioFlushRead:00000000 ioFlushRead
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2512   .text.ioFlushRead:00000010 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2518   .text.pb_ostream_to_uart:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2525   .text.pb_ostream_to_uart:00000000 pb_ostream_to_uart
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2558   .text.pb_ostream_to_uart:0000001c $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2563   .text.pb_istream_from_uart:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2570   .text.pb_istream_from_uart:00000000 pb_istream_from_uart
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2593   .text.pb_istream_from_uart:00000014 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2631   .data._ioWriteAllowed:00000000 _ioWriteAllowed
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2600   .bss.i_packet:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2604   .bss.i_packet:00000000 i_packet
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2607   .bss.i_ridx:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2611   .bss.i_ridx:00000000 i_ridx
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2614   .bss.mconf:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2618   .bss.mconf:00000000 mconf
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2621   .bss.o_packet:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2625   .bss.o_packet:00000000 o_packet
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2634   .rodata.aiLogErr.str1.4:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2641   .rodata.aiPrintNetworkInfo.str1.4:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2716   .rodata.aiTestHeader.str1.4:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2729   .rodata.crcIpInit.str1.4:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s:2733   .rodata.logDeviceConf.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:1629   .text.__wrap_free:00000040 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:1634   .text.aiLogErr:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:1641   .text.aiLogErr:00000000 aiLogErr
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:1685   .text.aiLogErr:0000001c $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:1691   .text.aiBufferSize:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:1698   .text.aiBufferSize:00000000 aiBufferSize
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:1724   .text.aiPrintNetworkInfo:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:1731   .text.aiPrintNetworkInfo:00000000 aiPrintNetworkInfo
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2232   .text.aiPrintNetworkInfo:00000284 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2259   .text.aiPrintNetworkInfo:000002e8 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2367   .text.aiPrintNetworkInfo:00000378 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2378   .text.aiTestHeader:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2385   .text.aiTestHeader:00000000 aiTestHeader
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2434   .text.aiTestHeader:00000030 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2442   .text.ioFlushWrite:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2449   .text.ioFlushWrite:00000000 ioFlushWrite
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2478   .text.ioFlushWrite:00000018 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2483   .text.ioFlushRead:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2490   .text.ioFlushRead:00000000 ioFlushRead
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2512   .text.ioFlushRead:00000010 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2518   .text.pb_ostream_to_uart:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2525   .text.pb_ostream_to_uart:00000000 pb_ostream_to_uart
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2558   .text.pb_ostream_to_uart:0000001c $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2563   .text.pb_istream_from_uart:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2570   .text.pb_istream_from_uart:00000000 pb_istream_from_uart
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2593   .text.pb_istream_from_uart:00000014 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2631   .data._ioWriteAllowed:00000000 _ioWriteAllowed
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2600   .bss.i_packet:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2604   .bss.i_packet:00000000 i_packet
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2607   .bss.i_ridx:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2611   .bss.i_ridx:00000000 i_ridx
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2614   .bss.mconf:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2618   .bss.mconf:00000000 mconf
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2621   .bss.o_packet:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2625   .bss.o_packet:00000000 o_packet
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2634   .rodata.aiLogErr.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2641   .rodata.aiPrintNetworkInfo.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2716   .rodata.aiTestHeader.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2729   .rodata.crcIpInit.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s:2733   .rodata.logDeviceConf.str1.4:00000000 $d
 
 UNDEFINED SYMBOLS
 HAL_UART_Transmit
@@ -4932,6 +4932,6 @@ __errno
 __real_malloc
 __real_free
 __aeabi_f2d
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccQeAQv1.s 			page 84
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccnd6Pke.s 			page 84
 
 

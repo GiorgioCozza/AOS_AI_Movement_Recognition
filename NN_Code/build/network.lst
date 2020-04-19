@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -33,7 +33,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
    2:Src/network.c ****   ******************************************************************************
    3:Src/network.c ****   * @file    network.c
    4:Src/network.c ****   * @author  AST Embedded Analytics Research Platform
-   5:Src/network.c ****   * @date    Sat Apr 18 17:04:59 2020
+   5:Src/network.c ****   * @date    Sun Apr 19 20:29:51 2020
    6:Src/network.c ****   * @brief   AI Tool Automatic Code Generator for Embedded NN computing
    7:Src/network.c ****   ******************************************************************************
    8:Src/network.c ****   * @attention
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
   27:Src/network.c **** #include "core_common.h"
   28:Src/network.c **** #include "layers.h"
   29:Src/network.c **** 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 2
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 2
 
 
   30:Src/network.c **** #undef AI_TOOLS_VERSION_MAJOR
@@ -87,7 +87,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
   53:Src/network.c **** #endif
   54:Src/network.c **** 
   55:Src/network.c **** #undef AI_TOOLS_DATE_TIME
-  56:Src/network.c **** #define AI_TOOLS_DATE_TIME   "Sat Apr 18 17:04:59 2020"
+  56:Src/network.c **** #define AI_TOOLS_DATE_TIME   "Sun Apr 19 20:29:51 2020"
   57:Src/network.c **** 
   58:Src/network.c **** #undef AI_TOOLS_COMPILE_TIME
   59:Src/network.c **** #define AI_TOOLS_COMPILE_TIME    __DATE__ " " __TIME__
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
   84:Src/network.c **** AI_STATIC ai_array FCN1_output_array;   /* Array #15 */
   85:Src/network.c **** AI_STATIC ai_array FCN1_nl_output_array;   /* Array #16 */
   86:Src/network.c **** AI_STATIC ai_array FCN2_output_array;   /* Array #17 */
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 3
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 3
 
 
   87:Src/network.c **** AI_STATIC ai_array FCN2_nl_output_array;   /* Array #18 */
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  141:Src/network.c ****     NULL, NULL, 7,
  142:Src/network.c ****      AI_STATIC)
  143:Src/network.c **** AI_ARRAY_OBJ_DECLARE(
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 4
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 4
 
 
  144:Src/network.c ****     FCN3_weights_array, AI_ARRAY_FORMAT_FLOAT,
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  198:Src/network.c ****      AI_STATIC)
  199:Src/network.c **** AI_ARRAY_OBJ_DECLARE(
  200:Src/network.c ****     FCN1_output_array, AI_ARRAY_FORMAT_FLOAT,
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 5
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 5
 
 
  201:Src/network.c ****     NULL, NULL, 32,
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  255:Src/network.c ****   1, &LSTM1_bias_array, NULL)
  256:Src/network.c **** AI_TENSOR_OBJ_DECLARE(
  257:Src/network.c ****   LSTM1_peephole, AI_STATIC,
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 6
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 6
 
 
  258:Src/network.c ****   0x0, 0x0, AI_SHAPE_INIT(4, 1, 192, 1, 1), AI_STRIDE_INIT(4, 4, 4, 768, 768),
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  312:Src/network.c **** 
  313:Src/network.c **** 
  314:Src/network.c **** /**  Layer declarations section  **********************************************/
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 7
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 7
 
 
  315:Src/network.c **** 
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  369:Src/network.c **** )
  370:Src/network.c **** 
  371:Src/network.c **** AI_TENSOR_CHAIN_OBJ_DECLARE(
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 8
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 8
 
 
  372:Src/network.c ****   FCN1_nl_chain, AI_STATIC_CONST, 4,
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  426:Src/network.c **** 
  427:Src/network.c **** AI_LAYER_OBJ_DECLARE(
  428:Src/network.c ****   FCN3_layer, 7,
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 9
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 9
 
 
  429:Src/network.c ****   DENSE_TYPE,
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  483:Src/network.c ****     LSTM1_output_array.data_start = AI_PTR(activations + 1440);
  484:Src/network.c ****     FCN1_output_array.data = AI_PTR(activations + 0);
  485:Src/network.c ****     FCN1_output_array.data_start = AI_PTR(activations + 0);
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 10
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 10
 
 
  486:Src/network.c ****     FCN1_nl_output_array.data = AI_PTR(activations + 0);
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  540:Src/network.c ****     LSTM1_recurrent_array.format |= AI_FMT_FLAG_CONST;
  541:Src/network.c ****     LSTM1_recurrent_array.data = AI_PTR(weights + 12384);
  542:Src/network.c ****     LSTM1_recurrent_array.data_start = AI_PTR(weights + 12384);
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 11
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 11
 
 
  543:Src/network.c ****     LSTM1_kernel_array.format |= AI_FMT_FLAG_CONST;
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
   58              		.loc 1 568 5 is_stmt 1 view .LVU7
   59              		.loc 1 568 23 is_stmt 0 view .LVU8
   60 0014 6422     		movs	r2, #100
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 12
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 12
 
 
   61 0016 0021     		movs	r1, #0
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  585:Src/network.c ****       .interface_api_version  = ai_platform_interface_api_get_version(),
   97              		.loc 1 585 33 view .LVU15
   98 0056 FFF7FEFF 		bl	ai_platform_interface_api_get_version
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 13
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 13
 
 
   99              	.LVL7:
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  133 007a 00E0     		b	.L2
  134              	.LVL13:
  135              	.L5:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 14
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 14
 
 
  136              		.loc 1 604 10 view .LVU28
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  611:Src/network.c **** }
  186              		.loc 1 611 1 view .LVU35
  187 0006 08BD     		pop	{r3, pc}
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 15
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 15
 
 
  188              		.cfi_endproc
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  234              		.cfi_endproc
  235              	.LFE12:
  237              		.section	.text.ai_network_destroy,"ax",%progbits
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 16
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 16
 
 
  238              		.align	1
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  284              	.LCFI8:
  285              		.cfi_def_cfa_offset 8
  286              		.cfi_offset 4, -8
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 17
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 17
 
 
  287              		.cfi_offset 14, -4
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  323              		.loc 1 517 26 view .LVU66
  324 0022 9160     		str	r1, [r2, #8]
  518:Src/network.c ****     FCN3_weights_array.format |= AI_FMT_FLAG_CONST;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 18
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 18
 
 
  325              		.loc 1 518 5 is_stmt 1 view .LVU67
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  362 0054 42F08042 		orr	r2, r2, #1073741824
  363 0058 0A60     		str	r2, [r1]
  526:Src/network.c ****     FCN2_weights_array.data_start = AI_PTR(weights + 88032);
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 19
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 19
 
 
  364              		.loc 1 526 5 is_stmt 1 view .LVU85
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  533:Src/network.c ****     LSTM1_bias_array.format |= AI_FMT_FLAG_CONST;
  401              		.loc 1 533 35 is_stmt 0 view .LVU103
  402 008c D160     		str	r1, [r2, #12]
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 20
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 20
 
 
  534:Src/network.c ****     LSTM1_bias_array.data = AI_PTR(weights + 78688);
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  541:Src/network.c ****     LSTM1_recurrent_array.data_start = AI_PTR(weights + 12384);
  440              		.loc 1 541 34 is_stmt 0 view .LVU121
  441 00c2 03F54151 		add	r1, r3, #12352
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 21
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 21
 
 
  442 00c6 2031     		adds	r1, r1, #32
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  477              		.loc 1 549 46 is_stmt 0 view .LVU140
  478 00f0 224A     		ldr	r2, .L21+44
  479 00f2 1168     		ldr	r1, [r2]
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 22
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 22
 
 
  480 00f4 41F08041 		orr	r1, r1, #1073741824
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  515              		.loc 1 479 37 is_stmt 0 view .LVU159
  516 010c CA60     		str	r2, [r1, #12]
  480:Src/network.c ****     batch_normalization_1_output_array.data_start = AI_PTR(activations + 0);
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 23
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 23
 
 
  517              		.loc 1 480 5 is_stmt 1 view .LVU160
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  552 0130 8160     		str	r1, [r0, #8]
  489:Src/network.c ****     FCN2_nl_output_array.data = AI_PTR(activations + 128);
  553              		.loc 1 489 5 is_stmt 1 view .LVU180
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 24
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 24
 
 
  489:Src/network.c ****     FCN2_nl_output_array.data = AI_PTR(activations + 128);
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  589              		.loc 1 641 1 view .LVU199
  590 0148 10BD     		pop	{r4, pc}
  591              	.LVL32:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 25
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 25
 
 
  592              	.L19:
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  640              		.loc 1 647 1 is_stmt 0 view .LVU203
  641 0000 08B5     		push	{r3, lr}
  642              	.LCFI9:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 26
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 26
 
 
  643              		.cfi_def_cfa_offset 8
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  696              	__compound_literal.50:
  697 0000 00000000 		.space	4
  698              		.section	.bss.__compound_literal.55,"aw",%nobits
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 27
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 27
 
 
  699              		.align	2
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  769      00000000 
  770              		.section	.bss.__compound_literal.88,"aw",%nobits
  771              		.align	2
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 28
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 28
 
 
  774              	__compound_literal.88:
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  830              		.section	.data.FCN1_nl_layer,"aw"
  831              		.align	2
  834              	FCN1_nl_layer:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 29
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 29
 
 
  835 0000 1927     		.short	10009
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  895              		.set	.LANCHOR16,. + 0
  898              	FCN1_output_array:
  899 0000 40108201 		.word	25301056
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 30
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 30
 
 
  900 0004 20000000 		.word	32
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  962 000c 00000000 		.word	0
  963              		.section	.data.FCN2_layer,"aw"
  964              		.align	2
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 31
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 31
 
 
  967              	FCN2_layer:
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  1029 000a 00       		.byte	0
  1030 000b 00       		.byte	0
  1031 000c 00000000 		.word	__compound_literal.34
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 32
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 32
 
 
  1032 0010 01       		.byte	1
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  1094 0012 00       		.byte	0
  1095 0013 00       		.byte	0
  1096 0014 00000000 		.word	__compound_literal.1
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 33
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 33
 
 
  1097 0018 00000000 		.word	FCN3_bias_array
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  1161 0008 00000000 		.word	0
  1162 000c 00000000 		.word	0
  1163              		.section	.data.FCN3_output,"aw"
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 34
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 34
 
 
  1164              		.align	2
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  1228 0000 00000000 		.word	0
  1229 0004 0000     		.short	0
  1230 0006 00       		.byte	0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 35
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 35
 
 
  1231 0007 01       		.byte	1
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  1293 0010 00000000 		.word	forward_lstm
  1294 0014 00000000 		.word	LSTM1_chain
  1295 0018 40000000 		.word	64
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 36
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 36
 
 
  1296 001c 00000000 		.word	ai_math_tanh
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  1358 0000 40108201 		.word	25301056
  1359 0004 C0000000 		.word	192
  1360 0008 00000000 		.word	0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 37
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 37
 
 
  1361 000c 00000000 		.word	0
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  1427 000c 00200000 		.word	8192
  1428              		.section	.data.__compound_literal.12,"aw"
  1429              		.align	2
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 38
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 38
 
 
  1432              	__compound_literal.12:
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  1500              		.section	.data.__compound_literal.2,"aw"
  1501              		.align	2
  1504              	__compound_literal.2:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 39
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 39
 
 
  1505 0000 20000000 		.word	32
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  1573              		.align	2
  1576              	__compound_literal.27:
  1577 0000 04000000 		.word	4
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 40
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 40
 
 
  1578 0004 04000000 		.word	4
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  1648              	__compound_literal.34:
  1649 0000 01000000 		.word	1
  1650 0004 20000000 		.word	32
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 41
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 41
 
 
  1651 0008 01000000 		.word	1
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  1721 0000 04000000 		.word	4
  1722 0004 04000000 		.word	4
  1723 0008 1C000000 		.word	28
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 42
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 42
 
 
  1724 000c 1C000000 		.word	28
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  1794 000c 80000000 		.word	128
  1795              		.section	.data.__compound_literal.51,"aw"
  1796              		.align	2
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 43
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 43
 
 
  1799              	__compound_literal.51:
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  1863              		.align	2
  1866              	__compound_literal.58:
  1867 0000 00000000 		.word	FCN1_nl_output
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 44
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 44
 
 
  1868              		.section	.data.__compound_literal.6,"aw"
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  1934 0024 0000     		.short	0
  1935 0026 0000     		.short	0
  1936 0028 00000000 		.word	__compound_literal.65
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 45
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 45
 
 
  1937 002c 00000000 		.word	0
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  2007 0008 00000000 		.word	0
  2008 000c 0100     		.short	1
  2009 000e 0000     		.short	0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 46
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 46
 
 
  2010 0010 00000000 		.word	__compound_literal.73
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  2076              		.section	.data.__compound_literal.87,"aw"
  2077              		.align	2
  2080              	__compound_literal.87:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 47
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 47
 
 
  2081 0000 00000000 		.word	FCN3_nl_output
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  2147 0000 1227     		.short	10002
  2148 0002 0000     		.short	0
  2149 0004 00000000 		.word	0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 48
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 48
 
 
  2150 0008 00000000 		.word	g_network
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  2212 0008 00000000 		.word	0
  2213 000c 00000000 		.word	0
  2214              		.section	.data.g_network,"aw"
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 49
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 49
 
 
  2215              		.align	2
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  2273              		.set	.LANCHOR13,. + 0
  2276              	input_0_output_array:
  2277 0000 40108209 		.word	159518784
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 50
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 50
 
 
  2278 0004 68010000 		.word	360
@@ -2998,22 +2998,22 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  2342      35633763 
  2342      32373865 
  2343 0029 000000   		.space	3
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 51
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 51
 
 
  2344              	.LC2:
- 2345 002c 53617420 		.ascii	"Sat Apr 18 17:04:59 2020\000"
+ 2345 002c 53756E20 		.ascii	"Sun Apr 19 20:29:51 2020\000"
  2345      41707220 
- 2345      31382031 
- 2345      373A3034 
- 2345      3A353920 
+ 2345      31392032 
+ 2345      303A3239 
+ 2345      3A353120 
  2346 0045 000000   		.space	3
  2347              	.LC3:
- 2348 0048 41707220 		.ascii	"Apr 18 2020 17:05:14\000"
- 2348      31382032 
+ 2348 0048 41707220 		.ascii	"Apr 19 2020 20:30:00\000"
+ 2348      31392032 
  2348      30323020 
- 2348      31373A30 
- 2348      353A3134 
+ 2348      32303A33 
+ 2348      303A3030 
  2349 005d 000000   		.space	3
  2350              	.LC4:
  2351 0060 28726576 		.ascii	"(rev-5.0.0)\000"
@@ -3047,348 +3047,348 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 1
  2379              		.file 19 "Middlewares/ST/AI/Inc/layers_norm.h"
  2380              		.file 20 "Middlewares/ST/AI/Inc/layers_rnn.h"
  2381              		.file 21 "<built-in>"
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 52
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 52
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 network.c
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:18     .text.ai_network_get_info:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:26     .text.ai_network_get_info:00000000 ai_network_get_info
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:152    .text.ai_network_get_info:00000084 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:162    .text.ai_network_get_error:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:169    .text.ai_network_get_error:00000000 ai_network_get_error
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:192    .text.ai_network_create:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:199    .text.ai_network_create:00000000 ai_network_create
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:233    .text.ai_network_create:0000001c $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:238    .text.ai_network_destroy:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:245    .text.ai_network_destroy:00000000 ai_network_destroy
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:268    .text.ai_network_init:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:275    .text.ai_network_init:00000000 ai_network_init
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:601    .text.ai_network_init:00000150 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:626    .text.ai_network_run:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:633    .text.ai_network_run:00000000 ai_network_run
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:656    .text.ai_network_forward:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:663    .text.ai_network_forward:00000000 ai_network_forward
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:687    .bss.__compound_literal.45:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:690    .bss.__compound_literal.45:00000000 __compound_literal.45
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:693    .bss.__compound_literal.50:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:696    .bss.__compound_literal.50:00000000 __compound_literal.50
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:699    .bss.__compound_literal.55:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:702    .bss.__compound_literal.55:00000000 __compound_literal.55
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:705    .bss.__compound_literal.59:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:708    .bss.__compound_literal.59:00000000 __compound_literal.59
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:711    .bss.__compound_literal.60:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:714    .bss.__compound_literal.60:00000000 __compound_literal.60
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:717    .bss.__compound_literal.65:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:720    .bss.__compound_literal.65:00000000 __compound_literal.65
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:723    .bss.__compound_literal.69:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:726    .bss.__compound_literal.69:00000000 __compound_literal.69
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:729    .bss.__compound_literal.70:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:732    .bss.__compound_literal.70:00000000 __compound_literal.70
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:735    .bss.__compound_literal.75:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:738    .bss.__compound_literal.75:00000000 __compound_literal.75
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:741    .bss.__compound_literal.79:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:744    .bss.__compound_literal.79:00000000 __compound_literal.79
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:747    .bss.__compound_literal.80:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:750    .bss.__compound_literal.80:00000000 __compound_literal.80
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:753    .bss.__compound_literal.83:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:756    .bss.__compound_literal.83:00000000 __compound_literal.83
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:759    .bss.__compound_literal.84:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:762    .bss.__compound_literal.84:00000000 __compound_literal.84
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:765    .bss.__compound_literal.85:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:768    .bss.__compound_literal.85:00000000 __compound_literal.85
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:771    .bss.__compound_literal.88:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:774    .bss.__compound_literal.88:00000000 __compound_literal.88
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:777    .bss.__compound_literal.89:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:780    .bss.__compound_literal.89:00000000 __compound_literal.89
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:783    .bss.__compound_literal.90:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:786    .bss.__compound_literal.90:00000000 __compound_literal.90
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:789    .data.FCN1_bias:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:792    .data.FCN1_bias:00000000 FCN1_bias
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2036   .data.__compound_literal.8:00000000 __compound_literal.8
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2086   .data.__compound_literal.9:00000000 __compound_literal.9
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 53
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:18     .text.ai_network_get_info:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:26     .text.ai_network_get_info:00000000 ai_network_get_info
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:152    .text.ai_network_get_info:00000084 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:162    .text.ai_network_get_error:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:169    .text.ai_network_get_error:00000000 ai_network_get_error
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:192    .text.ai_network_create:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:199    .text.ai_network_create:00000000 ai_network_create
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:233    .text.ai_network_create:0000001c $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:238    .text.ai_network_destroy:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:245    .text.ai_network_destroy:00000000 ai_network_destroy
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:268    .text.ai_network_init:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:275    .text.ai_network_init:00000000 ai_network_init
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:601    .text.ai_network_init:00000150 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:626    .text.ai_network_run:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:633    .text.ai_network_run:00000000 ai_network_run
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:656    .text.ai_network_forward:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:663    .text.ai_network_forward:00000000 ai_network_forward
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:687    .bss.__compound_literal.45:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:690    .bss.__compound_literal.45:00000000 __compound_literal.45
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:693    .bss.__compound_literal.50:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:696    .bss.__compound_literal.50:00000000 __compound_literal.50
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:699    .bss.__compound_literal.55:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:702    .bss.__compound_literal.55:00000000 __compound_literal.55
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:705    .bss.__compound_literal.59:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:708    .bss.__compound_literal.59:00000000 __compound_literal.59
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:711    .bss.__compound_literal.60:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:714    .bss.__compound_literal.60:00000000 __compound_literal.60
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:717    .bss.__compound_literal.65:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:720    .bss.__compound_literal.65:00000000 __compound_literal.65
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:723    .bss.__compound_literal.69:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:726    .bss.__compound_literal.69:00000000 __compound_literal.69
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:729    .bss.__compound_literal.70:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:732    .bss.__compound_literal.70:00000000 __compound_literal.70
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:735    .bss.__compound_literal.75:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:738    .bss.__compound_literal.75:00000000 __compound_literal.75
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:741    .bss.__compound_literal.79:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:744    .bss.__compound_literal.79:00000000 __compound_literal.79
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:747    .bss.__compound_literal.80:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:750    .bss.__compound_literal.80:00000000 __compound_literal.80
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:753    .bss.__compound_literal.83:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:756    .bss.__compound_literal.83:00000000 __compound_literal.83
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:759    .bss.__compound_literal.84:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:762    .bss.__compound_literal.84:00000000 __compound_literal.84
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:765    .bss.__compound_literal.85:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:768    .bss.__compound_literal.85:00000000 __compound_literal.85
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:771    .bss.__compound_literal.88:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:774    .bss.__compound_literal.88:00000000 __compound_literal.88
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:777    .bss.__compound_literal.89:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:780    .bss.__compound_literal.89:00000000 __compound_literal.89
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:783    .bss.__compound_literal.90:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:786    .bss.__compound_literal.90:00000000 __compound_literal.90
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:789    .data.FCN1_bias:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:792    .data.FCN1_bias:00000000 FCN1_bias
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2036   .data.__compound_literal.8:00000000 __compound_literal.8
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2086   .data.__compound_literal.9:00000000 __compound_literal.9
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 53
 
 
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:813    .data.FCN1_bias_array:00000000 FCN1_bias_array
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:809    .data.FCN1_bias_array:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:819    .data.FCN1_layer:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:822    .data.FCN1_layer:00000000 FCN1_layer
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2219   .data.g_network:00000000 g_network
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:834    .data.FCN1_nl_layer:00000000 FCN1_nl_layer
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2285   .rodata.FCN1_chain:00000000 FCN1_chain
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:831    .data.FCN1_nl_layer:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:967    .data.FCN2_layer:00000000 FCN2_layer
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2293   .rodata.FCN1_nl_chain:00000000 FCN1_nl_chain
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:844    .data.FCN1_nl_output:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:847    .data.FCN1_nl_output:00000000 FCN1_nl_output
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1630   .data.__compound_literal.32:00000000 __compound_literal.32
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1639   .data.__compound_literal.33:00000000 __compound_literal.33
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:868    .data.FCN1_nl_output_array:00000000 FCN1_nl_output_array
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:864    .data.FCN1_nl_output_array:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:874    .data.FCN1_output:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:877    .data.FCN1_output:00000000 FCN1_output
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1612   .data.__compound_literal.30:00000000 __compound_literal.30
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1621   .data.__compound_literal.31:00000000 __compound_literal.31
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:898    .data.FCN1_output_array:00000000 FCN1_output_array
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:894    .data.FCN1_output_array:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:904    .data.FCN1_weights:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:907    .data.FCN1_weights:00000000 FCN1_weights
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1414   .data.__compound_literal.10:00000000 __compound_literal.10
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1423   .data.__compound_literal.11:00000000 __compound_literal.11
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:928    .data.FCN1_weights_array:00000000 FCN1_weights_array
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:924    .data.FCN1_weights_array:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:934    .data.FCN2_bias:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:937    .data.FCN2_bias:00000000 FCN2_bias
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1702   .data.__compound_literal.4:00000000 __compound_literal.4
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1790   .data.__compound_literal.5:00000000 __compound_literal.5
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:958    .data.FCN2_bias_array:00000000 FCN2_bias_array
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:954    .data.FCN2_bias_array:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:964    .data.FCN2_layer:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:979    .data.FCN2_nl_layer:00000000 FCN2_nl_layer
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2301   .rodata.FCN2_chain:00000000 FCN2_chain
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:976    .data.FCN2_nl_layer:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1112   .data.FCN3_layer:00000000 FCN3_layer
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2309   .rodata.FCN2_nl_chain:00000000 FCN2_nl_chain
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:989    .data.FCN2_nl_output:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:992    .data.FCN2_nl_output:00000000 FCN2_nl_output
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1666   .data.__compound_literal.36:00000000 __compound_literal.36
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1675   .data.__compound_literal.37:00000000 __compound_literal.37
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1013   .data.FCN2_nl_output_array:00000000 FCN2_nl_output_array
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1009   .data.FCN2_nl_output_array:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1019   .data.FCN2_output:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1022   .data.FCN2_output:00000000 FCN2_output
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1648   .data.__compound_literal.34:00000000 __compound_literal.34
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1657   .data.__compound_literal.35:00000000 __compound_literal.35
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1043   .data.FCN2_output_array:00000000 FCN2_output_array
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1039   .data.FCN2_output_array:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1049   .data.FCN2_weights:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1052   .data.FCN2_weights:00000000 FCN2_weights
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1872   .data.__compound_literal.6:00000000 __compound_literal.6
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1954   .data.__compound_literal.7:00000000 __compound_literal.7
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1073   .data.FCN2_weights_array:00000000 FCN2_weights_array
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 54
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:813    .data.FCN1_bias_array:00000000 FCN1_bias_array
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:809    .data.FCN1_bias_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:819    .data.FCN1_layer:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:822    .data.FCN1_layer:00000000 FCN1_layer
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2219   .data.g_network:00000000 g_network
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:834    .data.FCN1_nl_layer:00000000 FCN1_nl_layer
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2285   .rodata.FCN1_chain:00000000 FCN1_chain
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:831    .data.FCN1_nl_layer:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:967    .data.FCN2_layer:00000000 FCN2_layer
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2293   .rodata.FCN1_nl_chain:00000000 FCN1_nl_chain
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:844    .data.FCN1_nl_output:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:847    .data.FCN1_nl_output:00000000 FCN1_nl_output
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1630   .data.__compound_literal.32:00000000 __compound_literal.32
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1639   .data.__compound_literal.33:00000000 __compound_literal.33
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:868    .data.FCN1_nl_output_array:00000000 FCN1_nl_output_array
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:864    .data.FCN1_nl_output_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:874    .data.FCN1_output:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:877    .data.FCN1_output:00000000 FCN1_output
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1612   .data.__compound_literal.30:00000000 __compound_literal.30
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1621   .data.__compound_literal.31:00000000 __compound_literal.31
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:898    .data.FCN1_output_array:00000000 FCN1_output_array
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:894    .data.FCN1_output_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:904    .data.FCN1_weights:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:907    .data.FCN1_weights:00000000 FCN1_weights
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1414   .data.__compound_literal.10:00000000 __compound_literal.10
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1423   .data.__compound_literal.11:00000000 __compound_literal.11
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:928    .data.FCN1_weights_array:00000000 FCN1_weights_array
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:924    .data.FCN1_weights_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:934    .data.FCN2_bias:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:937    .data.FCN2_bias:00000000 FCN2_bias
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1702   .data.__compound_literal.4:00000000 __compound_literal.4
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1790   .data.__compound_literal.5:00000000 __compound_literal.5
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:958    .data.FCN2_bias_array:00000000 FCN2_bias_array
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:954    .data.FCN2_bias_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:964    .data.FCN2_layer:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:979    .data.FCN2_nl_layer:00000000 FCN2_nl_layer
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2301   .rodata.FCN2_chain:00000000 FCN2_chain
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:976    .data.FCN2_nl_layer:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1112   .data.FCN3_layer:00000000 FCN3_layer
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2309   .rodata.FCN2_nl_chain:00000000 FCN2_nl_chain
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:989    .data.FCN2_nl_output:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:992    .data.FCN2_nl_output:00000000 FCN2_nl_output
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1666   .data.__compound_literal.36:00000000 __compound_literal.36
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1675   .data.__compound_literal.37:00000000 __compound_literal.37
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1013   .data.FCN2_nl_output_array:00000000 FCN2_nl_output_array
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1009   .data.FCN2_nl_output_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1019   .data.FCN2_output:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1022   .data.FCN2_output:00000000 FCN2_output
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1648   .data.__compound_literal.34:00000000 __compound_literal.34
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1657   .data.__compound_literal.35:00000000 __compound_literal.35
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1043   .data.FCN2_output_array:00000000 FCN2_output_array
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1039   .data.FCN2_output_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1049   .data.FCN2_weights:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1052   .data.FCN2_weights:00000000 FCN2_weights
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1872   .data.__compound_literal.6:00000000 __compound_literal.6
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1954   .data.__compound_literal.7:00000000 __compound_literal.7
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1073   .data.FCN2_weights_array:00000000 FCN2_weights_array
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 54
 
 
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1069   .data.FCN2_weights_array:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1079   .data.FCN3_bias:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1082   .data.FCN3_bias:00000000 FCN3_bias
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1396   .data.__compound_literal.0:00000000 __compound_literal.0
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1405   .data.__compound_literal.1:00000000 __compound_literal.1
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1103   .data.FCN3_bias_array:00000000 FCN3_bias_array
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1099   .data.FCN3_bias_array:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1109   .data.FCN3_layer:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1124   .data.FCN3_nl_layer:00000000 FCN3_nl_layer
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2317   .rodata.FCN3_chain:00000000 FCN3_chain
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1121   .data.FCN3_nl_layer:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2325   .rodata.FCN3_nl_chain:00000000 FCN3_nl_chain
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1134   .data.FCN3_nl_output:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1137   .data.FCN3_nl_output:00000000 FCN3_nl_output
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1711   .data.__compound_literal.40:00000000 __compound_literal.40
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1720   .data.__compound_literal.41:00000000 __compound_literal.41
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1158   .data.FCN3_nl_output_array:00000000 FCN3_nl_output_array
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1154   .data.FCN3_nl_output_array:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1164   .data.FCN3_output:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1167   .data.FCN3_output:00000000 FCN3_output
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1684   .data.__compound_literal.38:00000000 __compound_literal.38
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1693   .data.__compound_literal.39:00000000 __compound_literal.39
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1188   .data.FCN3_output_array:00000000 FCN3_output_array
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1184   .data.FCN3_output_array:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1194   .data.FCN3_weights:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1197   .data.FCN3_weights:00000000 FCN3_weights
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1504   .data.__compound_literal.2:00000000 __compound_literal.2
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1603   .data.__compound_literal.3:00000000 __compound_literal.3
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1218   .data.FCN3_weights_array:00000000 FCN3_weights_array
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1214   .data.FCN3_weights_array:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1224   .data.LSTM1_bias:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1227   .data.LSTM1_bias:00000000 LSTM1_bias
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1432   .data.__compound_literal.12:00000000 __compound_literal.12
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1441   .data.__compound_literal.13:00000000 __compound_literal.13
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1248   .data.LSTM1_bias_array:00000000 LSTM1_bias_array
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1244   .data.LSTM1_bias_array:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1254   .data.LSTM1_kernel:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1257   .data.LSTM1_kernel:00000000 LSTM1_kernel
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1486   .data.__compound_literal.18:00000000 __compound_literal.18
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1495   .data.__compound_literal.19:00000000 __compound_literal.19
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1278   .data.LSTM1_kernel_array:00000000 LSTM1_kernel_array
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1274   .data.LSTM1_kernel_array:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1284   .data.LSTM1_layer:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1287   .data.LSTM1_layer:00000000 LSTM1_layer
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2333   .rodata.LSTM1_chain:00000000 LSTM1_chain
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1303   .data.LSTM1_output:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1306   .data.LSTM1_output:00000000 LSTM1_output
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1585   .data.__compound_literal.28:00000000 __compound_literal.28
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1594   .data.__compound_literal.29:00000000 __compound_literal.29
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1327   .data.LSTM1_output_array:00000000 LSTM1_output_array
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1323   .data.LSTM1_output_array:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1333   .data.LSTM1_peephole:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1336   .data.LSTM1_peephole:00000000 LSTM1_peephole
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1450   .data.__compound_literal.14:00000000 __compound_literal.14
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1459   .data.__compound_literal.15:00000000 __compound_literal.15
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1357   .data.LSTM1_peephole_array:00000000 LSTM1_peephole_array
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1353   .data.LSTM1_peephole_array:00000000 $d
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 55
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1069   .data.FCN2_weights_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1079   .data.FCN3_bias:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1082   .data.FCN3_bias:00000000 FCN3_bias
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1396   .data.__compound_literal.0:00000000 __compound_literal.0
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1405   .data.__compound_literal.1:00000000 __compound_literal.1
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1103   .data.FCN3_bias_array:00000000 FCN3_bias_array
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1099   .data.FCN3_bias_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1109   .data.FCN3_layer:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1124   .data.FCN3_nl_layer:00000000 FCN3_nl_layer
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2317   .rodata.FCN3_chain:00000000 FCN3_chain
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1121   .data.FCN3_nl_layer:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2325   .rodata.FCN3_nl_chain:00000000 FCN3_nl_chain
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1134   .data.FCN3_nl_output:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1137   .data.FCN3_nl_output:00000000 FCN3_nl_output
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1711   .data.__compound_literal.40:00000000 __compound_literal.40
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1720   .data.__compound_literal.41:00000000 __compound_literal.41
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1158   .data.FCN3_nl_output_array:00000000 FCN3_nl_output_array
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1154   .data.FCN3_nl_output_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1164   .data.FCN3_output:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1167   .data.FCN3_output:00000000 FCN3_output
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1684   .data.__compound_literal.38:00000000 __compound_literal.38
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1693   .data.__compound_literal.39:00000000 __compound_literal.39
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1188   .data.FCN3_output_array:00000000 FCN3_output_array
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1184   .data.FCN3_output_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1194   .data.FCN3_weights:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1197   .data.FCN3_weights:00000000 FCN3_weights
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1504   .data.__compound_literal.2:00000000 __compound_literal.2
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1603   .data.__compound_literal.3:00000000 __compound_literal.3
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1218   .data.FCN3_weights_array:00000000 FCN3_weights_array
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1214   .data.FCN3_weights_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1224   .data.LSTM1_bias:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1227   .data.LSTM1_bias:00000000 LSTM1_bias
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1432   .data.__compound_literal.12:00000000 __compound_literal.12
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1441   .data.__compound_literal.13:00000000 __compound_literal.13
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1248   .data.LSTM1_bias_array:00000000 LSTM1_bias_array
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1244   .data.LSTM1_bias_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1254   .data.LSTM1_kernel:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1257   .data.LSTM1_kernel:00000000 LSTM1_kernel
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1486   .data.__compound_literal.18:00000000 __compound_literal.18
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1495   .data.__compound_literal.19:00000000 __compound_literal.19
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1278   .data.LSTM1_kernel_array:00000000 LSTM1_kernel_array
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1274   .data.LSTM1_kernel_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1284   .data.LSTM1_layer:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1287   .data.LSTM1_layer:00000000 LSTM1_layer
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2333   .rodata.LSTM1_chain:00000000 LSTM1_chain
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1303   .data.LSTM1_output:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1306   .data.LSTM1_output:00000000 LSTM1_output
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1585   .data.__compound_literal.28:00000000 __compound_literal.28
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1594   .data.__compound_literal.29:00000000 __compound_literal.29
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1327   .data.LSTM1_output_array:00000000 LSTM1_output_array
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1323   .data.LSTM1_output_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1333   .data.LSTM1_peephole:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1336   .data.LSTM1_peephole:00000000 LSTM1_peephole
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1450   .data.__compound_literal.14:00000000 __compound_literal.14
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1459   .data.__compound_literal.15:00000000 __compound_literal.15
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1357   .data.LSTM1_peephole_array:00000000 LSTM1_peephole_array
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1353   .data.LSTM1_peephole_array:00000000 $d
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 55
 
 
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1363   .data.LSTM1_recurrent:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1366   .data.LSTM1_recurrent:00000000 LSTM1_recurrent
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1468   .data.__compound_literal.16:00000000 __compound_literal.16
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1477   .data.__compound_literal.17:00000000 __compound_literal.17
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1387   .data.LSTM1_recurrent_array:00000000 LSTM1_recurrent_array
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1383   .data.LSTM1_recurrent_array:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1393   .data.__compound_literal.0:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1402   .data.__compound_literal.1:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1411   .data.__compound_literal.10:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1420   .data.__compound_literal.11:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1429   .data.__compound_literal.12:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1438   .data.__compound_literal.13:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1447   .data.__compound_literal.14:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1456   .data.__compound_literal.15:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1465   .data.__compound_literal.16:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1474   .data.__compound_literal.17:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1483   .data.__compound_literal.18:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1492   .data.__compound_literal.19:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1501   .data.__compound_literal.2:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1510   .data.__compound_literal.20:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1513   .data.__compound_literal.20:00000000 __compound_literal.20
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1519   .data.__compound_literal.21:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1522   .data.__compound_literal.21:00000000 __compound_literal.21
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1528   .data.__compound_literal.22:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1531   .data.__compound_literal.22:00000000 __compound_literal.22
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1537   .data.__compound_literal.23:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1540   .data.__compound_literal.23:00000000 __compound_literal.23
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1546   .data.__compound_literal.24:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1549   .data.__compound_literal.24:00000000 __compound_literal.24
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1555   .data.__compound_literal.25:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1558   .data.__compound_literal.25:00000000 __compound_literal.25
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1564   .data.__compound_literal.26:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1567   .data.__compound_literal.26:00000000 __compound_literal.26
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1573   .data.__compound_literal.27:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1576   .data.__compound_literal.27:00000000 __compound_literal.27
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1582   .data.__compound_literal.28:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1591   .data.__compound_literal.29:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1600   .data.__compound_literal.3:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1609   .data.__compound_literal.30:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1618   .data.__compound_literal.31:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1627   .data.__compound_literal.32:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1636   .data.__compound_literal.33:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1645   .data.__compound_literal.34:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1654   .data.__compound_literal.35:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1663   .data.__compound_literal.36:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1672   .data.__compound_literal.37:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1681   .data.__compound_literal.38:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1690   .data.__compound_literal.39:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1699   .data.__compound_literal.4:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1708   .data.__compound_literal.40:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1717   .data.__compound_literal.41:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1726   .data.__compound_literal.42:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1729   .data.__compound_literal.42:00000000 __compound_literal.42
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2255   .data.input_0_output:00000000 input_0_output
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1732   .data.__compound_literal.43:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1735   .data.__compound_literal.43:00000000 __compound_literal.43
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2158   .data.batch_normalization_1_output:00000000 batch_normalization_1_output
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 56
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1363   .data.LSTM1_recurrent:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1366   .data.LSTM1_recurrent:00000000 LSTM1_recurrent
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1468   .data.__compound_literal.16:00000000 __compound_literal.16
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1477   .data.__compound_literal.17:00000000 __compound_literal.17
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1387   .data.LSTM1_recurrent_array:00000000 LSTM1_recurrent_array
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1383   .data.LSTM1_recurrent_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1393   .data.__compound_literal.0:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1402   .data.__compound_literal.1:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1411   .data.__compound_literal.10:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1420   .data.__compound_literal.11:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1429   .data.__compound_literal.12:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1438   .data.__compound_literal.13:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1447   .data.__compound_literal.14:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1456   .data.__compound_literal.15:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1465   .data.__compound_literal.16:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1474   .data.__compound_literal.17:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1483   .data.__compound_literal.18:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1492   .data.__compound_literal.19:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1501   .data.__compound_literal.2:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1510   .data.__compound_literal.20:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1513   .data.__compound_literal.20:00000000 __compound_literal.20
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1519   .data.__compound_literal.21:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1522   .data.__compound_literal.21:00000000 __compound_literal.21
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1528   .data.__compound_literal.22:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1531   .data.__compound_literal.22:00000000 __compound_literal.22
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1537   .data.__compound_literal.23:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1540   .data.__compound_literal.23:00000000 __compound_literal.23
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1546   .data.__compound_literal.24:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1549   .data.__compound_literal.24:00000000 __compound_literal.24
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1555   .data.__compound_literal.25:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1558   .data.__compound_literal.25:00000000 __compound_literal.25
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1564   .data.__compound_literal.26:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1567   .data.__compound_literal.26:00000000 __compound_literal.26
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1573   .data.__compound_literal.27:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1576   .data.__compound_literal.27:00000000 __compound_literal.27
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1582   .data.__compound_literal.28:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1591   .data.__compound_literal.29:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1600   .data.__compound_literal.3:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1609   .data.__compound_literal.30:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1618   .data.__compound_literal.31:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1627   .data.__compound_literal.32:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1636   .data.__compound_literal.33:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1645   .data.__compound_literal.34:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1654   .data.__compound_literal.35:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1663   .data.__compound_literal.36:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1672   .data.__compound_literal.37:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1681   .data.__compound_literal.38:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1690   .data.__compound_literal.39:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1699   .data.__compound_literal.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1708   .data.__compound_literal.40:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1717   .data.__compound_literal.41:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1726   .data.__compound_literal.42:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1729   .data.__compound_literal.42:00000000 __compound_literal.42
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2255   .data.input_0_output:00000000 input_0_output
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1732   .data.__compound_literal.43:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1735   .data.__compound_literal.43:00000000 __compound_literal.43
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2158   .data.batch_normalization_1_output:00000000 batch_normalization_1_output
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 56
 
 
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1738   .data.__compound_literal.44:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1741   .data.__compound_literal.44:00000000 __compound_literal.44
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2188   .data.batch_normalization_1_scale:00000000 batch_normalization_1_scale
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2116   .data.batch_normalization_1_bias:00000000 batch_normalization_1_bias
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1745   .data.__compound_literal.46:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1748   .data.__compound_literal.46:00000000 __compound_literal.46
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1766   .data.__compound_literal.47:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1769   .data.__compound_literal.47:00000000 __compound_literal.47
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1772   .data.__compound_literal.48:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1775   .data.__compound_literal.48:00000000 __compound_literal.48
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1778   .data.__compound_literal.49:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1781   .data.__compound_literal.49:00000000 __compound_literal.49
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1787   .data.__compound_literal.5:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1796   .data.__compound_literal.51:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1799   .data.__compound_literal.51:00000000 __compound_literal.51
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1817   .data.__compound_literal.52:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1820   .data.__compound_literal.52:00000000 __compound_literal.52
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1823   .data.__compound_literal.53:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1826   .data.__compound_literal.53:00000000 __compound_literal.53
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1829   .data.__compound_literal.54:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1832   .data.__compound_literal.54:00000000 __compound_literal.54
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1836   .data.__compound_literal.56:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1839   .data.__compound_literal.56:00000000 __compound_literal.56
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1857   .data.__compound_literal.57:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1860   .data.__compound_literal.57:00000000 __compound_literal.57
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1863   .data.__compound_literal.58:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1866   .data.__compound_literal.58:00000000 __compound_literal.58
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1869   .data.__compound_literal.6:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1878   .data.__compound_literal.61:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1881   .data.__compound_literal.61:00000000 __compound_literal.61
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1899   .data.__compound_literal.62:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1902   .data.__compound_literal.62:00000000 __compound_literal.62
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1905   .data.__compound_literal.63:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1908   .data.__compound_literal.63:00000000 __compound_literal.63
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1911   .data.__compound_literal.64:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1914   .data.__compound_literal.64:00000000 __compound_literal.64
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1918   .data.__compound_literal.66:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1921   .data.__compound_literal.66:00000000 __compound_literal.66
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1939   .data.__compound_literal.67:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1942   .data.__compound_literal.67:00000000 __compound_literal.67
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1945   .data.__compound_literal.68:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1948   .data.__compound_literal.68:00000000 __compound_literal.68
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1951   .data.__compound_literal.7:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1960   .data.__compound_literal.71:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1963   .data.__compound_literal.71:00000000 __compound_literal.71
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1981   .data.__compound_literal.72:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1984   .data.__compound_literal.72:00000000 __compound_literal.72
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1987   .data.__compound_literal.73:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1990   .data.__compound_literal.73:00000000 __compound_literal.73
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1993   .data.__compound_literal.74:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:1996   .data.__compound_literal.74:00000000 __compound_literal.74
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2000   .data.__compound_literal.76:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2003   .data.__compound_literal.76:00000000 __compound_literal.76
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2021   .data.__compound_literal.77:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2024   .data.__compound_literal.77:00000000 __compound_literal.77
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2027   .data.__compound_literal.78:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2030   .data.__compound_literal.78:00000000 __compound_literal.78
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 57
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1738   .data.__compound_literal.44:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1741   .data.__compound_literal.44:00000000 __compound_literal.44
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2188   .data.batch_normalization_1_scale:00000000 batch_normalization_1_scale
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2116   .data.batch_normalization_1_bias:00000000 batch_normalization_1_bias
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1745   .data.__compound_literal.46:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1748   .data.__compound_literal.46:00000000 __compound_literal.46
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1766   .data.__compound_literal.47:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1769   .data.__compound_literal.47:00000000 __compound_literal.47
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1772   .data.__compound_literal.48:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1775   .data.__compound_literal.48:00000000 __compound_literal.48
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1778   .data.__compound_literal.49:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1781   .data.__compound_literal.49:00000000 __compound_literal.49
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1787   .data.__compound_literal.5:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1796   .data.__compound_literal.51:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1799   .data.__compound_literal.51:00000000 __compound_literal.51
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1817   .data.__compound_literal.52:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1820   .data.__compound_literal.52:00000000 __compound_literal.52
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1823   .data.__compound_literal.53:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1826   .data.__compound_literal.53:00000000 __compound_literal.53
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1829   .data.__compound_literal.54:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1832   .data.__compound_literal.54:00000000 __compound_literal.54
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1836   .data.__compound_literal.56:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1839   .data.__compound_literal.56:00000000 __compound_literal.56
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1857   .data.__compound_literal.57:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1860   .data.__compound_literal.57:00000000 __compound_literal.57
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1863   .data.__compound_literal.58:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1866   .data.__compound_literal.58:00000000 __compound_literal.58
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1869   .data.__compound_literal.6:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1878   .data.__compound_literal.61:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1881   .data.__compound_literal.61:00000000 __compound_literal.61
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1899   .data.__compound_literal.62:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1902   .data.__compound_literal.62:00000000 __compound_literal.62
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1905   .data.__compound_literal.63:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1908   .data.__compound_literal.63:00000000 __compound_literal.63
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1911   .data.__compound_literal.64:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1914   .data.__compound_literal.64:00000000 __compound_literal.64
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1918   .data.__compound_literal.66:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1921   .data.__compound_literal.66:00000000 __compound_literal.66
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1939   .data.__compound_literal.67:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1942   .data.__compound_literal.67:00000000 __compound_literal.67
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1945   .data.__compound_literal.68:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1948   .data.__compound_literal.68:00000000 __compound_literal.68
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1951   .data.__compound_literal.7:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1960   .data.__compound_literal.71:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1963   .data.__compound_literal.71:00000000 __compound_literal.71
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1981   .data.__compound_literal.72:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1984   .data.__compound_literal.72:00000000 __compound_literal.72
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1987   .data.__compound_literal.73:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1990   .data.__compound_literal.73:00000000 __compound_literal.73
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1993   .data.__compound_literal.74:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:1996   .data.__compound_literal.74:00000000 __compound_literal.74
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2000   .data.__compound_literal.76:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2003   .data.__compound_literal.76:00000000 __compound_literal.76
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2021   .data.__compound_literal.77:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2024   .data.__compound_literal.77:00000000 __compound_literal.77
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2027   .data.__compound_literal.78:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2030   .data.__compound_literal.78:00000000 __compound_literal.78
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 57
 
 
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2033   .data.__compound_literal.8:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2042   .data.__compound_literal.81:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2045   .data.__compound_literal.81:00000000 __compound_literal.81
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2063   .data.__compound_literal.82:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2066   .data.__compound_literal.82:00000000 __compound_literal.82
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2069   .data.__compound_literal.86:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2072   .data.__compound_literal.86:00000000 __compound_literal.86
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2077   .data.__compound_literal.87:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2080   .data.__compound_literal.87:00000000 __compound_literal.87
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2083   .data.__compound_literal.9:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2092   .data.__compound_literal.91:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2095   .data.__compound_literal.91:00000000 __compound_literal.91
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2100   .data.__compound_literal.92:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2103   .data.__compound_literal.92:00000000 __compound_literal.92
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2113   .data.batch_normalization_1_bias:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2137   .data.batch_normalization_1_bias_array:00000000 batch_normalization_1_bias_array
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2133   .data.batch_normalization_1_bias_array:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2143   .data.batch_normalization_1_layer:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2146   .data.batch_normalization_1_layer:00000000 batch_normalization_1_layer
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2356   .rodata.batch_normalization_1_chain:00000000 batch_normalization_1_chain
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2155   .data.batch_normalization_1_output:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2179   .data.batch_normalization_1_output_array:00000000 batch_normalization_1_output_array
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2175   .data.batch_normalization_1_output_array:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2185   .data.batch_normalization_1_scale:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2209   .data.batch_normalization_1_scale_array:00000000 batch_normalization_1_scale_array
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2205   .data.batch_normalization_1_scale_array:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2215   .data.g_network:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2252   .data.input_0_output:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2276   .data.input_0_output_array:00000000 input_0_output_array
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2272   .data.input_0_output_array:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2282   .rodata.FCN1_chain:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2290   .rodata.FCN1_nl_chain:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2298   .rodata.FCN2_chain:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2306   .rodata.FCN2_nl_chain:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2314   .rodata.FCN3_chain:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2322   .rodata.FCN3_nl_chain:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2330   .rodata.LSTM1_chain:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2338   .rodata.ai_network_get_info.str1.4:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s:2353   .rodata.batch_normalization_1_chain:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2033   .data.__compound_literal.8:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2042   .data.__compound_literal.81:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2045   .data.__compound_literal.81:00000000 __compound_literal.81
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2063   .data.__compound_literal.82:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2066   .data.__compound_literal.82:00000000 __compound_literal.82
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2069   .data.__compound_literal.86:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2072   .data.__compound_literal.86:00000000 __compound_literal.86
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2077   .data.__compound_literal.87:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2080   .data.__compound_literal.87:00000000 __compound_literal.87
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2083   .data.__compound_literal.9:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2092   .data.__compound_literal.91:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2095   .data.__compound_literal.91:00000000 __compound_literal.91
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2100   .data.__compound_literal.92:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2103   .data.__compound_literal.92:00000000 __compound_literal.92
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2113   .data.batch_normalization_1_bias:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2137   .data.batch_normalization_1_bias_array:00000000 batch_normalization_1_bias_array
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2133   .data.batch_normalization_1_bias_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2143   .data.batch_normalization_1_layer:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2146   .data.batch_normalization_1_layer:00000000 batch_normalization_1_layer
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2356   .rodata.batch_normalization_1_chain:00000000 batch_normalization_1_chain
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2155   .data.batch_normalization_1_output:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2179   .data.batch_normalization_1_output_array:00000000 batch_normalization_1_output_array
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2175   .data.batch_normalization_1_output_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2185   .data.batch_normalization_1_scale:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2209   .data.batch_normalization_1_scale_array:00000000 batch_normalization_1_scale_array
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2205   .data.batch_normalization_1_scale_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2215   .data.g_network:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2252   .data.input_0_output:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2276   .data.input_0_output_array:00000000 input_0_output_array
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2272   .data.input_0_output_array:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2282   .rodata.FCN1_chain:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2290   .rodata.FCN1_nl_chain:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2298   .rodata.FCN2_chain:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2306   .rodata.FCN2_nl_chain:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2314   .rodata.FCN3_chain:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2322   .rodata.FCN3_nl_chain:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2330   .rodata.LSTM1_chain:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2338   .rodata.ai_network_get_info.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s:2353   .rodata.batch_normalization_1_chain:00000000 $d
 
 UNDEFINED SYMBOLS
 ai_platform_context_acquire
@@ -3407,7 +3407,7 @@ ai_platform_network_process
 forward_dense
 forward_relu
 forward_sm
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccweA4bs.s 			page 58
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cciU5DMM.s 			page 58
 
 
 forward_lstm

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
   28:Src/pb_decode.c **** static bool checkreturn decode_static_field(pb_istream_t *stream, pb_wire_type_t wire_type, pb_fiel
   29:Src/pb_decode.c **** static bool checkreturn decode_callback_field(pb_istream_t *stream, pb_wire_type_t wire_type, pb_fi
   30:Src/pb_decode.c **** static bool checkreturn decode_field(pb_istream_t *stream, pb_wire_type_t wire_type, pb_field_iter_
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 2
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 2
 
 
   31:Src/pb_decode.c **** static void iter_from_extension(pb_field_iter_t *iter, pb_extension_t *extension);
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
   85:Src/pb_decode.c **** static bool checkreturn buf_read(pb_istream_t *stream, pb_byte_t *buf, size_t count)
   86:Src/pb_decode.c **** {
   29              		.loc 1 86 1 view -0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 3
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 3
 
 
   30              		.cfi_startproc
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
   96:Src/pb_decode.c ****     
   97:Src/pb_decode.c ****     return true;
   73              		.loc 1 97 5 is_stmt 1 view .LVU17
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 4
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 4
 
 
   98:Src/pb_decode.c **** }
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  132:Src/pb_decode.c **** }
  133:Src/pb_decode.c **** 
  134:Src/pb_decode.c **** /* Read a single byte from input stream. buf may not be NULL.
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 5
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 5
 
 
  135:Src/pb_decode.c ****  * This is an optimization for the varint decoding. */
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  131 0018 1846     		mov	r0, r3
  132 001a 10BD     		pop	{r4, pc}
  133              	.LVL9:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 6
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 6
 
 
  134              	.L16:
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  183              		.syntax unified
  184              		.thumb
  185              		.thumb_func
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 7
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 7
 
 
  186              		.fpu fpv4-sp-d16
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  210 000a 1446     		mov	r4, r2
  184:Src/pb_decode.c ****     pb_byte_t byte;
  211              		.loc 1 184 5 is_stmt 1 view .LVU44
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 8
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 8
 
 
  185:Src/pb_decode.c ****     uint32_t result;
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  220:Src/pb_decode.c ****                 
  221:Src/pb_decode.c ****                 if ((byte & 0x7F) != 0x00 && ((result >> 31) == 0 || byte != sign_extension))
  222:Src/pb_decode.c ****                 {
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 9
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 9
 
 
  223:Src/pb_decode.c ****                     PB_RETURN_ERROR(stream, "varint overflow");
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  259              		.loc 1 193 17 is_stmt 1 view .LVU62
  193:Src/pb_decode.c ****             }
  260              		.loc 1 193 22 is_stmt 0 view .LVU63
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 10
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 10
 
 
  261 0038 0123     		movs	r3, #1
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  228:Src/pb_decode.c ****             }
  301              		.loc 1 228 24 view .LVU78
  302 0058 1D43     		orrs	r5, r5, r3
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 11
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 11
 
 
  303              	.LVL25:
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  342 0084 E9D0     		beq	.L30
  221:Src/pb_decode.c ****                 {
  343              		.loc 1 221 43 discriminator 1 view .LVU94
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 12
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 12
 
 
  344 0086 002D     		cmp	r5, #0
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  387 00b6 00BF     		.align	2
  388              	.L43:
  389 00b8 00000000 		.word	.LC2
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 13
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 13
 
 
  390              	.LBE2:
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  285:Src/pb_decode.c **** {
  286:Src/pb_decode.c ****     uint32_t length;
  287:Src/pb_decode.c ****     if (!pb_decode_varint32(stream, &length))
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 14
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 14
 
 
  288:Src/pb_decode.c ****         return false;
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  342:Src/pb_decode.c ****                 if (!pb_read(stream, buf, 1)) return false;
  343:Src/pb_decode.c ****             } while (*buf++ & 0x80);
  344:Src/pb_decode.c ****             return true;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 15
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 15
 
 
  345:Src/pb_decode.c ****             
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  399:Src/pb_decode.c ****  *************************/
  400:Src/pb_decode.c **** 
  401:Src/pb_decode.c **** static bool checkreturn decode_static_field(pb_istream_t *stream, pb_wire_type_t wire_type, pb_fiel
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 16
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 16
 
 
  402:Src/pb_decode.c **** {
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  456:Src/pb_decode.c ****                     PB_RETURN_ERROR(stream, "array overflow");
  457:Src/pb_decode.c **** 
  458:Src/pb_decode.c ****                 return func(stream, iter->pos, pItem);
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 17
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 17
 
 
  459:Src/pb_decode.c ****             }
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  513:Src/pb_decode.c ****     *(void**)pData = ptr;
  514:Src/pb_decode.c ****     return true;
  515:Src/pb_decode.c **** }
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 18
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 18
 
 
  516:Src/pb_decode.c **** 
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  557:Src/pb_decode.c ****                 pb_release_single_field(iter);
  558:Src/pb_decode.c ****             }
  559:Src/pb_decode.c ****         
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 19
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 19
 
 
  560:Src/pb_decode.c ****             if (PB_HTYPE(type) == PB_HTYPE_ONEOF)
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  614:Src/pb_decode.c ****                         status = false;
  615:Src/pb_decode.c ****                         break;
  616:Src/pb_decode.c ****                     }
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 20
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 20
 
 
  617:Src/pb_decode.c ****                     
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  430 0010 00000000 		.word	.LC3
  431              		.cfi_endproc
  432              	.LFE15:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 21
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 21
 
 
  434              		.section	.text.iter_from_extension,"ax",%progbits
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  702:Src/pb_decode.c ****         
  703:Src/pb_decode.c ****         return pCallback->funcs.decode(&substream, iter->pos, arg);
  704:Src/pb_decode.c ****     }
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 22
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 22
 
 
  705:Src/pb_decode.c **** }
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  462 0008 9E68     		ldr	r6, [r3, #8]
  463              	.LVL35:
  741:Src/pb_decode.c ****     (void)pb_field_iter_begin(iter, field, extension->dest);
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 23
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 23
 
 
  464              		.loc 1 741 5 is_stmt 1 view .LVU119
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  504              	.LFE18:
  506              		.section	.text.find_extension_field,"ax",%progbits
  507              		.align	1
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 24
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 24
 
 
  508              		.syntax unified
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  516              		.loc 1 799 1 is_stmt 1 view -0
  517              		.cfi_startproc
  518              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 25
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 25
 
 
  519              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  562              		.loc 1 809 1 view .LVU151
  563              		.cfi_endproc
  564              	.LFE21:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 26
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 26
 
 
  566              		.section	.text.pb_field_set_to_default,"ax",%progbits
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  601              		.loc 1 829 10 is_stmt 1 view .LVU160
  602              		.loc 1 829 13 is_stmt 0 view .LVU161
  603 0010 13F0C002 		ands	r2, r3, #192
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 27
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 27
 
 
  604 0014 3CD1     		bne	.L64
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  633              		.loc 1 854 31 is_stmt 0 view .LVU172
  634 0032 D2F80B10 		ldr	r1, [r2, #11]	@ unaligned
  635              		.loc 1 854 21 view .LVU173
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 28
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 28
 
 
  636 0036 21B3     		cbz	r1, .L69
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  676              		.loc 1 826 13 view .LVU187
  826:Src/pb_decode.c ****         }
  677              		.loc 1 826 17 is_stmt 0 view .LVU188
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 29
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 29
 
 
  678 005c A468     		ldr	r4, [r4, #8]
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  718 0078 D2F80B00 		ldr	r0, [r2, #11]	@ unaligned
  719              	.LVL62:
  852:Src/pb_decode.c ****             }
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 30
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 30
 
 
  720              		.loc 1 852 17 is_stmt 0 view .LVU203
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  749              		.cfi_def_cfa_offset 8
  750              		@ sp needed
  751 0096 10BD     		pop	{r4, pc}
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 31
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 31
 
 
  752              	.LVL69:
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  795              		.cfi_startproc
  796              		@ args = 0, pretend = 0, frame = 24
  797              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 32
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 32
 
 
  798              		.loc 1 885 1 is_stmt 0 view .LVU222
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  843              		.section	.text.pb_read,"ax",%progbits
  844              		.align	1
  845              		.global	pb_read
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 33
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 33
 
 
  846              		.syntax unified
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  890              	.LVL80:
  123:Src/pb_decode.c ****         PB_RETURN_ERROR(stream, "io error");
  891              		.loc 1 123 10 view .LVU245
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 34
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 34
 
 
  892 0018 2046     		mov	r0, r4
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  935              		.loc 1 109 4 is_stmt 1 view .LVU256
  109:Src/pb_decode.c **** 				return false;
  936              		.loc 1 109 9 is_stmt 0 view .LVU257
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 35
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 35
 
 
  937 0038 1022     		movs	r2, #16
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  980              		.loc 1 124 9 is_stmt 1 view .LVU268
  981 0068 E268     		ldr	r2, [r4, #12]
  982 006a 0AB1     		cbz	r2, .L96
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 36
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 36
 
 
  983              	.L89:
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  1031 0008 0DF10701 		add	r1, sp, #7
  1032 000c 2046     		mov	r0, r4
  1033 000e FFF7FEFF 		bl	pb_read
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 37
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 37
 
 
  1034              	.LVL95:
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  1082              		.loc 1 333 5 is_stmt 1 view .LVU284
  333:Src/pb_decode.c ****     switch (wire_type)
  1083              		.loc 1 333 12 is_stmt 0 view .LVU285
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 38
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 38
 
 
  1084 0008 1F68     		ldr	r7, [r3]
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  1125              		.loc 1 341 17 is_stmt 1 view .LVU298
  341:Src/pb_decode.c ****                 if (!pb_read(stream, buf, 1)) return false;
  1126              		.loc 1 341 20 is_stmt 0 view .LVU299
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 39
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 39
 
 
  1127 002e BB42     		cmp	r3, r7
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  1167 005a F8BD     		pop	{r3, r4, r5, r6, r7, pc}
  1168              	.LVL108:
  1169              	.L106:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 40
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 40
 
 
  351:Src/pb_decode.c ****             return pb_read(stream, buf, 4);
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  1216              		@ args = 0, pretend = 0, frame = 0
  1217              		@ frame_needed = 0, uses_anonymous_args = 0
  1218              		@ link register save eliminated.
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 41
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 41
 
 
  155:Src/pb_decode.c ****     pb_istream_t stream;
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  1259              		.global	pb_decode_varint32
  1260              		.syntax unified
  1261              		.thumb
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 42
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 42
 
 
  1262              		.thumb_func
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  286:Src/pb_decode.c ****     if (!pb_decode_varint32(stream, &length))
  1312              		.loc 1 286 5 is_stmt 1 view .LVU346
  287:Src/pb_decode.c ****         return false;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 43
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 43
 
 
  1313              		.loc 1 287 5 view .LVU347
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  904:Src/pb_decode.c ****     const uint32_t allbits = ~(uint32_t)0;
  905:Src/pb_decode.c ****     uint32_t extension_range_start = 0;
  906:Src/pb_decode.c ****     pb_field_iter_t iter;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 44
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 44
 
 
  907:Src/pb_decode.c **** 
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  961:Src/pb_decode.c ****             continue;
  962:Src/pb_decode.c ****         }
  963:Src/pb_decode.c **** 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 45
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 45
 
 
  964:Src/pb_decode.c ****         /* If a repeated fixed count field was found, get size from
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
 1018:Src/pb_decode.c ****         } while (pb_field_iter_next(&iter));
 1019:Src/pb_decode.c ****         
 1020:Src/pb_decode.c ****         /* Fixup if last field was also required. */
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 46
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 46
 
 
 1021:Src/pb_decode.c ****         if (PB_HTYPE(last_type) == PB_HTYPE_REQUIRED && iter.pos->tag != 0)
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
 1075:Src/pb_decode.c ****     if (!pb_close_string_substream(stream, &substream))
 1076:Src/pb_decode.c ****         return false;
 1077:Src/pb_decode.c ****     return status;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 47
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 47
 
 
 1078:Src/pb_decode.c **** }
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
 1132:Src/pb_decode.c ****     pb_type_t type;
 1133:Src/pb_decode.c ****     type = iter->pos->type;
 1134:Src/pb_decode.c **** 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 48
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 48
 
 
 1135:Src/pb_decode.c ****     if (PB_HTYPE(type) == PB_HTYPE_ONEOF)
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
 1189:Src/pb_decode.c ****             }
 1190:Src/pb_decode.c ****         }
 1191:Src/pb_decode.c ****     }
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 49
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 49
 
 
 1192:Src/pb_decode.c ****     
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
 1246:Src/pb_decode.c ****     if (value & 1)
 1247:Src/pb_decode.c ****         *dest = (pb_int64_t)(~(value >> 1));
 1248:Src/pb_decode.c ****     else
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 50
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 50
 
 
 1249:Src/pb_decode.c ****         *dest = (pb_int64_t)(value >> 1);
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
 1303:Src/pb_decode.c ****     if (field->data_size == sizeof(pb_int64_t))
 1304:Src/pb_decode.c ****         svalue = (pb_int64_t)value;
 1305:Src/pb_decode.c ****     else
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 51
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 51
 
 
 1306:Src/pb_decode.c ****         svalue = (int32_t)value;
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
 1360:Src/pb_decode.c ****         clamped = *(int32_t*)dest = (int32_t)value;
 1361:Src/pb_decode.c ****     else if (field->data_size == sizeof(int_least16_t))
 1362:Src/pb_decode.c ****         clamped = *(int_least16_t*)dest = (int_least16_t)value;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 52
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 52
 
 
 1363:Src/pb_decode.c ****     else if (field->data_size == sizeof(int_least8_t))
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
 1417:Src/pb_decode.c ****     else
 1418:Src/pb_decode.c ****     {
 1419:Src/pb_decode.c ****         if (alloc_size > field->data_size)
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 53
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 53
 
 
 1420:Src/pb_decode.c ****             PB_RETURN_ERROR(stream, "bytes overflow");
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
 1474:Src/pb_decode.c ****     
 1475:Src/pb_decode.c ****     /* New array entries need to be initialized, while required and optional
 1476:Src/pb_decode.c ****      * submessages have already been initialized in the top-level pb_decode. */
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 54
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 54
 
 
 1477:Src/pb_decode.c ****     if (PB_HTYPE(field->type) == PB_HTYPE_REPEATED)
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
 1495:Src/pb_decode.c ****         PB_RETURN_ERROR(stream, "bytes overflow");
 1496:Src/pb_decode.c **** 
 1497:Src/pb_decode.c ****     if (size == 0)
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 55
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 55
 
 
  1392              		.loc 1 1497 5 is_stmt 1 view .LVU363
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  1432 0040 FAE7     		b	.L131
  1433              	.L137:
 1500:Src/pb_decode.c ****         return true;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 56
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 56
 
 
  1434              		.loc 1 1500 9 is_stmt 1 view .LVU374
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  1483              		.cfi_offset 5, -12
  1484              		.cfi_offset 6, -8
  1485              		.cfi_offset 14, -4
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 57
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 57
 
 
  1486 0002 82B0     		sub	sp, sp, #8
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  1523              		.loc 1 1454 31 is_stmt 0 view .LVU398
  1524 0024 B5F80730 		ldrh	r3, [r5, #7]	@ unaligned
 1454:Src/pb_decode.c ****             PB_RETURN_ERROR(stream, "string overflow");
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 58
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 58
 
 
  1525              		.loc 1 1454 12 view .LVU399
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
 1445:Src/pb_decode.c **** #else
  1571              		.loc 1 1445 9 view .LVU408
  1572 0052 074B     		ldr	r3, .L156+4
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 59
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 59
 
 
  1573 0054 FAE7     		b	.L147
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  1619              		@ args = 0, pretend = 0, frame = 8
  1620              		@ frame_needed = 0, uses_anonymous_args = 0
 1392:Src/pb_decode.c ****     uint32_t size;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 60
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 60
 
 
  1621              		.loc 1 1392 1 is_stmt 0 view .LVU419
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  1661 001e 16D2     		bcs	.L170
 1407:Src/pb_decode.c ****     {
  1662              		.loc 1 1407 5 is_stmt 1 view .LVU434
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 61
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 61
 
 
 1407:Src/pb_decode.c ****     {
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  1706 004a 0D4B     		ldr	r3, .L176
  1707 004c F8E7     		b	.L161
  1708              	.LVL145:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 62
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 62
 
 
  1709              	.L170:
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  1750 0074 019A     		ldr	r2, [sp, #4]
  1751 0076 2046     		mov	r0, r4
  1752 0078 FFF7FEFF 		bl	pb_read
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 63
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 63
 
 
  1753              	.LVL148:
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  1802              		.loc 1 254 14 is_stmt 0 view .LVU465
  1803 000a 0025     		movs	r5, #0
  1804 000c 2E46     		mov	r6, r5
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 64
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 64
 
 
  253:Src/pb_decode.c ****     uint64_t result = 0;
@@ -3838,7 +3838,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  1844 0048 0734     		adds	r4, r4, #7
  1845              	.LVL155:
  266:Src/pb_decode.c ****     
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 65
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 65
 
 
  1846              		.loc 1 266 5 view .LVU481
@@ -3898,7 +3898,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  1893              		.fpu fpv4-sp-d16
  1895              	pb_dec_uvarint:
  1896              	.LVL158:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 66
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 66
 
 
  1897              	.LFB33:
@@ -3958,7 +3958,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
 1337:Src/pb_decode.c ****         clamped = *(uint_least16_t*)dest = (uint_least16_t)value;
  1938              		.loc 1 1337 13 is_stmt 0 view .LVU503
  1939 0020 022A     		cmp	r2, #2
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 67
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 67
 
 
  1940 0022 1CD0     		beq	.L200
@@ -4018,7 +4018,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  1980              	.LVL165:
  1981              	.L189:
 1348:Src/pb_decode.c **** 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 68
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 68
 
 
  1982              		.loc 1 1348 1 view .LVU518
@@ -4078,7 +4078,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  2024 006e F360     		str	r3, [r6, #12]
  2025 0070 0023     		movs	r3, #0
  2026 0072 EDE7     		b	.L189
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 69
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 69
 
 
  2027              	.L202:
@@ -4138,7 +4138,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
 1294:Src/pb_decode.c ****         return false;
  2076              		.loc 1 1294 5 view .LVU538
 1294:Src/pb_decode.c ****         return false;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 70
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 70
 
 
  2077              		.loc 1 1294 10 is_stmt 0 view .LVU539
@@ -4198,7 +4198,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
 1316:Src/pb_decode.c ****     else
  2115              		.loc 1 1316 9 is_stmt 1 view .LVU556
 1316:Src/pb_decode.c ****     else
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 71
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 71
 
 
  2116              		.loc 1 1316 42 is_stmt 0 view .LVU557
@@ -4258,7 +4258,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  2157              	.LVL181:
  2158              	.L206:
 1324:Src/pb_decode.c **** 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 72
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 72
 
 
  2159              		.loc 1 1324 1 view .LVU571
@@ -4318,7 +4318,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  2202 0078 EEE7     		b	.L206
  2203              	.L222:
 1318:Src/pb_decode.c **** 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 73
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 73
 
 
  2204              		.loc 1 1318 9 view .LVU583
@@ -4378,7 +4378,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  296:Src/pb_decode.c ****     *wire_type = (pb_wire_type_t) 0;
  2254              		.loc 1 296 10 view .LVU590
  2255 000c 2370     		strb	r3, [r4]
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 74
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 74
 
 
  297:Src/pb_decode.c ****     *tag = 0;
@@ -4438,7 +4438,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  2291 002e 2B70     		strb	r3, [r5]
  313:Src/pb_decode.c **** }
  2292              		.loc 1 313 5 is_stmt 1 view .LVU610
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 75
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 75
 
 
  2293              	.L226:
@@ -4498,7 +4498,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  2341 0006 DFE801F0 		tbb	[pc, r1]
  2342              	.L233:
  2343 000a 03       		.byte	(.L236-.L233)/2
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 76
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 76
 
 
  2344 000b 06       		.byte	(.L235-.L233)/2
@@ -4558,7 +4558,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  2385              		.loc 1 323 34 view .LVU631
  2386 002a FFF7FEFF 		bl	pb_read
  2387              	.LVL203:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 77
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 77
 
 
  323:Src/pb_decode.c ****         default: PB_RETURN_ERROR(stream, "invalid wire_type");
@@ -4618,7 +4618,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  2437 0002 82B0     		sub	sp, sp, #8
  2438              	.LCFI63:
  2439              		.cfi_def_cfa_offset 24
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 78
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 78
 
 
  2440 0004 0446     		mov	r4, r0
@@ -4678,7 +4678,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  2478              		.cfi_def_cfa_offset 16
  2479              		@ sp needed
  2480 002c 70BD     		pop	{r4, r5, r6, pc}
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 79
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 79
 
 
  2481              	.LVL210:
@@ -4738,7 +4738,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  2530              		.loc 1 384 18 is_stmt 0 view .LVU661
  2531 0006 8A68     		ldr	r2, [r1, #8]
  384:Src/pb_decode.c ****         if (!pb_read(substream, NULL, substream->bytes_left))
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 80
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 80
 
 
  2532              		.loc 1 384 8 view .LVU662
@@ -4798,7 +4798,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  2573              		.section	.text.decode_static_field,"ax",%progbits
  2574              		.align	1
  2575              		.syntax unified
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 81
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 81
 
 
  2576              		.thumb
@@ -4858,7 +4858,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  409:Src/pb_decode.c ****     {
  2621              		.loc 1 409 5 is_stmt 0 view .LVU687
  2622 001c 102B     		cmp	r3, #16
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 82
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 82
 
 
  2623 001e 1AD0     		beq	.L258
@@ -4918,7 +4918,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  412:Src/pb_decode.c ****             
  2665              		.loc 1 412 20 view .LVU700
  2666 004a B847     		blx	r7
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 83
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 83
 
 
  2667              	.LVL229:
@@ -4978,7 +4978,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  420:Src/pb_decode.c ****                 && PB_LTYPE(type) <= PB_LTYPE_LAST_PACKABLE)
  2710              		.loc 1 420 13 is_stmt 1 view .LVU712
  420:Src/pb_decode.c ****                 && PB_LTYPE(type) <= PB_LTYPE_LAST_PACKABLE)
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 84
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 84
 
 
  2711              		.loc 1 420 16 is_stmt 0 view .LVU713
@@ -5038,7 +5038,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  2750              		.loc 1 456 21 is_stmt 0 discriminator 4 view .LVU728
  2751 0094 EB60     		str	r3, [r5, #12]
  2752 0096 0026     		movs	r6, #0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 85
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 85
 
 
  2753 0098 D9E7     		b	.L264
@@ -5098,7 +5098,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  431:Src/pb_decode.c ****                 {
  2792              		.loc 1 431 69 discriminator 1 view .LVU744
  2793 00ba B1F80920 		ldrh	r2, [r1, #9]	@ unaligned
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 86
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 86
 
 
  431:Src/pb_decode.c ****                 {
@@ -5158,7 +5158,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  2832 00e2 33B1     		cbz	r3, .L271
  443:Src/pb_decode.c ****                 if (!pb_close_string_substream(stream, &substream))
  2833              		.loc 1 443 21 is_stmt 1 view .LVU761
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 87
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 87
 
 
  2834 00e4 EB68     		ldr	r3, [r5, #12]
@@ -5218,7 +5218,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  2876              	.LVL255:
  458:Src/pb_decode.c ****             }
  2877              		.loc 1 458 24 view .LVU774
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 88
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 88
 
 
  2878 010a 0646     		mov	r6, r0
@@ -5278,7 +5278,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  2921 0138 00000000 		.word	.LANCHOR0
  2922 013c 00000000 		.word	.LC12
  2923 0140 10000000 		.word	.LC13
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 89
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 89
 
 
  2924              		.cfi_endproc
@@ -5338,7 +5338,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  2970              		.loc 1 671 5 is_stmt 1 view .LVU795
  671:Src/pb_decode.c ****     {
  2971              		.loc 1 671 8 is_stmt 0 view .LVU796
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 90
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 90
 
 
  2972 0014 0229     		cmp	r1, #2
@@ -5398,7 +5398,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  3012 0046 9847     		blx	r3
  3013              	.LVL268:
  3014 0048 0346     		mov	r3, r0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 91
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 91
 
 
  3015 004a 03E0     		b	.L290
@@ -5458,7 +5458,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  3057              		.loc 1 678 9 is_stmt 1 view .LVU822
  680:Src/pb_decode.c ****                 PB_RETURN_ERROR(stream, "callback failed");
  3058              		.loc 1 680 13 view .LVU823
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 92
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 92
 
 
  680:Src/pb_decode.c ****                 PB_RETURN_ERROR(stream, "callback failed");
@@ -5518,7 +5518,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  3104              		.align	1
  3105              		.syntax unified
  3106              		.thumb
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 93
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 93
 
 
  3107              		.thumb_func
@@ -5578,7 +5578,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  3151              		.loc 1 733 1 view .LVU844
  3152 0022 08BD     		pop	{r3, pc}
  3153              	.LVL282:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 94
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 94
 
 
  3154              	.L305:
@@ -5638,7 +5638,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  3201              		.cfi_offset 6, -8
  3202              		.cfi_offset 14, -4
  3203 0002 86B0     		sub	sp, sp, #24
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 95
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 95
 
 
  3204              	.LCFI77:
@@ -5698,7 +5698,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  3245              		.loc 1 766 5 is_stmt 1 view .LVU866
  766:Src/pb_decode.c ****     return decode_field(stream, wire_type, &iter);
  3246              		.loc 1 766 22 is_stmt 0 view .LVU867
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 96
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 96
 
 
  3247 0020 0123     		movs	r3, #1
@@ -5758,7 +5758,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  776:Src/pb_decode.c ****     
  3296              		.loc 1 776 5 is_stmt 1 view .LVU875
  776:Src/pb_decode.c ****     
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 97
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 97
 
 
  3297              		.loc 1 776 12 is_stmt 0 view .LVU876
@@ -5818,7 +5818,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  3336 002a 2368     		ldr	r3, [r4]
  781:Src/pb_decode.c ****             status = extension->type->decode(stream, extension, tag, wire_type);
  3337              		.loc 1 781 28 view .LVU892
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 98
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 98
 
 
  3338 002c 1D68     		ldr	r5, [r3]
@@ -5878,7 +5878,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  902:Src/pb_decode.c ****     uint32_t fields_seen[(PB_MAX_REQUIRED_FIELDS + 31) / 32] = {0, 0};
  3384              		.loc 1 902 1 is_stmt 0 view .LVU903
  3385 0000 F0B5     		push	{r4, r5, r6, r7, lr}
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 99
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 99
 
 
  3386              	.LCFI81:
@@ -5938,7 +5938,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  3425              		.loc 1 927 13 is_stmt 1 view .LVU918
  927:Src/pb_decode.c ****                 break;
  3426              		.loc 1 927 17 is_stmt 0 view .LVU919
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 100
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 100
 
 
  3427 001a 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
@@ -5998,7 +5998,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  947:Src/pb_decode.c ****                         return false;
  3468              		.loc 1 947 26 is_stmt 0 view .LVU933
  3469 0048 04AB     		add	r3, sp, #16
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 101
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 101
 
 
  3470 004a 9DF80620 		ldrb	r2, [sp, #6]	@ zero_extendqisi2
@@ -6058,7 +6058,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  991:Src/pb_decode.c ****             fields_seen[iter.required_field_index >> 5] |= tmp;
  3510              		.loc 1 991 71 is_stmt 0 view .LVU948
  3511 007a 03F01F01 		and	r1, r3, #31
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 102
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 102
 
 
  991:Src/pb_decode.c ****             fields_seen[iter.required_field_index >> 5] |= tmp;
@@ -6118,7 +6118,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  3551              		.loc 1 925 14 is_stmt 0 view .LVU963
  3552 00aa 0DF10703 		add	r3, sp, #7
  3553 00ae 02AA     		add	r2, sp, #8
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 103
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 103
 
 
  3554 00b0 0DF10601 		add	r1, sp, #6
@@ -6178,7 +6178,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  3593              		.loc 1 943 20 view .LVU978
  3594 00e0 A942     		cmp	r1, r5
  3595 00e2 B0D2     		bcs	.L364
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 104
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 104
 
 
  3596              	.L334:
@@ -6238,7 +6238,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  3638              		.loc 1 976 58 discriminator 1 view .LVU990
  3639 0108 B6F80910 		ldrh	r1, [r6, #9]	@ unaligned
  976:Src/pb_decode.c ****                 {
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 105
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 105
 
 
  3640              		.loc 1 976 38 discriminator 1 view .LVU991
@@ -6298,7 +6298,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
 1012:Src/pb_decode.c ****         pb_type_t last_type;
  3682              		.loc 1 1012 9 is_stmt 1 discriminator 1 view .LVU1004
 1013:Src/pb_decode.c ****         unsigned i;
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 106
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 106
 
 
  3683              		.loc 1 1013 9 discriminator 1 view .LVU1005
@@ -6358,7 +6358,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  3720 0154 402D     		cmp	r5, #64
  3721 0156 15D8     		bhi	.L357
 1027:Src/pb_decode.c ****         {
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 107
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 107
 
 
  3722              		.loc 1 1027 9 is_stmt 1 view .LVU1023
@@ -6418,7 +6418,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  3764              	.LVL336:
  3765              	.L357:
 1025:Src/pb_decode.c **** 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 108
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 108
 
 
  3766              		.loc 1 1025 29 view .LVU1036
@@ -6478,7 +6478,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  3807              		.loc 1 1042 21 view .LVU1049
  3808              	.LBE25:
 1048:Src/pb_decode.c **** }
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 109
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 109
 
 
  3809              		.loc 1 1048 12 view .LVU1050
@@ -6538,7 +6538,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  3858              		.loc 1 1054 5 view .LVU1057
  3859 000c FFF7FEFF 		bl	pb_message_set_to_defaults
  3860              	.LVL345:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 110
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 110
 
 
 1055:Src/pb_decode.c ****     
@@ -6598,7 +6598,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
 1467:Src/pb_decode.c ****     
  3907              		.loc 1 1467 23 is_stmt 0 view .LVU1068
  3908 000a D1F80B60 		ldr	r6, [r1, #11]	@ unaligned
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 111
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 111
 
 
  3909              	.LVL348:
@@ -6658,7 +6658,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  3948              		.loc 1 1482 8 view .LVU1083
  3949 003c 0346     		mov	r3, r0
  3950 003e 00B1     		cbz	r0, .L375
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 112
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 112
 
 
 1484:Src/pb_decode.c **** }
@@ -6718,7 +6718,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  3998              		.section	.text.pb_decode_delimited_noinit,"ax",%progbits
  3999              		.align	1
  4000              		.global	pb_decode_delimited_noinit
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 113
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 113
 
 
  4001              		.syntax unified
@@ -6778,7 +6778,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  4047              		@ sp needed
  4048 0018 70BD     		pop	{r4, r5, r6, pc}
  4049              	.LVL362:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 114
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 114
 
 
  4050              	.L389:
@@ -6838,7 +6838,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  4098              		.cfi_offset 5, -12
  4099              		.cfi_offset 6, -8
  4100              		.cfi_offset 14, -4
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 115
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 115
 
 
  4101 0002 84B0     		sub	sp, sp, #16
@@ -6898,7 +6898,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  4144 0026 6946     		mov	r1, sp
  4145 0028 2046     		mov	r0, r4
  4146 002a FFF7FEFF 		bl	pb_close_string_substream
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 116
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 116
 
 
  4147              	.LVL373:
@@ -6958,7 +6958,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  4198              	.LFB29:
 1241:Src/pb_decode.c ****     pb_uint64_t value;
  4199              		.loc 1 1241 1 is_stmt 1 view -0
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 117
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 117
 
 
  4200              		.cfi_startproc
@@ -7018,7 +7018,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  4241              		.loc 1 1247 15 view .LVU1140
  4242 002a 2360     		str	r3, [r4]
  4243 002c 6260     		str	r2, [r4, #4]
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 118
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 118
 
 
  4244              	.L397:
@@ -7078,7 +7078,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  4294 0004 0646     		mov	r6, r0
  4295 0006 0D46     		mov	r5, r1
  4296 0008 1446     		mov	r4, r2
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 119
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 119
 
 
 1352:Src/pb_decode.c ****     if (!pb_decode_svarint(stream, &value))
@@ -7138,7 +7138,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  4333 0030 C117     		asrs	r1, r0, #31
  4334              	.LVL383:
 1364:Src/pb_decode.c ****     else
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 120
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 120
 
 
  4335              		.loc 1 1364 17 view .LVU1165
@@ -7198,7 +7198,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  4378              		.loc 1 1360 35 view .LVU1176
  4379 0058 2060     		str	r0, [r4]
 1360:Src/pb_decode.c ****     else if (field->data_size == sizeof(int_least16_t))
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 121
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 121
 
 
  4380              		.loc 1 1360 17 view .LVU1177
@@ -7258,7 +7258,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  4425              		.section	.text.pb_decode_fixed32,"ax",%progbits
  4426              		.align	1
  4427              		.global	pb_decode_fixed32
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 122
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 122
 
 
  4428              		.syntax unified
@@ -7318,7 +7318,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
 1262:Src/pb_decode.c ****                        ((uint32_t)bytes[2] << 16) |
  4471              		.loc 1 1262 50 view .LVU1200
  4472 0024 43EA0143 		orr	r3, r3, r1, lsl #16
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 123
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 123
 
 
 1264:Src/pb_decode.c ****     return true;
@@ -7378,7 +7378,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  4517              		.loc 1 1377 12 view .LVU1212
  4518 0004 FFF7FEFF 		bl	pb_decode_fixed32
  4519              	.LVL399:
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 124
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 124
 
 
 1378:Src/pb_decode.c **** 
@@ -7438,7 +7438,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  4566 0012 9DF80020 		ldrb	r2, [sp]	@ zero_extendqisi2
 1277:Src/pb_decode.c ****                        ((uint64_t)bytes[2] << 16) |
  4567              		.loc 1 1277 25 view .LVU1223
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 125
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 125
 
 
  4568 0016 9DF80160 		ldrb	r6, [sp, #1]	@ zero_extendqisi2
@@ -7498,7 +7498,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  4606              		.cfi_endproc
  4607              	.LFE31:
  4609              		.section	.text.pb_dec_fixed64,"ax",%progbits
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 126
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 126
 
 
  4610              		.align	1
@@ -7558,7 +7558,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  4661 0000 63616C6C 		.ascii	"callback failed\000"
  4661      6261636B 
  4661      20666169 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 127
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 127
 
 
  4661      6C656400 
@@ -7618,7 +7618,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  4690      6C696420 
  4690      6669656C 
  4690      64206465 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 128
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 128
 
 
  4690      73637269 
@@ -7678,7 +7678,7 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  4718              	.LC1:
  4719 0010 696F2065 		.ascii	"io error\000"
  4719      72726F72 
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 129
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 129
 
 
  4719      00
@@ -7703,135 +7703,135 @@ ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 1
  4734              		.file 10 "Inc/pb_decode.h"
  4735              		.file 11 "Inc/pb_common.h"
  4736              		.file 12 "<built-in>"
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 130
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 130
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 pb_decode.c
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:18     .text.buf_read:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:25     .text.buf_read:00000000 buf_read
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:87     .text.pb_readbyte:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:93     .text.pb_readbyte:00000000 pb_readbyte
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:176    .text.pb_readbyte:00000038 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:182    .text.pb_decode_varint32_eof:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:188    .text.pb_decode_varint32_eof:00000000 pb_decode_varint32_eof
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:389    .text.pb_decode_varint32_eof:000000b8 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:395    .text.decode_pointer_field:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:401    .text.decode_pointer_field:00000000 decode_pointer_field
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:430    .text.decode_pointer_field:00000010 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:435    .text.iter_from_extension:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:441    .text.iter_from_extension:00000000 iter_from_extension
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:507    .text.find_extension_field:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:513    .text.find_extension_field:00000000 find_extension_field
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:567    .text.pb_field_set_to_default:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:573    .text.pb_field_set_to_default:00000000 pb_field_set_to_default
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:791    .text.pb_message_set_to_defaults:00000000 pb_message_set_to_defaults
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:785    .text.pb_message_set_to_defaults:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:844    .text.pb_read:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:851    .text.pb_read:00000000 pb_read
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:994    .text.pb_read:00000074 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:1001   .text.pb_skip_varint:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:1007   .text.pb_skip_varint:00000000 pb_skip_varint
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:1056   .text.read_raw_value:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:1062   .text.read_raw_value:00000000 read_raw_value
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:1199   .text.read_raw_value:00000074 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:1204   .text.pb_istream_from_buffer:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:1211   .text.pb_istream_from_buffer:00000000 pb_istream_from_buffer
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:1253   .text.pb_istream_from_buffer:00000014 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:1258   .text.pb_decode_varint32:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:1265   .text.pb_decode_varint32:00000000 pb_decode_varint32
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:1289   .text.pb_skip_string:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:1295   .text.pb_skip_string:00000000 pb_skip_string
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:1347   .text.pb_dec_fixed_length_bytes:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:1353   .text.pb_dec_fixed_length_bytes:00000000 pb_dec_fixed_length_bytes
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:1459   .text.pb_dec_fixed_length_bytes:00000060 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:1465   .text.pb_dec_string:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:1471   .text.pb_dec_string:00000000 pb_dec_string
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:1601   .text.pb_dec_string:0000006c $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:1608   .text.pb_dec_bytes:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:1614   .text.pb_dec_bytes:00000000 pb_dec_bytes
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:1760   .text.pb_dec_bytes:00000080 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:1767   .text.pb_decode_varint:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:1774   .text.pb_decode_varint:00000000 pb_decode_varint
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:1884   .text.pb_decode_varint:00000070 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:1889   .text.pb_dec_uvarint:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:1895   .text.pb_dec_uvarint:00000000 pb_dec_uvarint
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:2039   .text.pb_dec_uvarint:0000007c $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:2045   .text.pb_dec_varint:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:2051   .text.pb_dec_varint:00000000 pb_dec_varint
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:2215   .text.pb_dec_varint:00000084 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:2221   .text.pb_decode_tag:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:2228   .text.pb_decode_tag:00000000 pb_decode_tag
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:2318   .text.pb_skip_field:00000000 $t
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 131
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:18     .text.buf_read:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:25     .text.buf_read:00000000 buf_read
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:87     .text.pb_readbyte:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:93     .text.pb_readbyte:00000000 pb_readbyte
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:176    .text.pb_readbyte:00000038 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:182    .text.pb_decode_varint32_eof:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:188    .text.pb_decode_varint32_eof:00000000 pb_decode_varint32_eof
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:389    .text.pb_decode_varint32_eof:000000b8 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:395    .text.decode_pointer_field:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:401    .text.decode_pointer_field:00000000 decode_pointer_field
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:430    .text.decode_pointer_field:00000010 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:435    .text.iter_from_extension:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:441    .text.iter_from_extension:00000000 iter_from_extension
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:507    .text.find_extension_field:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:513    .text.find_extension_field:00000000 find_extension_field
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:567    .text.pb_field_set_to_default:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:573    .text.pb_field_set_to_default:00000000 pb_field_set_to_default
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:791    .text.pb_message_set_to_defaults:00000000 pb_message_set_to_defaults
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:785    .text.pb_message_set_to_defaults:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:844    .text.pb_read:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:851    .text.pb_read:00000000 pb_read
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:994    .text.pb_read:00000074 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:1001   .text.pb_skip_varint:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:1007   .text.pb_skip_varint:00000000 pb_skip_varint
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:1056   .text.read_raw_value:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:1062   .text.read_raw_value:00000000 read_raw_value
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:1199   .text.read_raw_value:00000074 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:1204   .text.pb_istream_from_buffer:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:1211   .text.pb_istream_from_buffer:00000000 pb_istream_from_buffer
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:1253   .text.pb_istream_from_buffer:00000014 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:1258   .text.pb_decode_varint32:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:1265   .text.pb_decode_varint32:00000000 pb_decode_varint32
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:1289   .text.pb_skip_string:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:1295   .text.pb_skip_string:00000000 pb_skip_string
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:1347   .text.pb_dec_fixed_length_bytes:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:1353   .text.pb_dec_fixed_length_bytes:00000000 pb_dec_fixed_length_bytes
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:1459   .text.pb_dec_fixed_length_bytes:00000060 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:1465   .text.pb_dec_string:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:1471   .text.pb_dec_string:00000000 pb_dec_string
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:1601   .text.pb_dec_string:0000006c $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:1608   .text.pb_dec_bytes:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:1614   .text.pb_dec_bytes:00000000 pb_dec_bytes
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:1760   .text.pb_dec_bytes:00000080 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:1767   .text.pb_decode_varint:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:1774   .text.pb_decode_varint:00000000 pb_decode_varint
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:1884   .text.pb_decode_varint:00000070 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:1889   .text.pb_dec_uvarint:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:1895   .text.pb_dec_uvarint:00000000 pb_dec_uvarint
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:2039   .text.pb_dec_uvarint:0000007c $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:2045   .text.pb_dec_varint:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:2051   .text.pb_dec_varint:00000000 pb_dec_varint
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:2215   .text.pb_dec_varint:00000084 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:2221   .text.pb_decode_tag:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:2228   .text.pb_decode_tag:00000000 pb_decode_tag
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:2318   .text.pb_skip_field:00000000 $t
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 131
 
 
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:2325   .text.pb_skip_field:00000000 pb_skip_field
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:2343   .text.pb_skip_field:0000000a $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:2349   .text.pb_skip_field:00000010 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:2410   .text.pb_skip_field:00000040 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:2415   .text.pb_make_string_substream:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:2422   .text.pb_make_string_substream:00000000 pb_make_string_substream
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:2500   .text.pb_make_string_substream:0000003c $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:2505   .text.pb_close_string_substream:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:2512   .text.pb_close_string_substream:00000000 pb_close_string_substream
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:2574   .text.decode_static_field:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:2580   .text.decode_static_field:00000000 decode_static_field
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:2921   .text.decode_static_field:00000138 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:2928   .text.decode_callback_field:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:2934   .text.decode_callback_field:00000000 decode_callback_field
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:3098   .text.decode_callback_field:00000094 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:3104   .text.decode_field:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:3110   .text.decode_field:00000000 decode_field
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:3177   .text.decode_field:00000034 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:3182   .text.default_extension_decoder:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:3188   .text.default_extension_decoder:00000000 default_extension_decoder
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:3261   .text.decode_extension:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:3267   .text.decode_extension:00000000 decode_extension
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:3370   .text.pb_decode_noinit:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:3377   .text.pb_decode_noinit:00000000 pb_decode_noinit
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:3820   .text.pb_decode_noinit:000001c0 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:3826   .text.pb_decode:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:3833   .text.pb_decode:00000000 pb_decode
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:3876   .text.pb_dec_submessage:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:3882   .text.pb_dec_submessage:00000000 pb_dec_submessage
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:3994   .text.pb_dec_submessage:00000064 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:3999   .text.pb_decode_delimited_noinit:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4006   .text.pb_decode_delimited_noinit:00000000 pb_decode_delimited_noinit
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4079   .text.pb_decode_delimited:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4086   .text.pb_decode_delimited:00000000 pb_decode_delimited
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4159   .text.pb_decode_nullterminated:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4166   .text.pb_decode_nullterminated:00000000 pb_decode_nullterminated
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4189   .text.pb_decode_svarint:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4196   .text.pb_decode_svarint:00000000 pb_decode_svarint
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4270   .text.pb_dec_svarint:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4276   .text.pb_dec_svarint:00000000 pb_dec_svarint
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4420   .text.pb_dec_svarint:0000007c $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4426   .text.pb_decode_fixed32:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4433   .text.pb_decode_fixed32:00000000 pb_decode_fixed32
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4493   .text.pb_dec_fixed32:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4499   .text.pb_dec_fixed32:00000000 pb_dec_fixed32
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4526   .text.pb_decode_fixed64:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4533   .text.pb_decode_fixed64:00000000 pb_decode_fixed64
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4610   .text.pb_dec_fixed64:00000000 $t
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4616   .text.pb_dec_fixed64:00000000 pb_dec_fixed64
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4643   .rodata.PB_DECODERS:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4647   .rodata.PB_DECODERS:00000000 PB_DECODERS
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4659   .rodata.decode_callback_field.str1.4:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4663   .rodata.decode_pointer_field.str1.4:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4667   .rodata.decode_static_field.str1.4:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4674   .rodata.pb_dec_fixed_length_bytes.str1.4:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4681   .rodata.pb_dec_string.str1.4:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4688   .rodata.pb_dec_submessage.str1.4:00000000 $d
-ARM GAS  C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s 			page 132
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:2325   .text.pb_skip_field:00000000 pb_skip_field
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:2343   .text.pb_skip_field:0000000a $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:2349   .text.pb_skip_field:00000010 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:2410   .text.pb_skip_field:00000040 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:2415   .text.pb_make_string_substream:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:2422   .text.pb_make_string_substream:00000000 pb_make_string_substream
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:2500   .text.pb_make_string_substream:0000003c $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:2505   .text.pb_close_string_substream:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:2512   .text.pb_close_string_substream:00000000 pb_close_string_substream
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:2574   .text.decode_static_field:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:2580   .text.decode_static_field:00000000 decode_static_field
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:2921   .text.decode_static_field:00000138 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:2928   .text.decode_callback_field:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:2934   .text.decode_callback_field:00000000 decode_callback_field
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:3098   .text.decode_callback_field:00000094 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:3104   .text.decode_field:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:3110   .text.decode_field:00000000 decode_field
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:3177   .text.decode_field:00000034 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:3182   .text.default_extension_decoder:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:3188   .text.default_extension_decoder:00000000 default_extension_decoder
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:3261   .text.decode_extension:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:3267   .text.decode_extension:00000000 decode_extension
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:3370   .text.pb_decode_noinit:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:3377   .text.pb_decode_noinit:00000000 pb_decode_noinit
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:3820   .text.pb_decode_noinit:000001c0 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:3826   .text.pb_decode:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:3833   .text.pb_decode:00000000 pb_decode
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:3876   .text.pb_dec_submessage:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:3882   .text.pb_dec_submessage:00000000 pb_dec_submessage
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:3994   .text.pb_dec_submessage:00000064 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:3999   .text.pb_decode_delimited_noinit:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4006   .text.pb_decode_delimited_noinit:00000000 pb_decode_delimited_noinit
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4079   .text.pb_decode_delimited:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4086   .text.pb_decode_delimited:00000000 pb_decode_delimited
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4159   .text.pb_decode_nullterminated:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4166   .text.pb_decode_nullterminated:00000000 pb_decode_nullterminated
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4189   .text.pb_decode_svarint:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4196   .text.pb_decode_svarint:00000000 pb_decode_svarint
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4270   .text.pb_dec_svarint:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4276   .text.pb_dec_svarint:00000000 pb_dec_svarint
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4420   .text.pb_dec_svarint:0000007c $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4426   .text.pb_decode_fixed32:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4433   .text.pb_decode_fixed32:00000000 pb_decode_fixed32
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4493   .text.pb_dec_fixed32:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4499   .text.pb_dec_fixed32:00000000 pb_dec_fixed32
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4526   .text.pb_decode_fixed64:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4533   .text.pb_decode_fixed64:00000000 pb_decode_fixed64
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4610   .text.pb_dec_fixed64:00000000 $t
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4616   .text.pb_dec_fixed64:00000000 pb_dec_fixed64
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4643   .rodata.PB_DECODERS:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4647   .rodata.PB_DECODERS:00000000 PB_DECODERS
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4659   .rodata.decode_callback_field.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4663   .rodata.decode_pointer_field.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4667   .rodata.decode_static_field.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4674   .rodata.pb_dec_fixed_length_bytes.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4681   .rodata.pb_dec_string.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4688   .rodata.pb_dec_submessage.str1.4:00000000 $d
+ARM GAS  C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s 			page 132
 
 
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4692   .rodata.pb_dec_uvarint.str1.4:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4699   .rodata.pb_decode_noinit.str1.4:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4706   .rodata.pb_decode_varint32_eof.str1.4:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4710   .rodata.pb_make_string_substream.str1.4:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4714   .rodata.pb_readbyte.str1.4:00000000 $d
-C:\Users\grgcz\AppData\Local\Temp\ccvNlRs9.s:4721   .rodata.read_raw_value.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4692   .rodata.pb_dec_uvarint.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4699   .rodata.pb_decode_noinit.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4706   .rodata.pb_decode_varint32_eof.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4710   .rodata.pb_make_string_substream.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4714   .rodata.pb_readbyte.str1.4:00000000 $d
+C:\Users\grgcz\AppData\Local\Temp\cc8pIEwC.s:4721   .rodata.read_raw_value.str1.4:00000000 $d
 
 UNDEFINED SYMBOLS
 pb_field_iter_begin

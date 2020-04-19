@@ -10,38 +10,21 @@
         "factor": null,
         "layers": {}
     },
-    "date_time": "Sat Apr 18 17:05:36 2020",
-    "error": 0,
-    "error_str": [],
-    "evaluation_measures": [
-        {
-            "acc": 100.0,
-            "desc": "stm32 C-model #1",
-            "mae": 0.00042500896961428225,
-            "rmse": 0.004269074182957411
-        },
-        {
-            "acc": 100.0,
-            "desc": "original model #1",
-            "mae": 0.00042500896961428225,
-            "rmse": 0.004269074648618698
-        },
-        {
-            "acc": 100.0,
-            "desc": "X-cross #1",
-            "mae": 6.871543611897124e-11,
-            "rmse": 1.0878694611804463e-09
-        }
+    "date_time": "Sun Apr 19 20:29:57 2020",
+    "error": -1,
+    "error_str": [
+        "TOOL ERROR: Weights are incompatible with model: 93180 loaded, 89864 found"
     ],
-    "evaluation_status": "stm32 C-model #1: acc=100.0%,rmse=0.004269,mae=0.000425;original model #1: acc=100.0%,rmse=0.004269,mae=0.000425;X-cross #1: acc=100.0%,rmse=0.000000,mae=0.000000;L2r status: l2r=2.88233859e-09,status=PASSED;",
+    "evaluation_measures": [],
+    "evaluation_status": "NOT EVALUATED",
     "exec_cmd": "validate",
-    "exec_duration": 201.80327796936035,
+    "exec_duration": null,
     "hash": "fc8f821a7f3a5c7c278e772d8331cb75",
     "inputs": [
         "input_0"
     ],
-    "l2_error": 2.882338590026734e-09,
-    "l2_status": "PASSED",
+    "l2_error": -1.0,
+    "l2_status": "NOT EVALUATED",
     "layers": [
         {
             "extras": {
@@ -455,8 +438,8 @@
         },
         {
             "extras": {
-                "c_l2_error": 2.882338590026734e-09,
-                "c_l2_id": 7,
+                "c_l2_error": 0,
+                "c_l2_id": -1,
                 "n_macc": 105,
                 "n_params": 0,
                 "psize": 0,
@@ -538,7 +521,7 @@
             "name": "input_0"
         }
     ],
-    "rom_l2_error_max": 2.882338590026734e-09,
+    "rom_l2_error_max": 0.0,
     "rom_n_c_nodes": 8,
     "rom_n_macc": 597465,
     "rom_n_macc_max": 593280,
